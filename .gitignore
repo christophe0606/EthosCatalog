@@ -1,0 +1,10 @@
+.venv/
+.uv-cache/
+__pycache__/
+*.pyc
+tmp/
+out/
+*.cbuild*.yml
+*.cbuild*.json
+ai_layer/
+validation/

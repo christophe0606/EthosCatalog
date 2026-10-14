@@ -1,0 +1,39 @@
+Captured 2026-10-14 on DevKit-E8, template.Release+DevKit-E8, COM5 at 115200 baud.
+CMSIS Load starts the first run. The debugger resets and stops at main;
+continuing produces the final run used in benchmark.yml. Each run has
+one unreported warmup followed by ten measured and validated inferences.
+
+ExecuTorch Ethos-U85 example: 3104 byte model
+Output: 128 elements, max absolute error 0.005359
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=3104 B, arena=192 B at 0x02010000, weights=256 B at 0x8023f710
+Benchmark pools: method peak=1320 B, temp peak=192 B, reserved=131072 B
+Benchmark sample 1: NPU=692 cycles (0.001730 ms), forward=39446 ticks (0.098615 ms)
+Benchmark sample 2: NPU=654 cycles (0.001635 ms), forward=37827 ticks (0.094567 ms)
+Benchmark sample 3: NPU=642 cycles (0.001605 ms), forward=36693 ticks (0.091732 ms)
+Benchmark sample 4: NPU=644 cycles (0.001610 ms), forward=36549 ticks (0.091372 ms)
+Benchmark sample 5: NPU=615 cycles (0.001538 ms), forward=36399 ticks (0.090997 ms)
+Benchmark sample 6: NPU=618 cycles (0.001545 ms), forward=36387 ticks (0.090968 ms)
+Benchmark sample 7: NPU=615 cycles (0.001538 ms), forward=36525 ticks (0.091313 ms)
+Benchmark sample 8: NPU=644 cycles (0.001610 ms), forward=36627 ticks (0.091567 ms)
+Benchmark sample 9: NPU=644 cycles (0.001610 ms), forward=36489 ticks (0.091222 ms)
+Benchmark sample 10: NPU=591 cycles (0.001478 ms), forward=36297 ticks (0.090743 ms)
+Benchmark PMU: last active=591 cycles, invocations=1, overflow=0
+Test_result: PASS
+ExecuTorch Ethos-U85 example: 3104 byte model
+Output: 128 elements, max absolute error 0.005359
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=3104 B, arena=192 B at 0x02010000, weights=256 B at 0x8023f710
+Benchmark pools: method peak=1320 B, temp peak=192 B, reserved=131072 B
+Benchmark sample 1: NPU=698 cycles (0.001745 ms), forward=39068 ticks (0.097670 ms)
+Benchmark sample 2: NPU=613 cycles (0.001533 ms), forward=36773 ticks (0.091933 ms)
+Benchmark sample 3: NPU=644 cycles (0.001610 ms), forward=36973 ticks (0.092433 ms)
+Benchmark sample 4: NPU=650 cycles (0.001625 ms), forward=36505 ticks (0.091262 ms)
+Benchmark sample 5: NPU=644 cycles (0.001610 ms), forward=36577 ticks (0.091442 ms)
+Benchmark sample 6: NPU=644 cycles (0.001610 ms), forward=36793 ticks (0.091982 ms)
+Benchmark sample 7: NPU=650 cycles (0.001625 ms), forward=36721 ticks (0.091802 ms)
+Benchmark sample 8: NPU=648 cycles (0.001620 ms), forward=36493 ticks (0.091232 ms)
+Benchmark sample 9: NPU=644 cycles (0.001610 ms), forward=36193 ticks (0.090482 ms)
+Benchmark sample 10: NPU=642 cycles (0.001605 ms), forward=36457 ticks (0.091143 ms)
+Benchmark PMU: last active=642 cycles, invocations=1, overflow=0
+Test_result: PASS

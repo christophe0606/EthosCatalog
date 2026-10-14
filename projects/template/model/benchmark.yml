@@ -1,0 +1,59 @@
+# Paths, including vela.ini, are relative to the project directory.
+benchmark:
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_MRAM
+    memory_mode: Shared_Sram
+  measurements:
+    size: 3104 # Embedded ExecuTorch .pte bytes, including the delegate and weights.
+    arena: 192 # NPU scratch bytes passed to ethosu_invoke_v3; not reserved pool capacity.
+    time:
+      ms: 0.001610 # Median NPU time = cycles / 400 MHz; excludes CPU/IRQ overhead.
+      cycles: 644 # Ethos-U85 PMCCNTR, NPU_ACTIVE start / NPU_IDLE stop.
+      statistic: median
+      min_cycles: 613
+      max_cycles: 698
+      mean_cycles: 647.7
+      forward_ms: 0.0916225 # Median module.forward(), including CPU work and PMU hooks.
+      forward_timer_hz: 400000000 # RTX osKernelGetSysTimerFreq().
+      cycles_samples: [698, 613, 644, 650, 644, 644, 650, 648, 644, 642]
+      forward_ticks_samples: [39068, 36773, 36973, 36505, 36577, 36793, 36721, 36493, 36193, 36457]
+    weights:
+      memory: MRAM
+      section: ER_ROM
+      address: 0x8023f710 # Driver base_addr[0], inside model_pte in ER_ROM.
+      size: 256 # Compressed weight/constant bytes reported by the delegate.
+      clock: 66 # MHz, documented MRAM operating clock; not measured by a timer.
+      clock_source: "Alif ADTS0013 v1.2 (June 2026), section 3.12.1, page 37"
+      # Vela's OffChipFlash_clock_scale=0.121 models throughput, not this clock.
+    activation:
+      memory: SRAM0
+      section: RW_SRAM0 # Input section .bss.ai_pool.
+      address: 0x02010000 # Driver base_addr[1], g_temp_pool.
+      clock: 400 # MHz, runtime CLOCK_SETTING_AXI_FREQ from Secure Enclave.
+    pools:
+      method_peak: 1320 # ExecuTorch metadata and planned tensors, including alignment.
+      temp_peak: 192 # High-water mark before the per-operator allocator reset.
+      reserved: 131072 # Two 65536-byte pools; separate from the NPU arena requirement.
+  run:
+    recorded_at: "2026-10-14T13:34:22Z"
+    context: template.Release+DevKit-E8
+    target: DevKit-E8@Release
+    device: AE822FA0E5597LS0
+    core: M55_HP
+    npu: Ethos-U85
+    macs: 256
+    compiler: AC6@6.24.0
+    optimize: "-O3 -ffast-math"
+    cpu_clock_mhz: 400 # Runtime CLOCK_SETTING_EXTSYS0_FREQ.
+    npu_clock_mhz: 400 # System AXI clock, queried at runtime.
+    warmup: 1 # Method load and first inference excluded from timing statistics.
+    samples: 10 # Every sample checked against model_test_expected.
+    pmu_cross_check: "PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference"
+    pmu_overflow: 0 # Measured; counter overflow check passed.
+    npu_invocations_per_forward: 1
+    test_result: PASS
+    max_absolute_error: 0.005359
+    uart: benchmark_uart.txt # Final launch run; preceding CMSIS Load run also retained.
+    model_sha256: 4b727b8252128b0e5733df5530d081ef5750c1c7baa53ea8eadfb8171af3c8cd
+    firmware_sha256: 3110d3188257037696359f6720a784e739c77dbe9ab688d2c9cf2607f5ce85fd

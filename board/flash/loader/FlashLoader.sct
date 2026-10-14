@@ -1,0 +1,20 @@
+; Based on ARM CMSIS 5.9.0 Device/_Template_Flash/Target.lin.
+; Position-independent code and R9-relative data are relocated by the debugger.
+PRG 0 PI
+{
+  PrgCode +0
+  {
+    * (+RO)
+  }
+  PrgData +0
+  {
+    * (+RW,+ZI)
+  }
+}
+DSCR +0
+{
+  DevDscr +0
+  {
+    * (DevDscr)
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "activeSolution": "../EthosCatalog.csolution.yml",
+    "activeTarget": "DevKit-E8@Release",
+    "targetSet": {
+        "EthosCatalog": {
+            "activeTargetType": "DevKit-E8",
+            "DevKit-E8": 1
+        },
+        "board/flash/loader/FlashLoader": {
+            "activeTargetType": "DevKit-E8"
+        }
+    }
+}

@@ -1,0 +1,56 @@
+# Select exactly one application project below, then regenerate ai_layer.
+solution:
+  created-for: CMSIS-Toolbox@2.14.1
+  cdefault:
+  compiler: AC6
+  packs:
+    - pack: AlifSemiconductor::Ensemble@^2.2.0-0
+    - pack: ARM::CMSIS@^6.2.0
+    - pack: ARM::CMSIS-Compiler@^2.1.0
+    - pack: PyTorch::ExecuTorch@1.4.1
+    - pack: ARM::CMSIS-NN
+    - pack: ARM::ethos-u-core-driver@1.26.5
+  target-types:
+    - type: DevKit-E8
+      board: DevKit-E8
+      device: AE822FA0E5597LS0
+      variables:
+        - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
+        - AI-Layer: $SolutionDir()$/ai_layer/ai_layer.clayer.yml
+      target-set:
+        - set: Debug
+          images:
+            - project-context: template.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Release
+          images:
+            - project-context: template.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+  build-types:
+    - type: Debug
+      debug: on
+      optimize: none
+    - type: Release
+      debug: on
+      optimize: speed
+      misc:
+        - for-compiler: AC6
+          C-CPP:
+            - -O3
+            - -ffast-math
+  projects:
+    - project: projects/template/template.cproject.yml
+  mlops:
+    description: Ethos-U85 hello world
+    npu:
+      type: Ethos-U85
+      macs: 256
+    model:
+      clayer: $AI-Layer$
+      name: Template

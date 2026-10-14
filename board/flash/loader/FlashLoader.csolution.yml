@@ -1,0 +1,22 @@
+solution:
+  created-for: CMSIS-Toolbox@2.14.1
+  compiler: AC6
+  packs:
+    - pack: AlifSemiconductor::Ensemble@2.2.1
+    - pack: ARM::CMSIS@^6.2.0
+  target-types:
+    - type: DevKit-E8
+      board: DevKit-E8
+      device: AE822FA0E5597LS0
+      target-set:
+        - set:
+          images:
+            - project-context: FlashLoader.FlashLoader
+  build-types:
+    - type: FlashLoader
+      debug: on
+      optimize: none
+  projects:
+    - project: FlashLoader.cproject.yml
+  output-dirs:
+    outdir: ../../../out/$Project$/$TargetType$/$BuildType$

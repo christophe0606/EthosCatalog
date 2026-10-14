@@ -1,0 +1,6 @@
+# Install separately with uv pip install --no-deps, as in CMSIS-Executorch.
+# The Arm exporter requires this flatbuffers version; tosa-tools' declared
+# dependency would otherwise replace it.
+ml_dtypes==0.5.1
+flatbuffers==24.3.25
+tosa-tools==2026.5.0

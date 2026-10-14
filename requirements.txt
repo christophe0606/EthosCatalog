@@ -1,0 +1,7 @@
+# Must match PyTorch::ExecuTorch@1.4.1 in EthosCatalog.csolution.yml.
+executorch==1.4.1
+torch==2.13.0
+torchao==0.18.0
+ethos-u-vela==5.1.0
+PyYAML==6.0.3
+safetensors==0.6.2

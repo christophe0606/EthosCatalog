@@ -1,0 +1,31 @@
+project:
+  device: :M55_HP
+  processor:
+    trustzone: off
+  misc:
+    - for-compiler: AC6
+      C:
+        - -fropi
+        - -frwpi
+        - -fno-builtin
+      Link:
+        - --entry=Init
+        - --keep=Init
+        - --keep=UnInit
+        - --keep=EraseSector
+        - --keep=ProgramPage
+        - --keep=Verify
+        - --keep=BlankCheck
+        - --keep=FlashDevice
+        - --diag_suppress=6314
+  linker:
+    - script: FlashLoader.sct
+      for-compiler: AC6
+  groups:
+    - group: E8 polling flash algorithm
+      files:
+        - file: FlashPrg.c
+        - file: FlashDev.c
+  output:
+    base-name: DevKit-E8_IS25WX
+    type: [elf, map]
