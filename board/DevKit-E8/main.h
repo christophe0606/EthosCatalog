@@ -27,6 +27,9 @@ extern "C" {
 
 /* Prototypes */
 extern int app_main(void);
+/* Optional project hook after board initialization, before the RTOS starts. */
+extern int app_prepare(void);
+extern volatile int32_t app_result;
 extern int shield_setup(void);
 extern int stdio_init(void);
 

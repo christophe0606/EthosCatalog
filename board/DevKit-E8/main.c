@@ -36,6 +36,14 @@
 
 volatile int32_t app_result;
 
+/* Projects can prepare external model storage before the RTOS starts. The
+ * MRAM template uses this default; the OSPI template supplies its own hook.
+ */
+__WEAK int app_prepare(void)
+{
+    return 0;
+}
+
 static void application_thread(void *argument)
 {
     (void)argument;
@@ -150,6 +158,10 @@ int main(void)
     profile.memory_blocks |= MRAM_MASK | SRAM0_MASK;
     if (SERVICES_set_run_cfg(se_services_s_handle, &profile, &service_error) != SERVICES_REQ_SUCCESS || service_error) {
         return 1;
+    }
+    app_result = app_prepare();
+    if (app_result) {
+        for (;;) __WFI();
     }
     static uint64_t thread_stack[32768 / sizeof(uint64_t)];
     static const osThreadAttr_t attributes = {

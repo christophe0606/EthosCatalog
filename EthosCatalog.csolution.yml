@@ -1,4 +1,4 @@
-# Select exactly one application project below, then regenerate ai_layer.
+# List application projects below; select one in the CMSIS UI and regenerate ai_layer.
 solution:
   created-for: CMSIS-Toolbox@2.14.1
   cdefault:
@@ -14,25 +14,56 @@ solution:
     - type: DevKit-E8
       board: DevKit-E8
       device: AE822FA0E5597LS0
+      memory:
+        - name: OSPI_FLASH
+          access: rx
+          start: 0xC0000000
+          size: 0x02000000
       variables:
         - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
         - AI-Layer: $SolutionDir()$/ai_layer/ai_layer.clayer.yml
       target-set:
         - set: Debug
           images:
-            - project-context: template.Debug
+            - project-context: template_mram.Debug
           debugger:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
         - set: Release
           images:
-            - project-context: template.Release
+            - project-context: template_mram.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: OSPI_Debug
+          images:
+            - project-context: template_ospi.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: OSPI_Release
+          images:
+            - project-context: template_ospi.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: ProgramModel
+          images:
+            - project-context: template_ospi.ProgramModel
           debugger:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
   build-types:
+    - type: ProgramModel
+      debug: on
+      optimize: none
+      define:
+        - MODEL_PROGRAMMING_MODE: 1
     - type: Debug
       debug: on
       optimize: none
@@ -45,7 +76,11 @@ solution:
             - -O3
             - -ffast-math
   projects:
-    - project: projects/template/template.cproject.yml
+    - project: projects/template_mram/template_mram.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
+    - project: projects/template_ospi/template_ospi.cproject.yml
   mlops:
     description: Ethos-U85 hello world
     npu:
@@ -53,4 +88,3 @@ solution:
       macs: 256
     model:
       clayer: $AI-Layer$
-      name: Template

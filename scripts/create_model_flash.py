@@ -26,11 +26,12 @@ class IndentedDumper(yaml.SafeDumper):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--solution", type=Path, default=DEFAULT_SOLUTION)
+    parser.add_argument("--project", help="Application name or cproject path; default: CMSIS UI selection")
     parser.add_argument("--run", type=Path, help="Application cbuild-run from the selected target (required for OSPI)")
     parser.add_argument("--output", type=Path, help="Default: out/<project>-model.cbuild-run.yml")
     parser.add_argument("--algorithm", type=Path, help="Optional locally built OSPI FLM")
     args = parser.parse_args()
-    solution_file, _, project_file, config_file, network = selected_project(args.solution)
+    solution_file, _, project_file, config_file, network = selected_project(args.solution, args.project)
     output = args.output or solution_file.parent / f"out/{project_file.stem.removesuffix('.cproject')}-model.cbuild-run.yml"
     if not network["flash_ospi"]:
         print(f"{network['name']}: flash_ospi is false; the model is embedded in the application. Load the application into MRAM with CMSIS.")

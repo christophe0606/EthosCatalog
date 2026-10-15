@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
-"""Template-owned model loading, calibration data and quantization policy.
+"""OSPI template-owned model loading, calibration data and quantization policy.
 
 Normally called by scripts/create_ai_layer.py. Firmware test data is maintained
 separately in this project's model/model_test_data.h and is never written here.
@@ -59,17 +59,18 @@ def quantize_model(spec, project_dir, network):
     if not any(value.dtype == torch.int8 for value in program.state_dict.values()):
         raise ValueError("Template quantization produced no int8 weights")
     save_quantized_program(program, spec.target, project_dir, network)
-    print(f"[template] calibrated with {len(samples)} project inputs; saved quantized graph/weights before Vela",
+    print(f"[template_ospi] calibrated with {len(samples)} project inputs; saved quantized graph/weights before Vela",
           flush=True)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--solution", type=Path, default=DEFAULT_SOLUTION)
+    parser.add_argument("--project", help="Application name or cproject path; default: CMSIS UI selection")
     args = parser.parse_args()
-    _, solution, project, _, network = selected_project(args.solution)
+    _, solution, project, _, network = selected_project(args.solution, args.project)
     if project.parent != Path(__file__).resolve().parents[1]:
-        parser.error("This quantizer belongs to the template project; select that project first")
+        parser.error("This quantizer belongs to its OSPI template project; select that project first")
     quantize_model(compile_spec(solution, project.parent, network), project.parent, network)
 
 

@@ -1,6 +1,6 @@
 # DevKit-E8 OSPI flash loader
 
-This optional FlashOS adapter is independent of the template application.
+This optional FlashOS adapter is independent of the MRAM and OSPI templates.
 Open `FlashLoader.csolution.yml` with CMSIS and build **DevKit-E8**. This
 solution builds an algorithm only; its ELF is not an application to load/run.
 
@@ -12,8 +12,10 @@ uv run scripts/publish_e8_flash_loader.py
 
 Then pass `--algorithm board/flash/DevKit-E8_IS25WX.FLM` to
 `scripts/create_model_flash.py` for a selected OSPI project. See the root
-[README](../../../README.md) for the manual programming sequence. The template
-embeds its PTE in MRAM and does not use this loader.
+[README](../../../README.md) for the manual programming sequence.
+`template_mram` embeds its PTE in MRAM and does not use this loader.
+`template_ospi` supplies the preparation firmware in its `ProgramModel` build;
+see [the OSPI template](../../../projects/template_ospi/README.md).
 
 The loader uses RAM, position-independent code and R9-relative data. Its
 `Reset_Handler` aliases `Init` to satisfy the CMSIS default AC6 entry setting;

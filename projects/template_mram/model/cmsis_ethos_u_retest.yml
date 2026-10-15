@@ -1,0 +1,89 @@
+# Hardware retest of the new CMSIS-Ethos-U pack; historical benchmark.yml is retained.
+retest:
+  recorded_at: "2026-10-15T07:08:29Z"
+  context: template_mram.Release+DevKit-E8
+  target: DevKit-E8@Release
+  device: AE822FA0E5597LS0
+  core: M55_HP
+  npu: Ethos-U85
+  macs: 256
+  packs:
+    driver: ARM::CMSIS-Ethos-U@1.0.0
+    driver_component: "ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0"
+    board: AlifSemiconductor::Ensemble@2.2.1
+    runtime: PyTorch::ExecuTorch@1.4.1
+  compiler: AC6@6.24.0
+  optimize: "-O3 -ffast-math"
+  build:
+    result: PASS
+    tool: cmsis_action
+    job: b-6
+    initial_failure: "ethosu_driver.c:1334:21: use of undeclared identifier 'ETHOSU_MACS'"
+    fix: "Added ETHOSU_MACS: 256 to board/DevKit-E8/Board_HP-U85.clayer.yml."
+    unused_solution_pack: ARM::ethos-u-core-driver@1.26.5
+  environment:
+    result: PASS
+    source: .cmsis/tools-environment.yml
+    format: 1.0.0
+    generator: arm.cmsis-csolution version 1.72.0
+    validation: "Schema structural validation; all selected paths exist; generator matches installed extension."
+    toolbox: 2.15.0
+    cmake: 3.31.12
+    ninja: 1.13.2
+    selected_compilers: [AC6@6.24.0, GCC@14.3.1]
+    detected_toolchains: [AC6@6.22.0, AC6@6.24.0, CLANG@18.1.3, CLANG@22.1.0, GCC@13.3.1, GCC@14.3.1]
+    import: "Generated PATH entries and variables applied only to the checking process."
+  execution:
+    tool: cmsis_action load_and_debug
+    job: d-7
+    probe: ULINKplus@pyOCD
+    uart: cmsis_ethos_u_retest_uart.txt
+    port: COM5
+    baud: 115200
+    load_time_run: PASS
+    debugger_run: PASS
+    warmup_per_run: 1
+    measured_samples_per_run: 10
+    validated_outputs_per_inference: 128
+    test_result: PASS
+    max_absolute_error: 0.005359
+    tolerance: 0.02
+    live_state:
+      app_result: 0
+      npu_error: 0
+      npu_interrupts: 11
+      last_pmu_cycles: 762
+      last_pmu_active_cycles: 762
+      last_pmu_invocations: 1
+      last_pmu_overflow: 0
+  measurements:
+    # Final debugger-launched run; warmup excluded from timing.
+    cpu_hz: 400000000
+    npu_hz: 400000000
+    timer_hz: 400000000
+    npu_cycles_samples: [756, 732, 756, 762, 756, 756, 726, 756, 666, 762]
+    npu_cycles_median: 756
+    npu_cycles_min: 666
+    npu_cycles_max: 762
+    npu_cycles_mean: 742.8
+    npu_ms_median: 0.00189
+    forward_ticks_samples: [43838, 42883, 41719, 41310, 41358, 41161, 41521, 41340, 41340, 41311]
+    forward_ticks_median: 41349
+    forward_ms_median: 0.1033725
+    pmu_cross_check: "PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference; no overflow."
+    model_bytes: 3104
+    arena_bytes: 192
+    arena_address: 0x02010000
+    arena_memory: SRAM0
+    weights_bytes: 256
+    weights_address: 0x802410f0
+    weights_memory: MRAM
+    method_pool_peak_bytes: 1320
+    temp_pool_peak_bytes: 192
+    reserved_pool_bytes: 131072
+  artifacts:
+    model: ai_layer/model.pte
+    model_sha256: 4b727b8252128b0e5733df5530d081ef5750c1c7baa53ea8eadfb8171af3c8cd
+    firmware: out/template_mram/DevKit-E8/Release/template_mram.axf
+    firmware_sha256: f3b523732a2558d8c7f581a3fd3c717ae6797b425eb5764fc292efee17b94f3b
+  scope: "Release hardware smoke test with the existing embedded model and board cache/RTOS callbacks. Debug build and other models were not tested."
