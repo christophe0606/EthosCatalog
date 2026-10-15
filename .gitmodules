@@ -1,0 +1,6 @@
+[submodule "thirdparty/c_mcp"]
+	path = thirdparty/c_mcp
+	url = https://github.com/christophe0606/c_mcp
+[submodule "thirdparty/CMSIS-Stream"]
+	path = thirdparty/CMSIS-Stream
+	url = https://github.com/ARM-software/CMSIS-Stream

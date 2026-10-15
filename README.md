@@ -5,6 +5,15 @@ CMSIS solution for the Alif DevKit-E8 M55 HP core and Ethos-U85 (256 MACs).
 a deterministic 1x1 convolution and ReLU. Firmware compares the result with
 the original PyTorch model and prints `Test_result: PASS` on UART4.
 
+## Third-party submodules
+
+`thirdparty/c_mcp` and `thirdparty/CMSIS-Stream` track the upstream repositories
+for future CMSIS Pack integration. Initialize them after cloning this repository:
+
+```sh
+git submodule update --init --recursive
+```
+
 ## Select a project and prepare its network
 
 1. Keep exactly one application in `EthosCatalog.csolution.yml` → `projects`.
