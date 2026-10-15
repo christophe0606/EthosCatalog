@@ -304,7 +304,15 @@ cache.write_bytes(b"project-owned quantization")
         weights = self.project / self.network["safetensors"]
         first_hash = sha256(weights)
         tensors = {key: value.clone() for key, value in load_file(weights).items()}
-        self.assertTrue(any(t.dtype == torch.int8 for t in tensors.values()))
+        self.assertTrue(any(t.dtype == torch.int16 for t in tensors.values()))
+        self.assertFalse(any(t.dtype == torch.int8 for t in tensors.values()))
+        quantizers = [node for node in program.graph.nodes
+                      if node.target == torch.ops.quantized_decomposed.quantize_per_tensor.default]
+        self.assertTrue(quantizers)
+        self.assertTrue(all(node.args[-1] == torch.int16 for node in quantizers))
+        self.assertTrue(any(node.target == torch.ops.aten.mul.Tensor for node in program.graph.nodes))
+        self.assertFalse(any('conv' in str(node.target) for node in program.graph.nodes))
+        torch.testing.assert_close(expected, 2.0*sample, atol=0.0001, rtol=0)
         self.assertFalse(any(key.startswith("test.") for key in tensors))
         source.write_text("raise RuntimeError('original network was imported')\n")
         program = load_quantized_program(spec.target, self.project, self.network)

@@ -1,11 +1,15 @@
 # MRAM microphone spectrum template
 
-The onboard PDM microphone feeds 512 signed mono samples at 48 kHz to a quantized
-Ethos-U85 network implementing `y = 2*x`. A 2048-sample window advances by 512
-samples (75% overlap). Independent DC removal, Hann window, FFT and magnitude
+The onboard PDM microphone feeds 512 signed mono samples at 48 kHz to an int16
+Ethos-U85 network implementing the elementwise multiply `y = 2*x`. A 2048-sample
+window advances by 512 samples (75% overlap). Independent DC removal, Hann window, FFT and magnitude
 stages produce a calibrated one-sided spectrum. The network preserves negative
 samples and has no ReLU or bias. Its float interface quantizes the normalized
-PCM range [-1, 1]; output range is approximately [-2, 2].
+PCM range [-1, 1]; output range is approximately [-2, 2]. The model is simply
+`x * 2.0`, with no convolution. Both activations and the multiply constant are
+quantized to int16. The quantizer uses a small minimum scale (`2**-24`) so the
+normalized input uses the available precision. The float graph interface remains;
+normalizing int16 PCM to float by dividing by 32768 is exact.
 
 Capture enables only `ARM_PDM_MASK_CHANNEL_4`; channel 5 is disabled. The board
 driver writes one 16-bit sample for each enabled channel, so these buffers contain
@@ -67,12 +71,14 @@ and timing/deadline counters), `gain_test_passed`, `microphone_drops` and
 `microphone_overflows` in the debugger. `pipeline_error` also records errors.
 The LCD uses asynchronous events because rendering and VSYNC have their own
 cadence. The dataflow signal-processing stages always consume/produce their
-configured samples. The [earlier board validation](../../documentation/cmsis-stream-validation.md)
-records the previous packet-based implementation; its gap-recovery observations
-do not describe this scalar graph.
+configured samples. The [board validation](../../documentation/cmsis-stream-validation.md)
+records the current scalar graph with int16 Ethos gain.
 
 `model/benchmark.yml` and `model/benchmark_uart.txt` record the current gain
-network: median NPU 0.0050875 ms and median forward 0.151685 ms at 400 MHz.
+network: median NPU 0.0012425 ms and median forward 0.14742 ms at 400 MHz.
+The signed-ramp self-test reports maximum absolute error 0.000030, with a
+0.0001 tolerance. Vela delegates one multiply to Ethos; the float-boundary
+quantize/dequantize operators run on the CPU.
 The benchmark runs one warmup and ten checked forwards before starting
 capture and drawing. `forward()` timing excludes tensor setup, output copying,
 validation, UART, capture and display; it includes float-boundary quantization

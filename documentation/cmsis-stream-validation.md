@@ -1,122 +1,122 @@
 # MRAM CMSIS Stream validation - October 15, 2026
 
-This board-run record predates the sample-based node conversion. It describes
-packet FIFOs, capture-gap recovery and invalid warm-up frames in that earlier
-implementation. The current realtime graph uses scalar sample FIFOs, zero-padded
-startup history and `EthosGain`; see the [current template](../projects/template_mram/README.md).
-The live measurements below have not been repeated for that conversion.
+This record covers the sample-based realtime graph with an int16 elementwise
+Ethos gain on DevKit-E8 M55_HP. It supersedes the earlier packet-based MRAM
+validation. The OSPI template retains its existing implementation.
 
-The scalar conversion passed Release build **b-62** through `cmsis_action`.
-The build-artefact symbol lookup found only `arm_rfft_fast_init_2048_f32`
-(122 bytes) for the RFFT initializers in the Release image. The FFT wrapper
-selects a size-specific initializer with `if constexpr`.
+## Model and generation
 
-The default generated schedule has nine steps and 16,384 bytes of FIFO storage.
-Three Python generator tests passed, including 128/256/512/1024-sample PCM
-conversion rates. Production-wrapper host checks passed for 300-sample source
-reblocking, mixed 256/512 rates, zero-padded overlap, the Ethos interface, all
-eight FFT lengths from 32 to 4096, calibrated tone amplitude and LCD event
-ownership/pool bounds. The existing audio DSP/renderer host checks also passed.
-The CMSIS environment check passed with schema-validated environment format
-1.0.0 from CMSIS Solution 1.72.0, Toolbox 2.15.0, CMake 3.31.12, Ninja 1.13.2,
-and the selected AC6 6.24.0 compiler.
+`projects/template_mram/model/model.py` implements `x * 2.0` directly. The saved
+quantized graph contains int16 activations and an int16 multiply constant, with
+no convolution. `get_symmetric_a16w8_quantization_config(epsilon=2**-24)` keeps
+its minimum scale below the approximately 1/32767 input scale. The exported
+interface remains float; dividing signed int16 PCM by 32768 is exact. CPU
+boundary quantize/dequantize operators surround the Ethos delegate.
 
-The MRAM template runs the generated `scheduler_app` dataflow graph and the
-CMSIS Stream event queue on the DevKit-E8 M55_HP with the embedded MRAM model.
-The OSPI template retains its existing scheduling.
+Vela 5.1.0 compiled one NPU operator and zero CPU network operators, with zero
+convolution MACs. The PTE is 2816 bytes. Its estimate is 128 cycles at 400 MHz,
+with 1024 bytes of SRAM and a 16-byte constants region. The retained summary
+was regenerated with intermediate artifacts enabled; after removing the added
+`debug_artifact_path` compile specification, the deserialized runtime program
+and compiled delegate bytes matched the firmware PTE exactly.
 
-## Generation and host checks
+The local `cmsis-stream` Python package (3.2.0+git39.efdc521) and local pack at
+`thirdparty/CMSIS-Stream` generate nine dataflow nodes and one event-only LCD
+node. The nine-step synchronous schedule uses two 16-byte-aligned shared FIFO
+buffers totaling 16,384 bytes. Ports carry primitive int16 PCM or float samples;
+Python docstrings describe their meaning. Startup sliding history is zero-padded.
+The signal-processing graph assumes continuous realtime input.
 
-The local `cmsis-stream` Python package (3.2.0+git39.efdc521) was installed with
-`uv pip install -e ./thirdparty/CMSIS-Stream/PythonPackage`. The local pack is
-selected by the `path: thirdparty/CMSIS-Stream` solution entry and
-`CMSIS:STREAM&Source` project component.
+The microphone enables only PDM channel 4; channel 5 is disabled. Its 48 kHz,
+signed 16-bit input is mono, with 512 samples per hardware capture. There is no
+stereo interleaving before the mono FFT.
 
-`uv run projects/template_mram/app.py` generates nine dataflow nodes and one
-event-only LCD node, with a nine-step synchronous schedule. FIFO optimization
-uses two 16-byte-aligned buffers totaling 16,416 bytes. Source/metadata hashes
-were identical when generated from the repository root and project directory.
-Graphviz produced `generated/app.pdf`. Simulated missing `dot` and nonzero
-conversion exits both printed a warning and returned a completed graph.
+## Host and build checks
 
-`tests/run_stream_tests.ps1 -PackRoot C:/ctools_pack` passed using production
-node wrappers and Stream FIFO/event types. It covers normalization, overlapping
-history, four-block warm-up after a gap, window scale, three immutable queued
-payloads, pool exhaustion, queue rejection/reuse and LCD event consumption.
-`tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack` also passed its original
-silence, DC, tone, amplitude, Nyquist, display/touch and framebuffer-bound checks.
-The generated scheduler passed a host C++ syntax check. Benchmark schema checks
-and their 11 unit tests passed after replacing the MRAM capture and record.
+All 16 project-generation/cache tests passed, including int16 graph/tensor
+checks, absence of convolution, calibration accuracy within 0.0001, cache reuse
+and regeneration after changing the gain. The benchmark validator and its
+11 unit tests also passed after updating the board capture and Vela summary.
+
+The sample-based conversion previously passed three Python generator tests,
+including 128/256/512/1024-sample PCM conversion rates. Production-wrapper host
+checks passed for 300-sample source reblocking, mixed 256/512 rates, zero-padded
+overlap, the Ethos interface, all eight FFT lengths from 32 to 4096, calibrated
+tone amplitude and LCD event ownership/pool bounds. The existing audio
+DSP/renderer host checks also passed.
+
+Release build **b-63** passed through `cmsis_action`. The environment check
+validated format 1.0.0 from CMSIS Solution 1.72.0, Toolbox 2.15.0, CMake 3.31.12,
+Ninja 1.13.2 and AC6 6.24.0. FFT initialization selects the size-specific
+initializer with `if constexpr`; the Release symbol lookup found only
+`arm_rfft_fast_init_2048_f32` among the RFFT initializers.
 
 ## Release on the board
 
-CMSIS build **b-52** passed; load-and-debug **d-53** loaded the resulting image.
-The separate **DevKit-E8@Debug** build also passed (**b-54**).
-The signed gain self-test checked all 512 outputs during one warm-up and ten
-measured forwards. Maximum absolute error was **0.008816**, below **0.04**.
-Each forward required one nonzero Ethos PMU invocation, equal cycle/active
-counters and no PMU overflow.
+Load-and-debug **d-64** programmed Release and started the firmware. Its signed
+ramp self-test checked all 512 outputs during one warmup and ten measured
+forwards. The UART reported maximum absolute error **0.000030**, below the
+**0.0001** tolerance. Every forward required one nonzero Ethos PMU invocation,
+equal cycle/active counters and no PMU overflow.
 
-The retained capture is `projects/template_mram/model/benchmark_uart.txt`.
-The matching `benchmark.yml` records median NPU time **0.0050875 ms** and
-median `forward()` time **0.151685 ms**, with CPU, AXI/NPU and timer at 400 MHz.
-The model, arena, weights and method/temp allocator peaks remain 3072, 1216,
-192, 3752 and 1216 bytes respectively. The record includes the Release ELF
-SHA256 and the build/execution job IDs.
+The retained `projects/template_mram/model/benchmark_uart.txt` is the second
+startup in d-64, after the debugger reset. `benchmark.yml` records its exact
+cycle/timer samples, model/configuration/firmware hashes and job IDs. CPU,
+AXI/NPU and timer clocks were all 400 MHz.
 
-A live breakpoint in `LCD::processEvent` showed this call chain:
-
-```text
-LCD::processEvent
-CMSISEventQueue::execute
-event_thread_function
-osThreadEntry
-```
-
-This proves the LCD is dispatched by Stream message passing. The generated
-graph subscribes `SendToLCD` output 0 to LCD input 0. RTX reported the dataflow
-thread waiting for microphone thread flags at priority 48, and the event thread
-waiting for event flags at priority 40.
-
-At that LCD breakpoint, before the current frame's `lcd_present()` completed:
-
-| `stream_stats` field | Observed |
+| Measurement | Result |
 | --- | ---: |
-| error | 0 |
-| audio_blocks | 7406 |
-| spectrum_frames | 7385 |
-| frames_presented | 1589 |
-| lcd_events_sent | 1590 |
-| lcd_events_received | 1590 |
-| lcd_events_dropped | 0 |
-| audio_ticks_max | 152467 |
-| audio_deadline_misses | 0 |
-| lcd_deadline_misses | 0 |
-| discontinuities | 6 |
-| warmup_blocks | 21 |
+| Median NPU cycles | 497 |
+| Median NPU time | 0.0012425 ms |
+| Median complete forward | 0.14742 ms |
+| Model size | 2816 bytes |
+| Ethos arena | 1024 bytes |
+| Ethos constants region | 16 bytes |
+| ExecuTorch method pool peak | 4776 bytes |
+| ExecuTorch temporary pool peak | 1024 bytes |
 
-The maximum observed processing time was approximately 0.3812 ms, below the
-10.6667 ms block interval. The initial three invalid packets plus three per
-capture discontinuity account for all 21 warm-up packets. Debugger halts leave
-the microphone peripheral running; the graph resumed capture and discarded
-partial history afterward. An earlier snapshot showed nonzero spectrum data
-and `spectrum_peak_hz=93`.
+Forward timing excludes tensor setup, output copying, validation, UART, capture
+and drawing; it includes CPU float-boundary quantization and PMU hooks. The
+previous int8 convolution reported 0.008816 maximum error, 0.0050875 ms median
+NPU time and 0.151685 ms median forward time. Both quantization and operation
+changed, so this comparison is for the complete models, not dtype alone.
 
-The build-artefact tool reported 1,669,120 bytes in SRAM0, including both LCD
-buffers and NPU-visible pools/input, out of 4 MiB. FIFO buffers and Stream runtime
-storage occupy DTCM. The runtime uses the configured 32 KiB dataflow and 8 KiB
-event stacks and a 64 KiB RTX dynamic pool.
+Two live snapshots showed continued capture and display progress:
 
-These checks prove live capture/inference progress and successful LCD driver
-presentation through the Stream event thread. Physical panel appearance and
-touch interaction were not assessed during this migration; the existing
-renderer and touch code are covered by the host checks.
+| `stream_stats` field | First | Second |
+| --- | ---: | ---: |
+| error | 0 | 0 |
+| audio_blocks | 13222 | 16309 |
+| spectrum_frames | 13222 | 16309 |
+| frames_presented | 2837 | 3500 |
+| lcd_events_sent | 2838 | 3500 |
+| lcd_events_received | 2838 | 3500 |
+| lcd_events_dropped | 0 | 0 |
+| audio_ticks_max | 159448 | 159448 |
+| audio_deadline_misses | 0 | 0 |
+| lcd_deadline_misses | 0 | 0 |
 
-## Final state
+The maximum processing time was **0.39862 ms**, below the **10.6667 ms** audio
+block interval. `pipeline_error == 0`, `gain_test_passed == 1` and
+`gain_benchmark_complete == 1`. A dataflow thread stack showed
+`osThreadFlagsWait -> microphone_read -> read_microphone_samples ->
+MicrophoneSource<short,512>::run -> scheduler_app -> stream_thread_function`
+at priority 48. The event thread waited for event flags at priority 40.
 
-Release rebuild **b-57** passed with the same ELF SHA256 as **b-52**. After
-switching back from Debug, the explicit Release cbuild-run file was programmed
-with `flash` (509,952 bytes). The resulting UART self-test again passed, with
-weights at the Release address `0x8026f8f0`. The retained benchmark above is the
-recorded **d-53** measurement run. **g-59** started CMSIS Run on Release; the
-target was left running, with no debug session and the owned serial port closed.
+The debugger initially supplied no active frame after a pause. Enumerating
+threads and obtaining a call stack made global evaluation available. During
+these inspection halts the microphone peripheral kept running: the first
+snapshot had zero software drops and four hardware overflows. These counts
+include debugger disruption and are not uninterrupted-run overrun measurements.
+No gap detection or recovery packets are part of this realtime graph.
+
+The build-artefact tool reported 1,669,136 bytes of SRAM0 load-segment usage,
+including LCD buffers and inference pools, out of 4 MiB. The scalar FIFOs and
+Stream runtime storage occupy DTCM. Dataflow/event stack reservations are
+32 KiB/8 KiB, with a 64 KiB RTX dynamic pool.
+
+These checks establish live capture, int16 Ethos inference, spectrum generation
+and LCD driver presentation through Stream events. Physical panel appearance
+and touch interaction were not assessed in this run; renderer and touch logic
+are covered by the existing host checks. The validation breakpoint was removed
+and the target was left running.
