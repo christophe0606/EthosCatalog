@@ -3,8 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """OSPI template-owned model loading, calibration data and quantization policy.
 
-Normally called by scripts/create_ai_layer.py. Firmware test data is maintained
-separately in this project's model/model_test_data.h and is never written here.
+Normally called by scripts/create_ai_layer.py. Firmware gain self-test constants are maintained
+separately in this project's model/model_test_data.h and are never written here.
 """
 import argparse
 import importlib.util
@@ -18,12 +18,12 @@ from quantized_model import compile_spec, save_quantized_program
 
 
 def calibration_inputs():
-    """Represent the template's NHWC input range and both ReLU branches."""
+    """Represent the template's signed PCM input range."""
     import torch
-    shape = (1, 8, 8, 1)
+    shape = (1, 1, 512, 1)
     generator = torch.Generator().manual_seed(17)
     return [
-        torch.linspace(-1.0, 1.0, 64).reshape(shape),
+        torch.linspace(-1.0, 1.0, 512).reshape(shape),
         torch.full(shape, -1.0),
         torch.full(shape, 1.0),
         torch.rand(shape, generator=generator) * 2.0 - 1.0,
@@ -41,7 +41,7 @@ def quantize_model(spec, project_dir, network):
         raise ValueError(f"Cannot import the template's Python model: {source}")
     module = importlib.util.module_from_spec(module_spec)
     module_spec.loader.exec_module(module)
-    model = module.SmokeModel().eval()
+    model = module.GainModel().eval()
     samples = calibration_inputs()
     example = (samples[0],)
     graph = torch.export.export(model, example).module()
@@ -54,7 +54,7 @@ def quantize_model(spec, project_dir, network):
     quantized = convert_pt2e(prepared, fold_quantize=True)
     with torch.no_grad():
         for sample in samples:
-            torch.testing.assert_close(quantized(sample), model(sample), atol=0.02, rtol=0)
+            torch.testing.assert_close(quantized(sample), model(sample), atol=0.04, rtol=0)
     program = torch.export.export(quantized, example)
     if not any(value.dtype == torch.int8 for value in program.state_dict.values()):
         raise ValueError("Template quantization produced no int8 weights")

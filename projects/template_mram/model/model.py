@@ -1,24 +1,16 @@
-# Copyright (c) 2026 Arm Limited or its affiliates. All rights reserved.
+# Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
-
-"""Deterministic PyTorch starting point for the E8 Ethos-U85 smoke test."""
+"""A signed, sample-wise 2x gain executed by Ethos, with no ReLU or bias."""
 import torch
 from torch import nn
-
-INPUT_SHAPE = (1, 8, 8, 1)  # NHWC at the firmware boundary.
-OUTPUT_SHAPE = (1, 8, 8, 2)
-
-
-class SmokeModel(nn.Module):
+INPUT_SHAPE = (1, 1, 512, 1)  # NHWC: one vector of microphone samples.
+OUTPUT_SHAPE = INPUT_SHAPE
+GAIN = 2.0
+class GainModel(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv = nn.Conv2d(1, 2, kernel_size=1)
+        self.gain = nn.Conv2d(1, 1, kernel_size=1, bias=False)
         with torch.no_grad():
-            self.conv.weight.copy_(torch.tensor([1.0, -0.5]).reshape(2, 1, 1, 1))
-            self.conv.bias.copy_(torch.tensor([0.125, 0.25]))
-
+            self.gain.weight.fill_(GAIN)
     def forward(self, x):
-        x = x.permute(0, 3, 1, 2)
-        return torch.relu(self.conv(x)).permute(0, 2, 3, 1).contiguous()
-
-
+        return self.gain(x.permute(0, 3, 1, 2)).permute(0, 2, 3, 1).contiguous()

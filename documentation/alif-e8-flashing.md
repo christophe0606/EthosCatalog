@@ -25,9 +25,9 @@ root.
    and SRAM for the arena (Ethos-U85 TRM `arm/102685-latest`, r0p0 Issue 05,
    pp.48–49 and 56–59; MEM_ATTR defaults in ethos-u-core-driver 1.26.5).
 4. Set SW4 to U4 for UART4 output. Run the application and inspect stdout at
-   115200 baud, 8 data bits, no parity, 1 stop bit. Expect 128 output elements,
-   the maximum absolute error and `Test_result: PASS`. `app_result` holds the
-   application status for debugger inspection.
+   115200 baud, 8 data bits, no parity, 1 stop bit. Expect `Ethos gain self-test: PASS`, then a live microphone spectrum on the
+   standard MIPI LCD. Verify `gain_test_passed == 1`, `pipeline_error == 0`, and
+   advancing `audio_blocks`/`frames_presented` in the debugger.
 
 ## Program an OSPI model
 
@@ -153,8 +153,8 @@ been exercised with the supplied template on DevKit-E8.
    preparation code and `model_programming_wait` breakpoint. The `ProgramModel`
    configuration runs this code without accessing the OSPI model. The normal
    configurations enable XIP; `app_main.cpp` verifies the model's generated
-   CRC32 in place and benchmarks checked inferences directly from OSPI. Only writable
-   inference/runtime pools use SRAM0; the PTE is not copied there.
+   CRC32 in place before starting the microphone spectrum. Writable
+   inference/runtime pools and LCD framebuffers use SRAM0; the PTE is not copied there.
 5. In Explorer, right-click
    `board/flash/loader/FlashLoader.csolution.yml` and choose
    **CMSIS: Select as Active Solution**. Select its **DevKit-E8** target in the
@@ -231,8 +231,8 @@ been exercised with the supplied template on DevKit-E8.
     again. Run **CMSIS: Build Solution** to restore the normal application run
     file, then **CMSIS: Load & Run Application**. Its startup enables XIP before
     the model is read. Check `model_verified == 1` and the application's
-    `Test_result: PASS` output on UART4. These are correctness checks, not an
-    OSPI benchmark.
+    `Ethos gain self-test: PASS` output on UART4, followed by advancing
+    `audio_blocks` and `frames_presented` with `pipeline_error == 0`.
 
 Whenever the compiled PTE changes, repeat the AI-layer generation, application
 build, model-only file preparation, board preparation and programming steps.

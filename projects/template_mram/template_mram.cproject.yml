@@ -16,11 +16,19 @@ project:
     - NPU_REGIONCFG_1: 0
     - APP_METHOD_POOL_SIZE: 65536
     - APP_TEMP_POOL_SIZE: 65536
+    # Main application + dedicated audio and LCD threads use C library state.
+    - OS_THREAD_NUM: 3
     - APP_POOL_SECTION: \".bss.ai_pool\"
   components:
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
     - component: CMSIS-Compiler:TTY:Custom
+    - component: CMSIS:DSP&Source
+      optimize: speed
+      misc:
+        - C-CPP: [-O3, -ffast-math]
+    - component: Device:SOC Peripherals:PDM
+    - component: BSP:External peripherals:GT911 Touch Controller
   connections:
     - connect: MRAM template application
       provides:
@@ -40,10 +48,23 @@ project:
       files:
         - file: app_main.cpp
         - file: model/model_test_data.h
+        - file: spectrum.h
+        - file: spectrum_ui.c
     - group: Embedded ExecuTorch module
       files:
         - file: ../../common/arm_embedded_module.cpp
         - file: ../../common/arm_embedded_module.hpp
+    - group: Reusable processing nodes
+      files:
+        - file: ../../common/nodes.h
+        - file: ../../common/board_nodes.h
+        - file: ../../common/embedded_runtime.hpp
+        - file: ../../common/nodes_impl/c/embedded_runtime.cpp
+        - file: ../../common/nodes_impl/c/sliding_buffer.c
+        - file: ../../common/nodes_impl/c/window.c
+        - file: ../../common/nodes_impl/c/fft.c
+        - file: ../../common/nodes_impl/alif_e8/microphone.c
+        - file: ../../common/nodes_impl/alif_e8/lcd.c
   layers:
     - layer: $Board-Layer$
       type: Board

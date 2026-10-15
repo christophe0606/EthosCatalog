@@ -313,7 +313,7 @@ cache.write_bytes(b"project-owned quantization")
         self.assertEqual(sha256(weights), first_hash)
         with self.assertRaisesRegex(RuntimeError, "original network was imported"):
             quantizer.quantize_model(spec, self.project, self.network)
-        source.write_text(original.replace("[0.125, 0.25]", "[0.2, 0.25]"))
+        source.write_text(original.replace("GAIN = 2.0", "GAIN = 1.5"))
         quantizer.quantize_model(spec, self.project, self.network)
         regenerated = load_quantized_program(spec.target, self.project, self.network)
         with torch.no_grad():

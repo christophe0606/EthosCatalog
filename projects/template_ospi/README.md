@@ -1,21 +1,16 @@
 # OSPI template
 
-This template uses the MRAM template's small convolution/ReLU model and fixed
-test data. Application code remains in MRAM. `flash_ospi: true` stores the PTE
-separately in OSPI1 at `0xC0000000`, within a reserved 32 MiB window.
+This template runs the same microphone -> Ethos 2x gain -> spectrum application
+as the [MRAM template](../template_mram/README.md). The application and drawing
+stay in this project. Reusable processing and board nodes live in `../../common`.
+Audio uses CMSIS Realtime priority; LCD rendering and animation use High priority.
 
-The normal application enables XIP, checks the PTE's generated CRC32 in place
-and passes its OSPI address directly to ExecuTorch's `BufferDataLoader`.
-The U85 reads the command stream and constant weights through `AXI_EXT`
-(`NPU_QCONFIG=2`, `NPU_REGIONCFG_0=3`). Writable activations, scratch and runtime
-pools remain in SRAM0 (`NPU_REGIONCFG_1=0`); no SRAM model buffer is reserved
-and the PTE is never staged there. Application code remains in MRAM.
-
-The model has been programmed and checked inferences have passed on DevKit-E8;
-see the hardware validation record below. The runner validates one warmup and
-ten measured inferences, matching the MRAM template's measurement method.
-[model/benchmark.yml](model/benchmark.yml) records the final run, with raw UART
-output in [model/benchmark_uart.txt](model/benchmark_uart.txt).
+Application code remains in MRAM. `flash_ospi: true` stores the PTE separately
+in OSPI1 at `0xC0000000`, within a reserved 32 MiB window. Startup enables XIP,
+checks the generated full-PTE CRC32 in place, and passes the OSPI address to the
+persistent EmbeddedModule. The PTE is never copied into SRAM. U85 command and
+constant reads use AXI_EXT; writable activations, scratch and input use SRAM0.
+The two RGB565 LCD buffers also use SRAM0.
 
 The flash uses continuous reads (volatile configuration register `07h = FFh`)
 so NPU bursts can cross 32-byte boundaries. The CPU's OSPI1 MPU region uses
@@ -29,7 +24,7 @@ Rev. A14, May 12, 2026, page 24, Table 6.6.
 
 | Target set | Build context | Behavior |
 | --- | --- | --- |
-| `DevKit-E8@OSPI_Debug` | `template_ospi.Debug` | Initialize XIP, verify model in place, benchmark checked inferences |
+| `DevKit-E8@OSPI_Debug` | `template_ospi.Debug` | Initialize XIP, verify model, start microphone spectrum |
 | `DevKit-E8@OSPI_Release` | `template_ospi.Release` | Same application with optimization |
 | `DevKit-E8@ProgramModel` | `template_ospi.ProgramModel` | Prepare hardware and wait; no model or inference runtime |
 
@@ -86,41 +81,23 @@ For normal application startup, choose **OSPI_Debug** or **OSPI_Release** and
 rebuild so the application run file selects that build instead of `ProgramModel`.
 The normal path initializes XIP and sets the CPU's OSPI1 region non-cacheable
 before accessing the programmed model. `model_verified == 1` records a
-matching full-PTE CRC32; `app_stage == 4` and `app_result == 0` record a completed
-successful inference.
+matching full-PTE CRC32. `gain_test_passed == 1` records the signed gain
+self-test; advancing `audio_blocks` and `frames_presented` with
+`pipeline_error == 0` prove the ongoing application is working.
 
-## Hardware validation
+## Validation
 
-On October 15, 2026, `ProgramModel` prepared DevKit-E8, the model-only flash
-operation programmed the PTE, and `OSPI_Release` built, loaded and completed one
-inference. UART4 at 115200 baud reported `Test_result: PASS`, with 128 outputs
-and a maximum absolute error of `0.005359` against the reference test data.
-
-| Check | Observed result |
-| --- | --- |
-| PTE | 3104 bytes at `0xC0000000`, CRC32 `0xF0A854FB` |
-| Firmware status | `app_stage=4`, `app_error=0`, `app_result=0`, `model_verified=1` |
-| NPU completion | `npu_error=0`, `npu_interrupts=1`, `QREAD=QSIZE=300` |
-| NPU command stream | `QBASE=0xC00000D0` |
-| NPU constant weights | `BASEP0=0xC0000220`, 256 bytes |
-| NPU writable arena | `BASEP1=0x02010000`, 192 bytes in SRAM0 |
-| SRAM0 linker allocation | 131328 bytes: method pool, temporary pool and input; no PTE buffer |
-
-The original 32-byte flash wrap configuration stalled the NPU command stream.
-Continuous reads resolved that stall; making CPU OSPI1 accesses non-cacheable
-also resolved the subsequent CPU metadata-access fault. The recorded pass uses
-both settings. This initial check validated functional execution of the supplied
-smoke model.
-
-The subsequent Release benchmark used the same direct OSPI configuration and
-passed all eleven checked inferences. With CPU and NPU clocks at 400 MHz and
-OSPI configured at 25 MHz, the ten measured samples had a median NPU time of
-`0.0204675 ms` (8187 cycles) and a median `module.forward()` time of
-`0.394775 ms`. NPU timing excludes CPU work and IRQ overhead; forward timing
-includes CPU work and PMU hooks. These measurements apply to this smoke model
-and configuration.
+See [current audio validation](../../documentation/audio-spectrum-validation.md).
+[model/benchmark.yml](model/benchmark.yml) and the accompanying raw UART capture
+record ten measured, checked gain-network forwards after one warmup. The median
+NPU time is 0.0235875 ms and median `module.forward()` time is 0.44615125 ms
+at 400 MHz. The arena is 1216 bytes; method/temp peaks are 3752/1216 bytes.
+Timing excludes capture, FFT, display and UART; the record also lists full
+firmware memory allocations, including the two LCD buffers.
+The compiled PTE has changed: program it separately before loading the new
+application, or its CRC check will reject the old external model.
 
 To derive a project, keep `ospi_startup.c`, the OSPI component and helper sources,
 the SRAM inference-pool linker section and the `ProgramModel` context filters. Adapt
-the model/quantizer/test data and add the new project to the desired target sets
+the model/quantizer/gain self-test constants and add the new project to the desired target sets
 as described in [Add another project](../../README.md#add-another-project).

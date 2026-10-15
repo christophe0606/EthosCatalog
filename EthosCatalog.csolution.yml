@@ -6,6 +6,7 @@ solution:
   packs:
     - pack: AlifSemiconductor::Ensemble@^2.2.0-0
     - pack: ARM::CMSIS@^6.2.0
+    - pack: ARM::CMSIS-DSP@1.18.0
     - pack: ARM::CMSIS-Compiler@^2.1.0
     - pack: PyTorch::ExecuTorch@1.4.1
     - pack: ARM::CMSIS-NN
@@ -82,7 +83,7 @@ solution:
         - .Release
     - project: projects/template_ospi/template_ospi.cproject.yml
   mlops:
-    description: Ethos-U85 hello world
+    description: Microphone spectrum with Ethos-U85 sample gain
     npu:
       type: Ethos-U85
       macs: 256

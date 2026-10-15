@@ -1,15 +1,25 @@
 # EthosCatalog
 
 CMSIS solution for the Alif DevKit-E8 M55 HP core and Ethos-U85 (256 MACs).
-`projects/template_mram` is a small hello world: an 8x8 NHWC image passes through
-a deterministic 1x1 convolution and ReLU. Firmware compares the result with
-the original PyTorch model and prints `Test_result: PASS` on UART4.
-`projects/template_ospi` uses the same network and fixed test data, stores the
-model separately in OSPI, and includes the preparation firmware needed before
-programming it. Its normal application verifies the model's CRC32 in place,
-then benchmarks checked inferences directly from OSPI. Its
-[benchmark record](projects/template_ospi/model/benchmark.yml) contains ten
-measured samples after one warmup. Firmware remains in MRAM in both templates.
+Both templates capture the DevKit-E8 microphone at 48 kHz, apply a signed 2x
+sample gain with an Ethos-U85 network, and display the animated spectrum on the
+standard 480 x 800 MIPI LCD. The MRAM template embeds the model; the OSPI
+template reads it directly from separately programmed OSPI flash. Firmware
+remains in MRAM in both templates.
+
+The real-time audio thread processes 512-sample blocks through independent
+PCM conversion, Ethos gain, sliding buffer, DC removal, Hann window, FFT and
+magnitude stages. The LCD thread runs at CMSIS High priority, below Realtime,
+and receives complete spectrum snapshots without blocking audio on drawing or
+VSYNC. It retains the Spectrogram example's log/linear touch toggle, display
+scale slider and animated peak markers. The network gain is fixed at 2x; the
+slider changes display scale only.
+
+Reusable processing, microphone and LCD setup live under
+[common/nodes_impl](common/nodes_impl/README.md). Model execution, thread
+orchestration and drawing stay in each project. The project supplies the
+persistent ExecuTorch pools and their memory sizes. The common initializer
+constructs one EmbeddedModule that lives until reset.
 
 | VS Code target set | Project/build context | Purpose |
 | --- | --- | --- |
@@ -21,9 +31,6 @@ measured samples after one warmup. Firmware remains in MRAM in both templates.
 
 See the [MRAM template](projects/template_mram/README.md) and
 [OSPI template](projects/template_ospi/README.md) for their build configurations.
-The OSPI template has been programmed and run on DevKit-E8 with
-`Test_result: PASS`, reading the PTE directly from OSPI without an SRAM copy.
-See its [hardware validation record](projects/template_ospi/README.md#hardware-validation).
 
 ## Third-party submodules
 
@@ -54,7 +61,7 @@ files may still describe the previously selected project.
    target-set selection in `.vscode/cmsis.json` and its `project-context` entries;
    other projects can remain listed in the solution.
    Each project owns a `model/` directory containing the model, quantization
-   script, `network.yml`, quantized caches and fixed test data, plus its application
+   script, `network.yml`, quantized caches and gain self-test constants, plus its application
    and linker script.
 2. Install the CMSIS packs and tools selected by the solution using the CMSIS
    Solution extension and Arm Environment Manager. The required Python exporter
@@ -131,7 +138,7 @@ The script must save the quantized exported graph and safetensors at the configu
 paths using `scripts/quantized_model.py`'s cache format/helpers. That shared module
 only provides compiler configuration and cache I/O; it has no calibration policy.
 Set the project's network YAML and adapt its application, manually maintained
-test data and linker script to the model's shapes, pool sizes and memory placement.
+gain self-test constants and linker script to the model's shapes, pool sizes and memory placement.
 Keep model sources and quantized caches inside that project. Add it to the
 solution's `projects` list, select it alone for build in the CMSIS UI target set,
 and regenerate `ai_layer` before building. Other projects can remain listed.
@@ -252,3 +259,8 @@ setup in **Select a project and prepare its network** first.
     belongs to the newly selected application.
 
 Script regression checks: `uv run tests/test_project_scripts.py`.
+DSP and renderer checks on Windows with clang and installed CMSIS packs:
+`./tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack`.
+The latter also generates `out/audio-spectrum-{linear,log}.ppm` previews.
+See [validation notes](documentation/audio-spectrum-validation.md) for measured
+board results and the processing/thread contracts.
