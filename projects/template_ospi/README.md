@@ -60,13 +60,6 @@ and memory blocks, enables the OSPI1 clock, disables retained XIP, prepares flas
 pins/reset, and disables interrupts, SysTick, caches and the MPU. It clears MSP
 and PSP stack limits before publishing readiness and waiting in internal MRAM.
 
-The implementation is adapted from `M55_HP/main.c` in the local reference
-repository `Blinky_M55_HP`, branch `chess`, commit
-`37c18e4eb6e32f46d467aafc9d3188f4c5b1f519`. The reference's complete board/enclave
-initialization order and programming-entry operations are retained; chess,
-diagnostic erase and benchmark code are excluded. Source copyright/license
-notices are preserved. The existing board OSPI helpers are reused.
-
 Before programming, stop at `model_programming_wait` and require:
 
 ```text
@@ -87,7 +80,7 @@ The preparation application only waits. The separate source-built flash loader
 under `board/flash/loader` supplies the erase/write algorithm that the `flash`
 tool executes from RAM. Free the debug probe before calling that tool, and use
 the generated model-only run description with pre/post resets disabled. See
-the root [step-by-step OSPI procedure](../../README.md#manually-program-a-future-ospi-network).
+the [Alif DevKit-E8 OSPI programming procedure](../../documentation/alif-e8-flashing.md#program-an-ospi-model).
 
 For normal application startup, choose **OSPI_Debug** or **OSPI_Release** and
 rebuild so the application run file selects that build instead of `ProgramModel`.

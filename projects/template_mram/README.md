@@ -14,6 +14,9 @@ Then select **DevKit-E8@Debug** or **DevKit-E8@Release** in the CMSIS UI and use
 **CMSIS: Build Solution**. `flash_ospi: false` requires only normal application
 loading. The board's default `app_prepare()` hook does nothing for this project.
 
+See the [Alif DevKit-E8 MRAM loading procedure](../../documentation/alif-e8-flashing.md#load-and-run-an-mram-application)
+for board setup, loading and output checks.
+
 The existing `model/benchmark.yml` and `model/benchmark_uart.txt` retain the
 measurements and original `template.Release+DevKit-E8` context from before the
 rename; they are historical results, not a new benchmark of the renamed build.

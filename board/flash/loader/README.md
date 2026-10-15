@@ -11,8 +11,9 @@ uv run scripts/publish_e8_flash_loader.py
 ```
 
 Then pass `--algorithm board/flash/DevKit-E8_IS25WX.FLM` to
-`scripts/create_model_flash.py` for a selected OSPI project. See the root
-[README](../../../README.md) for the manual programming sequence.
+`scripts/create_model_flash.py` for a selected OSPI project. See the
+[Alif DevKit-E8 flashing guide](../../../documentation/alif-e8-flashing.md#program-an-ospi-model)
+for the manual programming sequence.
 `template_mram` embeds its PTE in MRAM and does not use this loader.
 `template_ospi` supplies the preparation firmware in its `ProgramModel` build;
 see [the OSPI template](../../../projects/template_ospi/README.md).

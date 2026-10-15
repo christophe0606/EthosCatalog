@@ -4,6 +4,9 @@
 
 Device: AE822FA0E5597LS0:M55_HP
 
+For application loading and OSPI model programming, follow the
+[Alif DevKit-E8 flashing guide](../../documentation/alif-e8-flashing.md).
+
 This setup is configured using **Conductor Tool**, an interactive tool provided by Alif Semiconductor for device configuration.
 Refer to ["Alif Conductor Tool Manual"](https://conductor.alifsemi.com/Alif_HTML_DCT_User_Help/Content/Help%20Manual.htm) for additional information.
 

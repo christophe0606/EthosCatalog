@@ -1,5 +1,4 @@
-/* OSPI preparation adapted from Blinky_M55_HP, chess branch,
- * M55_HP/main.c at 37c18e4eb6e32f46d467aafc9d3188f4c5b1f519.
+/* OSPI preparation.
  * Copyright (c) 2026 Arm Limited or its affiliates. All rights reserved.
  * New Arm contributions are licensed under Apache-2.0.
  *
