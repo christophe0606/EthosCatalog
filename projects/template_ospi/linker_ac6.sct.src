@@ -1,4 +1,4 @@
-; OSPI template: MRAM executable, external model staged in SRAM0 for inference.
+; OSPI template: MRAM executable, model read in place from OSPI.
 ; app_mem_regions.h is supplied by the cproject's linker regions setting.
 
 #define __ROM_BASE      APP_MRAM_HP_BASE
@@ -89,7 +89,6 @@ LR_ROM __ROM_BASE NOCOMPRESS __ROM_SIZE  {    ; load region size_region
   ; SRAM0 is powered by board main before the pools are used. Their allocators
   ; initialize allocated contents; startup must not zero them before that.
   RW_SRAM0 APP_SRAM0_BASE UNINIT APP_SRAM0_SIZE  {
-   * (.bss.ai_model_pool)              ; CPU-staged OSPI PTE; no startup access.
    * (.bss.ai_pool)                    ; NPU-visible method, scratch and input pools.
   }
   PADDING +0 OVERLAY ALIGN 16 FILL 0 16

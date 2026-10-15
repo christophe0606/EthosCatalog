@@ -1,0 +1,79 @@
+# Paths, including vela.ini, are relative to the project directory.
+benchmark:
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Shared_Sram
+  measurements:
+    size: 3104 # External ExecuTorch .pte bytes, including delegate and weights.
+    arena: 192 # NPU scratch bytes passed to ethosu_invoke_v3; not reserved pool capacity.
+    time:
+      ms: 0.0204675 # Median NPU time = cycles / 400 MHz; excludes CPU/IRQ overhead.
+      cycles: 8187 # Ethos-U85 PMCCNTR, NPU_ACTIVE start / NPU_IDLE stop.
+      statistic: median
+      min_cycles: 8181
+      max_cycles: 8195
+      mean_cycles: 8187.5
+      forward_ms: 0.394775 # Median module.forward(), including CPU work and PMU hooks.
+      forward_timer_hz: 400000000 # RTX osKernelGetSysTimerFreq().
+      cycles_samples: [8184, 8181, 8193, 8193, 8195, 8191, 8187, 8181, 8183, 8187]
+      forward_ticks_samples: [160181, 158081, 158678, 158012, 157532, 157508, 157676, 157844, 157390, 157976]
+    weights:
+      memory: OSPI1
+      section: OSPI_FLASH # External memory window; the PTE is not an ELF section.
+      address: 0xC0000220 # Driver base_addr[0], inside the memory-mapped PTE.
+      size: 256 # Compressed weight/constant bytes reported by the delegate.
+      clock: 25 # MHz, configured OSPI clock; not measured by a timer.
+      clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+    activation:
+      memory: SRAM0
+      section: RW_SRAM0 # Input section .bss.ai_pool.
+      address: 0x02010000 # Driver base_addr[1], temp_pool.
+      clock: 400 # MHz, runtime CLOCK_SETTING_AXI_FREQ from Secure Enclave.
+    pools:
+      method_peak: 1320 # ExecuTorch metadata and planned tensors, including alignment.
+      temp_peak: 192 # High-water mark before the per-operator allocator reset.
+      reserved: 131072 # Two 65536-byte pools; separate from the NPU arena requirement.
+  ospi:
+    model_address: 0xC0000000
+    model_crc32: 0xF0A854FB # Full PTE checked in place before inference.
+    model_copied_to_sram: false
+    firmware_memory: MRAM
+    flash_read_mode: continuous # IS25WX256 volatile configuration register 07h = FFh.
+    dummy_cycles: 16
+    cpu_memory_attribute: Normal non-cacheable # OSPI1 MPU region, MAIR 44h.
+    npu_qconfig: 2
+    npu_regioncfg_0: 3
+    npu_regioncfg_1: 0
+    npu_mem_attr_2: 0x24 # Normal non-cacheable, non-bufferable on AXI_EXT.
+    npu_mem_attr_3: 0x24
+  run:
+    recorded_at: "2026-10-15T07:44:22Z"
+    context: template_ospi.Release+DevKit-E8
+    target: DevKit-E8@OSPI_Release
+    device: AE822FA0E5597LS0
+    core: M55_HP
+    npu: Ethos-U85
+    macs: 256
+    packs:
+      driver: ARM::CMSIS-Ethos-U@1.0.0
+      driver_component: "ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0"
+      board: AlifSemiconductor::Ensemble@2.2.1
+      runtime: PyTorch::ExecuTorch@1.4.1
+    compiler: AC6@6.24.0
+    optimize: "-O3 -ffast-math"
+    build_job: b-25 # Successful cmsis_action build.
+    execution_job: d-26 # Successful cmsis_action load_and_debug.
+    cpu_clock_mhz: 400 # Runtime CLOCK_SETTING_EXTSYS0_FREQ.
+    npu_clock_mhz: 400 # System AXI clock, queried at runtime.
+    warmup: 1 # Method load and first inference excluded from timing statistics.
+    samples: 10 # Every sample and warmup checked against model_test_expected.
+    pmu_cross_check: "PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference"
+    pmu_overflow: 0 # Measured; counter overflow check passed.
+    npu_invocations_per_forward: 1
+    test_result: PASS
+    max_absolute_error: 0.005359
+    tolerance: 0.02
+    uart: benchmark_uart.txt # Final debugger-launched run; preceding CMSIS Load run also retained.
+    model_sha256: 5a5912b7b35a1a5b24d09ba5c5594fbce6cad6f30a7581b89a6165cb1d2dd208
+    firmware_sha256: a6b9f2a5475da19d28e890a27272b8007c7882bee97fd8fb8e92bd6c37ea2cc4

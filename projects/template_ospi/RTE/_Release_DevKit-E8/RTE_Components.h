@@ -31,7 +31,7 @@
 #define RTE_CMSIS_RTOS2                 /* CMSIS-RTOS2 */
 #define RTE_CMSIS_RTOS2_RTX5            /* CMSIS-RTOS2 Keil RTX5 */
 #define RTE_CMSIS_RTOS2_RTX5_SOURCE     /* CMSIS-RTOS2 Keil RTX5 Source */
-/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@1.26.5 */
+/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0 */
 #define RTE_ETHOS_U_CORE_DRIVER
 /* AlifSemiconductor::BSP:External peripherals:CAMERA Sensor MT9M114@2.2.0 */
 #define RTE_Drivers_CAMERA_SENSOR_MT9M114            /* Driver CAMERA Sensor */

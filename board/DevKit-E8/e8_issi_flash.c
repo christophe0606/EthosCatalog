@@ -135,11 +135,14 @@ static int issi_flash_probe(ospi_flash_cfg_t *ospi_cfg)
 {
     /* Initialize SPI in Single mode 1-1-1 and read Flash ID */
     if (issi_flash_ReadID(ospi_cfg) == DEVICE_ID_ISSI_FLASH_IS25WX256) {
-        /* Set wrap configuration to 32 bytes */
+        /* NPU INCR bursts can cross a 32-byte cache-line boundary. Keep
+         * flash reads sequential instead of wrapping within that line.
+         * IS25WX256 volatile configuration register 07h: FFh = continuous.
+         */
         if (issi_flash_set_configuration_register_SDR(ospi_cfg,
                                                   ISSI_WRITE_VOLATILE_CONFIG_REG,
                                                   0x07,
-                                                  WRAP_32_BYTE)) return -1;
+                                                  0xFFU)) return -1;
 
         /* Set the wait cycles needed for read operations */
         if (issi_flash_set_configuration_register_SDR(ospi_cfg,

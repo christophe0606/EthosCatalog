@@ -9,8 +9,9 @@
 #ifndef PRE_INCLUDE_GLOBAL_H
 #define PRE_INCLUDE_GLOBAL_H
 
-/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@1.26.5 */
-// enabling global pre includes 
+/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0 */
+// enabling global pre includes
+        #define ETHOSU85
         #define ETHOSU_ARCH u85
 /* PyTorch::Machine Learning:ExecuTorch:Backend EthosU@1.4.1 */
 #define EXECUTORCH_BUILD_ARM_BAREMETAL 1

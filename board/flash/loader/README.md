@@ -25,5 +25,7 @@ entering the algorithm. The baud divisor assumes the board's normal AXI clock.
 
 `FlashOS.h` is from Arm CMSIS 5.9.0 under Apache-2.0. `ospi_private.h` and the
 polling/driver sequences adapted in `FlashPrg.c` retain the Alif license linked
-in their source headers. Installed packs are never modified. No hardware
-validation of this cleaned solution has been performed yet.
+in their source headers. Installed packs are never modified. On October 15,
+2026, the published algorithm successfully programmed the 3104-byte
+`template_ospi` PTE on DevKit-E8; the application verified its CRC and passed
+inference. See the template's [validation record](../../../projects/template_ospi/README.md#hardware-validation).

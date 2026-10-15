@@ -77,9 +77,9 @@ int app_prepare(void)
 #if SOC_FEAT_OSPI_HAS_CLK_ENABLE
     enable_ospi_clk(OSPI_INSTANCE_1);
 #endif
-    if (flash_xip_enabled()) preparation_failed(-305);
     int error = model_storage_prepare_programming();
     if (error) preparation_failed(error);
+    if (flash_xip_enabled()) preparation_failed(-305);
 
     /* Match the reference's quiescent loader entry. Its RAM stack must not
      * inherit the application's DTCM stack limits or MPU/cache policy.

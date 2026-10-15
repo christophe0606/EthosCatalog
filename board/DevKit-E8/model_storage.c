@@ -18,6 +18,7 @@
 #include "sys_utils.h"
 #include "ospi_xip_user.h"
 #include "setup_flash_xip.h"
+#include "ospi_drv.h"
 extern int e8_setup_flash_xip(void);
 
 #if OSPI_XIP_INSTANCE != 1
@@ -46,6 +47,16 @@ static const struct { uint8_t port, pin, function; uint32_t pad; } pads[] = {
  */
 int model_storage_prepare_programming(void)
 {
+    /* This routine and its caller execute from MRAM. Quiesce retained XIP
+     * before resetting the flash; a core reset alone does not clear it.
+     * ospi_init disables XIP and the SSI controller using the vendor driver.
+     */
+    ospi_flash_cfg_t config = {0};
+    config.regs = (ssi_regs_t *)OSPI1_BASE;
+    config.aes_regs = (aes_regs_t *)AES1_BASE;
+    config.ospi_clock = OSPI_CLOCK;
+    __DSB();
+    ospi_init(&config, OSPI_INSTANCE_1);
     for (unsigned i = 0; i < sizeof(pads)/sizeof(pads[0]); ++i)
         if (pinconf_set(pads[i].port, pads[i].pin, pads[i].function, pads[i].pad)) return -301;
     ARM_DRIVER_GPIO *gpio = &ARM_Driver_GPIO_(15);
@@ -64,7 +75,33 @@ int model_storage_init(void)
     int error = model_storage_prepare_programming();
     if (error) return error;
     if (e8_setup_flash_xip()) return -303;
+    /* The flash now serves linear NPU bursts. CPU cache fills can use WRAP
+     * transactions, which require a different flash wrap setting. Read the
+     * PTE uncached on the CPU so both masters can use the same linear flash
+     * configuration. The pack uses MAIR indices 0..3; reserve index 4 here.
+     */
     SCB_CleanInvalidateDCache();
-    __DSB();
-    return 0;
+    const uint32_t primask = __get_PRIMASK();
+    const uint32_t control = MPU->CTRL;
+    const uint32_t selected_region = MPU->RNR;
+    const uint32_t regions = (MPU->TYPE & MPU_TYPE_DREGION_Msk) >> MPU_TYPE_DREGION_Pos;
+    bool found = false;
+    __disable_irq();
+    ARM_MPU_Disable();
+    ARM_MPU_SetMemAttr(4U, ARM_MPU_ATTR(ARM_MPU_ATTR_NON_CACHEABLE,
+                                      ARM_MPU_ATTR_NON_CACHEABLE));
+    for (uint32_t region = 0; region < regions; ++region) {
+        MPU->RNR = region;
+        if ((MPU->RBAR & MPU_RBAR_BASE_Msk) == OSPI1_XIP_BASE &&
+            (MPU->RLAR & MPU_RLAR_EN_Msk)) {
+            MPU->RLAR = (MPU->RLAR & ~MPU_RLAR_AttrIndx_Msk) |
+                        (4U << MPU_RLAR_AttrIndx_Pos);
+            found = true;
+            break;
+        }
+    }
+    MPU->RNR = selected_region;
+    ARM_MPU_Enable(control);
+    __set_PRIMASK(primask);
+    return found ? 0 : -304;
 }

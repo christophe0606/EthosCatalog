@@ -6,9 +6,10 @@ a deterministic 1x1 convolution and ReLU. Firmware compares the result with
 the original PyTorch model and prints `Test_result: PASS` on UART4.
 `projects/template_ospi` uses the same network and fixed test data, stores the
 model separately in OSPI, and includes the preparation firmware needed before
-programming it. Its normal application stages the model in SRAM0, verifies its
-CRC32, then performs one checked inference. It has no inference benchmark loop
-or recorded OSPI benchmark results. Firmware remains in MRAM in both templates.
+programming it. Its normal application verifies the model's CRC32 in place,
+then benchmarks checked inferences directly from OSPI. Its
+[benchmark record](projects/template_ospi/model/benchmark.yml) contains ten
+measured samples after one warmup. Firmware remains in MRAM in both templates.
 
 | VS Code target set | Project/build context | Purpose |
 | --- | --- | --- |
@@ -20,8 +21,9 @@ or recorded OSPI benchmark results. Firmware remains in MRAM in both templates.
 
 See the [MRAM template](projects/template_mram/README.md) and
 [OSPI template](projects/template_ospi/README.md) for their build configurations.
-The OSPI template has been generated and built only; it has not been loaded,
-run, programmed or benchmarked as part of this change.
+The OSPI template has been programmed and run on DevKit-E8 with
+`Test_result: PASS`, reading the PTE directly from OSPI without an SRAM copy.
+See its [hardware validation record](projects/template_ospi/README.md#hardware-validation).
 
 ## Third-party submodules
 
@@ -186,14 +188,14 @@ Select **DevKit-E8@ProgramModel** to build this preparation mode. It defines
 generated AI layer or inference code. Set a breakpoint at
 `model_programming_wait`. Readiness requires `model_programming_ready == 1`,
 `app_stage == 5`, `app_error == 0` and `app_service_error == 0`.
-`app_error == -305` means XIP is still enabled from a previous application;
-read the [OSPI template's cold-start instructions](projects/template_ospi/README.md)
-before retrying. The normal **OSPI_Debug/OSPI_Release** builds instead initialize
+The MRAM preparation path disables retained XIP before resetting the flash.
+`app_error == -305` means XIP remained enabled despite preparation; do not
+program until readiness is established. The normal **OSPI_Debug/OSPI_Release** builds initialize
 XIP and continue into the application. Both modes belong to the same project;
 no separate preparation-firmware project is needed.
 
 The existing `model_storage_prepare_programming()` helper in
-`board/DevKit-E8/model_storage.c` configures pins and resets the external chip;
+`board/DevKit-E8/model_storage.c` disables retained XIP, configures pins and resets the external chip;
 it supplies only part of this preparation. The OSPI template's `app_prepare()`
 adds the remaining initialization, CPU settings and wait point. The same file's
 `model_storage_init()` also enables XIP for normal model access, so it serves a
@@ -231,16 +233,17 @@ or power-cycling the board at this point would lose that preparation.
    whenever the compiled PTE changes.
 
 The source flash loader is kept as a separate build-only solution; see
-[its instructions](board/flash/loader/README.md). Hardware execution and OSPI
-programming must be checked after a board is connected.
+[its instructions](board/flash/loader/README.md). The supplied template's OSPI
+programming and inference have been verified on DevKit-E8; repeat the model
+CRC and output checks when adapting it to another network.
 
 **Hands-on sequence**
 
 This sequence uses the supplied `template_ospi`. For a derived OSPI project,
 substitute its project/context names and retain the `ProgramModel` build mode.
 Complete the Python/tool setup in **Select a project and prepare its network**
-first. These are instructions for future hardware use; this template has only
-been generated and built during its creation.
+first. This preparation, model-only programming and inference sequence has
+been exercised with the supplied template on DevKit-E8.
 
 1. In VS Code, open the repository root folder. Choose **Terminal > New Terminal**
    and use a PowerShell terminal at that root. Run all commands below there.
@@ -252,8 +255,9 @@ been generated and built during its creation.
 4. Open `projects/template_ospi/ospi_startup.c` to identify the provided
    preparation code and `model_programming_wait` breakpoint. The `ProgramModel`
    configuration runs this code without accessing the OSPI model. The normal
-   configurations enable XIP; `app_main.cpp` copies the model to SRAM0, verifies
-   its generated CRC32 and runs one inference.
+   configurations enable XIP; `app_main.cpp` verifies the model's generated
+   CRC32 in place and benchmarks checked inferences directly from OSPI. Only writable
+   inference/runtime pools use SRAM0; the PTE is not copied there.
 5. In Explorer, right-click
    `board/flash/loader/FlashLoader.csolution.yml` and choose
    **CMSIS: Select as Active Solution**. Select its **DevKit-E8** target in the
@@ -308,8 +312,8 @@ been generated and built during its creation.
 17. Run **CMSIS: Load & Debug Application** from the Command Palette. Set a
     breakpoint at `model_programming_wait`, then continue to that breakpoint.
     Confirm `model_programming_ready == 1`, `app_stage == 5`, `app_error == 0`
-    and `app_service_error == 0`. If `app_error == -305`, follow the OSPI
-    template's cold-start instructions, then verify readiness again. The flash
+    and `app_service_error == 0`. If `app_error == -305`, XIP remained enabled
+    despite preparation; resolve it and verify readiness before programming. The flash
     tool will run the separate RAM flash loader after this preparation.
 18. Run **CMSIS: Detach Debugger** to release the probe, following the project's
     procedure for preserving the prepared hardware state. If a separate CMSIS
@@ -439,7 +443,7 @@ setup in **Select a project and prepare its network** first.
     both templates stay in the solution's project list. For an OSPI-derived
     project, also select it in the **ProgramModel** target set using its
     `ProgramModel` build type; keep its `ospi_startup.c`, OSPI component, source
-    files, SRAM staging section and context filters.
+    files, SRAM inference-pool section and context filters.
 13. In the repository-root terminal, force a first quantization for the new
     project so copied template caches are replaced:
 

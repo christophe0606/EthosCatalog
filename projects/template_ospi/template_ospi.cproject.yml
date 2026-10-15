@@ -9,11 +9,14 @@ project:
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
   define:
-    # The PTE is stored in OSPI and staged in SRAM0 before inference, matching
-    # the reference chess application. The NPU reads the staged SRAM copy.
-    - NPU_QCONFIG: 1
-    - NPU_REGIONCFG_0: 1
+    # U85 MEM_ATTR_2/3 route command stream and weights to AXI_EXT (OSPI).
+    # Writable activation/scratch memory remains on AXI_SRAM.
+    - NPU_QCONFIG: 2
+    - NPU_REGIONCFG_0: 3
     - NPU_REGIONCFG_1: 0
+    # Normal non-cacheable, non-bufferable EXT reads (AxCACHE=0010).
+    - NPU_MEM_ATTR_2: 0x24
+    - NPU_MEM_ATTR_3: 0x24
     - APP_METHOD_POOL_SIZE: 65536
     - APP_TEMP_POOL_SIZE: 65536
     - APP_POOL_SECTION: \".bss.ai_pool\"
