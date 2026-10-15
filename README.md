@@ -258,6 +258,21 @@ setup in **Select a project and prepare its network** first.
     `uv run scripts/create_ai_layer.py` before building, so the shared AI layer
     belongs to the newly selected application.
 
+## Benchmark records
+
+Both templates record hardware measurements and Vela estimated bandwidth in
+separate `measurements` and `estimates` sections of `model/benchmark.yml`.
+Memory measurements cover the model, Ethos regions and ExecuTorch pool peaks.
+Each project keeps only the latest benchmark and its source data, updated in
+place; Git provides the history.
+`benchmark.platform` identifies the OS/RTOS and CPU
+independently of CMSIS targets, with optional OS version. The shared
+[benchmark schema](schema/README.md) also supports platforms such as Linux on
+Cortex-A without CMSIS or Vela metadata.
+
+Validate all benchmark YAML files with `uv run scripts/validate_benchmarks.py`.
+Schema regression checks: `uv run tests/test_benchmark_schema.py`.
+
 Script regression checks: `uv run tests/test_project_scripts.py`.
 DSP and renderer checks on Windows with clang and installed CMSIS packs:
 `./tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack`.

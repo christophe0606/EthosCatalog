@@ -45,8 +45,14 @@ network: median NPU 0.00519875 ms and median forward 0.14859125 ms at 400 MHz.
 The benchmark runs one warmup and ten checked forwards before starting
 capture and drawing. `forward()` timing excludes tensor setup, output copying,
 validation, UART, capture and display; it includes float-boundary quantization
-and PMU hooks. The record distinguishes actual allocator peaks and NPU arena
-requirements from reserved pool, stack and framebuffer capacities.
+and PMU hooks. `measurements.memory` records the model size, Ethos weights/arena
+region sizes and observed ExecuTorch method/temp pool peaks. Physical memory
+types and clocks are under `platform.memory`.
 
-`model/cmsis_ethos_u_retest*` retains the historical driver integration check
-for the previous convolution/ReLU smoke model.
+The record identifies RTX5 5.9.1 on Cortex-M55 under `platform`. `estimates.vela`
+holds estimated SRAM and MRAM bandwidth separately from measured results, with the raw
+`model/benchmark_vela_summary.csv` and model/configuration hashes for provenance.
+See the [shared benchmark format and validator](../../schema/README.md).
+
+Update the benchmark and its source captures in place after each run. Git keeps
+the history; the project stores only the latest benchmark.

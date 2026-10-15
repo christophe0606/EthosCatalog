@@ -5,5 +5,8 @@
     "memory-inspector.addressPadding": "32bit",
     "memory-inspector.groupings.groupsPerRow": "Autofit",
     "memory-inspector.groupings.MAUsPerGroup": 4,
-    "memory-inspector.scrollingBehavior": "Auto-Append"
+    "memory-inspector.scrollingBehavior": "Auto-Append",
+    "yaml.schemas": {
+        "./schema/benchmark.schema.yml": ["projects/**/*benchmark*.yml", "projects/**/*benchmark*.yaml"]
+    }
 }

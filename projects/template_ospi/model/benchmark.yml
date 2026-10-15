@@ -1,12 +1,27 @@
-# Measured on the gain network; paths are relative to the project.
+# Network benchmark; measured results and compiler estimates are separate sections.
 benchmark:
-  vela:
-    ini: ../../.cmsis/ensemble_vela.ini
-    system_config: Ethos_U85_SRAM_OSPI
-    memory_mode: Shared_Sram
+  platform:
+    os: RTX5
+    os_version: 5.9.1
+    cpu: Cortex-M55
+    memory:
+      weights:
+        type: OSPI1
+        clock_mhz: 25
+        clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+      activations:
+        type: SRAM0
+        clock_mhz: 400.0
   measurements:
-    size: 3072
-    arena: 1216
+    memory:
+      model_bytes: 3072
+      input_tensor_bytes: 2048
+      ethos:
+        weights_region_bytes: 192
+        arena_region_bytes: 1216
+      executorch:
+        method_pool_peak_bytes: 3752
+        temp_pool_peak_bytes: 1216
     time:
       ms: 0.0235875
       cycles: 9435.0
@@ -38,50 +53,31 @@ benchmark:
       - 178006
       - 178832
       - 178028
-    weights:
-      memory: OSPI1
-      section: OSPI_FLASH
-      address: 3221226064
-      size: 192
-      clock: 25
-      clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
-    activation:
-      memory: SRAM0
-      section: RW_SRAM0
-      address: 33619968
-      clock: 400.0
-    pools:
-      method_peak: 3752
-      temp_peak: 1216
-      reserved: 131072
-    firmware:
-      mram_load_bytes: 341200
-      sram0_allocated_bytes: 1669120
-      sram0_padding_bytes: 16
-      lcd_framebuffer_bytes: 1536000
-      network_input_bytes: 2048
-      dtcm_rw_bytes: 203864
-      dtcm_driver_region_bytes: 3296
-      c_heap_reserved_bytes: 98304
-      application_heap_reserved_bytes: 32768
-      main_stack_reserved_bytes: 32768
-      audio_stack_bytes: 32768
-      lcd_stack_bytes: 8192
-      source: CMSIS get_memory_usage, Release ELF/map; reservations include stack/pool
-        capacities, not measured peak usage
-  ospi:
-    model_address: 3221225472
-    model_crc32: 1693001423
-    model_copied_to_sram: false
-    firmware_memory: MRAM
-    flash_read_mode: continuous
-    dummy_cycles: 16
-    cpu_memory_attribute: Normal non-cacheable
-    npu_qconfig: 2
-    npu_regioncfg_0: 3
-    npu_regioncfg_1: 0
-    npu_mem_attr_2: 36
-    npu_mem_attr_3: 36
+  estimates:
+    vela:
+      ini: ../../.cmsis/ensemble_vela.ini
+      system_config: Ethos_U85_SRAM_OSPI
+      memory_mode: Shared_Sram
+      version: 5.1.0
+      accelerator_config: Ethos_U85_256
+      model_sha256: 3d05527acb3a17eb67a9ae3addd8bfa90754d1193d0105ba3cf3a7bf46ef2e7b
+      ini_sha256: 987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2
+      summary: benchmark_vela_summary.csv
+      cycles: 1687
+      time_ms: 0.0042175
+      bandwidth:
+        sram:
+          memory: SRAM0
+          vela_memory_area: sram
+          total_bytes_per_inference: 3008
+          average_bytes_per_second: 713218731.4759929
+          design_peak_bytes_per_second: 12800000000.0
+        weights:
+          memory: OSPI1
+          vela_memory_area: dram
+          total_bytes_per_inference: 192
+          average_bytes_per_second: 45524599.881446354
+          design_peak_bytes_per_second: 332800000.0
   run:
     recorded_at: '2026-10-15T08:54:16.183667+00:00'
     context: template_ospi.Release+DevKit-E8
@@ -116,8 +112,9 @@ benchmark:
       and every sample
     timing_scope: module.forward() only; excludes TensorImpl setup, output copy, validation,
       UART, capture and LCD; includes CPU boundary quantize/dequantize and PMU hooks
-    uart_run: last complete run; preceding CMSIS Load run retained
-    measurement_source: UART4 COM5 115200 8N1 and CMSIS build-artifact tools
+    uart_run: latest complete run
+    measurement_source: UART4 COM5 115200 8N1; Ethos driver region sizes and ExecuTorch
+      allocator high-water marks
   network:
     operation: y = 2*x, signed sample-wise gain, no bias or ReLU
     input_shape:

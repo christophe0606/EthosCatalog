@@ -3,23 +3,6 @@ Output: 512 elements, max absolute error 0.008816
 Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
 Benchmark memory: model=3072 B, arena=1216 B at 0x02010000, weights=192 B at 0x802485a0
 Benchmark pools: method peak=3752 B, temp peak=1216 B, reserved=131072 B
-Benchmark sample 1: NPU=2105 cycles (0.005262 ms), forward=62355 ticks (0.155888 ms)
-Benchmark sample 2: NPU=2012 cycles (0.005030 ms), forward=60011 ticks (0.150028 ms)
-Benchmark sample 3: NPU=2087 cycles (0.005217 ms), forward=59525 ticks (0.148812 ms)
-Benchmark sample 4: NPU=2027 cycles (0.005067 ms), forward=59729 ticks (0.149322 ms)
-Benchmark sample 5: NPU=2084 cycles (0.005210 ms), forward=59105 ticks (0.147762 ms)
-Benchmark sample 6: NPU=1994 cycles (0.004985 ms), forward=59471 ticks (0.148677 ms)
-Benchmark sample 7: NPU=2087 cycles (0.005217 ms), forward=59207 ticks (0.148017 ms)
-Benchmark sample 8: NPU=2054 cycles (0.005135 ms), forward=58961 ticks (0.147402 ms)
-Benchmark sample 9: NPU=2084 cycles (0.005210 ms), forward=59309 ticks (0.148273 ms)
-Benchmark sample 10: NPU=2024 cycles (0.005060 ms), forward=59429 ticks (0.148572 ms)
-Benchmark PMU: last active=2024 cycles, invocations=1, overflow=0
-Test_result: PASS
-Ethos gain self-test: PASS (512 signed samples, gain 2.0)
-Output: 512 elements, max absolute error 0.008816
-Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
-Benchmark memory: model=3072 B, arena=1216 B at 0x02010000, weights=192 B at 0x802485a0
-Benchmark pools: method peak=3752 B, temp peak=1216 B, reserved=131072 B
 Benchmark sample 1: NPU=2078 cycles (0.005195 ms), forward=61377 ticks (0.153443 ms)
 Benchmark sample 2: NPU=2015 cycles (0.005038 ms), forward=59633 ticks (0.149083 ms)
 Benchmark sample 3: NPU=2084 cycles (0.005210 ms), forward=58859 ticks (0.147147 ms)

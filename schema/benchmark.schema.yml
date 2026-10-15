@@ -1,0 +1,361 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: EthosCatalog benchmark
+description: Network benchmark with observed results under measurements and compiler predictions under estimates.
+  Platform identity is independent of build tools; memory records contain only network resources.
+type: object
+additionalProperties: false
+required:
+- benchmark
+properties:
+  benchmark:
+    type: object
+    additionalProperties: false
+    required:
+    - platform
+    - measurements
+    - run
+    - network
+    properties:
+      platform:
+        type: object
+        additionalProperties: false
+        required:
+        - os
+        - cpu
+        properties:
+          os:
+            $ref: '#/$defs/text'
+            description: OS or RTOS name, for example RTX5, Linux or bare-metal.
+          os_version:
+            $ref: '#/$defs/text'
+          cpu:
+            $ref: '#/$defs/text'
+            description: CPU model, for example Cortex-M55 or Cortex-A78.
+          memory:
+            type: object
+            additionalProperties: false
+            required: []
+            properties:
+              weights:
+                type: object
+                additionalProperties: false
+                required:
+                - type
+                properties:
+                  type:
+                    $ref: '#/$defs/text'
+                  clock_mhz:
+                    $ref: '#/$defs/positiveNumber'
+                  clock_source:
+                    $ref: '#/$defs/text'
+              activations:
+                type: object
+                additionalProperties: false
+                required:
+                - type
+                properties:
+                  type:
+                    $ref: '#/$defs/text'
+                  clock_mhz:
+                    $ref: '#/$defs/positiveNumber'
+                  clock_source:
+                    $ref: '#/$defs/text'
+            description: Physical memories used by the network; no addresses or linker section names.
+      measurements:
+        type: object
+        additionalProperties: false
+        required:
+        - time
+        properties:
+          memory:
+            type: object
+            additionalProperties: false
+            required:
+            - model_bytes
+            properties:
+              model_bytes:
+                $ref: '#/$defs/nonnegativeInteger'
+                description: Measured compiled model size; includes the Ethos weights region.
+              input_tensor_bytes:
+                $ref: '#/$defs/nonnegativeInteger'
+                description: Exact storage size of the caller-owned network input tensor; excludes application processing buffers.
+              ethos:
+                type: object
+                additionalProperties: false
+                required:
+                - weights_region_bytes
+                - arena_region_bytes
+                properties:
+                  weights_region_bytes:
+                    $ref: '#/$defs/nonnegativeInteger'
+                    description: Read-only weights/constant region reported by the Ethos driver (region 0).
+                  arena_region_bytes:
+                    $ref: '#/$defs/nonnegativeInteger'
+                    description: Writable arena reported by the Ethos driver (region 1); allocated from the ExecuTorch
+                      temp pool in these templates.
+              executorch:
+                type: object
+                additionalProperties: false
+                required:
+                - method_pool_peak_bytes
+                - temp_pool_peak_bytes
+                properties:
+                  method_pool_peak_bytes:
+                    $ref: '#/$defs/nonnegativeInteger'
+                    description: Observed method allocator high-water mark, including planned buffers and alignment.
+                  temp_pool_peak_bytes:
+                    $ref: '#/$defs/nonnegativeInteger'
+                    description: Observed temporary allocator high-water mark, including Ethos arena allocation.
+            description: Observed network memory components. Regions backed by the model or pools must not be counted
+              twice; these are not total process memory.
+          time:
+            type: object
+            additionalProperties: false
+            required:
+            - ms
+            properties:
+              ms:
+                $ref: '#/$defs/nonnegativeNumber'
+                description: Measured inference time in milliseconds; NPU time when PMU counters are used.
+              cycles:
+                $ref: '#/$defs/nonnegativeNumber'
+              statistic:
+                enum:
+                - median
+                - mean
+                - min
+                - max
+              min_cycles:
+                $ref: '#/$defs/nonnegativeInteger'
+              max_cycles:
+                $ref: '#/$defs/nonnegativeInteger'
+              mean_cycles:
+                $ref: '#/$defs/nonnegativeNumber'
+              forward_ms:
+                $ref: '#/$defs/nonnegativeNumber'
+              forward_timer_hz:
+                $ref: '#/$defs/positiveInteger'
+              cycles_samples:
+                $ref: '#/$defs/samples'
+              forward_ticks_samples:
+                $ref: '#/$defs/samples'
+      run:
+        type: object
+        additionalProperties: false
+        required:
+        - recorded_at
+        - samples
+        - test_result
+        properties:
+          recorded_at:
+            type: string
+            format: date-time
+            pattern: ^\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(\.\d+)?([Zz]|[+-]\d{2}:\d{2})$
+          context:
+            $ref: '#/$defs/text'
+          target:
+            $ref: '#/$defs/text'
+          device:
+            $ref: '#/$defs/text'
+          core:
+            $ref: '#/$defs/text'
+          npu:
+            $ref: '#/$defs/text'
+          macs:
+            $ref: '#/$defs/positiveInteger'
+          packs:
+            type: object
+            additionalProperties: false
+            properties:
+              driver:
+                $ref: '#/$defs/text'
+              driver_component:
+                $ref: '#/$defs/text'
+              board:
+                $ref: '#/$defs/text'
+              runtime:
+                $ref: '#/$defs/text'
+          compiler:
+            $ref: '#/$defs/text'
+          optimize:
+            $ref: '#/$defs/text'
+          build_job:
+            $ref: '#/$defs/text'
+          execution_job:
+            $ref: '#/$defs/text'
+          cpu_clock_mhz:
+            $ref: '#/$defs/positiveNumber'
+          npu_clock_mhz:
+            $ref: '#/$defs/positiveNumber'
+          warmup:
+            $ref: '#/$defs/nonnegativeInteger'
+          samples:
+            $ref: '#/$defs/positiveInteger'
+          pmu_cross_check:
+            $ref: '#/$defs/text'
+          pmu_overflow:
+            $ref: '#/$defs/nonnegativeInteger'
+          npu_invocations_per_forward:
+            $ref: '#/$defs/positiveInteger'
+          test_result:
+            enum:
+            - PASS
+            - FAIL
+          max_absolute_error:
+            $ref: '#/$defs/nonnegativeNumber'
+          tolerance:
+            $ref: '#/$defs/nonnegativeNumber'
+          uart:
+            $ref: '#/$defs/text'
+          model_sha256:
+            $ref: '#/$defs/sha256'
+          firmware_sha256:
+            $ref: '#/$defs/sha256'
+          input:
+            $ref: '#/$defs/text'
+          timing_scope:
+            $ref: '#/$defs/text'
+          uart_run:
+            $ref: '#/$defs/text'
+          measurement_source:
+            $ref: '#/$defs/text'
+      estimates:
+        type: object
+        additionalProperties: false
+        required:
+        - vela
+        properties:
+          vela:
+            type: object
+            additionalProperties: false
+            required:
+            - ini
+            - system_config
+            - memory_mode
+            - version
+            - accelerator_config
+            - model_sha256
+            - ini_sha256
+            - summary
+            - cycles
+            - time_ms
+            - bandwidth
+            properties:
+              ini:
+                $ref: '#/$defs/text'
+                description: Configuration path relative to the project directory.
+              system_config:
+                $ref: '#/$defs/text'
+              memory_mode:
+                $ref: '#/$defs/text'
+              version:
+                $ref: '#/$defs/text'
+              accelerator_config:
+                $ref: '#/$defs/text'
+              model_sha256:
+                $ref: '#/$defs/sha256'
+                description: SHA256 of the compiled model used to obtain these estimates.
+              ini_sha256:
+                $ref: '#/$defs/sha256'
+              summary:
+                $ref: '#/$defs/text'
+                description: Raw Vela summary CSV path relative to this benchmark file.
+              cycles:
+                $ref: '#/$defs/positiveInteger'
+              time_ms:
+                $ref: '#/$defs/positiveNumber'
+              bandwidth:
+                type: object
+                additionalProperties: false
+                required:
+                - sram
+                - weights
+                properties:
+                  sram:
+                    $ref: '#/$defs/bandwidth'
+                  weights:
+                    $ref: '#/$defs/bandwidth'
+        description: Compiler estimates only; observed results belong in measurements.
+      network:
+        type: object
+        additionalProperties: false
+        required:
+        - operation
+        - input_shape
+        - output_shape
+        properties:
+          operation:
+            $ref: '#/$defs/text'
+          input_shape:
+            $ref: '#/$defs/shape'
+          output_shape:
+            $ref: '#/$defs/shape'
+          samples_per_forward:
+            $ref: '#/$defs/positiveInteger'
+          sample_rate_hz:
+            $ref: '#/$defs/positiveInteger'
+          block_deadline_ms:
+            $ref: '#/$defs/positiveNumber'
+          float_boundary:
+            type: boolean
+          quantization:
+            $ref: '#/$defs/text'
+$defs:
+  text:
+    type: string
+    minLength: 1
+    pattern: \S
+  positiveInteger:
+    type: integer
+    minimum: 1
+  nonnegativeNumber:
+    type: number
+    minimum: 0
+  positiveNumber:
+    type: number
+    exclusiveMinimum: 0
+  sha256:
+    type: string
+    pattern: ^[0-9a-f]{64}$
+  samples:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/nonnegativeInteger'
+  shape:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/positiveInteger'
+  bandwidth:
+    type: object
+    additionalProperties: false
+    required:
+    - memory
+    - vela_memory_area
+    - total_bytes_per_inference
+    - average_bytes_per_second
+    - design_peak_bytes_per_second
+    properties:
+      memory:
+        $ref: '#/$defs/text'
+        description: Physical memory name used by the benchmark.
+      vela_memory_area:
+        enum:
+        - sram
+        - dram
+        - on_chip_flash
+        - off_chip_flash
+        description: Prefix of the corresponding Vela summary CSV columns.
+      total_bytes_per_inference:
+        $ref: '#/$defs/nonnegativeInteger'
+        description: Vela total_bytes divided by batch_size.
+      average_bytes_per_second:
+        $ref: '#/$defs/nonnegativeNumber'
+        description: Vela total_bytes divided by estimated inference_time (seconds).
+      design_peak_bytes_per_second:
+        $ref: '#/$defs/nonnegativeNumber'
+        description: Configured peak bandwidth; Vela CSV bandwidth multiplied by 2^30.
+  nonnegativeInteger:
+    type: integer
+    minimum: 0

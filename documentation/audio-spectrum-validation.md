@@ -125,8 +125,8 @@ prepared programming sequence with a full completion wait resolved it.
 
 Both `projects/template_{mram,ospi}/model/benchmark.yml` files have been replaced
 with new measurements for the signed 512-sample gain network. Raw UART captures
-are next to them. Each contains the CMSIS Load run followed by the final
-launched run; statistics use the last complete run. Every warmup and sample
+are next to them. Each contains only the final launched run used for the
+recorded statistics. Every warmup and sample
 checks all outputs, requires one NPU invocation, verifies the PMU cycle/active
 counter equality, and rejects counter overflow. The maximum absolute output
 error was 0.008816, below the 0.04 tolerance, in both templates.
@@ -138,21 +138,22 @@ error was 0.008816, below the 0.04 tolerance, in both templates.
 | Compressed constants bytes | 192 | 192 |
 | Method allocator peak bytes | 3752 | 3752 |
 | Temporary allocator peak bytes | 1216 | 1216 |
-| Reserved method + temp pool bytes | 131072 | 131072 |
 | Median NPU cycles | 2079.5 | 9435 |
 | Median NPU ms, 400 MHz | 0.00519875 | 0.0235875 |
 | Median forward ms | 0.14859125 | 0.44615125 |
-| Firmware MRAM load bytes | 341424 | 341200 |
-| SRAM0 allocation bytes, excluding padding | 1669120 | 1669120 |
 
 The forward timer surrounds only `module.forward()`: it excludes tensor setup,
 output copy, validation and UART. Both timed regions include CPU float-boundary
 quantize/dequantize and the existing PMU hooks. Audio capture and LCD rendering
 start after measurement. These are network timings, not whole-pipeline timing.
 
-The full firmware memory breakdown in each YAML distinguishes reserved pools,
-heaps, stacks and framebuffers from measured allocator peaks. Each record also
-includes all ten raw sample counts, clock rates, model/firmware SHA256 and
+Each YAML's `measurements.memory` records the model size, Ethos weights/arena
+regions and observed ExecuTorch allocator peaks. The weights region is contained
+in the model, and the arena is backed by the temporary pool; these overlapping
+components must not be summed as independent allocations. Application pool
+capacities, firmware allocations and linker placement are omitted. Vela
+predictions are separate under `estimates.vela`. Each record also includes all
+ten raw sample counts, clock rates, model/firmware SHA256 and
 build/execution job IDs. Independent checks reproduced medians from the UART
 samples and verified the recorded firmware hashes against the final Release
 ELFs.

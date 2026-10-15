@@ -92,8 +92,15 @@ See [current audio validation](../../documentation/audio-spectrum-validation.md)
 record ten measured, checked gain-network forwards after one warmup. The median
 NPU time is 0.0235875 ms and median `module.forward()` time is 0.44615125 ms
 at 400 MHz. The arena is 1216 bytes; method/temp peaks are 3752/1216 bytes.
-Timing excludes capture, FFT, display and UART; the record also lists full
-firmware memory allocations, including the two LCD buffers.
+Timing excludes capture, FFT, display and UART. `measurements.memory` records the
+model size, Ethos weights/arena region sizes and observed ExecuTorch method/temp
+pool peaks. Physical memory types and clocks are under `platform.memory`.
+
+The record identifies RTX5 5.9.1 on Cortex-M55 under `platform`. `estimates.vela`
+holds estimated SRAM and OSPI1 bandwidth separately from measured results, with the raw
+`model/benchmark_vela_summary.csv` and model/configuration hashes for provenance.
+See the [shared benchmark format and validator](../../schema/README.md).
+
 The compiled PTE has changed: program it separately before loading the new
 application, or its CRC check will reject the old external model.
 
