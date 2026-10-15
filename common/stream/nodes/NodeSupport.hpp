@@ -8,5 +8,6 @@
 #include <array>
 #include <cstring>
 #include <type_traits>
+#include <algorithm>
+#include <memory>
 using namespace arm_cmsis_stream;
-template<class Block> constexpr size_t block_samples = std::extent_v<decltype(Block::samples)>;

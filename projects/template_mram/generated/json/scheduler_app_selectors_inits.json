@@ -1,39 +1,39 @@
 {
-  "RemoveDC<FFTBlock,1,FFTBlock,1>": {
+  "RemoveDC<float,2048,float,2048>": {
     "isTemplate": true,
     "selectors": []
   },
-  "FFT<FFTBlock,1,FFTBlock,1>": {
+  "FFT<float,2048,float,2048>": {
     "isTemplate": true,
     "selectors": []
   },
-  "EmbeddedGain<AudioBlock,1,AudioBlock,1>": {
+  "EthosGain<float,512,float,512>": {
     "isTemplate": true,
     "selectors": []
   },
-  "Magnitude<FFTBlock,1,SpectrumBlock,1>": {
+  "Magnitude<float,2048,float,1025>": {
     "isTemplate": true,
     "selectors": []
   },
-  "MicrophoneSource<PcmBlock,1>": {
+  "MicrophoneSource<int16_t,512>": {
     "isTemplate": true,
     "selectors": []
   },
-  "PCMToFloat<PcmBlock,1,AudioBlock,1>": {
+  "PCMToFloat<int16_t,512,float,512>": {
     "isTemplate": true,
     "selectors": []
   },
-  "SendToLCD<SpectrumBlock,1>": {
+  "SendToLCD<float,1025>": {
     "isTemplate": true,
     "selectors": [
       "SEL_SPECTRUM_ID"
     ]
   },
-  "SlidingBuffer<AudioBlock,1,FFTBlock,1>": {
+  "SlidingBuffer<float,512,float,2048>": {
     "isTemplate": true,
     "selectors": []
   },
-  "HannWindow<FFTBlock,1,FFTBlock,1>": {
+  "HannWindow<float,2048,float,2048>": {
     "isTemplate": true,
     "selectors": []
   },

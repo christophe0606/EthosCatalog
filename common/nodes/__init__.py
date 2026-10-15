@@ -1,6 +1,6 @@
 from .MicrophoneSource import MicrophoneSource
 from .PCMToFloat import PCMToFloat
-from .EmbeddedGain import EmbeddedGain
+from .EthosGain import EthosGain
 from .SlidingBuffer import SlidingBuffer
 from .RemoveDC import RemoveDC
 from .HannWindow import HannWindow

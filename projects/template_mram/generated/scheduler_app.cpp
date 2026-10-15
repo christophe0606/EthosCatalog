@@ -114,7 +114,7 @@ Internal ID identification for the nodes
 
 /* Initialize the selectors global IDs in each class */
 template<>
-std::array<uint16_t,1> SendToLCD<SpectrumBlock,1>::selectors = {SEL_SPECTRUM_ID};
+std::array<uint16_t,1> SendToLCD<float,1025>::selectors = {SEL_SPECTRUM_ID};
 std::array<uint16_t,1> LCD::selectors = {SEL_SPECTRUM_ID};
 
 
@@ -131,45 +131,45 @@ CG_BEFORE_FIFO_BUFFERS
 FIFO buffers
 
 ************/
-#define FIFOSIZE0 1
-#define FIFOSIZE1 1
-#define FIFOSIZE2 1
-#define FIFOSIZE3 1
-#define FIFOSIZE4 1
-#define FIFOSIZE5 1
-#define FIFOSIZE6 1
-#define FIFOSIZE7 1
+#define FIFOSIZE0 512
+#define FIFOSIZE1 512
+#define FIFOSIZE2 512
+#define FIFOSIZE3 2048
+#define FIFOSIZE4 2048
+#define FIFOSIZE5 2048
+#define FIFOSIZE6 2048
+#define FIFOSIZE7 1025
 
-#define BUFFERSIZE0 8208
+#define BUFFERSIZE0 8192
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf0[BUFFERSIZE0]={0};
 
-#define BUFFERSIZE1 8208
+#define BUFFERSIZE1 8192
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf1[BUFFERSIZE1]={0};
 
 
 typedef struct {
-FIFO<PcmBlock,FIFOSIZE0,1,0> *fifo0;
-FIFO<AudioBlock,FIFOSIZE1,1,0> *fifo1;
-FIFO<AudioBlock,FIFOSIZE2,1,0> *fifo2;
-FIFO<FFTBlock,FIFOSIZE3,1,0> *fifo3;
-FIFO<FFTBlock,FIFOSIZE4,1,0> *fifo4;
-FIFO<FFTBlock,FIFOSIZE5,1,0> *fifo5;
-FIFO<FFTBlock,FIFOSIZE6,1,0> *fifo6;
-FIFO<SpectrumBlock,FIFOSIZE7,1,0> *fifo7;
+FIFO<int16_t,FIFOSIZE0,1,0> *fifo0;
+FIFO<float,FIFOSIZE1,1,0> *fifo1;
+FIFO<float,FIFOSIZE2,1,0> *fifo2;
+FIFO<float,FIFOSIZE3,1,0> *fifo3;
+FIFO<float,FIFOSIZE4,1,0> *fifo4;
+FIFO<float,FIFOSIZE5,1,0> *fifo5;
+FIFO<float,FIFOSIZE6,1,0> *fifo6;
+FIFO<float,FIFOSIZE7,1,0> *fifo7;
 } fifos_t;
 
 typedef struct {
-    RemoveDC<FFTBlock,1,FFTBlock,1> *dc;
-    FFT<FFTBlock,1,FFTBlock,1> *fft;
-    EmbeddedGain<AudioBlock,1,AudioBlock,1> *gain;
-    Magnitude<FFTBlock,1,SpectrumBlock,1> *magnitude;
-    MicrophoneSource<PcmBlock,1> *microphone;
-    PCMToFloat<PcmBlock,1,AudioBlock,1> *pcm;
-    SendToLCD<SpectrumBlock,1> *send;
-    SlidingBuffer<AudioBlock,1,FFTBlock,1> *sliding;
-    HannWindow<FFTBlock,1,FFTBlock,1> *window;
+    RemoveDC<float,2048,float,2048> *dc;
+    FFT<float,2048,float,2048> *fft;
+    EthosGain<float,512,float,512> *gain;
+    Magnitude<float,2048,float,1025> *magnitude;
+    MicrophoneSource<int16_t,512> *microphone;
+    PCMToFloat<int16_t,512,float,512> *pcm;
+    SendToLCD<float,1025> *send;
+    SlidingBuffer<float,512,float,2048> *sliding;
+    HannWindow<float,2048,float,2048> *window;
     LCD *lcd;
 } nodes_t;
 
@@ -197,42 +197,42 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     (void)evtQueue;
 
     CG_BEFORE_FIFO_INIT;
-    fifos.fifo0 = new (std::nothrow) FIFO<PcmBlock,FIFOSIZE0,1,0>(stream_app_buf1);
+    fifos.fifo0 = new (std::nothrow) FIFO<int16_t,FIFOSIZE0,1,0>(stream_app_buf1);
     if (fifos.fifo0==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo1 = new (std::nothrow) FIFO<AudioBlock,FIFOSIZE1,1,0>(stream_app_buf0);
+    fifos.fifo1 = new (std::nothrow) FIFO<float,FIFOSIZE1,1,0>(stream_app_buf0);
     if (fifos.fifo1==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo2 = new (std::nothrow) FIFO<AudioBlock,FIFOSIZE2,1,0>(stream_app_buf1);
+    fifos.fifo2 = new (std::nothrow) FIFO<float,FIFOSIZE2,1,0>(stream_app_buf1);
     if (fifos.fifo2==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo3 = new (std::nothrow) FIFO<FFTBlock,FIFOSIZE3,1,0>(stream_app_buf0);
+    fifos.fifo3 = new (std::nothrow) FIFO<float,FIFOSIZE3,1,0>(stream_app_buf0);
     if (fifos.fifo3==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo4 = new (std::nothrow) FIFO<FFTBlock,FIFOSIZE4,1,0>(stream_app_buf1);
+    fifos.fifo4 = new (std::nothrow) FIFO<float,FIFOSIZE4,1,0>(stream_app_buf1);
     if (fifos.fifo4==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo5 = new (std::nothrow) FIFO<FFTBlock,FIFOSIZE5,1,0>(stream_app_buf0);
+    fifos.fifo5 = new (std::nothrow) FIFO<float,FIFOSIZE5,1,0>(stream_app_buf0);
     if (fifos.fifo5==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo6 = new (std::nothrow) FIFO<FFTBlock,FIFOSIZE6,1,0>(stream_app_buf1);
+    fifos.fifo6 = new (std::nothrow) FIFO<float,FIFOSIZE6,1,0>(stream_app_buf1);
     if (fifos.fifo6==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo7 = new (std::nothrow) FIFO<SpectrumBlock,FIFOSIZE7,1,0>(stream_app_buf0);
+    fifos.fifo7 = new (std::nothrow) FIFO<float,FIFOSIZE7,1,0>(stream_app_buf0);
     if (fifos.fifo7==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -241,55 +241,55 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     CG_BEFORE_NODE_INIT;
     cg_status initError;
 
-    nodes.dc = new (std::nothrow) RemoveDC<FFTBlock,1,FFTBlock,1>(*(fifos.fifo3),*(fifos.fifo4));
+    nodes.dc = new (std::nothrow) RemoveDC<float,2048,float,2048>(*(fifos.fifo3),*(fifos.fifo4));
     if (nodes.dc==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.fft = new (std::nothrow) FFT<FFTBlock,1,FFTBlock,1>(*(fifos.fifo5),*(fifos.fifo6));
+    nodes.fft = new (std::nothrow) FFT<float,2048,float,2048>(*(fifos.fifo5),*(fifos.fifo6));
     if (nodes.fft==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.gain = new (std::nothrow) EmbeddedGain<AudioBlock,1,AudioBlock,1>(*(fifos.fifo1),*(fifos.fifo2),params->gain);
+    nodes.gain = new (std::nothrow) EthosGain<float,512,float,512>(*(fifos.fifo1),*(fifos.fifo2),params->gain);
     if (nodes.gain==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.magnitude = new (std::nothrow) Magnitude<FFTBlock,1,SpectrumBlock,1>(*(fifos.fifo6),*(fifos.fifo7));
+    nodes.magnitude = new (std::nothrow) Magnitude<float,2048,float,1025>(*(fifos.fifo6),*(fifos.fifo7),params->magnitude);
     if (nodes.magnitude==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.microphone = new (std::nothrow) MicrophoneSource<PcmBlock,1>(*(fifos.fifo0),params->microphone);
+    nodes.microphone = new (std::nothrow) MicrophoneSource<int16_t,512>(*(fifos.fifo0),params->microphone);
     if (nodes.microphone==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.pcm = new (std::nothrow) PCMToFloat<PcmBlock,1,AudioBlock,1>(*(fifos.fifo0),*(fifos.fifo1));
+    nodes.pcm = new (std::nothrow) PCMToFloat<int16_t,512,float,512>(*(fifos.fifo0),*(fifos.fifo1));
     if (nodes.pcm==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.send = new (std::nothrow) SendToLCD<SpectrumBlock,1>(*(fifos.fifo7),evtQueue,params->send);
+    nodes.send = new (std::nothrow) SendToLCD<float,1025>(*(fifos.fifo7),evtQueue,params->send);
     if (nodes.send==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.sliding = new (std::nothrow) SlidingBuffer<AudioBlock,1,FFTBlock,1>(*(fifos.fifo2),*(fifos.fifo3));
+    nodes.sliding = new (std::nothrow) SlidingBuffer<float,512,float,2048>(*(fifos.fifo2),*(fifos.fifo3));
     if (nodes.sliding==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.window = new (std::nothrow) HannWindow<FFTBlock,1,FFTBlock,1>(*(fifos.fifo4),*(fifos.fifo5));
+    nodes.window = new (std::nothrow) HannWindow<float,2048,float,2048>(*(fifos.fifo4),*(fifos.fifo5));
     if (nodes.window==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);

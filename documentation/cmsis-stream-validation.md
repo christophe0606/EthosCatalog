@@ -1,5 +1,26 @@
 # MRAM CMSIS Stream validation - October 15, 2026
 
+This board-run record predates the sample-based node conversion. It describes
+packet FIFOs, capture-gap recovery and invalid warm-up frames in that earlier
+implementation. The current realtime graph uses scalar sample FIFOs, zero-padded
+startup history and `EthosGain`; see the [current template](../projects/template_mram/README.md).
+The live measurements below have not been repeated for that conversion.
+
+The scalar conversion passed Release build **b-62** through `cmsis_action`.
+The build-artefact symbol lookup found only `arm_rfft_fast_init_2048_f32`
+(122 bytes) for the RFFT initializers in the Release image. The FFT wrapper
+selects a size-specific initializer with `if constexpr`.
+
+The default generated schedule has nine steps and 16,384 bytes of FIFO storage.
+Three Python generator tests passed, including 128/256/512/1024-sample PCM
+conversion rates. Production-wrapper host checks passed for 300-sample source
+reblocking, mixed 256/512 rates, zero-padded overlap, the Ethos interface, all
+eight FFT lengths from 32 to 4096, calibrated tone amplitude and LCD event
+ownership/pool bounds. The existing audio DSP/renderer host checks also passed.
+The CMSIS environment check passed with schema-validated environment format
+1.0.0 from CMSIS Solution 1.72.0, Toolbox 2.15.0, CMake 3.31.12, Ninja 1.13.2,
+and the selected AC6 6.24.0 compiler.
+
 The MRAM template runs the generated `scheduler_app` dataflow graph and the
 CMSIS Stream event queue on the DevKit-E8 M55_HP with the embedded MRAM model.
 The OSPI template retains its existing scheduling.

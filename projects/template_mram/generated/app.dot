@@ -28,7 +28,7 @@ fft [label=<
 gain [label=<
 <TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gain<BR/>(EmbeddedGain)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gain<BR/>(EthosGain)</FONT></TD>
   </TR>
 </TABLE>>];
 
@@ -92,37 +92,53 @@ lcd [label=<
 
 
 
-microphone:i -> pcm:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<PcmBlock>
+microphone:i -> pcm:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<s16(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
 
-]
+pcm:i -> gain:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
 
-pcm:i -> gain:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<AudioBlock>
+gain:i -> sliding:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
 
-]
+sliding:i -> dc:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2048)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>]
 
-gain:i -> sliding:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<AudioBlock>
+dc:i -> window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2048)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>]
 
-]
+window:i -> fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2048)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>]
 
-sliding:i -> dc:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<FFTBlock>
+fft:i -> magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2048)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2048</FONT>
+</TD></TR></TABLE>>]
 
-]
-
-dc:i -> window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<FFTBlock>
-
-]
-
-window:i -> fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<FFTBlock>
-
-]
-
-fft:i -> magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<FFTBlock>
-
-]
-
-magnitude:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<SpectrumBlock>
-
-]
+magnitude:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(1025)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >1025</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >1025</FONT>
+</TD></TR></TABLE>>]
 
 
 

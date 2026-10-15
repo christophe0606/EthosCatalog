@@ -4,6 +4,9 @@ AppParams appParams = {
     .gain = {
         .hw_ = {0},
     },
+    .magnitude = {
+        .amplitude_scale = 0.001953125f,
+    },
     .microphone = {
         .hw_ = {0},
     },

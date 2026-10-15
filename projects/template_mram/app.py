@@ -4,23 +4,25 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'common'))
-from cmsis_stream.cg.scheduler import Graph, CStructType
-from nodes import MicrophoneSource, PCMToFloat, EmbeddedGain, SlidingBuffer, RemoveDC, HannWindow, FFT, Magnitude, SendToLCD, LCD
+from cmsis_stream.cg.scheduler import Graph
+from nodes import MicrophoneSource, PCMToFloat, EthosGain, SlidingBuffer, RemoveDC, HannWindow, FFT, Magnitude, SendToLCD, LCD
 from stream_graph import mk_app
 
 BLOCK, FFT_SIZE, SAMPLE_RATE, FPS = 512, 2048, 48000, 20
-PCM = CStructType('PcmBlock', 16 + 2*BLOCK)
-AUDIO = CStructType('AudioBlock', 16 + 4*BLOCK)
-FRAME = CStructType('FFTBlock', 16 + 4*FFT_SIZE)
-SPECTRUM = CStructType('SpectrumBlock', 16 + 4*(FFT_SIZE//2+1))
+# Dataflow ports carry scalar samples. Their meanings are documented by each
+# Python node: signed PCM, normalized audio, packed real FFT, or magnitude bins.
+# Equal scalar types do not imply compatible meanings or frame boundaries.
+# The board backend enables PDM channel 4 only: mono signed 16-bit PCM at 48 kHz.
+# A stereo backend would require a stereo sample type and conversion to mono
+# before this graph's mono audio/FFT processing.
 
-def make_graph():
+def make_graph(pcm_samples=BLOCK):
     graph = Graph()
-    stages = [MicrophoneSource('microphone', PCM), PCMToFloat('pcm', PCM, AUDIO),
-              EmbeddedGain('gain', AUDIO), SlidingBuffer('sliding', AUDIO, FRAME),
-              RemoveDC('dc', FRAME), HannWindow('window', FRAME), FFT('fft', FRAME),
-              Magnitude('magnitude', FRAME, SPECTRUM),
-              SendToLCD('send', SPECTRUM, SAMPLE_RATE, BLOCK, FPS)]
+    stages = [MicrophoneSource('microphone', BLOCK), PCMToFloat('pcm', pcm_samples),
+              EthosGain('gain', BLOCK), SlidingBuffer('sliding', BLOCK, FFT_SIZE),
+              RemoveDC('dc', FFT_SIZE), HannWindow('window', FFT_SIZE), FFT('fft', FFT_SIZE),
+              Magnitude('magnitude', FFT_SIZE, amplitude_scale=4.0/FFT_SIZE),
+              SendToLCD('send', FFT_SIZE//2+1, SAMPLE_RATE, BLOCK, FPS)]
     lcd = LCD('lcd', FFT_SIZE, SAMPLE_RATE, FPS)
     for src, dst in zip(stages, stages[1:]):
         graph.connect(src.o, dst.i)

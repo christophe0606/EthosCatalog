@@ -1,4 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
+def sample_count(value):
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise ValueError('Sample counts must be positive integers')
+    return value
+
 class ProjectNode:
     folder = "../../../common/stream/nodes"
     params = {}

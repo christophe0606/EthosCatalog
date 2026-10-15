@@ -1,11 +1,18 @@
 # MRAM microphone spectrum template
 
-The onboard PDM microphone feeds 512 signed samples at 48 kHz to a quantized
+The onboard PDM microphone feeds 512 signed mono samples at 48 kHz to a quantized
 Ethos-U85 network implementing `y = 2*x`. A 2048-sample window advances by 512
 samples (75% overlap). Independent DC removal, Hann window, FFT and magnitude
 stages produce a calibrated one-sided spectrum. The network preserves negative
 samples and has no ReLU or bias. Its float interface quantizes the normalized
 PCM range [-1, 1]; output range is approximately [-2, 2].
+
+Capture enables only `ARM_PDM_MASK_CHANNEL_4`; channel 5 is disabled. The board
+driver writes one 16-bit sample for each enabled channel, so these buffers contain
+mono PCM, with no left/right interleaving. `PCMToFloat` therefore produces mono
+audio for the gain and FFT stages. If stereo capture is enabled later, represent
+each left/right pair as one stereo sample and add an explicit stereo-to-mono
+node before the mono processing chain.
 
 `app.py` describes the CMSIS Stream graph. `hardware_params.cpp` owns the
 persistent model pools, NPU-visible input and LCD buffers. `app_main.cpp` checks a
@@ -18,12 +25,15 @@ before starting capture. `gain_test_passed == 1` records that check.
   events. Three fixed reference-counted payload slots bound memory use. Drawing
   and VSYNC run in the event thread; exhausted slots drop a publication.
 
-The dataflow chain is MicrophoneSource -> PCMToFloat -> EmbeddedGain ->
+The dataflow chain is MicrophoneSource -> PCMToFloat -> EthosGain ->
 SlidingBuffer -> RemoveDC -> HannWindow -> FFT -> Magnitude -> SendToLCD.
-The LCD has an event input only. Packet metadata carries capture gaps and
-warm-up validity through the entire chain. The generated graph uses synchronous
-scheduling and memory optimization, with two aligned shared FIFO buffers
-totaling 16,416 bytes. See [shared nodes](../../common/stream/README.md).
+The LCD has an event input only. Signal processing assumes continuous realtime
+input and uses scalar `int16_t` PCM and `float` sample FIFOs, with sample counts
+configured in Python. Node docstrings describe audio, packed RFFT and magnitude
+semantics. Sliding history starts with zero padding; no gap-recovery or validity
+packets travel through the graph. The generated graph uses a nine-step synchronous
+schedule and memory optimization, with two aligned shared FIFO buffers totaling
+16,384 bytes. See [shared nodes](../../common/stream/README.md).
 
 The LCD owns its animation and touch state. Tap the plot to toggle log/linear;
 the slider changes display scale from 0.5x to 2x. This display control is separate
@@ -52,12 +62,14 @@ then **Load & Debug** or **Load & Run**. The model is embedded in MRAM and needs
 no separate programming. Connect the standard MIPI LCD. UART4 (SW4 to U4,
 115200 8N1) prints the gain self-test result once; live data is shown on the LCD.
 
-Inspect `stream_stats` (including `error`, block/frame counts, LCD event counts,
-deadline counters and discontinuities), `gain_test_passed`, `microphone_drops`
-and `microphone_overflows` in the debugger. `pipeline_error` also records errors.
-Halting can overflow the PDM FIFO; recovery restarts
-capture and clears the sliding window. See the
-[board validation](../../documentation/cmsis-stream-validation.md).
+Inspect `stream_stats` (including `error`, source/frame counts, LCD event counts
+and timing/deadline counters), `gain_test_passed`, `microphone_drops` and
+`microphone_overflows` in the debugger. `pipeline_error` also records errors.
+The LCD uses asynchronous events because rendering and VSYNC have their own
+cadence. The dataflow signal-processing stages always consume/produce their
+configured samples. The [earlier board validation](../../documentation/cmsis-stream-validation.md)
+records the previous packet-based implementation; its gap-recovery observations
+do not describe this scalar graph.
 
 `model/benchmark.yml` and `model/benchmark_uart.txt` record the current gain
 network: median NPU 0.0050875 ms and median forward 0.151685 ms at 400 MHz.

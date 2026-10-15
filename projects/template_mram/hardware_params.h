@@ -10,9 +10,11 @@ extern "C" {
 typedef struct {
     void *module;
     float *inference_input;
+    size_t inference_samples;
     StreamStats *stats;
     int (*microphone_start)(void);
-    int (*microphone_read)(int16_t*, bool*);
+    int (*microphone_read)(int16_t*);
+    size_t microphone_block_samples;
     uint16_t *framebuffers[2];
     float *lcd_magnitude;
     volatile uint32_t *lcd_peak_hz;

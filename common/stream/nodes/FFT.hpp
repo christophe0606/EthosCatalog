@@ -5,13 +5,26 @@ template<typename IN, int inputSamples, typename OUT, int outputSamples>
 class FFT : public GenericNode<IN,inputSamples,OUT,outputSamples> {
 public:
     FFT(FIFOBase<IN>& in, FIFOBase<OUT>& out) : GenericNode<IN,inputSamples,OUT,outputSamples>(in,out) {
-        static_assert(inputSamples == 1 && outputSamples == 1 && block_samples<IN> == 2048 && block_samples<OUT> == 2048);
+        static_assert(std::is_same_v<IN,float> && std::is_same_v<OUT,float>);
+        static_assert(inputSamples >= 32 && inputSamples <= 4096 && (inputSamples & (inputSamples-1)) == 0);
+        static_assert(outputSamples == inputSamples);
     }
-    cg_status init() final { return fft_2048_init(&fft_) ? CG_INIT_FAILURE : CG_SUCCESS; }
+    cg_status init() final {
+        // Only the selected initializer and its tables are referenced.
+        arm_status status;
+        if constexpr (inputSamples == 32) status = arm_rfft_fast_init_32_f32(&fft_);
+        else if constexpr (inputSamples == 64) status = arm_rfft_fast_init_64_f32(&fft_);
+        else if constexpr (inputSamples == 128) status = arm_rfft_fast_init_128_f32(&fft_);
+        else if constexpr (inputSamples == 256) status = arm_rfft_fast_init_256_f32(&fft_);
+        else if constexpr (inputSamples == 512) status = arm_rfft_fast_init_512_f32(&fft_);
+        else if constexpr (inputSamples == 1024) status = arm_rfft_fast_init_1024_f32(&fft_);
+        else if constexpr (inputSamples == 2048) status = arm_rfft_fast_init_2048_f32(&fft_);
+        else if constexpr (inputSamples == 4096) status = arm_rfft_fast_init_4096_f32(&fft_);
+        return status == ARM_MATH_SUCCESS ? CG_SUCCESS : CG_INIT_FAILURE;
+    }
     int run() final {
         auto* in = this->getReadBuffer(); auto* out = this->getWriteBuffer();
-        out->info = in->info;
-        if (out->info.valid) fft_forward(&fft_, in->samples, out->samples);
+        fft_forward(&fft_, in, out);
         return CG_SUCCESS;
     }
 private:

@@ -5,7 +5,11 @@
 #include "hardware_params.h"
 typedef struct {
     HardwareParams hw_;
-} EmbeddedGainParams;
+} EthosGainParams;
+
+typedef struct {
+    float amplitude_scale;
+} MagnitudeParams;
 
 typedef struct {
     HardwareParams hw_;
@@ -26,7 +30,8 @@ typedef struct {
 } LCDParams;
 
 typedef struct {
-    EmbeddedGainParams gain;
+    EthosGainParams gain;
+    MagnitudeParams magnitude;
     MicrophoneSourceParams microphone;
     SendToLCDParams send;
     LCDParams lcd;
