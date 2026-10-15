@@ -6,3 +6,5 @@ ethos-u-vela==5.1.0
 PyYAML==6.0.3
 jsonschema==4.26.0
 safetensors==0.6.2
+# Use the generator matching the local CMSIS-Stream runtime (including events).
+-e ./thirdparty/CMSIS-Stream/PythonPackage

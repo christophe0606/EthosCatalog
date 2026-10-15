@@ -2,12 +2,11 @@
 #define SPECTRUM_H
 #include <stdint.h>
 #include <stdbool.h>
+#include "app_sizes.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define SPECTRUM_FFT_SIZE 2048U
-#define SPECTRUM_BINS (SPECTRUM_FFT_SIZE / 2U + 1U)
-#define SPECTRUM_SAMPLE_RATE 48000U
+#define SPECTRUM_SAMPLE_RATE MIC_SAMPLE_RATE
 #define SPECTRUM_WIDTH 800U
 #define SPECTRUM_HEIGHT 480U
 #define SPECTRUM_STRIP 24U

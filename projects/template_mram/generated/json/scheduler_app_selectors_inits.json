@@ -1,0 +1,46 @@
+{
+  "RemoveDC<FFTBlock,1,FFTBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FFT<FFTBlock,1,FFTBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "EmbeddedGain<AudioBlock,1,AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "Magnitude<FFTBlock,1,SpectrumBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<PcmBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PCMToFloat<PcmBlock,1,AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SendToLCD<SpectrumBlock,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_SPECTRUM_ID"
+    ]
+  },
+  "SlidingBuffer<AudioBlock,1,FFTBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "HannWindow<FFTBlock,1,FFTBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "LCD": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_SPECTRUM_ID"
+    ]
+  }
+}

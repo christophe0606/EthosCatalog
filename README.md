@@ -15,9 +15,12 @@ VSYNC. It retains the Spectrogram example's log/linear touch toggle, display
 scale slider and animated peak markers. The network gain is fixed at 2x; the
 slider changes display scale only.
 
-Reusable processing, microphone and LCD setup live under
-[common/nodes_impl](common/nodes_impl/README.md). Model execution, thread
-orchestration and drawing stay in each project. The project supplies the
+The MRAM template uses a generated CMSIS Stream dataflow scheduler and an LCD
+event node. Python node descriptions, C++ wrappers and shared graph conventions
+are in [common/stream](common/stream/README.md). The OSPI template retains its
+existing thread orchestration. Reusable processing, microphone and LCD setup
+live under [common/nodes_impl](common/nodes_impl/README.md). Drawing and hardware
+parameters stay in each project. The project supplies the
 persistent ExecuTorch pools and their memory sizes. The common initializer
 constructs one EmbeddedModule that lives until reset.
 
@@ -34,8 +37,9 @@ See the [MRAM template](projects/template_mram/README.md) and
 
 ## Third-party submodules
 
-`thirdparty/c_mcp` and `thirdparty/CMSIS-Stream` track the upstream repositories
-for future CMSIS Pack integration. Initialize them after cloning this repository:
+`thirdparty/c_mcp` and `thirdparty/CMSIS-Stream` track the upstream repositories.
+The solution loads `ARM.CMSIS-STREAM.pdsc` through the pack's local `path` entry.
+Initialize the submodules after cloning this repository:
 
 ```sh
 git submodule update --init --recursive
@@ -113,7 +117,17 @@ files may still describe the previously selected project.
    by each project. The template keeps its fixed `model/model_test_data.h` with
    its model files. Neither layer generation nor quantization writes that header;
    review and update it manually when the template's behavior changes.
-6. Open `EthosCatalog.csolution.yml` in the CMSIS Solution extension, select
+6. For the MRAM template, generate the Stream graph and its PDF diagram:
+
+   ```powershell
+   uv run projects/template_mram/app.py
+   ```
+
+   Generated C++ and configuration are checked in. Regenerate them after changing
+   the graph. Graphviz `dot` is optional; missing or failed PDF conversion prints
+   a warning and leaves the generated code and DOT diagram available.
+
+7. Open `EthosCatalog.csolution.yml` in the CMSIS Solution extension, select
    **DevKit-E8@Debug** or **DevKit-E8@Release** for MRAM, or
    **DevKit-E8@OSPI_Debug** or **DevKit-E8@OSPI_Release** for OSPI, and **Build**. When using the
    CMSIS Developer Assistant, use `cmsis_action` with `action: build`.

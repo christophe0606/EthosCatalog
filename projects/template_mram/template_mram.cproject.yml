@@ -5,6 +5,8 @@ project:
   add-path:
     - .
     - ../../common
+    - ../../common/stream
+    - generated
     - ../../board/DevKit-E8
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
@@ -16,12 +18,14 @@ project:
     - NPU_REGIONCFG_1: 0
     - APP_METHOD_POOL_SIZE: 65536
     - APP_TEMP_POOL_SIZE: 65536
-    # Main application + dedicated audio and LCD threads use C library state.
+    # Main application + Stream dataflow and event threads.
     - OS_THREAD_NUM: 3
+    - OS_DYNAMIC_MEM_SIZE: 65536
     - APP_POOL_SECTION: \".bss.ai_pool\"
   components:
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
+    - component: CMSIS:STREAM&Source
     - component: CMSIS-Compiler:TTY:Custom
     - component: CMSIS:DSP&Source
       optimize: speed
@@ -42,7 +46,7 @@ project:
       C: [-ffunction-sections, -fdata-sections]
       CPP: [-ffunction-sections, -fdata-sections]
       Link: [--remove]
-    - CPP: [-std=gnu++17, -Wno-deprecated-declarations]
+    - CPP: [-std=gnu++17, -Wno-deprecated-declarations, -fno-color-diagnostics]
   groups:
     - group: MRAM template
       files:
@@ -50,6 +54,13 @@ project:
         - file: model/model_test_data.h
         - file: spectrum.h
         - file: spectrum_ui.c
+        - file: hardware_params.cpp
+        - file: hardware_params.h
+        - file: datatypes.h
+    - group: Generated CMSIS Stream graph
+      files:
+        - file: generated/scheduler_app.cpp
+        - file: generated/app_params.c
     - group: Embedded ExecuTorch module
       files:
         - file: ../../common/arm_embedded_module.cpp

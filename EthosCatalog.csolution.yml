@@ -7,6 +7,8 @@ solution:
     - pack: AlifSemiconductor::Ensemble@^2.2.0-0
     - pack: ARM::CMSIS@^6.2.0
     - pack: ARM::CMSIS-DSP@1.18.0
+    - pack: ARM::CMSIS-STREAM
+      path: thirdparty/CMSIS-Stream
     - pack: ARM::CMSIS-Compiler@^2.1.0
     - pack: PyTorch::ExecuTorch@1.4.1
     - pack: ARM::CMSIS-NN

@@ -23,36 +23,36 @@ benchmark:
         method_pool_peak_bytes: 3752
         temp_pool_peak_bytes: 1216
     time:
-      ms: 0.00519875
-      cycles: 2079.5
+      ms: 0.0050875
+      cycles: 2035.0
       statistic: median
-      min_cycles: 1994
-      max_cycles: 2090
-      mean_cycles: 2060.4
-      forward_ms: 0.14859125
+      min_cycles: 1981
+      max_cycles: 2081
+      mean_cycles: 2033.4
+      forward_ms: 0.151685
       forward_timer_hz: 400000000
       cycles_samples:
-      - 2078
-      - 2015
-      - 2084
-      - 2030
-      - 2055
-      - 2090
-      - 2090
-      - 2087
-      - 1994
+      - 2052
+      - 1981
       - 2081
+      - 2011
+      - 2070
+      - 2077
+      - 1981
+      - 2018
+      - 1987
+      - 2076
       forward_ticks_samples:
-      - 61377
-      - 59633
-      - 58859
-      - 60059
-      - 59559
-      - 59027
-      - 59111
-      - 59314
-      - 58997
-      - 59591
+      - 63450
+      - 62304
+      - 60648
+      - 60607
+      - 60669
+      - 60816
+      - 60555
+      - 60838
+      - 60444
+      - 60679
   estimates:
     vela:
       ini: ../../.cmsis/ensemble_vela.ini
@@ -79,7 +79,7 @@ benchmark:
           average_bytes_per_second: 62439024.390243895
           design_peak_bytes_per_second: 774400000.0
   run:
-    recorded_at: '2026-10-15T09:04:32.370348+00:00'
+    recorded_at: '2026-10-15T12:41:37.818903+00:00'
     context: template_mram.Release+DevKit-E8
     target: DevKit-E8@Release
     device: AE822FA0E5597LS0
@@ -93,8 +93,8 @@ benchmark:
       runtime: PyTorch::ExecuTorch@1.4.1
     compiler: AC6@6.24.0
     optimize: -O3 -ffast-math
-    build_job: b-42
-    execution_job: d-43
+    build_job: b-52
+    execution_job: d-53
     cpu_clock_mhz: 400.0
     npu_clock_mhz: 400.0
     warmup: 1
@@ -107,12 +107,12 @@ benchmark:
     tolerance: 0.04
     uart: benchmark_uart.txt
     model_sha256: 4c39c47f7ed0f1aec3a2752fdc0061b37e42ca617b48d1f5c6fb228700631beb
-    firmware_sha256: c9c09b1132325a22a74783461dec2f70431713e9c52ecc59abe15e31c1e42b74
+    firmware_sha256: f80c0de79c2b6edbadd5a4b854849b5ab79c4b8bba5f25d30ca424a1a259752d
     input: deterministic signed ramp from -1 to +1; all 512 outputs checked on warmup
       and every sample
     timing_scope: module.forward() only; excludes TensorImpl setup, output copy, validation,
       UART, capture and LCD; includes CPU boundary quantize/dequantize and PMU hooks
-    uart_run: latest complete run
+    uart_run: recorded measurement run d-53
     measurement_source: UART4 COM5 115200 8N1; Ethos driver region sizes and ExecuTorch
       allocator high-water marks
   network:

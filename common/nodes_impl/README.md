@@ -16,7 +16,8 @@ the startup self-test. Pool sizes and linker placement belong to each project.
 
 Sliding buffer, DC removal, window multiplication, FFT and magnitude are
 separate calls with caller-owned storage. They contain no scheduling or UI
-state, so future CMSIS-Stream nodes can wrap them individually.
+state. The [CMSIS Stream wrappers](../stream/README.md) wrap them individually
+for the MRAM graph; the OSPI template still calls them from its audio thread.
 
 The microphone is a single-consumer source of signed 512-sample blocks at
 48 kHz. Its interrupt handler reserves one ring slot for the next capture,

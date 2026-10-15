@@ -9,6 +9,15 @@ A CMSIS Stream graph is a collection of interconnected nodes that define the flo
 
 The graph is defined in Python and the python script when run will generate C++ source files and headers that must be built into the project.
 
+The philosophy of the CMSIS Stream dataflow graph is that by giving the amount of samples produced on a port or consumed on a port, CMSIS Stream will able to size the FIFO and schedule the nodes in an optimal way.
+For instance, you can connect a node producing 128 samples to a node consuming 256 samples.
+
+As consequence, in some cases it is better to expose block of samples rather than block datatypes on CMSIS Stream I/O ports. Instead of sending one block of 128 samples it may be better to expose that the output produce 128 samples.
+
+It depends on the graph and the node to be connected. But a node that produces samples datatype is more flexible and can be reused in more context since it allows to connect node with different producing / consuming rates.
+
+On the other hand, if the schedule length computed by CMSIS Stream is very big it indicates that the consuming rates are really not compatible (like coprime rates) and thus the nodes may have to be reworked.
+
 ## Generated C++ Source Files and Headers
 
 C++ and C files rely on the files provided by the CMSIS Stream pack.
