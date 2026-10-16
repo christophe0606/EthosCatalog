@@ -32,6 +32,7 @@ project:
     - component: CMSIS:STREAM&Source
       for-context: [.Debug, .Release]
     - component: CMSIS-Compiler:TTY:Custom
+      for-compiler: AC6
     - component: CMSIS:DSP&Source
       optimize: speed
       misc:

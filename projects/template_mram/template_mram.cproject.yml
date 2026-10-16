@@ -26,6 +26,7 @@ project:
     - component: CMSIS:OS Tick:SysTick
     - component: CMSIS:STREAM&Source
     - component: CMSIS-Compiler:TTY:Custom
+      for-compiler: AC6
     - component: CMSIS:DSP&Source
       optimize: speed
       misc:

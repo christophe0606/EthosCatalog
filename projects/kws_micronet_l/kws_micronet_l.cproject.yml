@@ -22,6 +22,7 @@ project:
   - component: CMSIS:RTOS2:Keil RTX5&Source
   - component: CMSIS:OS Tick:SysTick
   - component: CMSIS-Compiler:TTY:Custom
+    for-compiler: AC6
   - component: CMSIS:STREAM&Source
   - component: CMSIS:DSP&Source
     optimize: speed
