@@ -3,7 +3,7 @@
 This procedure applies to the Alif DevKit-E8 M55 HP core. The flash algorithm,
 OSPI initialization and programming handoff are specific to this board.
 
-Complete [project selection and network preparation](../README.md#select-a-project-and-prepare-its-network)
+Complete [project selection and network preparation](HOWTO.md#select-a-project-and-prepare-its-network)
 first. All file paths and terminal commands below are relative to the repository
 root.
 
@@ -138,7 +138,7 @@ CRC and output checks when adapting it to another network.
 
 This sequence uses the supplied `template_ospi`. For a derived OSPI project,
 substitute its project/context names and retain the `ProgramModel` build mode.
-Complete the [Python/tool setup](../README.md#select-a-project-and-prepare-its-network)
+Complete the [Python/tool setup](HOWTO.md#set-up-the-tools)
 first. This preparation, model-only programming and inference sequence has
 been exercised with the supplied template on DevKit-E8.
 

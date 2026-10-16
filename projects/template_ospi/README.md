@@ -138,4 +138,4 @@ application, or its CRC check will reject the old external model.
 To derive a project, keep `ospi_startup.c`, the OSPI component and helper sources,
 the SRAM inference-pool linker section and the `ProgramModel` context filters. Adapt
 the model/quantizer/gain self-test constants and add the new project to the desired target sets
-as described in [Add another project](../../README.md#add-another-project).
+as described in [Add another project](../../documentation/HOWTO.md#add-another-project).

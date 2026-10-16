@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Generate CATALOG.md from the YAML headers in projects/*/README.md."""
+"""Generate README.md from documentation/readme_header.md and project YAML headers."""
 from pathlib import Path
 import sys
 from urllib.parse import quote
@@ -38,6 +38,7 @@ def table_text(value: str) -> str:
 
 
 def update_catalog(root: Path = ROOT) -> Path:
+    header = (root / "documentation/readme_header.md").read_text(encoding="utf-8-sig")
     categories = {}
     for project in (root / "projects").iterdir():
         if not project.is_dir():
@@ -55,16 +56,23 @@ def update_catalog(root: Path = ROOT) -> Path:
             "",
             f"## {table_text(category)}",
             "",
-            "| Project name | Description |",
-            "| --- | --- |",
+            "| Project name | Description | Benchmark |",
+            "| --- | --- | --- |",
         ])
         for project, description in sorted(
             categories[category], key=lambda item: (item[0].name.casefold(), item[0].name)
         ):
             link = quote((project / "README.md").relative_to(root).as_posix(), safe="/")
-            rows.append(f"| [{table_text(project.name)}]({link}) | {table_text(description)} |")
-    output = root / "CATALOG.md"
-    output.write_text("\n".join(rows) + "\n", encoding="utf-8", newline="\n")
+            benchmark = project / "model/benchmark.yml"
+            benchmark_link = (
+                f"[benchmark.yml]({quote(benchmark.relative_to(root).as_posix(), safe='/')})"
+                if benchmark.is_file() else "—"
+            )
+            rows.append(
+                f"| [{table_text(project.name)}]({link}) | {table_text(description)} | {benchmark_link} |"
+            )
+    output = root / "README.md"
+    output.write_text(header.rstrip() + "\n\n" + "\n".join(rows) + "\n", encoding="utf-8", newline="\n")
     return output
 
 
