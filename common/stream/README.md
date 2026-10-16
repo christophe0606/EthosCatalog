@@ -24,11 +24,12 @@ DOT and (when Graphviz is available) PDF.
 | RFFTMagnitude | `float[n]` CMSIS-DSP fast RFFT packing -> `float[n/2+1]` bins | DC/Nyquist included; configurable amplitude scale |
 
 Application nodes live in their project's `nodes/` and `nodes_impl/` folders.
-The MRAM template's `EthosGain`, `SendToLCD` and `LCD` belong there: its model
+Each template's `EthosGain`, `SendToLCD` and `LCD` belong there: its model
 demonstration, spectrum event protocol, publication policy, drawing, animation
 and touch interaction are specific to that application. Injecting hardware or
 renderer callbacks does not make an application node reusable. Only the
-UI-independent LCD presentation and touch driver remains shared.
+UI-independent LCD presentation and touch driver remains shared. OSPI owns
+separate copies of these application nodes and does not import MRAM's nodes.
 
 The notation above describes scalar FIFO sample types and samples per firing;
 arrays are not wrapped in block structs. Each Python constructor selects its
@@ -67,10 +68,9 @@ while whole blocks can be read directly into the FIFO.
 needed for the next firing, before downstream nodes can modify the output.
 It stores no full-frame copy. With a 2048-sample frame and 512-sample hop, its
 sample storage is 1536 floats (6 KiB), saving 2 KiB; equal hop/frame lengths
-require no retained samples. The raw C sliding-buffer API still used by the
-OSPI template maintains that caller's full-frame history separately.
+require no retained samples.
 
-The MRAM project's `stream_types.h` defines `StreamStats`, diagnostic state
+Each project's `stream_types.h` defines `StreamStats`, diagnostic state
 outside the sample FIFOs. Audio block counts count source firings; timing
 measures from the latest source firing to
 `SendToLCD`. In the default graph this is one 512-sample audio hop. If a graph
@@ -90,26 +90,27 @@ The renderer receives the magnitude array explicitly for each call.
 
 Projects provide `datatypes.h`, `hardware_params.h/.cpp` and `stream_init.cpp`.
 The hardware block includes only the required peripherals, model and renderer
-callbacks. The MRAM template's `EthosGain`, `SendToLCD` and `LCD` descriptions live
-in `projects/template_mram/nodes`, with their C++ wrappers and the gain's
-ExecuTorch adapter in `projects/template_mram/nodes_impl`. The adapter keeps
+callbacks. Each template's `EthosGain`, `SendToLCD` and `LCD` descriptions live
+in its own `nodes/` folder, with their C++ wrappers and the gain's
+ExecuTorch adapter in its `nodes_impl/` folder. The adapter keeps
 ExecuTorch's platform enums out of Stream translation units, where they conflict with global event
 names. Only the hardware implementation and model boundary include ExecuTorch
 headers.
 
 RTE configuration shims include the shared files in this folder. Runtime pool,
-stack and priority settings come from the project's Python graph. The MRAM
-graph uses the pack's CMSIS-RTOS dataflow and event threads. It runs continuously
+stack and priority settings come from the project's Python graph. Both template
+graphs use the pack's CMSIS-RTOS dataflow and event threads. Each runs continuously
 until reset; this application does not switch between multiple graphs.
 
-Regenerate the MRAM graph from the repository root:
+Regenerate either graph from the repository root:
 
 ```powershell
 uv pip install -e ./thirdparty/CMSIS-Stream/PythonPackage
 uv run projects/template_mram/app.py
+uv run projects/template_ospi/app.py
 ```
 
-From `projects/template_mram`, use `uv run app.py`. The generated sources and
+From either template folder, use `uv run app.py`. The generated sources and
 metadata are identical from either directory. `dot -Tpdf` creates `app.pdf`
 beside `app.dot`; missing Graphviz or a conversion error only emits a warning.
 
@@ -119,6 +120,8 @@ wrappers, with a host clock and the Stream POSIX platform:
 ```powershell
 ./tests/run_stream_tests.ps1 -PackRoot C:/ctools_pack
 ./tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack
+./tests/run_stream_tests.ps1 -PackRoot C:/ctools_pack -Project template_ospi
+./tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack -Project template_ospi
 ```
 
 These check sample reblocking, mixed 256/512 rates, zero-padded overlap,

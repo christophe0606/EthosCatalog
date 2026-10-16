@@ -7,8 +7,8 @@
 #include "RFFTMagnitude.hpp"
 #include "RemoveDC.hpp"
 #include "HannWindow.hpp"
-#include "../projects/template_mram/nodes_impl/SendToLCD.hpp"
-#include "../projects/template_mram/nodes_impl/LCD.hpp"
+#include "SendToLCD.hpp"
+#include "LCD.hpp"
 #include <cassert>
 #include <cmath>
 #include <deque>

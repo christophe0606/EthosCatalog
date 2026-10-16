@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/template_mram/DevKit-E8/Release/template_mram.axf",
+            "program": "out/template_ospi/DevKit-E8/Release/template_ospi.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -46,7 +46,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/template_mram/DevKit-E8/Release/template_mram.axf",
+            "program": "out/template_ospi/DevKit-E8/Release/template_ospi.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

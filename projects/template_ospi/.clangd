@@ -1,5 +1,5 @@
 CompileFlags:
-  CompilationDatabase: c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Debug
+  CompilationDatabase: c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Release
 
 ---
 If:
@@ -7,7 +7,7 @@ If:
 CompileFlags:
   Add:
     - -include
-    - c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Debug\compile_macros_c.h
+    - c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Release\compile_macros_c.h
 
 ---
 If:
@@ -15,4 +15,4 @@ If:
 CompileFlags:
   Add:
     - -include
-    - c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Debug\compile_macros_cxx.h
+    - c:\Users\chrfav01\benchresults\EthosCatalog\out\template_ospi\DevKit-E8\Release\compile_macros_cxx.h

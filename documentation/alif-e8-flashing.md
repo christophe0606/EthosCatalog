@@ -152,7 +152,7 @@ been exercised with the supplied template on DevKit-E8.
 4. Open `projects/template_ospi/ospi_startup.c` to identify the provided
    preparation code and `model_programming_wait` breakpoint. The `ProgramModel`
    configuration runs this code without accessing the OSPI model. The normal
-   configurations enable XIP; `app_main.cpp` verifies the model's generated
+   configurations enable XIP; `hardware_params.cpp` verifies the model's generated
    CRC32 in place before starting the microphone spectrum. Writable
    inference/runtime pools and LCD framebuffers use SRAM0; the PTE is not copied there.
 5. In Explorer, right-click

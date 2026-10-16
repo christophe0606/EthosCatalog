@@ -2,7 +2,8 @@
 
 This record covers the sample-based realtime graph with an int16 elementwise
 Ethos gain on DevKit-E8 M55_HP. It supersedes the earlier packet-based MRAM
-validation. The OSPI template retains its existing implementation.
+validation. The later OSPI migration is recorded in
+[OSPI CMSIS Stream validation](ospi-stream-validation.md).
 
 ## Model and generation
 

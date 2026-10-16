@@ -1,9 +1,10 @@
-param([string]$PackRoot = $env:CMSIS_PACK_ROOT)
+param([string]$PackRoot = $env:CMSIS_PACK_ROOT,
+      [ValidateSet('template_mram', 'template_ospi')][string]$Project = 'template_mram')
 $ErrorActionPreference = 'Stop'
 Push-Location (Split-Path $PSScriptRoot -Parent)
 try {
     New-Item -ItemType Directory -Force out/stream-tests | Out-Null
-    $includes = @('-Icommon', '-Icommon/stream', '-Icommon/nodes_impl/c', '-Iprojects/template_mram', '-Iprojects/template_mram/nodes_impl', '-Iprojects/template_mram/generated', "-I$PackRoot/ARM/CMSIS-DSP/1.18.0/Include", "-I$PackRoot/ARM/CMSIS/6.3.0/CMSIS/Core/Include")
+    $includes = @('-Icommon', '-Icommon/stream', '-Icommon/nodes_impl/c', "-Iprojects/$Project", "-Iprojects/$Project/nodes_impl", "-Iprojects/$Project/generated", "-I$PackRoot/ARM/CMSIS-DSP/1.18.0/Include", "-I$PackRoot/ARM/CMSIS/6.3.0/CMSIS/Core/Include")
     $dsp = Join-Path $PackRoot 'ARM/CMSIS-DSP/1.18.0'
     $sources = @('common/nodes_impl/c/sliding_buffer.c', 'common/nodes_impl/c/window.c', 'common/nodes_impl/c/fft.c')
     $sources += @(

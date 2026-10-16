@@ -1,17 +1,17 @@
 Ethos gain self-test: PASS (512 signed samples, gain 2.0)
-Output: 512 elements, max absolute error 0.008816
+Output: 512 elements, max absolute error 0.000030
 Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
-Benchmark memory: model=3072 B, arena=1216 B at 0x02010000, weights=192 B at 0xc0000250
-Benchmark pools: method peak=3752 B, temp peak=1216 B, reserved=131072 B
-Benchmark sample 1: NPU=9452 cycles (0.023630 ms), forward=181027 ticks (0.452568 ms)
-Benchmark sample 2: NPU=9438 cycles (0.023595 ms), forward=179065 ticks (0.447663 ms)
-Benchmark sample 3: NPU=9432 cycles (0.023580 ms), forward=178282 ticks (0.445705 ms)
-Benchmark sample 4: NPU=9436 cycles (0.023590 ms), forward=178679 ticks (0.446698 ms)
-Benchmark sample 5: NPU=9430 cycles (0.023575 ms), forward=178399 ticks (0.445997 ms)
-Benchmark sample 6: NPU=9434 cycles (0.023585 ms), forward=178080 ticks (0.445200 ms)
-Benchmark sample 7: NPU=9438 cycles (0.023595 ms), forward=178522 ticks (0.446305 ms)
-Benchmark sample 8: NPU=9440 cycles (0.023600 ms), forward=178006 ticks (0.445015 ms)
-Benchmark sample 9: NPU=9434 cycles (0.023585 ms), forward=178832 ticks (0.447080 ms)
-Benchmark sample 10: NPU=9432 cycles (0.023580 ms), forward=178028 ticks (0.445070 ms)
-Benchmark PMU: last active=9432 cycles, invocations=1, overflow=0
+Benchmark memory: model=2816 B, arena=1024 B at 0x02010000, weights=16 B at 0xc0000200
+Benchmark pools: method peak=4776 B, temp peak=1024 B, reserved=131072 B
+Benchmark sample 1: NPU=4184 cycles (0.010460 ms), forward=168742 ticks (0.421855 ms)
+Benchmark sample 2: NPU=4180 cycles (0.010450 ms), forward=168077 ticks (0.420193 ms)
+Benchmark sample 3: NPU=4189 cycles (0.010472 ms), forward=166886 ticks (0.417215 ms)
+Benchmark sample 4: NPU=4182 cycles (0.010455 ms), forward=167348 ticks (0.418370 ms)
+Benchmark sample 5: NPU=4164 cycles (0.010410 ms), forward=166487 ticks (0.416218 ms)
+Benchmark sample 6: NPU=4193 cycles (0.010483 ms), forward=166990 ticks (0.417475 ms)
+Benchmark sample 7: NPU=4184 cycles (0.010460 ms), forward=166859 ticks (0.417148 ms)
+Benchmark sample 8: NPU=4188 cycles (0.010470 ms), forward=166541 ticks (0.416353 ms)
+Benchmark sample 9: NPU=4190 cycles (0.010475 ms), forward=166936 ticks (0.417340 ms)
+Benchmark sample 10: NPU=4194 cycles (0.010485 ms), forward=166202 ticks (0.415505 ms)
+Benchmark PMU: last active=4194 cycles, invocations=1, overflow=0
 Test_result: PASS

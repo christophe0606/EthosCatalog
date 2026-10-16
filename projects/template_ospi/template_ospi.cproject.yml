@@ -5,6 +5,8 @@ project:
   add-path:
     - .
     - ../../common
+    - ../../common/stream
+    - generated
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
   define:
@@ -19,13 +21,16 @@ project:
     - APP_MODEL_OSPI
     - APP_METHOD_POOL_SIZE: 65536
     - APP_TEMP_POOL_SIZE: 65536
-    # Main application + dedicated audio and LCD threads use C library state.
+    # Main application + Stream dataflow and event threads.
     - OS_THREAD_NUM: 3
+    - OS_DYNAMIC_MEM_SIZE: 65536
     - APP_POOL_SECTION: \".bss.ai_pool\"
   components:
     - component: BSP:OSPI FLASH XIP:core
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
+    - component: CMSIS:STREAM&Source
+      for-context: [.Debug, .Release]
     - component: CMSIS-Compiler:TTY:Custom
     - component: CMSIS:DSP&Source
       optimize: speed
@@ -46,14 +51,14 @@ project:
       C: [-ffunction-sections, -fdata-sections]
       CPP: [-ffunction-sections, -fdata-sections]
       Link: [--remove]
-    - CPP: [-std=gnu++17, -Wno-deprecated-declarations]
+    - CPP: [-std=gnu++17, -Wno-deprecated-declarations, -fno-color-diagnostics]
   groups:
     - group: OSPI startup and programming preparation
       files:
         - file: ospi_startup.c
         - file: ../../board/DevKit-E8/model_storage.c
         - file: ../../board/DevKit-E8/e8_issi_flash.c
-    - group: OSPI template inference
+    - group: OSPI template
       for-context:
         - .Debug
         - .Release
@@ -62,6 +67,23 @@ project:
         - file: model/model_test_data.h
         - file: spectrum.h
         - file: spectrum_ui.c
+        - file: hardware_params.cpp
+        - file: hardware_params.h
+        - file: datatypes.h
+        - file: stream_types.h
+    - group: Generated CMSIS Stream graph
+      for-context: [.Debug, .Release]
+      files:
+        - file: generated/scheduler_app.cpp
+        - file: generated/app_params.c
+    - group: Project-specific CMSIS Stream nodes
+      for-context: [.Debug, .Release]
+      files:
+        - file: nodes_impl/EthosGain.hpp
+        - file: nodes_impl/SendToLCD.hpp
+        - file: nodes_impl/LCD.hpp
+        - file: nodes_impl/embedded_gain.h
+        - file: nodes_impl/embedded_gain.cpp
     - group: Embedded ExecuTorch module
       for-context:
         - .Debug

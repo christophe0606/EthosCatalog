@@ -3,6 +3,8 @@
 The original thread-based validation below records the pre-Stream MRAM and
 OSPI implementations. The current MRAM implementation and benchmark were
 revalidated after migration; see [CMSIS Stream validation](cmsis-stream-validation.md).
+The OSPI migration and its current benchmark are recorded separately in
+[OSPI CMSIS Stream validation](ospi-stream-validation.md).
 
 The source was adapted from `Spectrogram` in
 `C:/Users/chrfav01/benchresults/testassistant/Blinky_M55_HP`, read directly from

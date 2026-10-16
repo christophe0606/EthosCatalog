@@ -15,14 +15,14 @@ VSYNC. It retains the Spectrogram example's log/linear touch toggle, display
 scale slider and animated peak markers. The network gain is fixed at 2x; the
 slider changes display scale only.
 
-The MRAM template uses a generated CMSIS Stream dataflow scheduler and an LCD
+Both templates use a generated CMSIS Stream dataflow scheduler and an LCD
 event node. Reusable Python node descriptions are in `common/nodes`, their C++
 wrappers in `common/nodes_impl/c`, and shared runtime configuration in
 [common/stream](common/stream/README.md). The example `EthosGain`, spectrum `LCD`
 and `SendToLCD` nodes are project-specific, with Python descriptions in
-`projects/template_mram/nodes` and implementations in
-`projects/template_mram/nodes_impl`. The OSPI template retains its existing
-thread orchestration. Reusable processing, microphone and LCD setup
+each template's `nodes/` and `nodes_impl/` folders. These application nodes are
+duplicated in the OSPI project so each template remains independent.
+Reusable processing, microphone and LCD setup
 live under [common/nodes_impl](common/nodes_impl/README.md). Drawing and hardware
 parameters stay in each project. The project supplies the
 persistent ExecuTorch pools and their memory sizes. The common initializer
@@ -153,11 +153,14 @@ files may still describe the previously selected project.
    by each project. The template keeps its fixed `model/model_test_data.h` with
    its model files. Neither layer generation nor quantization writes that header;
    review and update it manually when the template's behavior changes.
-6. For the MRAM template, generate the Stream graph and its PDF diagram:
+6. Generate the selected template's Stream graph and its PDF diagram:
 
    ```powershell
    uv run projects/template_mram/app.py
    ```
+
+   For OSPI, use `uv run projects/template_ospi/app.py` instead. Both scripts
+   also work as `uv run app.py` from their own project folder.
 
    Generated C++ and configuration are checked in. Regenerate them after changing
    the graph. Graphviz `dot` is optional; missing or failed PDF conversion prints
@@ -254,6 +257,8 @@ setup in **Select a project and prepare its network** first.
    the Python scripts will not generate this header for you.
 8. Open `projects/my_network/app_main.cpp`. Adapt input shapes, buffers, output
    checks and application behavior to your network. Save the file.
+   Update `app.py` to import `projects.my_network.nodes`, adapt the graph and
+   its project-owned nodes, and regenerate with `uv run projects/my_network/app.py`.
 9. Open `projects/my_network/linker_ac6.sct.src` and
    `projects/my_network/my_network.cproject.yml`. Adapt memory placement, pool
    sizes, required components and source-file lists. Update the copied

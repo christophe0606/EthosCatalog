@@ -3,8 +3,8 @@ declarations in an `extern "C"` section of its C++ header, together with any
 node-specific state types. The C implementation includes its owning header;
 C++ runtime code is guarded so C compilation sees only that node's interface.
 There is no public umbrella header exposing all processing functions. Audio
-tests declare their required interfaces independently. OSPI keeps temporary
-project-local declarations until it migrates to Stream.
+tests declare their required interfaces independently. Both templates use the
+Stream wrappers rather than project-local raw processing declarations.
 
 - `c/`: portable processing, CMSIS-DSP calls, and CMSIS Stream C++ wrappers.
   The Stream wrappers and their shared `NodeSupport.hpp` live beside the
@@ -25,9 +25,9 @@ the project adapter.
 
 Common nodes must be reusable across projects; portability alone is insufficient.
 The spectrum `LCD` and `SendToLCD` nodes live in
-`projects/template_mram/nodes_impl/`, alongside the model-specific `EthosGain`.
+each template's `nodes_impl/`, alongside its model-specific `EthosGain`.
 Spectrum rendering, animation, touch interaction and publication policy belong
-to that project. The shared LCD driver only initializes the panel, presents
+to its project. The shared LCD driver only initializes the panel, presents
 framebuffers and reports touch coordinates; it imposes no drawing or UI policy.
 
 The project supplies model bytes and persistent method/scratch pools to
@@ -39,9 +39,8 @@ the startup self-test. Pool sizes and linker placement belong to each project.
 DC removal, window multiplication, FFT and packed RFFT magnitude are separate
 calls with caller-owned storage and no scheduling or UI state. Their
 [CMSIS Stream wrappers](../stream/README.md) expose them individually in the
-MRAM graph. The Stream sliding-buffer node builds frames directly in its output
-FIFO and retains only the overlap between firings. The OSPI audio thread still
-uses the raw C sliding-buffer API with its caller-owned full-frame history.
+MRAM and OSPI graphs. The Stream sliding-buffer node builds frames directly in
+its output FIFO and retains only the overlap between firings.
 
 `window.c` uses CMSIS-DSP for Q15-to-float conversion, mean and offset for DC
 removal, periodic Hann generation, and elementwise window multiplication.
@@ -57,7 +56,8 @@ The microphone is a single-consumer source of signed 512-sample blocks at
 48 kHz. Its interrupt handler reserves one ring slot for the next capture,
 drops new blocks when full, and signals the audio thread. Per-block sequence
 numbers identify discontinuities. PDM overflow powers down and restarts capture
-in the consumer thread; a gap resets the sliding window before further FFTs.
+in the consumer thread. The template graphs assume continuous input and do not
+propagate discontinuity metadata or reset their sliding history on a gap.
 
 The LCD takes two caller-owned, 32-byte-aligned RGB565 buffers in DMA-visible
 SRAM. `lcd_present()` cleans the submitted buffer and waits for two scanline

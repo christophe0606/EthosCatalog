@@ -8,7 +8,25 @@ category: audio
 This template runs the same microphone -> Ethos 2x gain -> spectrum application
 as the [MRAM template](../template_mram/README.md). The application and drawing
 stay in this project. Reusable processing and board nodes live in `../../common`.
-Audio uses CMSIS Realtime priority; LCD rendering and animation use High priority.
+`app.py` generates the same CMSIS Stream graph as MRAM: MicrophoneSource ->
+PCMToFloat -> EthosGain -> SlidingBuffer -> RemoveDC -> HannWindow -> FFT ->
+RFFTMagnitude -> SendToLCD, with asynchronous spectrum events to LCD.
+Audio uses CMSIS Realtime priority with a 32 KiB stack; the LCD event thread
+uses High priority with an 8 KiB stack and nominal 20 fps updates. The nine-step
+schedule shares two aligned FIFO buffers totaling 16,384 bytes.
+
+`nodes/` and `nodes_impl/` contain this project's own copies of EthosGain,
+SendToLCD, LCD and the ExecuTorch gain adapter. They are independent of MRAM's
+application nodes. `spectrum_ui.c` owns the drawing, animation and touch policy;
+LCD retains its magnitudes and peak frequency. `hardware_params.cpp` initializes
+the model, pools, framebuffers and injected driver/UI callbacks. RTE shims use
+the shared runtime configuration and the project's `stream_init.cpp`.
+
+The model is the same signed elementwise `x * 2.0` demonstration as MRAM, with
+int16 activations and multiply constant, no convolution, and float boundaries.
+Normalized mono PCM feeds the 512-sample model and a 2048-sample spectrum window
+with 75% overlap. The signed-ramp self-test requires error below 0.0001 and
+real Ethos PMU activity before starting capture.
 
 Application code remains in MRAM. `flash_ospi: true` stores the PTE separately
 in OSPI1 at `0xC0000000`, within a reserved 32 MiB window. Startup enables XIP,
@@ -38,8 +56,14 @@ Rev. A14, May 12, 2026, page 24, Table 6.6.
 1. In a terminal at the repository root, generate the OSPI layer:
 
    ```powershell
+   uv run projects/template_ospi/app.py
    uv run scripts/create_ai_layer.py --project template_ospi
    ```
+
+   Graph generation also works as `uv run app.py` from this project folder.
+   Regenerate `generated/` after graph changes; it contains scheduler sources,
+   parameters, includes, metadata and DOT/PDF diagrams. Graphviz PDF failure
+   emits a warning and leaves the other outputs usable.
 
 2. Select **DevKit-E8@OSPI_Release** in the CMSIS UI.
 3. Run **CMSIS: Build Solution** from the Command Palette.
@@ -87,16 +111,18 @@ rebuild so the application run file selects that build instead of `ProgramModel`
 The normal path initializes XIP and sets the CPU's OSPI1 region non-cacheable
 before accessing the programmed model. `model_verified == 1` records a
 matching full-PTE CRC32. `gain_test_passed == 1` records the signed gain
-self-test; advancing `audio_blocks` and `frames_presented` with
-`pipeline_error == 0` prove the ongoing application is working.
+self-test. Inspect `stream_stats` for advancing `audio_blocks`,
+`spectrum_frames`, `frames_presented`, and LCD event counts, with `error == 0`
+and `pipeline_error == 0`. Also check its audio/LCD deadline and dropped-event
+counters plus `microphone_drops` and `microphone_overflows`.
 
 ## Validation
 
-See [current audio validation](../../documentation/audio-spectrum-validation.md).
+See [OSPI Stream validation](../../documentation/ospi-stream-validation.md).
 [model/benchmark.yml](model/benchmark.yml) and the accompanying raw UART capture
 record ten measured, checked gain-network forwards after one warmup. The median
-NPU time is 0.0235875 ms and median `module.forward()` time is 0.44615125 ms
-at 400 MHz. The arena is 1216 bytes; method/temp peaks are 3752/1216 bytes.
+NPU time is 0.010465 ms and median `module.forward()` time is 0.4172775 ms
+at 400 MHz. The arena is 1024 bytes; method/temp peaks are 4776/1024 bytes.
 Timing excludes capture, FFT, display and UART. `measurements.memory` records the
 model size, Ethos weights/arena region sizes and observed ExecuTorch method/temp
 pool peaks. Physical memory types and clocks are under `platform.memory`.

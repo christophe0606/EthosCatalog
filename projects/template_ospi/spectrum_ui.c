@@ -144,7 +144,7 @@ static void label(uint16_t *fb, unsigned x, unsigned y, unsigned scale,
     }
 }
 
-void spectrum_render(uint16_t *fb, bool logarithmic)
+void spectrum_render(uint16_t *fb, const float *magnitudes, bool logarithmic)
 {
     const unsigned plot_height = SPECTRUM_HEIGHT - SPECTRUM_STRIP;
     const float gain = fminf(2.0f, fmaxf(0.5f, spectrum_display_gain));
@@ -157,8 +157,9 @@ void spectrum_render(uint16_t *fb, bool logarithmic)
         unsigned first = x * SPECTRUM_BINS / SPECTRUM_PLOT_WIDTH;
         unsigned end = (x+1U) * SPECTRUM_BINS / SPECTRUM_PLOT_WIDTH;
         float a = 0.0f;
-        for (unsigned bin = first; bin < end; ++bin)
-            if (spectrum_magnitude[bin] > a) a = spectrum_magnitude[bin];
+        if (magnitudes)
+            for (unsigned bin = first; bin < end; ++bin)
+                if (magnitudes[bin] > a) a = magnitudes[bin];
         /* Display-only gain makes quiet microphone signals visible in linear
          * mode. Clip before converting to a height or filling the buffer. */
         float level = logarithmic ? (20.0f * log10f(fmaxf(a, 0.0001f)) + 80.0f) / 80.0f

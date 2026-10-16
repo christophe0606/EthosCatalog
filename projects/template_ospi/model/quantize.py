@@ -32,7 +32,7 @@ def calibration_inputs():
 
 def quantize_model(spec, project_dir, network):
     import torch
-    from executorch.backends.arm.quantizer import EthosUQuantizer, get_symmetric_quantization_config
+    from executorch.backends.arm.quantizer import EthosUQuantizer, get_symmetric_a16w8_quantization_config
     from torchao.quantization.pt2e.quantize_pt2e import convert_pt2e, prepare_pt2e
 
     source = project_dir / network["model"]
@@ -44,9 +44,15 @@ def quantize_model(spec, project_dir, network):
     model = module.GainModel().eval()
     samples = calibration_inputs()
     example = (samples[0],)
-    graph = torch.export.export(model, example).module()
+    # Calibration uses the fixed exported shape. Omit PyTorch's runtime guard
+    # submodule, which the installed ExecuTorch annotation passes do not accept.
+    graph = torch.export.export(model, example).module(check_guards=False)
     quantizer = EthosUQuantizer(spec)
-    quantizer.set_global(get_symmetric_quantization_config(is_per_channel=True))
+    # Keep the minimum scale below the ~1/32767 PCM activation scale. The
+    # helper's default epsilon (2**-12) would waste several bits of precision.
+    # There are no convolution weights; the gain constant is also quantized
+    # as an int16 operand of the elementwise multiply.
+    quantizer.set_global(get_symmetric_a16w8_quantization_config(epsilon=2**-24))
     prepared = prepare_pt2e(graph, quantizer)
     with torch.no_grad():
         for sample in samples:
@@ -54,12 +60,14 @@ def quantize_model(spec, project_dir, network):
     quantized = convert_pt2e(prepared, fold_quantize=True)
     with torch.no_grad():
         for sample in samples:
-            torch.testing.assert_close(quantized(sample), model(sample), atol=0.04, rtol=0)
+            torch.testing.assert_close(quantized(sample), model(sample), atol=0.0001, rtol=0)
     program = torch.export.export(quantized, example)
-    if not any(value.dtype == torch.int8 for value in program.state_dict.values()):
-        raise ValueError("Template quantization produced no int8 weights")
+    activation_quantizers = [node for node in program.graph.nodes
+                             if node.target == torch.ops.quantized_decomposed.quantize_per_tensor.default]
+    if not activation_quantizers or any(node.args[-1] != torch.int16 for node in activation_quantizers):
+        raise ValueError("Template gain requires int16 activation quantization")
     save_quantized_program(program, spec.target, project_dir, network)
-    print(f"[template_ospi] calibrated with {len(samples)} project inputs; saved quantized graph/weights before Vela",
+    print(f"[template_ospi] calibrated with {len(samples)} project inputs; saved int16 elementwise gain before Vela",
           flush=True)
 
 
