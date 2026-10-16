@@ -10,6 +10,9 @@ try {
         'TransformFunctions/arm_cfft_radix8_f32.c', 'TransformFunctions/arm_bitreversal2.c',
         'CommonTables/arm_common_tables.c', 'CommonTables/arm_const_structs.c',
         'BasicMathFunctions/arm_scale_f32.c',
+        'BasicMathFunctions/arm_mult_f32.c', 'BasicMathFunctions/arm_offset_f32.c',
+        'StatisticsFunctions/arm_mean_f32.c', 'WindowFunctions/arm_hanning_f32.c',
+        'SupportFunctions/arm_q15_to_float.c',
         'ComplexMathFunctions/arm_cmplx_mag_f32.c', 'SupportFunctions/arm_fill_q15.c'
     ) | ForEach-Object { Join-Path $dsp "Source/$_" }
     & clang -std=c11 -O3 -ffast-math -D_CRT_SECURE_NO_WARNINGS -I projects/template_mram -I projects/template_mram/generated -I common -I "$dsp/Include" -I "$dsp/PrivateInclude" -I "$PackRoot/ARM/CMSIS/6.3.0/CMSIS/Core/Include" tests/test_audio_nodes.c common/nodes_impl/c/sliding_buffer.c common/nodes_impl/c/window.c common/nodes_impl/c/fft.c projects/template_mram/spectrum_ui.c @sources -o out/test_audio_nodes.exe

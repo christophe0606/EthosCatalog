@@ -1,3 +1,8 @@
+---
+description: Microphone spectrum demo with Ethos-U85 2x gain and a model stored in OSPI flash.
+category: audio
+---
+
 # OSPI template
 
 This template runs the same microphone -> Ethos 2x gain -> spectrum application

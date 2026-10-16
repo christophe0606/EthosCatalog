@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
-#include "NodeSupport.hpp"
+#include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "embedded_gain.h"
 
 template<typename IN, int inputSamples, typename OUT, int outputSamples>

@@ -164,7 +164,7 @@ typedef struct {
     RemoveDC<float,2048,float,2048> *dc;
     FFT<float,2048,float,2048> *fft;
     EthosGain<float,512,float,512> *gain;
-    Magnitude<float,2048,float,1025> *magnitude;
+    RFFTMagnitude<float,2048,float,1025> *magnitude;
     MicrophoneSource<int16_t,512> *microphone;
     PCMToFloat<int16_t,512,float,512> *pcm;
     SendToLCD<float,1025> *send;
@@ -259,7 +259,7 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.magnitude = new (std::nothrow) Magnitude<float,2048,float,1025>(*(fifos.fifo6),*(fifos.fifo7),params->magnitude);
+    nodes.magnitude = new (std::nothrow) RFFTMagnitude<float,2048,float,1025>(*(fifos.fifo6),*(fifos.fifo7),params->magnitude);
     if (nodes.magnitude==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);

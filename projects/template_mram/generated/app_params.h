@@ -9,7 +9,7 @@ typedef struct {
 
 typedef struct {
     float amplitude_scale;
-} MagnitudeParams;
+} RFFTMagnitudeParams;
 
 typedef struct {
     HardwareParams hw_;
@@ -31,7 +31,7 @@ typedef struct {
 
 typedef struct {
     EthosGainParams gain;
-    MagnitudeParams magnitude;
+    RFFTMagnitudeParams magnitude;
     MicrophoneSourceParams microphone;
     SendToLCDParams send;
     LCDParams lcd;

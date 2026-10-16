@@ -7,7 +7,6 @@ project:
     - ../../common
     - ../../common/stream
     - generated
-    - ../../board/DevKit-E8
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
   define:
@@ -57,18 +56,24 @@ project:
         - file: hardware_params.cpp
         - file: hardware_params.h
         - file: datatypes.h
+        - file: stream_types.h
     - group: Generated CMSIS Stream graph
       files:
         - file: generated/scheduler_app.cpp
         - file: generated/app_params.c
+    - group: Project-specific CMSIS Stream nodes
+      files:
+        - file: nodes_impl/EthosGain.hpp
+        - file: nodes_impl/SendToLCD.hpp
+        - file: nodes_impl/LCD.hpp
+        - file: nodes_impl/embedded_gain.h
+        - file: nodes_impl/embedded_gain.cpp
     - group: Embedded ExecuTorch module
       files:
         - file: ../../common/arm_embedded_module.cpp
         - file: ../../common/arm_embedded_module.hpp
     - group: Reusable processing nodes
       files:
-        - file: ../../common/nodes.h
-        - file: ../../common/board_nodes.h
         - file: ../../common/embedded_runtime.hpp
         - file: ../../common/nodes_impl/c/embedded_runtime.cpp
         - file: ../../common/nodes_impl/c/sliding_buffer.c

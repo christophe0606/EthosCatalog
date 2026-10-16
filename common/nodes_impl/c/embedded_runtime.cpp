@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "embedded_runtime.hpp"
-#include "embedded_gain.h"
 #include <executorch/extension/data_loader/buffer_data_loader.h>
 #include <executorch/runtime/platform/runtime.h>
 #include <new>
@@ -61,8 +60,4 @@ EmbeddedModule *initialize_runtime(const unsigned char *pte, size_t pte_size,
     // Intentionally no destructor: the runtime and its allocators live until reset.
     return module;
 }
-}
-extern "C" int embedded_gain_forward(void *module, float *input, float *output, size_t count)
-{
-    return arm::embedded::gain_forward(static_cast<arm::embedded::EmbeddedModule*>(module), input, output, count);
 }

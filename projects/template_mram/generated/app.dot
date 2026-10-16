@@ -35,7 +35,7 @@ gain [label=<
 magnitude [label=<
 <TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">magnitude<BR/>(Magnitude)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">magnitude<BR/>(RFFTMagnitude)</FONT></TD>
   </TR>
 </TABLE>>];
 

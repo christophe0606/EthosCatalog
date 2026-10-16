@@ -1,5 +1,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
+#include <stddef.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+float hann_window_init(float *window, size_t count);
+void apply_window(const float *in, const float *window, float *out, size_t count);
+
+#ifdef __cplusplus
+}
 #include "NodeSupport.hpp"
 template<typename IN, int inputSamples, typename OUT, int outputSamples>
 class HannWindow : public GenericNode<IN,inputSamples,OUT,outputSamples> {
@@ -17,3 +27,4 @@ public:
 private:
     float window_[inputSamples];
 };
+#endif // __cplusplus

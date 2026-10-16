@@ -1,5 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
+#include <stddef.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void remove_dc(const float *in, float *out, size_t count);
+
+#ifdef __cplusplus
+}
 #include "NodeSupport.hpp"
 template<typename IN, int inputSamples, typename OUT, int outputSamples>
 class RemoveDC : public GenericNode<IN,inputSamples,OUT,outputSamples> {
@@ -14,3 +23,4 @@ public:
         return CG_SUCCESS;
     }
 };
+#endif // __cplusplus

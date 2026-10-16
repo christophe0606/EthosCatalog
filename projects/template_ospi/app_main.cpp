@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include "embedded_runtime.hpp"
-#include "nodes.h"
+#include "arm_math.h"
 #include "board_nodes.h"
 #include "spectrum.h"
 #include "model_pte.h"
@@ -13,6 +13,21 @@
 #include "cmsis_os2.h"
 #include "main.h"
 #include "se_services_port.h"
+
+// Transitional project-owned declarations until OSPI moves to CMSIS Stream.
+// The raw C interfaces are otherwise private to their owning node headers.
+extern "C" {
+typedef struct { float *data; size_t size, valid; } sliding_buffer_t;
+void sliding_buffer_init(sliding_buffer_t *state, float *storage, size_t size);
+bool sliding_buffer_push(sliding_buffer_t *state, const float *block, size_t count);
+void pcm_to_float(const int16_t *pcm, float *out, size_t count);
+void remove_dc(const float *in, float *out, size_t count);
+float hann_window_init(float *window, size_t count);
+void apply_window(const float *in, const float *window, float *out, size_t count);
+int fft_2048_init(arm_rfft_fast_instance_f32 *fft);
+void fft_forward(arm_rfft_fast_instance_f32 *fft, float *in, float *packed);
+void fft_magnitude(const float *packed, float *out, size_t fft_size, float scale);
+}
 
 using namespace executorch::aten;
 using arm::embedded::EmbeddedModule;

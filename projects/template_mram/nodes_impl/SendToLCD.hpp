@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
-#include "NodeSupport.hpp"
+#include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "EventQueue.hpp"
+// Application spectrum publication cadence and pipeline diagnostics.
 template<typename IN, int inputSamples>
 class SendToLCD : public GenericSink<IN,inputSamples> {
 public:

@@ -5,7 +5,8 @@ from ._base import ProjectNode, sample_count
 class FFT(ProjectNode, GenericNode):
     """Consume n F32 audio samples; produce n CMSIS-DSP packed RFFT scalars.
 
-    Packed output: DC, Nyquist, then interleaved real/imaginary bin values.
+    Packed output: Re(X[0]), Re(X[n/2]), Re(X[1]), Im(X[1]), ... .
+    DC and Nyquist are real; packing them together fits n/2+1 bins in n floats.
     n is a power of two from 32 to 4096, as supported by CMSIS-DSP."""
     def __init__(self, name, samples):
         GenericNode.__init__(self, name, identified=False)

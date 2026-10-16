@@ -1,8 +1,14 @@
 # Shared CMSIS Stream nodes
 
-`../nodes/` contains Python descriptions, one class per file. `nodes/` contains
-their C++ wrappers. Each wrapper calls the processing functions in
-`common/nodes_impl`; it does not duplicate DSP or board-driver implementations.
+`../nodes/` contains reusable Python descriptions, one class per file. Their
+portable C++ wrappers live in `../nodes_impl/c/`, beside the processing functions
+they call. Board-specific drivers live in `../nodes_impl/alif_e8/`;
+`../nodes_impl/helium/` is reserved for implementations that require Helium.
+This `stream/` folder holds shared runtime configuration and interfaces.
+Each node header declares only its own C backend interface inside `extern "C"`;
+`SlidingBuffer.hpp` also owns `sliding_buffer_t`. Shared support headers do not
+expose unrelated processing functions. C backends include their owning node
+headers with the C++ wrapper sections excluded during C compilation.
 `../stream_graph.py` applies the graph skill's shared scheduler conventions and
 generates parameter structures, hardware setters, includes, JSON metadata,
 DOT and (when Graphviz is available) PDF.
@@ -11,41 +17,62 @@ DOT and (when Graphviz is available) PDF.
 | --- | --- | --- |
 | MicrophoneSource | none -> `int16_t[n]` PCM | Hardware callbacks; reblocks capture into the configured sample count |
 | PCMToFloat | `int16_t[n]` PCM -> `float[n]` audio | Signed PCM normalization |
-| EthosGain | `float[n]` audio -> `float[n]` audio | Ethos-backed EmbeddedModule and NPU-visible input in `hw_`; n matches the model |
-| SlidingBuffer | `float[hop]` audio -> `float[frame_samples]` audio | Owns zero-initialized history |
+| SlidingBuffer | `float[hop]` audio -> `float[frame_samples]` audio | Retains only `frame_samples - hop` zero-initialized overlap samples |
 | RemoveDC | `float[n]` audio -> `float[n]` audio | Removes the frame mean |
 | HannWindow | `float[n]` audio -> `float[n]` audio | Owns periodic Hann coefficients |
 | FFT | `float[n]` audio -> `float[n]` packed RFFT | Power-of-two n from 32 to 4096 |
-| Magnitude | `float[n]` packed RFFT -> `float[n/2+1]` bins | DC/Nyquist included; configurable amplitude scale |
-| SendToLCD | `float[bins]` magnitudes -> event | Bounded payload storage and publication cadence |
-| LCD | event -> none | Owns display/touch state; identified for external inspection |
+| RFFTMagnitude | `float[n]` CMSIS-DSP fast RFFT packing -> `float[n/2+1]` bins | DC/Nyquist included; configurable amplitude scale |
+
+Application nodes live in their project's `nodes/` and `nodes_impl/` folders.
+The MRAM template's `EthosGain`, `SendToLCD` and `LCD` belong there: its model
+demonstration, spectrum event protocol, publication policy, drawing, animation
+and touch interaction are specific to that application. Injecting hardware or
+renderer callbacks does not make an application node reusable. Only the
+UI-independent LCD presentation and touch driver remains shared.
 
 The notation above describes scalar FIFO sample types and samples per firing;
 arrays are not wrapped in block structs. Each Python constructor selects its
 sample count. CMSIS Stream balances different compatible production/consumption
 rates, sizes FIFOs, and repeats nodes as needed. For example, a 512-sample
-microphone feeds a 256-sample `PCMToFloat` twice before a 512-sample `EthosGain`.
+microphone feeds a 256-sample `PCMToFloat` twice before a 512-sample `SlidingBuffer`.
 Coprime rates can create long schedules; adjust the node lengths in that case.
 
 Node docstrings describe sample meanings and frame layouts. The graph author
 must connect compatible meanings: audio, packed RFFT scalars and magnitudes all
-use `float`, so type equality alone cannot validate a connection. The deployed
-Ethos model still determines its tensor length; `EthosGain` checks the configured
-length against hardware input storage during initialization.
+use `float`, so type equality alone cannot validate a connection.
 `FFT` selects its size-specific CMSIS-DSP initializer with `if constexpr`, so
 unused FFT sizes and their tables can be discarded by the linker.
+
+The floating-point fast RFFT uses exactly `n` floats for `n/2+1` complex bins:
+`[Re(X[0]), Re(X[n/2]), Re(X[1]), Im(X[1]), ...]`. DC and Nyquist are purely
+real, so the Nyquist value occupies the otherwise unused imaginary slot of DC.
+`RFFTMagnitude` handles those first two scalars separately and applies complex
+magnitude only to the remaining `n/2-1` pairs. Its output has `n/2+1` real
+magnitudes; one-sided amplitude scaling doubles only the interior bins.
+This node requires the CMSIS-DSP fast floating-point RFFT packing. A general
+CFFT spectrum needs a general complex-magnitude node. An unpacked RFFT result
+must be explicitly converted to the required packed format before this node.
+See the [CMSIS-DSP real FFT packing specification](https://arm-software.github.io/CMSIS-DSP/latest/group__RealFFT.html).
 
 The signal-processing graph assumes continuous realtime input. It carries no
 packet headers, gap flags, warm-up validity or calibration metadata. Sliding
 history starts with zeros and produces a full frame every firing; after four
-512-sample hops all 2048 samples come from capture. `Magnitude` receives its
+512-sample hops all 2048 samples come from capture. `RFFTMagnitude` receives its
 calibration from Python (`4/n` for the periodic Hann window), keeping it independent
 of a particular window node. The microphone's hardware block size is independent
 of its output rate: partial blocks are retained in storage allocated at init,
 while whole blocks can be read directly into the FIFO.
 
-`StreamStats` is diagnostic state outside the sample FIFOs. Audio block counts
-count source firings; timing measures from the latest source firing to
+`SlidingBuffer` builds each frame in its output FIFO and retains only the tail
+needed for the next firing, before downstream nodes can modify the output.
+It stores no full-frame copy. With a 2048-sample frame and 512-sample hop, its
+sample storage is 1536 floats (6 KiB), saving 2 KiB; equal hop/frame lengths
+require no retained samples. The raw C sliding-buffer API still used by the
+OSPI template maintains that caller's full-frame history separately.
+
+The MRAM project's `stream_types.h` defines `StreamStats`, diagnostic state
+outside the sample FIFOs. Audio block counts count source firings; timing
+measures from the latest source firing to
 `SendToLCD`. In the default graph this is one 512-sample audio hop. If a graph
 batches several source firings before a sink firing, this counter measures from
 the most recent source firing, rather than the age of every buffered sample.
@@ -56,13 +83,19 @@ executing messages own references, so their payloads remain immutable. The
 producer only fills an unreferenced slot, under its short buffer mutex, then
 posts asynchronously. A full queue or busy pool drops a publication and counts
 it. Rendering and VSYNC never run in the dataflow thread. The LCD event handler
-copies the payload and releases its reference before drawing.
+copies the payload into its own retained spectrum buffer and releases its
+reference before drawing. Its spectrum buffer and peak frequency are node
+state, allocated during initialization rather than supplied by `HardwareParams`.
+The renderer receives the magnitude array explicitly for each call.
 
 Projects provide `datatypes.h`, `hardware_params.h/.cpp` and `stream_init.cpp`.
 The hardware block includes only the required peripherals, model and renderer
-callbacks. ExecuTorch is hidden behind `common/embedded_gain.h` because its
-platform enums conflict with Stream's global event names. Only the hardware
-implementation and model boundary include ExecuTorch headers.
+callbacks. The MRAM template's `EthosGain`, `SendToLCD` and `LCD` descriptions live
+in `projects/template_mram/nodes`, with their C++ wrappers and the gain's
+ExecuTorch adapter in `projects/template_mram/nodes_impl`. The adapter keeps
+ExecuTorch's platform enums out of Stream translation units, where they conflict with global event
+names. Only the hardware implementation and model boundary include ExecuTorch
+headers.
 
 RTE configuration shims include the shared files in this folder. Runtime pool,
 stack and priority settings come from the project's Python graph. The MRAM

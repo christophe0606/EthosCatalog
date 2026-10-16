@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
+// DevKit-E8 microphone and LCD configuration and driver interface.
 #include <stdbool.h>
 #include <stdint.h>
 #ifdef __cplusplus

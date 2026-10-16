@@ -5,8 +5,9 @@ from ._base import ProjectNode, sample_count
 class SlidingBuffer(ProjectNode, GenericNode):
     """Consume hop F32 audio samples; produce frame_samples F32 history samples.
 
-    History starts with zeros. Each firing advances it by hop samples and emits
-    the full time-domain frame, including zero padding during startup.
+    Retains only frame_samples - hop overlap samples, initially zero. Each
+    firing appends the new hop and emits the full time-domain frame, including
+    zero padding during startup.
     """
     def __init__(self, name, hop, frame_samples):
         GenericNode.__init__(self, name, identified=False)

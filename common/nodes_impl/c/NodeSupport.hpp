@@ -4,7 +4,8 @@
 #include "app_config.hpp"
 #include "StreamNode.hpp"
 #include "GenericNodes.hpp"
-#include "nodes.h"
+#include <cstddef>
+#include <cstdint>
 #include <array>
 #include <cstring>
 #include <type_traits>

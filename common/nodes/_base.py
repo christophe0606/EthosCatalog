@@ -5,7 +5,7 @@ def sample_count(value):
     return value
 
 class ProjectNode:
-    folder = "../../../common/stream/nodes"
+    folder = "../../../common/nodes_impl/c"
     params = {}
     needsHardware = False
 

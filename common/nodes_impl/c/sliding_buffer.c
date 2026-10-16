@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-#include "nodes.h"
+#include "SlidingBuffer.hpp"
 #include <string.h>
 void sliding_buffer_init(sliding_buffer_t *s, float *storage, size_t size)
 {

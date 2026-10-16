@@ -8,5 +8,8 @@
     "memory-inspector.scrollingBehavior": "Auto-Append",
     "yaml.schemas": {
         "./schema/benchmark.schema.yml": ["projects/**/*benchmark*.yml", "projects/**/*benchmark*.yaml"]
-    }
+    },
+    "clangd.arguments": [
+        "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\EthosCatalog\\out\\template_mram\\DevKit-E8\\Release"
+    ]
 }

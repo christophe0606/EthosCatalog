@@ -3,10 +3,11 @@
 from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT/'common'))
+sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
-from nodes import MicrophoneSource, PCMToFloat, EthosGain, SlidingBuffer, RemoveDC, HannWindow, FFT, Magnitude, SendToLCD, LCD
-from stream_graph import mk_app
+from common.nodes import MicrophoneSource, PCMToFloat, SlidingBuffer, RemoveDC, HannWindow, FFT, RFFTMagnitude
+from common.stream_graph import mk_app
+from projects.template_mram.nodes import EthosGain, SendToLCD, LCD
 
 BLOCK, FFT_SIZE, SAMPLE_RATE, FPS = 512, 2048, 48000, 20
 # Dataflow ports carry scalar samples. Their meanings are documented by each
@@ -21,7 +22,7 @@ def make_graph(pcm_samples=BLOCK):
     stages = [MicrophoneSource('microphone', BLOCK), PCMToFloat('pcm', pcm_samples),
               EthosGain('gain', BLOCK), SlidingBuffer('sliding', BLOCK, FFT_SIZE),
               RemoveDC('dc', FFT_SIZE), HannWindow('window', FFT_SIZE), FFT('fft', FFT_SIZE),
-              Magnitude('magnitude', FFT_SIZE, amplitude_scale=4.0/FFT_SIZE),
+              RFFTMagnitude('magnitude', FFT_SIZE, amplitude_scale=4.0/FFT_SIZE),
               SendToLCD('send', FFT_SIZE//2+1, SAMPLE_RATE, BLOCK, FPS)]
     lcd = LCD('lcd', FFT_SIZE, SAMPLE_RATE, FPS)
     for src, dst in zip(stages, stages[1:]):

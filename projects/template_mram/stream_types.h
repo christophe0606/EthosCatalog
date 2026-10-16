@@ -2,6 +2,7 @@
 #pragma once
 #include <stdint.h>
 
+// Diagnostics for this application's audio-to-spectrum pipeline.
 typedef struct {
     volatile int32_t error;
     volatile uint32_t audio_blocks, spectrum_frames, frames_presented;

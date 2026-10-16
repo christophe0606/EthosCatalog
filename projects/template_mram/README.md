@@ -1,3 +1,8 @@
+---
+description: Microphone spectrum demo with Ethos-U85 2x gain and a model stored in MRAM.
+category: audio
+---
+
 # MRAM microphone spectrum template
 
 The onboard PDM microphone feeds 512 signed mono samples at 48 kHz to an int16
@@ -30,20 +35,35 @@ before starting capture. `gain_test_passed == 1` records that check.
   and VSYNC run in the event thread; exhausted slots drop a publication.
 
 The dataflow chain is MicrophoneSource -> PCMToFloat -> EthosGain ->
-SlidingBuffer -> RemoveDC -> HannWindow -> FFT -> Magnitude -> SendToLCD.
+SlidingBuffer -> RemoveDC -> HannWindow -> FFT -> RFFTMagnitude -> SendToLCD.
 The LCD has an event input only. Signal processing assumes continuous realtime
 input and uses scalar `int16_t` PCM and `float` sample FIFOs, with sample counts
 configured in Python. Node docstrings describe audio, packed RFFT and magnitude
-semantics. Sliding history starts with zero padding; no gap-recovery or validity
-packets travel through the graph. The generated graph uses a nine-step synchronous
+semantics. `RFFTMagnitude` accepts only CMSIS-DSP fast RFFT packing, with DC and
+Nyquist in the first two floats; it cannot consume ordinary interleaved CFFT
+output directly. Sliding history starts with zero padding; no gap-recovery or
+validity packets travel through the graph. The generated graph uses a nine-step synchronous
 schedule and memory optimization, with two aligned shared FIFO buffers totaling
 16,384 bytes. See [shared nodes](../../common/stream/README.md).
+
+`EthosGain` is a project-specific example: using Ethos for a simple gain is for
+demonstration. Its Python description is in `nodes/`, and its C++ wrapper and
+ExecuTorch adapter are in `nodes_impl/`. The deployed model determines the tensor
+length; the node checks it against hardware input storage during initialization.
+
+`LCD` and `SendToLCD` are also project-specific, with Python descriptions in
+`nodes/` and C++ implementations in `nodes_impl/`. They own this application's
+spectrum event protocol, publication cadence, display state and touch policy.
+`stream_types.h` defines the application's pipeline diagnostics. Another
+application can supply its own display nodes and renderer while reusing the
+DSP nodes and the UI-independent board LCD/touch driver from `common`.
 
 The LCD owns its animation and touch state. Tap the plot to toggle log/linear;
 the slider changes display scale from 0.5x to 2x. This display control is separate
 from the fixed 2x Ethos sample gain. Framebuffers and inference pools occupy
 DMA/NPU-visible SRAM0. Buffer sizes, thread stacks and linker sections belong
-to this project; reusable stages and driver setup are in `../../common`.
+to this project. `spectrum_ui.c` implements its drawing style, smoothing and peak
+animation; reusable processing stages and driver setup are in `../../common`.
 
 From the repository root:
 

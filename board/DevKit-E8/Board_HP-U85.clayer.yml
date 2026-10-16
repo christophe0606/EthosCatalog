@@ -5,6 +5,9 @@ layer:
   for-device: Alif Semiconductor::AE822FA0E5597LS0:M55_HP
   device: :M55_HP
 
+  add-path:
+    - .
+
   # Processor features used in this project.
   processor:
     trustzone: off
@@ -109,6 +112,7 @@ layer:
         - file: ./main.c
         - file: ./main.h
         - file: ./DevKit-E8.h
+        - file: ./board_nodes.h
         - file: ./ethos_setup.c
         - file: ./retarget_stdio.c
         - file: ./ext_init.c

@@ -16,13 +16,11 @@ typedef struct {
     int (*microphone_read)(int16_t*);
     size_t microphone_block_samples;
     uint16_t *framebuffers[2];
-    float *lcd_magnitude;
-    volatile uint32_t *lcd_peak_hz;
     int (*lcd_touch)(unsigned*, unsigned*, bool*);
     int (*lcd_present)(uint16_t*);
     bool (*ui_touch)(unsigned, unsigned, bool);
     void (*ui_release)(void);
-    void (*ui_render)(uint16_t*, bool);
+    void (*ui_render)(uint16_t*, const float*, bool);
     size_t model_size, method_pool_size, temp_pool_size;
 } HardwareParams;
 extern StreamStats stream_stats;

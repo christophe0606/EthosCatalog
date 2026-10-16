@@ -120,3 +120,200 @@ and LCD driver presentation through Stream events. Physical panel appearance
 and touch interaction were not assessed in this run; renderer and touch logic
 are covered by the existing host checks. The validation breakpoint was removed
 and the target was left running.
+
+## Project-specific spectrum nodes - October 16, 2026
+
+`LCD` and `SendToLCD` now live in `projects/template_mram/nodes/` and
+`projects/template_mram/nodes_impl/`. Their spectrum event protocol, publication
+cadence, retained spectrum/peak state and touch policy belong to this application.
+Its drawing style and animation remain in the project's `spectrum_ui.c`.
+`stream_types.h` also moved into the project because its counters describe this
+pipeline. Common code retains reusable DSP and microphone nodes and the
+UI-independent Alif panel presentation/touch driver. `EthosGain` remains local
+to the MRAM project.
+
+Generation through `app.py` from both the repository root and project directory
+produced identical source/metadata hashes. All generated node includes resolved;
+the schedule remained nine steps with 16,384 bytes of FIFO storage. All three
+Python graph tests, production Stream-wrapper host checks and DSP/renderer host
+checks passed. The generated CMSIS environment passed full schema validation:
+Toolbox 2.15.0, CMake 3.31.12, Ninja 1.13.2 and AC6 6.24.0.
+
+Release build **b-2** and load-and-debug **d-3** succeeded through `cmsis_action`,
+using the matching `out/template_mram/DevKit-E8/Release/template_mram.axf`.
+COM5 reported the signed 512-sample gain self-test and `Test_result: PASS`, with
+maximum absolute error **0.000030**. Live inspection confirmed
+`gain_test_passed == 1`, `gain_benchmark_complete == 1` and `pipeline_error == 0`.
+
+| Diagnostic | First snapshot | Second snapshot |
+| --- | ---: | ---: |
+| `stream_stats.error` | 0 | 0 |
+| `audio_blocks` / `spectrum_frames` | 1103 | 3530 |
+| `frames_presented` | 237 | 758 |
+| `lcd_events_sent` / `lcd_events_received` | 237 | 758 |
+| `lcd_events_dropped` | 0 | 0 |
+| `audio_deadline_misses` / `lcd_deadline_misses` | 0 | 0 |
+| `audio_ticks_max` | 160649 | 160649 |
+| `microphone_drops` | 0 | 0 |
+| `microphone_overflows` | 0 | 2 |
+
+Maximum audio processing time was **0.401623 ms** at the 400 MHz system timer,
+below the 10.6667 ms hop interval. The audio thread waited in
+`microphone_read -> MicrophoneSource::run -> scheduler_app` at priority 48;
+the event thread waited for event flags at priority 40. The two microphone
+hardware overflows were observed after inspection halts, during which the
+peripheral continues running; this is not an uninterrupted-run overrun test.
+Physical panel appearance and touch operation were not directly assessed.
+No breakpoints remained, COM5 was closed, and the firmware was resumed and left
+running.
+
+## Sliding-buffer overlap storage - October 16, 2026
+
+The Stream `SlidingBuffer` now builds each frame in its output FIFO and retains
+only `outputSamples - inputSamples` samples for the next firing. It saves that
+tail before downstream processing can overwrite the output. Initialization
+zeroes the overlap, preserving startup padding; equal hop/frame lengths retain
+no samples. The OSPI raw C API and its caller-owned full-frame history are
+unchanged.
+
+For the 2048-sample frame / 512-sample hop, the retained samples occupy
+**6144 bytes** instead of 8192 bytes. Debugger `sizeof` measurements against the
+matching old and new Release images showed the complete node shrinking from
+**8224 to 6164 bytes**, a **2060-byte** reduction including the removed 12-byte
+C history descriptor.
+
+The production Stream-node executable passed with new tests for hop/frame pairs
+1/8, 3/8, 4/8, 5/8, 8/8 and 1/1. These check every startup and subsequent frame,
+reinitialization, overwritten downstream output and shared input/output storage.
+Compile-time size checks reject full-frame storage and large zero-overlap nodes.
+The existing 512/2048 pipeline and DSP/renderer host checks also passed, as did
+the three Python graph tests. Generation from both working directories produced
+identical source/metadata hashes, nine schedule steps and 16,384 FIFO bytes.
+
+Release build **b-4** and load-and-debug **d-5** succeeded through `cmsis_action`
+with matching `template_mram.Release+DevKit-E8` firmware and symbols. COM5
+reported the signed gain self-test and `Test_result: PASS`, with maximum absolute
+error **0.000030**. Live inspection confirmed `gain_test_passed == 1`,
+`gain_benchmark_complete == 1` and `pipeline_error == 0`.
+
+| Diagnostic | First snapshot | Second snapshot |
+| --- | ---: | ---: |
+| `stream_stats.error` | 0 | 0 |
+| `audio_blocks` / `spectrum_frames` | 1403 | 4353 |
+| `frames_presented` | 301 | 934 |
+| `lcd_events_sent` / `lcd_events_received` | 301 | 935 |
+| `lcd_events_dropped` | 0 | 0 |
+| `audio_deadline_misses` / `lcd_deadline_misses` | 0 | 0 |
+| `audio_ticks_max` | 159558 | 159558 |
+| `microphone_drops` | 0 | 0 |
+| `microphone_overflows` | 0 | 2 |
+
+Maximum audio processing time was **0.398895 ms** at 400 MHz. The audio thread
+waited for microphone input at priority 48; the LCD event thread ran at priority
+40. The second snapshot caught one frame between event receipt and presentation.
+The two microphone hardware overflows appeared across debugger inspection
+halts; these snapshots do not measure uninterrupted operation. Physical panel
+appearance and touch operation were not directly assessed. No breakpoints
+remained, COM5 was released, and the updated firmware was left running.
+
+## Fast RFFT packing check - October 16, 2026
+
+Reviewed the [CMSIS-DSP floating-point real FFT specification](https://arm-software.github.io/CMSIS-DSP/latest/group__RealFFT.html)
+against the existing implementation. `fft_forward` produces N packed floats:
+DC at index 0, Nyquist at index 1, then interleaved complex interior bins.
+`fft_magnitude` already treats DC/Nyquist separately and calls
+`arm_cmplx_mag_f32` only on the N/2-1 pairs starting at index 2.
+
+Added simultaneous negative DC, negative Nyquist and sine/cosine interior-bin
+regression checks for all eight FFT lengths from 32 to 4096. They verify the
+packed real/imaginary values, all calibrated output magnitudes and guards
+around the N-float packed and N/2+1-float magnitude buffers. The Stream host
+test suite passed through `tests/run_stream_tests.ps1`. Only comments,
+documentation and host tests changed; the firmware algorithm is unchanged.
+The existing board session remained running.
+
+## RFFTMagnitude node name - October 16, 2026
+
+Renamed the Python and C++ node classes and files to `RFFTMagnitude`, including
+the package export, generated parameter type, scheduler, includes, graph diagram
+and JSON metadata. The node's contract requires CMSIS-DSP fast F32 RFFT packing:
+N floats with DC at index 0 and Nyquist at index 1, followed by complex interior
+bins. It produces N/2+1 real magnitudes with the configured one-sided amplitude
+scaling. General CFFT spectra require a general complex-magnitude node.
+
+Both host suites and all three Python graph tests passed. Generation from the
+repository root and project folder produced identical source/metadata hashes;
+the schedule remained nine steps and FIFO storage 16,384 bytes. The exported
+CMSIS environment passed full schema and toolchain checks. Release build **b-6**
+and load-and-debug **d-7** succeeded through `cmsis_action`; build-artefact symbol
+lookup confirmed `RFFTMagnitude<float,2048,float,1025>` in the Release ELF.
+
+The matching live graph reported the same node type with `scale_ == 0.001953125`
+(4/2048). COM5 recorded `Test_result: PASS` and maximum signed gain self-test
+error 0.000030. `gain_test_passed == 1`, `gain_benchmark_complete == 1` and
+`pipeline_error == 0` in both live snapshots.
+
+| Diagnostic | First snapshot | Second snapshot |
+| --- | ---: | ---: |
+| `stream_stats.error` | 0 | 0 |
+| `audio_blocks` / `spectrum_frames` | 1937 | 3648 |
+| `frames_presented` | 416 | 783 |
+| `lcd_events_sent` / `lcd_events_received` | 416 | 783 |
+| `lcd_events_dropped` | 0 | 0 |
+| `audio_deadline_misses` / `lcd_deadline_misses` | 0 | 0 |
+| `audio_ticks_max` | 158250 | 158250 |
+| `microphone_drops` | 0 | 0 |
+| `microphone_overflows` | 0 | 2 |
+
+Maximum processing time was 0.395625 ms at 400 MHz. The dataflow thread waited
+for microphone input at priority 48, and the event thread waited for event flags
+at priority 40. Two microphone hardware overflows appeared across inspection
+halts; this is not an uninterrupted-run overrun measurement. Physical panel
+appearance and touch operation were not directly assessed. No breakpoints
+remained, COM5 was closed, and the firmware was resumed and left running.
+
+## CMSIS-DSP audio preprocessing - October 16, 2026
+
+Replaced the scalar loops in `common/nodes_impl/c/window.c` with
+`arm_q15_to_float`, `arm_mean_f32`, `arm_offset_f32`, `arm_hanning_f32` and
+`arm_mult_f32`. The periodic Hann definition and returned 2/sum(window)
+amplitude scale are preserved. DC removal and window application remain usable
+in place, and empty blocks remain no-ops. Q15-to-float conversion is exact over
+the full signed 16-bit range; saturation is unnecessary in this direction.
+
+Both existing host suites passed against CMSIS-DSP 1.18.0 sources. New audio
+checks cover all 65,536 PCM values, periodic Hann coefficients and amplitude
+normalization, DC removal and window application with separate and shared input
+and output buffers, buffer guards, empty blocks, singleton blocks and lengths
+with vector tails. The existing full spectrum/renderer checks and all three
+Python graph tests also passed. The CMSIS environment schema and toolchain
+checks passed.
+
+MRAM Release build **b-8** and load-and-debug **d-9** succeeded through
+`cmsis_action`; the artefact tools confirmed the updated Release ELF and all
+five CMSIS-DSP functions used by the preprocessing backend.
+COM5 recorded `Test_result: PASS` and maximum signed gain self-test error
+0.000030. OSPI build and runtime verification are deferred at the user's request
+until its rework.
+
+`gain_test_passed == 1`, `gain_benchmark_complete == 1` and
+`pipeline_error == 0` in both live snapshots.
+
+| Diagnostic | First snapshot | Second snapshot |
+| --- | ---: | ---: |
+| `stream_stats.error` | 0 | 0 |
+| `audio_blocks` / `spectrum_frames` | 1627 | 4907 |
+| `frames_presented` | 349 | 1053 |
+| `lcd_events_sent` / `lcd_events_received` | 349 | 1053 |
+| `lcd_events_dropped` | 0 | 0 |
+| `audio_deadline_misses` / `lcd_deadline_misses` | 0 | 0 |
+| `audio_ticks_max` | 158772 | 158772 |
+| `microphone_drops` | 0 | 0 |
+| `microphone_overflows` | 0 | 2 |
+
+Maximum audio processing time was 0.396930 ms at 400 MHz. The dataflow thread
+waited for microphone input at priority 48; the LCD event thread waited at
+priority 40. Two microphone hardware overflows appeared across debugger halts;
+these snapshots do not measure uninterrupted operation. Physical panel
+appearance and touch operation were not directly assessed. No breakpoints
+remained, COM5 was closed, and the updated MRAM firmware was left running.

@@ -16,9 +16,13 @@ scale slider and animated peak markers. The network gain is fixed at 2x; the
 slider changes display scale only.
 
 The MRAM template uses a generated CMSIS Stream dataflow scheduler and an LCD
-event node. Python node descriptions, C++ wrappers and shared graph conventions
-are in [common/stream](common/stream/README.md). The OSPI template retains its
-existing thread orchestration. Reusable processing, microphone and LCD setup
+event node. Reusable Python node descriptions are in `common/nodes`, their C++
+wrappers in `common/nodes_impl/c`, and shared runtime configuration in
+[common/stream](common/stream/README.md). The example `EthosGain`, spectrum `LCD`
+and `SendToLCD` nodes are project-specific, with Python descriptions in
+`projects/template_mram/nodes` and implementations in
+`projects/template_mram/nodes_impl`. The OSPI template retains its existing
+thread orchestration. Reusable processing, microphone and LCD setup
 live under [common/nodes_impl](common/nodes_impl/README.md). Drawing and hardware
 parameters stay in each project. The project supplies the
 persistent ExecuTorch pools and their memory sizes. The common initializer
@@ -34,6 +38,38 @@ constructs one EmbeddedModule that lives until reset.
 
 See the [MRAM template](projects/template_mram/README.md) and
 [OSPI template](projects/template_ospi/README.md) for their build configurations.
+
+## Project catalog
+
+Browse all demos in the [project catalog](CATALOG.md).
+
+The [catalog generator](scripts/update_catalog.py) scans every project folder
+under `projects/`, reads the `category` and `description` from each README's YAML
+header, and updates `CATALOG.md`. Each nonempty category has a section containing
+a table of project names and one-line descriptions, with links to their READMEs.
+Categories and projects within each category are sorted alphabetically.
+
+Each project's `README.md` must begin with a header like this:
+
+```yaml
+---
+description: A one-line description of the demo.
+category: audio
+---
+```
+
+Categories are free-form labels such as `audio`, `image`, `video`, `speech`,
+`music` or `text`; the generator normalizes them to lowercase.
+
+After adding a project or changing its description or category, regenerate the catalog
+from the repository root using the Python environment described below:
+
+```powershell
+uv run scripts/update_catalog.py
+```
+
+The script reports missing or invalid descriptions and categories before updating
+the catalog.
 
 ## Third-party submodules
 
@@ -141,6 +177,9 @@ your target:
 - [Alif DevKit-E8: MRAM application loading and OSPI model programming](documentation/alif-e8-flashing.md)
 
 ## Add another project
+
+Give the project's `README.md` a one-line `description` and a `category` in its
+YAML header, then [regenerate the project catalog](#project-catalog).
 
 Copy the MRAM or OSPI template's project layout and write a project-specific quantization
 script with `--solution` and `--project` arguments. It owns how to load the model,

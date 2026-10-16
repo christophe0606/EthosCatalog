@@ -11,7 +11,7 @@
     "isTemplate": true,
     "selectors": []
   },
-  "Magnitude<float,2048,float,1025>": {
+  "RFFTMagnitude<float,2048,float,1025>": {
     "isTemplate": true,
     "selectors": []
   },

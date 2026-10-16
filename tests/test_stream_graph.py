@@ -6,12 +6,12 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/'common'))
+sys.path.insert(0, str(ROOT))
 spec = importlib.util.spec_from_file_location('mram_app', ROOT/'projects/template_mram/app.py')
 app = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(app)
-from stream_graph import configuration
-from nodes import FFT, SlidingBuffer
+from common.stream_graph import configuration
+from common.nodes import FFT, SlidingBuffer
 
 
 class StreamGraph(unittest.TestCase):

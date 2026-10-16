@@ -1,5 +1,18 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
+#include <stddef.h>
+#include "arm_math.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+int fft_2048_init(arm_rfft_fast_instance_f32 *fft);
+// N real samples -> N packed floats: Re(X[0]), Re(X[N/2]),
+// Re(X[1]), Im(X[1]), ..., Re(X[N/2-1]), Im(X[N/2-1]).
+void fft_forward(arm_rfft_fast_instance_f32 *fft, float *in, float *packed);
+
+#ifdef __cplusplus
+}
 #include "NodeSupport.hpp"
 template<typename IN, int inputSamples, typename OUT, int outputSamples>
 class FFT : public GenericNode<IN,inputSamples,OUT,outputSamples> {
@@ -30,3 +43,4 @@ public:
 private:
     arm_rfft_fast_instance_f32 fft_{};
 };
+#endif // __cplusplus

@@ -5,7 +5,6 @@ project:
   add-path:
     - .
     - ../../common
-    - ../../board/DevKit-E8
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
   define:
@@ -73,8 +72,6 @@ project:
     - group: Reusable processing nodes
       for-context: [.Debug, .Release]
       files:
-        - file: ../../common/nodes.h
-        - file: ../../common/board_nodes.h
         - file: ../../common/embedded_runtime.hpp
         - file: ../../common/nodes_impl/c/embedded_runtime.cpp
         - file: ../../common/nodes_impl/c/sliding_buffer.c
