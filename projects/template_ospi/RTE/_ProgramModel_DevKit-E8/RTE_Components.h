@@ -24,9 +24,6 @@
 /* ARM::CMSIS-Compiler:STDOUT:Custom@1.1.0 */
 #define RTE_CMSIS_Compiler_STDOUT                /* CMSIS-Compiler STDOUT */
 #define RTE_CMSIS_Compiler_STDOUT_Custom         /* CMSIS-Compiler STDOUT: Custom */
-/* ARM::CMSIS-Compiler:TTY:Custom@1.1.0 */
-#define RTE_CMSIS_Compiler_TTY                   /* CMSIS-Compiler TTY */
-#define RTE_CMSIS_Compiler_TTY_Custom            /* CMSIS-Compiler TTY: Custom */
 /* ARM::CMSIS:RTOS2:Keil RTX5&Source@5.9.1 */
 #define RTE_CMSIS_RTOS2                 /* CMSIS-RTOS2 */
 #define RTE_CMSIS_RTOS2_RTX5            /* CMSIS-RTOS2 Keil RTX5 */

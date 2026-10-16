@@ -25,8 +25,6 @@ project:
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
     - component: CMSIS:STREAM&Source
-    - component: CMSIS-Compiler:TTY:Custom
-      for-compiler: AC6
     - component: CMSIS:DSP&Source
       optimize: speed
       misc:
@@ -40,6 +38,8 @@ project:
   linker:
     - script: linker_ac6.sct.src
       for-compiler: AC6
+    - script: linker_clang.ld.src
+      for-compiler: CLANG
     - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
   misc:
     - for-compiler: AC6

@@ -40,11 +40,15 @@
 /* Exported function */
 extern int stdio_init(void);
 
-/* CMSIS-Compiler's TTY hook shares the board's UART stdout transport. */
-void ttywrch(int ch)
+/* Arm C library diagnostic output uses the board's UART stdout transport.
+ * Implement the library hook directly: the CMSIS TTY component is AC6-only.
+ */
+#if defined(__ARMCOMPILER_VERSION)
+void _ttywrch(int ch)
 {
     (void)stdout_putchar(ch);
 }
+#endif
 
 /* Reference to the underlying USART driver */
 #define ptrUSART (&ARM_Driver_USART_(RETARGET_STDIO_UART))
