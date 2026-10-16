@@ -56,20 +56,27 @@ def update_catalog(root: Path = ROOT) -> Path:
             "",
             f"## {table_text(category)}",
             "",
-            "| Project name | Description | Benchmark |",
-            "| --- | --- | --- |",
+            "| Project name | Description | Application graph | Benchmark |",
+            "| --- | --- | --- | --- |",
         ])
         for project, description in sorted(
             categories[category], key=lambda item: (item[0].name.casefold(), item[0].name)
         ):
             link = quote((project / "README.md").relative_to(root).as_posix(), safe="/")
+            pdf = project / "generated/app.pdf"
+            thumbnail = pdf.with_suffix(".png")
+            graph_link = (
+                f"[![{table_text(project.name)} graph]({quote(thumbnail.relative_to(root).as_posix(), safe='/')})]"
+                f"({quote(pdf.relative_to(root).as_posix(), safe='/')})"
+                if pdf.is_file() and thumbnail.is_file() else "missing"
+            )
             benchmark = project / "model/benchmark.yml"
             benchmark_link = (
                 f"[benchmark.yml]({quote(benchmark.relative_to(root).as_posix(), safe='/')})"
                 if benchmark.is_file() else "missing"
             )
             rows.append(
-                f"| [{table_text(project.name)}]({link}) | {table_text(description)} | {benchmark_link} |"
+                f"| [{table_text(project.name)}]({link}) | {table_text(description)} | {graph_link} | {benchmark_link} |"
             )
     output = root / "README.md"
     output.write_text(header.rstrip() + "\n\n" + "\n".join(rows) + "\n", encoding="utf-8", newline="\n")

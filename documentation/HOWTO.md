@@ -152,8 +152,10 @@ uv run projects/template_mram/app.py
 Use `projects/template_ospi/app.py` or `projects/kws_micronet_l/app.py` for the
 other applications. You can also run `uv run app.py` from the project folder.
 Generated C++ and configuration files are checked in; regenerate them after
-changing the graph. Graphviz `dot` is optional. If PDF conversion is unavailable
-or fails, the generated code and DOT diagram remain available.
+changing the graph. Graphviz `dot` also creates `generated/app.pdf` and a
+thumbnail, `generated/app.png`, bounded by 320 x 240 pixels. Graphviz is optional;
+if rendering is unavailable or fails, the generated code and DOT diagram remain
+available.
 
 Build the selected target with **CMSIS: Build Solution**. When using the CMSIS
 Developer Assistant, use `cmsis_action` with `action: build`. Release uses
@@ -269,12 +271,15 @@ category: audio
 
 Categories are free-form labels such as `audio`, `image`, `video`, `speech`,
 `music` or `text`. The generator converts them to lowercase and sorts categories
-and project names alphabetically. Each table links to the project README and
-its `model/benchmark.yml`, or shows `missing` if no benchmark exists.
+and project names alphabetically. Each table contains the project README link,
+description, application graph thumbnail and `model/benchmark.yml` link. Clicking
+the thumbnail opens `generated/app.pdf`. The graph column shows `missing` if
+either the PDF or its PNG thumbnail is absent; the benchmark column shows
+`missing` if no benchmark exists.
 
 Edit `documentation/readme_header.md` to change the README introduction. After
-editing that header, adding a project, changing its metadata or adding a
-benchmark file, regenerate the root README:
+editing that header, adding a project, changing its metadata or generating graph
+images or a benchmark file, regenerate the root README:
 
 ```powershell
 uv run scripts/update_catalog.py

@@ -15,8 +15,8 @@ and details on building, running and extending the projects.
 
 ## audio
 
-| Project name | Description | Benchmark |
-| --- | --- | --- |
-| [kws_micronet_l](projects/kws_micronet_l/README.md) | Prequantized MicroNet Large keyword spotting through PyTorch and ExecuTorch; validated and benchmarked on Ethos-U85 with MRAM weights. | [benchmark.yml](projects/kws_micronet_l/model/benchmark.yml) |
-| [template_mram](projects/template_mram/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in MRAM. | [benchmark.yml](projects/template_mram/model/benchmark.yml) |
-| [template_ospi](projects/template_ospi/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in OSPI flash. | [benchmark.yml](projects/template_ospi/model/benchmark.yml) |
+| Project name | Description | Application graph | Benchmark |
+| --- | --- | --- | --- |
+| [kws_micronet_l](projects/kws_micronet_l/README.md) | Prequantized MicroNet Large keyword spotting through PyTorch and ExecuTorch; validated and benchmarked on Ethos-U85 with MRAM weights. | [![kws_micronet_l graph](projects/kws_micronet_l/generated/app.png)](projects/kws_micronet_l/generated/app.pdf) | [benchmark.yml](projects/kws_micronet_l/model/benchmark.yml) |
+| [template_mram](projects/template_mram/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in MRAM. | [![template_mram graph](projects/template_mram/generated/app.png)](projects/template_mram/generated/app.pdf) | [benchmark.yml](projects/template_mram/model/benchmark.yml) |
+| [template_ospi](projects/template_ospi/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in OSPI flash. | [![template_ospi graph](projects/template_ospi/generated/app.png)](projects/template_ospi/generated/app.pdf) | [benchmark.yml](projects/template_ospi/model/benchmark.yml) |

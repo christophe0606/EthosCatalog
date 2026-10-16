@@ -75,8 +75,9 @@ uv run scripts/create_ai_layer.py --project template_mram
 
 Graph generation also works as `uv run app.py` from this project folder.
 `generated/` contains the scheduler, parameters, includes, JSON metadata and
-`app.dot`. Graphviz creates `app.pdf` alongside it. If `dot` is unavailable or
-conversion fails, the script prints a warning and continues successfully.
+`app.dot`. Graphviz creates `app.pdf` and its `app.png` thumbnail alongside it.
+If `dot` is unavailable or conversion fails, the script prints a warning and
+continues successfully.
 Regenerate after editing the graph. The solution uses the local pack at
 `thirdparty/CMSIS-Stream/ARM.CMSIS-STREAM.pdsc`.
 

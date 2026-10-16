@@ -111,8 +111,10 @@ uv run projects/template_ospi/app.py
 ```
 
 From either template folder, use `uv run app.py`. The generated sources and
-metadata are identical from either directory. `dot -Tpdf` creates `app.pdf`
-beside `app.dot`; missing Graphviz or a conversion error only emits a warning.
+metadata are identical from either directory. Graphviz creates `app.pdf` and a
+PNG thumbnail, `app.png`, beside `app.dot` in `generated/`. The thumbnail fits
+within 320 x 240 pixels and links to the PDF in the root README catalog.
+Missing Graphviz or a conversion error only emits a warning.
 
 Host checks use production Stream FIFO/event classes and the production node
 wrappers, with a host clock and the Stream POSIX platform:

@@ -65,10 +65,13 @@ def mk_app(graph, output, globals, runtime, config=None):
     for name in ('scheduler_app.cpp', 'scheduler_app.h', 'app.dot'):
         generated = output/name
         generated.write_text('\n'.join(line.rstrip() for line in generated.read_text().splitlines()) + '\n')
-    try:
-        subprocess.run(['dot', '-Tpdf', str(output/'app.dot'), '-o', str(output/'app.pdf')],
-                       check=True, capture_output=True, text=True)
-    except (OSError, subprocess.CalledProcessError) as error:
-        print(f'Warning: Graphviz PDF generation failed; app.dot is available: {error}', file=sys.stderr)
+    # Render the same diagram as a PDF and a thumbnail bounded by 320 x 240 px.
+    for format, options in (('pdf', []), ('png', ['-Gsize=4,3', '-Gdpi=80'])):
+        try:
+            subprocess.run(['dot', f'-T{format}', *options, str(output/'app.dot'),
+                            '-o', str(output/f'app.{format}')],
+                           check=True, capture_output=True, text=True)
+        except (OSError, subprocess.CalledProcessError) as error:
+            print(f'Warning: Graphviz {format.upper()} generation failed; app.dot is available: {error}', file=sys.stderr)
     print(f'Schedule length = {scheduling.scheduleLength}; FIFO storage = {scheduling.memory} bytes')
     return scheduling
