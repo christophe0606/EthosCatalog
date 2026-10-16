@@ -8,3 +8,4 @@ out/
 *.cbuild*.json
 ai_layer/
 validation/
+ci-reports/

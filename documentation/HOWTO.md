@@ -16,6 +16,10 @@ paths in this guide are also relative to that root.
 - [Benchmark records](#benchmark-records)
 - [Validation checks](#validation-checks)
 
+Changed projects are checked automatically on pushes and pull requests. See
+[GitHub CI validation](ci.md) for build order, required project files and
+downloadable error reports.
+
 ## Set up the tools
 
 1. Open the repository root in VS Code. Install the CMSIS Solution extension,

@@ -1,0 +1,133 @@
+name: Validate changed projects
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    env:
+      PYTHONUNBUFFERED: '1'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Find affected projects
+        id: changes
+        run: python3 scripts/ci_projects.py select
+
+      - name: Use the runner's default CMSIS pack cache
+        id: pack_cache
+        if: steps.changes.outputs.has_projects == 'true'
+        # Override the developer-machine path in .cmsis/tools-environment.yml.
+        # cpackget automatically initializes its default cache on a fresh runner.
+        run: echo "CMSIS_PACK_ROOT=${XDG_CACHE_HOME:-$HOME/.cache}/arm/packs" >> "$GITHUB_ENV"
+
+      - name: Setup Python 3.12
+        id: python
+        if: steps.changes.outputs.has_projects == 'true'
+        continue-on-error: true
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-arm-tosa.txt
+
+      - name: Install metadata validators
+        id: metadata_dependencies
+        if: steps.changes.outputs.has_projects == 'true' && steps.python.outcome == 'success'
+        continue-on-error: true
+        run: python -m pip install PyYAML==6.0.3 jsonschema==4.26.0
+
+      - name: Validate project files and metadata
+        id: metadata
+        if: steps.changes.outputs.has_projects == 'true' && steps.metadata_dependencies.outcome == 'success'
+        continue-on-error: true
+        run: python scripts/ci_projects.py validate
+
+      # Arm environment setup follows CMSIS-DSP's runtest.yaml.
+      - name: Install system packages
+        id: system
+        if: steps.changes.outputs.has_projects == 'true'
+        continue-on-error: true
+        run: |
+          sudo add-apt-repository -y ppa:deadsnakes/ppa
+          sudo apt-get update
+          sudo apt-get install -y libpython3.12 libtinfo5 graphviz
+
+      - name: Activate vcpkg
+        id: vcpkg
+        if: steps.changes.outputs.has_projects == 'true' && steps.system.outcome == 'success'
+        continue-on-error: true
+        uses: ARM-software/cmsis-actions/vcpkg@v1
+        with:
+          config: .github/ci/vcpkg-configuration.json
+          cache: -project-validation
+
+      # The action's default license is for evaluation. armclang in the CI
+      # manifest supplies armlm; all firmware builds explicitly select CLANG.
+      - name: Activate Arm tool license
+        id: license
+        if: steps.changes.outputs.has_projects == 'true' && steps.vcpkg.outcome == 'success'
+        continue-on-error: true
+        uses: ARM-software/cmsis-actions/armlm@v1
+
+      - name: Set up ExecuTorch Python environment
+        id: executorch
+        if: steps.changes.outputs.has_projects == 'true' && steps.python.outcome == 'success'
+        continue-on-error: true
+        run: python setup_venv.py 2>&1 | tee ci-reports/python-setup.log
+
+      - name: Build each project sequentially with LLVM Embedded
+        id: build
+        if: >-
+          steps.changes.outputs.has_projects == 'true' &&
+          steps.executorch.outcome == 'success' &&
+          steps.vcpkg.outcome == 'success' &&
+          steps.license.outcome == 'success'
+        continue-on-error: true
+        run: .venv/bin/python scripts/ci_projects.py build
+
+      - name: Write validation error report and set job result
+        id: report
+        if: always()
+        env:
+          CI_STEPS: ${{ toJSON(steps) }}
+        run: |
+          mkdir -p ci-reports
+          if [ -f scripts/ci_projects.py ]; then
+            python3 scripts/ci_projects.py report
+          else
+            printf '# Project validation failed\n\nCheckout failed; see the Actions job log.\n' > ci-reports/validation-errors.md
+            exit 1
+          fi
+
+      - name: Upload validation report and command logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: project-validation-report
+          path: ci-reports/
+          if-no-files-found: error
+          retention-days: 14

@@ -2,6 +2,14 @@
 
 This repository uses executorch. Network saved in .pt2 / .safetensor format are loaded from pytorch and use the executorch flow to be compiled by vela.
 
+## Important
+
+Only one project should be built at a given time because there is only one ai_layer that is generated for a specific project.
+So building all projects is wrong since the same ai_layer would be used by all of them.
+
+Only one project must be enabled when building the solution.
+
+
 ## Node organization
 
 - Put reusable Python node descriptions in `common/nodes/`, with one class per
