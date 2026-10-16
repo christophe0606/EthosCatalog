@@ -1,0 +1,24 @@
+KWS Release board verification
+Target: DevKit-E8@KWS_Release
+Program: out/kws_micronet_l/DevKit-E8/Release/kws_micronet_l.axf
+Build job: b-20 (success); load_and_debug job: d-21 (success)
+Completed run captured in benchmark_uart.txt; breakpoint app_main.cpp:162 was after all timing and reporting.
+At completion: pipeline_error=0, app_result=0, npu_error=0, kws_test_passed=1.
+Evaluated: kws_results
+Result: {...}
+Type: KwsResults
+Fields:
+  cases: 270 (uint32_t)
+  max_default_error: 1 (uint32_t)
+  max_reference_error: 2 (uint32_t)
+  max_pytorch_error: 1 (uint32_t)
+  default_top1_mismatches: 1 (uint32_t)
+  reference_top1_mismatches: 0 (uint32_t)
+  pytorch_top1_mismatches: 1 (uint32_t)
+  cpu_hz: 400000000 (uint32_t)
+  npu_hz: 400000000 (uint32_t)
+  timer_hz: 400000000 (uint32_t)
+  method_peak: 788 (uint32_t)
+  temp_peak: 371232 (uint32_t)
+After continuing to the idle loop, kws_heartbeat=33 was observed under a later pause.
+Final state: target running; breakpoint list empty; owned COM5 serial port closed.

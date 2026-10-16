@@ -1,0 +1,310 @@
+benchmark:
+  platform:
+    os: RTX5
+    os_version: 5.9.1
+    cpu: Cortex-M55
+    memory:
+      weights:
+        type: MRAM
+      activations:
+        type: SRAM0
+        clock_mhz: 400.0
+  measurements:
+    memory:
+      model_bytes: 559680
+      input_tensor_bytes: 490
+      ethos:
+        weights_region_bytes: 553328
+        arena_region_bytes: 371232
+      executorch:
+        method_pool_peak_bytes: 788
+        temp_pool_peak_bytes: 371232
+    time:
+      ms: 2.26148
+      cycles: 904592.0
+      statistic: median
+      min_cycles: 904550
+      max_cycles: 904814
+      mean_cycles: 904629.18
+      forward_ms: 2.3448775
+      forward_timer_hz: 400000000
+      cycles_samples:
+      - 904616
+      - 904712
+      - 904562
+      - 904622
+      - 904765
+      - 904591
+      - 904592
+      - 904778
+      - 904590
+      - 904592
+      - 904592
+      - 904610
+      - 904681
+      - 904562
+      - 904562
+      - 904675
+      - 904562
+      - 904562
+      - 904730
+      - 904562
+      - 904586
+      - 904736
+      - 904555
+      - 904621
+      - 904638
+      - 904592
+      - 904699
+      - 904789
+      - 904592
+      - 904586
+      - 904754
+      - 904556
+      - 904555
+      - 904591
+      - 904562
+      - 904699
+      - 904592
+      - 904585
+      - 904730
+      - 904561
+      - 904592
+      - 904808
+      - 904556
+      - 904562
+      - 904698
+      - 904592
+      - 904616
+      - 904778
+      - 904622
+      - 904562
+      - 904789
+      - 904556
+      - 904585
+      - 904712
+      - 904586
+      - 904592
+      - 904706
+      - 904556
+      - 904556
+      - 904554
+      - 904592
+      - 904730
+      - 904591
+      - 904555
+      - 904669
+      - 904556
+      - 904592
+      - 904777
+      - 904556
+      - 904592
+      - 904682
+      - 904584
+      - 904550
+      - 904754
+      - 904562
+      - 904592
+      - 904706
+      - 904592
+      - 904556
+      - 904675
+      - 904586
+      - 904592
+      - 904562
+      - 904578
+      - 904645
+      - 904586
+      - 904592
+      - 904676
+      - 904585
+      - 904591
+      - 904814
+      - 904592
+      - 904561
+      - 904760
+      - 904789
+      - 904616
+      - 904784
+      - 904586
+      - 904592
+      - 904693
+      forward_ticks_samples:
+      - 938256
+      - 938102
+      - 938180
+      - 937740
+      - 938144
+      - 938138
+      - 937739
+      - 938012
+      - 938078
+      - 938034
+      - 937902
+      - 937940
+      - 938250
+      - 937992
+      - 938012
+      - 938196
+      - 937840
+      - 937952
+      - 938129
+      - 937917
+      - 937988
+      - 937794
+      - 938040
+      - 937650
+      - 937924
+      - 937824
+      - 937932
+      - 938040
+      - 937904
+      - 937907
+      - 938318
+      - 937733
+      - 937950
+      - 937848
+      - 937704
+      - 937948
+      - 937962
+      - 937866
+      - 938198
+      - 937800
+      - 937940
+      - 938279
+      - 937949
+      - 937788
+      - 937847
+      - 937928
+      - 937984
+      - 938003
+      - 937790
+      - 937923
+      - 938282
+      - 937859
+      - 937944
+      - 938312
+      - 937754
+      - 938084
+      - 938550
+      - 938370
+      - 938513
+      - 937576
+      - 937970
+      - 938346
+      - 937850
+      - 937781
+      - 937844
+      - 937920
+      - 937910
+      - 938010
+      - 937914
+      - 937952
+      - 938070
+      - 937943
+      - 937812
+      - 938460
+      - 937763
+      - 938072
+      - 937962
+      - 937844
+      - 937640
+      - 938016
+      - 938162
+      - 938312
+      - 937767
+      - 937931
+      - 938156
+      - 937788
+      - 938012
+      - 937811
+      - 937704
+      - 937766
+      - 937919
+      - 937952
+      - 938208
+      - 938524
+      - 937860
+      - 938098
+      - 938184
+      - 938092
+      - 938000
+      - 937998
+  estimates:
+    vela:
+      ini: ../../.cmsis/ensemble_vela.ini
+      system_config: Ethos_U85_SRAM_MRAM
+      memory_mode: Shared_Sram
+      version: 5.1.0
+      accelerator_config: Ethos_U85_256
+      model_sha256: 4446aff4ae5ffdfac6185bbd05187be3a324632bbe5dc36dd3efd0dded0fffbd
+      ini_sha256: 987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2
+      summary: benchmark_vela_summary.csv
+      cycles: 2353813
+      time_ms: 5.884532500000001
+      bandwidth:
+        sram:
+          memory: SRAM0
+          vela_memory_area: sram
+          total_bytes_per_inference: 6325402
+          average_bytes_per_second: 1074920055.2465298
+          design_peak_bytes_per_second: 12800000000.0
+        weights:
+          memory: MRAM
+          vela_memory_area: off_chip_flash
+          total_bytes_per_inference: 3834016
+          average_bytes_per_second: 651541307.6569804
+          design_peak_bytes_per_second: 774400000.0
+  run:
+    recorded_at: '2026-10-16T07:35:45.250279+00:00'
+    context: kws_micronet_l.Release+DevKit-E8
+    target: DevKit-E8@KWS_Release
+    device: AE822FA0E5597LS0
+    core: M55_HP
+    npu: Ethos-U85
+    macs: 256
+    packs:
+      driver: ARM::CMSIS-Ethos-U@1.0.0
+      driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0
+      board: AlifSemiconductor::Ensemble@2.2.1
+      runtime: PyTorch::ExecuTorch@1.4.1
+    compiler: AC6@6.24.0
+    optimize: -O3 -ffast-math
+    build_job: b-20
+    execution_job: d-21
+    cpu_clock_mhz: 400.0
+    npu_clock_mhz: 400.0
+    warmup: 1
+    samples: 100
+    pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference
+    pmu_overflow: 0
+    npu_invocations_per_forward: 1
+    test_result: PASS
+    max_absolute_error: 2
+    tolerance: 2
+    uart: benchmark_uart.txt
+    model_sha256: 4446aff4ae5ffdfac6185bbd05187be3a324632bbe5dc36dd3efd0dded0fffbd
+    firmware_sha256: e43dd2321dd696f87bc0167cdff658a3645ab8783fe2ad765eb18afdc06927ac
+    input: 270 locally generated MFCC-shaped int8 inputs (seed 20261016), all 12 scores
+      checked against original TFLite reference/default and PyTorch; benchmark repeats
+      random_0
+    timing_scope: module.forward() only; includes ExecuTorch and PMU hooks; excludes
+      tensor setup, input/output copy, validation and UART; after 270 validation forwards
+      and one immediate warmup; no debugger halt during measured loop
+    uart_run: last complete startup in benchmark_uart.txt
+    measurement_source: UART4 COM5 115200 8N1; Ethos PMU, RTOS system timer and allocator
+      high-water marks
+  network:
+    operation: 'MicroNet Large keyword spotting: 16 convolutions including depthwise,
+      ReLU6, average pool, 12 class scores (no softmax)'
+    input_shape:
+    - 1
+    - 49
+    - 10
+    - 1
+    output_shape:
+    - 1
+    - 12
+    float_boundary: false
+    quantization: Original TFLite asymmetric int8 activations and per-channel int8
+      weights, int32 bias; int8 input/output; error units are raw int8 score steps

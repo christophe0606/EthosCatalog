@@ -10,6 +10,6 @@
         "./schema/benchmark.schema.yml": ["projects/**/*benchmark*.yml", "projects/**/*benchmark*.yaml"]
     },
     "clangd.arguments": [
-        "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\EthosCatalog\\out\\template_ospi\\DevKit-E8\\Release"
+        "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\EthosCatalog\\out\\kws_micronet_l\\DevKit-E8\\Release"
     ]
 }

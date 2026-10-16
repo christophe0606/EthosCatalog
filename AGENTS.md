@@ -1,5 +1,7 @@
 # Repository guidelines
 
+This repository uses executorch. Network saved in .pt2 / .safetensor format are loaded from pytorch and use the executorch flow to be compiled by vela.
+
 ## Node organization
 
 - Put reusable Python node descriptions in `common/nodes/`, with one class per

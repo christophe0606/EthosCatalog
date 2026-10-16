@@ -61,6 +61,20 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: KWS_Debug
+          images:
+            - project-context: kws_micronet_l.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: KWS_Release
+          images:
+            - project-context: kws_micronet_l.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: ProgramModel
       debug: on
@@ -84,6 +98,10 @@ solution:
         - .Debug
         - .Release
     - project: projects/template_ospi/template_ospi.cproject.yml
+    - project: projects/kws_micronet_l/kws_micronet_l.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
   mlops:
     description: Microphone spectrum with Ethos-U85 sample gain
     npu:

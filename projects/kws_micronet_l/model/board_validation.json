@@ -1,0 +1,110 @@
+{
+  "recorded_at": "2026-10-16T07:35:45.250279+00:00",
+  "patterns": 270,
+  "outputs_checked": 3240,
+  "comparisons": {
+    "default": {
+      "max_error_lsb": 1,
+      "mean_error_lsb": 0.01574074074074074,
+      "exact_output_fraction": 0.9842592592592593,
+      "top1_agreement": 0.9962962962962963,
+      "top1_difference_patterns": [
+        "random_89"
+      ],
+      "top1_differences": [
+        {
+          "pattern": "random_89",
+          "board_scores": [
+            -77,
+            -39,
+            -50,
+            -12,
+            -124,
+            -122,
+            -44,
+            -72,
+            -121,
+            17,
+            -128,
+            18
+          ],
+          "expected_scores": [
+            -77,
+            -39,
+            -50,
+            -12,
+            -124,
+            -123,
+            -44,
+            -72,
+            -121,
+            18,
+            -128,
+            18
+          ]
+        }
+      ]
+    },
+    "reference": {
+      "max_error_lsb": 2,
+      "mean_error_lsb": 0.3089506172839506,
+      "exact_output_fraction": 0.6993827160493827,
+      "top1_agreement": 1.0,
+      "top1_difference_patterns": [],
+      "top1_differences": []
+    },
+    "pytorch": {
+      "max_error_lsb": 1,
+      "mean_error_lsb": 0.027777777777777776,
+      "exact_output_fraction": 0.9722222222222222,
+      "top1_agreement": 0.9962962962962963,
+      "top1_difference_patterns": [
+        "random_89"
+      ],
+      "top1_differences": [
+        {
+          "pattern": "random_89",
+          "board_scores": [
+            -77,
+            -39,
+            -50,
+            -12,
+            -124,
+            -122,
+            -44,
+            -72,
+            -121,
+            17,
+            -128,
+            18
+          ],
+          "expected_scores": [
+            -77,
+            -39,
+            -50,
+            -12,
+            -124,
+            -123,
+            -44,
+            -72,
+            -121,
+            18,
+            -128,
+            18
+          ]
+        }
+      ]
+    }
+  },
+  "tolerance_lsb": 2,
+  "fixture_sha256": "7bc11a88dc2858c4a9e279cde3c18b3b6030fe83ca4789f36ec51fe389daef86",
+  "uart_sha256": "f1ca73a73878112346a7cbb327630f59c4e84f482dea4e9de70cdf6e040f611a",
+  "pte_sha256": "4446aff4ae5ffdfac6185bbd05187be3a324632bbe5dc36dd3efd0dded0fffbd",
+  "firmware_elf_sha256": "e43dd2321dd696f87bc0167cdff658a3645ab8783fe2ad765eb18afdc06927ac",
+  "harness_sha256": "afc30d7417aec13c2ffd897f73f923207023131d9ab43bcaa4b77efaa39fd841",
+  "project_sha256": "dcc6a73fda10900ea05666d0f06c52682840dffea02b796481e091397692e32f",
+  "npu_weights_address": "0x80243960",
+  "npu_arena_address": "0x02010000",
+  "timing_samples": 100,
+  "scope": "Network only, synthetic features; no speech accuracy, preprocessing, microphone or LCD"
+}

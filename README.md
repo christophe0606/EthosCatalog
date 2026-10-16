@@ -43,6 +43,11 @@ See the [MRAM template](projects/template_mram/README.md) and
 
 Browse all demos in the [project catalog](CATALOG.md).
 
+[kws_micronet_l](projects/kws_micronet_l/README.md) adds the prequantized
+MicroNet Large model as a PyTorch/ExecuTorch import. Its firmware is currently
+a network-only validation and benchmark harness: 2.261 ms median NPU latency
+on Ethos-U85 at 400 MHz, with MRAM weights. A speech demo is a later stage.
+
 The [catalog generator](scripts/update_catalog.py) scans every project folder
 under `projects/`, reads the `category` and `description` from each README's YAML
 header, and updates `CATALOG.md`. Each nonempty category has a section containing

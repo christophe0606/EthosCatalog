@@ -1,0 +1,58 @@
+{
+  "source_sha256": "15723bcc7d73599546cfebd289632799393e329df84bba883205b08b666a1aa3",
+  "seed": 20261016,
+  "patterns": 270,
+  "input_shape": [
+    1,
+    49,
+    10,
+    1
+  ],
+  "input_dtype": "int8",
+  "output_shape": [
+    1,
+    12
+  ],
+  "output_dtype": "int8",
+  "max_allowed_error_lsb": {
+    "reference": 2,
+    "default": 1
+  },
+  "comparisons": {
+    "reference": {
+      "max_error_lsb": 2,
+      "mean_error_lsb": 0.3101851851851852,
+      "exact_output_fraction": 0.6984567901234567,
+      "top1_agreement": 0.9962962962962963,
+      "worst_pattern": "constant_64",
+      "top1_differences": [
+        "random_89"
+      ]
+    },
+    "default": {
+      "max_error_lsb": 1,
+      "mean_error_lsb": 0.03179012345679012,
+      "exact_output_fraction": 0.9682098765432099,
+      "top1_agreement": 1.0,
+      "worst_pattern": "random_3",
+      "top1_differences": []
+    }
+  },
+  "versions": {
+    "torch": "2.13.0+cpu",
+    "tensorflow": "2.20.0"
+  },
+  "scope": "Host exported PyTorch Q/DQ graph vs TFLite; no firmware or NPU execution",
+  "restored_cache_matches_python_exactly": true,
+  "artifacts": {
+    "model": "6d674a74e68df36cf14dbfa39bbf937b0076f723c47a91e3a8b8b45977e59574",
+    "quantize": "c0e77ffff6064fef7822dd21a3fe66fa97d2d1fd75159826b6ca1721eaf49b7d",
+    "graph": "16e00b6f4e4a2ed82750644a1f38d4febde4404809f345af3a267f9780c68a9a",
+    "safetensors": "e5122224befd06c6cb9fe2a05bedc6a328d1762382364339a0283f6247069002"
+  },
+  "validation_sources": {
+    "validate.py": "866e29b9be34f51df0c2c86f0c7fcfc26c1fba39795b93f175085b68a15f4112",
+    "tflite_reference.py": "823c8071490782ddd9b89c8bbb7567e1a76ec6ef4b8559f735909667cba713e4",
+    "fake_inputs.py": "57c76467d05d2efe333eb7d16456d2f8e4c95535ef2a8aed07d6a712f9a0b81a"
+  }
+}

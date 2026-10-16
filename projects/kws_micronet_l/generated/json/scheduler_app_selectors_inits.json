@@ -1,0 +1,46 @@
+{
+  "RemoveDC<float,2048,float,2048>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FFT<float,2048,float,2048>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "EthosGain<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RFFTMagnitude<float,2048,float,1025>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<int16_t,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PCMToFloat<int16_t,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SendToLCD<float,1025>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_SPECTRUM_ID"
+    ]
+  },
+  "SlidingBuffer<float,512,float,2048>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "HannWindow<float,2048,float,2048>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "LCD": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_SPECTRUM_ID"
+    ]
+  }
+}

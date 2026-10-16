@@ -1,0 +1,12 @@
+# Paths are relative to the project directory, one level above this file.
+network:
+  name: MicroNet Large KWS (prequantized int8)
+  model: model/model.py
+  quantize: model/quantize.py
+  safetensors: model/model_quantized.safetensors
+  graph: model/model_quantized.pt2
+  flash_ospi: false
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_MRAM
+    memory_mode: Shared_Sram
