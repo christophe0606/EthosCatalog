@@ -66,7 +66,7 @@ def update_catalog(root: Path = ROOT) -> Path:
             benchmark = project / "model/benchmark.yml"
             benchmark_link = (
                 f"[benchmark.yml]({quote(benchmark.relative_to(root).as_posix(), safe='/')})"
-                if benchmark.is_file() else "—"
+                if benchmark.is_file() else "missing"
             )
             rows.append(
                 f"| [{table_text(project.name)}]({link}) | {table_text(description)} | {benchmark_link} |"

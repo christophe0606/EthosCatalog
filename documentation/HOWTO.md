@@ -270,7 +270,7 @@ category: audio
 Categories are free-form labels such as `audio`, `image`, `video`, `speech`,
 `music` or `text`. The generator converts them to lowercase and sorts categories
 and project names alphabetically. Each table links to the project README and
-its `model/benchmark.yml`, or shows a dash if no benchmark exists.
+its `model/benchmark.yml`, or shows `missing` if no benchmark exists.
 
 Edit `documentation/readme_header.md` to change the README introduction. After
 editing that header, adding a project, changing its metadata or adding a
