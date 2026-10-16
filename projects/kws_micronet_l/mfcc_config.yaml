@@ -1,0 +1,21 @@
+# ML Eval Kit MicroNetKwsMFCC: periodic Hann, HTK mel, magnitude, natural log.
+dct:
+  kws:
+    melFilters: 40
+    dctOutputs: 10
+    type: f32
+melfilter:
+  kws:
+    fftlength: 1024
+    fmin: 20
+    fmax: 4000
+    samplingRate: 16000
+    melFilters: 40
+    htk: true
+    type: f32
+window:
+  kws:
+    fftlength: 1024
+    frameLength: 640
+    type: f32
+    win: hanning

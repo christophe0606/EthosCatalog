@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: Apache-2.0
-from .EthosGain import EthosGain
-from .SendToLCD import SendToLCD
-from .LCD import LCD
+from .KwsInference import KwsInference
+from .KwsEvents import KwsEvents
+from .KeywordLCD import KeywordLCD

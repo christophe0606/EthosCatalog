@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-16",
+  "microphone_source": "common/nodes_impl/c/MicrophoneSource.hpp",
+  "microphone_driver": "common/nodes_impl/alif_e8/microphone.c",
+  "rate_source": "MIC_SAMPLE_RATE and MIC_BLOCK_SAMPLES generated from each project's app.py",
+  "template_mram": {
+    "target": "DevKit-E8@Release",
+    "build_job": "b-30",
+    "execution_job": "d-32",
+    "sample_rate_hz": 48000,
+    "block_samples": 512,
+    "self_test_passed": true,
+    "pipeline_error": 0,
+    "npu_error": 0,
+    "microphone_drops": 0,
+    "microphone_overflows": 0,
+    "stats": {
+      "error": 0,
+      "audio_blocks": 2053,
+      "spectrum_frames": 2053,
+      "frames_presented": 440,
+      "audio_ticks_max": 161057,
+      "audio_deadline_misses": 0,
+      "lcd_deadline_misses": 0,
+      "lcd_events_sent": 441,
+      "lcd_events_received": 441,
+      "lcd_events_dropped": 0,
+      "audio_started": 376380829
+    }
+  },
+  "template_ospi": {
+    "target": "DevKit-E8@OSPI_Release",
+    "build_job": "b-33",
+    "execution_job": "d-34",
+    "sample_rate_hz": 48000,
+    "block_samples": 512,
+    "self_test_passed": true,
+    "model_verified": true,
+    "pipeline_error": 0,
+    "npu_error": 0,
+    "microphone_drops": 0,
+    "microphone_overflows": 0,
+    "stats": {
+      "error": 0,
+      "audio_blocks": 3154,
+      "spectrum_frames": 3154,
+      "frames_presented": 677,
+      "audio_ticks_max": 275186,
+      "audio_deadline_misses": 0,
+      "lcd_deadline_misses": 0,
+      "lcd_events_sent": 677,
+      "lcd_events_received": 677,
+      "lcd_events_dropped": 0,
+      "audio_started": 810274416
+    }
+  }
+}

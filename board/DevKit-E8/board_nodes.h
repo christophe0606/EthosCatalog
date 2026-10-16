@@ -10,6 +10,8 @@ extern "C" {
 #define LCD_PIXELS (480U * 800U)
 // One caller, the audio thread. Blocks without polling; reports sequence gaps.
 int microphone_start(void);
+// Configure mono capture before the first read. Supports 16/48 kHz, up to 512 samples.
+int microphone_start_configured(uint32_t sample_rate, uint32_t block_samples);
 int microphone_read(int16_t *block, bool *discontinuity);
 extern volatile uint32_t microphone_drops, microphone_overflows;
 // Initialize before starting audio. Only the LCD thread calls present/touch.

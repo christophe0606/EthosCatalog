@@ -5,3 +5,4 @@ from .RemoveDC import RemoveDC
 from .HannWindow import HannWindow
 from .FFT import FFT
 from .RFFTMagnitude import RFFTMagnitude
+from .MFCC import MFCC

@@ -1,46 +1,45 @@
 {
-  "RemoveDC<float,2048,float,2048>": {
+  "SlidingBuffer<float,320,float,640>": {
     "isTemplate": true,
     "selectors": []
   },
-  "FFT<float,2048,float,2048>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "EthosGain<float,512,float,512>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "RFFTMagnitude<float,2048,float,1025>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "MicrophoneSource<int16_t,512>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "PCMToFloat<int16_t,512,float,512>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "SendToLCD<float,1025>": {
+  "KwsEvents<float,10>": {
     "isTemplate": true,
     "selectors": [
-      "SEL_SPECTRUM_ID"
+      "SEL_DISPLAY_TICK_ID"
     ]
   },
-  "SlidingBuffer<float,512,float,2048>": {
+  "Duplicate<float,10,float,10>": {
     "isTemplate": true,
     "selectors": []
   },
-  "HannWindow<float,2048,float,2048>": {
+  "KwsInference<float,490>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_KEYWORD_ID"
+    ]
+  },
+  "MFCC<float,640,float,10>": {
     "isTemplate": true,
     "selectors": []
   },
-  "LCD": {
+  "SlidingBuffer<float,250,float,490>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<int16_t,320>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PCMToFloat<int16_t,320,float,320>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "KeywordLCD": {
     "isTemplate": false,
     "selectors": [
-      "SEL_SPECTRUM_ID"
+      "SEL_KEYWORD_ID",
+      "SEL_DISPLAY_TICK_ID"
     ]
   }
 }

@@ -52,12 +52,28 @@ processing. Hann initialization returns the one-sided amplitude scale 2/sum(wind
 accepts CMSIS-DSP fast F32 RFFT output only: DC and Nyquist share the first
 pair of floats. It is not a general complex-spectrum magnitude node.
 
-The microphone is a single-consumer source of signed 512-sample blocks at
-48 kHz. Its interrupt handler reserves one ring slot for the next capture,
+The microphone is a single-consumer source of signed PCM blocks. Each project's
+`app.py` generates `MIC_SAMPLE_RATE` and `MIC_BLOCK_SAMPLES`; its hardware adapter
+passes both to `microphone_start_configured()`. The spectrum templates select
+512 samples at 48 kHz; KWS selects 320 samples at 16 kHz. The portable
+`MicrophoneSource` node is the same in all three graphs. The board driver supports
+16/48 kHz and blocks up to the board's 512-sample capture capacity.
+Both spectrum templates were rebuilt and run at 48 kHz after this change;
+[microphone-rate-validation.json](../../documentation/microphone-rate-validation.json)
+records their startup checks, live audio/LCD progress and zero error/drop counters.
+Its interrupt handler reserves one ring slot for the next capture,
 drops new blocks when full, and signals the audio thread. Per-block sequence
 numbers identify discontinuities. PDM overflow powers down and restarts capture
 in the consumer thread. The template graphs assume continuous input and do not
 propagate discontinuity metadata or reset their sliding history on a gap.
+KWS counts discontinuities and suppresses inference until a fresh full context
+has replaced the affected history.
+
+`MFCC.hpp` owns the portable MFCC backend interface and its Stream wrapper.
+It uses CMSIS-DSP FFT, magnitude, multiplication and dot products with injected
+window, mel and DCT tables and a configurable log floor. Working storage belongs
+to the node; model-specific tables stay in the project. KWS uses `FLT_MIN` to
+match ML Eval Kit; the stock `arm_mfcc_f32` uses a different floor.
 
 The LCD takes two caller-owned, 32-byte-aligned RGB565 buffers in DMA-visible
 SRAM. `lcd_present()` cleans the submitted buffer and waits for two scanline

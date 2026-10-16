@@ -7,7 +7,7 @@ The support classes and code are covered by CMSIS-Stream license.
 
 */
 
-#ifndef SCHEDULER_APP_H_ 
+#ifndef SCHEDULER_APP_H_
 #define SCHEDULER_APP_H_
 
 
@@ -28,7 +28,7 @@ extern "C"
 #define STREAM_APP_SCHED_LEN 9
 
 /* Selectors global identifiers */
-#define SEL_SPECTRUM_ID 100 
+#define SEL_SPECTRUM_ID 100
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);
 

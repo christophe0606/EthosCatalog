@@ -61,6 +61,10 @@ def mk_app(graph, output, globals, runtime, config=None):
     scheduling.genJsonSelectorsInit(str(output/'json'), conf)
     with (output/'app.dot').open('w') as f:
         scheduling.graphviz(f)
+    # The upstream templates leave trailing spaces in selectors and DOT edges.
+    for name in ('scheduler_app.cpp', 'scheduler_app.h', 'app.dot'):
+        generated = output/name
+        generated.write_text('\n'.join(line.rstrip() for line in generated.read_text().splitlines()) + '\n')
     try:
         subprocess.run(['dot', '-Tpdf', str(output/'app.dot'), '-o', str(output/'app.pdf')],
                        check=True, capture_output=True, text=True)

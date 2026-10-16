@@ -5,11 +5,13 @@
 #include "hardware_params.h"
 typedef struct {
     HardwareParams hw_;
-} EthosGainParams;
+    int32_t fps;
+} KwsEventsParams;
 
 typedef struct {
-    float amplitude_scale;
-} RFFTMagnitudeParams;
+    HardwareParams hw_;
+    float threshold;
+} KwsInferenceParams;
 
 typedef struct {
     HardwareParams hw_;
@@ -17,24 +19,15 @@ typedef struct {
 
 typedef struct {
     HardwareParams hw_;
-    int32_t sample_rate;
-    int32_t block_samples;
+    int32_t fade_ms;
     int32_t fps;
-} SendToLCDParams;
+} KeywordLCDParams;
 
 typedef struct {
-    HardwareParams hw_;
-    int32_t fft_size;
-    int32_t sample_rate;
-    int32_t fps;
-} LCDParams;
-
-typedef struct {
-    EthosGainParams gain;
-    RFFTMagnitudeParams magnitude;
+    KwsEventsParams display_clock;
+    KwsInferenceParams inference;
     MicrophoneSourceParams microphone;
-    SendToLCDParams send;
-    LCDParams lcd;
+    KeywordLCDParams lcd;
 } AppParams;
 #ifdef __cplusplus
 extern "C" {

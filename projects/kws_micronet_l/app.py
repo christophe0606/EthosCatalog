@@ -1,46 +1,48 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Generate from the solution root or this folder: uv run app.py."""
+"""Generate the KWS demo from the repository root or this directory."""
 from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
-from common.nodes import MicrophoneSource, PCMToFloat, SlidingBuffer, RemoveDC, HannWindow, FFT, RFFTMagnitude
+from common.nodes import MicrophoneSource, PCMToFloat, SlidingBuffer, MFCC
 from common.stream_graph import mk_app
-from projects.kws_micronet_l.nodes import EthosGain, SendToLCD, LCD
+from projects.kws_micronet_l.nodes import KwsInference, KwsEvents, KeywordLCD
 
-BLOCK, FFT_SIZE, SAMPLE_RATE, FPS = 512, 2048, 48000, 20
-# Dataflow ports carry scalar samples. Their meanings are documented by each
-# Python node: signed PCM, normalized audio, packed real FFT, or magnitude bins.
-# Equal scalar types do not imply compatible meanings or frame boundaries.
-# The board backend enables PDM channel 4 only: mono signed 16-bit PCM at 48 kHz.
-# A stereo backend would require a stereo sample type and conversion to mono
-# before this graph's mono audio/FFT processing.
+SAMPLE_RATE, AUDIO_HOP, FRAME, FEATURES, CONTEXT = 16000, 320, 640, 10, 49
+# 49-24 = 25 new MFCC blocks -> 500 ms, matching KwsPreProcess.
+# Set overlap to 48 for inference every new MFCC block (20 ms).
+MFCC_OVERLAP = 24
 
-def make_graph(pcm_samples=BLOCK):
+def make_graph(overlap=MFCC_OVERLAP):
+    if isinstance(overlap, bool) or not isinstance(overlap, int) or not 0 <= overlap < CONTEXT:
+        raise ValueError('MFCC overlap must be between 0 and 48')
     graph = Graph()
-    stages = [MicrophoneSource('microphone', BLOCK), PCMToFloat('pcm', pcm_samples),
-              EthosGain('gain', BLOCK), SlidingBuffer('sliding', BLOCK, FFT_SIZE),
-              RemoveDC('dc', FFT_SIZE), HannWindow('window', FFT_SIZE), FFT('fft', FFT_SIZE),
-              RFFTMagnitude('magnitude', FFT_SIZE, amplitude_scale=4.0/FFT_SIZE),
-              SendToLCD('send', FFT_SIZE//2+1, SAMPLE_RATE, BLOCK, FPS)]
-    lcd = LCD('lcd', FFT_SIZE, SAMPLE_RATE, FPS)
-    for src, dst in zip(stages, stages[1:]):
-        graph.connect(src.o, dst.i)
-    graph.connect(stages[-1]['oev0'], lcd['iev0'])
+    mic = MicrophoneSource('microphone', AUDIO_HOP)
+    pcm = PCMToFloat('pcm', AUDIO_HOP)
+    audio = SlidingBuffer('audio_window', AUDIO_HOP, FRAME)
+    mfcc = MFCC('mfcc', FRAME, FEATURES, 'kws_mfcc_config')
+    context = SlidingBuffer('mfcc_window', (CONTEXT-overlap)*FEATURES, CONTEXT*FEATURES)
+    inference = KwsInference('inference', CONTEXT*FEATURES)
+    events = KwsEvents('display_clock', FEATURES)
+    lcd = KeywordLCD('lcd')
+    stages = [mic, pcm, audio, mfcc, context, inference]
+    for source, destination in zip(stages, stages[1:]):
+        graph.connect(source.o, destination.i)
+    graph.connect(mfcc.o, events.i)
+    graph.connect(events['oev0'], lcd['iev0'])
+    graph.connect(inference['oev0'], lcd['iev0'])
     return graph
 
 def generate():
-    output = Path(__file__).resolve().parent/'generated'
-    return mk_app(make_graph(), output, globals=dict(
-        MIC_BLOCK_SAMPLES=BLOCK, MIC_SAMPLE_RATE=SAMPLE_RATE,
-        SPECTRUM_FFT_SIZE=FFT_SIZE, SPECTRUM_BINS=FFT_SIZE//2+1, LCD_FPS=FPS), runtime=dict(
-        CMSISSTREAM_EVENT_QUEUE_LENGTH=3,
-        CMSISSTREAM_EVT_THREAD_STACK_SIZE=8192,
+    return mk_app(make_graph(), Path(__file__).resolve().parent/'generated', globals=dict(
+        MIC_BLOCK_SAMPLES=AUDIO_HOP, MIC_SAMPLE_RATE=SAMPLE_RATE, KWS_FRAME_SAMPLES=FRAME,
+        KWS_FEATURES=FEATURES, KWS_CONTEXT_FRAMES=CONTEXT, KWS_MFCC_OVERLAP=MFCC_OVERLAP,
+        KWS_INFERENCE_HOP_FRAMES=CONTEXT-MFCC_OVERLAP, LCD_FPS=20), runtime=dict(
+        CMSISSTREAM_EVENT_QUEUE_LENGTH=4, CMSISSTREAM_EVT_THREAD_STACK_SIZE=8192,
         CMSISSTREAM_STREAM_THREAD_STACK_SIZE=32768,
         CMSISSTREAM_STREAM_THREAD_PRIORITY='osPriorityRealtime',
-        CMSISSTREAM_EVT_NORMAL_PRIORITY='osPriorityHigh',
-        CMSISSTREAM_NB_MAX_EVENTS=8,
+        CMSISSTREAM_EVT_NORMAL_PRIORITY='osPriorityHigh', CMSISSTREAM_NB_MAX_EVENTS=12,
         CMSISSTREAM_NB_MAX_BUFS=4))
 
 if __name__ == '__main__':

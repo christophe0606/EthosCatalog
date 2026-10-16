@@ -31,11 +31,11 @@ The support classes and code are covered by CMSIS-Stream license.
 
 #if !defined(CG_BEFORE_ITERATION)
 #define CG_BEFORE_ITERATION
-#endif 
+#endif
 
 #if !defined(CG_AFTER_ITERATION)
 #define CG_AFTER_ITERATION
-#endif 
+#endif
 
 #if !defined(CG_BEFORE_SCHEDULE)
 #define CG_BEFORE_SCHEDULE
@@ -88,12 +88,15 @@ using namespace arm_cmsis_stream;
 
 /*
 
-Description of the scheduling. 
+Description of the scheduling.
 
 */
-static uint8_t schedule[9]=
-{ 
-4,5,2,7,0,8,1,3,6,
+static uint8_t schedule[152]=
+{
+6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,
+2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,
+0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,
+6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,6,7,0,4,2,1,5,3,
 };
 
 /*
@@ -101,21 +104,22 @@ static uint8_t schedule[9]=
 Internal ID identification for the nodes
 
 */
-#define DC_INTERNAL_ID 0
-#define FFT_INTERNAL_ID 1
-#define GAIN_INTERNAL_ID 2
-#define MAGNITUDE_INTERNAL_ID 3
-#define MICROPHONE_INTERNAL_ID 4
-#define PCM_INTERNAL_ID 5
-#define SEND_INTERNAL_ID 6
-#define SLIDING_INTERNAL_ID 7
-#define WINDOW_INTERNAL_ID 8
-#define LCD_INTERNAL_ID 9
+#define AUDIO_WINDOW_INTERNAL_ID 0
+#define DISPLAY_CLOCK_INTERNAL_ID 1
+#define DUP0_INTERNAL_ID 2
+#define INFERENCE_INTERNAL_ID 3
+#define MFCC_INTERNAL_ID 4
+#define MFCC_WINDOW_INTERNAL_ID 5
+#define MICROPHONE_INTERNAL_ID 6
+#define PCM_INTERNAL_ID 7
+#define LCD_INTERNAL_ID 8
 
 /* Initialize the selectors global IDs in each class */
 template<>
-std::array<uint16_t,1> SendToLCD<float,1025>::selectors = {SEL_SPECTRUM_ID};
-std::array<uint16_t,1> LCD::selectors = {SEL_SPECTRUM_ID};
+std::array<uint16_t,1> KwsEvents<float,10>::selectors = {SEL_DISPLAY_TICK_ID};
+template<>
+std::array<uint16_t,1> KwsInference<float,490>::selectors = {SEL_KEYWORD_ID};
+std::array<uint16_t,2> KeywordLCD::selectors = {SEL_KEYWORD_ID, SEL_DISPLAY_TICK_ID};
 
 
 /***********
@@ -131,22 +135,37 @@ CG_BEFORE_FIFO_BUFFERS
 FIFO buffers
 
 ************/
-#define FIFOSIZE0 512
-#define FIFOSIZE1 512
-#define FIFOSIZE2 512
-#define FIFOSIZE3 2048
-#define FIFOSIZE4 2048
-#define FIFOSIZE5 2048
-#define FIFOSIZE6 2048
-#define FIFOSIZE7 1025
+#define FIFOSIZE0 320
+#define FIFOSIZE1 320
+#define FIFOSIZE2 640
+#define FIFOSIZE3 490
+#define FIFOSIZE4 10
+#define FIFOSIZE5 250
+#define FIFOSIZE6 10
 
-#define BUFFERSIZE0 8192
+#define BUFFERSIZE0 1960
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf0[BUFFERSIZE0]={0};
 
-#define BUFFERSIZE1 8192
+#define BUFFERSIZE1 1280
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf1[BUFFERSIZE1]={0};
+
+#define BUFFERSIZE2 2560
+CG_BEFORE_BUFFER
+uint8_t stream_app_buf2[BUFFERSIZE2]={0};
+
+#define BUFFERSIZE3 40
+CG_BEFORE_BUFFER
+uint8_t stream_app_buf3[BUFFERSIZE3]={0};
+
+#define BUFFERSIZE4 40
+CG_BEFORE_BUFFER
+uint8_t stream_app_buf4[BUFFERSIZE4]={0};
+
+#define BUFFERSIZE5 250
+CG_BEFORE_BUFFER
+float stream_app_buf5[BUFFERSIZE5]={0};
 
 
 typedef struct {
@@ -155,22 +174,20 @@ FIFO<float,FIFOSIZE1,1,0> *fifo1;
 FIFO<float,FIFOSIZE2,1,0> *fifo2;
 FIFO<float,FIFOSIZE3,1,0> *fifo3;
 FIFO<float,FIFOSIZE4,1,0> *fifo4;
-FIFO<float,FIFOSIZE5,1,0> *fifo5;
+FIFO<float,FIFOSIZE5,0,0> *fifo5;
 FIFO<float,FIFOSIZE6,1,0> *fifo6;
-FIFO<float,FIFOSIZE7,1,0> *fifo7;
 } fifos_t;
 
 typedef struct {
-    RemoveDC<float,2048,float,2048> *dc;
-    FFT<float,2048,float,2048> *fft;
-    EthosGain<float,512,float,512> *gain;
-    RFFTMagnitude<float,2048,float,1025> *magnitude;
-    MicrophoneSource<int16_t,512> *microphone;
-    PCMToFloat<int16_t,512,float,512> *pcm;
-    SendToLCD<float,1025> *send;
-    SlidingBuffer<float,512,float,2048> *sliding;
-    HannWindow<float,2048,float,2048> *window;
-    LCD *lcd;
+    SlidingBuffer<float,320,float,640> *audio_window;
+    KwsEvents<float,10> *display_clock;
+    Duplicate<float,10,float,10> *dup0;
+    KwsInference<float,490> *inference;
+    MFCC<float,640,float,10> *mfcc;
+    SlidingBuffer<float,250,float,490> *mfcc_window;
+    MicrophoneSource<int16_t,320> *microphone;
+    PCMToFloat<int16_t,320,float,320> *pcm;
+    KeywordLCD *lcd;
 } nodes_t;
 
 
@@ -197,17 +214,17 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     (void)evtQueue;
 
     CG_BEFORE_FIFO_INIT;
-    fifos.fifo0 = new (std::nothrow) FIFO<int16_t,FIFOSIZE0,1,0>(stream_app_buf1);
+    fifos.fifo0 = new (std::nothrow) FIFO<int16_t,FIFOSIZE0,1,0>(stream_app_buf0);
     if (fifos.fifo0==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo1 = new (std::nothrow) FIFO<float,FIFOSIZE1,1,0>(stream_app_buf0);
+    fifos.fifo1 = new (std::nothrow) FIFO<float,FIFOSIZE1,1,0>(stream_app_buf1);
     if (fifos.fifo1==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo2 = new (std::nothrow) FIFO<float,FIFOSIZE2,1,0>(stream_app_buf1);
+    fifos.fifo2 = new (std::nothrow) FIFO<float,FIFOSIZE2,1,0>(stream_app_buf2);
     if (fifos.fifo2==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -217,23 +234,18 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo4 = new (std::nothrow) FIFO<float,FIFOSIZE4,1,0>(stream_app_buf1);
+    fifos.fifo4 = new (std::nothrow) FIFO<float,FIFOSIZE4,1,0>(stream_app_buf3);
     if (fifos.fifo4==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo5 = new (std::nothrow) FIFO<float,FIFOSIZE5,1,0>(stream_app_buf0);
+    fifos.fifo5 = new (std::nothrow) FIFO<float,FIFOSIZE5,0,0>(stream_app_buf5);
     if (fifos.fifo5==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo6 = new (std::nothrow) FIFO<float,FIFOSIZE6,1,0>(stream_app_buf1);
+    fifos.fifo6 = new (std::nothrow) FIFO<float,FIFOSIZE6,1,0>(stream_app_buf4);
     if (fifos.fifo6==NULL)
-    {
-        return(CG_MEMORY_ALLOCATION_FAILURE);
-    }
-    fifos.fifo7 = new (std::nothrow) FIFO<float,FIFOSIZE7,1,0>(stream_app_buf0);
-    if (fifos.fifo7==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
@@ -241,61 +253,55 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     CG_BEFORE_NODE_INIT;
     cg_status initError;
 
-    nodes.dc = new (std::nothrow) RemoveDC<float,2048,float,2048>(*(fifos.fifo3),*(fifos.fifo4));
-    if (nodes.dc==NULL)
+    nodes.audio_window = new (std::nothrow) SlidingBuffer<float,320,float,640>(*(fifos.fifo1),*(fifos.fifo2));
+    if (nodes.audio_window==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.fft = new (std::nothrow) FFT<float,2048,float,2048>(*(fifos.fifo5),*(fifos.fifo6));
-    if (nodes.fft==NULL)
+    nodes.display_clock = new (std::nothrow) KwsEvents<float,10>(*(fifos.fifo6),evtQueue,params->display_clock);
+    if (nodes.display_clock==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.gain = new (std::nothrow) EthosGain<float,512,float,512>(*(fifos.fifo1),*(fifos.fifo2),params->gain);
-    if (nodes.gain==NULL)
+    nodes.dup0 = new (std::nothrow) Duplicate<float,10,float,10>(*(fifos.fifo4),{fifos.fifo5,fifos.fifo6});
+    if (nodes.dup0==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.magnitude = new (std::nothrow) RFFTMagnitude<float,2048,float,1025>(*(fifos.fifo6),*(fifos.fifo7),params->magnitude);
-    if (nodes.magnitude==NULL)
+    nodes.inference = new (std::nothrow) KwsInference<float,490>(*(fifos.fifo3),evtQueue,params->inference);
+    if (nodes.inference==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.microphone = new (std::nothrow) MicrophoneSource<int16_t,512>(*(fifos.fifo0),params->microphone);
+    nodes.mfcc = new (std::nothrow) MFCC<float,640,float,10>(*(fifos.fifo2),*(fifos.fifo4),kws_mfcc_config);
+    if (nodes.mfcc==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.mfcc_window = new (std::nothrow) SlidingBuffer<float,250,float,490>(*(fifos.fifo5),*(fifos.fifo3));
+    if (nodes.mfcc_window==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.microphone = new (std::nothrow) MicrophoneSource<int16_t,320>(*(fifos.fifo0),params->microphone);
     if (nodes.microphone==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.pcm = new (std::nothrow) PCMToFloat<int16_t,512,float,512>(*(fifos.fifo0),*(fifos.fifo1));
+    nodes.pcm = new (std::nothrow) PCMToFloat<int16_t,320,float,320>(*(fifos.fifo0),*(fifos.fifo1));
     if (nodes.pcm==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.send = new (std::nothrow) SendToLCD<float,1025>(*(fifos.fifo7),evtQueue,params->send);
-    if (nodes.send==NULL)
-    {
-        return(CG_MEMORY_ALLOCATION_FAILURE);
-    }
-
-    nodes.sliding = new (std::nothrow) SlidingBuffer<float,512,float,2048>(*(fifos.fifo2),*(fifos.fifo3));
-    if (nodes.sliding==NULL)
-    {
-        return(CG_MEMORY_ALLOCATION_FAILURE);
-    }
-
-    nodes.window = new (std::nothrow) HannWindow<float,2048,float,2048>(*(fifos.fifo4),*(fifos.fifo5));
-    if (nodes.window==NULL)
-    {
-        return(CG_MEMORY_ALLOCATION_FAILURE);
-    }
-
-    nodes.lcd = new (std::nothrow) LCD(params->lcd);
+    nodes.lcd = new (std::nothrow) KeywordLCD(params->lcd);
     if (nodes.lcd==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -305,50 +311,47 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
 
 
 /* Subscribe nodes for the event system*/
-    nodes.send->subscribe(0,*nodes.lcd,0);
+    nodes.display_clock->subscribe(0,*nodes.lcd,0);
+    nodes.inference->subscribe(0,*nodes.lcd,0);
 
     initError = CG_SUCCESS;
-    initError = nodes.dc->init();
+    initError = nodes.audio_window->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-    initError = nodes.fft->init();
+
+    initError = nodes.display_clock->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-    initError = nodes.gain->init();
+
+    initError = nodes.dup0->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-    initError = nodes.magnitude->init();
+
+    initError = nodes.inference->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
+    initError = nodes.mfcc->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.mfcc_window->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
     initError = nodes.microphone->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.pcm->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-    initError = nodes.send->init();
-    if (initError != CG_SUCCESS)
-        return(initError);
-    
-    initError = nodes.sliding->init();
-    if (initError != CG_SUCCESS)
-        return(initError);
-    
-    initError = nodes.window->init();
-    if (initError != CG_SUCCESS)
-        return(initError);
-    
+
     initError = nodes.lcd->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-   
+
+
 
 
     return(CG_SUCCESS);
@@ -385,26 +388,30 @@ void free_scheduler_app()
     {
        delete fifos.fifo6;
     }
-    if (fifos.fifo7!=NULL)
-    {
-       delete fifos.fifo7;
-    }
 
-    if (nodes.dc!=NULL)
+    if (nodes.audio_window!=NULL)
     {
-        delete nodes.dc;
+        delete nodes.audio_window;
     }
-    if (nodes.fft!=NULL)
+    if (nodes.display_clock!=NULL)
     {
-        delete nodes.fft;
+        delete nodes.display_clock;
     }
-    if (nodes.gain!=NULL)
+    if (nodes.dup0!=NULL)
     {
-        delete nodes.gain;
+        delete nodes.dup0;
     }
-    if (nodes.magnitude!=NULL)
+    if (nodes.inference!=NULL)
     {
-        delete nodes.magnitude;
+        delete nodes.inference;
+    }
+    if (nodes.mfcc!=NULL)
+    {
+        delete nodes.mfcc;
+    }
+    if (nodes.mfcc_window!=NULL)
+    {
+        delete nodes.mfcc_window;
     }
     if (nodes.microphone!=NULL)
     {
@@ -413,18 +420,6 @@ void free_scheduler_app()
     if (nodes.pcm!=NULL)
     {
         delete nodes.pcm;
-    }
-    if (nodes.send!=NULL)
-    {
-        delete nodes.send;
-    }
-    if (nodes.sliding!=NULL)
-    {
-        delete nodes.sliding;
-    }
-    if (nodes.window!=NULL)
-    {
-        delete nodes.window;
     }
     if (nodes.lcd!=NULL)
     {
@@ -462,15 +457,15 @@ void reset_fifos_scheduler_app(int all)
     {
        fifos.fifo6->reset();
     }
-    if (fifos.fifo7!=NULL)
-    {
-       fifos.fifo7->reset();
-    }
    // Buffers are set to zero too
    if (all)
    {
        std::fill_n(stream_app_buf0, BUFFERSIZE0, (uint8_t)0);
        std::fill_n(stream_app_buf1, BUFFERSIZE1, (uint8_t)0);
+       std::fill_n(stream_app_buf2, BUFFERSIZE2, (uint8_t)0);
+       std::fill_n(stream_app_buf3, BUFFERSIZE3, (uint8_t)0);
+       std::fill_n(stream_app_buf4, BUFFERSIZE4, (uint8_t)0);
+       std::fill_n(stream_app_buf5, BUFFERSIZE5, (float)0);
    }
 }
 
@@ -493,71 +488,64 @@ uint32_t scheduler_app(int *error)
         /* Run a schedule iteration */
         CG_BEFORE_ITERATION;
         unsigned long id=0;
-        for(; id < 9; id++)
+        for(; id < 152; id++)
         {
             CG_BEFORE_NODE_EXECUTION(schedule[id]);
             switch(schedule[id])
             {
                 case 0:
                 {
-                    
-                   cgStaticError = nodes.dc->run();
+
+                   cgStaticError = nodes.audio_window->run();
                 }
                 break;
 
                 case 1:
                 {
-                    
-                   cgStaticError = nodes.fft->run();
+
+                   cgStaticError = nodes.display_clock->run();
                 }
                 break;
 
                 case 2:
                 {
-                    
-                   cgStaticError = nodes.gain->run();
+
+                   cgStaticError = nodes.dup0->run();
                 }
                 break;
 
                 case 3:
                 {
-                    
-                   cgStaticError = nodes.magnitude->run();
+
+                   cgStaticError = nodes.inference->run();
                 }
                 break;
 
                 case 4:
                 {
-                    
-                   cgStaticError = nodes.microphone->run();
+
+                   cgStaticError = nodes.mfcc->run();
                 }
                 break;
 
                 case 5:
                 {
-                    
-                   cgStaticError = nodes.pcm->run();
+
+                   cgStaticError = nodes.mfcc_window->run();
                 }
                 break;
 
                 case 6:
                 {
-                    
-                   cgStaticError = nodes.send->run();
+
+                   cgStaticError = nodes.microphone->run();
                 }
                 break;
 
                 case 7:
                 {
-                    
-                   cgStaticError = nodes.sliding->run();
-                }
-                break;
 
-                case 8:
-                {
-                    
-                   cgStaticError = nodes.window->run();
+                   cgStaticError = nodes.pcm->run();
                 }
                 break;
 
@@ -574,5 +562,5 @@ errorHandling:
     CG_AFTER_SCHEDULE;
     *error=cgStaticError;
     return(nbSchedule);
-    
+
 }

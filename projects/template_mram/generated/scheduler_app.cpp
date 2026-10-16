@@ -31,11 +31,11 @@ The support classes and code are covered by CMSIS-Stream license.
 
 #if !defined(CG_BEFORE_ITERATION)
 #define CG_BEFORE_ITERATION
-#endif 
+#endif
 
 #if !defined(CG_AFTER_ITERATION)
 #define CG_AFTER_ITERATION
-#endif 
+#endif
 
 #if !defined(CG_BEFORE_SCHEDULE)
 #define CG_BEFORE_SCHEDULE
@@ -88,11 +88,11 @@ using namespace arm_cmsis_stream;
 
 /*
 
-Description of the scheduling. 
+Description of the scheduling.
 
 */
 static uint8_t schedule[9]=
-{ 
+{
 4,5,2,7,0,8,1,3,6,
 };
 
@@ -311,44 +311,44 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     initError = nodes.dc->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.fft->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.gain->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.magnitude->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.microphone->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.pcm->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.send->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.sliding->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.window->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
+
     initError = nodes.lcd->init();
     if (initError != CG_SUCCESS)
         return(initError);
-    
-   
+
+
 
 
     return(CG_SUCCESS);
@@ -500,63 +500,63 @@ uint32_t scheduler_app(int *error)
             {
                 case 0:
                 {
-                    
+
                    cgStaticError = nodes.dc->run();
                 }
                 break;
 
                 case 1:
                 {
-                    
+
                    cgStaticError = nodes.fft->run();
                 }
                 break;
 
                 case 2:
                 {
-                    
+
                    cgStaticError = nodes.gain->run();
                 }
                 break;
 
                 case 3:
                 {
-                    
+
                    cgStaticError = nodes.magnitude->run();
                 }
                 break;
 
                 case 4:
                 {
-                    
+
                    cgStaticError = nodes.microphone->run();
                 }
                 break;
 
                 case 5:
                 {
-                    
+
                    cgStaticError = nodes.pcm->run();
                 }
                 break;
 
                 case 6:
                 {
-                    
+
                    cgStaticError = nodes.send->run();
                 }
                 break;
 
                 case 7:
                 {
-                    
+
                    cgStaticError = nodes.sliding->run();
                 }
                 break;
 
                 case 8:
                 {
-                    
+
                    cgStaticError = nodes.window->run();
                 }
                 break;
@@ -574,5 +574,5 @@ errorHandling:
     CG_AFTER_SCHEDULE;
     *error=cgStaticError;
     return(nbSchedule);
-    
+
 }
