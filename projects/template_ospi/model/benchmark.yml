@@ -1,121 +1,5 @@
 # Network benchmark; measured results and compiler estimates are separate sections.
-benchmark:
-  platform:
-    os: RTX5
-    os_version: 5.9.1
-    cpu: Cortex-M55
-    memory:
-      weights:
-        type: OSPI1
-        clock_mhz: 25
-        clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
-      activations:
-        type: SRAM0
-        clock_mhz: 400.0
-  measurements:
-    memory:
-      model_bytes: 2816
-      input_tensor_bytes: 2048
-      ethos:
-        weights_region_bytes: 16
-        arena_region_bytes: 1024
-      executorch:
-        method_pool_peak_bytes: 4776
-        temp_pool_peak_bytes: 1024
-    time:
-      ms: 0.010465
-      cycles: 4186.0
-      statistic: median
-      min_cycles: 4164
-      max_cycles: 4194
-      mean_cycles: 4184.8
-      forward_ms: 0.4172775
-      forward_timer_hz: 400000000
-      cycles_samples:
-      - 4184
-      - 4180
-      - 4189
-      - 4182
-      - 4164
-      - 4193
-      - 4184
-      - 4188
-      - 4190
-      - 4194
-      forward_ticks_samples:
-      - 168742
-      - 168077
-      - 166886
-      - 167348
-      - 166487
-      - 166990
-      - 166859
-      - 166541
-      - 166936
-      - 166202
-  estimates:
-    vela:
-      ini: ../../.cmsis/ensemble_vela.ini
-      system_config: Ethos_U85_SRAM_OSPI
-      memory_mode: Shared_Sram
-      version: 5.1.0
-      accelerator_config: Ethos_U85_256
-      model_sha256: 3674e8befb4ff5e71bfcfd6c7daf3475c7acd8b0169c5c1652d207176d2a2df3
-      ini_sha256: 987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2
-      summary: benchmark_vela_summary.csv
-      cycles: 128
-      time_ms: 0.00032
-      bandwidth:
-        sram:
-          memory: SRAM0
-          vela_memory_area: sram
-          total_bytes_per_inference: 1024
-          average_bytes_per_second: 3200000000.0
-          design_peak_bytes_per_second: 12800000000.0
-        weights:
-          memory: OSPI1
-          vela_memory_area: dram
-          total_bytes_per_inference: 0
-          average_bytes_per_second: 0.0
-          design_peak_bytes_per_second: 332800000.0
-  run:
-    recorded_at: '2026-10-16T06:51:14.889497+00:00'
-    context: template_ospi.Release+DevKit-E8
-    target: DevKit-E8@OSPI_Release
-    device: AE822FA0E5597LS0
-    core: M55_HP
-    npu: Ethos-U85
-    macs: 256
-    packs:
-      driver: ARM::CMSIS-Ethos-U@1.0.0
-      driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0
-      board: AlifSemiconductor::Ensemble@2.2.1
-      runtime: PyTorch::ExecuTorch@1.4.1
-    compiler: AC6@6.24.0
-    optimize: -O3 -ffast-math
-    build_job: b-18
-    execution_job: d-19
-    cpu_clock_mhz: 400.0
-    npu_clock_mhz: 400.0
-    warmup: 1
-    samples: 10
-    pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference
-    pmu_overflow: 0
-    npu_invocations_per_forward: 1
-    test_result: PASS
-    max_absolute_error: 3.0e-05
-    tolerance: 0.0001
-    uart: benchmark_uart.txt
-    model_sha256: 3674e8befb4ff5e71bfcfd6c7daf3475c7acd8b0169c5c1652d207176d2a2df3
-    firmware_sha256: bf69564d0d42c196b3d157c44214c9564e339f2d9150f8ace526d8d2a71cf538
-    input: deterministic signed ramp from -1 to +1; all 512 outputs checked on warmup
-      and every sample
-    timing_scope: module.forward() only; excludes TensorImpl setup, output copy, validation,
-      UART, capture and LCD; includes CPU boundary quantize/dequantize and PMU hooks
-    uart_run: last complete startup during Release load-and-debug; before Stream capture
-      starts
-    measurement_source: UART4 COM5 115200 8N1; Ethos driver region sizes and ExecuTorch
-      allocator high-water marks
+benchmarks:
   network:
     operation: y = 2*x, signed elementwise multiply, no convolution, bias or ReLU
     input_shape:
@@ -134,3 +18,120 @@ benchmark:
     float_boundary: true
     quantization: int16 symmetric activations and multiply constant; no convolution
       weights
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 2816
+        input_tensor_bytes: 2048
+        ethos:
+          weights_region_bytes: 16
+          arena_region_bytes: 1024
+        executorch:
+          method_pool_peak_bytes: 4776
+          temp_pool_peak_bytes: 1024
+      time:
+        ms: 0.010465
+        cycles: 4186.0
+        statistic: median
+        min_cycles: 4164
+        max_cycles: 4194
+        mean_cycles: 4184.8
+        forward_ms: 0.4172775
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 4184
+        - 4180
+        - 4189
+        - 4182
+        - 4164
+        - 4193
+        - 4184
+        - 4188
+        - 4190
+        - 4194
+        forward_ticks_samples:
+        - 168742
+        - 168077
+        - 166886
+        - 167348
+        - 166487
+        - 166990
+        - 166859
+        - 166541
+        - 166936
+        - 166202
+    estimates:
+      vela:
+        ini: ../../.cmsis/ensemble_vela.ini
+        system_config: Ethos_U85_SRAM_OSPI
+        memory_mode: Shared_Sram
+        version: 5.1.0
+        accelerator_config: Ethos_U85_256
+        model_sha256: 3674e8befb4ff5e71bfcfd6c7daf3475c7acd8b0169c5c1652d207176d2a2df3
+        ini_sha256: 987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2
+        summary: benchmark_vela_summary.csv
+        cycles: 128
+        time_ms: 0.00032
+        bandwidth:
+          sram:
+            memory: SRAM0
+            vela_memory_area: sram
+            total_bytes_per_inference: 1024
+            average_bytes_per_second: 3200000000.0
+            design_peak_bytes_per_second: 12800000000.0
+          weights:
+            memory: OSPI1
+            vela_memory_area: dram
+            total_bytes_per_inference: 0
+            average_bytes_per_second: 0.0
+            design_peak_bytes_per_second: 332800000.0
+    run:
+      recorded_at: '2026-10-16T06:51:14.889497+00:00'
+      context: template_ospi.Release+DevKit-E8
+      target: DevKit-E8@OSPI_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        driver: ARM::CMSIS-Ethos-U@1.0.0
+        driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0
+        board: AlifSemiconductor::Ensemble@2.2.1
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-18
+      execution_job: d-19
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 10
+      pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference
+      pmu_overflow: 0
+      npu_invocations_per_forward: 1
+      test_result: PASS
+      max_absolute_error: 3.0e-05
+      tolerance: 0.0001
+      uart: benchmark_uart.txt
+      model_sha256: 3674e8befb4ff5e71bfcfd6c7daf3475c7acd8b0169c5c1652d207176d2a2df3
+      firmware_sha256: bf69564d0d42c196b3d157c44214c9564e339f2d9150f8ace526d8d2a71cf538
+      input: deterministic signed ramp from -1 to +1; all 512 outputs checked on warmup
+        and every sample
+      timing_scope: module.forward() only; excludes TensorImpl setup, output copy, validation,
+        UART, capture and LCD; includes CPU boundary quantize/dequantize and PMU hooks
+      uart_run: last complete startup during Release load-and-debug; before Stream capture
+        starts
+      measurement_source: UART4 COM5 115200 8N1; Ethos driver region sizes and ExecuTorch
+        allocator high-water marks

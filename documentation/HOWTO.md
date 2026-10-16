@@ -97,6 +97,15 @@ OSPI projects also define `ospi.address` and `ospi.size` for their reserved mode
 partition. Vela settings come from the project configuration; changing a CMSIS
 build context does not automatically override them.
 
+Check the configuration against the shared [network schema](../schema/README.md#network-configuration):
+
+```powershell
+uv run scripts/validate_networks.py projects/kws_micronet_l/model/network.yml
+```
+
+Omit the file argument to validate every project's network configuration. The
+command exits nonzero if any file fails, so it can also be used in CI.
+
 ### Generate the AI layer
 
 ```powershell
@@ -272,12 +281,15 @@ header first, followed by the generated catalog.
 
 ## Benchmark records
 
-Store each project's latest benchmark in `model/benchmark.yml`, along with its
-source data. Update these files in place; Git provides the history.
+Store each project's latest results for its different configurations in
+`model/benchmark.yml`, along with the matching source data. The `benchmarks`
+mapping contains shared `network` details and a `benchmark` list with one entry
+per configuration. Update a configuration's entry in place; Git provides the
+history. Each entry references its own UART capture and Vela summary when present.
 
 Keep hardware measurements in `measurements` and compiler estimates, such as
 Vela bandwidth estimates, in `estimates`. Memory measurements cover model
-storage, Ethos regions and ExecuTorch pool peaks. `benchmark.platform` identifies
+storage, Ethos regions and ExecuTorch pool peaks. Each entry's `platform` identifies
 the OS or RTOS and CPU, with an optional OS version. The
 [benchmark schema](../schema/README.md) also supports platforms such as Linux on
 Cortex-A without CMSIS or Vela metadata.
@@ -288,6 +300,8 @@ Run the checks relevant to your changes from the repository root:
 
 | Check | Command |
 | --- | --- |
+| Network configuration files | `uv run scripts/validate_networks.py` |
+| Network schema regression tests | `uv run tests/test_network_schema.py` |
 | Benchmark files | `uv run scripts/validate_benchmarks.py` |
 | Benchmark schema regression tests | `uv run tests/test_benchmark_schema.py` |
 | Project script regression tests | `uv run tests/test_project_scripts.py` |

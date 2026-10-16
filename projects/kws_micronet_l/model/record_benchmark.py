@@ -130,11 +130,12 @@ def main():
                 "uart": "benchmark_uart.txt", "model_sha256": generation["pte_sha256"], "firmware_sha256": sha256(firmware),
                 "input": "270 locally generated MFCC-shaped int8 inputs (seed 20261016), all 12 scores checked against original TFLite reference/default and PyTorch; benchmark repeats random_0",
                 "timing_scope": "module.forward() only; includes ExecuTorch and PMU hooks; excludes tensor setup, input/output copy, validation and UART; after 270 validation forwards and one immediate warmup; no debugger halt during measured loop",
-                "uart_run": "last complete startup in benchmark_uart.txt", "measurement_source": "UART4 COM5 115200 8N1; Ethos PMU, RTOS system timer and allocator high-water marks"},
-        "network": {"operation": "MicroNet Large keyword spotting: 16 convolutions including depthwise, ReLU6, average pool, 12 class scores (no softmax)",
-                    "input_shape": [1,49,10,1], "output_shape": [1,12], "float_boundary": False,
-                    "quantization": "Original TFLite asymmetric int8 activations and per-channel int8 weights, int32 bias; int8 input/output; error units are raw int8 score steps"}}
-    (MODEL / "benchmark.yml").write_text(yaml.safe_dump({"benchmark": benchmark}, sort_keys=False), encoding="utf-8")
+                "uart_run": "last complete startup in benchmark_uart.txt", "measurement_source": "UART4 COM5 115200 8N1; Ethos PMU, RTOS system timer and allocator high-water marks"}}
+    network = {"operation": "MicroNet Large keyword spotting: 16 convolutions including depthwise, ReLU6, average pool, 12 class scores (no softmax)",
+               "input_shape": [1,49,10,1], "output_shape": [1,12], "float_boundary": False,
+               "quantization": "Original TFLite asymmetric int8 activations and per-channel int8 weights, int32 bias; int8 input/output; error units are raw int8 score steps"}
+    document = {"benchmarks": {"network": network, "benchmark": [benchmark]}}
+    (MODEL / "benchmark.yml").write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
     print(json.dumps({"accuracy": comparisons, "median_npu_ms": benchmark["measurements"]["time"]["ms"],
                       "median_forward_ms": benchmark["measurements"]["time"]["forward_ms"],
                       "network_memory": benchmark["measurements"]["memory"]}, indent=2))

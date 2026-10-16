@@ -1,12 +1,53 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-title: EthosCatalog benchmark
-description: Network benchmark with observed results under measurements and compiler predictions under estimates.
+title: EthosCatalog benchmarks
+description: Benchmarks for multiple configurations of one network, with observed measurements and compiler estimates.
   Platform identity is independent of build tools; memory records contain only network resources.
 type: object
 additionalProperties: false
 required:
-- benchmark
+- benchmarks
 properties:
+  benchmarks:
+    type: object
+    additionalProperties: false
+    required:
+    - network
+    - benchmark
+    properties:
+      network:
+        $ref: '#/$defs/network'
+        description: Network properties shared by every benchmark configuration in this file.
+      benchmark:
+        type: array
+        minItems: 1
+        description: Results for individual configurations, each with its own platform, run, measurements and optional estimates.
+        items:
+          $ref: '#/$defs/benchmark'
+$defs:
+  network:
+    type: object
+    additionalProperties: false
+    required:
+    - operation
+    - input_shape
+    - output_shape
+    properties:
+      operation:
+        $ref: '#/$defs/text'
+      input_shape:
+        $ref: '#/$defs/shape'
+      output_shape:
+        $ref: '#/$defs/shape'
+      samples_per_forward:
+        $ref: '#/$defs/positiveInteger'
+      sample_rate_hz:
+        $ref: '#/$defs/positiveInteger'
+      block_deadline_ms:
+        $ref: '#/$defs/positiveNumber'
+      float_boundary:
+        type: boolean
+      quantization:
+        $ref: '#/$defs/text'
   benchmark:
     type: object
     additionalProperties: false
@@ -14,7 +55,6 @@ properties:
     - platform
     - measurements
     - run
-    - network
     properties:
       platform:
         type: object
@@ -276,31 +316,6 @@ properties:
                   weights:
                     $ref: '#/$defs/bandwidth'
         description: Compiler estimates only; observed results belong in measurements.
-      network:
-        type: object
-        additionalProperties: false
-        required:
-        - operation
-        - input_shape
-        - output_shape
-        properties:
-          operation:
-            $ref: '#/$defs/text'
-          input_shape:
-            $ref: '#/$defs/shape'
-          output_shape:
-            $ref: '#/$defs/shape'
-          samples_per_forward:
-            $ref: '#/$defs/positiveInteger'
-          sample_rate_hz:
-            $ref: '#/$defs/positiveInteger'
-          block_deadline_ms:
-            $ref: '#/$defs/positiveNumber'
-          float_boundary:
-            type: boolean
-          quantization:
-            $ref: '#/$defs/text'
-$defs:
   text:
     type: string
     minLength: 1

@@ -111,5 +111,6 @@ holds estimated SRAM and MRAM bandwidth separately from measured results, with t
 `model/benchmark_vela_summary.csv` and model/configuration hashes for provenance.
 See the [shared benchmark format and validator](../../schema/README.md).
 
-Update the benchmark and its source captures in place after each run. Git keeps
-the history; the project stores only the latest benchmark.
+Keep shared network details under `benchmarks.network` and the latest result for
+each configuration in the `benchmarks.benchmark` list. Update a configuration's
+entry and its source captures in place after each run; Git keeps the history.

@@ -1,0 +1,87 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: EthosCatalog network configuration
+description: Project-owned model sources, quantized caches, model storage and Vela configuration.
+type: object
+additionalProperties: false
+required:
+- network
+properties:
+  network:
+    type: object
+    additionalProperties: false
+    required:
+    - name
+    - model
+    - quantize
+    - safetensors
+    - graph
+    - flash_ospi
+    - vela
+    properties:
+      name:
+        $ref: '#/$defs/text'
+        description: Human-readable network name.
+      model:
+        $ref: '#/$defs/text'
+        description: Model source path, relative to and contained within the project directory.
+      quantize:
+        $ref: '#/$defs/text'
+        description: Project quantization or import script path, relative to and contained within the project directory.
+      safetensors:
+        $ref: '#/$defs/text'
+        description: Quantized tensor cache path, relative to and contained within the project directory.
+      graph:
+        $ref: '#/$defs/text'
+        description: Companion exported .pt2 graph path, relative to and contained within the project directory.
+      flash_ospi:
+        type: boolean
+        description: Whether the model is programmed separately into the OSPI partition.
+      ospi:
+        type: object
+        additionalProperties: false
+        required:
+        - address
+        - size
+        properties:
+          address:
+            type: integer
+            minimum: 0
+            description: Model partition start address in bytes; YAML hexadecimal integers are accepted.
+          size:
+            type: integer
+            minimum: 1
+            description: Reserved model partition size in bytes; YAML hexadecimal integers are accepted.
+          pname:
+            $ref: '#/$defs/text'
+            description: Optional CMSIS processor name; the model flash script defaults to M55_HP.
+      vela:
+        type: object
+        additionalProperties: false
+        required:
+        - ini
+        - system_config
+        - memory_mode
+        properties:
+          ini:
+            $ref: '#/$defs/text'
+            description: Vela configuration path, relative to the project directory; may refer outside the project.
+          system_config:
+            $ref: '#/$defs/text'
+            description: System configuration name in the Vela ini file.
+          memory_mode:
+            $ref: '#/$defs/text'
+            description: Memory mode name in the Vela ini file.
+    if:
+      required:
+      - flash_ospi
+      properties:
+        flash_ospi:
+          const: true
+    then:
+      required:
+      - ospi
+$defs:
+  text:
+    type: string
+    minLength: 1
+    pattern: \S

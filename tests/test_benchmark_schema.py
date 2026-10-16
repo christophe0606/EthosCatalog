@@ -1,6 +1,6 @@
 """Check portable benchmark structure, validation failures and Vela provenance."""
 from copy import deepcopy
-from contextlib import redirect_stderr
+from contextlib import redirect_stderr, redirect_stdout
 import csv
 import hashlib
 import io
@@ -10,6 +10,8 @@ import re
 import sys
 import tempfile
 import unittest
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -28,6 +30,12 @@ class BenchmarkSchema(unittest.TestCase):
     def errors(self, document):
         return list(validation_errors(document, self.check))
 
+    def records(self):
+        for path, document in zip(self.paths, self.documents):
+            collection = document["benchmarks"]
+            for index, record in enumerate(collection["benchmark"]):
+                yield path, index, collection["network"], record
+
     def test_all_benchmarks_validate(self):
         self.assertGreaterEqual(len(self.paths), 2)
         for path, document in zip(self.paths, self.documents):
@@ -35,17 +43,60 @@ class BenchmarkSchema(unittest.TestCase):
                 self.assertEqual(self.errors(document), [])
 
     def test_platform_is_independent_of_cmsis_and_vela(self):
-        document = {"benchmark": {
-            "platform": {"os": "Linux", "cpu": "Cortex-A78"},
-            "measurements": {"time": {"ms": 1.25}},
-            "run": {"recorded_at": "2026-10-15T12:00:00Z", "samples": 10, "test_result": "PASS"},
+        document = {"benchmarks": {
             "network": {"operation": "y = 2*x", "input_shape": [1, 512], "output_shape": [1, 512]},
+            "benchmark": [{
+                "platform": {"os": "Linux", "cpu": "Cortex-A78"},
+                "measurements": {"time": {"ms": 1.25}},
+                "run": {"recorded_at": "2026-10-15T12:00:00Z", "samples": 10, "test_result": "PASS"},
+            }],
         }}
         self.assertEqual(self.errors(document), [])
         for key in ("os", "cpu"):
             invalid = deepcopy(document)
-            del invalid["benchmark"]["platform"][key]
+            del invalid["benchmarks"]["benchmark"][0]["platform"][key]
             self.assertTrue(self.errors(invalid))
+
+    def test_multiple_configurations_share_network(self):
+        document = deepcopy(self.template)
+        records = document["benchmarks"]["benchmark"]
+        records.append({
+            "platform": {"os": "Linux", "cpu": "Cortex-A78"},
+            "measurements": {"time": {"ms": 1.25}},
+            "run": {"recorded_at": "2026-10-16T00:00:00Z", "samples": 20, "test_result": "PASS"},
+        })
+        self.assertEqual(self.errors(document), [])
+        for key in ("platform", "measurements", "run"):
+            invalid = deepcopy(document)
+            del invalid["benchmarks"]["benchmark"][1][key]
+            self.assertTrue(self.errors(invalid))
+        records[1]["measurements"]["time"]["ms"] = -1
+        errors = self.errors(document)
+        self.assertTrue(any("$.benchmarks.benchmark[1].measurements.time.ms" in error for error in errors))
+
+    def test_collection_requires_shared_network_and_nonempty_list(self):
+        for key in ("network", "benchmark"):
+            invalid = deepcopy(self.template)
+            del invalid["benchmarks"][key]
+            self.assertTrue(self.errors(invalid))
+        for value in ([], {}, None, [None], [{}]):
+            with self.subTest(value=value):
+                invalid = deepcopy(self.template)
+                invalid["benchmarks"]["benchmark"] = value
+                self.assertTrue(self.errors(invalid))
+        for key in ("operation", "input_shape", "output_shape"):
+            invalid = deepcopy(self.template)
+            del invalid["benchmarks"]["network"][key]
+            self.assertTrue(self.errors(invalid))
+
+    def test_network_must_be_shared_and_legacy_root_is_rejected(self):
+        invalid = deepcopy(self.template)
+        record = invalid["benchmarks"]["benchmark"][0]
+        record["network"] = invalid["benchmarks"]["network"]
+        self.assertTrue(self.errors(invalid))
+        del invalid["benchmarks"]["network"]
+        self.assertTrue(self.errors(invalid))
+        self.assertTrue(self.errors({"benchmark": record}))
 
     def test_unknown_keys_rejected_in_every_record_object(self):
         def objects(value, path=()):
@@ -53,6 +104,9 @@ class BenchmarkSchema(unittest.TestCase):
                 yield path
                 for key, child in value.items():
                     yield from objects(child, (*path, key))
+            elif isinstance(value, list):
+                for index, child in enumerate(value):
+                    yield from objects(child, (*path, index))
 
         for document in self.documents:
             for path in objects(document):
@@ -83,16 +137,19 @@ class BenchmarkSchema(unittest.TestCase):
         ]
         for path, value in cases:
             with self.subTest(path=path, value=value):
-                invalid = deepcopy(self.template)["benchmark"]
-                target = invalid
+                invalid = deepcopy(self.template)
+                if path[0] == "network":
+                    target = invalid["benchmarks"]
+                else:
+                    target = invalid["benchmarks"]["benchmark"][0]
                 for key in path[:-1]:
                     target = target[key]
                 target[path[-1]] = value
-                self.assertTrue(self.errors({"benchmark": invalid}))
+                self.assertTrue(self.errors(invalid))
 
     def test_incomplete_vela_estimates_rejected(self):
         invalid = deepcopy(self.template)
-        del invalid["benchmark"]["estimates"]["vela"]["bandwidth"]
+        del invalid["benchmarks"]["benchmark"][0]["estimates"]["vela"]["bandwidth"]
         self.assertTrue(self.errors(invalid))
 
     def test_application_and_linker_details_rejected(self):
@@ -109,45 +166,45 @@ class BenchmarkSchema(unittest.TestCase):
         for path, key, value in cases:
             with self.subTest(path=path, key=key):
                 invalid = deepcopy(self.template)
-                target = invalid["benchmark"]
+                target = invalid["benchmarks"]["benchmark"][0]
                 for part in path:
                     target = target[part]
                 target[key] = value
                 self.assertTrue(self.errors(invalid))
 
     def test_estimates_and_measurements_cannot_be_mixed(self):
-        record = self.template["benchmark"]
+        record = self.template["benchmarks"]["benchmark"][0]
         invalid = deepcopy(self.template)
-        invalid["benchmark"]["measurements"]["vela"] = record["estimates"]["vela"]
+        invalid["benchmarks"]["benchmark"][0]["measurements"]["vela"] = record["estimates"]["vela"]
         self.assertTrue(self.errors(invalid))
         invalid = deepcopy(self.template)
-        invalid["benchmark"]["estimates"]["memory"] = record["measurements"]["memory"]
+        invalid["benchmarks"]["benchmark"][0]["estimates"]["memory"] = record["measurements"]["memory"]
         self.assertTrue(self.errors(invalid))
         invalid = deepcopy(self.template)
-        invalid["benchmark"]["vela"] = record["estimates"]["vela"]
+        invalid["benchmarks"]["benchmark"][0]["vela"] = record["estimates"]["vela"]
         self.assertTrue(self.errors(invalid))
 
     def test_network_memory_matches_uart_observations(self):
-        for path, document in zip(self.paths, self.documents):
-            record = document["benchmark"]
+        for path, index, network, record in self.records():
             if "uart" not in record["run"] or "memory" not in record["measurements"]:
                 continue
-            with self.subTest(path=path):
+            with self.subTest(path=path, index=index):
                 uart = (path.parent / record["run"]["uart"]).read_text()
                 observed = re.findall(r"Benchmark memory: model=(\d+) B, arena=(\d+) B at 0x[0-9a-fA-F]+, weights=(\d+) B", uart)
                 model, arena, weights = map(int, observed[-1])
                 method, temp = map(int, re.findall(r"Benchmark pools: method peak=(\d+) B, temp peak=(\d+) B", uart)[-1])
                 memory = record["measurements"]["memory"]
                 self.assertEqual(memory["model_bytes"], model)
-                if record["network"].get("float_boundary"):
-                    self.assertEqual(memory["input_tensor_bytes"], math.prod(record["network"]["input_shape"]) * 4)
+                if network.get("float_boundary"):
+                    self.assertEqual(memory["input_tensor_bytes"], math.prod(network["input_shape"]) * 4)
                 self.assertEqual(memory["ethos"], {"weights_region_bytes": weights, "arena_region_bytes": arena})
                 self.assertEqual(memory["executorch"], {"method_pool_peak_bytes": method, "temp_pool_peak_bytes": temp})
 
     def test_yaml_duplicates_and_non_string_keys_rejected(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as directory:
             path = Path(directory) / "benchmark.yml"
-            for content in ("benchmark: {}\nbenchmark: {}\n", "benchmark:\n  1: value\n"):
+            for content in ("benchmarks: {}\nbenchmarks: {}\n", "benchmarks:\n  1: value\n",
+                            "benchmarks:\n  benchmark:\n  - run: {}\n    run: {}\n"):
                 path.write_text(content, encoding="utf-8")
                 with self.assertRaises(ValueError):
                     load_yaml(path)
@@ -155,18 +212,37 @@ class BenchmarkSchema(unittest.TestCase):
     def test_cli_returns_failure_for_invalid_or_missing_file(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as directory, redirect_stderr(io.StringIO()):
             path = Path(directory) / "benchmark.yml"
-            path.write_text("benchmark: {}\n", encoding="utf-8")
+            path.write_text("benchmarks: {}\n", encoding="utf-8")
             self.assertEqual(main([str(path)]), 1)
             self.assertEqual(main([str(path.with_name("missing.yml"))]), 1)
-            path.write_text("benchmark: [\n", encoding="utf-8")
+            path.write_text("benchmarks: [\n", encoding="utf-8")
             self.assertEqual(main([str(path)]), 1)
 
+    def test_cli_validates_every_configuration(self):
+        document = deepcopy(self.template)
+        records = document["benchmarks"]["benchmark"]
+        records.append(deepcopy(records[0]))
+        records[1]["run"]["cpu_clock_mhz"] = 200
+        records[1]["measurements"]["time"]["ms"] = 0.0025
+        with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as directory:
+            path = Path(directory) / "benchmarks.yml"
+            path.write_text(yaml.safe_dump(document), encoding="utf-8")
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                self.assertEqual(main([str(path)]), 0)
+            self.assertIn(f"OK {path}", stdout.getvalue())
+            records[1]["run"]["samples"] = 0
+            path.write_text(yaml.safe_dump(document), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                self.assertEqual(main([str(path)]), 1)
+            self.assertIn("$.benchmarks.benchmark[1].run.samples", stderr.getvalue())
+
     def test_bandwidth_matches_raw_vela_summary(self):
-        for path, document in zip(self.paths, self.documents):
-            record = document["benchmark"]
+        for path, index, _, record in self.records():
             if "vela" not in record.get("estimates", {}):
                 continue
-            with self.subTest(path=path):
+            with self.subTest(path=path, index=index):
                 vela = record["estimates"]["vela"]
                 if "model_sha256" in record["run"]:
                     self.assertEqual(vela["model_sha256"], record["run"]["model_sha256"])

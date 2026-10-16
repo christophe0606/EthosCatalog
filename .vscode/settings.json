@@ -7,7 +7,8 @@
     "memory-inspector.groupings.MAUsPerGroup": 4,
     "memory-inspector.scrollingBehavior": "Auto-Append",
     "yaml.schemas": {
-        "./schema/benchmark.schema.yml": ["projects/**/*benchmark*.yml", "projects/**/*benchmark*.yaml"]
+        "./schema/benchmark.schema.yml": ["projects/**/*benchmark*.yml", "projects/**/*benchmark*.yaml"],
+        "./schema/network.schema.yml": ["projects/**/network.yml", "projects/**/network.yaml"]
     },
     "clangd.arguments": [
         "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\EthosCatalog\\out\\kws_micronet_l\\DevKit-E8\\Release"

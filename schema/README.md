@@ -1,7 +1,54 @@
-# Benchmark YAML
+# YAML schemas
+
+## Network configuration
+
+[network.schema.yml](network.schema.yml) is a JSON Schema (Draft 2020-12),
+written in YAML, for project `model/network.yml` files. After installing the root
+`requirements.txt`, check one file or all project network files:
+
+```powershell
+uv run scripts/validate_networks.py projects/kws_micronet_l/model/network.yml
+uv run scripts/validate_networks.py
+```
+
+Explicit file arguments are relative to the current working directory; multiple
+files and files outside the repository are accepted. Without arguments, the
+validator scans `projects/` in this repository for `network.yml` and
+`network.yaml`, regardless of the current working directory. It prints `OK` for
+valid files and reports errors with the file and YAML property path to stderr.
+It exits with status 0 when every file passes, 1 for invalid or unreadable files,
+and 2 for command usage errors or an empty scan.
+
+The `network` mapping requires `name`, `model`, `quantize`, `safetensors`, `graph`,
+`flash_ospi` and `vela`. All text fields must contain a non-whitespace character.
+`vela` requires `ini`, `system_config` and `memory_mode`. Unknown keys are rejected
+at every level, as are duplicate and non-string YAML mapping keys.
+
+`flash_ospi` must be a boolean. When true, `ospi` is required with a nonnegative
+integer `address` and a positive integer `size`, both in bytes. Hexadecimal YAML
+integers such as `0xC0000000` are accepted; quoted numbers and booleans are not
+integers. `ospi.pname` is optional (the flash script defaults to `M55_HP`). An
+`ospi` mapping may be retained when `flash_ospi` is false, but must still be valid.
+
+Paths are interpreted relative to the project directory, one level above
+`model/`. Model sources, quantizers and caches belong inside the project;
+`vela.ini` may reference shared configuration outside it. Schema validation
+checks structure and types without loading models or requiring generated cache
+files. The existing project scripts additionally check resolved path containment
+and the presence of the Vela ini file when preparing a network.
+
+VS Code associates the schema with project `network.yml` and `network.yaml`
+files through `.vscode/settings.json` when YAML language support is installed.
+Extend the shared schema when adding configuration fields. Regression checks:
+
+```powershell
+uv run tests/test_network_schema.py
+```
+
+## Benchmark YAML
 
 [benchmark.schema.yml](benchmark.schema.yml) is a JSON Schema (Draft 2020-12),
-written in YAML. Both templates use this structure. Objects reject unknown keys;
+written in YAML. All projects use this structure. Objects reject unknown keys;
 required fields and numeric types catch missing data, typos and inconsistent units.
 VS Code associates it with `projects/**/*benchmark*.yml` and `*.yaml` through
 `.vscode/settings.json` when YAML language support is installed.
@@ -24,15 +71,27 @@ uv run scripts/validate_benchmarks.py projects/template_mram/model/benchmark.yml
 The validator also rejects duplicate mapping keys, non-string keys and non-finite
 numbers. Timestamps must be quoted RFC 3339 strings with a timezone.
 
-Each project keeps only its latest `model/benchmark.yml`, UART capture and Vela
-summary. Update these files in place; Git provides the history. Do not add
-historical benchmark snapshots or separate retest records.
+Each project's `model/benchmark.yml` contains a `benchmarks` mapping with one
+shared `network` and a nonempty `benchmark` list. Every list entry describes one
+configuration with its own `platform`, `measurements`, `run` and optional
+`estimates`. Network properties are required under `benchmarks.network` and are
+not accepted inside individual entries. The old top-level `benchmark` layout is
+no longer accepted.
+
+Keep the latest result for each configuration in the same file. Different
+configurations can vary the CPU, OS, clocks, memory placement or compiler
+settings; describe those differences in each entry's `platform` and `run`.
+Keep UART captures and Vela summaries alongside the YAML and reference the
+matching files from each entry. Use distinct evidence filenames when recording
+different configurations. Update a configuration's result in place; Git
+provides the history rather than separate historical benchmark snapshots.
 
 ## Platform identity
 
-Every benchmark has `platform.os` and `platform.cpu`. `os` names either the OS or
-RTOS; `os_version` is optional. CPU and OS names are free text, independent of
-CMSIS targets, pack names or Vela configuration. For example, the templates use:
+Every entry in `benchmarks.benchmark` has `platform.os` and `platform.cpu`.
+`os` names either the OS or RTOS; `os_version` is optional. CPU and OS names are
+free text, independent of CMSIS targets, pack names or Vela configuration. For
+example, the templates use:
 
 ```yaml
 platform:
@@ -46,24 +105,36 @@ remain optional provenance. A future Cortex-A benchmark can omit all of them,
 along with the optional compiler estimates and network-memory details:
 
 ```yaml
-benchmark:
-  platform:
-    os: Linux
-    cpu: Cortex-A78
-  measurements:
-    time:
-      ms: 1.25
-  run:
-    recorded_at: '2026-10-15T12:00:00Z'
-    samples: 10
-    test_result: PASS
+benchmarks:
   network:
     operation: y = 2*x
     input_shape: [1, 512]
     output_shape: [1, 512]
+  benchmark:
+    - platform:
+        os: Linux
+        cpu: Cortex-A78
+      measurements:
+        time:
+          ms: 1.25
+      run:
+        recorded_at: '2026-10-15T12:00:00Z'
+        samples: 10
+        test_result: PASS
+    - platform:
+        os: RTX5
+        cpu: Cortex-M55
+      measurements:
+        time:
+          ms: 2.5
+      run:
+        recorded_at: '2026-10-16T12:00:00Z'
+        samples: 20
+        test_result: PASS
 ```
 
-This shows all mandatory fields. Additional measurements use the same schema
+This illustrative example shows all mandatory fields for two configurations of
+the same network. Additional measurements use the same schema
 properties on every platform; optional sections are omitted when inapplicable.
 Extend the shared schema when adding a new metric.
 
@@ -103,8 +174,8 @@ breakdowns, pool reservations, linker section names and memory addresses.
 
 ## Vela estimates and units
 
-One YAML file holds two distinct sections: `benchmark.measurements` for observed
-results and `benchmark.estimates` for predictions. Vela configuration, provenance,
+Each entry in `benchmarks.benchmark` holds `measurements` for observed results
+and optional `estimates` for predictions. Vela configuration, provenance,
 estimated cycles, time and bandwidth all live under `estimates.vela`; they are
 not accepted under `measurements` or as a top-level `vela` section.
 
