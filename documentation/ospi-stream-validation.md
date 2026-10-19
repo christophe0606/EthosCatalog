@@ -31,7 +31,7 @@ the installed CMSIS Solution 1.72.0 schema, format 1.0.0. Its solution resolves
 to this repository's `EthosCatalog.csolution.yml`; all selected paths exist.
 The exported PATH and variables were imported only into the checking process.
 The selected executable was
-`C:/Users/chrfav01/.vscode/extensions/arm.cmsis-csolution-1.72.0-win32-x64/tools/cmsis-toolbox/bin/cbuild.exe`.
+`$HOME/.vscode/extensions/arm.cmsis-csolution-1.72.0-win32-x64/tools/cmsis-toolbox/bin/cbuild.exe`.
 It reported CMSIS-Toolbox 2.15.0, CMake 3.31.12 and Ninja 1.13.2. Detected
 toolchains were AC6 6.22.0/6.24.0, Clang 18.1.3/22.1.0 and GCC 13.3.1/14.3.1.
 The firmware builds used the selected AC6 6.24.0.

@@ -60,24 +60,30 @@ cosines changes low-energy tonal features. Host comparison against the unmodifie
 ML Eval Kit implementation checks silence, impulses, tones, noise, and all 49
 speech frames: 145 frames / 1,450 coefficients match exactly after int8
 quantization. [mfcc_validation.json](model/mfcc_validation.json) records the
-reference hash and result. This is frontend equivalence on these inputs, not a
-speech-dataset accuracy measurement.
+reference pack, source hashes, public audio repository and relative filename,
+comparison results, and tolerance. It contains no local checkout path. This is
+frontend equivalence on these inputs, not a speech-dataset accuracy measurement.
 
 Regenerate and check from the repository root:
 
 ```powershell
-.venv/Scripts/python.exe projects/kws_micronet_l/generate_mfcc.py --dsp-scripts C:/Users/chrfav01/benchresults/cmsis/CMSIS-DSP/Scripts
+.venv/Scripts/python.exe projects/kws_micronet_l/generate_mfcc.py --dsp-scripts "$HOME/cmsis/CMSIS-DSP/Scripts"
 .venv/Scripts/python.exe projects/kws_micronet_l/app.py
-.venv/Scripts/python.exe tests/run_kws_tests.py
+.venv/Scripts/python.exe tests/run_kws_tests.py --pack-root "path/to/CMSIS/packs" --reference "path/to/reference/kws"
 .venv/Scripts/python.exe -m unittest discover -s tests -p test_kws_graph.py
 ```
 
-`app.py` and `generate_mfcc.py` also work from this project directory. The host
-test defaults to the installed ML Eval Kit 22.8.0-Beta pack and the sibling
-`mlek-cmsis-pack-examples/kws` reference; use `--pack-root` and `--reference` to
-override those paths. It regenerates the startup speech fixture locally. No
-speech dataset is downloaded. The host LCD check verifies queued delivery,
-one-second fading, label bounds, and rejected-event counters.
+`app.py` and `generate_mfcc.py` also work from this project directory. To rerun
+the host comparison, obtain the public
+[ML Eval Kit examples](https://github.com/Arm-Examples/mlek-cmsis-pack-examples)
+and replace `path/to/reference/kws` with that checkout's `kws` directory. The
+runner requires `--reference`; it does not assume a checkout location. Replace
+`path/to/CMSIS/packs` with your installed pack root, or omit `--pack-root` when
+`CMSIS_PACK_ROOT` is set. The comparison uses the installed ML Eval Kit
+22.8.0-Beta pack and regenerates the startup speech fixture locally. The checked-in
+fixture and report remain available without an examples checkout. No speech
+dataset is downloaded. The host LCD check verifies queued delivery, one-second
+fading, label bounds, and rejected-event counters.
 
 Generate the KWS AI layer as described below, build `DevKit-E8@KWS_Release`,
 then load/debug through CMSIS Developer Assistant. Inspect `pipeline_error`,

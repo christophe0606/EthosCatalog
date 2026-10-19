@@ -21,8 +21,8 @@ Only one project must be enabled when building the solution.
 
 * For open source reuse, copyright and licenses must be preserved. License must be compatible with Apache.
 
-* Don't record any reference (in documentation, comments) to a local project outside of this one. Only use references to public project available on the web
+* Don't record any reference (in documentation, comments or scripts) to a local project outside of this one. Only use references to public project available on the web, local path pointing inside this project. If there is a the need to refer to an external project, the scripts should use a command line argument to receive the path to this project. A script must never hardcode any absolute path or use local paths that point outside of this project
 
-* When user uses a local ML Eval Kit project, 
-document the public references using https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit
-or https://github.com/Arm-Examples/mlek-cmsis-pack-examples
+* If you need to reference an external project for test or validation or quantization, check if it is possible to icopy mport some files from the external project:
+   - Only a few files is acceptable. We must not copy the full external project
+   - The license of those files must be compatible with Apache

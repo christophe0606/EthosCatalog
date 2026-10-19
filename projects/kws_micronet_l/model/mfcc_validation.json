@@ -1,7 +1,8 @@
 {
   "reference_pack": "ARM::ml-embedded-eval-kit-uc-api@22.8.0-Beta",
   "reference_mfcc_sha256": "005849f963e755716d0db62877839960ffdfc77b0c20c37594cb231af9764985",
-  "audio_source": "C:\\Users\\chrfav01\\benchresults\\mlek-cmsis-pack-examples\\kws\\src\\sample_audio.cpp",
+  "audio_source": "https://github.com/Arm-Examples/mlek-cmsis-pack-examples",
+  "audio_path": "kws/src/sample_audio.cpp",
   "audio_sha256": "81107400e2e378a40fcda251854ee0ee3d89e16178103c907e0811659fe15a2a",
   "result": "MFCC: 145 frames, max float error 2.288818e-05, max quantized error 0 LSB, differing coefficients 0 / 1450\nStock MFCC log floor divergence: 73.521034 natural-log units\n",
   "tolerance_lsb": 1

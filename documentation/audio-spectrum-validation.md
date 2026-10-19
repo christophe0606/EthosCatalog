@@ -6,9 +6,7 @@ revalidated after migration; see [CMSIS Stream validation](cmsis-stream-validati
 The OSPI migration and its current benchmark are recorded separately in
 [OSPI CMSIS Stream validation](ospi-stream-validation.md).
 
-The source was adapted from `Spectrogram` in
-`C:/Users/chrfav01/benchresults/testassistant/Blinky_M55_HP`, read directly from
-the branch while leaving its `chess` checkout untouched.
+
 
 ## Processing and ownership
 
