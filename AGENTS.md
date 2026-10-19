@@ -23,6 +23,8 @@ Only one project must be enabled when building the solution.
 
 * Don't record any reference (in documentation, comments or scripts) to a local project outside of this one. Only use references to public project available on the web, local path pointing inside this project. If there is a the need to refer to an external project, the scripts should use a command line argument to receive the path to this project. A script must never hardcode any absolute path or use local paths that point outside of this project
 
-* If you need to reference an external project for test or validation or quantization, check if it is possible to icopy mport some files from the external project:
-   - Only a few files is acceptable. We must not copy the full external project
-   - The license of those files must be compatible with Apache
+* If you need to reference an external project for test or validation or quantization, check if it is possible to copy some files from the external project:
+  * Only a few files is acceptable. We must not copy the full external project
+  * The license of those files must be compatible with Apache
+  * If it is not possible to copy the files because of size (too many files, or too big files)
+    ask the user if you can download and install the external project somewhere outside of this project and then use command line arguments to give the path to this project where it is needed
