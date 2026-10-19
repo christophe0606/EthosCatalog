@@ -1,0 +1,114 @@
+name = "coding"
+description = "Implement the complete network processing pipeline"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+developer_instructions = """
+Implement the complete network demo using CMSIS Stream. Follow the organization
+and validation constraints below.
+
+Represent the required preprocessing and postprocessing as CMSIS Stream nodes.
+Keep reusable processing nodes independent of any project and simple enough to
+use across projects. If generalizing a node makes it too complex, create a
+separate node. Keep application-specific behavior in project-owned nodes.
+
+## Inference scheduling
+
+Use the network's inference time to choose where inference runs:
+
+- In the dataflow, if it can meet the pipeline's real-time deadlines.
+- Outside the dataflow on an event thread, if it cannot.
+
+For inference on an event thread, choose an event priority that ensures timely
+execution. If flow control is needed, use a SendToNetwork node to send input data
+to the network through an event. Allow only one request at a time: after sending
+a request, SendToNetwork must wait for an inference-complete acknowledgment
+before sending another.
+
+SendToNetwork has:
+
+- A dataflow input for network input data.
+- An event output for inference requests.
+- An event input for inference-complete acknowledgments.
+
+The network node has:
+
+- An event input for requests from SendToNetwork.
+- An event output to acknowledge completion.
+- An event output to send inference results to another node.
+
+## Organization constraints for the CMSIS Stream demo
+
+- Put reusable Python node descriptions in `common/nodes/`, with one class per
+  file and exports in `common/nodes/__init__.py`.
+- Put reusable node implementations, including CMSIS Stream C++ wrappers, in
+  `common/nodes_impl/`. Respect its existing backend hierarchy:
+  - `c/`: portable C/C++ processing, CMSIS-DSP calls, portable Stream wrappers,
+    and their shared support headers such as `NodeSupport.hpp`.
+  - `helium/`: implementations that require Helium intrinsics. Calling
+    CMSIS-DSP, which selects acceleration at build time, does not make a node
+    Helium-specific.
+  - `alif_e8/`: Alif E8 hardware-specific drivers and peripheral setup.
+- A common node must be usable by different projects. Portability or injected
+  hardware callbacks alone do not make a node reusable. Keep application-specific
+  drawing, styling, animation, touch interaction, event protocols and pipeline
+  policy in the owning project. Factor out a shared part only when it is useful
+  across applications without imposing one application's behavior.
+- Classify reusable implementations by their actual dependencies. For example,
+  the portable microphone source belongs in `common/nodes_impl/c/`. Alif-specific
+  microphone, LCD and touch drivers belong in `common/nodes_impl/alif_e8/`.
+  The spectrum LCD node and its `SendToLCD` publisher belong in
+  `projects/template_mram/`.
+- Put board-specific interfaces and configuration in `board/<board>/`, exposed
+  through that board's layer. For example, microphone availability, capture
+  block sizes, LCD dimensions, and the DevKit-E8 driver declarations belong in
+  `board/DevKit-E8/board_nodes.h`, not in `common`. Portable Stream nodes use
+  injected callbacks and parameters rather than including a board header.
+- Keep `common/stream/` for shared Stream runtime configuration and interfaces.
+  Do not put node implementations in `common/stream/nodes/` or create another
+  parallel implementation tree.
+- Keep nodes as self-contained and independent as possible. Declare a node's
+  private C backend interface in its own C++ header inside an `extern "C"`
+  section, and define node-specific state types there, such as
+  `sliding_buffer_t` in `SlidingBuffer.hpp`. Guard C++ linkage and wrapper code
+  so the C implementation can include its owning header for declarations and
+  types without importing Stream's C++ runtime.
+- Keep processing results and retained application state in the node that owns
+  them. For example, do not allocate spectrum magnitudes, peak frequencies or
+  similar data in `hardware_params.cpp`, or pass their storage through
+  `HardwareParams`.
+  Pass node-owned data explicitly to application callbacks that consume it.
+- Do not expose private processing functions through a shared `common/nodes.h`
+  or other public umbrella interface. Shared support headers must not import
+  unrelated node interfaces. For example, audio tests must independently declare
+  the C interfaces and state layouts they use on the test side.
+- Put project-specific Python nodes in `projects/<project>/nodes/`, with exports
+  in that package's `__init__.py`. Put their implementations and node-specific
+  adapters in `projects/<project>/nodes_impl/`. Preserve any backend subfolders
+  used by that project. Do not promote a demonstration or model-specific node
+  into `common` merely because it could technically be reused.
+  - `EthosGain` is a project-specific demonstration. Its Python description
+    belongs in `projects/template_mram/nodes/`; its C++ wrapper and ExecuTorch
+    adapter belong in `projects/template_mram/nodes_impl/`.
+  - `LCD` and `SendToLCD` are project-specific spectrum nodes. Their Python
+    descriptions belong in `projects/template_mram/nodes/`; their C++ wrappers
+    belong in `projects/template_mram/nodes_impl/`. Spectrum diagnostics belong
+    to that project as well. Share only UI-independent LCD driver operations.
+- When relocating nodes, update Python imports and `folder` properties, project
+  files, include paths, host checks, and documentation. Regenerate graph outputs
+  through the project's `app.py`; verify generation from both the repository
+  root and the project folder.
+
+## Validation constraints
+
+- After rebuilding, load and run that updated build on the board.
+  A successful build or host test alone does not complete verification.
+- Use matching firmware and debugger symbols for the selected target and build
+  configuration. Verify the startup self-test, pipeline error state, and live
+  audio/LCD progress, including deadline and dropped-event counters.
+- Before finishing, resume the target and leave the firmware running. If board
+  verification is blocked, report the concrete blocker and do not claim it passed.
+"""
+
+[[skills.config]]
+path = "../../.agents/skills/planner/SKILL.md"
+enabled = false

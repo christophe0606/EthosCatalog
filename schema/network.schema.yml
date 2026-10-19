@@ -1,6 +1,6 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: EthosCatalog network configuration
-description: Project-owned model sources, quantized caches, model storage and Vela configuration.
+description: Project-owned model sources, quantization provenance, quantized caches, model storage and Vela configuration.
 type: object
 additionalProperties: false
 required:
@@ -13,6 +13,7 @@ properties:
     - name
     - model
     - quantize
+    - quantization
     - safetensors
     - graph
     - flash_ospi
@@ -27,6 +28,36 @@ properties:
       quantize:
         $ref: '#/$defs/text'
         description: Project quantization or import script path, relative to and contained within the project directory.
+      quantization:
+        type: object
+        additionalProperties: false
+        required:
+        - type
+        - quantization
+        - error
+        properties:
+          type:
+            type: string
+            enum:
+            - quantization_aware_training
+            - post_training_quantization
+            description: Quantization method; current catalog projects use post_training_quantization only.
+          quantization:
+            type: string
+            enum:
+            - full
+            - partial
+            - already
+            - synthetic
+            description: "Calibration provenance: full or partial original-source test patterns, an already quantized network, or synthetic data."
+          error:
+            description: >-
+              Network-dependent error or quality measurements, with no prescribed
+              type, structure, metric names, units or ranges. May contain a scalar,
+              list, matrix, mapping of multiple metrics, or null when unavailable.
+              Describe metrics, units, references and evaluation inputs in the value
+              or YAML comments. For already quantized networks, report a comparison
+              against float only if provided by the original source.
       safetensors:
         $ref: '#/$defs/text'
         description: Quantized tensor cache path, relative to and contained within the project directory.

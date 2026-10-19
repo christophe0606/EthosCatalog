@@ -172,6 +172,15 @@ class CIProjects(unittest.TestCase):
         self.assertIn("duplicate key", self.errors())
         self.assertIn("is not of type 'boolean'", self.errors())
 
+    def test_ci_rejects_invalid_quantization_provenance(self):
+        directory = self.project()
+        path = directory / "model/network.yml"
+        document = yaml.safe_load(path.read_text())
+        document["network"]["quantization"]["quantization"] = "fake"
+        path.write_text(yaml.safe_dump(document))
+        ci.check_project(self.root, "demo", self.config, self.report)
+        self.assertIn("$.network.quantization.quantization", self.errors())
+
     def test_reject_target_set_selecting_multiple_projects(self):
         directory = self.project()
         self.config["target-types"][0]["target-set"][0]["images"].append({"project-context": "other.Release"})

@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 MODEL = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from quantized_model import sha256
+from validate_networks import load_network
 
 
 def main():
@@ -94,7 +95,7 @@ def main():
     (MODEL / "board_validation.json").write_text(json.dumps(detail, indent=2)+"\n", encoding="utf-8")
     with (MODEL / "benchmark_vela_summary.csv").open(newline="") as file:
         estimate = next(csv.DictReader(file))
-    config = yaml.safe_load((MODEL / "network.yml").read_text())["network"]["vela"]
+    config = load_network(MODEL / "network.yml")["vela"]
     bandwidth = {}
     for key, memory, prefix in (("sram", "SRAM0", "sram"), ("weights", "MRAM", "off_chip_flash")):
         total = int(estimate[prefix+"_total_bytes"])

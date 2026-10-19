@@ -3,6 +3,13 @@ network:
   name: Template MRAM
   model: model/model.py
   quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    # Maximum absolute output error vs float, before Vela, on the four
+    # quantize.py calibration_inputs() patterns (2048 values, random seed 17).
+    error:
+      max_absolute_error: 3.039836883544922e-05
   safetensors: model/model_quantized.safetensors
   graph: model/model_quantized.pt2
   flash_ospi: false

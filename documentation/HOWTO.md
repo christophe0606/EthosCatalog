@@ -93,6 +93,9 @@ project directory, one level above `model/`.
 | --- | --- |
 | `model` | Model source |
 | `quantize` | Project-specific quantization or import script |
+| `quantization.type` | `post_training_quantization` in current projects; the schema also recognizes `quantization_aware_training` |
+| `quantization.quantization` | Calibration provenance: `full`, `partial`, `synthetic`, or `already` |
+| `quantization.error` | Network-dependent error or quality measurements of any structure; `null` if unavailable |
 | `safetensors` and `graph` | Cached quantized tensors and companion `.pt2` graph |
 | `flash_ospi` | Whether to program the model separately in OSPI flash |
 | `vela.ini`, `vela.system_config`, `vela.memory_mode` | Vela compiler and memory configuration |
@@ -100,6 +103,18 @@ project directory, one level above `model/`.
 OSPI projects also define `ospi.address` and `ospi.size` for their reserved model
 partition. Vela settings come from the project configuration; changing a CMSIS
 build context does not automatically override them.
+
+Use `full` for all original-source test patterns, `partial` for a subset,
+`synthetic` for generated calibration data, and `already` for an imported
+quantized network. Choose error metrics that suit the network: absolute error,
+recognition percentage, a confusion matrix, perplexity, or future measurements.
+The schema imposes no type, structure, metric names, units or ranges on `error`.
+Use descriptive metric names and include units, reference and evaluation inputs
+in the value or YAML comments. For an already quantized network, report a
+comparison against float only if it was supplied by the original source;
+otherwise leave that comparison unavailable. Use `null` when no measurements are
+available. A comparison against another quantized implementation is not a float
+comparison.
 
 Check the configuration against the shared [network schema](../schema/README.md#network-configuration):
 

@@ -3,6 +3,12 @@ network:
   name: MicroNet Large KWS (prequantized int8)
   model: model/model.py
   quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: already
+    # For already quantized networks, use a float error only if provided by the original source.
+    # The original source supplies no float comparison here.
+    error: null
   safetensors: model/model_quantized.safetensors
   graph: model/model_quantized.pt2
   flash_ospi: false

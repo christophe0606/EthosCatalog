@@ -36,8 +36,10 @@ def main():
         (temp / '.cmsis').mkdir()
         shutil.copyfile(ROOT / '.cmsis/ensemble_vela.ini', temp / '.cmsis/ensemble_vela.ini')
         (temp / 'scripts').mkdir()
-        for name in ('project_config.py', 'quantized_model.py'):
+        for name in ('project_config.py', 'quantized_model.py', 'validate_networks.py'):
             shutil.copyfile(ROOT / 'scripts' / name, temp / 'scripts' / name)
+        (temp / 'schema').mkdir()
+        shutil.copyfile(ROOT / 'schema/network.schema.yml', temp / 'schema/network.schema.yml')
         env = dict(os.environ, CMSIS_PACK_ROOT=str(pack.parents[2]))
         # The real CLI generates all layer files here, including the --quantize
         # subprocess. The original shared ai_layer and CMSIS selection are untouched.

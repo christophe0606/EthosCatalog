@@ -219,7 +219,7 @@ def check_project(root, name, config, report):
     check("network.yml schema", network)
 
     def caches():
-        network = networks.load_yaml(project / "model/network.yml")["network"]
+        network = networks.load_network(project / "model/network.yml")
         errors = []
         for key, suffixes in (("graph", {".pt2"}), ("safetensors", {".safetensors", ".safetensor"})):
             path = (project / network[key]).resolve()

@@ -1,0 +1,17 @@
+name = "review"
+description = "Review the network for correctness and adherence to standards"
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+developer_instructions = """
+Load the CHECKPOINT.md to know where we are.
+Verify the project for correctness and adherence 
+to standards based on the loaded checkpoint.
+If any discrepancies or violations are found, 
+document them in the .flow folder and provide recommendations for correction.
+Communicate to the calling agent the findings and recommendations 
+based on the review (give it the path to the file recording the findings).
+"""
+
+[[skills.config]]
+path = "../../.agents/skills/planner/SKILL.md"
+enabled = false

@@ -13,7 +13,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from validate_networks import load_yaml, main, network_files, validation_errors, validator
+from validate_networks import load_network, load_yaml, main, network_files, validation_errors, validator
 
 
 class NetworkSchema(unittest.TestCase):
@@ -38,7 +38,8 @@ class NetworkSchema(unittest.TestCase):
     def test_required_fields(self):
         records = [
             ((), ("network",)),
-            (("network",), ("name", "model", "quantize", "safetensors", "graph", "flash_ospi", "vela")),
+            (("network",), ("name", "model", "quantize", "quantization", "safetensors", "graph", "flash_ospi", "vela")),
+            (("network", "quantization"), ("type", "quantization", "error")),
             (("network", "vela"), ("ini", "system_config", "memory_mode")),
             (("network", "ospi"), ("address", "size")),
         ]
@@ -52,8 +53,8 @@ class NetworkSchema(unittest.TestCase):
                     del record[key]
                     self.assertTrue(self.errors(invalid))
 
-    def test_unknown_keys_rejected_at_every_level(self):
-        for path in ((), ("network",), ("network", "vela"), ("network", "ospi")):
+    def test_unknown_configuration_keys_rejected_outside_error_measurements(self):
+        for path in ((), ("network",), ("network", "quantization"), ("network", "vela"), ("network", "ospi")):
             with self.subTest(path=path):
                 invalid = deepcopy(self.ospi)
                 record = invalid
@@ -108,10 +109,68 @@ class NetworkSchema(unittest.TestCase):
         for document in (None, [], "network", {"network": None}, {"network": []}):
             with self.subTest(document=document):
                 self.assertTrue(self.errors(document))
-        for key in ("vela", "ospi"):
+        for key in ("quantization", "vela", "ospi"):
             invalid = deepcopy(self.ospi)
             invalid["network"][key] = []
             self.assertTrue(self.errors(invalid))
+
+    def test_quantization_methods_and_calibration_provenance(self):
+        for method in ("quantization_aware_training", "post_training_quantization"):
+            for provenance in ("full", "partial", "already", "synthetic"):
+                with self.subTest(method=method, provenance=provenance):
+                    valid = deepcopy(self.template)
+                    valid["network"]["quantization"].update(type=method, quantization=provenance)
+                    self.assertEqual(self.errors(valid), [])
+        for field, values in {
+            "type": ("post-training", "", None, 1, False, [], {}),
+            "quantization": ("fake", "unknown", "", None, 1, False, [], {}),
+        }.items():
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    invalid = deepcopy(self.template)
+                    invalid["network"]["quantization"][field] = value
+                    self.assertTrue(self.errors(invalid))
+
+    def test_error_accepts_network_dependent_measurements_without_metric_constraints(self):
+        measurements = (
+            None, 0, 0.0001, -0.4, "96.1% recognition", True, False, [], {},
+            [[92, 8], [5, 95]],
+            {"recognition_percent": {"float": 96.5, "quantized": 96.1},
+             "confusion_matrix": {"labels": ["negative", "positive"], "values": [[92, 8], [5, 95]]},
+             "perplexity": {"float": 12.4, "quantized": 12.7},
+             "future_metric": {"signed_delta": -0.4, "samples": [1, 2, 3], "units": "custom"}},
+            {"perplexity": float("inf")}, float("nan"),
+        )
+        for value in measurements:
+            with self.subTest(value=value):
+                valid = deepcopy(self.template)
+                valid["network"]["quantization"]["error"] = value
+                self.assertEqual(self.errors(valid), [])
+
+    def test_network_reader_validates_quantization_and_preserves_metadata(self):
+        for path, document in zip(self.paths, self.documents):
+            with self.subTest(path=path):
+                self.assertEqual(load_network(path), document["network"])
+        with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as directory:
+            path = Path(directory) / "network.yml"
+            for measurement in (None, -0.4, "96.1% recognition", [[92, 8], [5, 95]],
+                                {"future_metric": {"units": "custom", "values": [1, -2]},
+                                 "perplexity": float("inf")}):
+                with self.subTest(measurement=measurement):
+                    valid = deepcopy(self.template)
+                    valid["network"]["quantization"]["error"] = measurement
+                    path.write_text(yaml.safe_dump(valid), encoding="utf-8")
+                    self.assertEqual(load_network(path)["quantization"]["error"], measurement)
+                    with redirect_stdout(io.StringIO()):
+                        self.assertEqual(main([str(path)]), 0)
+            invalid = deepcopy(self.template)
+            del invalid["network"]["quantization"]["error"]
+            path.write_text(yaml.safe_dump(invalid), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, r"network\.quantization.*error.*required"):
+                load_network(path)
+            path.write_text("network:\n  quantization:\n    error: 0\n    error: 1\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "duplicate key 'error'"):
+                load_network(path)
 
     def test_yaml_duplicate_and_non_string_keys_rejected(self):
         contents = (

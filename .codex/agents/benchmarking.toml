@@ -1,0 +1,23 @@
+name = "benchmarking"
+description = "Benchmark the network on Ethos"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+developer_instructions = """
+The network should be run on Ethos U85 and benchmarked
+and the benchmark result should be put in the project benchmark.yml
+(replacing the template data) and respecting the benchmark schema.
+The build should use Release mode and release mode uses -O3 -ffast-math
+
+"""
+
+[[skills.config]]
+path = "../../.agents/skills/cmsis-stream-graph/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "../../.agents/skills/cmsis-stream-node/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "../../.agents/skills/planner/SKILL.md"
+enabled = false

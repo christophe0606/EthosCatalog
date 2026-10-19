@@ -19,10 +19,58 @@ valid files and reports errors with the file and YAML property path to stderr.
 It exits with status 0 when every file passes, 1 for invalid or unreadable files,
 and 2 for command usage errors or an empty scan.
 
-The `network` mapping requires `name`, `model`, `quantize`, `safetensors`, `graph`,
-`flash_ospi` and `vela`. All text fields must contain a non-whitespace character.
-`vela` requires `ini`, `system_config` and `memory_mode`. Unknown keys are rejected
-at every level, as are duplicate and non-string YAML mapping keys.
+The `network` mapping requires `name`, `model`, `quantize`, `quantization`,
+`safetensors`, `graph`, `flash_ospi` and `vela`. Configuration text fields must
+contain a non-whitespace character. `vela` requires `ini`, `system_config` and
+`memory_mode`. Unknown configuration keys are rejected outside the unrestricted
+`quantization.error` value. Duplicate and non-string YAML mapping keys are rejected.
+
+`network.quantization` records how the network was quantized. All three fields
+are required:
+
+```yaml
+quantization:
+  type: post_training_quantization
+  quantization: synthetic
+  # No float comparison has been recorded yet.
+  error: null
+```
+
+- `type`: `quantization_aware_training` or `post_training_quantization`. Current
+  catalog projects use only post-training quantization.
+- `quantization`: `full` for the complete original-source test patterns,
+  `partial` for a subset of those patterns, `synthetic` for generated calibration
+  data, or `already` when importing an already quantized network. `already`
+  describes the imported model, regardless of the inputs used to validate it.
+- `error`: network-dependent error or quality measurements. The field is required,
+  but its value has no prescribed type, structure, metric names, units or ranges.
+  Scalars, text, lists, matrices, nested mappings and multiple metrics are accepted;
+  use `null` when no measurement is available. Describe each metric, its units,
+  reference and evaluation inputs in the value or YAML comments. A tolerance is not
+  a measured error. **For an already quantized network, give a comparison against
+  float only if the original source supplied it.** Comparisons against another
+  quantized model do not qualify as comparisons against float.
+
+For example, a project may record recognition percentages, a confusion matrix,
+or perplexity. These illustrative keys and values are not schema requirements:
+
+```yaml
+error:
+  recognition_percent:
+    float: 96.5
+    quantized: 96.1
+  confusion_matrix:
+    labels: [negative, positive]
+    quantized: [[92, 8], [5, 95]]
+  perplexity:
+    float: 12.4
+    quantized: 12.7
+```
+
+Both templates use synthetic calibration inputs. KWS imports an already
+quantized TFLite network and has no original-source float error to report.
+The templates name their existing measurement `error.max_absolute_error`; this
+name is specific to those projects, not enforced by the schema.
 
 `flash_ospi` must be a boolean. When true, `ospi` is required with a nonnegative
 integer `address` and a positive integer `size`, both in bytes. Hexadecimal YAML
@@ -34,8 +82,10 @@ Paths are interpreted relative to the project directory, one level above
 `model/`. Model sources, quantizers and caches belong inside the project;
 `vela.ini` may reference shared configuration outside it. Schema validation
 checks structure and types without loading models or requiring generated cache
-files. The existing project scripts additionally check resolved path containment
-and the presence of the Vela ini file when preparing a network.
+files. Python readers use `validate_networks.load_network()` to enforce the same
+schema, including quantization metadata. The project selection code additionally
+checks resolved path containment and the presence of the Vela ini file when
+preparing a network.
 
 VS Code associates the schema with project `network.yml` and `network.yaml`
 files through `.vscode/settings.json` when YAML language support is installed.

@@ -118,6 +118,30 @@ class ProjectScripts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "inside its project"):
             selected_project(self.solution_file)
 
+    def test_selection_reads_and_validates_quantization_metadata(self):
+        for provenance in ("full", "partial", "already", "synthetic"):
+            with self.subTest(provenance=provenance):
+                self.network["quantization"].update(quantization=provenance, error={
+                    "recognition_percent": 96.1, "signed_delta": -0.4,
+                    "confusion_matrix": [[92, 8], [5, 95]],
+                    "future_metric": {"units": "custom", "values": [1, 2]},
+                })
+                self.write_config()
+                self.assertEqual(selected_project(self.solution_file)[4]["quantization"],
+                                 self.network["quantization"])
+        for invalid in (None, {"type": "post_training_quantization"},
+                        {"type": "post_training_quantization", "quantization": "fake", "error": None},
+                        {"type": "unknown", "quantization": "synthetic", "error": {}}):
+            with self.subTest(invalid=invalid):
+                self.network["quantization"] = invalid
+                self.write_config()
+                with self.assertRaisesRegex(ValueError, r"network\.quantization"):
+                    selected_project(self.solution_file)
+        del self.network["quantization"]
+        self.write_config()
+        with self.assertRaisesRegex(ValueError, "quantization.*required"):
+            selected_project(self.solution_file)
+
     def test_ui_selects_application_among_multiple_listed_projects(self):
         second = self.add_project("second")
         self.add_project("FlashLoader", application=False)

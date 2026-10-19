@@ -46,6 +46,15 @@ def validation_errors(document, check):
         yield f"{path}: {error.message}"
 
 
+def load_network(path):
+    """Read validated settings, preserving network-dependent error measurements."""
+    document = load_yaml(path)
+    errors = list(validation_errors(document, validator()))
+    if errors:
+        raise ValueError("\n".join(f"{path}: {error}" for error in errors))
+    return document["network"]
+
+
 def network_files():
     return sorted(path for path in (ROOT / "projects").rglob("*")
                   if path.is_file() and path.name in {"network.yml", "network.yaml"})

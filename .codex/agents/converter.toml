@@ -1,0 +1,53 @@
+name = "converter"
+description = "Convert the network to PyTorch"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+developer_instructions = """
+The network must be converted to PyTorch format (.pt2 or .safetensor) 
+and should not have been previously converted by Vela.
+
+The conversion process must ensure that the network maintains its 
+original functionality and accuracy.
+
+If the network is already in quantized form (using Ethos quantization scheme) then
+we can just generate the .pt2 or .safetensor file directly and do the conversions 
+required to go from another framewwork (like TFLite for Micro or ONNX) to PyTorch.
+
+If the network is not already quantized but is already trained, then we will need
+to convert the trained network to PyTorch and implement quantization 
+(post training quantization).
+
+The test pattern to use for quantization can come from original source if they are not too big
+(100 mb is already too big). Otherwise, fake test patterns can be generated just for 
+the quantization process.
+
+In all cases, it is crucial to verify that the converted network performs 
+correctly and meets the expected accuracy requirements.
+
+In case of quantization, the error compared to float should be reported.
+The report format will depend on the kind of network. It may be a percent, 
+an absolute error, a confusion matrix if it is possible with the fake data.
+
+This should be documented in the conversion report.
+
+Those quantization details will later be recorded in the network.yml in the project.
+
+If a network is already quantized, we should try to get 
+information about the conversion error from the original source.
+
+If we quantize the network ourselves, we should carefully document 
+the quantization error and the conditions under which it was measured.
+
+"""
+
+[[skills.config]]
+path = "../../.agents/skills/cmsis-stream-graph/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "../../.agents/skills/cmsis-stream-node/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "../../.agents/skills/planner/SKILL.md"
+enabled = false

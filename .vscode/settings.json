@@ -12,5 +12,6 @@
     },
     "clangd.arguments": [
         "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\EthosCatalog\\out\\kws_micronet_l\\DevKit-E8\\Release"
-    ]
+    ],
+    "cmake.sourceDirectory": "C:/Users/chrfav01/benchresults/EthosCatalog/tmp/DevKit-E8/KWS_Release"
 }
