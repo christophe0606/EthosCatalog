@@ -330,9 +330,40 @@ Run the checks relevant to your changes from the repository root:
 | Benchmark schema regression tests | `uv run tests/test_benchmark_schema.py` |
 | Project script regression tests | `uv run tests/test_project_scripts.py` |
 | DSP and renderer checks on Windows | `./tests/run_audio_tests.ps1 -PackRoot C:/ctools_pack` |
+| Object detection processing, Stream ownership and camera rearm | `.venv/Scripts/python.exe tests/run_detection_tests.py --vcvars path/to/vcvars64.bat` |
 
 The DSP and renderer checks require clang and installed CMSIS packs; adjust
 `-PackRoot` to your installation. They also generate
 `out/audio-spectrum-{linear,log}.ppm` previews. See the
 [validation notes](audio-spectrum-validation.md) for board results and audio/LCD
 processing contracts. Verify firmware changes on the board as well as on the host.
+
+## Live object detection
+
+`projects/object_detection` ports the original 192x192 INT8 face network through
+PyTorch and ExecuTorch/Vela, preserving its quantization and two output heads.
+Select `DevKit-E8@Detection_Release` with only `object_detection.Release` enabled;
+the shared AI layer must belong to that project. Build/load/debug and UART capture
+use the CMSIS Developer Assistant tools. Startup runs the four-fixture network
+self-test, 100 measured forwards and optimized C preprocessing/decode checks.
+The seven application nodes perform single-shot camera capture, crop, grayscale,
+inline inference, model decoding, NMS and LCD publication within a 200 ms sampling
+budget. A generated shallow RGB-view Duplicate makes eight scheduled firings and
+72 bytes of FIFO storage. Common crop, grayscale and NMS nodes support other
+geometries/strides and box capacities/thresholds; model formats, clipping,
+capture/display ownership and frame pacing remain project-owned.
+
+The LCD has an 800x480 logical landscape canvas, with a centered 384x384 preview.
+One clockwise transform maps image and boxes to native 480x800 scanout. The E8
+camera profile supplies 640x480 RGB565; existing projects keep their prior camera
+settings and LCD/touch initializer. The detector uses display-only initialization
+because camera and touch share I2C1 completion callback ownership.
+
+See the project's [README](../projects/object_detection/README.md),
+[live verification](../projects/object_detection/LIVE_VALIDATION.md),
+[conversion report](../projects/object_detection/model/CONVERSION.md) and
+[benchmark report](../projects/object_detection/model/BENCHMARK.md). Regenerate its
+graph from either the repository root or project folder using `app.py`, then run
+`scripts/update_catalog.py` after documentation or graph changes. Recheck the board
+after firmware changes and leave it running. No labeled-dataset accuracy is implied
+by the numerical fixtures or by live scene detections.

@@ -2,6 +2,21 @@
 
 A collection of neural networks, benchmarks and demos for Arm Ethos NPUs.
 
+The goal of the project is to identify networks that can run on a board using Ethos. 
+
+As consequences:
+
+* This project does not deliver networks quantized with state of the art methods
+  * Networks are not made to be reused as they are in a product
+  * The user interested in a network should check the accuracy on the full set of test patterns
+  * The network may have to be reconverted and quantized with better methods
+* This project does not try to optimize pre / post processing when what's available is enough to run the demo on board
+* This project does not try to optimize the final CMSIS Stream graph that may contain more data copies than required in a better graph
+
+Once a user has identified a network from this list, we expect that more time 
+will be spent by the user on validating the conversion and quantization 
+step before using the network in a product.
+
 The demos use CMSIS Stream, whose POSIX and Zephyr runtimes provide a path to
 porting them to Linux or Zephyr, including on Cortex-A processors. These ports
 have not yet been implemented in this repository.
@@ -20,3 +35,9 @@ and details on building, running and extending the projects.
 | [kws_micronet_l](projects/kws_micronet_l/README.md) | Prequantized MicroNet Large keyword spotting through PyTorch and ExecuTorch; validated and benchmarked on Ethos-U85 with MRAM weights. | [![kws_micronet_l graph](projects/kws_micronet_l/generated/app.png)](projects/kws_micronet_l/generated/app.pdf) | [benchmark.yml](projects/kws_micronet_l/model/benchmark.yml) |
 | [template_mram](projects/template_mram/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in MRAM. | [![template_mram graph](projects/template_mram/generated/app.png)](projects/template_mram/generated/app.pdf) | [benchmark.yml](projects/template_mram/model/benchmark.yml) |
 | [template_ospi](projects/template_ospi/README.md) | Microphone spectrum demo with Ethos-U85 2x gain and a model stored in OSPI flash. | [![template_ospi graph](projects/template_ospi/generated/app.png)](projects/template_ospi/generated/app.pdf) | [benchmark.yml](projects/template_ospi/model/benchmark.yml) |
+
+## image
+
+| Project name | Description | Application graph | Benchmark |
+| --- | --- | --- | --- |
+| [object_detection](projects/object_detection/README.md) | Live camera face detection on Ethos-U85 with CMSIS Stream, RGB565 preview and rotated LCD boxes. | [![object_detection graph](projects/object_detection/generated/app.png)](projects/object_detection/generated/app.pdf) | [benchmark.yml](projects/object_detection/model/benchmark.yml) |

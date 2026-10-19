@@ -75,6 +75,20 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: Detection_Debug
+          images:
+            - project-context: object_detection.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Detection_Release
+          images:
+            - project-context: object_detection.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: ProgramModel
       debug: on
@@ -102,8 +116,12 @@ solution:
       for-context:
         - .Debug
         - .Release
+    - project: projects/object_detection/object_detection.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
   mlops:
-    description: Microphone spectrum with Ethos-U85 sample gain
+    description: Ethos-U85 network demos and benchmarks for Alif DevKit-E8
     npu:
       type: Ethos-U85
       macs: 256

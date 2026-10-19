@@ -1,0 +1,17 @@
+# Paths are relative to the project directory, one level above this file.
+network:
+  name: YOLO Fastest 192 face v4 (prequantized int8)
+  model: model/model.py
+  quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: already
+    # Upstream does not provide float-versus-int8 conversion error.
+    error: null
+  safetensors: model/model_quantized.safetensors
+  graph: model/model_quantized.pt2
+  flash_ospi: false
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_MRAM
+    memory_mode: Shared_Sram

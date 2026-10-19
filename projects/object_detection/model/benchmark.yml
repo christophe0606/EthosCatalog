@@ -1,0 +1,319 @@
+benchmarks:
+  network:
+    operation: YOLO Fastest 192 face v4; two independently quantized NHWC detection
+      heads, three anchors per cell, six values per anchor
+    input_shape:
+    - 1
+    - 192
+    - 192
+    - 1
+    output_shapes:
+    - - 1
+      - 6
+      - 6
+      - 18
+    - - 1
+      - 12
+      - 12
+      - 18
+    float_boundary: false
+    quantization: Original int8 TFLite quantization retained. Reported tolerance/error
+      is board versus default TFLite in LSB. BUILTIN_REF diagnostic separately in
+      board_validation.json.
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: MRAM
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 407440
+        input_tensor_bytes: 36864
+        ethos:
+          weights_region_bytes: 385872
+          arena_region_bytes: 527504
+        executorch:
+          method_pool_peak_bytes: 40464
+          temp_pool_peak_bytes: 527504
+      time:
+        ms: 3.01475
+        cycles: 1205900.0
+        statistic: median
+        min_cycles: 1205403
+        max_cycles: 1206127
+        mean_cycles: 1205872.19
+        forward_ms: 3.2407175
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 1205808
+        - 1206011
+        - 1205974
+        - 1205977
+        - 1205915
+        - 1205867
+        - 1205755
+        - 1205915
+        - 1205801
+        - 1205909
+        - 1205947
+        - 1205847
+        - 1205701
+        - 1205911
+        - 1205845
+        - 1205982
+        - 1205760
+        - 1205992
+        - 1206017
+        - 1205959
+        - 1205851
+        - 1205731
+        - 1205913
+        - 1205965
+        - 1205897
+        - 1205903
+        - 1205712
+        - 1205947
+        - 1205934
+        - 1205947
+        - 1205897
+        - 1205911
+        - 1205868
+        - 1205980
+        - 1205969
+        - 1205935
+        - 1205850
+        - 1205992
+        - 1205899
+        - 1206000
+        - 1205988
+        - 1205606
+        - 1205887
+        - 1206000
+        - 1205992
+        - 1205887
+        - 1205453
+        - 1205935
+        - 1205781
+        - 1205915
+        - 1205821
+        - 1205685
+        - 1205972
+        - 1205970
+        - 1205893
+        - 1205963
+        - 1205403
+        - 1205854
+        - 1205881
+        - 1205831
+        - 1206008
+        - 1205645
+        - 1205825
+        - 1206096
+        - 1205911
+        - 1205718
+        - 1205923
+        - 1205959
+        - 1205923
+        - 1205863
+        - 1205796
+        - 1205472
+        - 1205838
+        - 1206072
+        - 1205869
+        - 1205934
+        - 1205443
+        - 1205815
+        - 1205875
+        - 1205959
+        - 1205876
+        - 1205575
+        - 1205809
+        - 1205893
+        - 1205887
+        - 1205661
+        - 1206127
+        - 1205905
+        - 1205952
+        - 1205809
+        - 1205995
+        - 1205701
+        - 1205995
+        - 1205942
+        - 1206023
+        - 1205863
+        - 1205814
+        - 1205901
+        - 1205873
+        - 1205963
+        forward_ticks_samples:
+        - 1296475
+        - 1296553
+        - 1296503
+        - 1296089
+        - 1296161
+        - 1295953
+        - 1296413
+        - 1296509
+        - 1295795
+        - 1296403
+        - 1296259
+        - 1295861
+        - 1296287
+        - 1296695
+        - 1296037
+        - 1296559
+        - 1296449
+        - 1296287
+        - 1296433
+        - 1296043
+        - 1296473
+        - 1296481
+        - 1296005
+        - 1296455
+        - 1296323
+        - 1296575
+        - 1295993
+        - 1296293
+        - 1296587
+        - 1296349
+        - 1296335
+        - 1296025
+        - 1295957
+        - 1296761
+        - 1296157
+        - 1296039
+        - 1296259
+        - 1296091
+        - 1296521
+        - 1295665
+        - 1296845
+        - 1295927
+        - 1295623
+        - 1296317
+        - 1296365
+        - 1296109
+        - 1296031
+        - 1296449
+        - 1296029
+        - 1296221
+        - 1296367
+        - 1296203
+        - 1296617
+        - 1296461
+        - 1296173
+        - 1295845
+        - 1296335
+        - 1296371
+        - 1296229
+        - 1295873
+        - 1296599
+        - 1295957
+        - 1296547
+        - 1296113
+        - 1296385
+        - 1296185
+        - 1296563
+        - 1296377
+        - 1295939
+        - 1296311
+        - 1296591
+        - 1296003
+        - 1295599
+        - 1296365
+        - 1296409
+        - 1295819
+        - 1296089
+        - 1296479
+        - 1296075
+        - 1296769
+        - 1296031
+        - 1295887
+        - 1295993
+        - 1296317
+        - 1296479
+        - 1295783
+        - 1296361
+        - 1296209
+        - 1295861
+        - 1296257
+        - 1296173
+        - 1296439
+        - 1296281
+        - 1296347
+        - 1296317
+        - 1296193
+        - 1296317
+        - 1296509
+        - 1296233
+        - 1296275
+    estimates:
+      vela:
+        ini: ../../.cmsis/ensemble_vela.ini
+        system_config: Ethos_U85_SRAM_MRAM
+        memory_mode: Shared_Sram
+        version: 5.1.0
+        accelerator_config: Ethos_U85_256
+        model_sha256: 25c3a095d1a80d51ccdf8e3ac64b7d480ce63c93da519003da665c1219300244
+        ini_sha256: 987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2
+        summary: benchmark_vela_summary.csv
+        cycles: 1767133
+        time_ms: 4.417832499999999
+        bandwidth:
+          sram:
+            memory: SRAM0
+            vela_memory_area: sram
+            total_bytes_per_inference: 11756292
+            average_bytes_per_second: 2661099532.406446
+            design_peak_bytes_per_second: 12800000000.0
+          weights:
+            memory: MRAM
+            vela_memory_area: off_chip_flash
+            total_bytes_per_inference: 686861
+            average_bytes_per_second: 155474658.67028686
+            design_peak_bytes_per_second: 774400000.0
+    run:
+      recorded_at: '2026-10-19T11:00:43.641141+00:00'
+      context: object_detection.Release+DevKit-E8
+      target: DevKit-E8@Detection_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        driver: ARM::CMSIS-Ethos-U@1.0.0
+        driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic
+          U85@2.0.0
+        board: AlifSemiconductor::Ensemble@2.2.1
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-22
+      execution_job: g-24
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 100
+      pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) on every inference
+      pmu_overflow: 0
+      npu_invocations_per_forward: 1
+      test_result: PASS
+      max_absolute_error: 7
+      tolerance: 8
+      uart: benchmark_uart.txt
+      model_sha256: 25c3a095d1a80d51ccdf8e3ac64b7d480ce63c93da519003da665c1219300244
+      firmware_sha256: 05a7474796f3c64ae052fb7a25ab64828d877f7240f886d4594fe016ff2220ae
+      input: 'Four fixtures: original source RGB sample after host preprocessing,
+        constant -128, horizontal ramp, random_0 seed 20261019; benchmark repeats
+        random_0; both INT8 heads checked'
+      timing_scope: module.forward() including ExecuTorch and PMU hooks; excludes
+        input/output copies, setup, validation, decoding and UART. Four validation
+        forwards then one immediate warmup; no debugger halt during measured loop.
+      uart_run: last complete startup in benchmark_uart.txt
+      measurement_source: UART4 COM5 115200 8N1; NPU PMU, RTOS system timer, allocator
+        high-water marks

@@ -1,0 +1,136 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+camera [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">camera<BR/>(CameraCapture)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+crop [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">crop<BR/>(Rgb565CenterCrop)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+decode [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">decode<BR/>(FaceDecode)</FONT></TD>
+    <TD PORT="boxes"><FONT POINT-SIZE="12.0" COLOR="black">boxes</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="frame"><FONT POINT-SIZE="12.0" COLOR="black">frame</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+display [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="boxes"><FONT POINT-SIZE="12.0" COLOR="black">boxes</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">display<BR/>(FaceDisplay)</FONT></TD>
+    <TD></TD>
+  </TR>
+<TR>
+<TD PORT="frame"><FONT POINT-SIZE="12.0" COLOR="black">frame</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+dup0 [shape=point,label="dup0"]
+
+gray [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gray<BR/>(Rgb888ToGrayInt8)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+network [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">network<BR/>(FaceInference)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="rgb"><FONT POINT-SIZE="12.0" COLOR="black">rgb</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+nms [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">nms<BR/>(NonMaximumSuppression)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+
+camera:i -> crop:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<Rgb565Image>
+
+]
+
+gray:i -> network:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<GrayInt8Image>
+
+]
+
+network:o -> decode:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<InferredFrame>
+
+]
+
+decode:boxes -> nms:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<ScoredBoxList>
+
+]
+
+decode:frame -> display:frame [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<PreparedFrame>
+
+]
+
+nms:i -> display:boxes [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<ScoredBoxList>
+
+]
+
+crop:i ->
+dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<Rgb888Image>
+
+]
+
+
+dup0 -> gray:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<Rgb888Image>
+
+]
+
+
+dup0 -> network:rgb [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<Rgb888Image>
+
+]
+
+
+
+
+}

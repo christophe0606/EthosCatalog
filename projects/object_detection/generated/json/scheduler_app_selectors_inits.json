@@ -1,0 +1,34 @@
+{
+  "CameraCapture<Rgb565Image,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "Rgb565CenterCrop<Rgb565Image,1,Rgb888Image,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FaceDecode<InferredFrame,1,ScoredBoxList,1,PreparedFrame,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FaceDisplay<ScoredBoxList,1,PreparedFrame,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "Duplicate<Rgb888Image,1,Rgb888Image,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "Rgb888ToGrayInt8<Rgb888Image,1,GrayInt8Image,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FaceInference<GrayInt8Image,1,Rgb888Image,1,InferredFrame,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "NonMaximumSuppression<ScoredBoxList,1,ScoredBoxList,1>": {
+    "isTemplate": true,
+    "selectors": []
+  }
+}

@@ -32,7 +32,7 @@ static void clean_frame(uint16_t *frame)
     SCB_CleanDCache_by_Addr((uint32_t *)frame, LCD_PIXELS * sizeof(uint16_t));
     __DSB();
 }
-int lcd_init(uint16_t *initial_frame)
+int lcd_init_display(uint16_t *initial_frame)
 {
     uint32_t error = 0;
     run_profile_t profile = {0};
@@ -48,6 +48,13 @@ int lcd_init(uint16_t *initial_frame)
     CHECK(Driver_CDC200.Control(CDC200_CONFIGURE_DISPLAY, (uint32_t)initial_frame));
     CHECK(Driver_CDC200.Control(CDC200_SCANLINE0_EVENT, 1U));
     CHECK(Driver_CDC200.Start());
+    return 0;
+}
+int lcd_init(uint16_t *initial_frame)
+{
+    // Touch owns I2C1's callback for the lifetime of this API. Applications
+    // using the MT9M114 on that bus use lcd_init_display instead.
+    CHECK(lcd_init_display(initial_frame));
     const uint32_t pad = PADCTRL_READ_ENABLE | PADCTRL_DRIVER_DISABLED_PULL_UP |
                          PADCTRL_OUTPUT_DRIVE_STRENGTH_12MA;
     CHECK(pinconf_set(PORT_7, PIN_2, PINMUX_ALTERNATE_FUNCTION_5, pad));

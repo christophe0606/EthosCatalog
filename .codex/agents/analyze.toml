@@ -28,7 +28,8 @@ implementation may need double buffering so a big part of the memory may be used
 At this step, you cannot be totally sure if it is going to be possible to port the network to Ethos.
 So the goal is to skip networks that are clearly not suitable for porting to Ethos.
 If there is a doubt, then the next step by other agents will allow to discover 
-whether it is feasible to port the network to Ethos.
+whether it is feasible to port the network to Ethos. The coding step will generally be able
+to demonstrate the feasibility of porting the network to Ethos.
 
 We reject networks only if it is obvious they can't fit on the target board.
 The reasons for the rejection must be clearly documented.

@@ -11,6 +11,18 @@ Keep reusable processing nodes independent of any project and simple enough to
 use across projects. If generalizing a node makes it too complex, create a
 separate node. Keep application-specific behavior in project-owned nodes.
 
+The coding may demonstrate that we do not have enough memory (SRAM, MRAM, OSPI ...) to 
+run the network with the software (pre / post processing, RTOS, boot code etc ...) 
+on the given board.
+In that case, the coding process should be stopped and the problem documented and reported to
+calling agent.
+
+A new project may require to slightly modify or extend a reusable node to meet its specific needs.
+It is acceptable but a reusable node should not become too complex and try to do too many things. 
+If a reusable node becomes too complex, consider splitting it into smaller, more manageable and 
+focused nodes.
+CMSIS Stream section gives detailed guidance on when a node can be considered reusable.
+
 ## Inference scheduling
 
 Use the network's inference time to choose where inference runs:
@@ -48,11 +60,19 @@ The network node has:
     CMSIS-DSP, which selects acceleration at build time, does not make a node
     Helium-specific.
   - `alif_e8/`: Alif E8 hardware-specific drivers and peripheral setup.
-- A common node must be usable by different projects. Portability or injected
+- A reusable node in common must be usable by different projects. Portability or injected
   hardware callbacks alone do not make a node reusable. Keep application-specific
   drawing, styling, animation, touch interaction, event protocols and pipeline
   policy in the owning project. Factor out a shared part only when it is useful
   across applications without imposing one application's behavior.
+- If only one project of a given kind is present, it does not mean that a node is project-specific
+  only because it is currently used by a single project. The criteria is if it may be reused
+  by other similar projects in the future. For instance, face detection networks may
+  use similar pre-processing nodes that could be factored out into reusable common nodes for those
+  kind of project. Other example, if the pre-processing for a face detection is really depending on the
+  very specific format used by the network then it may not be suitable for reuse in other projects.
+- A reusable node does not have to be reusable for all projects. 
+  It only needs to be reusable for multiple projects of a similar kind.
 - Classify reusable implementations by their actual dependencies. For example,
   the portable microphone source belongs in `common/nodes_impl/c/`. Alif-specific
   microphone, LCD and touch drivers belong in `common/nodes_impl/alif_e8/`.

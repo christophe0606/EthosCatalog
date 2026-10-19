@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/kws_micronet_l/DevKit-E8/Release/kws_micronet_l.axf",
+            "program": "out/object_detection/DevKit-E8/Release/object_detection.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -46,7 +46,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/kws_micronet_l/DevKit-E8/Release/kws_micronet_l.axf",
+            "program": "out/object_detection/DevKit-E8/Release/object_detection.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

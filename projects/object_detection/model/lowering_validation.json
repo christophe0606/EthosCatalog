@@ -1,0 +1,24 @@
+{
+  "project": "object_detection",
+  "target": "ethos-u85-256",
+  "cache_sha256": {
+    "graph": "0326dc8fd2bcd70f28a3ce38dbc6703bacd5da4ed46aa594b1b2c608b2c83225",
+    "safetensors": "dca436eca716156d6be04ee86ed8bd4bf7ca65486e774d0e56b4be1056ac04c2"
+  },
+  "config_sha256": "ba7b8e367ca0faa6ced667ad62f5e9d3613369e68e739f56d0d3931f3e95edac",
+  "pte_sha256": "2b8b90bfe54c48f937ce81d068633b413bb5daaa404a7946437ebc1b7b543888",
+  "pte_bytes": 407472,
+  "delegates": 1,
+  "cpu_operators": [],
+  "quantize_is_noop": true,
+  "executorch": "1.4.1",
+  "full_generator_cli_passed": true,
+  "shared_ai_layer_modified": false,
+  "scope": "Host create_ai_layer CLI through ExecuTorch and Vela; no firmware build/run",
+  "sources": {
+    "create_ai_layer.py": "cb07841e218490e2bcdfe7c63a2d5edd414b1e73569f492fa68dc375d24a1c9d",
+    "quantized_model.py": "6a775830b2af0265f24db3b7b206c76c4e975e82488bd9664dee3b0b3278a2ef",
+    "project_config.py": "e3a7742bc42399b41ed80a47e3bcf18443e1706b302e60c87099f6583b5207c5"
+  },
+  "check_sha256": "1458759cb47b98072522fc63e02650064dd814f219526e9bcd9df94a5584b6ea"
+}

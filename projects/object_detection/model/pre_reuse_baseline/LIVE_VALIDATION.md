@@ -1,0 +1,124 @@
+# Live landscape demo validation
+
+Validated on the physical Alif DevKit-E8 M55_HP / Ethos-U85-256 on 2026-10-19.
+Only `object_detection.Release` was selected. Final AC6 6.24 Release build
+**b-19** was loaded by **l-20**, run by **g-21**, and inspected through the
+matching CMSIS attach configuration. `get_device_info` identified
+`out/object_detection/DevKit-E8/Release/object_detection.axf` and
+`DevKit-E8@Detection_Release`.
+
+ELF SHA256: `cfb44a8daef5d27e4d129a41b9fa8e271f10c2a85e634f9b4b230adfd18799ad`.
+The PTE and original quantization are unchanged. Raw startup evidence is in
+[model/benchmark_uart.txt](model/benchmark_uart.txt); network values, timing and
+hashes are in [model/board_validation.json](model/board_validation.json) and
+[model/benchmark.yml](model/benchmark.yml). Live debugger snapshots are retained
+in [model/live_validation.json](model/live_validation.json).
+
+## Behavior and scheduling
+
+The CMSIS Stream schedule contains exactly five firings: camera, preprocessing,
+network, decoder, display. FIFO tokens occupy 48 bytes on the target. Inline
+inference was selected from measured complete-forward latency, then validated
+against the whole camera-to-display path. Default cadence is one requested
+single-shot frame per 200 ms, approximately 5 fps; the sensor runs at its native
+rate independently. No requested captures are queued or discarded.
+
+The LCD uses an **800x480 landscape canvas**. The original square 192x192 model
+crop appears at 2x scale, centered at logical `(208,48)` with black margins.
+One clockwise transform maps logical `(x,y)` to native framebuffer
+`(479-y,x)` on the 480x800 panel. Image pixels and red boxes use that same
+transform; physical pixel `(0,0)` corresponds to logical bottom-left. This
+preserves the source's square inference area while satisfying landscape display.
+
+The MT9M114 profile is 640x480 RGB565. Live input memory, read through the CMSIS
+debugger, produced a recognizable grayscale crop of the actual scene. This
+checks capture and preprocessing continuity; it is not a camera calibration or
+accuracy measurement. The observed detections count is model output on an
+unlabeled scene, not confirmed face ground truth.
+
+## Board checks
+
+Both complete startup runs passed all four fixtures and 12,960 head values.
+The compiled Release C grayscale function matched the independent source RGB
+fixture byte-for-byte under `-O3 -ffast-math`. The actual C decoder reproduced
+both source-sample boxes/confidences within 0.001 pixels / 0.00001 score.
+Debugger flags for network, preprocessing, decoder and live startup were all 1.
+
+The final run completed 1,135 frames. Between two halted snapshots, 302 complete
+frames advanced over 60,389 RTOS milliseconds: **5.00091 fps**. At the final snapshot:
+
+| Check | Observed value |
+| --- | ---: |
+| Captured / preprocessed / inferred / decoded / presented | 1,135 each |
+| Pipeline / application error | 0 |
+| Full frame maximum including LCD fence | 57,999,901 ticks = 144.9997525 ms |
+| Maximum through rendering before LCD fence | 44,641,240 ticks = 111.6031 ms |
+| Maximum live complete forward | 1,305,349 ticks = 3.2633725 ms |
+| Frame deadline misses / capture timeouts | 0 / 0 |
+| Raw camera notifications / LCD error mask | 0 / 0 |
+| Dropped requested frames / dropped events / ownership errors | 0 / 0 / 0 |
+| Cumulative emitted detections | 571 |
+| Application heartbeat / LCD scanline events | 228 / 14,034 |
+
+The cadence interval advanced the application heartbeat from 167 to 228 and
+LCD scanline events from 10,315 to 14,034. Pipeline/application errors remained
+zero. The target was resumed after inspection; COM5 was closed, leaving CMSIS
+Run g-21 and the matching attach session running.
+
+The 400 MHz timer interval begins before sensor capture and ends after the
+two-VSYNC LCD release fence. The 200 ms budget includes capture/start/stop,
+cache maintenance, preprocessing, inference, decode, rendering and display wait;
+the sink delays the remaining budget. Measured startup median NPU time is
+3.014635 ms, complete forward 3.238185 ms. The slower display/camera operations
+determine full cadence, not inference alone. `dropped_frames=0` means no requested
+single shot was discarded; it does not mean every native sensor frame was used.
+
+All final `camera_diagnostics.error_count[4]` and `error_mask[4]` entries were
+zero, for initialization, idle, capture and stopping phases. Earlier b-14
+debugging observed two notifications before the first capture: breakpoints
+interrupted `CSI2_PowerControl` and `CSI2_ConfigureHost` inside `camera_init`.
+Their event argument was optimized out, so no exact old mask or CSI subtype is
+claimed. Those notifications were counted, not filtered. They remained at two
+through 353 otherwise successful frames and did not recur in the final run.
+Persistent phase/mask diagnostics now preserve any future notifications.
+
+## Driver integration and memory
+
+Touch and camera share I2C1. The pack I2C initializer keeps the first callback
+when already initialized; initializing GT911 before the camera prevented the
+sensor completion flag from updating. The detector uses `lcd_init_display()`;
+the existing `lcd_init()` still initializes GT911 for spectrum projects.
+
+Ensemble 2.2.1 `CPI_StopCapture` disables CPI interrupts and resets the
+controller. The reusable adapter restores CPI configuration and events before
+each single shot. Snapshot completion plus `Stop()` fence DMA before CPU reads.
+Clean/invalidate operations bracket camera DMA; LCD publication cleans its
+buffer and waits for prior scanout release. One camera buffer and two alternating
+LCD buffers have exclusive owners. Node-owned crop, head and box storage is
+retained until downstream consumption completes.
+
+[Build-artifact memory report](model/benchmark_memory.txt): SRAM0 execution
+3,301,376 bytes of 4 MiB (3.15 MiB), plus 16 segment-padding bytes; MRAM load
+occupancy 1,007,152 bytes. DTCM contains the separate 262,144-byte C++ heap,
+32,768-byte application heap, 32,768-byte stack, 151,576-byte RW region and
+3,296-byte nonsecure region. Startup and live inference share the single
+64 KiB method / 1 MiB temporary pools; observed peaks are 40,464 / 527,504 bytes.
+
+## Host checks and limits
+
+`tests/run_detection_tests.py --vcvars path/to/vcvars64.bat` passed with MSVC
+optimized host builds. It checks all 16,777,216 RGB colors, the original sample,
+RGB565 crop/expansion, four reference fixtures, empty/overlapping/all-540-candidate
+decode cases, clipping and landscape rotation at all four boundaries, guard
+margins, 100 production Stream wrapper frames, runtime injection, exclusive
+DMA/LCD ownership, failures and deadlines. The actual camera C adapter is tested
+against a driver double whose Stop clears configuration, including errors and
+phase diagnostics. Both shared RTE camera profiles compile; default settings and
+the existing LCD/touch entry point remain intact.
+
+Graph generation passed from the repository root and project folder. Network
+configuration validation, all 17 project-script tests, all 17 benchmark-schema
+tests and all repository benchmark records passed. The catalog was regenerated.
+AC6 was built and physically tested; the Clang linker heap override is supplied
+but no Clang firmware build or board run is claimed. No labeled-dataset mAP or
+general face accuracy is measured. The target is resumed and left running.

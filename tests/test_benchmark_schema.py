@@ -98,6 +98,27 @@ class BenchmarkSchema(unittest.TestCase):
         self.assertTrue(self.errors(invalid))
         self.assertTrue(self.errors({"benchmark": record}))
 
+    def test_multiple_output_tensor_shapes_validate(self):
+        document = deepcopy(self.template)
+        network = document["benchmarks"]["network"]
+        del network["output_shape"]
+        network["output_shapes"] = [[1, 6, 6, 18], [1, 12, 12, 18]]
+        self.assertEqual(self.errors(document), [])
+        network["output_shape"] = [1, 3240]
+        self.assertTrue(self.errors(document), "single and multiple shapes are exclusive")
+
+    def test_invalid_multiple_output_shapes_rejected(self):
+        for shapes in ([], [[1, 648]], [1, 648], [[1, 6, 6, 18], []],
+                       [[1, 6, 6, 18], [1, 0, 12, 18]],
+                       [[1, 6, 6, 18], [1, True, 12, 18]],
+                       [[1, 6, 6, 18], [1, "12", 12, 18]]):
+            with self.subTest(shapes=shapes):
+                document = deepcopy(self.template)
+                network = document["benchmarks"]["network"]
+                del network["output_shape"]
+                network["output_shapes"] = shapes
+                self.assertTrue(self.errors(document))
+
     def test_unknown_keys_rejected_in_every_record_object(self):
         def objects(value, path=()):
             if isinstance(value, dict):

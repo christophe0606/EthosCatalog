@@ -1,0 +1,163 @@
+{
+  "recorded_at": "2026-10-19T10:03:40.066Z",
+  "board": "Alif DevKit-E8 M55_HP / Ethos-U85-256",
+  "target": "DevKit-E8@Detection_Release",
+  "configuration": "object_detection.Release",
+  "build_job": "b-19",
+  "load_job": "l-20",
+  "execution_job": "g-21",
+  "debug_session": "M55_HP CMSIS_DAP@pyOCD (attach)",
+  "firmware_elf_sha256": "cfb44a8daef5d27e4d129a41b9fa8e271f10c2a85e634f9b4b230adfd18799ad",
+  "system_timer_hz": 400000000,
+  "rtos_tick_hz": 1000,
+  "landscape": {
+    "logical_width": 800,
+    "logical_height": 480,
+    "preview_origin": [
+      208,
+      48
+    ],
+    "preview_size": [
+      384,
+      384
+    ],
+    "physical_mapping": "(479 - logical_y, logical_x)"
+  },
+  "snapshots": [
+    {
+      "sample": "first final snapshot",
+      "values": [
+        {
+          "expression": "stream_stats",
+          "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  captured: 151 (volatile uint32_t)\n  preprocessed: 151 (volatile uint32_t)\n  inferences: 151 (volatile uint32_t)\n  decoded: 151 (volatile uint32_t)\n  frames_presented: 151 (volatile uint32_t)\n  detections: 113 (volatile uint32_t)\n  last_detections: 1 (volatile uint32_t)\n  frame_ticks_max: 57999848 (volatile uint32_t)\n  processing_ticks_max: 44637852 (volatile uint32_t)\n  frame_deadline_misses: 0 (volatile uint32_t)\n  capture_timeouts: 0 (volatile uint32_t)\n  camera_errors: 0 (volatile uint32_t)\n  dropped_frames: 0 (volatile uint32_t)\n  dropped_events: 0 (volatile uint32_t)\n  ownership_errors: 0 (volatile uint32_t)\n  frame_started: 1803098764 (volatile uint32_t)\n  last_frame_ticks: 55999844 (volatile uint32_t)\n  forward_ticks_max: 1305349 (volatile uint32_t)"
+        },
+        {
+          "expression": "camera_diagnostics",
+          "text": "Evaluated: camera_diagnostics\nResult: {...}\nType: volatile CameraDiagnostics\nFields:\n  phase: 2 (uint32_t)\n  error_count: [4] (uint32_t [4])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n  error_mask: [4] (uint32_t [4])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)"
+        },
+        {
+          "expression": "pipeline_error",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        },
+        {
+          "expression": "detection_test_passed",
+          "text": "Evaluated: detection_test_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_preprocess_passed",
+          "text": "Evaluated: detection_preprocess_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_decode_passed",
+          "text": "Evaluated: detection_decode_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_demo_started",
+          "text": "Evaluated: detection_demo_started\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_heartbeat",
+          "text": "Evaluated: detection_heartbeat\nResult: 31\nType: volatile uint32_t"
+        },
+        {
+          "expression": "(void*)inference_input",
+          "text": "Evaluated: (void*)inference_input\nResult: Error: could not evaluate expression"
+        }
+      ]
+    },
+    {
+      "sample": "cadence start",
+      "values": [
+        {
+          "expression": "pipeline_error",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        },
+        {
+          "expression": "stream_stats",
+          "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  captured: 833 (volatile uint32_t)\n  preprocessed: 833 (volatile uint32_t)\n  inferences: 833 (volatile uint32_t)\n  decoded: 833 (volatile uint32_t)\n  frames_presented: 833 (volatile uint32_t)\n  detections: 492 (volatile uint32_t)\n  last_detections: 0 (volatile uint32_t)\n  frame_ticks_max: 57999899 (volatile uint32_t)\n  processing_ticks_max: 44641240 (volatile uint32_t)\n  frame_deadline_misses: 0 (volatile uint32_t)\n  capture_timeouts: 0 (volatile uint32_t)\n  camera_errors: 0 (volatile uint32_t)\n  dropped_frames: 0 (volatile uint32_t)\n  dropped_events: 0 (volatile uint32_t)\n  ownership_errors: 0 (volatile uint32_t)\n  frame_started: 528523862 (volatile uint32_t)\n  last_frame_ticks: 55599848 (volatile uint32_t)\n  forward_ticks_max: 1305349 (volatile uint32_t)"
+        },
+        {
+          "expression": "osRtxInfo.kernel.tick",
+          "text": "Evaluated: osRtxInfo.kernel.tick\nResult: 173220\nType: uint32_t"
+        },
+        {
+          "expression": "'lcd.c'::scanlines",
+          "text": "Evaluated: 'lcd.c'::scanlines\nResult: 10315\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_heartbeat",
+          "text": "Evaluated: detection_heartbeat\nResult: 167\nType: volatile uint32_t"
+        }
+      ]
+    },
+    {
+      "sample": "final sustained",
+      "values": [
+        {
+          "expression": "pipeline_error",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        },
+        {
+          "expression": "stream_stats",
+          "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  captured: 1135 (volatile uint32_t)\n  preprocessed: 1135 (volatile uint32_t)\n  inferences: 1135 (volatile uint32_t)\n  decoded: 1135 (volatile uint32_t)\n  frames_presented: 1135 (volatile uint32_t)\n  detections: 571 (volatile uint32_t)\n  last_detections: 0 (volatile uint32_t)\n  frame_ticks_max: 57999901 (volatile uint32_t)\n  processing_ticks_max: 44641240 (volatile uint32_t)\n  frame_deadline_misses: 0 (volatile uint32_t)\n  capture_timeouts: 0 (volatile uint32_t)\n  camera_errors: 0 (volatile uint32_t)\n  dropped_frames: 0 (volatile uint32_t)\n  dropped_events: 0 (volatile uint32_t)\n  ownership_errors: 0 (volatile uint32_t)\n  frame_started: 3213687425 (volatile uint32_t)\n  last_frame_ticks: 55599848 (volatile uint32_t)\n  forward_ticks_max: 1305349 (volatile uint32_t)"
+        },
+        {
+          "expression": "camera_diagnostics",
+          "text": "Evaluated: camera_diagnostics\nResult: {...}\nType: volatile CameraDiagnostics\nFields:\n  phase: 2 (uint32_t)\n  error_count: [4] (uint32_t [4])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n  error_mask: [4] (uint32_t [4])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)"
+        },
+        {
+          "expression": "app_result",
+          "text": "Evaluated: app_result\nResult: 0\nType: volatile int32_t"
+        },
+        {
+          "expression": "detection_test_passed",
+          "text": "Evaluated: detection_test_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_preprocess_passed",
+          "text": "Evaluated: detection_preprocess_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_decode_passed",
+          "text": "Evaluated: detection_decode_passed\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_demo_started",
+          "text": "Evaluated: detection_demo_started\nResult: 1\nType: volatile uint32_t"
+        },
+        {
+          "expression": "detection_heartbeat",
+          "text": "Evaluated: detection_heartbeat\nResult: 228\nType: volatile uint32_t"
+        },
+        {
+          "expression": "'lcd.c'::scanlines",
+          "text": "Evaluated: 'lcd.c'::scanlines\nResult: 14034\nType: volatile uint32_t"
+        },
+        {
+          "expression": "'lcd.c'::display_errors",
+          "text": "Evaluated: 'lcd.c'::display_errors\nResult: 0\nType: volatile uint32_t"
+        },
+        {
+          "expression": "osRtxInfo.kernel.tick",
+          "text": "Evaluated: osRtxInfo.kernel.tick\nResult: 233609\nType: uint32_t"
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "start_frames": 833,
+    "start_rtos_tick": 173220,
+    "end_frames": 1135,
+    "end_rtos_tick": 233609,
+    "elapsed_rtos_ms": 60389,
+    "completed_frames": 302,
+    "frames_per_second": 5.0009107618937225
+  },
+  "final_state": "running",
+  "notes": [
+    "No debugger halt during the 100-forward startup measurement loop.",
+    "Raw camera errors were not filtered; final phase counts and masks are all zero.",
+    "Earlier b-14 observed two pre-capture initialization callbacks; their event argument was optimized out, so no old mask/subtype is claimed.",
+    "Live emitted detections on an unlabeled scene do not establish accuracy."
+  ]
+}

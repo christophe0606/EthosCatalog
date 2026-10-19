@@ -1,0 +1,44 @@
+Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml
+Image object_detection (M55_HP): out/object_detection/DevKit-E8/Release/object_detection.axf, map out/object_detection/DevKit-E8/Release/object_detection.axf.map (armlink)
+[object_detection.axf] size: text 996208 + data 10928 + bss 3773016 = 4780152 B (ROM ≈ 1007136 B, RAM ≈ 3783944 B)
+[object_detection.axf.map] totals: code 259388, ro-data 735125, rw-data 10901, zi-data 3772988 → RO 994513, RW 3783889, ROM 1005414 B
+Note: no "Image component sizes" in the map (link without --info sizes); per-object sizes are summed from the memory map
+
+Regions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from object_detection.axf LOAD segments):
+  MRAM           0x80000000   1007152 /   5767168 B    17%  ER_ROM_VECTORS ER_ROM
+  SRAM0          0x02000000   3301392 /   4194304 B    79%  RW_SRAM0 PADDING
+  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH
+  outside the listed regions: 0x20000000 +151576 B  RW_RAM RW_RAM
+  outside the listed regions: 0x20028000 +3296 B  NS_REGION_0
+  outside the listed regions: 0x2002c000 +294912 B  ARM_LIB_HEAP APP_HEAP
+  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK
+  [object_detection.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 3301376/4194304 B, PADDING 16/16 B, RW_RAM 151576/720896 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 262144/262144 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 994224/4294967295 B, MRAM_USER 0/1572864 B
+
+Largest symbols [object_detection.axf] (top 8, object from object_detection.axf.map):
+   1536000 B  obj   0x021af000  _ZN12_GLOBAL__N_112framebuffersE  RW_SRAM0 @SRAM0  ← hardware_params.o
+   1048576 B  obj   0x02019000  _ZN12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  ← app_main.o
+    614400 B  obj   0x02119000  _ZN12_GLOBAL__N_113camera_bufferE  RW_SRAM0 @SRAM0  ← hardware_params.o
+    407440 B  obj   0x8028bf20  model_pte  ER_ROM @MRAM  ← model_pte.o
+    147456 B  obj   0x80261648  _ZL21detection_test_inputs  ER_ROM @MRAM  ← app_main.o
+    110592 B  obj   0x80246648  _ZL20detection_sample_rgb  ER_ROM @MRAM  ← app_main.o
+     65536 B  obj   0x02009000  _ZN12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  ← app_main.o
+     65536 B  obj   0x20014600  os_mem  RW_RAM  ← rtx_lib.o
+
+Largest objects [object_detection.axf.map] (top 8 of 364; code / ro-data / rw-data / zi-data):
+   2150602 B  hardware_params.o  118 / 8 / 0 / 2150476
+   1454195 B  app_main.o  4270 / 284705 / 0 / 1165220
+    407444 B  model_pte.o  0 / 407444 / 0 / 0
+    327744 B  anon$$obj.o  0 / 48 / 0 / 327696
+     72748 B  libcpp_wnux.l(locale.cpp.o)  58988 / 11876 / 24 / 1860
+     68100 B  rtx_lib.o  390 / 297 / 0 / 67413
+     33182 B  main.o  362 / 48 / 0 / 32772
+     26838 B  stream_event_queue.o  21162 / 5663 / 0 / 13
+Libraries [object_detection.axf.map]:
+     87410 B  libcpp_wnux.l  68818 / 15631 / 28 / 2933
+     23669 B  c_wu.l  22354 / 943 / 24 / 348
+      8662 B  libcppabi_wnux.l  6416 / 1706 / 8 / 532
+      4880 B  libunwind_wnux.l  4468 / 411 / 0 / 1
+      1356 B  m_wv.l  1308 / 48 / 0 / 0
+       494 B  fz_wv.l  478 / 16 / 0 / 0
+
+Next: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists.

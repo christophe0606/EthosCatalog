@@ -1,0 +1,44 @@
+Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml
+Image object_detection (M55_HP): out/object_detection/DevKit-E8/Release/object_detection.axf, map out/object_detection/DevKit-E8/Release/object_detection.axf.map (armlink)
+[object_detection.axf] size: text 717204 + data 10328 + bss 1455400 = 2182932 B (ROM ≈ 727532 B, RAM ≈ 1465728 B)
+[object_detection.axf.map] totals: code 120928, ro-data 595159, rw-data 10305, zi-data 1455390 → RO 716087, RW 1465695, ROM 726392 B
+Note: no "Image component sizes" in the map (link without --info sizes); per-object sizes are summed from the memory map
+
+Regions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from object_detection.axf LOAD segments):
+  MRAM           0x80000000    727536 /   5767168 B    13%  ER_ROM_VECTORS ER_ROM
+  SRAM0          0x02000000   1150992 /   4194304 B    27%  RW_SRAM0 PADDING
+  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH
+  outside the listed regions: 0x20000000 +147600 B  RW_RAM RW_RAM
+  outside the listed regions: 0x20028000 +3296 B  NS_REGION_0
+  outside the listed regions: 0x2002c000 +131072 B  ARM_LIB_HEAP APP_HEAP
+  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK
+  [object_detection.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 1150976/4194304 B, PADDING 16/16 B, RW_RAM 147600/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 715220/4294967295 B, MRAM_USER 0/1572864 B
+
+Largest symbols [object_detection.axf] (top 8, object from object_detection.axf.map):
+   1048576 B  obj   0x02010000  _ZN12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  ← app_main.o
+    407440 B  obj   0x8024a2d0  model_pte  ER_ROM @MRAM  ← model_pte.o
+    147456 B  obj   0x80222148  _ZL21detection_test_inputs  ER_ROM @MRAM  ← app_main.o
+     65536 B  obj   0x02000000  _ZN12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  ← app_main.o
+     65536 B  obj   0x20013708  os_mem  RW_RAM  ← rtx_lib.o
+     36864 B  obj   0x02110000  _ZN12_GLOBAL__N_115inference_inputE  RW_SRAM0 @SRAM0  ← app_main.o
+     32768 B  obj   0x2000b6c0  main.thread_stack  RW_RAM  ← main.o
+     24000 B  obj   0x20001f6c  _ZN10executorch7runtime12_GLOBAL__N_123registered_kernels_dataE  RW_RAM  ← operator_registry.o
+
+Largest objects [object_detection.axf.map] (top 8 of 222; code / ro-data / rw-data / zi-data):
+   1342743 B  app_main.o  3584 / 173975 / 0 / 1165184
+    407444 B  model_pte.o  0 / 407444 / 0 / 0
+    163904 B  anon$$obj.o  0 / 48 / 0 / 163856
+     68100 B  rtx_lib.o  390 / 297 / 0 / 67413
+     33190 B  main.o  362 / 56 / 0 / 32772
+     24726 B  operator_registry.o  706 / 16 / 0 / 24004
+     19402 B  program.o  18814 / 588 / 0 / 0
+     10813 B  method.o  9700 / 1113 / 0 / 0
+Libraries [object_detection.axf.map]:
+     11099 B  c_wu.l  10486 / 241 / 24 / 348
+      8281 B  libcppabi_wnux.l  6290 / 1451 / 8 / 532
+      4880 B  libunwind_wnux.l  4468 / 411 / 0 / 1
+      2784 B  libcpp_wnux.l  2028 / 756 / 0 / 0
+       172 B  fz_wv.l  172 / 0 / 0 / 0
+        48 B  m_wv.l  48 / 0 / 0 / 0
+
+Next: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists.

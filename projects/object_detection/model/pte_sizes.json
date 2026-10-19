@@ -1,0 +1,72 @@
+{
+  "pte_sha256": "25c3a095d1a80d51ccdf8e3ac64b7d480ce63c93da519003da665c1219300244",
+  "pte_bytes": 407440,
+  "delegate_blocks": {
+    "vela_bin_stream": {
+      "bytes": 0
+    },
+    "cmd_data": {
+      "bytes": 19552
+    },
+    "weight_data": {
+      "bytes": 385872
+    },
+    "scratch_size": {
+      "bytes": 4,
+      "arena_bytes": 527504
+    },
+    "inputs": {
+      "bytes": 40,
+      "tensors": [
+        {
+          "shape_6d": [
+            1,
+            1,
+            1,
+            1,
+            192,
+            192
+          ],
+          "element_bytes": 1,
+          "offset_bytes": 0,
+          "region": 1
+        }
+      ]
+    },
+    "outputs": {
+      "bytes": 76,
+      "tensors": [
+        {
+          "shape_6d": [
+            1,
+            1,
+            1,
+            6,
+            6,
+            18
+          ],
+          "element_bytes": 1,
+          "offset_bytes": 3456,
+          "region": 1
+        },
+        {
+          "shape_6d": [
+            1,
+            1,
+            1,
+            12,
+            12,
+            18
+          ],
+          "element_bytes": 1,
+          "offset_bytes": 21888,
+          "region": 1
+        }
+      ]
+    },
+    "vela_end_stream": {
+      "bytes": 0
+    }
+  },
+  "scope": "PTE binary stream sizes; not measured runtime allocator peaks or linked firmware memory"
+}

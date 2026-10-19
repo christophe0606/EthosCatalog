@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-19T11:00:41.616559+00:00",
+  "scope": "License-notice-only correction after validated build b-22; no firmware instructions, declarations, fixtures or model data changed.",
+  "observed_build": "b-22",
+  "observed_execution": "g-24",
+  "observed_fixture_header_sha256": "67169e9c4862ab9fc566898f7c03d694c47cde479bcfbc8a8e740b9cf4b4c427",
+  "current_fixture_header_sha256": "392e2e7ea80df5a59cf8dc030b59bf38b30a2c89855a36c8e6f5a4123794f765",
+  "observed_fixture_generator_sha256": "331fed79324733fd1ee35308805be043ffe38fdfa12eb161ac80714c87ef9e02",
+  "current_fixture_generator_sha256": "0713efb24055cfb930bc19a70af5ec3d0672f301b4510f107496f6bee9c7ee62",
+  "reconstruct_observed_header": "Remove exactly the first two comment lines (2026 copyright and SPDX) from the current regenerated model_test_data.h.",
+  "reconstructed_header_sha256": "67169e9c4862ab9fc566898f7c03d694c47cde479bcfbc8a8e740b9cf4b4c427",
+  "fixture_payload_and_other_metadata_identical": true,
+  "compiled_constant_bytes": 186336,
+  "firmware_elf_sha256": "05a7474796f3c64ae052fb7a25ab64828d877f7240f886d4594fe016ff2220ae",
+  "pte_sha256": "25c3a095d1a80d51ccdf8e3ac64b7d480ce63c93da519003da665c1219300244",
+  "active_rte_adapters": "Six forwarding stubs received only a two-line copyright/SPDX prefix.",
+  "recording_note": "board_validation.json is re-evaluated against the current regenerated reference header using the unchanged raw b-22/g-24 UART capture. The observed compiled header identity remains recorded here."
+}

@@ -4,11 +4,38 @@ model = "gpt-6-luna"
 model_reasoning_effort = "high"
 developer_instructions = """
 Load the CHECKPOINT.md to know where we are.
-Verify the project for correctness and adherence 
+
+Check the license compliance of the project. 
+Ensure that all source files contain the appropriate license headers and copyright.
+
+
+If the coding process was stopped because it was demonstrated that there is not enough
+memory to run both the network and software on the board, then the review should:
+1. Check that a CHECKPOINT.md was added to the project folder.
+2. Verify that the project won't be included in the catalog.
+3. Maintain a root markdown file UNSUCCESSFUL.md with the list of 
+projects that failed the coding step because of memory constraints.
+Add this new project and explain the reason for the failure in the UNSUCCESSFUL.md file.
+4. Acknowledge the problem and return to the calling agent that the work is done. 
+
+If enough memory was available to build, link and 
+run the project then you can proceed with next steps:
+
+1. Verify the project for correctness and adherence 
 to standards based on the loaded checkpoint.
-If any discrepancies or violations are found, 
+2. If any discrepancies or violations are found, 
 document them in the .flow folder and provide recommendations for correction.
-Communicate to the calling agent the findings and recommendations 
+
+3. Check that we have correctly identified the nodes that are project specific and the ones that 
+could be shared.
+A node is project specific if it can only be used within a single project and 
+is not intended for reuse across multiple projects of a similar kind.
+A node does not have to be usable for all projects to be reusable. It only needs to be reusable 
+for multiple projects of a similar kind. 
+
+4. Check that the catalog markdown has been refreshed with this latest project.
+
+5. Communicate to the calling agent the findings and recommendations 
 based on the review (give it the path to the file recording the findings).
 """
 

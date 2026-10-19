@@ -1,0 +1,5 @@
+// Copyright 2026 Arm Limited and/or its affiliates.
+// SPDX-License-Identifier: Apache-2.0
+/* Node-owned RGB crop and NMS workspaces allocate from the C++ heap. */
+#define __HEAP_SIZE 0x00040000
+#include "../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_clang.ld.src"

@@ -1,0 +1,101 @@
+project:
+  device: :M55_HP
+  packs:
+  - pack: ARM::CMSIS-RTX@^5.9.0
+  add-path:
+  - .
+  - ../../common
+  - ../../common/stream
+  - generated
+  - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
+  - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
+  define:
+  - NPU_QCONFIG: 2
+  - NPU_REGIONCFG_0: 3
+  - NPU_REGIONCFG_1: 0
+  - APP_METHOD_POOL_SIZE: 65536
+  - APP_TEMP_POOL_SIZE: 1048576
+  - OS_THREAD_NUM: 3
+  - OS_DYNAMIC_MEM_SIZE: 65536
+  - APP_POOL_SECTION: \".bss.ai_pool\"
+  - OBJECT_DETECTION_RGB565
+  components:
+  - component: CMSIS:RTOS2:Keil RTX5&Source
+  - component: CMSIS:OS Tick:SysTick
+  - component: CMSIS:STREAM&Source
+  - component: BSP:External peripherals:GT911 Touch Controller
+  connections:
+  - connect: Object detection application
+    provides:
+    - CMSIS-RTOS2
+  linker:
+  - script: linker_ac6.sct.src
+    for-compiler: AC6
+  - script: linker_clang.ld.src
+    for-compiler: CLANG
+  - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
+  misc:
+  - for-compiler: AC6
+    C:
+    - -ffunction-sections
+    - -fdata-sections
+    CPP:
+    - -ffunction-sections
+    - -fdata-sections
+    Link:
+    - --remove
+  - CPP:
+    - -std=gnu++17
+    - -Wno-deprecated-declarations
+    - -fno-color-diagnostics
+  groups:
+  - group: Object detection application
+    files:
+    - file: app_main.cpp
+    - file: hardware_params.cpp
+    - file: hardware_params.h
+    - file: stream_types.h
+    - file: datatypes.h
+  - group: Embedded ExecuTorch module
+    files:
+    - file: ../../common/arm_embedded_module.cpp
+    - file: ../../common/arm_embedded_module.hpp
+    - file: ../../common/embedded_runtime.hpp
+    - file: ../../common/nodes_impl/c/embedded_runtime.cpp
+  - group: Generated CMSIS Stream graph
+    files:
+    - file: generated/scheduler_app.cpp
+    - file: generated/app_params.c
+  - group: Object detection processing
+    files:
+    - file: nodes_impl/CameraCapture.hpp
+    - file: nodes_impl/FaceInference.hpp
+    - file: nodes_impl/FaceDecode.hpp
+    - file: nodes_impl/face_decode.c
+    - file: nodes_impl/FaceDisplay.hpp
+    - file: nodes_impl/face_display.c
+  - group: Portable image and detection processing
+    files:
+    - file: ../../common/nodes_impl/c/ImageTypes.h
+    - file: ../../common/nodes_impl/c/DetectionTypes.h
+    - file: ../../common/nodes_impl/c/Rgb565CenterCrop.hpp
+    - file: ../../common/nodes_impl/c/rgb565_center_crop.c
+    - file: ../../common/nodes_impl/c/Rgb888ToGrayInt8.hpp
+    - file: ../../common/nodes_impl/c/rgb888_to_gray_int8.c
+    - file: ../../common/nodes_impl/c/NonMaximumSuppression.hpp
+    - file: ../../common/nodes_impl/c/non_maximum_suppression.c
+  - group: Alif E8 camera and display
+    files:
+    - file: ../../common/nodes_impl/alif_e8/camera.c
+    - file: ../../common/nodes_impl/alif_e8/lcd.c
+  layers:
+  - layer: $Board-Layer$
+    type: Board
+  - layer: $AI-Layer$
+    type: AI
+  output:
+    type:
+    - elf
+    - bin
+    - hex
+    - map

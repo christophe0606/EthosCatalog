@@ -1,0 +1,36 @@
+{
+  "conv_source_op_index": 100,
+  "output_scale": 0.18658526241779327,
+  "output_zero_point": -7,
+  "quantized_clamp_interval": [
+    -7,
+    25
+  ],
+  "scalar_boundary_checks": 200779,
+  "clamp_bit_exact": true,
+  "resize_input_hw": [
+    6,
+    6
+  ],
+  "resize_output_hw": [
+    12,
+    12
+  ],
+  "source_half_pixel_centers": true,
+  "source_align_corners": false,
+  "nearest_coordinate_map": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+  ],
+  "nearest_bit_exact": true
+}

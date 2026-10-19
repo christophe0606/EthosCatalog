@@ -28,3 +28,5 @@ Only one project must be enabled when building the solution.
   * The license of those files must be compatible with Apache
   * If it is not possible to copy the files because of size (too many files, or too big files)
     ask the user if you can download and install the external project somewhere outside of this project and then use command line arguments to give the path to this project where it is needed
+
+* Demos using LCD uses the LCD in landscape mode

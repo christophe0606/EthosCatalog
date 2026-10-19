@@ -47,7 +47,11 @@
 //     <1=> enable
 // <i> Defines CPI ISP port
 // <i> Default: ISP port disable
+#ifdef OBJECT_DETECTION_RGB565
+#define RTE_CPI_ISP_PORT                                      0
+#else
 #define RTE_CPI_ISP_PORT                                      1
+#endif
 
 // <o> CPI Row roundup
 //     <0=> disable
@@ -998,7 +1002,11 @@
 //     <4=>   320x240_RGB565
 //     <5=>   320x320_RGB565
 // <i> Default: 1
+#ifdef OBJECT_DETECTION_RGB565
+#define RTE_MT9M114_CAMERA_SENSOR_MIPI_IMAGE_CONFIG            3
+#else
 #define RTE_MT9M114_CAMERA_SENSOR_MIPI_IMAGE_CONFIG            1
+#endif
 
 // <o> select MT9M114 MIPI number of lanes in DPHY
 // <i> defines select MT9M114 MIPI number of lanes in DPHY.
@@ -1037,11 +1045,19 @@
 
 // <o> MT9M114 sensor frame width for ISP / CSI2 pipeline
 // <i> Width in pixels of the MT9M114 MIPI sensor frame
+#ifdef OBJECT_DETECTION_RGB565
+#define RTE_MT9M114_CAMERA_SENSOR_FRAME_WIDTH  640
+#else
 #define RTE_MT9M114_CAMERA_SENSOR_FRAME_WIDTH  1280
+#endif
 
 // <o> MT9M114 sensor frame height for ISP / CSI2 pipeline
 // <i> Height in pixels of the MT9M114 MIPI sensor frame
+#ifdef OBJECT_DETECTION_RGB565
+#define RTE_MT9M114_CAMERA_SENSOR_FRAME_HEIGHT 480
+#else
 #define RTE_MT9M114_CAMERA_SENSOR_FRAME_HEIGHT 720
+#endif
 
 #endif
 // </e> MT9M114_MIPI [Driver_MT9M114_MIPI]

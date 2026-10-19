@@ -30,7 +30,9 @@ $defs:
     required:
     - operation
     - input_shape
-    - output_shape
+    oneOf:
+    - required: [output_shape]
+    - required: [output_shapes]
     properties:
       operation:
         $ref: '#/$defs/text'
@@ -38,6 +40,13 @@ $defs:
         $ref: '#/$defs/shape'
       output_shape:
         $ref: '#/$defs/shape'
+        description: Shape of a single output tensor; use output_shapes for multiple tensors.
+      output_shapes:
+        type: array
+        minItems: 2
+        items:
+          $ref: '#/$defs/shape'
+        description: Shapes of multiple output tensors in runtime output order; mutually exclusive with output_shape.
       samples_per_forward:
         $ref: '#/$defs/positiveInteger'
       sample_rate_hz:

@@ -128,6 +128,12 @@ configuration with its own `platform`, `measurements`, `run` and optional
 not accepted inside individual entries. The old top-level `benchmark` layout is
 no longer accepted.
 
+Use `network.output_shape` for a single output tensor. For multiple outputs,
+use `network.output_shapes` with at least two shapes in runtime output order;
+the two fields are mutually exclusive. For example, the face detector has
+`output_shapes: [[1, 6, 6, 18], [1, 12, 12, 18]]`. Keep each tensor's actual
+shape rather than flattening independent heads into a synthetic tensor.
+
 Keep the latest result for each configuration in the same file. Different
 configurations can vary the CPU, OS, clocks, memory placement or compiler
 settings; describe those differences in each entry's `platform` and `run`.
