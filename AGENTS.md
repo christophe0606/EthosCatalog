@@ -18,6 +18,7 @@ Only one project must be enabled when building the solution.
 * Format of the solution must be respected : folder organization, purpose of each folder. The constraimts are detailed in the agents that need them.
 
 * Nothing covered by GPL license must be included in this project. GPL use is forbidden.
+  Network dual licensed can be used if the other license i not GPL.
 
 * For open source reuse, copyright and licenses must be preserved. License must be compatible with Apache.
 

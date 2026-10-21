@@ -8,6 +8,8 @@ Here are the things to checks:
 * If any GPL license is found, the network is rejected and won't be ported to Ethos.
 This GPL check includes examining the licenses of all dependencies and ensuring none of 
 them are under the GPL license. This includes examining the source code and network weights.
+Some networks are dual licensed and can be accepted if the other license is not GPL. 
+Check for a dual licensing possibility
 * If the network may be converted to PyTorch (in .pt2 / .safetensor format).
 It implies that a trained network must be available and some explanation of how
 to quantize it : either some patterns are available for this or it will be possible to generate
