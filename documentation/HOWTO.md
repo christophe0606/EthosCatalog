@@ -97,12 +97,21 @@ project directory, one level above `model/`.
 | `quantization.quantization` | Calibration provenance: `full`, `partial`, `synthetic`, or `already` |
 | `quantization.error` | Network-dependent error or quality measurements of any structure; `null` if unavailable |
 | `safetensors` and `graph` | Cached quantized tensors and companion `.pt2` graph |
+| `methods` | Alternative to `safetensors`/`graph`: named method caches compiled into one PTE |
+| `assets` | Optional OSPI binaries with project-relative `file` and integer `address`; bounded, nonoverlapping and hash checked |
 | `flash_ospi` | Whether to program the model separately in OSPI flash |
 | `vela.ini`, `vela.system_config`, `vela.memory_mode` | Vela compiler and memory configuration |
 
 OSPI projects also define `ospi.address` and `ospi.size` for their reserved model
 partition. Vela settings come from the project configuration; changing a CMSIS
 build context does not automatically override them.
+
+For a model with several entry points, replace the top-level `graph` and
+`safetensors` fields with a `methods` mapping. Each method supplies its own
+`graph` and `safetensors` paths. Methods require Ethos delegation unless they
+explicitly set `delegate: false`, for example for a CPU token embedding lookup.
+The exporter combines all methods into one PTE and flash preparation checks
+every method's cache hashes.
 
 Use `full` for all original-source test patterns, `partial` for a subset,
 `synthetic` for generated calibration data, and `already` for an imported
@@ -291,6 +300,10 @@ description, application graph thumbnail and `model/benchmark.yml` link. Clickin
 the thumbnail opens `generated/app.pdf`. The graph column shows `missing` if
 either the PDF or its PNG thumbnail is absent; the benchmark column shows
 `missing` if no benchmark exists.
+
+Set `catalog: false` in the README YAML header to retain an unfinished or
+unsuccessful port without publishing it in the catalog. Omit that field or set
+it to `true` only when the project is ready to appear there.
 
 Edit `documentation/readme_header.md` to change the README introduction. After
 editing that header, adding a project, changing its metadata or generating graph

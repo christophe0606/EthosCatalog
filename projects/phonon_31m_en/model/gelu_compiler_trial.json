@@ -1,0 +1,96 @@
+{
+  "build": "b-47",
+  "debug_session": "d-48",
+  "model_sha256": "cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7",
+  "mode": "Release, O3 and fast-math globally; AC6 Portable GELU component adds -fno-fast-math",
+  "configuration_evidence": "Generated cbuild component misc C/CPP contains -fno-fast-math for src/kernels/portable/cpu/op_gelu.cpp only",
+  "flash_pte_crc32": "a5f23dc5",
+  "ram_verified_bytes": 67108864,
+  "first_token": {
+    "token": 3248,
+    "position": 125,
+    "embedding_max_abs_error": 0,
+    "hidden_max_abs_error": 0.000190377235,
+    "cache_last_row_max_abs_error": 0.000855207443,
+    "cache_last_row_error_by_layer_k_v": [
+      [
+        0.000324815512,
+        0.000324860215
+      ],
+      [
+        0.000232934952,
+        0.000164985657
+      ],
+      [
+        0.00034725666,
+        0.000245630741
+      ],
+      [
+        0.000855207443,
+        0.000259935856
+      ],
+      [
+        0.000849723816,
+        0.000425055623
+      ],
+      [
+        0.000787429512,
+        0.00057343673
+      ]
+    ]
+  },
+  "method_allocator_peak_bytes": 165992,
+  "temp_allocator_peak_bytes": 5152,
+  "interpretation": "Changing GELU compiler options alone fixes the first-token large mismatch. This establishes compiler-option causality, but not a specific compiler transformation or speech quality acceptance.",
+  "next": "Restore proven full no-fast-math GELU correctness exception, validate first two complete audio frames, then legal memory-clock and Dedicated trials",
+  "firmware_sha256": "24f43dd1d73ce5728d73ed68f58058c4adf326f48733415247adca6e7f70b33a",
+  "narrower_trial": {
+    "build": "b-49",
+    "debug_session": "d-50",
+    "option": "-fno-finite-math-only",
+    "hidden_max_abs_error": 0.0615944676,
+    "cache_last_row_max_abs_error": 0.000855207443,
+    "result": "Narrower option is worse than full no-fast-math; diagnostic prefill cancelled, no frame timing accepted."
+  },
+  "repeat_same_binary": {
+    "build": "b-51",
+    "debug_session": "d-52",
+    "firmware_sha256": "24f43dd1d73ce5728d73ed68f58058c4adf326f48733415247adca6e7f70b33a",
+    "hidden_max_abs_error": 0.0179824159,
+    "cache_last_row_max_abs_error": 0.111280769,
+    "cache_error_by_layer_k_v": [
+      [
+        0.000324815512,
+        0.000324860215
+      ],
+      [
+        0.000232934952,
+        0.000164985657
+      ],
+      [
+        0.00034725666,
+        0.000245630741
+      ],
+      [
+        0.000855207443,
+        0.000259935856
+      ],
+      [
+        0.111280769,
+        0.0575942621
+      ],
+      [
+        0.0860683918,
+        0.0527562499
+      ]
+    ],
+    "npu_calls": 24,
+    "raw_npu_cycles": 231389290,
+    "overflow": 0,
+    "ram_rxds": 8,
+    "ram_baud": 16,
+    "ram_wait": 7,
+    "all_image_crc": "PASS",
+    "interpretation": "Same binary but different later-layer results. Compiler exception fixes original large GELU no-op, but repeatability is not established. No final quality acceptance."
+  }
+}

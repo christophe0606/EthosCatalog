@@ -1,3 +1,5 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Resolve an explicit or CMSIS UI-selected application and its network settings."""
 import json
 from pathlib import Path
@@ -5,6 +7,7 @@ from pathlib import Path
 import yaml
 
 from validate_networks import load_network
+from quantized_model import method_configs
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOLUTION = ROOT / "EthosCatalog.csolution.yml"
@@ -84,8 +87,12 @@ def selected_project(solution_file=DEFAULT_SOLUTION, project=None):
         raise ValueError(f"Selected project does not exist: {project_file}")
     config_file = project_file.parent / "model/network.yml"
     network = load_network(config_file)
-    for key in ("model", "quantize", "safetensors", "graph"):
-        path = (project_file.parent / network[key]).resolve()
+    paths = {key: network[key] for key in ("model", "quantize")}
+    for name, settings in method_configs(network).items():
+        paths.update({f"{name}.{key}": settings[key] for key in ("graph", "safetensors")})
+    paths.update({f"assets.{name}.file": asset["file"] for name, asset in network.get("assets", {}).items()})
+    for key, value in paths.items():
+        path = (project_file.parent / value).resolve()
         if not path.is_relative_to(project_file.parent):
             raise ValueError(f"{config_file}: {key} must remain inside its project")
     vela = network["vela"]

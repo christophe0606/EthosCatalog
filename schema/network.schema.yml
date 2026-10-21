@@ -14,10 +14,17 @@ properties:
     - model
     - quantize
     - quantization
-    - safetensors
-    - graph
     - flash_ospi
     - vela
+    oneOf:
+    - required: [graph, safetensors]
+      not:
+        required: [methods]
+    - required: [methods]
+      not:
+        anyOf:
+        - required: [graph]
+        - required: [safetensors]
     properties:
       name:
         $ref: '#/$defs/text'
@@ -64,9 +71,44 @@ properties:
       graph:
         $ref: '#/$defs/text'
         description: Companion exported .pt2 graph path, relative to and contained within the project directory.
+      methods:
+        type: object
+        minProperties: 1
+        description: Named method caches instead of the single forward graph/tensor pair. All methods are serialized into one PTE.
+        propertyNames:
+          pattern: '^[A-Za-z_][A-Za-z0-9_]*$'
+        additionalProperties:
+          type: object
+          additionalProperties: false
+          required: [graph, safetensors]
+          properties:
+            graph:
+              $ref: '#/$defs/text'
+            safetensors:
+              $ref: '#/$defs/text'
+            delegate:
+              type: boolean
+              default: true
+              description: False explicitly permits this method to run only on CPU. Other methods must contain an Ethos delegate.
       flash_ospi:
         type: boolean
         description: Whether the model is programmed separately into the OSPI partition.
+      assets:
+        type: object
+        minProperties: 1
+        description: Additional immutable model assets programmed within the same OSPI partition.
+        propertyNames:
+          pattern: '^[a-z][a-z0-9_]*$'
+        additionalProperties:
+          type: object
+          additionalProperties: false
+          required: [file, address]
+          properties:
+            file:
+              $ref: '#/$defs/text'
+            address:
+              type: integer
+              minimum: 0
       ospi:
         type: object
         additionalProperties: false
@@ -102,6 +144,11 @@ properties:
           memory_mode:
             $ref: '#/$defs/text'
             description: Memory mode name in the Vela ini file.
+    dependentSchemas:
+      assets:
+        properties:
+          flash_ospi:
+            const: true
     if:
       required:
       - flash_ospi

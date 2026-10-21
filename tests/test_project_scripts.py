@@ -1,3 +1,5 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Behavior checks for project selection, quantized cache reuse and model storage."""
 from copy import deepcopy
 import importlib.util
@@ -14,7 +16,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from create_ai_layer import c_array, header, prepare_quantized_model
-from quantized_model import compile_spec, load_quantized_program, sha256
+from quantized_model import cache_provenance, compile_spec, load_quantized_program, model_assets, sha256
 from project_config import selected_project
 import create_ai_layer
 
@@ -89,8 +91,9 @@ class ProjectScripts(unittest.TestCase):
         cache = self.project / self.network["safetensors"]
         cache.parent.mkdir(exist_ok=True)
         cache.write_bytes(b"fixture cache")
+        (self.project / self.network["graph"]).write_bytes(b"fixture graph")
         report = {"project": "projects/another/another.cproject.yml", "config_sha256": sha256(self.config_file),
-                  "pte_sha256": sha256(pte), "safetensors_sha256": sha256(cache), "flash_ospi": True}
+                  "pte_sha256": sha256(pte), **cache_provenance(self.project, self.network), "flash_ospi": True}
         (layer / "generation.json").write_text(json.dumps(report))
         runs = self.root / "application"
         runs.mkdir()
@@ -217,6 +220,7 @@ class ProjectScripts(unittest.TestCase):
         second = self.add_project("second")
         self.select_contexts("second.Release")
         (second.parent / self.network["safetensors"]).write_bytes(b"second cache")
+        (second.parent / self.network["graph"]).write_bytes(b"second graph")
         with (patch.object(sys, "argv", ["create_ai_layer.py", "--solution", str(self.solution_file)]),
               patch.object(create_ai_layer, "executorch_pack", return_value=("1.4.1", self.root)),
               patch.object(create_ai_layer, "prepare_quantized_model"),
@@ -274,6 +278,93 @@ class ProjectScripts(unittest.TestCase):
         self.network["ospi"]["size"] = 1
         with self.assertRaisesRegex(ValueError, "does not fit"):
             c_array(b"\x01\x02", self.network)
+
+    def test_ospi_assets_are_bounded_hashed_and_programmed(self):
+        self.prepare_ospi()
+        base = self.network["ospi"]["address"]
+        self.network["assets"] = {
+            "prefix": {"file": "model/prefix.bin", "address": base + 0x1000},
+            "bos": {"file": "model/bos.bin", "address": base + 0x2000},
+        }
+        for asset in self.network["assets"].values():
+            (self.project / asset["file"]).write_bytes(b"123456789")
+        self.write_config()
+        assets = model_assets(self.project, self.network, 23)
+        generated = header(self.network, b"pte", assets)
+        self.assertIn("#define MODEL_ASSET_PREFIX_SIZE_BYTES 9U", generated)
+        self.assertIn("#define MODEL_ASSET_PREFIX_CRC32 0xcbf43926U", generated)
+        report_path = self.root / "ai_layer/generation.json"
+        report = json.loads(report_path.read_text())
+        report.update(config_sha256=sha256(self.config_file), assets=assets)
+        report_path.write_text(json.dumps(report))
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        run = yaml.safe_load(self.output.read_text())["cbuild-run"]
+        self.assertEqual(run["output"][0]["load-offset"], base)
+        self.assertEqual({item["load-offset"] for item in run["output"][1:]},
+                         {base + 0x1000, base + 0x2000})
+        (self.project / "model/bos.bin").write_bytes(b"changed")
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("does not match", result.stderr)
+
+    def test_ospi_rejects_changed_single_graph_with_unchanged_weights(self):
+        self.prepare_ospi()
+        (self.project / self.network["graph"]).write_bytes(b"changed operator graph")
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("does not match", result.stderr)
+        self.assertFalse(self.output.exists())
+
+    def test_ospi_assets_reject_overlap_out_of_bounds_and_external_paths(self):
+        self.prepare_ospi()
+        base = self.network["ospi"]["address"]
+        (self.project / "model/asset.bin").write_bytes(b"asset")
+        self.network["assets"] = {"prefix": {"file": "model/asset.bin", "address": base}}
+        with self.assertRaisesRegex(ValueError, "overlaps PTE"):
+            model_assets(self.project, self.network, 23)
+        self.network["assets"]["prefix"]["address"] = base + self.network["ospi"]["size"] - 1
+        with self.assertRaisesRegex(ValueError, "exceeds"):
+            model_assets(self.project, self.network, 23)
+        self.network["assets"]["prefix"]["address"] = base + 0x1000
+        self.network["assets"]["bos"] = dict(self.network["assets"]["prefix"])
+        with self.assertRaisesRegex(ValueError, "overlaps prefix"):
+            model_assets(self.project, self.network, 23)
+        del self.network["assets"]["bos"]
+        self.network["assets"]["prefix"]["file"] = "../../outside.bin"
+        with self.assertRaisesRegex(ValueError, "inside model"):
+            model_assets(self.project, self.network, 23)
+
+    def test_named_methods_validate_paths_and_bind_all_flash_caches(self):
+        self.prepare_ospi()
+        del self.network["graph"]
+        del self.network["safetensors"]
+        self.network["methods"] = {
+            name: {"graph": f"model/{name}.pt2", "safetensors": f"model/{name}.safetensors",
+                   "delegate": name != "text_embedding"}
+            for name in ("backbone", "synthesize", "text_embedding")
+        }
+        for name, method in self.network["methods"].items():
+            for key in ("graph", "safetensors"):
+                (self.project / method[key]).write_bytes(f"{name} {key}".encode())
+        self.write_config()
+        self.assertEqual(selected_project(self.solution_file)[4]["methods"], self.network["methods"])
+        report_path = self.root / "ai_layer/generation.json"
+        report = json.loads(report_path.read_text())
+        report.pop("safetensors_sha256")
+        report.update(cache_provenance(self.project, self.network))
+        report["config_sha256"] = sha256(self.config_file)
+        report_path.write_text(json.dumps(report))
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        (self.project / self.network["methods"]["text_embedding"]["safetensors"]).write_bytes(b"changed CPU lookup")
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("does not match", result.stderr)
+        self.network["methods"]["text_embedding"]["graph"] = "../../outside.pt2"
+        self.write_config()
+        with self.assertRaisesRegex(ValueError, "inside its project"):
+            selected_project(self.solution_file)
 
     def test_entry_point_calls_selected_quantizer_on_first_run_and_force(self):
         script = self.project / self.network["quantize"]

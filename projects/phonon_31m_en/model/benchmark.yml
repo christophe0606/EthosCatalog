@@ -1,0 +1,196 @@
+benchmarks:
+  network:
+    operation: Phonon q8 stateful TTS audio frame; backbone then synthesize, principal embedding input and PCM output; persistent
+      states documented in method_manifest.json
+    input_shape:
+    - 1
+    - 1
+    - 512
+    output_shape:
+    - 1
+    - 1
+    - 1920
+    samples_per_forward: 1920
+    sample_rate_hz: 24000
+    block_deadline_ms: 80
+    float_boundary: true
+    quantization: q8 GGUF source; int16 activations and int8 linear/convolution weights on U85; CPU float attention, normalization
+      and state operations
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1 octal DDR flash
+          clock_mhz: 25
+          clock_source: SERVICES AXI clock 400 MHz divided by observed BAUDR 16
+        activations:
+          type: CPU planned tensors and persistent state in 64 MiB HyperRAM; U85 temporary scratch in SRAM0
+          clock_mhz: 25
+          clock_source: HyperRAM bus from SERVICES AXI clock 400 MHz divided by observed BAUDR 16; SRAM clock not represented
+            here
+    measurements:
+      memory:
+        model_bytes: 44675472
+      time:
+        ms: 59345
+        statistic: mean
+        forward_ms: 59345
+        forward_timer_hz: 1000
+        forward_ticks_samples:
+        - 59345
+        - 59345
+    run:
+      recorded_at: '2026-10-21T10:54:10Z'
+      context: Shared_Sram baseline, 512-position Flow context. Two uninterrupted complete frames; source-derived HyperRAM
+        wait 7, full 64 MiB physical RAM readback and full PTE/prefix/BOS CRC passed. Realtime FAIL at 741.8125 times the
+        80 ms budget. Prefix copy 1101 ms, pinned 7-token prefill 206033 ms, neural time to first frame 266479 ms. Speech
+        quality is not accepted and earlier same-binary first-token divergence remains unresolved. See shared_25mhz_result.json
+        and gelu_compiler_trial.json.
+      target: Alif E8 DevKit
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85-256
+      compiler: AC6 armclang
+      optimize: Release -O3 -ffast-math globally; Portable gelu source alone -fno-fast-math for measured correctness
+      build_job: b-51
+      execution_job: d-54 CMSIS Load and Debug
+      cpu_clock_mhz: 400
+      warmup: 0
+      samples: 2
+      pmu_cross_check: 61 delegated invocations per frame; raw U85 PMU cycles 517665738 and 517665835, overflow 0. Actual
+        HG clock is not independently verified; time.ms is measured complete-frame wall time.
+      pmu_overflow: 0
+      npu_invocations_per_forward: 61
+      test_result: FAIL
+      max_absolute_error: 0.798779726
+      uart: COM7 115200 baud
+      model_sha256: cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7
+      firmware_sha256: 24f43dd1d73ce5728d73ed68f58058c4adf326f48733415247adca6e7f70b33a
+      input: Hello from Phonon. pinned 7 token IDs, voice prefix 125, deterministic seed 20261021 noise at temperature 0.8;
+        generated frames 0 and 1
+      timing_scope: Complete backbone+synthesize, CPU state copies, bitwise finite checks, PCM16 conversion and handoff storage.
+        Excludes UART normalization/tokenization, prefix copy/text prefill, physical audio playback, logging and latent/EOS/PCM
+        reference comparisons. The hidden reference comparison is included for this first-two-frame diagnostic.
+      uart_run: Phonon case=0 frame=0 ticks=59345 NPU=517665738 calls=61 EOS=-11.926210
+      measurement_source: CMSIS serial capture and stopped-target variable inspection; model/shared_25mhz_result.json
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1 octal DDR flash
+          clock_mhz: 100
+          clock_source: SERVICES AXI clock 400 MHz divided by observed BAUDR 4
+        activations:
+          type: CPU planned tensors and persistent state in 64 MiB HyperRAM; U85 temporary scratch in SRAM0
+          clock_mhz: 100
+          clock_source: HyperRAM bus from SERVICES AXI clock 400 MHz divided by observed BAUDR 4; SRAM clock not represented
+            here
+    measurements:
+      memory:
+        model_bytes: 44675472
+      time:
+        ms: 18483
+        statistic: mean
+        forward_ms: 18483
+        forward_timer_hz: 1000
+        forward_ticks_samples:
+        - 18486
+        - 18480
+    run:
+      recorded_at: '2026-10-21T11:02:00Z'
+      context: Shared_Sram with 512-position Flow context and 100 MHz flash/HyperRAM. Full PTE/prefix/BOS physical CRC and
+        full 64 MiB RAM readback passed. Two uninterrupted frames average 18483 ms; realtime FAIL at 231.0375 times the 80
+        ms budget. Prefix copy 352 ms, pinned 7-token prefill 58078 ms, neural time to first frame 76916 ms. First token matches
+        the good baseline but frame differences remain unresolved; speech quality is not accepted. See shared_100mhz_result.json.
+      target: Alif E8 DevKit
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85-256
+      compiler: AC6 armclang
+      optimize: Release -O3 -ffast-math globally; Portable gelu source alone -fno-fast-math for measured correctness
+      build_job: b-55
+      execution_job: d-56 CMSIS Load and Debug
+      cpu_clock_mhz: 400
+      warmup: 0
+      samples: 2
+      pmu_cross_check: 61 delegated invocations per frame; raw U85 PMU cycles 139992845 and 139992766, overflow 0. Actual
+        HG clock is not independently verified; time.ms is measured complete-frame wall time.
+      pmu_overflow: 0
+      npu_invocations_per_forward: 61
+      test_result: FAIL
+      max_absolute_error: 4.01282406
+      uart: COM7 115200 baud
+      model_sha256: cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7
+      firmware_sha256: 243c24439496d5129d01bf8f08a0eadab608eb442e8210be5fa0292dd4016be7
+      input: Hello from Phonon. pinned 7 token IDs, voice prefix 125, deterministic seed 20261021 noise at temperature 0.8;
+        generated frames 0 and 1
+      timing_scope: Complete backbone+synthesize, CPU state copies, bitwise finite checks, PCM16 conversion and handoff storage.
+        Excludes UART normalization/tokenization, prefix copy/text prefill, physical audio playback, logging and latent/EOS/PCM
+        reference comparisons. The hidden reference comparison is included for this first-two-frame diagnostic.
+      uart_run: Phonon case=0 frame=0 ticks=18486 NPU=139992845 calls=61 EOS=-12.183635
+      measurement_source: CMSIS serial capture and stopped-target variable inspection; model/shared_100mhz_result.json
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1 octal DDR flash
+          clock_mhz: 100
+          clock_source: SERVICES AXI clock 400 MHz divided by observed BAUDR 4
+        activations:
+          type: CPU planned tensors and persistent state in 64 MiB HyperRAM; disjoint U85 slow scratch 1.5 MiB and Dedicated
+            fast scratch 384 KiB allocations in SRAM0
+          clock_mhz: 100
+          clock_source: HyperRAM bus from SERVICES AXI clock 400 MHz divided by observed BAUDR 4; SRAM clock not represented
+            here
+    measurements:
+      memory:
+        model_bytes: 44678800
+      time:
+        ms: 18459.5
+        statistic: mean
+        forward_ms: 18459.5
+        forward_timer_hz: 1000
+        forward_ticks_samples:
+        - 18458
+        - 18461
+    run:
+      recorded_at: '2026-10-21T11:29:09Z'
+      context: Dedicated_Sram with 384 KiB fast arena, 512-position Flow context and 100 MHz flash/HyperRAM. Full PTE/prefix/BOS
+        physical CRC and full 64 MiB RAM readback passed. Two uninterrupted frames average 18459.5 ms; realtime FAIL at 230.74375
+        times the 80 ms budget. Backend wall 401/404 ms, outside-backend 18057/18057 ms, 61 paired hooks/frame, aggregate
+        tick quantization bound 61 ms. Prefix copy 351 ms, pinned 7-token prefill 58059 ms, neural time to first frame 76868
+        ms. First-token and audio-frame numerical checks FAIL. See dedicated_100mhz_result.json.
+      target: Alif E8 DevKit
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85-256
+      compiler: AC6 armclang
+      optimize: Release -O3 -ffast-math globally; Portable gelu source alone -fno-fast-math for measured correctness
+      build_job: b-59
+      execution_job: d-60 CMSIS Load and Debug
+      cpu_clock_mhz: 400
+      warmup: 0
+      samples: 2
+      pmu_cross_check: 61 delegated invocations per frame; raw U85 PMU cycles 139372813 and 139372797, overflow 0. Actual
+        HG clock is not independently verified; time.ms is complete-frame wall time.
+      pmu_overflow: 0
+      npu_invocations_per_forward: 61
+      test_result: FAIL
+      max_absolute_error: 3.93008041
+      uart: COM7 115200 baud
+      model_sha256: a2f0a57d8b2f7d628aeeea7f391c2070445b215e4398fed967b6161363b90dd5
+      firmware_sha256: b95ba7a4df1ad8d0548117dbf38679c82d89b8d36199355c0f519bb6e6b98b1f
+      input: Hello from Phonon. pinned 7 token IDs, voice prefix 125, deterministic seed 20261021 noise at temperature 0.8;
+        generated frames 0 and 1
+      timing_scope: Complete backbone+synthesize, state copies, bitwise finite checks, PCM16 conversion and storage. First-two
+        hidden comparison is inside timing; latent/EOS/PCM comparisons and logging are outside. No halts within prefill or
+        either frame. Excludes initialization, UART normalization/tokenization and physical playback. First-token-only driver
+        address inspection pauses do not enter these intervals. Backend hooks include Vela parsing, CPU I/O copies, NPU wait
+        and output copies; outside-backend time is the remaining complete-frame wall time.
+      uart_run: Phonon case=0 frame=0 ticks=18458 NPU=139372813 calls=61 EOS=-11.449103
+      measurement_source: CMSIS serial, stopped driver/job/register and output variable inspection, CMSIS build memory/symbols;
+        model/dedicated_100mhz_result.json

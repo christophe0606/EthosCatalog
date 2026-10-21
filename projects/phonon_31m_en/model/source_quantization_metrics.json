@@ -1,0 +1,1447 @@
+{
+  "hf_revision": "52433c46975bfa13144c56204c9f4ee1c5b148aa",
+  "original_sha256": "8a04cf833cfe69b67c2ec968b2d31244655b9accc84ade9c0ebcc176f2074607",
+  "q8_import_sha256": "156814c6ca16a67713311572f0fc6780d96abca4a09ca2f3d06d495f3c781c2a",
+  "compared_tensors": 185,
+  "tensor_errors": {
+    "mimi.decoder.model.0.conv.bias": {
+      "max_absolute_error": 0.0052623748779296875,
+      "rmse": 0.001021091709844768,
+      "normalized_rmse": 0.0014854577937433986,
+      "finite": true
+    },
+    "mimi.decoder.model.0.conv.weight": {
+      "max_absolute_error": 0.0019526481628417969,
+      "rmse": 0.00011268784874118865,
+      "normalized_rmse": 0.0016578417027279342,
+      "finite": true
+    },
+    "mimi.decoder.model.11.conv.bias": {
+      "max_absolute_error": 7.165363058447838e-08,
+      "rmse": 7.165363058447838e-08,
+      "normalized_rmse": 0.00028043040029560235,
+      "finite": true
+    },
+    "mimi.decoder.model.11.conv.weight": {
+      "max_absolute_error": 7.573748007416725e-06,
+      "rmse": 2.2410119981941534e-06,
+      "normalized_rmse": 0.001676865691342944,
+      "finite": true
+    },
+    "mimi.decoder.model.2.convtr.bias": {
+      "max_absolute_error": 0.0038999319076538086,
+      "rmse": 0.0011546867899596691,
+      "normalized_rmse": 0.0015187014534117774,
+      "finite": true
+    },
+    "mimi.decoder.model.2.convtr.weight": {
+      "max_absolute_error": 0.0032564401626586914,
+      "rmse": 6.401543214451522e-05,
+      "normalized_rmse": 0.0016626669142426715,
+      "finite": true
+    },
+    "mimi.decoder.model.3.block.1.conv.bias": {
+      "max_absolute_error": 0.0035276412963867188,
+      "rmse": 0.0010068793781101704,
+      "normalized_rmse": 0.001493584318880508,
+      "finite": true
+    },
+    "mimi.decoder.model.3.block.1.conv.weight": {
+      "max_absolute_error": 0.007769107818603516,
+      "rmse": 0.0001821505866246298,
+      "normalized_rmse": 0.0016928280470275983,
+      "finite": true
+    },
+    "mimi.decoder.model.3.block.3.conv.bias": {
+      "max_absolute_error": 0.0065495967864990234,
+      "rmse": 0.0009336506482213736,
+      "normalized_rmse": 0.0015342305891515493,
+      "finite": true
+    },
+    "mimi.decoder.model.3.block.3.conv.weight": {
+      "max_absolute_error": 0.007736682891845703,
+      "rmse": 0.00040808916673995554,
+      "normalized_rmse": 0.0016537757293224897,
+      "finite": true
+    },
+    "mimi.decoder.model.5.convtr.bias": {
+      "max_absolute_error": 0.0037981271743774414,
+      "rmse": 0.0008573348168283701,
+      "normalized_rmse": 0.0016109183054319148,
+      "finite": true
+    },
+    "mimi.decoder.model.5.convtr.weight": {
+      "max_absolute_error": 0.0015527606010437012,
+      "rmse": 4.722416269942187e-05,
+      "normalized_rmse": 0.001638238830715958,
+      "finite": true
+    },
+    "mimi.decoder.model.6.block.1.conv.bias": {
+      "max_absolute_error": 0.0019472837448120117,
+      "rmse": 0.0004242633585818112,
+      "normalized_rmse": 0.001764400350158569,
+      "finite": true
+    },
+    "mimi.decoder.model.6.block.1.conv.weight": {
+      "max_absolute_error": 0.00121384859085083,
+      "rmse": 8.103606523945928e-05,
+      "normalized_rmse": 0.0016073975713192304,
+      "finite": true
+    },
+    "mimi.decoder.model.6.block.3.conv.bias": {
+      "max_absolute_error": 0.0019420981407165527,
+      "rmse": 0.0005003072437830269,
+      "normalized_rmse": 0.0013823493332598552,
+      "finite": true
+    },
+    "mimi.decoder.model.6.block.3.conv.weight": {
+      "max_absolute_error": 0.015331745147705078,
+      "rmse": 0.0006653487798757851,
+      "normalized_rmse": 0.0016662084500684532,
+      "finite": true
+    },
+    "mimi.decoder.model.8.convtr.bias": {
+      "max_absolute_error": 0.0018520951271057129,
+      "rmse": 0.0004171175532974303,
+      "normalized_rmse": 0.0015885834021199814,
+      "finite": true
+    },
+    "mimi.decoder.model.8.convtr.weight": {
+      "max_absolute_error": 0.0037038326263427734,
+      "rmse": 8.478872769046575e-05,
+      "normalized_rmse": 0.0016156106229147204,
+      "finite": true
+    },
+    "mimi.decoder.model.9.block.1.conv.bias": {
+      "max_absolute_error": 0.0009428858757019043,
+      "rmse": 0.0002726160455495119,
+      "normalized_rmse": 0.0011874295012634037,
+      "finite": true
+    },
+    "mimi.decoder.model.9.block.1.conv.weight": {
+      "max_absolute_error": 0.0019373893737792969,
+      "rmse": 9.717675857245922e-05,
+      "normalized_rmse": 0.0017316686938085497,
+      "finite": true
+    },
+    "mimi.decoder.model.9.block.3.conv.bias": {
+      "max_absolute_error": 0.0018120408058166504,
+      "rmse": 0.00046272663166746497,
+      "normalized_rmse": 0.0016519303068845887,
+      "finite": true
+    },
+    "mimi.decoder.model.9.block.3.conv.weight": {
+      "max_absolute_error": 0.004510164260864258,
+      "rmse": 0.0005464743007905781,
+      "normalized_rmse": 0.0015226744303787115,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.layer_scale_1.scale": {
+      "max_absolute_error": 0.0008794963359832764,
+      "rmse": 0.00023107176821213216,
+      "normalized_rmse": 0.0016530421789706683,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.layer_scale_2.scale": {
+      "max_absolute_error": 0.0009725093841552734,
+      "rmse": 0.00027030601631850004,
+      "normalized_rmse": 0.0015725713442147485,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.linear1.weight": {
+      "max_absolute_error": 0.003807544708251953,
+      "rmse": 0.0001455545425415039,
+      "normalized_rmse": 0.001660476851621655,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.linear2.weight": {
+      "max_absolute_error": 0.0018978714942932129,
+      "rmse": 0.00012016087566735223,
+      "normalized_rmse": 0.0016592463000481897,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.norm1.bias": {
+      "max_absolute_error": 0.0004742145538330078,
+      "rmse": 7.775281846988946e-05,
+      "normalized_rmse": 0.0017783519369544154,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.norm1.weight": {
+      "max_absolute_error": 0.0019369125366210938,
+      "rmse": 0.0005403144750744104,
+      "normalized_rmse": 0.0016261170899771061,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.norm2.bias": {
+      "max_absolute_error": 0.0008641481399536133,
+      "rmse": 0.00012102245091227815,
+      "normalized_rmse": 0.0017170979347326373,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.norm2.weight": {
+      "max_absolute_error": 0.001948714256286621,
+      "rmse": 0.0006309212185442448,
+      "normalized_rmse": 0.0015438331839711544,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.0038220882415771484,
+      "rmse": 0.00015927058120723814,
+      "normalized_rmse": 0.0016589399178897153,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.0.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.0014253854751586914,
+      "rmse": 0.00013398079317994416,
+      "normalized_rmse": 0.0016597227109426196,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.layer_scale_1.scale": {
+      "max_absolute_error": 0.0009396970272064209,
+      "rmse": 0.00026047960272990167,
+      "normalized_rmse": 0.0015489322356167334,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.layer_scale_2.scale": {
+      "max_absolute_error": 0.0019498467445373535,
+      "rmse": 0.0008635013946332037,
+      "normalized_rmse": 0.00172918833892655,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.linear1.weight": {
+      "max_absolute_error": 0.005387067794799805,
+      "rmse": 0.00016815541312098503,
+      "normalized_rmse": 0.0016586849497450765,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.linear2.weight": {
+      "max_absolute_error": 0.0022410154342651367,
+      "rmse": 0.0001320149312959984,
+      "normalized_rmse": 0.0016593550420786825,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.norm1.bias": {
+      "max_absolute_error": 0.0018740296363830566,
+      "rmse": 0.00013746060722041875,
+      "normalized_rmse": 0.0018996958463032506,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.norm1.weight": {
+      "max_absolute_error": 0.001875758171081543,
+      "rmse": 0.0005565433530136943,
+      "normalized_rmse": 0.001636889471413748,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.norm2.bias": {
+      "max_absolute_error": 0.0007022619247436523,
+      "rmse": 0.00015425904712174088,
+      "normalized_rmse": 0.0016652531437895254,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.norm2.weight": {
+      "max_absolute_error": 0.0019353032112121582,
+      "rmse": 0.0006554655265063047,
+      "normalized_rmse": 0.0015197443341020348,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.0037783384323120117,
+      "rmse": 0.00014768127584829926,
+      "normalized_rmse": 0.0016603683078822123,
+      "finite": true
+    },
+    "mimi.decoder_transformer.transformer.layers.1.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.0009718239307403564,
+      "rmse": 0.00012879339919891208,
+      "normalized_rmse": 0.001654772965160024,
+      "finite": true
+    },
+    "mimi.quantizer.output_proj.weight": {
+      "max_absolute_error": 0.003855466842651367,
+      "rmse": 0.00031901494367048144,
+      "normalized_rmse": 0.0016997311207902464,
+      "finite": true
+    },
+    "mimi.upsample.convtr.convtr.weight": {
+      "max_absolute_error": 0.00378262996673584,
+      "rmse": 0.00021309428848326206,
+      "normalized_rmse": 0.0016569847354336886,
+      "finite": true
+    },
+    "flow_lm.bos_emb": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.duration_delta.learnt_padding": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.duration_delta.output_proj.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.num_speakers.embed.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.num_speakers.learnt_padding": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.num_speakers.output_proj.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.speaker_wavs.learnt_padding": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.speaker_wavs.output_proj.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.transcript_in_segment.embed.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.condition_provider.conditioners.transcript_in_segment.learnt_padding": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.emb_mean": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.emb_std": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.3.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.3.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.6.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.6.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.9.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow.w_s_t.9.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": null,
+      "finite": true
+    },
+    "flow_lm.flow_net.cond_embed.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.cond_embed.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.final_layer.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.final_layer.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.final_layer.linear.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.final_layer.linear.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.input_proj.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.input_proj.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.0.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.1.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.2.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.3.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.4.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.adaLN_modulation.1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.adaLN_modulation.1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.in_ln.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.in_ln.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.res_blocks.5.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.freqs": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.0.mlp.3.alpha": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.freqs": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.mlp.0.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.mlp.0.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.mlp.2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.mlp.2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.flow_net.time_embed.1.mlp.3.alpha": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.input_linear.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.out_eos.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.out_eos.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.out_norm.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.out_norm.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.linear1.weight": {
+      "max_absolute_error": 0.000598907470703125,
+      "rmse": 4.859736509388313e-05,
+      "normalized_rmse": 0.005492652004952342,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.linear2.weight": {
+      "max_absolute_error": 0.000400543212890625,
+      "rmse": 4.380903556011617e-05,
+      "normalized_rmse": 0.009261833699425698,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.00201416015625,
+      "rmse": 0.00018432385695632547,
+      "normalized_rmse": 0.005575723392176665,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.0.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.0003204345703125,
+      "rmse": 7.568504224764183e-05,
+      "normalized_rmse": 0.005410825187308741,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.linear1.weight": {
+      "max_absolute_error": 0.000606536865234375,
+      "rmse": 0.00013007645611651242,
+      "normalized_rmse": 0.0054144180817492305,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.linear2.weight": {
+      "max_absolute_error": 0.0003910064697265625,
+      "rmse": 5.831837188452482e-05,
+      "normalized_rmse": 0.0055703656029526495,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.00119781494140625,
+      "rmse": 0.00015680371143389493,
+      "normalized_rmse": 0.005557115743517831,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.1.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.0003209114074707031,
+      "rmse": 8.483658893965185e-05,
+      "normalized_rmse": 0.005415613701938912,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.linear1.weight": {
+      "max_absolute_error": 0.0007781982421875,
+      "rmse": 0.00012322046677581966,
+      "normalized_rmse": 0.005402475418194089,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.linear2.weight": {
+      "max_absolute_error": 0.00042057037353515625,
+      "rmse": 5.9535606851568446e-05,
+      "normalized_rmse": 0.005662422787152228,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.0015411376953125,
+      "rmse": 0.00014800557983107865,
+      "normalized_rmse": 0.005544581477723012,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.2.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.000492095947265625,
+      "rmse": 9.529964881949127e-05,
+      "normalized_rmse": 0.005425290544319938,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.linear1.weight": {
+      "max_absolute_error": 0.000789642333984375,
+      "rmse": 0.00012453946692403406,
+      "normalized_rmse": 0.005370712555467973,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.linear2.weight": {
+      "max_absolute_error": 0.0006132125854492188,
+      "rmse": 7.064214878482744e-05,
+      "normalized_rmse": 0.005707984396877216,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.001983642578125,
+      "rmse": 0.00017755816224962473,
+      "normalized_rmse": 0.0055175267162935965,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.3.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.00038909912109375,
+      "rmse": 0.00010128325084224343,
+      "normalized_rmse": 0.005373541907792066,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.linear1.weight": {
+      "max_absolute_error": 0.000736236572265625,
+      "rmse": 0.0001291607622988522,
+      "normalized_rmse": 0.005373189620610314,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.linear2.weight": {
+      "max_absolute_error": 0.0005140304565429688,
+      "rmse": 8.657514990773052e-05,
+      "normalized_rmse": 0.0057157448381322,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.00176239013671875,
+      "rmse": 0.00016125534602906555,
+      "normalized_rmse": 0.005457477283495446,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.4.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.00042057037353515625,
+      "rmse": 0.00010357818246120587,
+      "normalized_rmse": 0.00536900108004003,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.linear1.weight": {
+      "max_absolute_error": 0.0007915496826171875,
+      "rmse": 0.00011926703155040741,
+      "normalized_rmse": 0.005412125253369805,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.linear2.weight": {
+      "max_absolute_error": 0.001007080078125,
+      "rmse": 8.159653953043744e-05,
+      "normalized_rmse": 0.005778673425927239,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.norm1.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.norm1.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.norm2.bias": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.norm2.weight": {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.self_attn.in_proj.weight": {
+      "max_absolute_error": 0.001369476318359375,
+      "rmse": 0.00016075384337455034,
+      "normalized_rmse": 0.005445749073587915,
+      "finite": true
+    },
+    "flow_lm.transformer.layers.5.self_attn.out_proj.weight": {
+      "max_absolute_error": 0.0005035400390625,
+      "rmse": 0.00012536419671960175,
+      "normalized_rmse": 0.005444897200089669,
+      "finite": true
+    }
+  },
+  "texts": [
+    "Hello from Phonon.",
+    "The quick brown fox jumps over the lazy dog."
+  ],
+  "frame_count": 16,
+  "frame_errors": [
+    {
+      "latent": {
+        "max_absolute_error": 0.0049686431884765625,
+        "rmse": 0.0013937936164438725,
+        "normalized_rmse": 0.000876114582388086,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.003924369812011719,
+        "rmse": 0.003924369812011719,
+        "normalized_rmse": 0.00033133365621254633,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00011059921234846115,
+        "rmse": 9.296431926486548e-06,
+        "normalized_rmse": 0.011432446570577074,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0074048638343811035,
+        "rmse": 0.003972962964326143,
+        "normalized_rmse": 0.0030137392980001745,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.015517234802246094,
+        "rmse": 0.015517234802246094,
+        "normalized_rmse": 0.0010305942261514282,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0004832365084439516,
+        "rmse": 9.634245361667126e-05,
+        "normalized_rmse": 0.016473873383249037,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.022091150283813477,
+        "rmse": 0.00872216559946537,
+        "normalized_rmse": 0.007286618951368548,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.031434059143066406,
+        "rmse": 0.031434059143066406,
+        "normalized_rmse": 0.0024656862220721444,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.024974383413791656,
+        "rmse": 0.004912441596388817,
+        "normalized_rmse": 0.04825504748718509,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.024835288524627686,
+        "rmse": 0.0077613284811377525,
+        "normalized_rmse": 0.00708130950715818,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.014310836791992188,
+        "rmse": 0.014310836791992188,
+        "normalized_rmse": 0.0014112309759838695,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.014142759144306183,
+        "rmse": 0.004509081598371267,
+        "normalized_rmse": 0.03672507095320941,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04862093925476074,
+        "rmse": 0.013083301484584808,
+        "normalized_rmse": 0.011493304131971417,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.01598834991455078,
+        "rmse": 0.01598834991455078,
+        "normalized_rmse": 0.0018923014652384277,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.07421919703483582,
+        "rmse": 0.013254883699119091,
+        "normalized_rmse": 0.0977821798302641,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.017587244510650635,
+        "rmse": 0.007403603754937649,
+        "normalized_rmse": 0.007735427996113225,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.0073699951171875,
+        "rmse": 0.0073699951171875,
+        "normalized_rmse": 0.0007577241684006667,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.015251841396093369,
+        "rmse": 0.0028250047471374273,
+        "normalized_rmse": 0.038971687443681485,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.014359712600708008,
+        "rmse": 0.006653119809925556,
+        "normalized_rmse": 0.005505054587276365,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.017642974853515625,
+        "rmse": 0.017642974853515625,
+        "normalized_rmse": 0.002078275494177402,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.004719167947769165,
+        "rmse": 0.0011350229615345597,
+        "normalized_rmse": 0.011094725709964273,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.025365233421325684,
+        "rmse": 0.008553805761039257,
+        "normalized_rmse": 0.009777020781093156,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.006725311279296875,
+        "rmse": 0.006725311279296875,
+        "normalized_rmse": 0.0008054382385801262,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0026923492550849915,
+        "rmse": 0.0010273518273606896,
+        "normalized_rmse": 0.011628784858399008,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.005123317241668701,
+        "rmse": 0.0015897526172921062,
+        "normalized_rmse": 0.0009802530555379347,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.006478309631347656,
+        "rmse": 0.006478309631347656,
+        "normalized_rmse": 0.0005000563143059685,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00010323245078325272,
+        "rmse": 9.184869668388274e-06,
+        "normalized_rmse": 0.010853247780290644,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.013517379760742188,
+        "rmse": 0.004847743548452854,
+        "normalized_rmse": 0.003812463067948506,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.0024566650390625,
+        "rmse": 0.0024566650390625,
+        "normalized_rmse": 0.00015493488043670465,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0017687119543552399,
+        "rmse": 0.0005343129159882665,
+        "normalized_rmse": 0.023097281931115512,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.022321462631225586,
+        "rmse": 0.00753036979585886,
+        "normalized_rmse": 0.00593927603728781,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.01659107208251953,
+        "rmse": 0.01659107208251953,
+        "normalized_rmse": 0.001705773027372083,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.014587461948394775,
+        "rmse": 0.0038085654377937317,
+        "normalized_rmse": 0.027239244437178425,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.013439655303955078,
+        "rmse": 0.004567772150039673,
+        "normalized_rmse": 0.0038820507411936114,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.01770305633544922,
+        "rmse": 0.01770305633544922,
+        "normalized_rmse": 0.0017710281809385352,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.001882154494524002,
+        "rmse": 0.0003005443431902677,
+        "normalized_rmse": 0.026784011716816082,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01978433132171631,
+        "rmse": 0.008424092084169388,
+        "normalized_rmse": 0.007064026935034037,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.0039043426513671875,
+        "rmse": 0.0039043426513671875,
+        "normalized_rmse": 0.0004258630123306794,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.015740592032670975,
+        "rmse": 0.003757735015824437,
+        "normalized_rmse": 0.032648593504973955,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.015539884567260742,
+        "rmse": 0.0068467953242361546,
+        "normalized_rmse": 0.006390077312899282,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.009055137634277344,
+        "rmse": 0.009055137634277344,
+        "normalized_rmse": 0.0008853793241968155,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0006587579846382141,
+        "rmse": 0.0001299046416534111,
+        "normalized_rmse": 0.01112150673984578,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01579466462135315,
+        "rmse": 0.006618239916861057,
+        "normalized_rmse": 0.0060666918995555905,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.03427314758300781,
+        "rmse": 0.03427314758300781,
+        "normalized_rmse": 0.0031532239780493916,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.020826488733291626,
+        "rmse": 0.0023262458853423595,
+        "normalized_rmse": 0.03094528442944628,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.15285342931747437,
+        "rmse": 0.03241848945617676,
+        "normalized_rmse": 0.03075084270647581,
+        "finite": true
+      },
+      "eos_logit": {
+        "max_absolute_error": 0.018685340881347656,
+        "rmse": 0.018685340881347656,
+        "normalized_rmse": 0.0018113158567654353,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.22319260239601135,
+        "rmse": 0.04734749719500542,
+        "normalized_rmse": 0.40482571412390816,
+        "finite": true
+      }
+    }
+  ],
+  "conditions": "Teacher-forced: identical previous latent, Gaussian noise, q8-generated KV/convolution states and default voice per frame;8frames/text; temp0.8; seed20261021.",
+  "limitations": "Numerical error on generated early frames only; no WER, listening test, upstream executable parity or perceptual acceptance claim."
+}

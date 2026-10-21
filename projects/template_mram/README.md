@@ -87,6 +87,14 @@ then **Load & Debug** or **Load & Run**. The model is embedded in MRAM and needs
 no separate programming. Connect the standard MIPI LCD. UART4 (SW4 to U4,
 115200 8N1) prints the gain self-test result once; live data is shown on the LCD.
 
+The root `ai_layer/` is shared by all applications. Switching the CMSIS target
+set does not regenerate it: run the layer-generation command above before
+building this template after another application. Build only the selected
+template context. A stale layer can link successfully while
+containing a different network. In that case the initial LCD UI can appear, but
+the gain self-test fails (`pipeline_error == -401`) before capture, animation or
+touch handling starts. Regenerate the layer, rebuild and reload the firmware.
+
 Inspect `stream_stats` (including `error`, source/frame counts, LCD event counts
 and timing/deadline counters), `gain_test_passed`, `microphone_drops` and
 `microphone_overflows` in the debugger. `pipeline_error` also records errors.

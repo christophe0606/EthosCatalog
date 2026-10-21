@@ -1,0 +1,65 @@
+{
+  "quality_accepted": false,
+  "limitations": "Signal-only diagnostics on two in-calibration texts and one default voice; no intelligibility, perceptual score, ASR or speaker identity validation.",
+  "settings": {
+    "sample_rate": 24000,
+    "mel_bands": 80,
+    "fft_size": 1024,
+    "window_samples": 600,
+    "hop_samples": 240,
+    "active_threshold_db": -50,
+    "pitch_window_samples": 960,
+    "pitch_hop_samples": 480,
+    "pitch_range_hz": [
+      60,
+      600
+    ],
+    "pitch_correlation_threshold": 0.6
+  },
+  "utterances": [
+    {
+      "text": "Hello from Phonon.",
+      "source_sha256": "e81360f1ae31b9921997755dd1cbff99ab87bf7760f438ef687d35cb0f1084f4",
+      "ptq_sha256": "0d3f98d5e460b24c2dae5682670ff6a587617062658b8108a49ae338833ecaae",
+      "source_audio_seconds": 1.84,
+      "ptq_audio_seconds": 1.84,
+      "eos_frame_difference": 0,
+      "aligned_active_log_mel_mean_absolute_db": 2.8151441945833486,
+      "mel_spectral_convergence": 0.23431805802999492,
+      "mean_mel_spectrum_cosine": 0.9962675525433244,
+      "energy_envelope_correlation": 0.996846512826335,
+      "source_pitch": {
+        "voiced_frames": 41,
+        "total_frames": 91,
+        "median_hz": 208.69565217391303
+      },
+      "ptq_pitch": {
+        "voiced_frames": 41,
+        "total_frames": 91,
+        "median_hz": 208.69565217391303
+      }
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "source_sha256": "952415f6d4c417e8a583b2669a5de896400da94b8ebd54dd9afc7ca0f37609e6",
+      "ptq_sha256": "3d407d52962630a95c805947db3c6bca750f171a24faabe7df3d4e08c7f2da22",
+      "source_audio_seconds": 3.04,
+      "ptq_audio_seconds": 3.04,
+      "eos_frame_difference": 0,
+      "aligned_active_log_mel_mean_absolute_db": 3.825188957403163,
+      "mel_spectral_convergence": 0.34324061399692124,
+      "mean_mel_spectrum_cosine": 0.9965772450114373,
+      "energy_envelope_correlation": 0.9583176985607845,
+      "source_pitch": {
+        "voiced_frames": 78,
+        "total_frames": 151,
+        "median_hz": 188.98809523809524
+      },
+      "ptq_pitch": {
+        "voiced_frames": 80,
+        "total_frames": 151,
+        "median_hz": 186.77325581395348
+      }
+    }
+  ]
+}

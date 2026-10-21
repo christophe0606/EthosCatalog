@@ -1,0 +1,3839 @@
+{
+  "status": "staged_lowered_unvalidated",
+  "quality_accepted": false,
+  "hardware_realtime_verified": false,
+  "policy": "linear+conv a16w8; float attention, masks, normalization and state; per-tensor transpose weights",
+  "seed": 20261021,
+  "temperature": 0.8,
+  "source_revision": "52433c46975bfa13144c56204c9f4ee1c5b148aa",
+  "calibration": "complete generated utterances including all voice/text conditioning, voiced/midstream audio and EOS",
+  "memory_mode": "Shared_Sram",
+  "float_chain_error": [
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    }
+  ],
+  "source_utterances": [
+    {
+      "text": "Hello from Phonon.",
+      "token_ids": [
+        3248,
+        744,
+        949,
+        1286,
+        697,
+        860,
+        663
+      ],
+      "frames": 23,
+      "eos_frame": 19,
+      "completed_eos": true,
+      "eos_logits": [
+        -11.840238571166992,
+        -15.072107315063477,
+        -12.717170715332031,
+        -10.154987335205078,
+        -8.433167457580566,
+        -9.719118118286133,
+        -8.47159481048584,
+        -8.34315299987793,
+        -8.709697723388672,
+        -7.567686557769775,
+        -9.198722839355469,
+        -9.191431045532227,
+        -9.22758960723877,
+        -7.426877975463867,
+        -8.921899795532227,
+        -6.6388397216796875,
+        -6.011498928070068,
+        -7.275663375854492,
+        -7.300324440002441,
+        7.83299446105957,
+        9.64801025390625,
+        9.36831283569336,
+        8.677209854125977
+      ],
+      "host_seconds": 2.781561199997668,
+      "file": "weights/staged_q8_0.wav",
+      "sha256": "e81360f1ae31b9921997755dd1cbff99ab87bf7760f438ef687d35cb0f1084f4",
+      "peak": 0.39000174403190613,
+      "rms": 0.0673319399356842,
+      "clipped_samples": 0,
+      "audio_seconds": 1.84
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "token_ids": [
+        776,
+        1417,
+        2600,
+        1657,
+        879,
+        2503,
+        1971,
+        662,
+        816,
+        665,
+        993,
+        3358,
+        1852,
+        663
+      ],
+      "frames": 38,
+      "eos_frame": 36,
+      "completed_eos": true,
+      "eos_logits": [
+        -12.961638450622559,
+        -15.85532283782959,
+        -9.563304901123047,
+        -9.743987083435059,
+        -9.556768417358398,
+        -10.90573501586914,
+        -10.868535995483398,
+        -10.812731742858887,
+        -8.73559284210205,
+        -9.03423023223877,
+        -11.421985626220703,
+        -8.026558876037598,
+        -8.104126930236816,
+        -8.843107223510742,
+        -9.253520965576172,
+        -9.231616973876953,
+        -9.693586349487305,
+        -8.942597389221191,
+        -8.705297470092773,
+        -10.377745628356934,
+        -9.783357620239258,
+        -8.774481773376465,
+        -8.741175651550293,
+        -8.199750900268555,
+        -9.200105667114258,
+        -7.551754474639893,
+        -8.999550819396973,
+        -9.206860542297363,
+        -9.721582412719727,
+        -8.1780366897583,
+        -7.357302665710449,
+        -7.633553981781006,
+        -7.53387451171875,
+        -7.738130569458008,
+        -8.8631010055542,
+        -8.14335823059082,
+        8.41099739074707,
+        9.645092010498047
+      ],
+      "host_seconds": 4.377526000003854,
+      "file": "weights/staged_q8_1.wav",
+      "sha256": "952415f6d4c417e8a583b2669a5de896400da94b8ebd54dd9afc7ca0f37609e6",
+      "peak": 0.5264530181884766,
+      "rms": 0.07259437441825867,
+      "clipped_samples": 0,
+      "audio_seconds": 3.04
+    }
+  ],
+  "fixed_state_backbone_errors": [
+    {
+      "max_absolute_error": 0.009691864252090454,
+      "rmse": 0.0029914635233581066,
+      "normalized_rmse": 0.00685040162742736,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007700979709625244,
+      "rmse": 0.001962851732969284,
+      "normalized_rmse": 0.01635739571139253,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007561206817626953,
+      "rmse": 0.0019884693901985884,
+      "normalized_rmse": 0.01942629787992589,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007389597594738007,
+      "rmse": 0.002066595945507288,
+      "normalized_rmse": 0.01699956930154224,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0072647035121917725,
+      "rmse": 0.0019706450402736664,
+      "normalized_rmse": 0.01190166242729288,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00614098459482193,
+      "rmse": 0.001970725366845727,
+      "normalized_rmse": 0.011652968530947567,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008656322956085205,
+      "rmse": 0.0023592710494995117,
+      "normalized_rmse": 0.014301577312369706,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007204174995422363,
+      "rmse": 0.0021306616254150867,
+      "normalized_rmse": 0.011139830143361555,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006021767854690552,
+      "rmse": 0.002105132443830371,
+      "normalized_rmse": 0.010611478768599263,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.010217249393463135,
+      "rmse": 0.0024546063505113125,
+      "normalized_rmse": 0.01971281766972652,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007551129907369614,
+      "rmse": 0.002349579008296132,
+      "normalized_rmse": 0.022721483923164813,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006734590977430344,
+      "rmse": 0.0021355976350605488,
+      "normalized_rmse": 0.015759400355043456,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.009691864252090454,
+      "rmse": 0.0029914635233581066,
+      "normalized_rmse": 0.00685040162742736,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007700979709625244,
+      "rmse": 0.001962851732969284,
+      "normalized_rmse": 0.01635739571139253,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00791102647781372,
+      "rmse": 0.0020012573804706335,
+      "normalized_rmse": 0.018347525831284923,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007160753011703491,
+      "rmse": 0.0021164834033697844,
+      "normalized_rmse": 0.015639152305202346,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007363677024841309,
+      "rmse": 0.002058423589915037,
+      "normalized_rmse": 0.011954924290842456,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008057013154029846,
+      "rmse": 0.0020920741371810436,
+      "normalized_rmse": 0.012172693526290641,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006475374102592468,
+      "rmse": 0.002058224519714713,
+      "normalized_rmse": 0.00984077088708646,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006505757570266724,
+      "rmse": 0.0020667631179094315,
+      "normalized_rmse": 0.009783694543707219,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006036907434463501,
+      "rmse": 0.0020450409501791,
+      "normalized_rmse": 0.009190965835671418,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006670556962490082,
+      "rmse": 0.0021899270359426737,
+      "normalized_rmse": 0.009115939724151414,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006223462522029877,
+      "rmse": 0.0020853285677731037,
+      "normalized_rmse": 0.008593835684871638,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006819598376750946,
+      "rmse": 0.002159243216738105,
+      "normalized_rmse": 0.008506522608529748,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007072925567626953,
+      "rmse": 0.0020989058539271355,
+      "normalized_rmse": 0.008008140741372448,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0057859867811203,
+      "rmse": 0.002131976652890444,
+      "normalized_rmse": 0.008661220683722604,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006818301975727081,
+      "rmse": 0.002192338462918997,
+      "normalized_rmse": 0.008354219661775417,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007525771856307983,
+      "rmse": 0.0022647373843938112,
+      "normalized_rmse": 0.008913879961523163,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007522404193878174,
+      "rmse": 0.00232483958825469,
+      "normalized_rmse": 0.01878210095617353,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008788708597421646,
+      "rmse": 0.0024520622100681067,
+      "normalized_rmse": 0.022796420896416654,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00727999210357666,
+      "rmse": 0.0023878307547420263,
+      "normalized_rmse": 0.020937992108365364,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008600860834121704,
+      "rmse": 0.0023869613651186228,
+      "normalized_rmse": 0.020143160185177034,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007323464844375849,
+      "rmse": 0.002115730196237564,
+      "normalized_rmse": 0.016833504809107034,
+      "finite": true
+    }
+  ],
+  "fixed_state_synthesis_errors": [
+    {
+      "latent": {
+        "max_absolute_error": 0.030760526657104492,
+        "rmse": 0.014369593933224678,
+        "normalized_rmse": 0.009027423319892402,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0016107559204101562,
+        "rmse": 0.0016107559204101562,
+        "normalized_rmse": 0.00013604083319170804,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.003189741401001811,
+        "rmse": 0.0003631095460150391,
+        "normalized_rmse": 0.4427534962565735,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005326367914676666,
+        "rmse": 0.0013692735228687525,
+        "normalized_rmse": 0.01901550642357797,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.033423155546188354,
+        "rmse": 0.013941207900643349,
+        "normalized_rmse": 0.010586095493107883,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.015295982360839844,
+        "rmse": 0.015295982360839844,
+        "normalized_rmse": 0.0010148535995064619,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.008032888174057007,
+        "rmse": 0.0014929951867088675,
+        "normalized_rmse": 0.2565218113119991,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005218729376792908,
+        "rmse": 0.001286370912566781,
+        "normalized_rmse": 0.01955538398955982,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.026190996170043945,
+        "rmse": 0.010865525342524052,
+        "normalized_rmse": 0.009081684053777114,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.021475791931152344,
+        "rmse": 0.021475791931152344,
+        "normalized_rmse": 0.0016887240418390211,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03243095800280571,
+        "rmse": 0.009656989946961403,
+        "normalized_rmse": 0.09528996503028146,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005077362060546875,
+        "rmse": 0.0008909106836654246,
+        "normalized_rmse": 0.011789588534010667,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03707408905029297,
+        "rmse": 0.015190060250461102,
+        "normalized_rmse": 0.013858157845753387,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.014251708984375,
+        "rmse": 0.014251708984375,
+        "normalized_rmse": 0.0014034196709401597,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.12528516352176666,
+        "rmse": 0.020344194024801254,
+        "normalized_rmse": 0.16523787966249628,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.007164813578128815,
+        "rmse": 0.0011882283724844456,
+        "normalized_rmse": 0.015364243889468528,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02514183521270752,
+        "rmse": 0.011892290785908699,
+        "normalized_rmse": 0.010443824385989413,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0071659088134765625,
+        "rmse": 0.0071659088134765625,
+        "normalized_rmse": 0.0008497292209032484,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.04935107007622719,
+        "rmse": 0.013035296462476254,
+        "normalized_rmse": 0.09638610876360619,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0038335099816322327,
+        "rmse": 0.0009163965005427599,
+        "normalized_rmse": 0.011042053074218081,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023395061492919922,
+        "rmse": 0.009890012443065643,
+        "normalized_rmse": 0.01034611631416172,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007853507995605469,
+        "rmse": 0.007853507995605469,
+        "normalized_rmse": 0.0008080473866069604,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03957962989807129,
+        "rmse": 0.0073006837628781796,
+        "normalized_rmse": 0.1007912545681718,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.002597890794277191,
+        "rmse": 0.0006939492304809391,
+        "normalized_rmse": 0.010065705603610847,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.032829999923706055,
+        "rmse": 0.011754537932574749,
+        "normalized_rmse": 0.009736126778458169,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0006742477416992188,
+        "rmse": 0.0006742477416992188,
+        "normalized_rmse": 7.958923399696345e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05086636543273926,
+        "rmse": 0.0081412922590971,
+        "normalized_rmse": 0.07915430226758824,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0060596764087677,
+        "rmse": 0.000996438437141478,
+        "normalized_rmse": 0.01312089707391769,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019249320030212402,
+        "rmse": 0.008546019904315472,
+        "normalized_rmse": 0.00980299053130633,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0020160675048828125,
+        "rmse": 0.0020160675048828125,
+        "normalized_rmse": 0.00024164335772247135,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.02714032307267189,
+        "rmse": 0.007855280302464962,
+        "normalized_rmse": 0.08916656637747578,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003071330487728119,
+        "rmse": 0.0006206771940924227,
+        "normalized_rmse": 0.009667251048729833,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.024327099323272705,
+        "rmse": 0.00991278886795044,
+        "normalized_rmse": 0.010182241234302487,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00855255126953125,
+        "rmse": 0.00855255126953125,
+        "normalized_rmse": 0.000981957301062765,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.020014554262161255,
+        "rmse": 0.004245876334607601,
+        "normalized_rmse": 0.04846406449108775,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00394880585372448,
+        "rmse": 0.0007594090420752764,
+        "normalized_rmse": 0.011441284203214658,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.06927454471588135,
+        "rmse": 0.01576988957822323,
+        "normalized_rmse": 0.01576548052521799,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0074672698974609375,
+        "rmse": 0.0074672698974609375,
+        "normalized_rmse": 0.0009867308642420266,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05343184247612953,
+        "rmse": 0.012666498310863972,
+        "normalized_rmse": 0.09262267432490875,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00345037505030632,
+        "rmse": 0.0009129485697485507,
+        "normalized_rmse": 0.012204636859315464,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01946800947189331,
+        "rmse": 0.008045006543397903,
+        "normalized_rmse": 0.008626005827113955,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0037221908569335938,
+        "rmse": 0.0037221908569335938,
+        "normalized_rmse": 0.0004046421358635476,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.013449244201183319,
+        "rmse": 0.004297161474823952,
+        "normalized_rmse": 0.05266512317636971,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0024834349751472473,
+        "rmse": 0.0006349473260343075,
+        "normalized_rmse": 0.008745136342492613,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02126944065093994,
+        "rmse": 0.008782735094428062,
+        "normalized_rmse": 0.008424474817625793,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004469871520996094,
+        "rmse": 0.004469871520996094,
+        "normalized_rmse": 0.00048630855182978393,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.010261351242661476,
+        "rmse": 0.0035263129975646734,
+        "normalized_rmse": 0.07172443852870357,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005389675498008728,
+        "rmse": 0.0007379036396741867,
+        "normalized_rmse": 0.009728459006828307,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023282885551452637,
+        "rmse": 0.009920401498675346,
+        "normalized_rmse": 0.01000941475763466,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0024366378784179688,
+        "rmse": 0.0024366378784179688,
+        "normalized_rmse": 0.0002640600614169597,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.007400525733828545,
+        "rmse": 0.0023757589515298605,
+        "normalized_rmse": 0.0724523705409849,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006602972745895386,
+        "rmse": 0.0008511816267855465,
+        "normalized_rmse": 0.011799647102558616,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.026416420936584473,
+        "rmse": 0.01064139325171709,
+        "normalized_rmse": 0.009195613843813231,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005047321319580078,
+        "rmse": 0.005047321319580078,
+        "normalized_rmse": 0.0006796020260807951,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0052142031490802765,
+        "rmse": 0.0016812861431390047,
+        "normalized_rmse": 0.08359664694170477,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006424829363822937,
+        "rmse": 0.0008773575536906719,
+        "normalized_rmse": 0.011058575018220922,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.035793304443359375,
+        "rmse": 0.010662087239325047,
+        "normalized_rmse": 0.008727237293190545,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.015862464904785156,
+        "rmse": 0.015862464904785156,
+        "normalized_rmse": 0.0017779245752937642,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0010746621992439032,
+        "rmse": 0.00026187780895270407,
+        "normalized_rmse": 0.2700265781652117,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006340518593788147,
+        "rmse": 0.0008405933622270823,
+        "normalized_rmse": 0.009303663480633361,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.027321338653564453,
+        "rmse": 0.010758994147181511,
+        "normalized_rmse": 0.009220501997079368,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.009682655334472656,
+        "rmse": 0.009682655334472656,
+        "normalized_rmse": 0.0014584860819659698,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.000407445797463879,
+        "rmse": 0.00010875965381274,
+        "normalized_rmse": 0.553399294358944,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00472143292427063,
+        "rmse": 0.0008355279569514096,
+        "normalized_rmse": 0.0086127453362562,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0177537202835083,
+        "rmse": 0.008299936540424824,
+        "normalized_rmse": 0.007466307375090802,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0012040138244628906,
+        "rmse": 0.0012040138244628906,
+        "normalized_rmse": 0.00020028512669957794,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00022831045498605818,
+        "rmse": 6.661042425548658e-05,
+        "normalized_rmse": 0.6565525035201909,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003127574920654297,
+        "rmse": 0.0007124381372705102,
+        "normalized_rmse": 0.00708616327647195,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03382062911987305,
+        "rmse": 0.011032233014702797,
+        "normalized_rmse": 0.009913728102270123,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0014829635620117188,
+        "rmse": 0.0014829635620117188,
+        "normalized_rmse": 0.0002038252026520608,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00022661677212454379,
+        "rmse": 6.128604582045227e-05,
+        "normalized_rmse": 0.6335138561530513,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005148172378540039,
+        "rmse": 0.0009399365517310798,
+        "normalized_rmse": 0.008745739021391528,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03259417414665222,
+        "rmse": 0.010876032523810863,
+        "normalized_rmse": 0.009657332767680844,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.000469207763671875,
+        "rmse": 0.000469207763671875,
+        "normalized_rmse": 6.427217961722781e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00021956817363388836,
+        "rmse": 6.042998575139791e-05,
+        "normalized_rmse": 0.6133737136903398,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004308417439460754,
+        "rmse": 0.0009557020384818316,
+        "normalized_rmse": 0.008718169056912776,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04722404479980469,
+        "rmse": 0.014469720423221588,
+        "normalized_rmse": 0.01264288115146316,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0018672943115234375,
+        "rmse": 0.0018672943115234375,
+        "normalized_rmse": 0.0002383883099632434,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0002125781320501119,
+        "rmse": 5.776644320576452e-05,
+        "normalized_rmse": 0.5792486261981437,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0064833760261535645,
+        "rmse": 0.001183499931357801,
+        "normalized_rmse": 0.01069745730389335,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04434633255004883,
+        "rmse": 0.0123276486992836,
+        "normalized_rmse": 0.010763271554632144,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013628005981445312,
+        "rmse": 0.0013628005981445312,
+        "normalized_rmse": 0.0001412519848424462,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00019477802561596036,
+        "rmse": 5.7887358707375824e-05,
+        "normalized_rmse": 0.5754593814676975,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006974279880523682,
+        "rmse": 0.0010676080128178,
+        "normalized_rmse": 0.009738047512322077,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0516815185546875,
+        "rmse": 0.013185298070311546,
+        "normalized_rmse": 0.01141099516525296,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0018320083618164062,
+        "rmse": 0.0018320083618164062,
+        "normalized_rmse": 0.00019555371324027923,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00021127700165379792,
+        "rmse": 5.729789336328395e-05,
+        "normalized_rmse": 0.565193293438272,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.008240222930908203,
+        "rmse": 0.0011608353815972805,
+        "normalized_rmse": 0.010627519611549242,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.040651798248291016,
+        "rmse": 0.011409387923777103,
+        "normalized_rmse": 0.009870974799017449,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0012273788452148438,
+        "rmse": 0.0012273788452148438,
+        "normalized_rmse": 0.00014144856075265142,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00021847491734661162,
+        "rmse": 5.8740835811477154e-05,
+        "normalized_rmse": 0.5801305992470851,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006562471389770508,
+        "rmse": 0.0010231517953798175,
+        "normalized_rmse": 0.00951189024295215,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03379392623901367,
+        "rmse": 0.015057857148349285,
+        "normalized_rmse": 0.009344109781940991,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0008907318115234375,
+        "rmse": 0.0008907318115234375,
+        "normalized_rmse": 6.872061853265587e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0031792304944247007,
+        "rmse": 0.0003653216699603945,
+        "normalized_rmse": 0.43969871126263643,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0055593326687812805,
+        "rmse": 0.0013663482386618853,
+        "normalized_rmse": 0.01876937956132288,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03358009457588196,
+        "rmse": 0.013123651966452599,
+        "normalized_rmse": 0.010518157824287066,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0,
+        "rmse": 0.0,
+        "normalized_rmse": 0.0,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.006440090015530586,
+        "rmse": 0.0018347275909036398,
+        "normalized_rmse": 0.07249059179133795,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004846179857850075,
+        "rmse": 0.0012027784250676632,
+        "normalized_rmse": 0.01839297317325189,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023194432258605957,
+        "rmse": 0.011452754959464073,
+        "normalized_rmse": 0.009067907162673467,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.015115737915039062,
+        "rmse": 0.015115737915039062,
+        "normalized_rmse": 0.001580597719232394,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.02818954735994339,
+        "rmse": 0.00738762691617012,
+        "normalized_rmse": 0.04990241467071368,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00510619580745697,
+        "rmse": 0.0009068925864994526,
+        "normalized_rmse": 0.011076860611047516,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.020414352416992188,
+        "rmse": 0.010559787042438984,
+        "normalized_rmse": 0.009130783647416709,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013723373413085938,
+        "rmse": 0.0013723373413085938,
+        "normalized_rmse": 0.00014083940481013056,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01016414538025856,
+        "rmse": 0.0018363191047683358,
+        "normalized_rmse": 0.17309752576557538,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004327557981014252,
+        "rmse": 0.0009680840885266662,
+        "normalized_rmse": 0.014047460067935566,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0355219841003418,
+        "rmse": 0.011852907948195934,
+        "normalized_rmse": 0.009405836481953702,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004477500915527344,
+        "rmse": 0.004477500915527344,
+        "normalized_rmse": 0.00046851620966294975,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05536144971847534,
+        "rmse": 0.009950428269803524,
+        "normalized_rmse": 0.08139359152873325,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.007481833919882774,
+        "rmse": 0.0009650687570683658,
+        "normalized_rmse": 0.011808749599664653,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.024122118949890137,
+        "rmse": 0.007879206910729408,
+        "normalized_rmse": 0.007325108063654904,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0052928924560546875,
+        "rmse": 0.0052928924560546875,
+        "normalized_rmse": 0.00048533110774770337,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.013917987234890461,
+        "rmse": 0.002100785728543997,
+        "normalized_rmse": 0.06290847112186002,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005400599911808968,
+        "rmse": 0.0008260466274805367,
+        "normalized_rmse": 0.01185459519513499,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03332662582397461,
+        "rmse": 0.012985494919121265,
+        "normalized_rmse": 0.014461784758494804,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007831573486328125,
+        "rmse": 0.007831573486328125,
+        "normalized_rmse": 0.0007205729906569447,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0009104256751015782,
+        "rmse": 0.00021364139684010297,
+        "normalized_rmse": 0.3961602957355736,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004508152604103088,
+        "rmse": 0.0008863553521223366,
+        "normalized_rmse": 0.01335679606956448,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.022270679473876953,
+        "rmse": 0.009548068977892399,
+        "normalized_rmse": 0.008443388800596155,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.010092735290527344,
+        "rmse": 0.010092735290527344,
+        "normalized_rmse": 0.0009334121599005677,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.030975908041000366,
+        "rmse": 0.0072820172645151615,
+        "normalized_rmse": 0.0522373026381613,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0028226077556610107,
+        "rmse": 0.0007357393624261022,
+        "normalized_rmse": 0.009773251517661164,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023008346557617188,
+        "rmse": 0.010746607556939125,
+        "normalized_rmse": 0.00979559307082107,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0058994293212890625,
+        "rmse": 0.0058994293212890625,
+        "normalized_rmse": 0.0006753324505757847,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05295789986848831,
+        "rmse": 0.010281861759722233,
+        "normalized_rmse": 0.09104516229100475,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0037321969866752625,
+        "rmse": 0.0008782266522757709,
+        "normalized_rmse": 0.010694747859731856,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0335673987865448,
+        "rmse": 0.012425050139427185,
+        "normalized_rmse": 0.012991093532707578,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0036954879760742188,
+        "rmse": 0.0036954879760742188,
+        "normalized_rmse": 0.0004090539958663906,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.015744879841804504,
+        "rmse": 0.004919477738440037,
+        "normalized_rmse": 0.050360674884368496,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00428309291601181,
+        "rmse": 0.0008083822904154658,
+        "normalized_rmse": 0.011439184425203284,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01930779218673706,
+        "rmse": 0.008304262533783913,
+        "normalized_rmse": 0.00784646637741347,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.008205413818359375,
+        "rmse": 0.008205413818359375,
+        "normalized_rmse": 0.0007183876855459128,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.003653954481706023,
+        "rmse": 0.0008743874495849013,
+        "normalized_rmse": 0.1839036480002382,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0028796885162591934,
+        "rmse": 0.0007843526545912027,
+        "normalized_rmse": 0.011339434791698778,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01758599281311035,
+        "rmse": 0.007318655960261822,
+        "normalized_rmse": 0.006095853698077721,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.003814697265625,
+        "rmse": 0.003814697265625,
+        "normalized_rmse": 0.0004752593638867281,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.06084996461868286,
+        "rmse": 0.009543724358081818,
+        "normalized_rmse": 0.09660629745659535,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003389030694961548,
+        "rmse": 0.0007278580451384187,
+        "normalized_rmse": 0.009242238808462392,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04146575927734375,
+        "rmse": 0.013381356373429298,
+        "normalized_rmse": 0.011894027301991293,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00251007080078125,
+        "rmse": 0.00251007080078125,
+        "normalized_rmse": 0.00030972747865239835,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03815110772848129,
+        "rmse": 0.009409066289663315,
+        "normalized_rmse": 0.12325226140618996,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0041706860065460205,
+        "rmse": 0.0009521828615106642,
+        "normalized_rmse": 0.012249861907294678,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023307323455810547,
+        "rmse": 0.009806049056351185,
+        "normalized_rmse": 0.009702706757137395,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0016374588012695312,
+        "rmse": 0.0016374588012695312,
+        "normalized_rmse": 0.0001851678103502012,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.008120838552713394,
+        "rmse": 0.0011835339246317744,
+        "normalized_rmse": 0.06866921919143866,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004811935126781464,
+        "rmse": 0.000793272745795548,
+        "normalized_rmse": 0.01151581392485142,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01995772123336792,
+        "rmse": 0.009655751287937164,
+        "normalized_rmse": 0.008611933869176896,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0031185150146484375,
+        "rmse": 0.0031185150146484375,
+        "normalized_rmse": 0.00033700847777289955,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01897483505308628,
+        "rmse": 0.004235029686242342,
+        "normalized_rmse": 0.34260847178577813,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005540803074836731,
+        "rmse": 0.0008162997546605766,
+        "normalized_rmse": 0.01096435390166518,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.029505550861358643,
+        "rmse": 0.011572041548788548,
+        "normalized_rmse": 0.009055113908681082,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007119178771972656,
+        "rmse": 0.007119178771972656,
+        "normalized_rmse": 0.0007711735432826188,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.016794346272945404,
+        "rmse": 0.003487461246550083,
+        "normalized_rmse": 0.10563913227608995,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005352571606636047,
+        "rmse": 0.0010914538288488984,
+        "normalized_rmse": 0.015138146904942007,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.020272016525268555,
+        "rmse": 0.010236723348498344,
+        "normalized_rmse": 0.00925927604477567,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005320549011230469,
+        "rmse": 0.005320549011230469,
+        "normalized_rmse": 0.0005488731228470331,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.025430262088775635,
+        "rmse": 0.0064493766985833645,
+        "normalized_rmse": 0.05124934992558483,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0027937963604927063,
+        "rmse": 0.0007444889633916318,
+        "normalized_rmse": 0.009945816293080015,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02926376461982727,
+        "rmse": 0.010794872418045998,
+        "normalized_rmse": 0.012584390689847432,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005810737609863281,
+        "rmse": 0.005810737609863281,
+        "normalized_rmse": 0.0006497818650392508,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.016376078128814697,
+        "rmse": 0.004062665160745382,
+        "normalized_rmse": 0.06228753218287722,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0036502331495285034,
+        "rmse": 0.0007412072736769915,
+        "normalized_rmse": 0.01089827582542673,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.032812416553497314,
+        "rmse": 0.014987672679126263,
+        "normalized_rmse": 0.01457660502470038,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0006856918334960938,
+        "rmse": 0.0006856918334960938,
+        "normalized_rmse": 7.876719156947847e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.1262255311012268,
+        "rmse": 0.012553065083920956,
+        "normalized_rmse": 0.2456274803749512,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005027554929256439,
+        "rmse": 0.0011896290816366673,
+        "normalized_rmse": 0.01699963167483558,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.021919727325439453,
+        "rmse": 0.0094445263966918,
+        "normalized_rmse": 0.00921191280711248,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.013111114501953125,
+        "rmse": 0.013111114501953125,
+        "normalized_rmse": 0.0012633875382460067,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.08388224244117737,
+        "rmse": 0.014518307521939278,
+        "normalized_rmse": 0.14859606872247208,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0033160001039505005,
+        "rmse": 0.0007523715030401945,
+        "normalized_rmse": 0.010524198944240865,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.025310873985290527,
+        "rmse": 0.010905169881880283,
+        "normalized_rmse": 0.010164816969182266,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.010390281677246094,
+        "rmse": 0.010390281677246094,
+        "normalized_rmse": 0.0010620363765248921,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01934276521205902,
+        "rmse": 0.004317161161452532,
+        "normalized_rmse": 0.041508767358312826,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003875650465488434,
+        "rmse": 0.0008744779042899609,
+        "normalized_rmse": 0.011484100690246966,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.020509958267211914,
+        "rmse": 0.0113208694383502,
+        "normalized_rmse": 0.009460994971790761,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.006503105163574219,
+        "rmse": 0.006503105163574219,
+        "normalized_rmse": 0.0007411383750668834,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.024085387587547302,
+        "rmse": 0.0064911991357803345,
+        "normalized_rmse": 0.05938395504335636,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004313305020332336,
+        "rmse": 0.0008999688434414566,
+        "normalized_rmse": 0.011030591652332618,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02284979820251465,
+        "rmse": 0.011243757791817188,
+        "normalized_rmse": 0.008778517805542653,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0025501251220703125,
+        "rmse": 0.0025501251220703125,
+        "normalized_rmse": 0.0002917370870608274,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.06163574755191803,
+        "rmse": 0.009696687571704388,
+        "normalized_rmse": 0.0956360556012499,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004504472017288208,
+        "rmse": 0.0009783663554117084,
+        "normalized_rmse": 0.011755444399365364,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.031137466430664062,
+        "rmse": 0.01293248776346445,
+        "normalized_rmse": 0.011244558911342533,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004261970520019531,
+        "rmse": 0.004261970520019531,
+        "normalized_rmse": 0.0005197682919709116,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.02378985285758972,
+        "rmse": 0.005817694123834372,
+        "normalized_rmse": 0.053540910055543955,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004897663369774818,
+        "rmse": 0.0013736840337514877,
+        "normalized_rmse": 0.017466820215508376,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023983299732208252,
+        "rmse": 0.01135230716317892,
+        "normalized_rmse": 0.010113994485736121,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0020151138305664062,
+        "rmse": 0.0020151138305664062,
+        "normalized_rmse": 0.00021903159631844478,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.009182073175907135,
+        "rmse": 0.002782180905342102,
+        "normalized_rmse": 0.04959895058248729,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00528176873922348,
+        "rmse": 0.0008008963195607066,
+        "normalized_rmse": 0.010804436536810444,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.021869957447052002,
+        "rmse": 0.011010687798261642,
+        "normalized_rmse": 0.01012961522323148,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004528045654296875,
+        "rmse": 0.004528045654296875,
+        "normalized_rmse": 0.0005996018103478921,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.036543987691402435,
+        "rmse": 0.009676448069512844,
+        "normalized_rmse": 0.08777886371545596,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004373572766780853,
+        "rmse": 0.0009615866001695395,
+        "normalized_rmse": 0.012907048740216854,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.028534650802612305,
+        "rmse": 0.012328093871474266,
+        "normalized_rmse": 0.010739422363572206,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005658149719238281,
+        "rmse": 0.005658149719238281,
+        "normalized_rmse": 0.000628714680630851,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.04944470524787903,
+        "rmse": 0.008735504932701588,
+        "normalized_rmse": 0.11716938059284451,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0037080347537994385,
+        "rmse": 0.0008973240037448704,
+        "normalized_rmse": 0.012205829691958764,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023319482803344727,
+        "rmse": 0.01187790185213089,
+        "normalized_rmse": 0.011961943099320117,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0019960403442382812,
+        "rmse": 0.0019960403442382812,
+        "normalized_rmse": 0.00021679923738045613,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.02940446138381958,
+        "rmse": 0.006438062526285648,
+        "normalized_rmse": 0.1123295480323008,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0030474886298179626,
+        "rmse": 0.0008126931497827172,
+        "normalized_rmse": 0.010877021507973301,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019114255905151367,
+        "rmse": 0.0099246297031641,
+        "normalized_rmse": 0.009272279078757623,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0005512237548828125,
+        "rmse": 0.0005512237548828125,
+        "normalized_rmse": 5.670103193916156e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.011539221741259098,
+        "rmse": 0.0035441063810139894,
+        "normalized_rmse": 0.11425853550271074,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0034472979605197906,
+        "rmse": 0.0007178867235779762,
+        "normalized_rmse": 0.00918160356007871,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03454148769378662,
+        "rmse": 0.011112428270280361,
+        "normalized_rmse": 0.012472137681018838,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0034198760986328125,
+        "rmse": 0.0034198760986328125,
+        "normalized_rmse": 0.00041817813105627993,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.010053029283881187,
+        "rmse": 0.0023574994411319494,
+        "normalized_rmse": 0.12467342339458226,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004668667912483215,
+        "rmse": 0.0007405373617075384,
+        "normalized_rmse": 0.010698153903461002,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02260512113571167,
+        "rmse": 0.008556823246181011,
+        "normalized_rmse": 0.008189179367453472,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.002040386199951172,
+        "rmse": 0.002040386199951172,
+        "normalized_rmse": 0.00027732802259999785,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01212267391383648,
+        "rmse": 0.001984348287805915,
+        "normalized_rmse": 0.2268606531657597,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006348133087158203,
+        "rmse": 0.0008750678971409798,
+        "normalized_rmse": 0.012908865863760857,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03940451145172119,
+        "rmse": 0.014997751452028751,
+        "normalized_rmse": 0.01387370857800568,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0166015625,
+        "rmse": 0.0166015625,
+        "normalized_rmse": 0.002174814318418777,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0022988244891166687,
+        "rmse": 0.0006348104798234999,
+        "normalized_rmse": 0.21076841033667948,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0112014040350914,
+        "rmse": 0.0011869347654283047,
+        "normalized_rmse": 0.015344451134375074,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019974201917648315,
+        "rmse": 0.007351142354309559,
+        "normalized_rmse": 0.0067343361615916945,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.013698577880859375,
+        "rmse": 0.013698577880859375,
+        "normalized_rmse": 0.0018182646737149107,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0006626422982662916,
+        "rmse": 0.00016412152035627514,
+        "normalized_rmse": 0.39119241846638114,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006747156381607056,
+        "rmse": 0.0006962668849155307,
+        "normalized_rmse": 0.007687887288656101,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.031225204467773438,
+        "rmse": 0.011109691113233566,
+        "normalized_rmse": 0.010247116931790668,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0005750656127929688,
+        "rmse": 0.0005750656127929688,
+        "normalized_rmse": 7.431583218080118e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00022848443768452853,
+        "rmse": 6.612787547055632e-05,
+        "normalized_rmse": 0.6318888643230894,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004595637321472168,
+        "rmse": 0.0009534697164781392,
+        "normalized_rmse": 0.009851074375675435,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.018065214157104492,
+        "rmse": 0.009173071943223476,
+        "normalized_rmse": 0.008335021802046913,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0032434463500976562,
+        "rmse": 0.0032434463500976562,
+        "normalized_rmse": 0.00036594938363729583,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00018772060866467655,
+        "rmse": 6.146158557385206e-05,
+        "normalized_rmse": 0.6262304758347716,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.002897799015045166,
+        "rmse": 0.0007563242106698453,
+        "normalized_rmse": 0.007119626388897851,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.028334081172943115,
+        "rmse": 0.010647271759808064,
+        "normalized_rmse": 0.009537112088080002,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0010957717895507812,
+        "rmse": 0.0010957717895507812,
+        "normalized_rmse": 0.0001345601849412046,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00021758332150056958,
+        "rmse": 5.9611760661937296e-05,
+        "normalized_rmse": 0.5963292281879243,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0034299492835998535,
+        "rmse": 0.0008066748850978911,
+        "normalized_rmse": 0.007374619983735932,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.05119609832763672,
+        "rmse": 0.013911308720707893,
+        "normalized_rmse": 0.012109777803847496,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0006647109985351562,
+        "rmse": 0.0006647109985351562,
+        "normalized_rmse": 7.90287961884763e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0002159412542823702,
+        "rmse": 5.964831143501215e-05,
+        "normalized_rmse": 0.5897848321728646,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006441831588745117,
+        "rmse": 0.0011748202377930284,
+        "normalized_rmse": 0.010489380257480637,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.043837547302246094,
+        "rmse": 0.012733145616948605,
+        "normalized_rmse": 0.01096654249270349,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013475418090820312,
+        "rmse": 0.0013475418090820312,
+        "normalized_rmse": 0.00013971269611687693,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0002023937413468957,
+        "rmse": 6.0315593145787716e-05,
+        "normalized_rmse": 0.593094876584044,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005723714828491211,
+        "rmse": 0.001095563406124711,
+        "normalized_rmse": 0.009770699923479124,
+        "finite": true
+      }
+    }
+  ],
+  "ptq_free_recurrence_utterances": [
+    {
+      "text": "Hello from Phonon.",
+      "token_ids": [
+        3248,
+        744,
+        949,
+        1286,
+        697,
+        860,
+        663
+      ],
+      "frames": 23,
+      "eos_frame": 19,
+      "completed_eos": true,
+      "eos_logits": [
+        -11.88991928100586,
+        -15.100468635559082,
+        -12.720258712768555,
+        -10.119399070739746,
+        -8.441784858703613,
+        -9.859071731567383,
+        -8.749049186706543,
+        -8.30629825592041,
+        -8.574851989746094,
+        -7.695640563964844,
+        -9.17728328704834,
+        -9.64568042755127,
+        -9.012280464172363,
+        -7.5717668533325195,
+        -8.71275806427002,
+        -6.377065181732178,
+        -6.17141580581665,
+        -7.271276950836182,
+        -6.9117536544799805,
+        8.261297225952148,
+        9.554226875305176,
+        9.172928810119629,
+        8.592755317687988
+      ],
+      "host_seconds": 7.478551000000152,
+      "file": "weights/staged_ptq_0.wav",
+      "sha256": "0d3f98d5e460b24c2dae5682670ff6a587617062658b8108a49ae338833ecaae",
+      "peak": 0.34674856066703796,
+      "rms": 0.0672951191663742,
+      "clipped_samples": 0,
+      "audio_seconds": 1.84
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "token_ids": [
+        776,
+        1417,
+        2600,
+        1657,
+        879,
+        2503,
+        1971,
+        662,
+        816,
+        665,
+        993,
+        3358,
+        1852,
+        663
+      ],
+      "frames": 38,
+      "eos_frame": 36,
+      "completed_eos": true,
+      "eos_logits": [
+        -13.010586738586426,
+        -15.84709644317627,
+        -9.61471176147461,
+        -9.689229011535645,
+        -9.514548301696777,
+        -10.920705795288086,
+        -10.75037956237793,
+        -10.914899826049805,
+        -8.950343132019043,
+        -8.956633567810059,
+        -11.24974536895752,
+        -8.275813102722168,
+        -8.195005416870117,
+        -9.22131633758545,
+        -9.025344848632812,
+        -9.218896865844727,
+        -9.230026245117188,
+        -8.298556327819824,
+        -8.481462478637695,
+        -10.074882507324219,
+        -9.626809120178223,
+        -8.381299018859863,
+        -8.059518814086914,
+        -8.121455192565918,
+        -9.292447090148926,
+        -7.516120433807373,
+        -8.708402633666992,
+        -9.28905963897705,
+        -10.06326961517334,
+        -8.24436092376709,
+        -7.550960063934326,
+        -7.631284236907959,
+        -7.507894515991211,
+        -7.734350681304932,
+        -8.901471138000488,
+        -8.099197387695312,
+        8.5709810256958,
+        9.64713191986084
+      ],
+      "host_seconds": 10.277687399997376,
+      "file": "weights/staged_ptq_1.wav",
+      "sha256": "3d407d52962630a95c805947db3c6bca750f171a24faabe7df3d4e08c7f2da22",
+      "peak": 0.4959265887737274,
+      "rms": 0.07335536926984787,
+      "clipped_samples": 0,
+      "audio_seconds": 3.04
+    }
+  ],
+  "source_vs_ptq_aligned_pcm": [
+    {
+      "max_absolute_error": 0.5694156289100647,
+      "rmse": 0.07080915570259094,
+      "normalized_rmse": 1.0516430033885724,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.5827028751373291,
+      "rmse": 0.07375388592481613,
+      "normalized_rmse": 1.0159725748094797,
+      "finite": true
+    }
+  ],
+  "coverage": {
+    "backbone": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten._softmax.default>: schema = aten::_softmax(Tensor self, int dim, bool half_to_float) -> Tensor": 6,
+          "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 56,
+          "<EdgeOpOverload: aten.arange.start_step>: schema = aten::arange.start_step(Scalar start, Scalar end, Scalar step=1, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor": 12,
+          "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor": 31,
+          "<EdgeOpOverload: aten.cos.default>: schema = aten::cos(Tensor self) -> Tensor": 1,
+          "<EdgeOpOverload: aten.expand_copy.default>: schema = aten::expand_copy(Tensor self, SymInt[] size, *, bool implicit=False) -> Tensor": 24,
+          "<EdgeOpOverload: aten.ge.Tensor>: schema = aten::ge.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.gelu.default>: schema = aten::gelu(Tensor self, *, str approximate=\"none\") -> Tensor": 6,
+          "<EdgeOpOverload: aten.le.Tensor>: schema = aten::le.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.mean.dim>: schema = aten::mean.dim(Tensor self, int[1]? dim, bool keepdim=False, *, ScalarType? dtype=None) -> Tensor": 24,
+          "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor": 91,
+          "<EdgeOpOverload: aten.permute_copy.default>: schema = aten::permute_copy(Tensor self, int[] dims) -> Tensor": 30,
+          "<EdgeOpOverload: aten.rsqrt.default>: schema = aten::rsqrt(Tensor self) -> Tensor": 12,
+          "<EdgeOpOverload: aten.select_copy.int>: schema = aten::select_copy.int(Tensor self, int dim, SymInt index) -> Tensor": 48,
+          "<EdgeOpOverload: aten.sin.default>: schema = aten::sin(Tensor self) -> Tensor": 1,
+          "<EdgeOpOverload: aten.slice_copy.Tensor>: schema = aten::slice_copy.Tensor(Tensor self, int dim=0, SymInt? start=None, SymInt? end=None, SymInt step=1) -> Tensor": 12,
+          "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]": 6,
+          "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 25,
+          "<EdgeOpOverload: aten.unsqueeze_copy.default>: schema = aten::unsqueeze_copy(Tensor self, int dim) -> Tensor": 25,
+          "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor": 92,
+          "<EdgeOpOverload: aten.where.self>: schema = aten::where.self(Tensor condition, Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 24,
+          "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 24,
+          "<built-in function getitem>": 43,
+          "executorch_call_delegate": 24
+        },
+        "expensive_operations": [
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          }
+        ],
+        "estimated_macs": 3151872
+      },
+      "delegates": [
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.bitwise_and.Tensor>: schema = aten::bitwise_and.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_0",
+          "delegate_bytes": 731648
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_1",
+          "delegate_bytes": 248448
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_2",
+          "delegate_bytes": 931888
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_3",
+          "delegate_bytes": 693792
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_4",
+          "delegate_bytes": 732656
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_5",
+          "delegate_bytes": 248800
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_6",
+          "delegate_bytes": 996176
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_7",
+          "delegate_bytes": 933536
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_8",
+          "delegate_bytes": 734608
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_9",
+          "delegate_bytes": 249728
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_10",
+          "delegate_bytes": 996224
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_11",
+          "delegate_bytes": 922864
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_12",
+          "delegate_bytes": 738736
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_13",
+          "delegate_bytes": 249344
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_14",
+          "delegate_bytes": 999216
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_15",
+          "delegate_bytes": 923040
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_16",
+          "delegate_bytes": 743296
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_17",
+          "delegate_bytes": 245648
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_18",
+          "delegate_bytes": 996112
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_19",
+          "delegate_bytes": 921984
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_20",
+          "delegate_bytes": 742768
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_21",
+          "delegate_bytes": 247440
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_22",
+          "delegate_bytes": 994336
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_23",
+          "delegate_bytes": 924928
+        }
+      ],
+      "delegated_estimated_macs": 18874368,
+      "expensive_macs_delegate_fraction": 0.8569037656903765
+    },
+    "text_embedding": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten.embedding.default>: schema = aten::embedding(Tensor weight, Tensor indices, SymInt padding_idx=-1, bool scale_grad_by_freq=False, bool sparse=False) -> Tensor": 1
+        },
+        "expensive_operations": [],
+        "estimated_macs": 0
+      },
+      "delegates": [],
+      "delegated_estimated_macs": 0,
+      "expensive_macs_delegate_fraction": 0.0
+    },
+    "synthesize": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten._softmax.default>: schema = aten::_softmax(Tensor self, int dim, bool half_to_float) -> Tensor": 2,
+          "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 69,
+          "<EdgeOpOverload: aten.arange.start_step>: schema = aten::arange.start_step(Scalar start, Scalar end, Scalar step=1, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor": 4,
+          "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor": 22,
+          "<EdgeOpOverload: aten.cos.default>: schema = aten::cos(Tensor self) -> Tensor": 3,
+          "<EdgeOpOverload: aten.elu.default>: schema = aten::elu(Tensor self, Scalar alpha=1, Scalar scale=1, Scalar input_scale=1) -> Tensor": 10,
+          "<EdgeOpOverload: aten.expand_copy.default>: schema = aten::expand_copy(Tensor self, SymInt[] size, *, bool implicit=False) -> Tensor": 8,
+          "<EdgeOpOverload: aten.full_like.default>: schema = aten::full_like(Tensor self, Scalar fill_value, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None, MemoryFormat? memory_format=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.ge.Tensor>: schema = aten::ge.Tensor(Tensor self, Tensor other) -> Tensor": 2,
+          "<EdgeOpOverload: aten.gelu.default>: schema = aten::gelu(Tensor self, *, str approximate=\"none\") -> Tensor": 2,
+          "<EdgeOpOverload: aten.le.Tensor>: schema = aten::le.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.mean.dim>: schema = aten::mean.dim(Tensor self, int[1]? dim, bool keepdim=False, *, ScalarType? dtype=None) -> Tensor": 26,
+          "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor": 96,
+          "<EdgeOpOverload: aten.permute_copy.default>: schema = aten::permute_copy(Tensor self, int[] dims) -> Tensor": 12,
+          "<EdgeOpOverload: aten.rsqrt.default>: schema = aten::rsqrt(Tensor self) -> Tensor": 14,
+          "<EdgeOpOverload: aten.select_copy.int>: schema = aten::select_copy.int(Tensor self, int dim, SymInt index) -> Tensor": 16,
+          "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor": 15,
+          "<EdgeOpOverload: aten.sin.default>: schema = aten::sin(Tensor self) -> Tensor": 3,
+          "<EdgeOpOverload: aten.slice_copy.Tensor>: schema = aten::slice_copy.Tensor(Tensor self, int dim=0, SymInt? start=None, SymInt? end=None, SymInt step=1) -> Tensor": 27,
+          "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]": 9,
+          "<EdgeOpOverload: aten.squeeze_copy.dims>: schema = aten::squeeze_copy.dims(Tensor self, int[] dim) -> Tensor": 4,
+          "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 20,
+          "<EdgeOpOverload: aten.unsqueeze_copy.default>: schema = aten::unsqueeze_copy(Tensor self, int dim) -> Tensor": 14,
+          "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor": 35,
+          "<EdgeOpOverload: aten.where.self>: schema = aten::where.self(Tensor condition, Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: dim_order_ops._clone_dim_order.default>: schema = dim_order_ops::_clone_dim_order(Tensor self, *, bool non_blocking=False, int[]? dim_order=None) -> Tensor": 2,
+          "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 61,
+          "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 48,
+          "<built-in function getitem>": 76,
+          "executorch_call_delegate": 37
+        },
+        "expensive_operations": [
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              266
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              64
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              266
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              64
+            ],
+            "estimated_macs": 2179072
+          }
+        ],
+        "estimated_macs": 8716288
+      },
+      "delegates": [
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 131072
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 131072
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_0",
+          "delegate_bytes": 222496
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 6,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 3
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_1",
+          "delegate_bytes": 684624
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 16384
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 802816,
+          "name": "lowered_module_2",
+          "delegate_bytes": 723856
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_3",
+          "delegate_bytes": 246720
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_4",
+          "delegate_bytes": 959728
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_5",
+          "delegate_bytes": 244352
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_6",
+          "delegate_bytes": 974176
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_7",
+          "delegate_bytes": 243664
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_8",
+          "delegate_bytes": 976192
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_9",
+          "delegate_bytes": 240576
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_10",
+          "delegate_bytes": 974800
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_11",
+          "delegate_bytes": 241456
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_12",
+          "delegate_bytes": 983632
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_13",
+          "delegate_bytes": 245968
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1024
+              ],
+              "estimated_macs": 524288
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_14",
+          "delegate_bytes": 685504
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                32
+              ],
+              "estimated_macs": 16384
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_15",
+          "delegate_bytes": 15168
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                1
+              ],
+              "estimated_macs": 16384,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_16",
+          "delegate_bytes": 31024
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                1,
+                32
+              ],
+              "estimated_macs": 16384,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_17",
+          "delegate_bytes": 835008
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.bitwise_and.Tensor>: schema = aten::bitwise_and.Tensor(Tensor self, Tensor other) -> Tensor": 2,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                1536
+              ],
+              "estimated_macs": 12582912
+            }
+          ],
+          "estimated_macs": 12582912,
+          "name": "lowered_module_18",
+          "delegate_bytes": 712096
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 4194304
+            }
+          ],
+          "estimated_macs": 4194304,
+          "name": "lowered_module_19",
+          "delegate_bytes": 243824
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                2048
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_20",
+          "delegate_bytes": 961152
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_21",
+          "delegate_bytes": 908048
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                1536
+              ],
+              "estimated_macs": 12582912
+            }
+          ],
+          "estimated_macs": 12582912,
+          "name": "lowered_module_22",
+          "delegate_bytes": 729424
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 4194304
+            }
+          ],
+          "estimated_macs": 4194304,
+          "name": "lowered_module_23",
+          "delegate_bytes": 245232
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                2048
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_24",
+          "delegate_bytes": 984544
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_25",
+          "delegate_bytes": 949392
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                16
+              ],
+              "estimated_macs": 29360128,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 29360128,
+          "name": "lowered_module_26",
+          "delegate_bytes": 1914224
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                256,
+                1,
+                102
+              ],
+              "estimated_macs": 25165824,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 25165824,
+          "name": "lowered_module_27",
+          "delegate_bytes": 1225248
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                96
+              ],
+              "estimated_macs": 9437184,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 9437184,
+          "name": "lowered_module_28",
+          "delegate_bytes": 112736
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                256,
+                96
+              ],
+              "estimated_macs": 3145728,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3145728,
+          "name": "lowered_module_29",
+          "delegate_bytes": 32480
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                1,
+                485
+              ],
+              "estimated_macs": 31457280,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 31457280,
+          "name": "lowered_module_30",
+          "delegate_bytes": 286272
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                480
+              ],
+              "estimated_macs": 11796480,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 11796480,
+          "name": "lowered_module_31",
+          "delegate_bytes": 31728
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                480
+              ],
+              "estimated_macs": 3932160,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3932160,
+          "name": "lowered_module_32",
+          "delegate_bytes": 10032
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                1,
+                1924
+              ],
+              "estimated_macs": 31457280,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 31457280,
+          "name": "lowered_module_33",
+          "delegate_bytes": 44032
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                32,
+                1920
+              ],
+              "estimated_macs": 11796480,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 11796480,
+          "name": "lowered_module_34",
+          "delegate_bytes": 9232
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                1920
+              ],
+              "estimated_macs": 3932160,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3932160,
+          "name": "lowered_module_35",
+          "delegate_bytes": 4656
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 5,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 3
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1
+              ],
+              "estimated_macs": 512
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 16384
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1920
+              ],
+              "estimated_macs": 368640,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 385536,
+          "name": "lowered_module_36",
+          "delegate_bytes": 34336
+        }
+      ],
+      "delegated_estimated_macs": 272032256,
+      "expensive_macs_delegate_fraction": 0.9689533990958115
+    }
+  },
+  "pte_bytes": 44684432,
+  "pte_sha256": "ecf04bb5f29d8b402612d64c2df3be76a6973cd710ac7affa6ea27222867c21a",
+  "delegates": 61,
+  "serialized_program": {
+    "methods": {
+      "backbone": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::where.self_out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::permute_copy.out",
+          "aten::cat.out",
+          "aten::expand_copy.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "aten::gelu.out",
+          "aten::view_copy.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          38801424
+        ],
+        "delegates": 24
+      },
+      "synthesize": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::full_like.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::cat.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::sigmoid.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::squeeze_copy.dims_out",
+          "aten::permute_copy.out",
+          "aten::where.self_out",
+          "aten::expand_copy.out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "dim_order_ops::_clone_dim_order.out",
+          "aten::gelu.out",
+          "aten::view_copy.out",
+          "aten::elu.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          6716144
+        ],
+        "delegates": 37
+      },
+      "text_embedding": {
+        "operators": [
+          "aten::embedding.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          2064
+        ],
+        "delegates": 0
+      }
+    },
+    "constant_buffer_bytes": 8305424
+  },
+  "elapsed_seconds": 386.6921379999985
+}

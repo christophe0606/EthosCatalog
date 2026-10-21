@@ -20,10 +20,30 @@ It exits with status 0 when every file passes, 1 for invalid or unreadable files
 and 2 for command usage errors or an empty scan.
 
 The `network` mapping requires `name`, `model`, `quantize`, `quantization`,
-`safetensors`, `graph`, `flash_ospi` and `vela`. Configuration text fields must
+`flash_ospi` and `vela`, plus either a `safetensors`/`graph` pair or `methods`.
+Configuration text fields must
 contain a non-whitespace character. `vela` requires `ini`, `system_config` and
 `memory_mode`. Unknown configuration keys are rejected outside the unrestricted
 `quantization.error` value. Duplicate and non-string YAML mapping keys are rejected.
+
+The single-graph pair exports the method `forward`. A multi-method model instead
+defines a nonempty `methods` mapping; it cannot also define the top-level cache
+pair. Each method has `graph` and `safetensors` paths, plus optional boolean
+`delegate` (default `true`). Method names must be identifiers. All methods are
+compiled into one PTE. A method with `delegate: false` may run only on CPU;
+every other method must produce an Ethos delegate. Flash provenance covers
+every named graph and tensor cache, including CPU methods.
+
+```yaml
+methods:
+  backbone:
+    graph: model/backbone_quantized.pt2
+    safetensors: model/backbone_quantized.safetensors
+  text_embedding:
+    graph: model/text_embedding.pt2
+    safetensors: model/text_embedding.safetensors
+    delegate: false
+```
 
 `network.quantization` records how the network was quantized. All three fields
 are required:
@@ -77,6 +97,15 @@ integer `address` and a positive integer `size`, both in bytes. Hexadecimal YAML
 integers such as `0xC0000000` are accepted; quoted numbers and booleans are not
 integers. `ospi.pname` is optional (the flash script defaults to `M55_HP`). An
 `ospi` mapping may be retained when `flash_ospi` is false, but must still be valid.
+
+OSPI models may declare immutable `assets`, keyed by lowercase identifiers. Each
+entry has a project-relative `file` contained in `model/` and an integer `address`.
+Generation checks that all asset bytes fit the model partition and overlap
+neither the PTE nor another asset. Generation provenance records asset size,
+SHA-256 and CRC-32; flash preparation rejects changed assets and emits one binary
+output per asset. The generated header provides `MODEL_ASSET_<NAME>_ADDRESS`,
+`MODEL_ASSET_<NAME>_SIZE_BYTES` and `MODEL_ASSET_<NAME>_CRC32` for firmware readback.
+`assets` requires `flash_ospi: true`. Writable runtime state must be copied to RAM.
 
 Paths are interpreted relative to the project directory, one level above
 `model/`. Model sources, quantizers and caches belong inside the project;

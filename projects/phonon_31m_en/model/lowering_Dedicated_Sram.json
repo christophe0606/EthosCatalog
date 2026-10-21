@@ -1,0 +1,1774 @@
+{
+  "memory_mode": "Dedicated_Sram",
+  "quality_accepted": false,
+  "hardware_realtime_verified": false,
+  "coverage": {
+    "backbone": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten._softmax.default>: schema = aten::_softmax(Tensor self, int dim, bool half_to_float) -> Tensor": 6,
+          "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 56,
+          "<EdgeOpOverload: aten.arange.start_step>: schema = aten::arange.start_step(Scalar start, Scalar end, Scalar step=1, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor": 12,
+          "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor": 31,
+          "<EdgeOpOverload: aten.cos.default>: schema = aten::cos(Tensor self) -> Tensor": 1,
+          "<EdgeOpOverload: aten.expand_copy.default>: schema = aten::expand_copy(Tensor self, SymInt[] size, *, bool implicit=False) -> Tensor": 24,
+          "<EdgeOpOverload: aten.ge.Tensor>: schema = aten::ge.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.gelu.default>: schema = aten::gelu(Tensor self, *, str approximate=\"none\") -> Tensor": 6,
+          "<EdgeOpOverload: aten.le.Tensor>: schema = aten::le.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.mean.dim>: schema = aten::mean.dim(Tensor self, int[1]? dim, bool keepdim=False, *, ScalarType? dtype=None) -> Tensor": 24,
+          "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor": 91,
+          "<EdgeOpOverload: aten.permute_copy.default>: schema = aten::permute_copy(Tensor self, int[] dims) -> Tensor": 30,
+          "<EdgeOpOverload: aten.rsqrt.default>: schema = aten::rsqrt(Tensor self) -> Tensor": 12,
+          "<EdgeOpOverload: aten.select_copy.int>: schema = aten::select_copy.int(Tensor self, int dim, SymInt index) -> Tensor": 48,
+          "<EdgeOpOverload: aten.sin.default>: schema = aten::sin(Tensor self) -> Tensor": 1,
+          "<EdgeOpOverload: aten.slice_copy.Tensor>: schema = aten::slice_copy.Tensor(Tensor self, int dim=0, SymInt? start=None, SymInt? end=None, SymInt step=1) -> Tensor": 12,
+          "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]": 6,
+          "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 25,
+          "<EdgeOpOverload: aten.unsqueeze_copy.default>: schema = aten::unsqueeze_copy(Tensor self, int dim) -> Tensor": 25,
+          "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor": 92,
+          "<EdgeOpOverload: aten.where.self>: schema = aten::where.self(Tensor condition, Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 24,
+          "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 24,
+          "<built-in function getitem>": 43,
+          "executorch_call_delegate": 24
+        },
+        "expensive_operations": [
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              513
+            ],
+            "estimated_macs": 262656
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              1,
+              64
+            ],
+            "estimated_macs": 262656
+          }
+        ],
+        "estimated_macs": 3151872
+      },
+      "delegates": [
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.bitwise_and.Tensor>: schema = aten::bitwise_and.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_0",
+          "delegate_bytes": 731648
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_1",
+          "delegate_bytes": 248448
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_2",
+          "delegate_bytes": 931888
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_3",
+          "delegate_bytes": 693792
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_4",
+          "delegate_bytes": 732656
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_5",
+          "delegate_bytes": 248800
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_6",
+          "delegate_bytes": 996176
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_7",
+          "delegate_bytes": 933536
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_8",
+          "delegate_bytes": 734608
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_9",
+          "delegate_bytes": 249728
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_10",
+          "delegate_bytes": 996224
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_11",
+          "delegate_bytes": 922864
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_12",
+          "delegate_bytes": 738736
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_13",
+          "delegate_bytes": 249344
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_14",
+          "delegate_bytes": 999216
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_15",
+          "delegate_bytes": 923040
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_16",
+          "delegate_bytes": 743296
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_17",
+          "delegate_bytes": 245648
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_18",
+          "delegate_bytes": 996112
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_19",
+          "delegate_bytes": 921984
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_20",
+          "delegate_bytes": 742768
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_21",
+          "delegate_bytes": 247440
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                2048
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_22",
+          "delegate_bytes": 994336
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 1048576
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_23",
+          "delegate_bytes": 924928
+        }
+      ],
+      "delegated_estimated_macs": 18874368,
+      "expensive_macs_delegate_fraction": 0.8569037656903765
+    },
+    "text_embedding": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten.embedding.default>: schema = aten::embedding(Tensor weight, Tensor indices, SymInt padding_idx=-1, bool scale_grad_by_freq=False, bool sparse=False) -> Tensor": 1
+        },
+        "expensive_operations": [],
+        "estimated_macs": 0
+      },
+      "delegates": [],
+      "delegated_estimated_macs": 0,
+      "expensive_macs_delegate_fraction": 0.0
+    },
+    "synthesize": {
+      "cpu": {
+        "operator_counts": {
+          "<EdgeOpOverload: aten._softmax.default>: schema = aten::_softmax(Tensor self, int dim, bool half_to_float) -> Tensor": 2,
+          "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 69,
+          "<EdgeOpOverload: aten.arange.start_step>: schema = aten::arange.start_step(Scalar start, Scalar end, Scalar step=1, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor": 4,
+          "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor": 22,
+          "<EdgeOpOverload: aten.cos.default>: schema = aten::cos(Tensor self) -> Tensor": 3,
+          "<EdgeOpOverload: aten.elu.default>: schema = aten::elu(Tensor self, Scalar alpha=1, Scalar scale=1, Scalar input_scale=1) -> Tensor": 10,
+          "<EdgeOpOverload: aten.expand_copy.default>: schema = aten::expand_copy(Tensor self, SymInt[] size, *, bool implicit=False) -> Tensor": 8,
+          "<EdgeOpOverload: aten.full_like.default>: schema = aten::full_like(Tensor self, Scalar fill_value, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None, MemoryFormat? memory_format=None) -> Tensor": 2,
+          "<EdgeOpOverload: aten.ge.Tensor>: schema = aten::ge.Tensor(Tensor self, Tensor other) -> Tensor": 2,
+          "<EdgeOpOverload: aten.gelu.default>: schema = aten::gelu(Tensor self, *, str approximate=\"none\") -> Tensor": 2,
+          "<EdgeOpOverload: aten.le.Tensor>: schema = aten::le.Tensor(Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: aten.mean.dim>: schema = aten::mean.dim(Tensor self, int[1]? dim, bool keepdim=False, *, ScalarType? dtype=None) -> Tensor": 26,
+          "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor": 96,
+          "<EdgeOpOverload: aten.permute_copy.default>: schema = aten::permute_copy(Tensor self, int[] dims) -> Tensor": 12,
+          "<EdgeOpOverload: aten.rsqrt.default>: schema = aten::rsqrt(Tensor self) -> Tensor": 14,
+          "<EdgeOpOverload: aten.select_copy.int>: schema = aten::select_copy.int(Tensor self, int dim, SymInt index) -> Tensor": 16,
+          "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor": 15,
+          "<EdgeOpOverload: aten.sin.default>: schema = aten::sin(Tensor self) -> Tensor": 3,
+          "<EdgeOpOverload: aten.slice_copy.Tensor>: schema = aten::slice_copy.Tensor(Tensor self, int dim=0, SymInt? start=None, SymInt? end=None, SymInt step=1) -> Tensor": 27,
+          "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]": 9,
+          "<EdgeOpOverload: aten.squeeze_copy.dims>: schema = aten::squeeze_copy.dims(Tensor self, int[] dim) -> Tensor": 4,
+          "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor": 20,
+          "<EdgeOpOverload: aten.unsqueeze_copy.default>: schema = aten::unsqueeze_copy(Tensor self, int dim) -> Tensor": 14,
+          "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor": 35,
+          "<EdgeOpOverload: aten.where.self>: schema = aten::where.self(Tensor condition, Tensor self, Tensor other) -> Tensor": 1,
+          "<EdgeOpOverload: dim_order_ops._clone_dim_order.default>: schema = dim_order_ops::_clone_dim_order(Tensor self, *, bool non_blocking=False, int[]? dim_order=None) -> Tensor": 2,
+          "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 61,
+          "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 48,
+          "<built-in function getitem>": 76,
+          "executorch_call_delegate": 37
+        },
+        "expensive_operations": [
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              266
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              64
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              266
+            ],
+            "estimated_macs": 2179072
+          },
+          {
+            "operator": "<EdgeOpOverload: aten.bmm.default>: schema = aten::bmm(Tensor self, Tensor mat2) -> Tensor",
+            "output_shape": [
+              8,
+              16,
+              64
+            ],
+            "estimated_macs": 2179072
+          }
+        ],
+        "estimated_macs": 8716288
+      },
+      "delegates": [
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 131072
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 131072
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_0",
+          "delegate_bytes": 222496
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 6,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 3
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_1",
+          "delegate_bytes": 684624
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 16384
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 802816,
+          "name": "lowered_module_2",
+          "delegate_bytes": 723856
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_3",
+          "delegate_bytes": 246720
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_4",
+          "delegate_bytes": 959728
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_5",
+          "delegate_bytes": 244352
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_6",
+          "delegate_bytes": 974176
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_7",
+          "delegate_bytes": 243664
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_8",
+          "delegate_bytes": 976192
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_9",
+          "delegate_bytes": 240576
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_10",
+          "delegate_bytes": 974800
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_11",
+          "delegate_bytes": 241456
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1536
+              ],
+              "estimated_macs": 786432
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 1048576,
+          "name": "lowered_module_12",
+          "delegate_bytes": 983632
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 262144,
+          "name": "lowered_module_13",
+          "delegate_bytes": 245968
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 4,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 2
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1024
+              ],
+              "estimated_macs": 524288
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                512
+              ],
+              "estimated_macs": 262144
+            }
+          ],
+          "estimated_macs": 786432,
+          "name": "lowered_module_14",
+          "delegate_bytes": 685504
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                32
+              ],
+              "estimated_macs": 16384
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_15",
+          "delegate_bytes": 15168
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                1
+              ],
+              "estimated_macs": 16384,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_16",
+          "delegate_bytes": 31024
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                1,
+                32
+              ],
+              "estimated_macs": 16384,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 16384,
+          "name": "lowered_module_17",
+          "delegate_bytes": 839104
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.bitwise_and.Tensor>: schema = aten::bitwise_and.Tensor(Tensor self, Tensor other) -> Tensor": 2,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                1536
+              ],
+              "estimated_macs": 12582912
+            }
+          ],
+          "estimated_macs": 12582912,
+          "name": "lowered_module_18",
+          "delegate_bytes": 712096
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 4194304
+            }
+          ],
+          "estimated_macs": 4194304,
+          "name": "lowered_module_19",
+          "delegate_bytes": 243824
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                2048
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_20",
+          "delegate_bytes": 961152
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_21",
+          "delegate_bytes": 908048
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                1536
+              ],
+              "estimated_macs": 12582912
+            }
+          ],
+          "estimated_macs": 12582912,
+          "name": "lowered_module_22",
+          "delegate_bytes": 729424
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 4194304
+            }
+          ],
+          "estimated_macs": 4194304,
+          "name": "lowered_module_23",
+          "delegate_bytes": 245232
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                2048
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_24",
+          "delegate_bytes": 984544
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                16,
+                512
+              ],
+              "estimated_macs": 16777216
+            }
+          ],
+          "estimated_macs": 16777216,
+          "name": "lowered_module_25",
+          "delegate_bytes": 949392
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                512,
+                16
+              ],
+              "estimated_macs": 29360128,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 29360128,
+          "name": "lowered_module_26",
+          "delegate_bytes": 1914224
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                256,
+                1,
+                102
+              ],
+              "estimated_macs": 25165824,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 25165824,
+          "name": "lowered_module_27",
+          "delegate_bytes": 1224112
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                96
+              ],
+              "estimated_macs": 9437184,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 9437184,
+          "name": "lowered_module_28",
+          "delegate_bytes": 112720
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                256,
+                96
+              ],
+              "estimated_macs": 3145728,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3145728,
+          "name": "lowered_module_29",
+          "delegate_bytes": 32480
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                1,
+                485
+              ],
+              "estimated_macs": 31457280,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 31457280,
+          "name": "lowered_module_30",
+          "delegate_bytes": 286464
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                480
+              ],
+              "estimated_macs": 11796480,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 11796480,
+          "name": "lowered_module_31",
+          "delegate_bytes": 31760
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                128,
+                480
+              ],
+              "estimated_macs": 3932160,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3932160,
+          "name": "lowered_module_32",
+          "delegate_bytes": 10016
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                1,
+                1924
+              ],
+              "estimated_macs": 31457280,
+              "transposed": true
+            }
+          ],
+          "estimated_macs": 31457280,
+          "name": "lowered_module_33",
+          "delegate_bytes": 44032
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                32,
+                1920
+              ],
+              "estimated_macs": 11796480,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 11796480,
+          "name": "lowered_module_34",
+          "delegate_bytes": 9216
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 1,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 1
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                64,
+                1920
+              ],
+              "estimated_macs": 3932160,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 3932160,
+          "name": "lowered_module_35",
+          "delegate_bytes": 4656
+        },
+        {
+          "operator_counts": {
+            "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor": 1,
+            "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor": 2,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 5,
+            "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor": 3,
+            "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor": 3
+          },
+          "expensive_operations": [
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1
+              ],
+              "estimated_macs": 512
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.linear.default>: schema = aten::linear(Tensor input, Tensor weight, Tensor? bias=None) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                512
+              ],
+              "estimated_macs": 16384
+            },
+            {
+              "operator": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+              "output_shape": [
+                1,
+                1,
+                1920
+              ],
+              "estimated_macs": 368640,
+              "transposed": false
+            }
+          ],
+          "estimated_macs": 385536,
+          "name": "lowered_module_36",
+          "delegate_bytes": 34336
+        }
+      ],
+      "delegated_estimated_macs": 272032256,
+      "expensive_macs_delegate_fraction": 0.9689533990958115
+    }
+  },
+  "pte_bytes": 44687888,
+  "pte_sha256": "af8a9eca89320c0eec66c8b314686fb14cdd3db15cbff39b1fb9289906d7d0d0",
+  "delegates": 61,
+  "serialized_program": {
+    "methods": {
+      "backbone": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::where.self_out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::permute_copy.out",
+          "aten::cat.out",
+          "aten::expand_copy.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "aten::gelu.out",
+          "aten::view_copy.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          38801424
+        ],
+        "delegates": 24
+      },
+      "synthesize": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::full_like.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::cat.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::sigmoid.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::squeeze_copy.dims_out",
+          "aten::permute_copy.out",
+          "aten::where.self_out",
+          "aten::expand_copy.out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "dim_order_ops::_clone_dim_order.out",
+          "aten::gelu.out",
+          "aten::view_copy.out",
+          "aten::elu.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          6716144
+        ],
+        "delegates": 37
+      },
+      "text_embedding": {
+        "operators": [
+          "aten::embedding.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          2064
+        ],
+        "delegates": 0
+      }
+    },
+    "constant_buffer_bytes": 8305424
+  }
+}

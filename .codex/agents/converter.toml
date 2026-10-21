@@ -4,7 +4,8 @@ model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 The network must be converted to PyTorch format (.pt2 or .safetensor) 
-and should not have been previously converted by Vela.
+and should not have been previously converted by Vela. The goal is to run the network 
+on Ethos U85 so it should use datatype and quantization supported by Ethos.
 
 The conversion process must ensure that the network maintains its 
 original functionality and accuracy.
@@ -13,9 +14,12 @@ If the network is already in quantized form (using Ethos quantization scheme) th
 we can just generate the .pt2 or .safetensor file directly and do the conversions 
 required to go from another framewwork (like TFLite for Micro or ONNX) to PyTorch.
 
+If the network uses a different quantization scheme than Ethos then we will need to 
+update the quantization to use Ethos scheme.
+
 If the network is not already quantized but is already trained, then we will need
 to convert the trained network to PyTorch and implement quantization 
-(post training quantization).
+(post training quantization only - no training involved).
 
 The test pattern to use for quantization can come from original source if they are not too big
 (100 mb is already too big). Otherwise, fake test patterns can be generated just for 

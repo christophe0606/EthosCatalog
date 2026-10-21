@@ -1,0 +1,13 @@
+{
+  "build": "b51",
+  "session": "d53",
+  "firmware_sha256": "24f43dd1d73ce5728d73ed68f58058c4adf326f48733415247adca6e7f70b33a",
+  "pte_sha256": "cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7",
+  "first_hidden_max_abs_error": 0.000190377235,
+  "first_cache_max_abs_error": 0.000855207443,
+  "first_cache_by_layer": [[0.000324815512,0.000324860215],[0.000232934952,0.000164985657],[0.00034725666,0.000245630741],[0.000855207443,0.000259935856],[0.000849723816,0.000425055623],[0.000787429512,0.00057343673]],
+  "diagnostic_halting": "Delegate14/15 captures and coherent cache-flushed GELU capture; no timing acceptance.",
+  "method_peak_bytes": 165992,
+  "temp_peak_bytes": 5152,
+  "interpretation": "Matches prior good d48 exactly; d52 corruption not reproduced with diagnostic pauses. Correctness repeatability remains unresolved."
+}

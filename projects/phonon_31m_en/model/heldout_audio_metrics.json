@@ -1,0 +1,87 @@
+{
+  "quality_accepted": false,
+  "limitations": "Signal-only diagnostics on a small English corpus and one default voice; no intelligibility, perceptual score, ASR or speaker identity validation.",
+  "settings": {
+    "sample_rate": 24000,
+    "mel_bands": 80,
+    "fft_size": 1024,
+    "window_samples": 600,
+    "hop_samples": 240,
+    "active_threshold_db": -50,
+    "pitch_window_samples": 960,
+    "pitch_hop_samples": 480,
+    "pitch_range_hz": [
+      60,
+      600
+    ],
+    "pitch_correlation_threshold": 0.6
+  },
+  "utterances": [
+    {
+      "text": "One, two, three!",
+      "source_sha256": "f6f8d64028c1fa4e1d3ab2951c7ab786f9fc9d163d871b78eb9c4219eccb46dc",
+      "ptq_sha256": "e31a616aea65d235b3685ed210010a2c48d630ebde6695b8d238f9ce27d49638",
+      "source_audio_seconds": 2.4,
+      "ptq_audio_seconds": 2.32,
+      "eos_frame_difference": -1,
+      "aligned_active_log_mel_mean_absolute_db": 5.052124735442154,
+      "mel_spectral_convergence": 0.35869506140957796,
+      "mean_mel_spectrum_cosine": 0.9981484377676761,
+      "energy_envelope_correlation": 0.9609444680531708,
+      "source_pitch": {
+        "voiced_frames": 47,
+        "total_frames": 115,
+        "median_hz": 163.26530612244898
+      },
+      "ptq_pitch": {
+        "voiced_frames": 47,
+        "total_frames": 115,
+        "median_hz": 170.2127659574468
+      }
+    },
+    {
+      "text": "Could you read this?",
+      "source_sha256": "72b58e9b1d39627573ae7f5c3050deee5ede32e7662597b32203f0e1a0bf54f0",
+      "ptq_sha256": "f479161726c91b7d1c1fba6fc0564c8dfdb12cea5e88dddd0e46aee5e092e1cd",
+      "source_audio_seconds": 1.76,
+      "ptq_audio_seconds": 1.76,
+      "eos_frame_difference": 0,
+      "aligned_active_log_mel_mean_absolute_db": 2.6341365772223257,
+      "mel_spectral_convergence": 0.27017708786525396,
+      "mean_mel_spectrum_cosine": 0.9956458481421967,
+      "energy_envelope_correlation": 0.9957937494856794,
+      "source_pitch": {
+        "voiced_frames": 27,
+        "total_frames": 87,
+        "median_hz": 188.9763779527559
+      },
+      "ptq_pitch": {
+        "voiced_frames": 27,
+        "total_frames": 87,
+        "median_hz": 190.47619047619048
+      }
+    },
+    {
+      "text": "This is a real time speech synthesis test.",
+      "source_sha256": "90b55a584d9caa1ca74edd2c80beae551c9bd3b77f60aa6f4909eca79bee8ce1",
+      "ptq_sha256": "e3831c5491d237a5c83ff68f5244d3a391ec7c70a346b04ec72295653089314c",
+      "source_audio_seconds": 2.8,
+      "ptq_audio_seconds": 2.8,
+      "eos_frame_difference": 0,
+      "aligned_active_log_mel_mean_absolute_db": 3.944759084009034,
+      "mel_spectral_convergence": 0.44623863279355763,
+      "mean_mel_spectrum_cosine": 0.9651429527885617,
+      "energy_envelope_correlation": 0.9823448264896713,
+      "source_pitch": {
+        "voiced_frames": 51,
+        "total_frames": 139,
+        "median_hz": 192.0
+      },
+      "ptq_pitch": {
+        "voiced_frames": 47,
+        "total_frames": 139,
+        "median_hz": 203.38983050847457
+      }
+    }
+  ]
+}

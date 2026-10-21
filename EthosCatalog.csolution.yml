@@ -21,7 +21,15 @@ solution:
         - name: OSPI_FLASH
           access: rx
           start: 0xC0000000
-          size: 0x02000000
+          # Bounded model loader; the fitted device has another 64 MiB below.
+          size: 0x04000000
+          algorithm: board/flash/DevKit-E8_IS25WX.FLM
+          ram-start: 0x00000000
+          ram-size: 0x00040000
+        - name: OSPI_FLASH_REMAINDER
+          access: rx
+          start: 0xC4000000
+          size: 0x04000000
       variables:
         - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
         - AI-Layer: $SolutionDir()$/ai_layer/ai_layer.clayer.yml
@@ -61,6 +69,30 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: Phonon_Debug
+          images:
+            - project-context: phonon_31m_en.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Phonon_Release
+          images:
+            - project-context: phonon_31m_en.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Phonon_ProgramModel
+          images:
+            - project-context: phonon_31m_en.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: FlashLoader
+          images:
+            - project-context: FlashLoader.FlashLoader
         - set: KWS_Debug
           images:
             - project-context: kws_micronet_l.Debug
@@ -83,13 +115,16 @@ solution:
             clock: 10000000
             protocol: swd
         - set: Detection_Release
-          images:
-            - project-context: object_detection.Release
           debugger:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+          images:
+            - project-context: template_mram.Release
   build-types:
+    - type: FlashLoader
+      debug: on
+      optimize: none
     - type: ProgramModel
       debug: on
       optimize: none
@@ -120,6 +155,10 @@ solution:
       for-context:
         - .Debug
         - .Release
+    - project: projects/phonon_31m_en/phonon_31m_en.cproject.yml
+    - project: board/flash/loader/FlashLoader.cproject.yml
+      for-context:
+        - .FlashLoader
   mlops:
     description: Ethos-U85 network demos and benchmarks for Alif DevKit-E8
     npu:

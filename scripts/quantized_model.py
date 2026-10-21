@@ -1,10 +1,59 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Shared cache I/O and compiler configuration; quantization belongs to projects."""
 import hashlib
+import zlib
 from pathlib import Path
 
 
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def method_configs(network):
+    """Resolve named caches while preserving single-graph forward settings."""
+    if "methods" not in network:
+        return {"forward": network}
+    return {name: {**network, **settings} for name, settings in network["methods"].items()}
+
+
+def cache_provenance(project_dir, network):
+    """Bind generation/flash records to every saved method graph and tensor file."""
+    if "methods" not in network:
+        return {key + "_sha256": sha256(project_dir / network[key])
+                for key in ("graph", "safetensors")}
+    return {"method_caches": {
+        name: {key + "_sha256": sha256(project_dir / settings[key])
+               for key in ("graph", "safetensors")}
+        for name, settings in method_configs(network).items()
+    }}
+
+
+def model_assets(project_dir, network, pte_size):
+    """Validate asset placement and bind bytes to generation/flash provenance."""
+    if not network.get("assets"):
+        return {}
+    if not network["flash_ospi"]:
+        raise ValueError("Additional model assets require OSPI storage")
+    base, limit = network["ospi"]["address"], network["ospi"]["size"]
+    ranges = [(base, base + pte_size, "PTE")]
+    result = {}
+    for name, asset in network["assets"].items():
+        path = (project_dir / asset["file"]).resolve()
+        if not path.is_relative_to((project_dir / "model").resolve()):
+            raise ValueError(f"Model asset {name} must remain inside model/")
+        data = path.read_bytes()
+        address = asset["address"]
+        end = address + len(data)
+        if not data or address < base or end > base + limit:
+            raise ValueError(f"Model asset {name} is empty or exceeds the OSPI partition")
+        for start, stop, other in ranges:
+            if address < stop and start < end:
+                raise ValueError(f"Model asset {name} overlaps {other}")
+        ranges.append((address, end, name))
+        result[name] = {"file": asset["file"], "address": address, "size": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(), "crc32": zlib.crc32(data)}
+    return result
 
 
 def compile_spec(solution, project_dir, network):

@@ -1,0 +1,2160 @@
+{
+  "status": "staged_lowered_unvalidated",
+  "quality_accepted": false,
+  "hardware_realtime_verified": false,
+  "policy": "linear+conv a16w8; float attention, masks, normalization and state; per-tensor transpose weights",
+  "seed": 20261021,
+  "temperature": 0.8,
+  "source_revision": "52433c46975bfa13144c56204c9f4ee1c5b148aa",
+  "calibration": "complete generated utterances including all voice/text conditioning, voiced/midstream audio and EOS",
+  "memory_mode": "Shared_Sram",
+  "float_chain_error": [
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    }
+  ],
+  "source_utterances": [
+    {
+      "text": "Hello from Phonon.",
+      "token_ids": [
+        3248,
+        744,
+        949,
+        1286,
+        697,
+        860,
+        663
+      ],
+      "frames": 23,
+      "eos_frame": 19,
+      "completed_eos": true,
+      "eos_logits": [
+        -11.840238571166992,
+        -15.072107315063477,
+        -12.717171669006348,
+        -10.154986381530762,
+        -8.433167457580566,
+        -9.719100952148438,
+        -8.471597671508789,
+        -8.343154907226562,
+        -8.709704399108887,
+        -7.567687511444092,
+        -9.198721885681152,
+        -9.191441535949707,
+        -9.227621078491211,
+        -7.426884174346924,
+        -8.921903610229492,
+        -6.6388397216796875,
+        -6.011499404907227,
+        -7.275664329528809,
+        -7.300325393676758,
+        7.833000183105469,
+        9.648006439208984,
+        9.36831283569336,
+        8.677207946777344
+      ],
+      "host_seconds": 2.857132199998887,
+      "file": "weights/staged_q8_0.wav",
+      "sha256": "ab0d1824dc0d935611d846271352ce9ce4e88789f3278d79e4d4cbdf38a8c104",
+      "peak": 0.39000338315963745,
+      "rms": 0.06733182072639465,
+      "clipped_samples": 0,
+      "audio_seconds": 1.84
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "token_ids": [
+        776,
+        1417,
+        2600,
+        1657,
+        879,
+        2503,
+        1971,
+        662,
+        816,
+        665,
+        993,
+        3358,
+        1852,
+        663
+      ],
+      "frames": 38,
+      "eos_frame": 36,
+      "completed_eos": true,
+      "eos_logits": [
+        -12.961638450622559,
+        -15.85531997680664,
+        -9.56330680847168,
+        -9.743987083435059,
+        -9.556771278381348,
+        -10.905736923217773,
+        -10.868531227111816,
+        -10.812734603881836,
+        -8.735599517822266,
+        -9.03422737121582,
+        -11.421978950500488,
+        -8.026546478271484,
+        -8.104120254516602,
+        -8.8431396484375,
+        -9.253506660461426,
+        -9.231618881225586,
+        -9.69357681274414,
+        -8.942574501037598,
+        -8.705280303955078,
+        -10.377737045288086,
+        -9.783342361450195,
+        -8.774476051330566,
+        -8.741194725036621,
+        -8.199688911437988,
+        -9.200145721435547,
+        -7.551793575286865,
+        -8.99954891204834,
+        -9.206854820251465,
+        -9.721600532531738,
+        -8.17803955078125,
+        -7.3572998046875,
+        -7.633552551269531,
+        -7.53387451171875,
+        -7.73813533782959,
+        -8.863100051879883,
+        -8.143360137939453,
+        8.411003112792969,
+        9.645092010498047
+      ],
+      "host_seconds": 4.11274979999871,
+      "file": "weights/staged_q8_1.wav",
+      "sha256": "3bdd2d980255c4e52f997542cee4f462ca4c7f4633936fdd516d2e5e5c7eaf29",
+      "peak": 0.526452898979187,
+      "rms": 0.07259440422058105,
+      "clipped_samples": 0,
+      "audio_seconds": 3.04
+    }
+  ],
+  "fixed_state_backbone_errors": [
+    {
+      "max_absolute_error": 0.009829863905906677,
+      "rmse": 0.0029869622085243464,
+      "normalized_rmse": 0.006840093691454891,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007838010787963867,
+      "rmse": 0.001967295538634062,
+      "normalized_rmse": 0.01639442809978049,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007444426417350769,
+      "rmse": 0.0019899930339306593,
+      "normalized_rmse": 0.01944118307612151,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007398031651973724,
+      "rmse": 0.0020647409837692976,
+      "normalized_rmse": 0.01698431060973786,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0072587281465530396,
+      "rmse": 0.001975467661395669,
+      "normalized_rmse": 0.011930788529374072,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006144501268863678,
+      "rmse": 0.0019728876650333405,
+      "normalized_rmse": 0.011665754276317615,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008523702621459961,
+      "rmse": 0.0023595800157636404,
+      "normalized_rmse": 0.014303450223459887,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007214099168777466,
+      "rmse": 0.0021220941562205553,
+      "normalized_rmse": 0.011095036474368259,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.005977332592010498,
+      "rmse": 0.0020995009690523148,
+      "normalized_rmse": 0.01058309182543168,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.010220110416412354,
+      "rmse": 0.0024537278804928064,
+      "normalized_rmse": 0.019705762722076962,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007486879825592041,
+      "rmse": 0.002346194349229336,
+      "normalized_rmse": 0.02268876255876078,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006729312241077423,
+      "rmse": 0.002130378969013691,
+      "normalized_rmse": 0.015720886343893292,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.009829863905906677,
+      "rmse": 0.0029869622085243464,
+      "normalized_rmse": 0.006840093691454891,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007838010787963867,
+      "rmse": 0.001967295538634062,
+      "normalized_rmse": 0.01639442809978049,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007960617542266846,
+      "rmse": 0.0020014122128486633,
+      "normalized_rmse": 0.018348945334384897,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007145345211029053,
+      "rmse": 0.0021156882867217064,
+      "normalized_rmse": 0.015633277016816008,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007409334182739258,
+      "rmse": 0.002054298995062709,
+      "normalized_rmse": 0.011930969445284153,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0080098956823349,
+      "rmse": 0.0020931658800691366,
+      "normalized_rmse": 0.012179045811494153,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006529562175273895,
+      "rmse": 0.0020577930845320225,
+      "normalized_rmse": 0.009838708111745472,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0065975189208984375,
+      "rmse": 0.002059485064819455,
+      "normalized_rmse": 0.009749241515351826,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006014734506607056,
+      "rmse": 0.002042503794655204,
+      "normalized_rmse": 0.009179563174156071,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006531335413455963,
+      "rmse": 0.002188290935009718,
+      "normalized_rmse": 0.009109129178757589,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00620877742767334,
+      "rmse": 0.0020875849295407534,
+      "normalized_rmse": 0.0086031343645025,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006808511912822723,
+      "rmse": 0.002162134274840355,
+      "normalized_rmse": 0.00851791217822654,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00725555419921875,
+      "rmse": 0.002099293516948819,
+      "normalized_rmse": 0.0080096198263119,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.005796849727630615,
+      "rmse": 0.002133765956386924,
+      "normalized_rmse": 0.008668489784175537,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.006867550313472748,
+      "rmse": 0.0021928208880126476,
+      "normalized_rmse": 0.008356058011679357,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007505834102630615,
+      "rmse": 0.002262657508254051,
+      "normalized_rmse": 0.008905693685104354,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007625997066497803,
+      "rmse": 0.002327225636690855,
+      "normalized_rmse": 0.018801377556090692,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008802991360425949,
+      "rmse": 0.002454206580296159,
+      "normalized_rmse": 0.022816361496584937,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.007351353764533997,
+      "rmse": 0.002403764985501766,
+      "normalized_rmse": 0.021077740941013036,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.008566439151763916,
+      "rmse": 0.002384620252996683,
+      "normalized_rmse": 0.020123376103644675,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.00735166622325778,
+      "rmse": 0.0021172708366066217,
+      "normalized_rmse": 0.01684576269392985,
+      "finite": true
+    }
+  ],
+  "fixed_state_synthesis_errors": [
+    {
+      "latent": {
+        "max_absolute_error": 0.031007766723632812,
+        "rmse": 0.014375626109540462,
+        "normalized_rmse": 0.009031212243256013,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0016126632690429688,
+        "rmse": 0.0016126632690429688,
+        "normalized_rmse": 0.00013620192358033053,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0005198490107432008,
+        "rmse": 6.690267036901787e-05,
+        "normalized_rmse": 0.08157689461058923,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0053519681096076965,
+        "rmse": 0.0013676637317985296,
+        "normalized_rmse": 0.018993148813641607,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03342318534851074,
+        "rmse": 0.013962234370410442,
+        "normalized_rmse": 0.01060206266021511,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.015293121337890625,
+        "rmse": 0.015293121337890625,
+        "normalized_rmse": 0.0010146637771485517,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.002524237148463726,
+        "rmse": 0.0005825458210892975,
+        "normalized_rmse": 0.10009125971003315,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005218766629695892,
+        "rmse": 0.00128589803352952,
+        "normalized_rmse": 0.019548197506320957,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02619040012359619,
+        "rmse": 0.01085581723600626,
+        "normalized_rmse": 0.009073569769987268,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.02147197723388672,
+        "rmse": 0.02147197723388672,
+        "normalized_rmse": 0.0016884239509180445,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.030435383319854736,
+        "rmse": 0.00894768163561821,
+        "normalized_rmse": 0.08829093236547908,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00510290265083313,
+        "rmse": 0.0008936393423937261,
+        "normalized_rmse": 0.011825697387845552,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03682541847229004,
+        "rmse": 0.015185028314590454,
+        "normalized_rmse": 0.013853567122582093,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.014250755310058594,
+        "rmse": 0.014250755310058594,
+        "normalized_rmse": 0.0014033258908133007,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.11333456635475159,
+        "rmse": 0.01940999925136566,
+        "normalized_rmse": 0.1576502615344983,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.007113344967365265,
+        "rmse": 0.0011872592149302363,
+        "normalized_rmse": 0.015351712314415277,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.025146543979644775,
+        "rmse": 0.01190301962196827,
+        "normalized_rmse": 0.010453270538709541,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00716400146484375,
+        "rmse": 0.00716400146484375,
+        "normalized_rmse": 0.0008495030486325795,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.046695735305547714,
+        "rmse": 0.010221965610980988,
+        "normalized_rmse": 0.0755836906102331,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003859318792819977,
+        "rmse": 0.000916507444344461,
+        "normalized_rmse": 0.01104339484061523,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0233955979347229,
+        "rmse": 0.009834540076553822,
+        "normalized_rmse": 0.010288091467415524,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007869720458984375,
+        "rmse": 0.007869720458984375,
+        "normalized_rmse": 0.0008097169169998948,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03660314530134201,
+        "rmse": 0.006482506170868874,
+        "normalized_rmse": 0.08949633401976173,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.002597823739051819,
+        "rmse": 0.0006916454876773059,
+        "normalized_rmse": 0.010032295328115334,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.032332658767700195,
+        "rmse": 0.011695238761603832,
+        "normalized_rmse": 0.009687003371703463,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0006694793701171875,
+        "rmse": 0.0006694793701171875,
+        "normalized_rmse": 7.902634143837398e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05216297507286072,
+        "rmse": 0.006854744162410498,
+        "normalized_rmse": 0.06664572612241909,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0060079991817474365,
+        "rmse": 0.0009921524906530976,
+        "normalized_rmse": 0.013064456763990475,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019493937492370605,
+        "rmse": 0.008589372038841248,
+        "normalized_rmse": 0.00985272237770275,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0020189285278320312,
+        "rmse": 0.0020189285278320312,
+        "normalized_rmse": 0.00024198622107367355,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0167219378054142,
+        "rmse": 0.006233855616301298,
+        "normalized_rmse": 0.07076221081963481,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0031226053833961487,
+        "rmse": 0.0006205437239259481,
+        "normalized_rmse": 0.009665174450267468,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.024573981761932373,
+        "rmse": 0.009949756786227226,
+        "normalized_rmse": 0.010220215902688738,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.008561134338378906,
+        "rmse": 0.008561134338378906,
+        "normalized_rmse": 0.0009829420088303823,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.025113005191087723,
+        "rmse": 0.0027938324492424726,
+        "normalized_rmse": 0.031889901862792114,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003974674269556999,
+        "rmse": 0.0007620469550602138,
+        "normalized_rmse": 0.011481028384786075,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.06923240423202515,
+        "rmse": 0.01570647396147251,
+        "normalized_rmse": 0.015702091995196253,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007465362548828125,
+        "rmse": 0.007465362548828125,
+        "normalized_rmse": 0.0009864787013917754,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.04672171175479889,
+        "rmse": 0.011596144177019596,
+        "normalized_rmse": 0.08479597776923019,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0034245066344738007,
+        "rmse": 0.000907790963537991,
+        "normalized_rmse": 0.012135695309005363,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.0197221040725708,
+        "rmse": 0.007991695776581764,
+        "normalized_rmse": 0.00856885105411286,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0037212371826171875,
+        "rmse": 0.0037212371826171875,
+        "normalized_rmse": 0.00040453850315984796,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.008826730772852898,
+        "rmse": 0.002083865460008383,
+        "normalized_rmse": 0.025539454836510215,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0024837329983711243,
+        "rmse": 0.0006344161229208112,
+        "normalized_rmse": 0.008737823662898332,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02106165885925293,
+        "rmse": 0.008749662898480892,
+        "normalized_rmse": 0.008392754562715687,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004482269287109375,
+        "rmse": 0.004482269287109375,
+        "normalized_rmse": 0.0004876568348477499,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.006103863473981619,
+        "rmse": 0.0016062507638707757,
+        "normalized_rmse": 0.03267082296366483,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005415037274360657,
+        "rmse": 0.0007380091119557619,
+        "normalized_rmse": 0.00972985623464207,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023283958435058594,
+        "rmse": 0.00988729391247034,
+        "normalized_rmse": 0.009976006505704255,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00240325927734375,
+        "rmse": 0.00240325927734375,
+        "normalized_rmse": 0.0002604419120487663,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0038584433495998383,
+        "rmse": 0.000863618915900588,
+        "normalized_rmse": 0.026337338042925287,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006653770804405212,
+        "rmse": 0.0008472110494039953,
+        "normalized_rmse": 0.011744605525175443,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.026665568351745605,
+        "rmse": 0.01062516588717699,
+        "normalized_rmse": 0.009181591189590818,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005039691925048828,
+        "rmse": 0.005039691925048828,
+        "normalized_rmse": 0.0006785741916450432,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0016658604145050049,
+        "rmse": 0.00047701734001748264,
+        "normalized_rmse": 0.023718155296254744,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006476253271102905,
+        "rmse": 0.0008786701364442706,
+        "normalized_rmse": 0.011075120390512366,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.036290884017944336,
+        "rmse": 0.010698974132537842,
+        "normalized_rmse": 0.008757431173037851,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.01585674285888672,
+        "rmse": 0.01585674285888672,
+        "normalized_rmse": 0.0017772824670181397,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00024533900432288647,
+        "rmse": 6.844165181973949e-05,
+        "normalized_rmse": 0.07057132912012727,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006186693906784058,
+        "rmse": 0.0008381495135836303,
+        "normalized_rmse": 0.009276615798169605,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.028066158294677734,
+        "rmse": 0.010845890268683434,
+        "normalized_rmse": 0.009294972328681586,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.009681224822998047,
+        "rmse": 0.009681224822998047,
+        "normalized_rmse": 0.0014582706058384263,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00020468258298933506,
+        "rmse": 5.037517985329032e-05,
+        "normalized_rmse": 0.2563235371646457,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0047203004360198975,
+        "rmse": 0.0008380157523788512,
+        "normalized_rmse": 0.008638391225106843,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.017506718635559082,
+        "rmse": 0.00827606488019228,
+        "normalized_rmse": 0.0074448317403586145,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0012025833129882812,
+        "rmse": 0.0012025833129882812,
+        "normalized_rmse": 0.00020004714830489787,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0001793246774468571,
+        "rmse": 4.729571446659975e-05,
+        "normalized_rmse": 0.46617588061580245,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0031267404556274414,
+        "rmse": 0.0007132464670576155,
+        "normalized_rmse": 0.00709420005788427,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03430891036987305,
+        "rmse": 0.011076721362769604,
+        "normalized_rmse": 0.009953703858685202,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0014853477478027344,
+        "rmse": 0.0014853477478027344,
+        "normalized_rmse": 0.00020415286914410598,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00015667080879211426,
+        "rmse": 4.6242246753536165e-05,
+        "normalized_rmse": 0.4780061410254723,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005275249481201172,
+        "rmse": 0.0009467150666750968,
+        "normalized_rmse": 0.008808806766345859,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03308916091918945,
+        "rmse": 0.010993355885148048,
+        "normalized_rmse": 0.009761505478445162,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0004668235778808594,
+        "rmse": 0.0004668235778808594,
+        "normalized_rmse": 6.394558498518475e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.000167979538673535,
+        "rmse": 4.4532738684210926e-05,
+        "normalized_rmse": 0.4520141606953558,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004333987832069397,
+        "rmse": 0.0009607605170458555,
+        "normalized_rmse": 0.008764310274341994,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04697227478027344,
+        "rmse": 0.01446455903351307,
+        "normalized_rmse": 0.012638364818442433,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013909339904785156,
+        "rmse": 0.0013909339904785156,
+        "normalized_rmse": 0.00017757359350999868,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00014987739268690348,
+        "rmse": 4.464730591280386e-05,
+        "normalized_rmse": 0.4476974070845769,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00648266077041626,
+        "rmse": 0.001183688989840448,
+        "normalized_rmse": 0.010699160407555515,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04458904266357422,
+        "rmse": 0.012329339981079102,
+        "normalized_rmse": 0.01076474597214526,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013599395751953125,
+        "rmse": 0.0013599395751953125,
+        "normalized_rmse": 0.0001409555003683031,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00015083778998814523,
+        "rmse": 4.423193968250416e-05,
+        "normalized_rmse": 0.4397106218052999,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.007024884223937988,
+        "rmse": 0.0010698491241782904,
+        "normalized_rmse": 0.009758485538767753,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.05167675018310547,
+        "rmse": 0.01315014623105526,
+        "normalized_rmse": 0.011380568898856717,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0018339157104492188,
+        "rmse": 0.0018339157104492188,
+        "normalized_rmse": 0.0001957573089854539,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00017158963601104915,
+        "rmse": 4.340586383477785e-05,
+        "normalized_rmse": 0.4281604940708271,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.008239567279815674,
+        "rmse": 0.0011589290807023644,
+        "normalized_rmse": 0.010610061519380442,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.040400028228759766,
+        "rmse": 0.01140013337135315,
+        "normalized_rmse": 0.009862965055465175,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0012264251708984375,
+        "rmse": 0.0012264251708984375,
+        "normalized_rmse": 0.00014133868617887896,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00015248148702085018,
+        "rmse": 4.480020288610831e-05,
+        "normalized_rmse": 0.4424512371086609,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006485104560852051,
+        "rmse": 0.0010204093996435404,
+        "normalized_rmse": 0.00948639119079163,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03354668617248535,
+        "rmse": 0.015028830617666245,
+        "normalized_rmse": 0.009326097452124132,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0008935928344726562,
+        "rmse": 0.0008935928344726562,
+        "normalized_rmse": 6.894134857076932e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0005742571083828807,
+        "rmse": 6.653868331341073e-05,
+        "normalized_rmse": 0.08008552409328018,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0055849552154541016,
+        "rmse": 0.001366844167932868,
+        "normalized_rmse": 0.018776192088656146,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03358003497123718,
+        "rmse": 0.01314887497574091,
+        "normalized_rmse": 0.010538376223417774,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0,
+        "rmse": 0.0,
+        "normalized_rmse": 0.0,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.008288360200822353,
+        "rmse": 0.0025055669248104095,
+        "normalized_rmse": 0.09899553640422522,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004846101626753807,
+        "rmse": 0.0012029139325022697,
+        "normalized_rmse": 0.018395047458410373,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023441553115844727,
+        "rmse": 0.011442304588854313,
+        "normalized_rmse": 0.009059632909811143,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.015111923217773438,
+        "rmse": 0.015111923217773438,
+        "normalized_rmse": 0.0015801985150561625,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.02375650405883789,
+        "rmse": 0.006451236549764872,
+        "normalized_rmse": 0.043577229535614576,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005080580711364746,
+        "rmse": 0.0009049925720319152,
+        "normalized_rmse": 0.011053654684037373,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02016735076904297,
+        "rmse": 0.010608498938381672,
+        "normalized_rmse": 0.009172903605056066,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013704299926757812,
+        "rmse": 0.0013704299926757812,
+        "normalized_rmse": 0.0001406436585907975,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.004338271915912628,
+        "rmse": 0.0006124048377387226,
+        "normalized_rmse": 0.05772728463871367,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004327557981014252,
+        "rmse": 0.000967591826338321,
+        "normalized_rmse": 0.014040317058856408,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03577136993408203,
+        "rmse": 0.011902960017323494,
+        "normalized_rmse": 0.009445556925389485,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.003997802734375,
+        "rmse": 0.003997802734375,
+        "normalized_rmse": 0.00041832148305343946,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03373315930366516,
+        "rmse": 0.005969817750155926,
+        "normalized_rmse": 0.04883259196661866,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0075072553008794785,
+        "rmse": 0.000968116451986134,
+        "normalized_rmse": 0.011846043886061051,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023874521255493164,
+        "rmse": 0.00791825819760561,
+        "normalized_rmse": 0.007361413916233051,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0052890777587890625,
+        "rmse": 0.0052890777587890625,
+        "normalized_rmse": 0.00048498123474158614,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00784716010093689,
+        "rmse": 0.0011835867771878839,
+        "normalized_rmse": 0.035442696030391886,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005375005304813385,
+        "rmse": 0.0008252682746388018,
+        "normalized_rmse": 0.01184342631979966,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.034073829650878906,
+        "rmse": 0.013055418618023396,
+        "normalized_rmse": 0.014539653089597596,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007828712463378906,
+        "rmse": 0.007828712463378906,
+        "normalized_rmse": 0.0007203100676428101,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0002239217283204198,
+        "rmse": 6.048396971891634e-05,
+        "normalized_rmse": 0.11215694050658215,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004610903561115265,
+        "rmse": 0.0008925293223001063,
+        "normalized_rmse": 0.013449824705967815,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02177739143371582,
+        "rmse": 0.00950689148157835,
+        "normalized_rmse": 0.008406977177652947,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.010097503662109375,
+        "rmse": 0.010097503662109375,
+        "normalized_rmse": 0.0009338529088177483,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01987600326538086,
+        "rmse": 0.00440182676538825,
+        "normalized_rmse": 0.03157638464211611,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.002847820520401001,
+        "rmse": 0.0007357515278272331,
+        "normalized_rmse": 0.009773417954115135,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02325618267059326,
+        "rmse": 0.010781682096421719,
+        "normalized_rmse": 0.009827564778171259,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0059070587158203125,
+        "rmse": 0.0059070587158203125,
+        "normalized_rmse": 0.0006762053026548208,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05187726765871048,
+        "rmse": 0.008664277382194996,
+        "normalized_rmse": 0.07672157658965258,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0037320666015148163,
+        "rmse": 0.0008796883630566299,
+        "normalized_rmse": 0.01071255002435665,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03358054161071777,
+        "rmse": 0.012429657392203808,
+        "normalized_rmse": 0.012995874230739269,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.003696441650390625,
+        "rmse": 0.003696441650390625,
+        "normalized_rmse": 0.00040915968776344405,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.012858685106039047,
+        "rmse": 0.003675035433843732,
+        "normalized_rmse": 0.037621154452656735,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004284411668777466,
+        "rmse": 0.0008078355458565056,
+        "normalized_rmse": 0.011431425906702373,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019073069095611572,
+        "rmse": 0.00827634148299694,
+        "normalized_rmse": 0.007820090720033774,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007716178894042969,
+        "rmse": 0.007716178894042969,
+        "normalized_rmse": 0.0006755553418092108,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0008564777672290802,
+        "rmse": 0.0001944095711223781,
+        "normalized_rmse": 0.040888387869286086,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0028798263520002365,
+        "rmse": 0.0007827737717889249,
+        "normalized_rmse": 0.011316605128615268,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.017829418182373047,
+        "rmse": 0.007420691661536694,
+        "normalized_rmse": 0.006180826528387304,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0038042068481445312,
+        "rmse": 0.0038042068481445312,
+        "normalized_rmse": 0.0004739531327006988,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.07000967860221863,
+        "rmse": 0.009181009605526924,
+        "normalized_rmse": 0.09293516794150877,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0033909156918525696,
+        "rmse": 0.0007297779666259885,
+        "normalized_rmse": 0.009266608057261044,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.04123842716217041,
+        "rmse": 0.013358271680772305,
+        "normalized_rmse": 0.01187349336065454,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0025053024291992188,
+        "rmse": 0.0025053024291992188,
+        "normalized_rmse": 0.00030913934523651217,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03301526978611946,
+        "rmse": 0.008275492116808891,
+        "normalized_rmse": 0.1084025042559527,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004221200942993164,
+        "rmse": 0.0009560605976730585,
+        "normalized_rmse": 0.012299734955287035,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.023550033569335938,
+        "rmse": 0.009798380546271801,
+        "normalized_rmse": 0.0096951087705266,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00167083740234375,
+        "rmse": 0.00167083740234375,
+        "normalized_rmse": 0.00018894165067708405,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.006556743755936623,
+        "rmse": 0.0005498445243574679,
+        "normalized_rmse": 0.03190123557019999,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0048112571239471436,
+        "rmse": 0.000793207495007664,
+        "normalized_rmse": 0.011514869180442056,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019943594932556152,
+        "rmse": 0.009651623666286469,
+        "normalized_rmse": 0.008608246049807323,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.003131866455078125,
+        "rmse": 0.003131866455078125,
+        "normalized_rmse": 0.00033845185074108487,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0022166334092617035,
+        "rmse": 0.000653873838018626,
+        "normalized_rmse": 0.05289714863589138,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005566209554672241,
+        "rmse": 0.000816083513200283,
+        "normalized_rmse": 0.010961443910413739,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.029747188091278076,
+        "rmse": 0.011537227779626846,
+        "normalized_rmse": 0.00902788142364018,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.007115364074707031,
+        "rmse": 0.007115364074707031,
+        "normalized_rmse": 0.0007707601631147925,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01269402727484703,
+        "rmse": 0.002316314959898591,
+        "normalized_rmse": 0.07016487583553249,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00535159558057785,
+        "rmse": 0.0010939177591353655,
+        "normalized_rmse": 0.015172331875896259,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02001643180847168,
+        "rmse": 0.01022970862686634,
+        "normalized_rmse": 0.00925293012186029,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005328178405761719,
+        "rmse": 0.005328178405761719,
+        "normalized_rmse": 0.0005496607195351013,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01567879691720009,
+        "rmse": 0.0035468332935124636,
+        "normalized_rmse": 0.028184525307275138,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0027681291103363037,
+        "rmse": 0.0007415025029331446,
+        "normalized_rmse": 0.00990592039871808,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.029508262872695923,
+        "rmse": 0.010769442655146122,
+        "normalized_rmse": 0.012554748801512118,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005831718444824219,
+        "rmse": 0.005831718444824219,
+        "normalized_rmse": 0.000652129702039113,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.008036695420742035,
+        "rmse": 0.0020962106063961983,
+        "normalized_rmse": 0.03213833487543265,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003650367259979248,
+        "rmse": 0.000742381380405277,
+        "normalized_rmse": 0.01091553920023128,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.032805442810058594,
+        "rmse": 0.014987551607191563,
+        "normalized_rmse": 0.0145764450236841,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.000701904296875,
+        "rmse": 0.000701904296875,
+        "normalized_rmse": 8.06297180983481e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.10854467004537582,
+        "rmse": 0.011348999105393887,
+        "normalized_rmse": 0.22207003346642099,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00504688173532486,
+        "rmse": 0.0011933606583625078,
+        "normalized_rmse": 0.017052935408117538,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.022420167922973633,
+        "rmse": 0.009378060698509216,
+        "normalized_rmse": 0.009147060724933823,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.013117790222167969,
+        "rmse": 0.013117790222167969,
+        "normalized_rmse": 0.0012640318563596654,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05722854286432266,
+        "rmse": 0.01099370140582323,
+        "normalized_rmse": 0.1125208610320687,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0033676475286483765,
+        "rmse": 0.0007464657537639141,
+        "normalized_rmse": 0.010441572793301981,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.025557518005371094,
+        "rmse": 0.01091343630105257,
+        "normalized_rmse": 0.010172518789458724,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.010403633117675781,
+        "rmse": 0.010403633117675781,
+        "normalized_rmse": 0.0010634027445129335,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.01659068465232849,
+        "rmse": 0.00295355636626482,
+        "normalized_rmse": 0.02839794213940679,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.003849215805530548,
+        "rmse": 0.0008760672644712031,
+        "normalized_rmse": 0.011504969621363766,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02074253559112549,
+        "rmse": 0.01135253719985485,
+        "normalized_rmse": 0.009487464849889377,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.00650787353515625,
+        "rmse": 0.00650787353515625,
+        "normalized_rmse": 0.0007416822949980463,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.010349133051931858,
+        "rmse": 0.0025457076262682676,
+        "normalized_rmse": 0.02328908752243339,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004288017749786377,
+        "rmse": 0.0009031897643581033,
+        "normalized_rmse": 0.011070074366170071,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.022549092769622803,
+        "rmse": 0.011220975778996944,
+        "normalized_rmse": 0.008760721057870067,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0025300979614257812,
+        "rmse": 0.0025300979614257812,
+        "normalized_rmse": 0.00028944532652716776,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05323470011353493,
+        "rmse": 0.008751648478209972,
+        "normalized_rmse": 0.08631500484987434,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0044791921973228455,
+        "rmse": 0.0009768869495019317,
+        "normalized_rmse": 0.011737656164604912,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03112649917602539,
+        "rmse": 0.01293251384049654,
+        "normalized_rmse": 0.011244585081352532,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.004200935363769531,
+        "rmse": 0.004200935363769531,
+        "normalized_rmse": 0.0005123286272372507,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.011744417250156403,
+        "rmse": 0.0027894764207303524,
+        "normalized_rmse": 0.025671801076879806,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004894210025668144,
+        "rmse": 0.0013726926408708096,
+        "normalized_rmse": 0.01745425403163731,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02397710084915161,
+        "rmse": 0.011410585604608059,
+        "normalized_rmse": 0.010165904022841466,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0020570755004882812,
+        "rmse": 0.0020570755004882812,
+        "normalized_rmse": 0.0002235916215648055,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0028961114585399628,
+        "rmse": 0.0007176232757046819,
+        "normalized_rmse": 0.012793372691266985,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005177482962608337,
+        "rmse": 0.0008033158374018967,
+        "normalized_rmse": 0.010837073607546164,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.021982669830322266,
+        "rmse": 0.011032234877347946,
+        "normalized_rmse": 0.010149425866275569,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0044879913330078125,
+        "rmse": 0.0044879913330078125,
+        "normalized_rmse": 0.0005942947576976546,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.03521006554365158,
+        "rmse": 0.008351077325642109,
+        "normalized_rmse": 0.07575615053463294,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004372790455818176,
+        "rmse": 0.0009623586083762348,
+        "normalized_rmse": 0.012917412434711934,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.028535127639770508,
+        "rmse": 0.012366313487291336,
+        "normalized_rmse": 0.010772712297484924,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.005658149719238281,
+        "rmse": 0.005658149719238281,
+        "normalized_rmse": 0.0006287148138795392,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.05882811173796654,
+        "rmse": 0.00800059363245964,
+        "normalized_rmse": 0.1073122468024329,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0037079527974128723,
+        "rmse": 0.0008988465997390449,
+        "normalized_rmse": 0.012226542009031583,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02356433868408203,
+        "rmse": 0.01195747684687376,
+        "normalized_rmse": 0.01204208618116075,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0015077590942382812,
+        "rmse": 0.0015077590942382812,
+        "normalized_rmse": 0.00016376483866366648,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.021152548491954803,
+        "rmse": 0.003919328562915325,
+        "normalized_rmse": 0.06838334688212924,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0030473247170448303,
+        "rmse": 0.0008166260085999966,
+        "normalized_rmse": 0.01092967057129495,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.01936054229736328,
+        "rmse": 0.009884935803711414,
+        "normalized_rmse": 0.00923519633528408,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0005311965942382812,
+        "rmse": 0.0005311965942382812,
+        "normalized_rmse": 5.464085800077047e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.007230915129184723,
+        "rmse": 0.001587573322467506,
+        "normalized_rmse": 0.05118172440320601,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0034472309052944183,
+        "rmse": 0.0007172637851908803,
+        "normalized_rmse": 0.00917363632357075,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03454446792602539,
+        "rmse": 0.011164347641170025,
+        "normalized_rmse": 0.012530414901510968,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0034160614013671875,
+        "rmse": 0.0034160614013671875,
+        "normalized_rmse": 0.0004177115285583145,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.004908507689833641,
+        "rmse": 0.001108099240809679,
+        "normalized_rmse": 0.05860051828752349,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0046426355838775635,
+        "rmse": 0.0007416964508593082,
+        "normalized_rmse": 0.010714900961597143,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.02260473370552063,
+        "rmse": 0.008564570918679237,
+        "normalized_rmse": 0.00819659135584689,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0020422935485839844,
+        "rmse": 0.0020422935485839844,
+        "normalized_rmse": 0.0002775873761842345,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00400482676923275,
+        "rmse": 0.0004854134749621153,
+        "normalized_rmse": 0.055495028210208915,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006348073482513428,
+        "rmse": 0.0008763109217397869,
+        "normalized_rmse": 0.012927201348977894,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.039652109146118164,
+        "rmse": 0.015122040174901485,
+        "normalized_rmse": 0.013988679095761786,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0166015625,
+        "rmse": 0.0166015625,
+        "normalized_rmse": 0.002174814725974344,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0006082747131586075,
+        "rmse": 0.00017503132403362542,
+        "normalized_rmse": 0.058113586690537115,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.011278234422206879,
+        "rmse": 0.001194663462229073,
+        "normalized_rmse": 0.015444363178819403,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.019971489906311035,
+        "rmse": 0.0073576420545578,
+        "normalized_rmse": 0.006740290496892463,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.013697147369384766,
+        "rmse": 0.013697147369384766,
+        "normalized_rmse": 0.0018180747964515738,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.000234296137932688,
+        "rmse": 6.0925009165657684e-05,
+        "normalized_rmse": 0.14521867148303844,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.00674670934677124,
+        "rmse": 0.0006972947157919407,
+        "normalized_rmse": 0.007699234899878772,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.03146719932556152,
+        "rmse": 0.011186197400093079,
+        "normalized_rmse": 0.010317679744810765,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0010528564453125,
+        "rmse": 0.0010528564453125,
+        "normalized_rmse": 0.0001360607432342748,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00017213713726960123,
+        "rmse": 4.8231504479190335e-05,
+        "normalized_rmse": 0.4608793426743692,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.004620909690856934,
+        "rmse": 0.0009593889117240906,
+        "normalized_rmse": 0.009912228127120263,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.017817378044128418,
+        "rmse": 0.009236522018909454,
+        "normalized_rmse": 0.008392673272495984,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0032444000244140625,
+        "rmse": 0.0032444000244140625,
+        "normalized_rmse": 0.0003660570235496685,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.0001698521082289517,
+        "rmse": 4.512631494435482e-05,
+        "normalized_rmse": 0.45979076566957455,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.002923309803009033,
+        "rmse": 0.000758609501644969,
+        "normalized_rmse": 0.007141136876710961,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.028087735176086426,
+        "rmse": 0.010632623918354511,
+        "normalized_rmse": 0.009523989499981794,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0010995864868164062,
+        "rmse": 0.0010995864868164062,
+        "normalized_rmse": 0.0001350285960820393,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00015083467587828636,
+        "rmse": 4.555441773845814e-05,
+        "normalized_rmse": 0.45570572958499306,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.0035064220428466797,
+        "rmse": 0.0008084529545158148,
+        "normalized_rmse": 0.00739087257327257,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.051194190979003906,
+        "rmse": 0.01393356453627348,
+        "normalized_rmse": 0.01212915020633932,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0006723403930664062,
+        "rmse": 0.0006723403930664062,
+        "normalized_rmse": 7.993581550859135e-05,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00014902130351401865,
+        "rmse": 4.398593955556862e-05,
+        "normalized_rmse": 0.43491984526607574,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.006441712379455566,
+        "rmse": 0.0011746576055884361,
+        "normalized_rmse": 0.010487926800785311,
+        "finite": true
+      }
+    },
+    {
+      "latent": {
+        "max_absolute_error": 0.043589115142822266,
+        "rmse": 0.01273976918309927,
+        "normalized_rmse": 0.01097224597538258,
+        "finite": true
+      },
+      "eos": {
+        "max_absolute_error": 0.0013494491577148438,
+        "rmse": 0.0013494491577148438,
+        "normalized_rmse": 0.00013991044940225115,
+        "finite": true
+      },
+      "pcm": {
+        "max_absolute_error": 0.00015233588055707514,
+        "rmse": 4.6099594328552485e-05,
+        "normalized_rmse": 0.4533062145767323,
+        "finite": true
+      },
+      "next_embedding": {
+        "max_absolute_error": 0.005723714828491211,
+        "rmse": 0.001094367355108261,
+        "normalized_rmse": 0.009760032383823796,
+        "finite": true
+      }
+    }
+  ],
+  "ptq_free_recurrence_utterances": [
+    {
+      "text": "Hello from Phonon.",
+      "token_ids": [
+        3248,
+        744,
+        949,
+        1286,
+        697,
+        860,
+        663
+      ],
+      "frames": 23,
+      "eos_frame": 19,
+      "completed_eos": true,
+      "eos_logits": [
+        -11.890884399414062,
+        -15.10094928741455,
+        -12.719772338867188,
+        -10.11552619934082,
+        -8.444685935974121,
+        -9.861489295959473,
+        -8.74904727935791,
+        -8.303393363952637,
+        -8.575818061828613,
+        -7.690316200256348,
+        -9.177765846252441,
+        -9.64954948425293,
+        -9.014698028564453,
+        -7.574184894561768,
+        -8.714692115783691,
+        -6.378515720367432,
+        -6.172866344451904,
+        -7.271275520324707,
+        -6.917074680328369,
+        8.258392333984375,
+        9.554708480834961,
+        9.170990943908691,
+        8.59178638458252
+      ],
+      "host_seconds": 5.744082099998195,
+      "file": "weights/staged_ptq_0.wav",
+      "sha256": "ef73df6c4989f55eb63f5dab390c7cbf510106fc94df688236510c11f612df03",
+      "peak": 0.3456880748271942,
+      "rms": 0.06764328479766846,
+      "clipped_samples": 0,
+      "audio_seconds": 1.84
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "token_ids": [
+        776,
+        1417,
+        2600,
+        1657,
+        879,
+        2503,
+        1971,
+        662,
+        816,
+        665,
+        993,
+        3358,
+        1852,
+        663
+      ],
+      "frames": 38,
+      "eos_frame": 36,
+      "completed_eos": true,
+      "eos_logits": [
+        -13.010584831237793,
+        -15.84709358215332,
+        -9.614709854125977,
+        -9.685356140136719,
+        -9.515030860900879,
+        -10.920220375061035,
+        -10.75134563446045,
+        -10.916349411010742,
+        -8.952277183532715,
+        -8.964374542236328,
+        -11.247323036193848,
+        -8.281618118286133,
+        -8.193068504333496,
+        -9.214540481567383,
+        -9.03066635131836,
+        -9.218411445617676,
+        -9.232443809509277,
+        -8.297586441040039,
+        -8.476622581481934,
+        -10.078268051147461,
+        -9.62680721282959,
+        -8.385652542114258,
+        -8.031935691833496,
+        -8.069194793701172,
+        -9.225669860839844,
+        -7.5427327156066895,
+        -8.686626434326172,
+        -9.294381141662598,
+        -10.056977272033691,
+        -8.15145492553711,
+        -7.4851508140563965,
+        -7.607572555541992,
+        -7.497247695922852,
+        -7.715961933135986,
+        -8.908244132995605,
+        -8.105002403259277,
+        8.59033489227295,
+        9.658259391784668
+      ],
+      "host_seconds": 10.146312899996701,
+      "file": "weights/staged_ptq_1.wav",
+      "sha256": "aca68ee82f6333d0add958431ed1b5a12e258867e4e3d8ed296a583b36d4bc6a",
+      "peak": 0.5005375742912292,
+      "rms": 0.07390005886554718,
+      "clipped_samples": 0,
+      "audio_seconds": 3.04
+    }
+  ],
+  "source_vs_ptq_aligned_pcm": [
+    {
+      "max_absolute_error": 0.5620313882827759,
+      "rmse": 0.07080534845590591,
+      "normalized_rmse": 1.0515882043889184,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.5871787071228027,
+      "rmse": 0.07259276509284973,
+      "normalized_rmse": 0.9999774207427016,
+      "finite": true
+    }
+  ],
+  "pte_bytes": 50215824,
+  "pte_sha256": "a71c0863f176e56aae6db88910162bb02a8b698965efd5f935016b66795b6269",
+  "delegates": 57,
+  "serialized_program": {
+    "methods": {
+      "backbone": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::where.self_out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::permute_copy.out",
+          "aten::cat.out",
+          "aten::expand_copy.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "aten::gelu.out",
+          "aten::view_copy.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          38801424
+        ],
+        "delegates": 24
+      },
+      "synthesize": {
+        "operators": [
+          "aten::arange.start_out",
+          "aten::mean.out",
+          "quantized_decomposed::quantize_per_tensor.out",
+          "aten::slice_copy.Tensor_out",
+          "aten::select_copy.int_out",
+          "aten::sub.out",
+          "aten::add.out",
+          "aten::unsqueeze_copy.out",
+          "aten::full_like.out",
+          "aten::ge.Tensor_out",
+          "aten::mul.out",
+          "aten::le.Tensor_out",
+          "aten::cos.out",
+          "aten::sin.out",
+          "aten::cat.out",
+          "aten::rsqrt.out",
+          "quantized_decomposed::dequantize_per_tensor.out",
+          "aten::silu.out",
+          "aten::sigmoid.out",
+          "aten::split_with_sizes_copy.out",
+          "aten::convolution.out",
+          "aten::permute_copy.out",
+          "aten::where.self_out",
+          "aten::expand_copy.out",
+          "aten::bmm.out",
+          "aten::_softmax.out",
+          "dim_order_ops::_clone_dim_order.out",
+          "aten::gelu.out",
+          "aten::view_copy.out",
+          "aten::elu.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          6716144
+        ],
+        "delegates": 33
+      },
+      "text_embedding": {
+        "operators": [
+          "aten::embedding.out"
+        ],
+        "planned_buffer_sizes": [
+          0,
+          2064
+        ],
+        "delegates": 0
+      }
+    },
+    "constant_buffer_bytes": 16235280
+  },
+  "elapsed_seconds": 219.34562719999667
+}

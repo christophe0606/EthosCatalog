@@ -1,0 +1,19 @@
+{
+  "model_sha256": "cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7",
+  "build": "b-44",
+  "debug_session": "d-46",
+  "method_runtime_address": "0x200283f8",
+  "instruction": 181,
+  "operator": "aten::gelu.out",
+  "scope": "Layer1 isolated replay before quantize6-equivalent; diagnostic only",
+  "kernel_registration": "RegisterAllKernels.cpp:3262 calls native::gelu_out",
+  "input": {"dtype":"Float","numel":2048,"shape":[1,1,2048],"address":"0xa1a00000"},
+  "output": {"dtype":"Float","numel":2048,"shape":[1,1,2048],"address":"0xa1800000"},
+  "approximate": {"data_address":"0xc22a896c","length":4,"bytes":"6e6f6e6500000000","value":"none"},
+  "argument_registers_at_kernel_entry": {"r0":"0x20011f40","r1":"0x02002750","r2":"0xc22a896c","r3":"0x00000004","r8_output_tensor":"0x020027c0"},
+  "checks": "Passed argument, resize and dimension-order checks; Method proceeds with no kernel failure.",
+  "stepping": "Reached actual GELU kernel, its type-switch lambda and scalar_type getter. Optimized line mapping then returns to line84; no user-loop source location observed. Step-over covers whole macro, so this alone does not establish which branch ran.",
+  "memory_result": "GELU output retains prior q16 bytes rather than float results. Coherent full buffer captures are in target_gelu_buffers.json.",
+  "debugger_math_probe": "Calling __hardfp_erf via a GDB function-pointer cast returned an implausible value. Inferior hard-float ABI handling was not verified, so this is excluded as evidence of firmware math-library correctness.",
+  "next_trial": "Component-specific -fno-fast-math for Portable gelu while keeping O3 Release globally; no PTE change or OSPI reprogramming required."
+}

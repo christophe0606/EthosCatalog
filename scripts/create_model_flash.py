@@ -16,6 +16,7 @@ import yaml
 
 from project_config import DEFAULT_SOLUTION, selected_project
 from create_ai_layer import sha256
+from quantized_model import cache_provenance, model_assets
 
 
 class IndentedDumper(yaml.SafeDumper):
@@ -40,10 +41,12 @@ def main():
         parser.error("OSPI projects require --run <application>.cbuild-run.yml")
     model = solution_file.parent / "ai_layer/model.pte"
     report = json.loads((model.parent / "generation.json").read_text(encoding="utf-8"))
+    assets = model_assets(project_file.parent, network, model.stat().st_size)
     if (report["project"] != project_file.relative_to(solution_file.parent).as_posix()
             or report["config_sha256"] != sha256(config_file)
             or report["pte_sha256"] != sha256(model)
-            or report["safetensors_sha256"] != sha256(project_file.parent / network["safetensors"])
+            or any(report.get(key) != value for key, value in cache_provenance(project_file.parent, network).items())
+            or report.get("assets", {}) != assets
             or not report["flash_ospi"]):
         raise ValueError("Generated layer does not match the selected project/config/cache/model; regenerate it before preparing a flash file")
     run = deepcopy(yaml.safe_load(args.run.read_text(encoding="utf-8"))["cbuild-run"])
@@ -72,9 +75,13 @@ def main():
     run["output"] = [{"file": model.as_posix(), "type": "bin", "load": "image",
                       "load-offset": address, "pname": pname,
                       "info": f"{network['name']} PTE, SHA256 {report['pte_sha256']}"}]
+    run["output"].extend({"file": (project_file.parent / asset["file"]).resolve().as_posix(),
+                          "type": "bin", "load": "image", "load-offset": asset["address"], "pname": pname,
+                          "info": f"{network['name']} {name}, SHA256 {asset['sha256']}"}
+                         for name, asset in assets.items())
     run["programming"] = algorithms
     memories = run.setdefault("system-resources", {}).setdefault("memory", [])
-    if not any(item["start"] <= address and address + size <= item["start"] + item["size"] for item in memories):
+    if not any(item["start"] <= address and address + partition_size <= item["start"] + item["size"] for item in memories):
         memories.append({"name": "OSPI_MODEL", "access": "rx", "start": address,
                          "size": partition_size, "default": False})
     if not any(item["start"] == 0 for item in memories):

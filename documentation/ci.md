@@ -26,7 +26,11 @@ For each affected project, `scripts/ci_projects.py` checks:
 3. `README.md` starts with a closed YAML header containing nonempty, single-line
    `category` and `description` strings. Duplicate YAML keys are rejected.
 4. The graph and tensor paths configured in `network.yml` name nonempty `.pt2`
-   and `.safetensors` (or `.safetensor`) files inside `model/`.
+   and `.safetensors` (or `.safetensor`) files inside `model/`. For a multi-method
+   model, every entry in `methods` is checked, including CPU methods. Optional
+   OSPI `assets` must be nonempty files inside `model/`, within the configured
+   partition and mutually nonoverlapping. Generation additionally checks overlap
+   with the actual PTE, then binds all asset hashes for programming.
 5. `generated/`, `model/`, `nodes/`, `nodes_impl/` and `RTE/` exist.
 6. `app.py` parses as Python and explicitly imports `cmsis_stream` or a submodule.
 7. The cproject declares an existing linker script within its project directory.
@@ -40,6 +44,23 @@ at least one target set that selects only that project. CI builds every such
 target set, covering the existing Debug, Release and OSPI ProgramModel sets.
 
 ## Environment and build order
+
+An unfinished port retained outside the catalog can explicitly declare this
+README header policy:
+
+```yaml
+catalog: false
+ci:
+  mode: metadata_only
+  reason: A concrete explanation referring to the port checkpoint.
+```
+
+This requires a nonempty project `CHECKPOINT.md`. CI continues checking source
+structure, Python syntax/imports, schemas, model paths, linker scripts and target
+sets. Generated Stream files, model binaries, binary asset layout, generation and firmware
+builds are reported as **SKIP**, with the stated reason. They are not certified
+by a metadata-only pass. Merely setting `catalog: false` does not skip builds.
+Remove the explicit policy when a port is accepted and reproducible in CI.
 
 The Arm setup follows CMSIS-DSP's `runtest.yaml`: Ubuntu 22.04, Python 3.12,
 system dependencies, the CMSIS vcpkg action and Arm license activation.

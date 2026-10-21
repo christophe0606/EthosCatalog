@@ -19,10 +19,11 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import zlib
 
 from project_config import DEFAULT_SOLUTION, selected_project
-from quantized_model import compile_spec, load_quantized_program, sha256
+from quantized_model import cache_provenance, compile_spec, load_quantized_program, method_configs, model_assets, sha256
 
 PACK = "PyTorch::ExecuTorch"
 SYMBOL = "model_pte"
@@ -60,8 +61,8 @@ def executorch_pack(solution, solution_dir):
 def prepare_quantized_model(solution_file, project_file, network, force=False):
     """Call the selected project's quantizer on first use or explicit request."""
     project_dir = project_file.parent
-    weights_file = project_dir / network["safetensors"]
-    if force or not weights_file.is_file():
+    caches = method_configs(network)
+    if force or any(not (project_dir / settings["safetensors"]).is_file() for settings in caches.values()):
         script = project_dir / network["quantize"]
         if not script.is_file():
             raise ValueError(f"Project quantization script does not exist: {script}")
@@ -71,28 +72,57 @@ def prepare_quantized_model(solution_file, project_file, network, force=False):
                        cwd=project_dir, check=True)
 
 
-def export_model(program, spec):
+def export_model(program, spec, *, cpu_methods=(), inspection_callback=None):
+    """Lower one graph or named methods into one PTE.
+
+    CPU-only methods, such as a token embedding lookup, must be named explicitly.
+    Every other method must produce an Ethos delegate.
+    An optional callback can record the lowered edge graphs before serialization.
+    """
     # Register CPU quantize/dequantize out variants used at float boundaries.
     import executorch.kernels.quantized  # noqa: F401
     from executorch.backends.arm.ethosu import EthosUPartitioner
     from executorch.exir import EdgeCompileConfig, ExecutorchBackendConfig, to_edge_transform_and_lower
-    edge = to_edge_transform_and_lower(program, partitioner=[EthosUPartitioner(spec)],
+    methods = program if isinstance(program, dict) else {"forward": program}
+    cpu_methods = set(cpu_methods)
+    unknown = cpu_methods - methods.keys()
+    if unknown:
+        raise ValueError(f"Unknown CPU-only methods: {sorted(unknown)}")
+    partitioners = {name: [] if name in cpu_methods else [EthosUPartitioner(spec)]
+                    for name in methods}
+    edge = to_edge_transform_and_lower(methods, partitioner=partitioners,
                                       compile_config=EdgeCompileConfig(_check_ir_validity=False))
-    delegated = sum(node.op == "call_function" and "executorch_call_delegate" in str(node.target)
-                    for node in edge.exported_program().graph.nodes)
+    counts = {name: sum(node.op == "call_function" and "executorch_call_delegate" in str(node.target)
+                       for node in edge.exported_program(name).graph.nodes)
+              for name in edge.methods}
+    missing = sorted(name for name, count in counts.items() if not count and name not in cpu_methods)
+    if missing:
+        raise ValueError(f"No Ethos-U delegate was generated for methods: {missing}")
+    delegated = sum(counts.values())
     if not delegated:
         raise ValueError("No Ethos-U delegate was generated")
+    if inspection_callback is not None:
+        inspection_callback(edge)
     output = edge.to_executorch(ExecutorchBackendConfig(extract_delegate_segments=False))
     return bytes(output.buffer), delegated
 
 
 def components(pte, pack):
+    from executorch.exir._serialize._program import deserialize_pte_binary
     available = set(re.findall(r'Csub="([^"]+)"', next(pack.glob("*.pdsc")).read_text()))
-    family = {"aten": "Portable", "quantized_decomposed": "Quantized", "cortex_m": "Cortex-M"}
+    family = {"aten": "Portable", "quantized_decomposed": "Quantized", "cortex_m": "Cortex-M",
+              "dim_order_ops": "Portable"}
+    aliases = {"_softmax": "softmax", "_clone_dim_order": "clone_dim_order"}
+    program = deserialize_pte_binary(pte).program
+    required = {operator.name for plan in program.execution_plan for operator in plan.operators}
     selected, unknown = set(), []
-    for ns, op in sorted(set(re.findall(rb"(aten|quantized_decomposed|cortex_m)::(\w+)", pte))):
-        ns, op = ns.decode(), op.decode()
-        candidates = [f"{family[ns]} {op}", f"{family[ns]} {re.sub(r'_(per_tensor|per_channel|byte|copy)$', '', op)}"]
+    for name in sorted(required):
+        ns, _, op = name.partition("::")
+        if ns not in family:
+            unknown.append(name)
+            continue
+        candidates = [f"{family[ns]} {op}", f"{family[ns]} {aliases.get(op, op)}",
+                      f"{family[ns]} {re.sub(r'_(per_tensor|per_channel|byte|copy)$', '', op)}"]
         match = next((c for c in candidates if c in available), None)
         if match:
             selected.add(match)
@@ -104,7 +134,9 @@ def components(pte, pack):
 
 
 def c_array(pte, network):
-    prefix = '// Generated by scripts/create_ai_layer.py -- do not edit.\n#include "model_pte.h"\n'
+    prefix = ('// Copyright 2026 Arm Limited and/or its affiliates.\n'
+              '// SPDX-License-Identifier: Apache-2.0\n'
+              '// Generated by scripts/create_ai_layer.py -- do not edit.\n#include "model_pte.h"\n')
     if network["flash_ospi"]:
         if len(pte) > network["ospi"]["size"]:
             raise ValueError("PTE does not fit the project's OSPI partition")
@@ -113,13 +145,20 @@ def c_array(pte, network):
     return prefix + f'__attribute__((aligned(16), section(".rodata.model_pte"))) const unsigned char {SYMBOL}[] = {{\n  ' + ",\n  ".join(rows) + f'\n}};\nconst unsigned long {SYMBOL}_size = sizeof({SYMBOL});\n'
 
 
-def header(network, pte):
+def header(network, pte, assets=None):
     declaration = f"*const {SYMBOL}" if network["flash_ospi"] else f"{SYMBOL}[]"
-    return f'''// Generated by scripts/create_ai_layer.py -- do not edit.
+    asset_defines = "".join(
+        f'#define MODEL_ASSET_{name.upper()}_ADDRESS 0x{asset["address"]:08x}UL\n'
+        f'#define MODEL_ASSET_{name.upper()}_SIZE_BYTES {asset["size"]}U\n'
+        f'#define MODEL_ASSET_{name.upper()}_CRC32 0x{asset["crc32"]:08x}U\n'
+        for name, asset in (assets or {}).items())
+    return f'''// Copyright 2026 Arm Limited and/or its affiliates.
+// SPDX-License-Identifier: Apache-2.0
+// Generated by scripts/create_ai_layer.py -- do not edit.
 #pragma once
 #define MODEL_PTE_SIZE_BYTES {len(pte)}U
 #define MODEL_PTE_CRC32 0x{zlib.crc32(pte):08x}U
-#ifdef __cplusplus
+{asset_defines}#ifdef __cplusplus
 extern "C" {{
 #endif
 extern const unsigned char {declaration};
@@ -132,10 +171,18 @@ extern const unsigned long {SYMBOL}_size;
 
 def clayer(network, runtime, operators, version):
     import yaml
+    operator_components = []
+    for name in operators:
+        component = {"component": f"Machine Learning:ExecuTorch Operators:{name}"}
+        if name == "Portable gelu":
+            # This kernel explicitly handles IEEE infinities. Preserve those
+            # semantics when the application enables AC6 -ffast-math globally.
+            component["misc"] = [{"for-compiler": "AC6", "C-CPP": ["-fno-fast-math"]}]
+        operator_components.append(component)
     layer = {"type": "AI", "description": network["name"], "packs": [{"pack": f"{PACK}@{version}"}],
              "define": [{"ET_LOG_ENABLED": 0}], "add-path": ["."],
              "components": ([{"component": f"Machine Learning:ExecuTorch:{c}"} for c in runtime]
-                            + [{"component": f"Machine Learning:ExecuTorch Operators:{c}"} for c in operators]),
+                            + operator_components),
              "groups": [{"group": f"Model {network['name']}", "files": [{"file": f"./{name}"} for name in
                         ("model_pte.c", "model_pte.h")]}]}
     return "# Generated by scripts/create_ai_layer.py -- do not edit.\n" + yaml.safe_dump({"layer": layer}, sort_keys=False)
@@ -157,19 +204,30 @@ def main():
     version, pack = executorch_pack(solution, solution_file.parent)
     prepare_quantized_model(solution_file, project_file, network, args.quantize)
     spec = compile_spec(solution, project_file.parent, network)
-    program = load_quantized_program(spec.target, project_file.parent, network)
-    pte, delegated = export_model(program, spec)
+    if "methods" in network:
+        settings = method_configs(network)
+        programs = {name: load_quantized_program(spec.target, project_file.parent, method)
+                    for name, method in settings.items()}
+        cpu_methods = [name for name, method in settings.items() if not method.get("delegate", True)]
+        pte, delegated = export_model(programs, spec, cpu_methods=cpu_methods)
+    else:
+        program = load_quantized_program(spec.target, project_file.parent, network)
+        pte, delegated = export_model(program, spec)
     runtime, operators = components(pte, pack)
+    assets = model_assets(project_file.parent, network, len(pte))
+    model_source = c_array(pte, network)
+    model_header = header(network, pte, assets)
     # This directory is shared by the single selected project, never project-local.
     layer_dir = solution_file.parent / "ai_layer"
     layer_dir.mkdir(exist_ok=True)
     (layer_dir / "model.pte").write_bytes(pte)
-    (layer_dir / "model_pte.c").write_text(c_array(pte, network), encoding="utf-8", newline="\n")
-    (layer_dir / "model_pte.h").write_text(header(network, pte), encoding="utf-8", newline="\n")
+    (layer_dir / "model_pte.c").write_text(model_source, encoding="utf-8", newline="\n")
+    (layer_dir / "model_pte.h").write_text(model_header, encoding="utf-8", newline="\n")
     (layer_dir / "ai_layer.clayer.yml").write_text(clayer(network, runtime, operators, version), encoding="utf-8", newline="\n")
     report = {"project": project_file.relative_to(solution_file.parent).as_posix(),
               "config_sha256": sha256(config_file), "pte_sha256": hashlib.sha256(pte).hexdigest(),
-              "safetensors_sha256": sha256(project_file.parent / network["safetensors"]),
+              **cache_provenance(project_file.parent, network),
+              "assets": assets,
               "flash_ospi": network["flash_ospi"], "vela": network["vela"],
               "delegates": delegated, "operators": operators, "pte_bytes": len(pte)}
     (layer_dir / "generation.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -177,4 +235,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # FlatBuffer serialization invokes a compiler and cleans scratch files. Keep
+    # CLI scratch files inside this repository in restricted environments.
+    scratch = Path(__file__).resolve().parents[1] / "tmp"
+    scratch.mkdir(exist_ok=True)
+    tempfile.tempdir = str(scratch)
     main()

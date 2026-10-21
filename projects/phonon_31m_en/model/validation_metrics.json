@@ -1,0 +1,83 @@
+{
+  "upstream_runtime_parity": false,
+  "limitations": "Independent source-formula/state tests do not prove upstream waveform parity or perceptual quality.",
+  "silu_portable_formula": {
+    "max_absolute_error": 9.5367431640625e-07,
+    "rmse": 9.68857136740553e-08,
+    "normalized_rmse": 1.1870451219017557e-08,
+    "finite": true
+  },
+  "flow_streamed_vs_independent_batch": {
+    "max_absolute_error": 7.152557373046875e-07,
+    "rmse": 1.2807625182631455e-07,
+    "normalized_rmse": 1.4707773723353925e-07,
+    "finite": true
+  },
+  "mimi_streamed_vs_independent_offline": {
+    "max_absolute_error": 4.0531158447265625e-06,
+    "rmse": 1.8266501911057276e-07,
+    "normalized_rmse": 1.9500507101566536e-06,
+    "finite": true
+  },
+  "tokenizer_parity": [
+    {
+      "text": "Hello from Phonon.",
+      "equal": true,
+      "tokens": [
+        3248,
+        744,
+        949,
+        1286,
+        697,
+        860,
+        663
+      ]
+    },
+    {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "equal": true,
+      "tokens": [
+        776,
+        1417,
+        2600,
+        1657,
+        879,
+        2503,
+        1971,
+        662,
+        816,
+        665,
+        993,
+        3358,
+        1852,
+        663
+      ]
+    },
+    {
+      "text": "One, two, three!",
+      "equal": true,
+      "tokens": [
+        1510,
+        661,
+        845,
+        661,
+        948,
+        1367
+      ]
+    },
+    {
+      "text": "Could you read this?",
+      "equal": true,
+      "tokens": [
+        1547,
+        1196,
+        706,
+        669,
+        1057,
+        688,
+        691
+      ]
+    }
+  ],
+  "status": "source_formula_checks_pass"
+}

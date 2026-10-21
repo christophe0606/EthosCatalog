@@ -1,0 +1,439 @@
+{
+  "status": "benchmark_failure_realtime_and_numerical_checks; diagnostic_Dedicated_Release_retained",
+  "date": "2026-10-21",
+  "target": "Alif E8 DevKit / Cortex-M55 HP / Ethos-U85",
+  "release_build": "b-59",
+  "debug_session": "d-60",
+  "historical_initial_crc_proof": {
+    "release_build": "b-34",
+    "debug_session": "d-35"
+  },
+  "current_firmware_sha256": "b95ba7a4df1ad8d0548117dbf38679c82d89b8d36199355c0f519bb6e6b98b1f",
+  "complete_frame_comparisons": [
+    {
+      "mode": "Shared_Sram",
+      "flash_hz": 25000000,
+      "hyperram_hz": 25000000,
+      "build": "b-51",
+      "session": "d-54",
+      "mean_ms": 59345,
+      "realtime_factor": 741.8125,
+      "record": "shared_25mhz_result.json"
+    },
+    {
+      "mode": "Shared_Sram",
+      "flash_hz": 100000000,
+      "hyperram_hz": 100000000,
+      "build": "b-55",
+      "session": "d-56",
+      "mean_ms": 18483,
+      "realtime_factor": 231.0375,
+      "record": "shared_100mhz_result.json"
+    },
+    {
+      "mode": "Dedicated_Sram",
+      "flash_hz": 100000000,
+      "hyperram_hz": 100000000,
+      "build": "b-59",
+      "session": "d-60",
+      "mean_ms": 18459.5,
+      "realtime_factor": 230.74375,
+      "backend_ms": [
+        401,
+        404
+      ],
+      "outside_backend_ms": [
+        18057,
+        18057
+      ],
+      "record": "dedicated_100mhz_result.json"
+    }
+  ],
+  "gelu_correctness_exception": {
+    "source": "src/kernels/portable/cpu/op_gelu.cpp in the selected ExecuTorch Portable gelu component",
+    "AC6_component_option": "-fno-fast-math",
+    "scope": "Release retains global -O3 -ffast-math; this single-source option is required by measured correctness",
+    "evidence": "gelu_compiler_trial.json; generated cbuild component misc C/CPP options",
+    "trials": [
+      {
+        "build": "b-47",
+        "session": "d-48",
+        "option": "-fno-fast-math",
+        "hidden_max_abs_error": 0.000190377235,
+        "cache_max_abs_error": 0.000855207443
+      },
+      {
+        "build": "b-49",
+        "session": "d-50",
+        "option": "-fno-finite-math-only",
+        "hidden_max_abs_error": 0.0615944676,
+        "cache_max_abs_error": 0.000855207443,
+        "result": "rejected narrower option"
+      },
+      {
+        "build": "b-51",
+        "session": "d-52",
+        "option": "-fno-fast-math",
+        "hidden_max_abs_error": 0.0179824159,
+        "cache_max_abs_error": 0.111280769,
+        "result": "same-binary numerical divergence, unresolved"
+      },
+      {
+        "build": "b-51",
+        "session": "d-53",
+        "option": "-fno-fast-math",
+        "hidden_max_abs_error": 0.000190377235,
+        "cache_max_abs_error": 0.000855207443,
+        "execution": "diagnostic delegate14/15 pauses and coherent buffer captures; first_token_repeat_d53.json"
+      },
+      {
+        "build": "b-51",
+        "session": "d-54",
+        "option": "-fno-fast-math",
+        "hidden_max_abs_error": 0.000190377235,
+        "cache_max_abs_error": 0.000855207443,
+        "execution": "uninterrupted first token; first_token_repeat_d54.json"
+      }
+    ],
+    "quality_status": "No speech quality acceptance; d52 divergence remains unexplained and full audio-frame references are still under test"
+  },
+  "compiler_options": [
+    "-O3",
+    "-ffast-math"
+  ],
+  "flash_loader_sha256": "d3d92dca0ef035a294da17820caf0abc26a057d5c49f4db7fa43890cef82a6cc",
+  "flash": {
+    "jedec_id": "9d5b1b",
+    "extended_id": 1,
+    "capacity_bytes": 134217728,
+    "programmed_partition_bytes": 67108864,
+    "full_flash_operation": "Started 08:56:30 UTC. Client transport timed out; server retained probe until its deadline. Complete subsequent target CRC, rather than the timeout, establishes programming success.",
+    "crc_algorithm": "IEEE CRC32, every byte; aligned volatile 32-bit uncached reads consumed little endian",
+    "images": [
+      {
+        "name": "model.pte",
+        "address": "0xc0000000",
+        "bytes": 44678800,
+        "sha256": "a2f0a57d8b2f7d628aeeea7f391c2070445b215e4398fed967b6161363b90dd5",
+        "expected_crc32": "b8bb566c",
+        "observed_crc32": "b8bb566c"
+      },
+      {
+        "name": "voice_prefix.bin",
+        "address": "0xc3000000",
+        "bytes": 12582912,
+        "sha256": "45bcb0df2bdc153a47568847dafa7a3b14c68fdb7d3b73087ce0ad6ea51deb2b",
+        "expected_crc32": "9d869927",
+        "observed_crc32": "9d869927"
+      },
+      {
+        "name": "bos_embedding.bin",
+        "address": "0xc3c00000",
+        "bytes": 2048,
+        "sha256": "cd56ca9e3fcbb90c9f8d7bc995339a2aaeb0560d16617604f8113e3003d326b3",
+        "expected_crc32": "dc5d06f4",
+        "observed_crc32": "dc5d06f4"
+      }
+    ],
+    "historical_shared_pte": {
+      "name": "model.pte",
+      "address": "0xc0000000",
+      "bytes": 44675472,
+      "sha256": "cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7",
+      "expected_crc32": "a5f23dc5",
+      "observed_crc32": "a5f23dc5"
+    },
+    "dedicated_programming": {
+      "preparation_build": "b-57",
+      "preparation_session": "d-58",
+      "preparation_ready": 1,
+      "preparation_error": 0,
+      "run_file": "out/phonon-dedicated-pte-only.cbuild-run.yml",
+      "loader_sha256": "d3d92dca0ef035a294da17820caf0abc26a057d5c49f4db7fa43890cef82a6cc",
+      "scope": "PTE only, all 341 128 KiB sectors; unchanged voice prefix and BOS retained",
+      "tool_outcome": "Client transport timed out after 300 s; server allowed 600 s. Subsequent CMSIS load succeeded, then complete target CRC established physical programming success.",
+      "physical_crc32": {
+        "pte": "b8bb566c",
+        "voice_prefix": "9d869927",
+        "bos_embedding": "dc5d06f4"
+      },
+      "all_crc_match": true
+    }
+  },
+  "external_ram": {
+    "protocol": "HyperBus, octal",
+    "geometry_capacity_bytes_provisional": 67108864,
+    "verified_capacity_bytes": 67108864,
+    "bus_speed_requested_hz": 25000000,
+    "baud_register": 16,
+    "rxds_delay": 8,
+    "id0_raw": "0x0f830f83",
+    "id1_raw": "0x00010001",
+    "id0_register": "0x0f83",
+    "id1_register": "0x0001",
+    "interpretation": "ISSI manufacturer 3, HyperRAM type 1, 16 row bits + 9 column bits + 1 byte/word bit. Full 64 MiB address-dependent physical readback passed after cache clean/invalidate; fitted speed grade is unknown.",
+    "rx_fifo_counts_at_delay8": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "raw_words_at_delay8": [
+      [
+        65667,
+        8589187,
+        260247427,
+        260247427
+      ],
+      [
+        260247427,
+        260247427,
+        260247427,
+        260247427
+      ],
+      [
+        260247297,
+        251723777,
+        65537,
+        65537
+      ],
+      [
+        65537,
+        65537,
+        65537,
+        65537
+      ]
+    ],
+    "registers_before_first_xip_transaction": {
+      "ctrlr0": "0x01c0081f",
+      "xip_ctrl": "0x0304c008",
+      "xip_write_ctrl": "0x00267008",
+      "aes_control": "0x00000010",
+      "rxflr": 0,
+      "sr": 6
+    },
+    "first_xip_read": "CMSIS read_memory A0000000 length16 returned PROBE_WEDGED with DHCSR unreadable. Target had stopped at phonon_psram_test_begin, before the first application RAM write. Recovery through the minimal ProgramModel image is ongoing.",
+    "documentation": "ISSI IS66/67WVH64M8DALL/BLL Rev A1 2024-10-28, pages 19-24; CMSIS doc web/issi-com-cn/2a195d07d6f4",
+    "latest_verified_bus_hz": 100000000,
+    "latest_verified_baud_register": 4
+  },
+  "subsequent_inspection": {
+    "build": "b-41",
+    "recovery": "CMSIS flash programmed 703488 bytes of MRAM despite an AP discovery diagnostic; CMSIS Run g-43 then attach recovered live inspection without a physical reset.",
+    "stop": "phonon_psram_test_begin before first XIP transaction, explicit volatile gate",
+    "id0_raw": "0x0f830f83",
+    "cr0_raw_both_dies": [
+      "0x8f2f8f2f",
+      "0x8f2f8f2f"
+    ],
+    "cr0_interpretation": "Register 0x8f2f, initial latency bits=2 => 7 clocks, fixed latency bit=1 => 14 actual clocks; ISSI Rev A1 pages22,24.",
+    "ctrlr0": "0x01c0001f",
+    "master_bit_note": "Explicit pack ospi_mode_master called, but bit31 reads zero. Do not infer a missing call from this observation.",
+    "xip_ctrl": "0x0304c008",
+    "xip_write_ctrl": "0x00267008",
+    "status": "Full 64MiB address-dependent write/flush/readback passed after live wait7 override. All three methods subsequently loaded; first inference run in progress.",
+    "working_xip_ctrl": "0x0304e008",
+    "working_xip_write_ctrl": "0x00277008",
+    "controller_wait_field": 7,
+    "wait14_result": "Read completes, but write A53C965A read back starts3ca54eae rather than5a963ca5: failed roundtrip.",
+    "sentinel_roundtrip_passed": [
+      {
+        "address": "0xa0000000",
+        "words": [
+          "11223344",
+          "89abcdef",
+          "5aa59669",
+          "01234567"
+        ],
+        "read_bytes": "44332211efcdab896996a55a67452301"
+      },
+      {
+        "address": "0xa1000000",
+        "word": "10203040"
+      },
+      {
+        "address": "0xa2000000",
+        "word": "50607080"
+      },
+      {
+        "address": "0xa3000000",
+        "word": "90a0b0c0"
+      },
+      {
+        "address": "0xa3fffffc",
+        "word": "deadbeef"
+      }
+    ],
+    "full_capacity_test": {
+      "bytes": 67108864,
+      "pattern": "word[i]=(i*0x9e3779b9)^0xa53c965a",
+      "cache_operation": "SCB_CleanInvalidateDCache after all writes and before readback",
+      "result": "PASS: breakpoint at verified_bytes store reached after complete comparison loop, error_address0"
+    },
+    "clock_readback": {
+      "cpu_hz": 400000000,
+      "axi_hz": 400000000,
+      "timer_hz": 1000,
+      "ospi0_baud": 16,
+      "ospi1_baud": 16,
+      "bus_hz_from_axi_divisor": 25000000,
+      "npu_hg_clock_independently_verified": false
+    }
+  },
+  "reset_startup_recheck": {
+    "build": "b-44",
+    "debug_session": "d-45",
+    "configuration": "No gate and no debugger register overrides. Source reads both CR0 registers and derives controller initial latency.",
+    "crc_all_images": "PASS, same complete CRC values as b-34",
+    "ram_verified_bytes": 67108864,
+    "cr0_raw_both_dies": [
+      "0x8f2f8f2f",
+      "0x8f2f8f2f"
+    ],
+    "derived_wait_cycles": 7,
+    "first_token": {
+      "token": 3248,
+      "position": 125,
+      "embedding_max_absolute_error": 0,
+      "hidden_max_absolute_error": 4.61525488,
+      "cache_last_row_max_absolute_error": 8.19478226,
+      "npu_calls": 24,
+      "raw_npu_cycles": 231389250,
+      "pmu_overflow": 0
+    },
+    "prefix_check": "Last32 copied prefix bytes read via CMSIS at A3101800 exactly match source raw bytes e84b73bfecc678be5afba5bc35f5543bb824f1bcb67694be9c80573e2a1b97bd.",
+    "result": "Runtime mismatch starts within first backbone before recurrence; first-delegate isolation ongoing. This is a fresh firmware reset/startup, not a claimed physical power-cycle test."
+  },
+  "inference": {
+    "executed": true,
+    "timings_available": true,
+    "numerical_quality_accepted": false,
+    "mode": "Shared_Sram / 512 Flow context",
+    "firmware_sha256": "b4bebd9b3c12a17a4f0e52e797e3e2eb0ad8fd4e4081ee160eb7c9d815ecda29",
+    "execution": "CMSIS Run g-43 and attach, b-41, live initial-latency override7",
+    "diagnostic_prefill_ticks": 205871,
+    "prefix_copy_ticks": 1211,
+    "caller_inputs_allocation_bytes_including_alignment": 14694208,
+    "planned_arena_bytes": 38801424,
+    "frames": [
+      {
+        "case": 0,
+        "frame": 0,
+        "ticks": 59115,
+        "npu_cycles": 517665730,
+        "calls": 61,
+        "eos": -7.049176,
+        "uninterrupted": false
+      },
+      {
+        "case": 0,
+        "frame": 1,
+        "ticks": 59127,
+        "npu_cycles": 517665777,
+        "calls": 61,
+        "eos": -6.203836,
+        "uninterrupted": true
+      },
+      {
+        "case": 0,
+        "frame": 2,
+        "ticks": 59118,
+        "npu_cycles": 517665866,
+        "calls": 61,
+        "eos": -6.703685,
+        "uninterrupted": false
+      }
+    ],
+    "first_two_frames_reference_max_absolute_error": {
+      "hidden": 4.9876647,
+      "latent": 8.61599255,
+      "eos": 8.89663315,
+      "pcm": 0.47968328
+    },
+    "finite_checks": "Bitwise exponent checks passed for hidden, latent, EOS and all1920 PCM samples before conversion, despite -ffast-math.",
+    "reference_eos_first_two": [
+      -11.88991928100586,
+      -15.100468635559082
+    ],
+    "result": "FAIL diagnostic baseline: 59127 ms per80ms audio (RTF739.0875); material numerical differences remain under investigation. No final utterance, UART tokenization or physical playback proof."
+  },
+  "current_release_build": "b-44",
+  "current_debug_session": "d-46",
+  "first_delegate_isolation": {
+    "model_sha256": "cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7",
+    "token": 3248,
+    "position": 125,
+    "input_q16": "PASS all512exact",
+    "scratch_qkv_q16": "1536elements;41differby1LSBonly;maxfloaterror0.0003248546",
+    "mask": "PASS canonical0/1;126true at387..512",
+    "backend_output_copy": "PASS QKV3072bytes andmask513bytes bitexacttoNPU scratch afterexplicitdebugcacheclean",
+    "causal_host_replay": "CapturedQKV thenrestPTQ: hiddenmax0.00023043,cachelastrowmax0.00105774; firstNPUroundingdoesnotexplainlargererror",
+    "next": "Seconddelegateattentioninput captured; comparing CPUattention vsPTQ"
+  },
+  "current_model_sha256": "a2f0a57d8b2f7d628aeeea7f391c2070445b215e4398fed967b6161363b90dd5",
+  "dedicated_memory_and_routing": {
+    "memory": {
+      "method_pool_address": "0x02060000",
+      "method_pool_allocated_bytes": 262144,
+      "method_peak_bytes": 165992,
+      "slow_temp_pool_address": "0x020a0000",
+      "slow_temp_pool_allocated_bytes": 1572864,
+      "slow_temp_peak_bytes": 1231360,
+      "fast_scratch_address": "0x02000000",
+      "fast_scratch_allocated_bytes": 393216,
+      "strong_backend_globals": "ethosu_fast_scratch and ethosu_fast_scratch_size defined by app_main.o",
+      "SRAM0_build_used_bytes": 2228240,
+      "SRAM0_capacity_bytes": 4194304,
+      "SRAM0_unallocated_bytes": 1966064,
+      "internal_RW_RAM_build_bytes": 147412,
+      "internal_heap_regions_bytes": 131072,
+      "internal_stack_region_bytes": 32768,
+      "shared_planned_arena_bytes": 38801424,
+      "external_inputs_bytes": 14694208,
+      "total_external_allocation_including_alignment_bytes": 53495648,
+      "external_capacity_bytes": 67108864,
+      "external_unallocated_bytes": 13613216,
+      "application_qualification": "Linker and allocator measurements describe the diagnostic harness. UART/audio/LCD final application memory and cycles have not been accepted. Other device SRAM banks are unused in this build."
+    },
+    "npu_runtime_routing": {
+      "register_base": "0x49042000",
+      "inspection": "Typed EthosDriver.dev.reg after first NPU completed; pre-command reset values were excluded",
+      "REGIONCFG_word": "0x00000013",
+      "QCONFIG_word": 2,
+      "MEM_ATTR_words": [
+        0,
+        0,
+        36,
+        36
+      ],
+      "region_attribute_selection": [
+        3,
+        0,
+        1
+      ],
+      "interpretation": "Region0 uses MEM_ATTR3 AXI_EXT; slow region1 and fast region2 use MEM_ATTR0/1 AXI_SRAM. All 61 delegated input/output records use slow region1.",
+      "first_delegate_base0": "0xc21bffe0",
+      "first_delegate_base0_bytes": 730160,
+      "first_delegate_base1": "0x020a0000",
+      "first_delegate_base1_bytes": 5152,
+      "first_delegate_base2": "0x02000000",
+      "first_delegate_base2_bytes": 393216
+    }
+  },
+  "benchmark_conclusion": "Outside-backend wall time alone exceeds 80 ms by over 225 times, even allowing 61 ms tick quantization uncertainty. More NPU fast SRAM cannot make this current CPU graph/state implementation realtime. This is a failure of the measured port, not proof that every possible rewrite is impossible.",
+  "post_review_runtime_handoff": {
+    "recorded_at": "2026-10-21T11:53:39Z",
+    "firmware_build": "b-59",
+    "measured_debug_session": "d-60",
+    "final_execution_job": "r-62 CMSIS load_and_run",
+    "firmware_sha256": "b95ba7a4df1ad8d0548117dbf38679c82d89b8d36199355c0f519bb6e6b98b1f",
+    "debugger_caveat": "Final d60 DAP responsiveness check timed out. Restart timed out; stopping succeeded. d61 CMSIS Load succeeded but debugger had no responsive threads. Cleared stale debug session, then used normal CMSIS load_and_run. Cause of DAP adapter failure is unresolved; it is not classified as a proven firmware hang.",
+    "startup_uart": [
+      "Phonon CRC: PTE=b8bb566c voice=9d869927 BOS=dc5d06f4",
+      "Phonon clocks: CPU=400000000 AXI=400000000 timer=1000 OSPI0baud=4 OSPI1baud=4"
+    ],
+    "first_frame_uart": "Phonon case=0 frame=0 ticks=18494 NPU=139372699 calls=61 EOS=-11.228938",
+    "scope": "Execution handoff check only; does not replace two-frame d60 timing or establish numerical/long-run stability.",
+    "final_state": "CMSIS Run active, diagnostic Release executing, owned COM7 closed; no pending programming/build operation."
+  }
+}

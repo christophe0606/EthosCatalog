@@ -1,0 +1,37 @@
+[
+  {
+    "file": "model.q8.gguf",
+    "source": "https://huggingface.co/gradium/phonon-31m-en/resolve/52433c46975bfa13144c56204c9f4ee1c5b148aa/model.q8.gguf",
+    "bytes": 64512352,
+    "sha256": "a7d9aad2cd6dc66473f24a08bc6d2939030ef4d751ef82349361fbef3272dbae",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "config.json",
+    "source": "https://huggingface.co/gradium/phonon-31m-en/resolve/52433c46975bfa13144c56204c9f4ee1c5b148aa/config.json",
+    "bytes": 2851,
+    "sha256": "7062ea376e6b158543c8abec8e5af67df171c49ad70eb7e2a0fb25c16f265e06",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "default-voice.safetensors",
+    "source": "https://huggingface.co/gradium/phonon-31m-en/resolve/52433c46975bfa13144c56204c9f4ee1c5b148aa/default-voice.safetensors",
+    "bytes": 256136,
+    "sha256": "f739e8c4c76ee7f92e7c94a82002748c8cd22e99582ac49f7b9b94cd63786e18",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tokenizer.json",
+    "source": "https://huggingface.co/gradium/phonon-31m-en/resolve/52433c46975bfa13144c56204c9f4ee1c5b148aa/tokenizer.json",
+    "bytes": 277967,
+    "sha256": "691a00068fa7b989f2f3e5ae5daa2d1a5bb319f2d5360deafcfb19a8bb6e7936",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tokenizer.model",
+    "source": "https://huggingface.co/gradium/phonon-31m-en/resolve/52433c46975bfa13144c56204c9f4ee1c5b148aa/tokenizer.model",
+    "bytes": 65045,
+    "sha256": "82e4572006d64d483317074c22c368e87779640b6f3a9dcd07b7caae32b030ce",
+    "license": "Apache-2.0"
+  }
+]

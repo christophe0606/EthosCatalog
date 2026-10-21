@@ -1,3 +1,5 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Exercise CI selection, project validation, failure reports and build isolation."""
 from pathlib import Path
 import json
@@ -132,6 +134,55 @@ class CIProjects(unittest.TestCase):
         self.project()
         ci.check_project(self.root, "demo", self.config, self.report)
         self.assertEqual(self.errors(), "")
+
+    def metadata_only(self, directory):
+        (directory / "README.md").write_text(
+            "---\ncategory: speech\ndescription: Experimental port.\ncatalog: false\n"
+            "ci:\n  mode: metadata_only\n  reason: Hardware feasibility failed; see CHECKPOINT.md.\n---\n")
+        (directory / "CHECKPOINT.md").write_text("Unaccepted hardware results and reproduction instructions.\n")
+
+    def test_metadata_only_retains_validation_and_explicitly_skips_binaries(self):
+        directory = self.project()
+        self.metadata_only(directory)
+        (directory / "model/graph.pt2").unlink()
+        (directory / "model/weights.safetensors").unlink()
+        for path in (directory / "generated").iterdir():
+            path.unlink()
+        (directory / "generated").rmdir()
+        ci.check_project(self.root, "demo", self.config, self.report)
+        self.assertEqual(self.errors(), "")
+        self.assertTrue(any(c.get("skipped") for c in self.report.data["checks"]))
+        (directory / "linker.sct.src").unlink()
+        ci.check_project(self.root, "demo", self.config, self.report)
+        self.assertIn("linker.sct.src", self.errors())
+        self.assertIn("SKIP", self.report.markdown()[0].read_text())
+
+    def test_metadata_only_requires_exclusion_checkpoint_and_valid_reason(self):
+        directory = self.project()
+        self.metadata_only(directory)
+        readme = directory / "README.md"
+        original = readme.read_text()
+        for invalid in (original.replace("catalog: false", "catalog: true"),
+                        original.replace("mode: metadata_only", "mode: disabled"),
+                        original.replace("reason: Hardware feasibility failed; see CHECKPOINT.md.", "reason: ''")):
+            readme.write_text(invalid)
+            with self.assertRaises(ValueError):
+                ci.build_exclusion(self.root, "demo")
+        readme.write_text(original)
+        (directory / "CHECKPOINT.md").unlink()
+        with self.assertRaisesRegex(ValueError, "CHECKPOINT"):
+            ci.build_exclusion(self.root, "demo")
+
+    def test_catalog_false_alone_still_builds_and_metadata_only_runs_no_commands(self):
+        directory = self.project()
+        readme = directory / "README.md"
+        readme.write_text(readme.read_text().replace("category: audio", "catalog: false\ncategory: audio"))
+        self.assertIsNone(ci.build_exclusion(self.root, "demo"))
+        self.metadata_only(directory)
+        with patch.object(ci, "command") as command:
+            ci.build(self.root, ["demo"], self.report)
+        command.assert_not_called()
+        self.assertTrue(self.report.data["checks"][-1].get("skipped"))
 
     def test_reports_independent_validation_errors_together(self):
         directory = self.project()

@@ -1,3 +1,5 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Check network configuration structure, OSPI conditions and validator CLI."""
 from contextlib import redirect_stderr, redirect_stdout
 from copy import deepcopy
@@ -34,6 +36,41 @@ class NetworkSchema(unittest.TestCase):
         for path, document in zip(self.paths, self.documents):
             with self.subTest(path=path):
                 self.assertEqual(self.errors(document), [])
+
+    def test_named_methods_replace_single_graph_and_tensors(self):
+        document = deepcopy(self.ospi)
+        network = document["network"]
+        del network["graph"]
+        del network["safetensors"]
+        network["methods"] = {
+            "backbone": {"graph": "model/backbone.pt2", "safetensors": "model/backbone.safetensors"},
+            "text_embedding": {"graph": "model/text.pt2", "safetensors": "model/text.safetensors", "delegate": False},
+        }
+        self.assertEqual(self.errors(document), [])
+        for key, value in (("graph", "model/ambiguous.pt2"), ("safetensors", "model/ambiguous.safetensors")):
+            invalid = deepcopy(document)
+            invalid["network"][key] = value
+            self.assertTrue(self.errors(invalid))
+        for methods in ({}, {"bad-name": network["methods"]["backbone"]},
+                        {"bad": {"graph": "model/x.pt2"}},
+                        {"bad": {**network["methods"]["backbone"], "delegate": "false"}}):
+            invalid = deepcopy(document)
+            invalid["network"]["methods"] = methods
+            self.assertTrue(self.errors(invalid))
+
+    def test_assets_require_ospi_and_valid_entries(self):
+        document = deepcopy(self.ospi)
+        asset = {"file": "model/voice.bin", "address": 0xC3000000}
+        document["network"]["assets"] = {"voice_prefix": asset}
+        self.assertEqual(self.errors(document), [])
+        invalid = deepcopy(document)
+        invalid["network"]["flash_ospi"] = False
+        self.assertTrue(self.errors(invalid))
+        for assets in ({}, {"bad-name": asset}, {"voice": {"file": "model/voice.bin"}},
+                       {"voice": {**asset, "address": -1}}, {"voice": {**asset, "extra": True}}):
+            invalid = deepcopy(document)
+            invalid["network"]["assets"] = assets
+            self.assertTrue(self.errors(invalid))
 
     def test_required_fields(self):
         records = [

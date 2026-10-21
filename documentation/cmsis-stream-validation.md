@@ -318,3 +318,36 @@ priority 40. Two microphone hardware overflows appeared across debugger halts;
 these snapshots do not measure uninterrupted operation. Physical panel
 appearance and touch operation were not directly assessed. No breakpoints
 remained, COM5 was closed, and the updated MRAM firmware was left running.
+
+## Office DevKit-E8 startup failure - October 21, 2026
+
+The initial spectrum UI appeared but capture, animation and touch handling did
+not start. Live debugging found `app_result == pipeline_error == -401`, zero
+NPU interrupts, and both gain self-test completion flags clear. Only the
+application, idle and timer threads existed. The shared `ai_layer/` generation
+record identified the object-detection YOLO model; the flashed firmware's
+`model_pte_size` confirmed its 407,440-byte size. The gain template was loading
+that model instead of its own network.
+
+Regenerated the shared layer with
+`uv run scripts/create_ai_layer.py --project template_mram`, selected
+`DevKit-E8@Release`, then built and loaded only `template_mram` through
+`cmsis_action` (build **b-9**, load-and-debug **d-10**). The environment passed
+full schema validation: CMSIS-Toolbox 2.15.0, CMake 3.31.12, Ninja 1.13.2 and
+AC6 6.24.0 were present. The corrected model is 2,816 bytes with one Ethos-U
+delegate and CPU quantize/dequantize boundary operators. No firmware source
+change was required. The existing SRAM1 address edit was retained.
+
+On the office board, `gain_test_passed == gain_benchmark_complete == 1`,
+`app_result == pipeline_error == stream_stats.error == 0`, and both Stream
+threads were present. A live snapshot recorded 1,887 audio blocks/spectrum
+frames, 405 presented frames, 405 LCD events sent/received, no dropped LCD
+events and no audio/LCD deadline misses. NPU interrupts advanced from 1,898
+to 4,349 between inspections. One microphone overflow was recorded across
+debugger halts; this is not an uninterrupted capture measurement.
+
+The user confirmed that LCD animation and dragging the scale slider both work.
+The debugger also observed `spectrum_display_gain == 0.794840276` after the
+slider interaction, from its initial value of 1.0. No breakpoints remained and
+the firmware was resumed and left running. This establishes the cause of this
+startup failure; it does not establish a hardware difference between boards.

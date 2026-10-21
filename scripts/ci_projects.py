@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
 """Select, validate and sequentially build changed catalog projects in CI."""
 from __future__ import annotations
@@ -42,13 +43,15 @@ class Report:
     def save(self):
         self.path.write_text(json.dumps(self.data, indent=2) + "\n", encoding="utf-8")
 
-    def add(self, project, check, errors=(), log=None):
+    def add(self, project, check, errors=(), log=None, skipped=None):
         errors = list(errors)
         self.data["checks"].append({
             "project": project, "check": check, "errors": errors, "log": log,
+            **({"skipped": skipped} if skipped else {}),
         })
         self.save()
-        print(f"{'FAIL' if errors else 'PASS'} {project}: {check}", flush=True)
+        status = "FAIL" if errors else "SKIP" if skipped else "PASS"
+        print(f"{status} {project}: {check}" + (f" ({skipped})" if skipped else ""), flush=True)
         for error in errors:
             print(f"  {error}", flush=True)
         return not errors
@@ -74,8 +77,9 @@ class Report:
                         rows += ["", "</details>", ""]
         rows += ["## Checks", ""]
         for item in self.data["checks"]:
-            status = "FAIL" if item["errors"] else "PASS"
-            rows.append(f"- {status}: {item['project']} / {item['check']}")
+            status = "FAIL" if item["errors"] else "SKIP" if item.get("skipped") else "PASS"
+            reason = f" — {item['skipped']}" if item.get("skipped") else ""
+            rows.append(f"- {status}: {item['project']} / {item['check']}{reason}")
         output = self.directory / "validation-errors.md"
         output.write_text("\n".join(rows) + "\n", encoding="utf-8")
         return output, bool(failures)
@@ -168,6 +172,27 @@ def build_targets(config, cproject):
     return list(dict.fromkeys(targets))
 
 
+def build_exclusion(root, name):
+    """An explicit experimental checkpoint can retain source without CI binaries."""
+    from update_catalog import _read_header
+    project = root / "projects" / name
+    header = _read_header(project / "README.md")
+    policy = header.get("ci")
+    if policy is None:
+        return None
+    if (not isinstance(policy, dict) or set(policy) != {"mode", "reason"}
+            or policy["mode"] != "metadata_only"
+            or not isinstance(policy["reason"], str) or not policy["reason"].strip()):
+        raise ValueError("README ci must contain mode: metadata_only and a nonempty reason")
+    if header.get("catalog") is not False:
+        raise ValueError("Metadata-only CI requires catalog: false")
+    checkpoint = project / "CHECKPOINT.md"
+    if (not checkpoint.resolve().is_relative_to(project.resolve())
+            or not checkpoint.is_file() or not checkpoint.read_text(encoding="utf-8").strip()):
+        raise ValueError("Metadata-only CI requires a nonempty project CHECKPOINT.md")
+    return policy["reason"].strip()
+
+
 def check_project(root, name, config, report):
     import yaml
     import validate_networks as networks
@@ -175,6 +200,7 @@ def check_project(root, name, config, report):
     from update_catalog import read_metadata
 
     project = root / "projects" / name
+    exclusion = None
 
     def check(label, operation):
         try:
@@ -182,11 +208,6 @@ def check_project(root, name, config, report):
         except (OSError, ValueError, KeyError, TypeError, SyntaxError, yaml.YAMLError) as error:
             errors = [str(error)]
         return report.add(name, label, errors)
-
-    check("Folder hierarchy", lambda: (f"Missing directory: {directory}/" for directory in DIRECTORIES
-                                       if not (project / directory).is_dir()))
-    check("CMSIS Stream files", lambda: (f"Missing file: {file}" for file in STREAM_FILES
-                                        if not (project / file).is_file()))
 
     def readme():
         path = project / "README.md"
@@ -198,6 +219,20 @@ def check_project(root, name, config, report):
         return []
 
     check("README YAML header", readme)
+    try:
+        exclusion = build_exclusion(root, name)
+        report.add(name, "CI build policy")
+    except (OSError, ValueError, TypeError, yaml.YAMLError) as error:
+        report.add(name, "CI build policy", [str(error)])
+
+    check("Folder hierarchy", lambda: (f"Missing directory: {directory}/" for directory in DIRECTORIES
+                                       if not (exclusion and directory == "generated")
+                                       and not (project / directory).is_dir()))
+    check("CMSIS Stream files", lambda: (f"Missing file: {file}" for file in STREAM_FILES
+                                        if not (exclusion and file.startswith("generated/"))
+                                        and not (project / file).is_file()))
+    if exclusion:
+        report.add(name, "Generated CMSIS Stream files", skipped=exclusion)
 
     def app():
         tree = ast.parse((project / "app.py").read_text(encoding="utf-8-sig"))
@@ -219,17 +254,39 @@ def check_project(root, name, config, report):
     check("network.yml schema", network)
 
     def caches():
+        from quantized_model import method_configs
         network = networks.load_network(project / "model/network.yml")
         errors = []
-        for key, suffixes in (("graph", {".pt2"}), ("safetensors", {".safetensors", ".safetensor"})):
-            path = (project / network[key]).resolve()
-            if not path.is_relative_to((project / "model").resolve()):
-                errors.append(f"network.{key} must refer to a file inside model/")
-            elif path.suffix not in suffixes or not path.is_file() or path.stat().st_size == 0:
-                errors.append(f"network.{key} must name an existing nonempty {' or '.join(sorted(suffixes))} file: {network[key]}")
+        for name, settings in method_configs(network).items():
+            for key, suffixes in (("graph", {".pt2"}), ("safetensors", {".safetensors", ".safetensor"})):
+                path = (project / settings[key]).resolve()
+                if not path.is_relative_to((project / "model").resolve()):
+                    errors.append(f"network.{name}.{key} must refer to a file inside model/")
+                elif path.suffix not in suffixes or (not exclusion and (
+                        not path.is_file() or path.stat().st_size == 0)):
+                    errors.append(f"network.{name}.{key} must name an existing nonempty {' or '.join(sorted(suffixes))} file: {settings[key]}")
         return errors
 
-    check("Saved model graph and tensors", caches)
+    check("Saved model paths" if exclusion else "Saved model graph and tensors", caches)
+
+    def assets():
+        from quantized_model import model_assets
+        network = networks.load_network(project / "model/network.yml")
+        # The generated PTE is unavailable at this stage. Generation additionally
+        # checks overlap with its actual size before publishing the shared layer.
+        model_assets(project, network, 0)
+        return []
+
+    if exclusion:
+        def asset_paths():
+            network = networks.load_network(project / "model/network.yml")
+            return [f"Model asset {name} must remain inside model/" for name, asset in
+                    network.get("assets", {}).items() if not (project / asset["file"]).resolve()
+                    .is_relative_to((project / "model").resolve())]
+        check("Model asset paths", asset_paths)
+        report.add(name, "Generated model binaries and asset layout", skipped=exclusion)
+    else:
+        check("Model assets", assets)
     for path in sorted((project / "model").glob("*benchmark*.y*ml")):
         if path.suffix in {".yml", ".yaml"}:
             check(f"{path.name} schema", lambda path=path: benchmarks.validation_errors(
@@ -280,6 +337,19 @@ def command(root, report, project, label, args):
 
 def build(root, names, report):
     config = solution(root)
+    enabled = []
+    for name in names:
+        try:
+            reason = build_exclusion(root, name)
+        except (OSError, ValueError, TypeError) as error:
+            report.add(name, "CI build policy", [str(error)])
+            continue
+        if reason:
+            report.add(name, "Firmware generation and builds", skipped=reason)
+        else:
+            enabled.append(name)
+    if not enabled:
+        return
     for label, args in (
         ("CMSIS-Toolbox version", ["cbuild", "--version"]),
         ("Build environment", ["cbuild", "list", "environment"]),
@@ -295,7 +365,7 @@ def build(root, names, report):
     if not command(root, report, "Environment", "ExecuTorch runtime pack",
                    ["cpackget", "add", "-a", pins[0]]):
         return
-    for name in names:
+    for name in enabled:
         try:
             cproject = project_file(root, name, config)
             targets = build_targets(config, cproject)

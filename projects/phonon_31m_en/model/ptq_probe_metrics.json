@@ -1,0 +1,42 @@
+[
+  {
+    "latent": {
+      "max_absolute_error": 8.457213401794434,
+      "rmse": 1.5769460201263428,
+      "normalized_rmse": 0.990686186145817,
+      "finite": true
+    },
+    "eos": {
+      "max_absolute_error": 10.656444549560547,
+      "rmse": 10.656444549560547,
+      "normalized_rmse": 0.9000194113918291,
+      "finite": true
+    },
+    "pcm": {
+      "max_absolute_error": 0.01651507057249546,
+      "rmse": 0.0024917067494243383,
+      "normalized_rmse": 3.038229980613957,
+      "finite": true
+    }
+  },
+  {
+    "latent": {
+      "max_absolute_error": 5.880889892578125,
+      "rmse": 1.3148747682571411,
+      "normalized_rmse": 0.9984350866463956,
+      "finite": true
+    },
+    "eos": {
+      "max_absolute_error": 14.698277473449707,
+      "rmse": 14.698277473449707,
+      "normalized_rmse": 0.9751972412483983,
+      "finite": true
+    },
+    "pcm": {
+      "max_absolute_error": 0.02615336887538433,
+      "rmse": 0.005853118374943733,
+      "normalized_rmse": 1.0056650827648062,
+      "finite": true
+    }
+  }
+]

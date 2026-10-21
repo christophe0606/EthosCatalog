@@ -1,0 +1,51 @@
+network:
+  name: Phonon 31m English q8 (experimental feasibility failure)
+  model: model/model.py
+  quantize: model/export_stages.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    error:
+      status: realtime_failed_quality_unaccepted
+      source: model.q8.gguf
+      source_revision: 52433c46975bfa13144c56204c9f4ee1c5b148aa
+      source_quantization: Q8_0 transformer weights and BF16 remaining tensors
+      source_vs_original_float:
+        report: model/source_quantization_metrics.json
+        frames: 16
+        mode: teacher_forced_early_frames
+        latent_mean_normalized_rmse: 0.007353391974456358
+        pcm_mean_normalized_rmse: 0.05249241880625652
+      ethos_ptq:
+        report: model/staged_metrics.json
+        activations: int16_linear_and_conv_float_attention_and_state
+        weights: int8
+        calibration: complete_generated_English_default_voice_prompts_utterances_and_EOS
+        quality_accepted: false
+  methods:
+    backbone:
+      graph: model/backbone_quantized.pt2
+      safetensors: model/backbone_quantized.safetensors
+    synthesize:
+      graph: model/synthesize_quantized.pt2
+      safetensors: model/synthesize_quantized.safetensors
+    text_embedding:
+      graph: model/text_embedding_quantized.pt2
+      safetensors: model/text_embedding_quantized.safetensors
+      delegate: false
+  flash_ospi: true
+  assets:
+    voice_prefix:
+      file: model/weights/voice_prefix.bin
+      address: 0xC3000000
+    bos_embedding:
+      file: model/weights/bos_embedding.bin
+      address: 0xC3C00000
+  ospi:
+    address: 3221225472
+    size: 67108864
+    pname: M55_HP
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Dedicated_Sram

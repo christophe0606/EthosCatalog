@@ -5,7 +5,6 @@ on Ethos NPU.
 
 This project is current only targeting Alif E8 DevKit.
 
-
 ## Mandatory Repository guidelines
 
 * This repository uses executorch. Network saved in .pt2 / .safetensor format are loaded from pytorch and use the executorch flow to be compiled by vela.
@@ -31,3 +30,5 @@ Only one project must be enabled when building the solution.
     ask the user if you can download and install the external project somewhere outside of this project and then use command line arguments to give the path to this project where it is needed
 
 * Demos using LCD uses the LCD in landscape mode
+
+* You are not allowed to modify files from imported libraries and packs. You can only modify files from this project.

@@ -1,0 +1,6 @@
+weights/
+*.safetensors
+*.pt2
+*.pte
+artifacts/
+*.log

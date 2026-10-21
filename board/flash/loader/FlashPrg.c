@@ -21,7 +21,10 @@
 #include "ospi_private.h"
 
 #define BASE 0xC0000000UL
-#define LIMIT 0x02000000UL
+#define LIMIT 0x04000000UL
+#define ERASE_SECTOR_BYTES 131072UL
+#define PROGRAM_BLOCK_BYTES 4096UL
+#define PHYSICAL_PAGE_BYTES 256UL
 #define SPI ((ssi_regs_t *)0x83002000UL)
 #define AES ((aes_regs_t *)0x83003000UL)
 #define REG(a) (*(volatile uint32_t *)(a))
@@ -29,6 +32,7 @@
 
 /* Persist after a returned failure for debugger inspection; no console I/O. */
 volatile uint32_t loader_stage, loader_error, loader_id, loader_status;
+volatile uint32_t loader_jedec_id, loader_extended_id;
 volatile uint32_t loader_erase_mode;
 volatile uint32_t loader_protocol_mode;
 /* Two uninterrupted CPU snapshots: end of Init and entry to EraseSector.
@@ -243,6 +247,7 @@ int Init(unsigned long address, unsigned long clock, unsigned long function)
     (void)clock;
     loader_stage = 1;
     loader_error = loader_id = loader_status = 0;
+    loader_jedec_id = loader_extended_id = 0;
     loader_protocol_mode = 0;
     for (uint32_t i = 0; i < 8; ++i) loader_trace[i] = 0;
     if (address < BASE || address >= BASE + LIMIT) return error(1);
@@ -271,10 +276,20 @@ int Init(unsigned long address, unsigned long clock, unsigned long function)
     /* E8 has two 8-bit RXDS delay fields (sys_ctrl_aes.h). */
     AES->aes_rxds_delay = 0x0B0B;
     loader_stage = 2;
-    uint8_t id[8];
-    if (receive(0x9E, 8, 0, id, 0)) return 1;
-    for (uint32_t i = 0; i < 8; ++i) loader_id = (loader_id << 1) | ((id[i] >> 1) & 1U);
-    if (loader_id != 0x9D) return error(2);
+    uint8_t id[48], decoded[6] = {0};
+    if (receive(0x9E, sizeof(id), 0, id, 0)) return 1;
+    for (uint32_t byte = 0; byte < sizeof(decoded); ++byte) {
+        for (uint32_t bit = 0; bit < 8; ++bit) {
+            decoded[byte] = (uint8_t)((decoded[byte] << 1) | ((id[byte * 8 + bit] >> 1) & 1U));
+        }
+    }
+    loader_id = decoded[0];
+    loader_jedec_id = ((uint32_t)decoded[0] << 16) | ((uint32_t)decoded[1] << 8) | decoded[2];
+    loader_extended_id = decoded[4];
+    /* Expansion beyond the former 32 MiB partition is permitted only for
+     * the verified 128 MiB IS25WX01G addressing/program/erase command set.
+     */
+    if (loader_jedec_id != 0x9D5B1BU || loader_extended_id != 1U) return error(2);
     loader_stage = 3;
     if (set_config(7, 0xFD) || set_config(1, 16) || set_config(0, 0xE7)) return 1;
     loader_protocol_mode = 1;
@@ -307,7 +322,8 @@ int UnInit(unsigned long function)
 
 int EraseSector(unsigned long address)
 {
-    if (address < BASE || address >= BASE + LIMIT || (address & 4095U)) return error(3);
+    if (address < BASE || address >= BASE + LIMIT ||
+        (address & (ERASE_SECTOR_BYTES - 1U))) return error(3);
     loader_stage = 6;
     loader_erase_mode = loader_protocol_mode;
     loader_trace[4] = loader_protocol_mode;
@@ -319,19 +335,23 @@ int EraseSector(unsigned long address)
      */
     if (command(0x06, 1)) return 1;
     configure(0, 8, 0, 0, 0, 1);
-    push(0x21);
+    /* The exact extended-ID check above establishes uniform 128 KiB geometry.
+     * Use the documented four-byte-address sector erase, within this dedicated
+     * model partition, to avoid thousands of slow 4 KiB erase transactions.
+     */
+    push(0xDC);
     push(address - BASE);
     select_flash();
     if (finish_tx() || ready()) return 1;
     return 0;
 }
 
-int ProgramPage(unsigned long address, unsigned long size, unsigned char *buffer)
+/* Keep each device transaction within one physical 256-byte page. The FlashOS
+ * host buffer is larger so multi-megabyte models need fewer debugger calls.
+ */
+static int program_physical_page(unsigned long address, unsigned long size,
+                                 const unsigned char *buffer)
 {
-    if (address < BASE || address >= BASE + LIMIT || !size || size > 256U ||
-        (address & 1U) || (size & 1U) ||
-        size > BASE + LIMIT - address || (address & 255U) + size > 256U) return error(4);
-    loader_stage = 7;
     if (command(0x06, 1)) return 1;
     configure(0, 8, 0, 0, 0, 1);
     push(0x84);
@@ -347,6 +367,23 @@ int ProgramPage(unsigned long address, unsigned long size, unsigned char *buffer
     }
     select_flash();
     if (finish_tx() || ready()) return 1;
+    return 0;
+}
+
+int ProgramPage(unsigned long address, unsigned long size, unsigned char *buffer)
+{
+    if (address < BASE || address >= BASE + LIMIT || !size ||
+        size > PROGRAM_BLOCK_BYTES || (address & 1U) || (size & 1U) ||
+        size > BASE + LIMIT - address || buffer == 0) return error(4);
+    loader_stage = 7;
+    while (size != 0U) {
+        unsigned long count = PHYSICAL_PAGE_BYTES - (address & (PHYSICAL_PAGE_BYTES - 1U));
+        if (count > size) count = size;
+        if (program_physical_page(address, count, buffer)) return 1;
+        address += count;
+        buffer += count;
+        size -= count;
+    }
     return 0;
 }
 

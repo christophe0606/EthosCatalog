@@ -1,0 +1,158 @@
+{
+  "format": "ethos-catalog-methods-v1",
+  "target": "ethos-u85-256",
+  "methods": {
+    "backbone": {
+      "graph": "model/backbone_quantized.pt2",
+      "safetensors": "model/backbone_quantized.safetensors",
+      "graph_sha256": "c81c4b46efdf0993eb8ed4aab1415b12fbd42a4273677d2711589248538e0e6c",
+      "safetensors_sha256": "1d9eaf836e1b76498e5e63a5ed43a976bfa1f94629fd1cef8230f7ce84145363"
+    },
+    "synthesize": {
+      "graph": "model/synthesize_quantized.pt2",
+      "safetensors": "model/synthesize_quantized.safetensors",
+      "graph_sha256": "818031adb2d7e147ff27ac347fc4406e127eb56bad35793ce9d1724c27f13958",
+      "safetensors_sha256": "b10a20bab13646e83aa72514763b9a249c59cb1ad6a02fc57a6dba86ed518692"
+    },
+    "text_embedding": {
+      "graph": "model/text_embedding_quantized.pt2",
+      "safetensors": "model/text_embedding_quantized.safetensors",
+      "graph_sha256": "0acb7cb5ce25beb95acdd0d15a90d894637ede3d5caee8db0a0a56cc3035c288",
+      "safetensors_sha256": "d1dbcd76b3930067e27c6d39b7c3f5b7f7ed54a148b3b38f99f91686882cba95"
+    }
+  },
+  "cpu_methods": [
+    "text_embedding"
+  ],
+  "startup": {
+    "file": "model/weights/startup.safetensors",
+    "sha256": "4c986d346df82a1cff68501ad6a267d43f8611543ddae13d290b01b5ecc3d7dc",
+    "voice_prefix": {
+      "file": "model/weights/voice_prefix.safetensors",
+      "sha256": "eedcd44596043a65ca4f19904a4b41281e502477c0bcd4f76c17253ddf1beece",
+      "raw_file": "model/weights/voice_prefix.bin",
+      "raw_bytes": 12582912,
+      "raw_sha256": "45bcb0df2bdc153a47568847dafa7a3b14c68fdb7d3b73087ce0ad6ea51deb2b",
+      "shape": [
+        6,
+        2,
+        1,
+        8,
+        512,
+        64
+      ],
+      "dtype": "float32_little_endian",
+      "position": 125,
+      "provenance": {
+        "source_gguf_sha256": "a7d9aad2cd6dc66473f24a08bc6d2939030ef4d751ef82349361fbef3272dbae",
+        "backbone_graph_sha256": "c81c4b46efdf0993eb8ed4aab1415b12fbd42a4273677d2711589248538e0e6c",
+        "backbone_safetensors_sha256": "1d9eaf836e1b76498e5e63a5ed43a976bfa1f94629fd1cef8230f7ce84145363",
+        "default_voice_sha256": "f739e8c4c76ee7f92e7c94a82002748c8cd22e99582ac49f7b9b94cd63786e18",
+        "position": "125",
+        "license": "Apache-2.0"
+      },
+      "validation": "Bit-exact safetensors/raw roundtrip and next text-token output/cache vs explicit PTQ voice prefill"
+    },
+    "bos_raw": {
+      "file": "model/weights/bos_embedding.bin",
+      "bytes": 2048,
+      "sha256": "cd56ca9e3fcbb90c9f8d7bc995339a2aaeb0560d16617604f8113e3003d326b3",
+      "shape": [
+        1,
+        1,
+        512
+      ],
+      "dtype": "float32_little_endian"
+    }
+  },
+  "quality_accepted": false,
+  "flow_capacity": 512,
+  "default_voice_tokens": 125,
+  "state_shapes": {
+    "flow_kv": [
+      6,
+      2,
+      1,
+      8,
+      512,
+      64
+    ],
+    "mimi_kv": [
+      2,
+      2,
+      1,
+      8,
+      250,
+      64
+    ],
+    "convolution": [
+      [
+        1,
+        512,
+        16
+      ],
+      [
+        1,
+        512,
+        6
+      ],
+      [
+        1,
+        256,
+        6
+      ],
+      [
+        1,
+        256,
+        2
+      ],
+      [
+        1,
+        128,
+        0
+      ],
+      [
+        1,
+        128,
+        5
+      ],
+      [
+        1,
+        128,
+        2
+      ],
+      [
+        1,
+        64,
+        0
+      ],
+      [
+        1,
+        64,
+        4
+      ],
+      [
+        1,
+        64,
+        2
+      ],
+      [
+        1,
+        32,
+        0
+      ],
+      [
+        1,
+        64,
+        2
+      ]
+    ]
+  },
+  "source_files": {
+    "model/model.py": "e10ea8a4c10c14f54d7651111daa06eb8a64b7010ec57113f33840c9cf09f068",
+    "model/stages.py": "618b9c20d77b84b3c699cf98ccd69c08be0e7caffa599f42c7b4cf786bf18ade",
+    "model/export_stages.py": "4f72e12ec309f89911fe12ecea9873c6c3e1697056374d5d96fedfa63e4c9530",
+    "model/import_q8.py": "1f52c154a37dfefad20c8263824480a922ecacc500edb3e5909d5f18b3de63b0",
+    "model/startup_assets.py": "4b9865435f0e97d27ba9ad0deaf065acd14e61d0a73fb7b6fa843dce39e1a322"
+  }
+}

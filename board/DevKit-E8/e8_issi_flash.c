@@ -30,8 +30,78 @@
 #include "issi_flash_private.h"
 #include "ospi_drv.h"
 #include "ospi_xip_user.h"
+#include "sys_clocks.h"
 
 static ospi_flash_cfg_t ospi_flash_config;
+static uint8_t flash_identification[6];
+static bool flash_initialized;
+
+/* Cached READ ID result; querying it performs no controller transaction. */
+uint32_t e8_flash_jedec_id(void)
+{
+    return ((uint32_t)flash_identification[0] << 16) |
+           ((uint32_t)flash_identification[1] << 8) | flash_identification[2];
+}
+
+uint32_t e8_flash_extended_id(void)
+{
+    return flash_identification[4];
+}
+
+uint32_t e8_flash_capacity_bytes(void)
+{
+    /* IS25WX01G READ ID: ISSI 9D, 1.8 V type 5B, 1 Gbit density 1B.
+     * Other devices need their own verified addressing/erase compatibility.
+     */
+    return e8_flash_jedec_id() == 0x9D5B1BU ? 0x08000000U : 0U;
+}
+
+/* Change only the controller read clock after initialization. Call from
+ * internal memory, before starting any NPU/DMA/other-core flash reader.
+ * Interrupt masking only quiesces this core; the caller owns other masters.
+ * Keep the verified DDR protocol, 16 dummy clocks and RXDS settings intact.
+ * The fitted IS25WX01G supports at most 166 MHz; these bounded comparison
+ * points deliberately stop at 100 MHz (ISSI Rev A1, 2025-08-14, pp25,82).
+ */
+int e8_flash_set_read_clock(uint32_t hz)
+{
+    ospi_flash_cfg_t *cfg = &ospi_flash_config;
+    if (!flash_initialized || !cfg->ddr_en ||
+        e8_flash_jedec_id() != 0x9D5B1BU || e8_flash_extended_id() != 1U ||
+        cfg->wait_cycles != 16U) return -1;
+    if (hz != 25000000U && hz != 50000000U && hz != 100000000U) return -2;
+    const uint32_t axi_hz = GetSystemAXIClock();
+    if (!axi_hz || axi_hz % hz) return -2;
+    const uint32_t divisor = axi_hz / hz;
+    if (divisor < 4U || divisor > 65534U || (divisor & 1U)) return -2;
+
+    const uint32_t irq_mask = __get_PRIMASK();
+    __disable_irq();
+    __DSB();
+    uint32_t attempts = 2000000U;
+    while ((ospi_readl(cfg, sr) & SR_BUSY) && --attempts) {}
+    if (!attempts) {
+        __set_PRIMASK(irq_mask);
+        return -3;
+    }
+    const uint32_t aes_control = cfg->aes_regs->aes_control;
+    const uint32_t enabled = ospi_readl(cfg, ssienr);
+    const uint32_t previous_divisor = ospi_readl(cfg, baudr);
+    cfg->aes_regs->aes_control = aes_control & ~AES_CONTROL_XIP_EN;
+    __DSB();
+    spi_disable(cfg);
+    spi_set_clk(cfg, divisor);
+    const bool changed = ospi_readl(cfg, baudr) == divisor;
+    if (!changed) spi_set_clk(cfg, previous_divisor);
+    ospi_writel(cfg, ssienr, enabled);
+    cfg->aes_regs->aes_control = aes_control;
+    __DSB();
+    __ISB();
+    __set_PRIMASK(irq_mask);
+    if (!changed) return -4;
+    cfg->ospi_clock = hz;
+    return 0;
+}
 
 /**
   \fn         static void issi_write_enable(ospi_flash_cfg_t *ospi_cfg)
@@ -47,13 +117,12 @@ static void issi_write_enable(ospi_flash_cfg_t *ospi_cfg)
 }
 
 /**
-  \fn         static uint8_t issi_decode_id(ospi_flash_cfg_t *ospi_cfg, uint8_t *buffer)
+  \fn         static uint8_t issi_decode_id(const uint8_t *buffer)
   \brief      Decode the Device ID sent by the flash in single mode but read in octal mode.
-  \param[in]  ospi_cfg : OSPI configuration structure
   \param[in]  buffer : ID read in SDR mode
   \return     ID of NOR flash
  */
-static uint8_t issi_decode_id(ospi_flash_cfg_t *ospi_cfg, uint8_t *buffer)
+static uint8_t issi_decode_id(const uint8_t *buffer)
 {
     uint8_t iter, id = 0;
 
@@ -67,8 +136,6 @@ static uint8_t issi_decode_id(ospi_flash_cfg_t *ospi_cfg, uint8_t *buffer)
         buffer++;
     }
 
-    ospi_cfg->device_id = id;
-
     return id;
 }
 
@@ -80,12 +147,20 @@ static uint8_t issi_decode_id(ospi_flash_cfg_t *ospi_cfg, uint8_t *buffer)
  */
 static uint8_t issi_flash_ReadID(ospi_flash_cfg_t *ospi_cfg)
 {
-    uint8_t buffer[8];
+    /* Legacy single-bit flash output is sampled by the octal controller:
+     * eight received samples decode one serial ID byte. Retain six bytes,
+     * including density and the extended ID's erase-sector information.
+     */
+    uint8_t buffer[sizeof(flash_identification) * 8] = {0};
 
-    ospi_setup_read(ospi_cfg, ADDR_LENGTH_0_BITS, 8, 0);
+    ospi_setup_read(ospi_cfg, ADDR_LENGTH_0_BITS, sizeof(buffer), 0);
     ospi_recv_blocking(ospi_cfg, ISSI_READ_ID, buffer);
 
-    return issi_decode_id(ospi_cfg, buffer);
+    for (unsigned i = 0; i < sizeof(flash_identification); ++i) {
+        flash_identification[i] = issi_decode_id(buffer + i * 8);
+    }
+    ospi_cfg->device_id = flash_identification[0];
+    return flash_identification[0];
 }
 
 /**
@@ -201,6 +276,7 @@ int e8_setup_flash_xip(void)
 {
     ospi_flash_cfg_t *ospi_cfg = &ospi_flash_config;
     OSPI_INSTANCE     drv_instance;
+    flash_initialized = false;
 
 #if (OSPI_XIP_INSTANCE == 0)
     ospi_cfg->regs     = (ssi_regs_t *) OSPI0_BASE;
@@ -235,5 +311,6 @@ int e8_setup_flash_xip(void)
         return -1;
     }
 
+    flash_initialized = true;
     return 0;
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
 """Generate README.md from documentation/readme_header.md and project YAML headers."""
 from pathlib import Path
@@ -10,7 +11,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def read_metadata(readme: Path) -> tuple[str, str]:
+def _read_header(readme: Path) -> dict:
     lines = readme.read_text(encoding="utf-8-sig").splitlines()
     if not lines or lines[0].strip() != "---":
         raise ValueError(f"{readme}: README must start with a YAML header")
@@ -21,6 +22,15 @@ def read_metadata(readme: Path) -> tuple[str, str]:
         header = yaml.safe_load("\n".join(lines[1:end]))
     except yaml.YAMLError as error:
         raise ValueError(f"{readme}: invalid YAML header: {error}") from error
+    if not isinstance(header, dict):
+        raise ValueError(f"{readme}: YAML header must be a mapping")
+    if "catalog" in header and type(header["catalog"]) is not bool:
+        raise ValueError(f"{readme}: catalog must be a boolean")
+    return header
+
+
+def read_metadata(readme: Path) -> tuple[str, str]:
+    header = _read_header(readme)
     metadata = {}
     for field in ("category", "description"):
         value = header.get(field) if isinstance(header, dict) else None
@@ -42,6 +52,8 @@ def update_catalog(root: Path = ROOT) -> Path:
     categories = {}
     for project in (root / "projects").iterdir():
         if not project.is_dir():
+            continue
+        if not _read_header(project / "README.md").get("catalog", True):
             continue
         category, description = read_metadata(project / "README.md")
         categories.setdefault(category, []).append((project, description))

@@ -1,0 +1,127 @@
+{
+  "status": "failed",
+  "target": "ethos-u85-256",
+  "memory_mode": "Shared_Sram",
+  "calibration": "generated normalized English text, default voice and recurrent q8 inference states",
+  "random_seed": 20261021,
+  "source_quantization": "GGML Q8_0 + BF16; not Ethos quantization",
+  "policy": "linear_a16w8",
+  "ethos_quantization": "selective linear/conv int16 activations, int8 weights; float attention masking/norm/state; MinMax calibration",
+  "upstream_q8_error": "Not published in the pinned model card; no original-float quality claim",
+  "speech_quality_verified": false,
+  "hardware_realtime_verified": false,
+  "calibration_texts": [
+    "Hello from Phonon.",
+    "The quick brown fox jumps over the lazy dog."
+  ],
+  "calibration_frames": 4,
+  "export_error": [
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    },
+    {
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "normalized_rmse": 0.0,
+      "finite": true
+    }
+  ],
+  "ptq_errors": [
+    [
+      {
+        "max_absolute_error": 0.03551337122917175,
+        "rmse": 0.015306814573705196,
+        "normalized_rmse": 0.009616213591667692,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.04297828674316406,
+        "rmse": 0.04297828674316406,
+        "normalized_rmse": 0.0036298497268309735,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.0005825968692079186,
+        "rmse": 4.78108850074932e-05,
+        "normalized_rmse": 0.058297576254915176,
+        "finite": true
+      }
+    ],
+    [
+      {
+        "max_absolute_error": 0.0344698429107666,
+        "rmse": 0.01557176187634468,
+        "normalized_rmse": 0.0118242389264593,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.031137466430664062,
+        "rmse": 0.031137466430664062,
+        "normalized_rmse": 0.002065899995254441,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.0026427931152284145,
+        "rmse": 0.0006075087585486472,
+        "normalized_rmse": 0.10438031606562938,
+        "finite": true
+      }
+    ],
+    [
+      {
+        "max_absolute_error": 0.03885045647621155,
+        "rmse": 0.016696620732545853,
+        "normalized_rmse": 0.010243963940526509,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.029993057250976562,
+        "rmse": 0.029993057250976562,
+        "normalized_rmse": 0.002313986566222727,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.0005775417666882277,
+        "rmse": 5.221580431680195e-05,
+        "normalized_rmse": 0.061214814695775104,
+        "finite": true
+      }
+    ],
+    [
+      {
+        "max_absolute_error": 0.04383957386016846,
+        "rmse": 0.02166052535176277,
+        "normalized_rmse": 0.01524182407739991,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.022304534912109375,
+        "rmse": 0.022304534912109375,
+        "normalized_rmse": 0.0014038811419049637,
+        "finite": true
+      },
+      {
+        "max_absolute_error": 0.003477620892226696,
+        "rmse": 0.0011044573038816452,
+        "normalized_rmse": 0.09576907956855453,
+        "finite": true
+      }
+    ]
+  ],
+  "max_latent_nrmse": 0.01524182407739991,
+  "max_pcm_nrmse": 0.10438031606562938,
+  "quantized_nodes": 1734,
+  "delegates": 57,
+  "error": "PermissionError: sandbox temporary-directory access denied while writing a FlatBuffer schema; temporary cleanup also denied.",
+  "traceback": "Machine-specific paths omitted. Failure originated in executorch.exir._serialize._flatbuffer_program._get_schema_info/_prepare_schema and subsequent tempfile cleanup.",
+  "elapsed_seconds": 255.90403689999948
+}
