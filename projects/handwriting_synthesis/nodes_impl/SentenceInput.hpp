@@ -32,6 +32,7 @@ private:
                     const unsigned offset=length_>1 && line_[0]==':' && line_[1]==':'?1:0;
                     std::memcpy(accepted_.text,line_+offset,length_-offset); accepted_.text[length_-offset]=0;
                     accepted_.bias=bias_; accepted_.seed=seed_;
+                    accepted_.seed_revision=seed_revision_;
                     accepted_.generation=generation_.load(std::memory_order_relaxed)+1;
                     generation_.store(accepted_.generation,std::memory_order_release);
                     stats_->generation=accepted_.generation; ++stats_->sentences;
@@ -95,14 +96,14 @@ private:
                     candidate=candidate*10U+digit;
                 }
                 if(!digits || !candidate || !end(value)) { command_error();return true; }
-                seed_=candidate;
+                seed_=candidate; ++seed_revision_;
             }
         } else {
             if(std::strcmp(line_,":help")) ++stats_->rejected;
             printf("Commands: :bias 0..2, :seed 1..4294967295, :help. Use :: for literal leading colon.\r\n");
             return true;
         }
-        printf("Legibility bias=%.2f; seed=%lu (next sentence).\r\n",double(bias_),(unsigned long)seed_);
+        printf("Legibility bias=%.2f; initial seed=%lu. RNG advances across sentences; :seed N resets the next sentence.\r\n",double(bias_),(unsigned long)seed_);
         return true;
     }
     void command_error() {
@@ -110,6 +111,6 @@ private:
         printf("Invalid setting. Use :bias 0..2 or :seed 1..4294967295.\r\n");
     }
     StreamStats* stats_; char line_[76]{}; unsigned length_=0,excess_=0,invalid_=0;
-    float bias_=1.0f;uint32_t seed_=42;
+    float bias_=1.0f;uint32_t seed_=42,seed_revision_=0;
     bool cr_=false; std::atomic<uint32_t> generation_{0}; SentenceSnapshot accepted_{};
 };

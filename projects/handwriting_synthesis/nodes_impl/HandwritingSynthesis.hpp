@@ -30,7 +30,10 @@ public:
         const auto request=*reinterpret_cast<const SentenceSnapshot*>(uintptr_t(evt.get<uint64_t>()));
         if(!handwriting::current(request)) return acknowledge(request.generation,false);
         if(generation_!=request.generation) {
-            int error=engine_.begin(request.text,request.seed,request.bias); if(error) return static_cast<cg_status>(error);
+            // Only startup or an explicit seed command restarts the random
+            // stream. Repeated sentences reset recurrence but retain sampling.
+            const bool reseed=!generation_ || request.seed!=request_.seed || request.seed_revision!=request_.seed_revision;
+            int error=engine_.begin(request.text,reseed?request.seed:0,request.bias); if(error) return static_cast<cg_status>(error);
             generation_=request.generation; result_={request,{},1,0,false};
             profile_count_=0;
             results_.sendSync(kNormalPriority,selectors[selStroke],uint64_t(reinterpret_cast<uintptr_t>(&result_)));

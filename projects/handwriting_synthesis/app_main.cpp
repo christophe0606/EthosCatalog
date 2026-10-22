@@ -83,7 +83,7 @@ extern "C" int app_main(void) {
     if(!error) error=stream_configure_and_start(&hardware);
     pipeline_error=error; stream_stats.error=error;
     if(error) printf("Handwriting startup FAILED: %d\n",error);
-    else printf("Handwriting READY. UART4 115200 8N1; 1..75 characters, Return starts. White on black, 800x480.\r\nLegibility bias=1.00, seed=42. Commands: :bias 0..2, :seed N, :help.\r\n");
+    else printf("Handwriting READY. UART4 115200 8N1; 1..75 characters, Return starts. White on black, 800x480.\r\nLegibility bias=1.00, initial seed=42; RNG advances across sentences. Commands: :bias 0..2, :seed N (reset), :help.\r\n");
     fflush(stdout);
     return error;
 }

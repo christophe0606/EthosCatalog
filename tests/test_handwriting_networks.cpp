@@ -135,6 +135,7 @@ int main() {
     queue.drain();
     assert(results.order==std::vector<unsigned>({1,0,10}));
     assert(stats.inferences==1 && stats.generated==1 && !results.done);
+    const auto first_sample=results.last.point;
     // Recurrent state persists across strokes; model input checks above run
     // on every call. The 40*length limit runs no models and still finishes/ACKs.
     for(unsigned i=1;i<40;++i) { assert(start()==0); queue.drain(); assert(calls.size()==5); }
@@ -162,8 +163,32 @@ int main() {
     assert(start()==0);queue.drain();
     assert(results.last.kind==0 && results.last.character==5 && results.last.punctuation);
     attend_end=false;
+    // New sentences keep sampling from the existing random stream. Resetting
+    // to the same seed is explicit and must work every time, including after
+    // only one stroke of an unfinished sentence.
+    auto next_sentence=[&](uint32_t id) {
+        request.generation=id;generation=id;std::strcpy(request.text,"A");
+        assert(start()==0);queue.drain();
+        assert(results.last.kind==0 && results.order==std::vector<unsigned>({1,0,10}));
+        return results.last.point;
+    };
+    const auto continued=next_sentence(6);
+    assert(std::memcmp(&continued,&first_sample,sizeof(continued))!=0);
+    ++request.seed_revision;
+    const auto reset=next_sentence(7);
+    assert(std::memcmp(&reset,&first_sample,sizeof(reset))==0);
+    const auto advanced=next_sentence(8);
+    assert(std::memcmp(&advanced,&reset,sizeof(advanced))!=0);
+    request.seed=7;++request.seed_revision;
+    const auto different_seed=next_sentence(9);
+    assert(std::memcmp(&different_seed,&reset,sizeof(reset))!=0);
+    ++request.seed_revision;
+    const auto reset_again=next_sentence(10);
+    assert(std::memcmp(&reset_again,&different_seed,sizeof(reset_again))==0);
+    const auto advanced_again=next_sentence(11);
+    assert(std::memcmp(&advanced_again,&reset_again,sizeof(advanced_again))!=0);
     // A failed method stops the chain before subsequent methods/results/ACK.
-    request.generation=6; generation=6; complete=false; failing_method=2;
+    request.generation=12; generation=12; complete=false; failing_method=2;
     assert(start()==0);
     assert(queue.dispatch()==0 && queue.dispatch()==0 && queue.dispatch()==-421);
     assert(queue.isEmpty() && calls==std::vector<unsigned>({0,1,2}));
@@ -203,10 +228,21 @@ int main() {
     assert(engine.begin("AB",42,1)==0 && engine.step(legible)==0);
     assert(std::fabs((legible.dx-.05f)-(baseline.dx-.05f)*std::exp(-.5f))<.00001f);
     assert(std::fabs((legible.dy-.05f)-(baseline.dy-.05f)*std::exp(-.5f))<.00001f);
+    // Continuation preserves the exact RNG state while resetting sentence
+    // recurrence. Explicit seeding replays the same multi-sentence sequence.
+    const auto rng=engine.state().rng;
+    assert(engine.begin("AB",0,1)==0 && engine.state().rng==rng && engine.state().steps==0);
+    for(const auto& layer:engine.state().h) for(float value:layer) assert(value==0);
+    handwriting::Stroke next{},replayed{};
+    assert(engine.step(next)==0 && std::memcmp(&next,&legible,sizeof(next))!=0);
+    assert(engine.begin("AB",42,1)==0 && engine.step(replayed)==0);
+    assert(std::memcmp(&replayed,&legible,sizeof(replayed))==0);
+    assert(engine.begin("AB",0,1)==0 && engine.step(replayed)==0);
+    assert(std::memcmp(&replayed,&next,sizeof(replayed))==0);
     const auto saved_state=engine.state();
     for(float bias:{-1.0f,2.1f,std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity()}) {
         assert(engine.begin("AB",42,bias)==-424);
         assert(std::memcmp(&saved_state,&engine.state(),sizeof(saved_state))==0);
     }
-    std::cout<<"PASS: five model nodes, recurrence, sampling bias, stage order, backpressure, replacement, EOS, step bound and errors\n";
+    std::cout<<"PASS: five model nodes, recurrence, evolving RNG, explicit seed reset, sampling bias, stage order, backpressure, replacement, EOS, step bound and errors\n";
 }

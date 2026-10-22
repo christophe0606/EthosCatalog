@@ -71,7 +71,7 @@ int main(int argc,char** argv) {
         }
     };
     input("ab\bcd\r\n");assert(stats.sentences==1 && std::string(snapshot.text)=="acd");
-    assert(snapshot.bias==1.0f && snapshot.seed==42);
+    assert(snapshot.bias==1.0f && snapshot.seed==42 && snapshot.seed_revision==0);
     input("QXZ\r");assert(stats.sentences==2 && std::string(snapshot.text)=="qxz" && stats.normalized==3);
     input(std::string(76,'a')+"\r");assert(stats.rejected==1 && stats.sentences==2);
     input("bad@\r");assert(stats.rejected==2 && stats.sentences==2);
@@ -81,15 +81,18 @@ int main(int argc,char** argv) {
     input("unfinished\x15Hello\r");assert(std::string(snapshot.text)=="Hello");
     const auto frozen=snapshot;
     input(":bias .75\r\n:seed 7\r:help\r");
-    assert(snapshot.generation==frozen.generation && snapshot.bias==1 && snapshot.seed==42);
+    assert(snapshot.generation==frozen.generation && snapshot.bias==1 && snapshot.seed==42 && snapshot.seed_revision==0);
     assert(handwriting::current(frozen));
     const auto rejected=stats.rejected;
     for(const char* bad:{":bias nan\r",":bias inf\r",":bias 2.1\r",":bias -1\r",
                          ":bias 1x\r",":seed 0\r",":seed 4294967296\r",":seed -2\r"}) input(bad);
     assert(stats.rejected==rejected+8 && snapshot.generation==frozen.generation);
-    input("Hello\r");assert(snapshot.bias==.75f && snapshot.seed==7 && !handwriting::current(frozen));
+    input("Hello\r");assert(snapshot.bias==.75f && snapshot.seed==7 && snapshot.seed_revision==1 && !handwriting::current(frozen));
+    input("Hello\r");assert(snapshot.seed==7 && snapshot.seed_revision==1);
+    input(":seed\r:bias .75\rHello\r");assert(snapshot.seed_revision==1);
+    input(":seed 7\rHello\r");assert(snapshot.seed==7 && snapshot.seed_revision==2);
     input(":bias 2\r:seed 4294967295\r::hello\r");
-    assert(std::string(snapshot.text)==":hello" && snapshot.bias==2 && snapshot.seed==UINT32_MAX);
+    assert(std::string(snapshot.text)==":hello" && snapshot.bias==2 && snapshot.seed==UINT32_MAX && snapshot.seed_revision==3);
     input(":bias 1\r:seed 42\rHello\r");
     Queue q;Sink sink;SendToNetwork<SentenceSnapshot,1> send(text,&q,{hw});send.subscribe(0,sink,0);
     assert(send.run()==0 && q.messages.size()==1);

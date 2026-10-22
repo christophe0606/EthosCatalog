@@ -15,4 +15,6 @@ typedef struct {
     void *current;
     float bias;
     uint32_t seed;
+    // Changes on every explicit :seed command, even when its value repeats.
+    uint32_t seed_revision;
 } SentenceSnapshot;

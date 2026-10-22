@@ -33,7 +33,9 @@ Final timing and acceptance evidence are recorded in
 - A new accepted sentence cancels unfinished generation. Generation IDs suppress
   stale results; the canvas clears before the new generation's first point.
 
-The demo now starts at **legibility bias 1.0**, with seed 42. Enter commands on
+The demo starts at **legibility bias 1.0**, with initial seed 42. The random
+generator continues across sentences, so submitting the same text again gives
+a new handwriting sample. Restarting the demo restarts the sequence. Enter commands on
 their own lines, then submit the sentence again:
 
 ```text
@@ -44,7 +46,9 @@ abcdefgh
 
 `:bias` accepts 0..2; larger values reduce sampling variation and often produce
 neater writing. Try 0.75 or 1.25 as alternatives; increasing it is not a guarantee
-of correct characters. `:seed 123` gives a different repeatable sample. Settings
+of correct characters. `:seed 123` explicitly resets the random sequence for the
+next sentence; it then continues across later sentences. Repeating `:seed 123`
+before the same text and bias reproduces that sample. Settings
 apply to the next sentence; they do not interrupt the current one. `:bias` or
 `:seed` without a value reports the settings, and `:help` lists commands. Use
 `::` to start literal text with a colon. Input echo and editing also work for

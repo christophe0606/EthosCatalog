@@ -23,6 +23,8 @@ class Engine {
 public:
     explicit Engine(arm::embedded::EmbeddedModule *module): module_(module) {}
     int dense(unsigned method, const float *input, float *output, uint32_t *ticks=nullptr);
+    // A zero seed continues the random stream (initial seed 42). Nonzero
+    // seeds explicitly restart it, preserving deterministic benchmark calls.
     int begin(const char *sentence, uint32_t seed=42, float bias=0.5f);
     // 0 emits a point, 1 completes normally, 2 reaches the source step bound.
     // Negative values indicate runtime, input or non-finite-state errors.

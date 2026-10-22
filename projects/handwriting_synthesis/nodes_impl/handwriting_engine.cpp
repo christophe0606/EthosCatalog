@@ -25,7 +25,7 @@ int Engine::begin(const char *sentence,uint32_t seed,float bias) {
         clean.characters[i]=static_cast<uint8_t>(found-alphabet);
     }
     clean.length=length+1; clean.limit=40*length;
-    clean.previous={0,0,1}; clean.rng=seed?seed:1;
+    clean.previous={0,0,1}; clean.rng=seed?seed:(state_.rng?state_.rng:42);
     state_=clean; bias_=bias; next_method_=0; return 0;
 }
 void Engine::cell(const float *g,float *h,float *c) {
