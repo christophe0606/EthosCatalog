@@ -6,7 +6,6 @@ tmp/
 out/
 *.cbuild*.yml
 *.cbuild*.json
-ai_layer/
 validation/
 ci-reports/
 .flow/
