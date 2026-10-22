@@ -18,7 +18,7 @@ struct State {
     uint32_t rng;
     Stroke previous;
 };
-// Exclusive ownership: one engine uses one module on the inference thread.
+// One event thread owns this state and serializes the five model nodes.
 class Engine {
 public:
     explicit Engine(arm::embedded::EmbeddedModule *module): module_(module) {}
@@ -27,6 +27,9 @@ public:
     // 0 emits a point, 1 completes normally, 2 reaches the source step bound.
     // Negative values indicate runtime, input or non-finite-state errors.
     int step(Stroke &point);
+    // Execute exactly one model and its CPU recurrence/sampling. Calls must
+    // follow method order 0..4; the point/status is final after method 4.
+    int stage(unsigned method, Stroke &point);
     bool finite() const;
     const State &state() const { return state_; }
     static void cell(const float *gates, float *h, float *c);
@@ -35,6 +38,7 @@ private:
     float uniform();
     arm::embedded::EmbeddedModule *module_;
     State state_{};
+    unsigned next_method_=0;
     alignas(32) float input_[876], output_[1600];
 };
 }

@@ -7,12 +7,19 @@
 namespace handwriting {
 // CMSIS Stream's fixed value variant carries local addresses as uint64_t.
 // SendToNetwork retains its immutable request until the completion ACK.
-// Network publishes its retained Result BEFORE ACK at the same queue priority;
+// Synthesis retains Work across the five serialized model-node events and
+// publishes its retained Result BEFORE ACK at the same queue priority;
 // FIFO dispatch draws/releases that result before another request can overwrite
 // it. This protocol is application-local, never an external pointer interface.
 inline bool current(const SentenceSnapshot& request) {
     return request.current && static_cast<std::atomic<uint32_t>*>(request.current)->load(std::memory_order_acquire)==request.generation;
 }
+struct Work {
+    Engine *engine;
+    Stroke point;
+    int status;
+    uint32_t ticks;
+};
 struct Result {
     SentenceSnapshot request;
     Stroke point;

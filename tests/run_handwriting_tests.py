@@ -25,17 +25,23 @@ def main():
     fixture.write_text(''.join(f'{x:.9g} {y:.9g} {p:.0f} {i//20} 0\n' for i,(x,y,p) in enumerate(points)))
     includes=[ROOT/p for p in ('tests/handwriting','projects/handwriting_synthesis',
         'projects/handwriting_synthesis/generated','projects/handwriting_synthesis/nodes_impl',
+        'board/DevKit-E8',
         'thirdparty/CMSIS-Stream/platform','thirdparty/CMSIS-Stream/platform/posix_runtime')]
-    binary=out/'test_handwriting_nodes.exe'
-    source=ROOT/'tests/test_handwriting_nodes.cpp'
-    if args.vcvars:
-        batch=out/'compile.cmd'
-        batch.write_text('@echo off\ncall "'+str(args.vcvars.resolve())+'" >nul\ncl /nologo /std:c++17 /EHsc /O2 /fp:fast '
-            +' '.join('/I"'+str(p)+'"' for p in includes)+' "'+str(source)+'" /Fe:"'+str(binary)+'"\n')
-        subprocess.run(['cmd','/d','/c',str(batch)],cwd=out,check=True)
-    else:
-        subprocess.run([args.cxx,'-std=c++17','-O2','-ffast-math',*[f'-I{p}' for p in includes],str(source),'-o',str(binary)],check=True)
-    subprocess.run([str(binary),str(fixture)],check=True)
+    for name in ('test_handwriting_nodes', 'test_handwriting_networks'):
+        binary=out/(name+'.exe')
+        sources=[ROOT/'tests'/(name+'.cpp')]
+        if name=='test_handwriting_networks':
+            sources.append(ROOT/'projects/handwriting_synthesis/nodes_impl/handwriting_engine.cpp')
+        if args.vcvars:
+            batch=out/'compile.cmd'
+            batch.write_text('@echo off\ncall "'+str(args.vcvars.resolve())+'" >nul\ncl /nologo /std:c++17 /EHsc /O2 /fp:fast '
+                +' '.join('/I"'+str(p)+'"' for p in includes)+' '
+                +' '.join('"'+str(source)+'"' for source in sources)+' /Fe:"'+str(binary)+'"\n')
+            subprocess.run(['cmd','/d','/c',str(batch)],cwd=out,check=True)
+        else:
+            subprocess.run([args.cxx,'-std=c++17','-O2','-ffast-math',*[f'-I{p}' for p in includes],
+                            *map(str,sources),'-o',str(binary)],check=True)
+        subprocess.run([str(binary),str(fixture)],check=True)
     raw=Path(str(fixture)+'.ppm').read_bytes().split(b'\n',3)[3]
     def chunk(tag,payload):
         return struct.pack('>I',len(payload))+tag+payload+struct.pack('>I',zlib.crc32(tag+payload)&0xffffffff)

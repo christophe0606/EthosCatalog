@@ -203,3 +203,45 @@ The original upstream source/checkpoint has no stated reuse license. The user
 authorized documenting that status and preserving Sean Vasquez's attribution;
 see [third-party notices](THIRD_PARTY_NOTICES.md). This is not an upstream
 license grant.
+
+## Separate model nodes (2026-10-22)
+
+The refactored graph runs `lstm1`, `attention`, `lstm2`, `lstm3` and `gmm`
+as five instances of `HandwritingNetwork`, configured with method IDs 0..4.
+`HandwritingSynthesis` coordinates the shared recurrence and results, without
+executing the model chain itself. Its acknowledgment output `oev0` returns to
+the sender; `oev2` starts the model chain, whose final output returns on `iev1`.
+
+CMSIS Release builds b-43 and b-44 passed for
+`DevKit-E8@Handwriting_Release`. The updated firmware was loaded and run on
+M55_HP. Startup passed the unchanged PTE CRC (`cf5a91ed`), CPU fixtures and all
+five dense NPU fixtures, and reached `Handwriting READY`. All five model-node
+instances and the synthesis controller were present in the live scheduler.
+
+Two `Hello` sentences each completed with 101 points on one line (3,568 and
+3,573 RTOS ticks at 1 kHz). Between those runs, a 44-character sentence was
+replaced while generation was active. The final live counters were:
+
+| Counter | Value |
+| --- | ---: |
+| Sentences / canvas clears | 3 / 3 |
+| Requests / acknowledgments / inferences | 514 / 514 / 514 |
+| Generated / drawn points | 511 / 511 |
+| Completed sentences | 2 |
+| Discarded stale results | 1 |
+| Pipeline error / event drops / ink overflows | 0 / 0 / 0 |
+
+The target was resumed and the owned serial port released. No new visual
+acceptance or 75-character throughput measurement is claimed for this refactor.
+The historical performance/memory results earlier in this document belong to
+the previous graph. After the split, `PROFILE_TICKS` sums the five model-node
+processing intervals; event dispatch time is excluded.
+
+Host C++ checks passed the existing 1,952-point rendering fixture and a new
+production-wrapper/controller test with deterministic dense outputs. The latter
+checks input packing and recurrence across strokes, one method per node, stage
+order, in-flight request protection, replacement between nodes, result-before-ACK
+ordering, EOS/step limits, dense errors and queue overflow. Two graph regression
+tests verify all event ports and shared-wrapper code generation. Graph generation
+passed from both working directories with three dataflow firings and 120-byte
+FIFO storage; the seven shared graph tests and catalog test also passed.

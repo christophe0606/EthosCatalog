@@ -12,10 +12,30 @@ AppParams appParams = {
     .uart = {
         .hw_ = {0},
     },
+    .attention = {
+        .hw_ = {0},
+        .method = 1,
+    },
     .display = {
         .hw_ = {0},
     },
-    .network = {
+    .gmm = {
+        .hw_ = {0},
+        .method = 4,
+    },
+    .lstm1 = {
+        .hw_ = {0},
+        .method = 0,
+    },
+    .lstm2 = {
+        .hw_ = {0},
+        .method = 2,
+    },
+    .lstm3 = {
+        .hw_ = {0},
+        .method = 3,
+    },
+    .synthesis = {
         .hw_ = {0},
     },
 };
@@ -25,6 +45,11 @@ void app_params_set_hardware(const HardwareParams *params)
     appParams.editor.hw_ = *params;
     appParams.send.hw_ = *params;
     appParams.uart.hw_ = *params;
+    appParams.attention.hw_ = *params;
     appParams.display.hw_ = *params;
-    appParams.network.hw_ = *params;
+    appParams.gmm.hw_ = *params;
+    appParams.lstm1.hw_ = *params;
+    appParams.lstm2.hw_ = *params;
+    appParams.lstm3.hw_ = *params;
+    appParams.synthesis.hw_ = *params;
 }

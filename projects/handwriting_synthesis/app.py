@@ -11,12 +11,18 @@ from projects.handwriting_synthesis.nodes import *
 def make_graph():
     graph = Graph()
     uart, editor, send = UartSource('uart'), SentenceInput('editor'), SendToNetwork('send')
-    network, display = HandwritingNetwork('network'), HandwritingDisplay('display')
+    synthesis, display = HandwritingSynthesis('synthesis'), HandwritingDisplay('display')
+    networks = [HandwritingNetwork(name, method) for method, name in enumerate(
+        ('lstm1', 'attention', 'lstm2', 'lstm3', 'gmm'))]
     graph.connect(uart.o, editor.i)
     graph.connect(editor.o, send.i)
-    graph.connect(send['oev0'], network['iev0'])
-    graph.connect(network['oev0'], send['iev0'])
-    graph.connect(network['oev1'], display['iev0'])
+    graph.connect(send['oev0'], synthesis['iev0'])
+    graph.connect(synthesis['oev0'], send['iev0'])
+    graph.connect(synthesis['oev1'], display['iev0'])
+    graph.connect(synthesis['oev2'], networks[0]['iev0'])
+    for source, destination in zip(networks, networks[1:]):
+        graph.connect(source['oev0'], destination['iev0'])
+    graph.connect(networks[-1]['oev0'], synthesis['iev1'])
     return graph
 
 def generate():

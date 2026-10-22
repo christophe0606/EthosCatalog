@@ -2,10 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // New implementation of the recurrence documented in model/ADAPTER_CONTRACT.md.
 #include "handwriting_engine.hpp"
-#include "embedded_runtime.hpp"
-#include "cmsis_os2.h"
 #include <algorithm>
-#include <array>
 #include <cmath>
 #include <cstring>
 namespace handwriting {
@@ -17,24 +14,6 @@ static bool is_finite(float x) {
 }
 static float sigmoid(float x) { return 1.0f/(1.0f+std::exp(-x)); }
 static float softplus(float x) { return std::max(x,0.0f)+std::log1p(std::exp(-std::fabs(x))); }
-int Engine::dense(unsigned method,const float *input,float *output,uint32_t *ticks) {
-    using namespace executorch::aten;
-    if(method>=5 || !module_ || !input || !output) return -420;
-    // Caller input can reside in ordinary RAM; boundary quantization produces
-    // the NPU input in the runtime's NPU-visible planned pool.
-    std::array<SizesType,2> sizes{1,static_cast<SizesType>(input_sizes[method])};
-    std::array<DimOrderType,2> order{0,1};
-    TensorImpl impl(ScalarType::Float,2,sizes.data(),const_cast<float*>(input),order.data());
-    const uint32_t start=osKernelGetSysTimerCount();
-    auto result=module_->execute(method_names[method],Tensor(&impl));
-    if(!result.ok() || result->size()!=1 || !result->front().isTensor()) return -421;
-    Tensor out=result->front().toTensor();
-    if(out.scalar_type()!=ScalarType::Float || out.numel()!=output_sizes[method]) return -422;
-    std::memcpy(output,out.const_data_ptr<float>(),output_sizes[method]*sizeof(float));
-    if(ticks) *ticks=osKernelGetSysTimerCount()-start;
-    for(unsigned i=0;i<output_sizes[method];++i) if(!is_finite(output[i])) return -423;
-    return 0;
-}
 int Engine::begin(const char *sentence,uint32_t seed) {
     if(!sentence) return -424;
     const size_t length=std::strlen(sentence);
@@ -47,7 +26,7 @@ int Engine::begin(const char *sentence,uint32_t seed) {
     }
     clean.length=length+1; clean.limit=40*length;
     clean.previous={0,0,1}; clean.rng=seed?seed:1;
-    state_=clean; return 0;
+    state_=clean; next_method_=0; return 0;
 }
 void Engine::cell(const float *g,float *h,float *c) {
     for(unsigned i=0;i<Hidden;++i) {
@@ -61,7 +40,7 @@ void Engine::window(const float *a,State &s) {
         alpha[j]=softplus(a[j]); beta[j]=std::max(softplus(a[10+j]),.01f);
         s.kappa[j]+=softplus(a[20+j])/25.0f;
     }
-    std::fill(s.window,s.window+AlphabetSize,0);
+    std::fill(s.window,s.window+AlphabetSize,0.0f);
     for(unsigned u=0;u<s.length;++u) {
         float phi=0;
         for(unsigned j=0;j<10;++j) { float d=s.kappa[j]-u; phi+=alpha[j]*std::exp(-d*d/beta[j]); }
@@ -81,24 +60,30 @@ bool Engine::finite() const {
     return is_finite(state_.previous.dx)&&is_finite(state_.previous.dy);
 }
 int Engine::step(Stroke &point) {
+    for(unsigned method=0;method<MethodCount;++method) {
+        int error=stage(method,point); if(error) return error;
+    }
+    return 0;
+}
+int Engine::stage(unsigned method,Stroke &point) {
     auto &s=state_;
     if(!s.length) return -424;
-    if(s.steps>=s.limit) return 2;
+    if(method>=MethodCount || method!=next_method_) return -435;
+    if(method==0 && s.steps>=s.limit) return 2;
     float xy[3]={s.previous.dx,s.previous.dy,s.previous.pen_up};
-    std::memcpy(input_,s.window,73*4); std::memcpy(input_+73,xy,3*4);
-    std::memcpy(input_+76,s.h[0],400*4);
-    int error=dense(0,input_,output_); if(error) return error;
-    cell(output_,s.h[0],s.c[0]);
-    std::memcpy(input_+76,s.h[0],400*4);
-    error=dense(1,input_,output_); if(error) return error;
-    window(output_,s);
-    for(unsigned k=1;k<3;++k) {
+    if(method<=1) {
+        std::memcpy(input_,s.window,73*4); std::memcpy(input_+73,xy,3*4);
+        std::memcpy(input_+76,s.h[0],400*4);
+    } else if(method<=3) {
+        const unsigned k=method-1;
         std::memcpy(input_,xy,3*4); std::memcpy(input_+3,s.h[k-1],400*4);
         std::memcpy(input_+403,s.window,73*4); std::memcpy(input_+476,s.h[k],400*4);
-        error=dense(k+1,input_,output_); if(error) return error;
-        cell(output_,s.h[k],s.c[k]);
     }
-    error=dense(4,s.h[2],output_); if(error) return error;
+    int error=dense(method,method==4?s.h[2]:input_,output_); if(error) return error;
+    next_method_=(method+1)%MethodCount;
+    if(method==1) window(output_,s);
+    else if(method<4) cell(output_,s.h[method==0?0:method-1],s.c[method==0?0:method-1]);
+    if(method<4) return 0;
     float pen=sigmoid(output_[120]);
     pen=pen<.01f?0:std::clamp(pen,1e-8f,1.0f-1e-8f);
     unsigned best=0; for(unsigned u=1;u<s.length;++u) if(s.phi[u]>s.phi[best]) best=u;

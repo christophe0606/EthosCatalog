@@ -5,8 +5,11 @@ from common.nodes._base import ProjectNode
 class HandwritingNetwork(ProjectNode, BaseNode):
     folder = '../nodes_impl'
     needsHardware = True
-    def __init__(self, name):
-        BaseNode.__init__(self, name, identified=False, selectors=['request', 'ack', 'stroke'])
+    def __init__(self, name, method):
+        if method not in range(5):
+            raise ValueError('Handwriting method must be in range 0..4')
+        BaseNode.__init__(self, name, identified=False, selectors=['advance'])
         self.addEventInput()
-        self.addEventOutput(2)
+        self.addEventOutput()
+        self.params = dict(method=method)
         self.parameters()

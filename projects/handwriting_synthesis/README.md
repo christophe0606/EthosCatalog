@@ -49,8 +49,14 @@ early or reach the original 40*length bound; text accuracy is not guaranteed.
 ## Execution and storage
 
 CMSIS Stream dataflow reads a 512-byte interrupt UART ring every 5 ms, edits the
-sentence, then sends one inference request at a time. The event thread owns
-recurrent state and all five dense NPU calls. A completion acknowledgment releases
+sentence, then sends one inference request at a time. The `synthesis` controller
+owns recurrent state and sends each stroke through five separate model nodes:
+`lstm1 -> attention -> lstm2 -> lstm3 -> gmm`. All five reuse the
+`HandwritingNetwork` C++ wrapper with a different method parameter from the shared
+PTE module. Each node runs exactly one dense NPU method and its associated CPU
+recurrence, attention or sampling; the final node returns to the controller.
+All model nodes and the controller execute serially on the event thread.
+A completion acknowledgment releases
 the next request after the prior result has been rendered. Sentence ownership,
 layout, styling and animation are project nodes; the shared board layer supplies
 UART/LCD hardware operations. The LCD node submits a VSYNC flip and defers its
@@ -58,6 +64,12 @@ two-event buffer-release wait until just before reuse, overlapping inference.
 It copies only the prior stroke damage into the alternate buffer and cleans
 only changed, aligned cache regions. Pen-up moves do not flip unchanged frames.
 Replacement clears the complete canvas; the panel continues scanning normally.
+
+The controller's event outputs are `oev0` (acknowledgment to `send.iev0`),
+`oev1` (stroke/clear to `display.iev0`), and `oev2` (work to `lstm1.iev0`).
+`gmm.oev0` returns completed work to `synthesis.iev1`; there is no direct
+controller self-connection. One retained work item owns the recurrent buffers
+throughout the chain, and the sender retains its request until acknowledgment.
 
 The 3,355,648-byte PTE exceeds the current 2 MiB HP MRAM code/model region, so weights
 execute from OSPI and firmware remains in MRAM. Two RGB565 buffers use 1,536,000
@@ -77,8 +89,12 @@ on UART before typing.
 The 25 MHz reference measured 117.017505 ms per complete stroke step, including CPU
 recurrence/attention/sampling and five dense methods. This is not a whole-sentence
 time. The demo streams points as they arrive. Each 75-character sentence also
-records 64 warmed full-step samples, excluding UART and LCD time, for the clock
-comparison; those are printed once on UART, without an LCD overlay.
+records 64 warmed samples. After the graph split, `PROFILE_TICKS` sums the five
+model-node processing intervals, including CPU recurrence/attention/sampling and
+excluding event dispatch, UART and LCD time; it is no longer one contiguous timer
+interval. `PROFILE_CYCLES` still sums all five NPU calls. These are printed once
+on UART, without an LCD overlay. Timing and memory figures above describe the
+prior validated firmware in `LIVE_VALIDATION.md`, before this graph split.
 
 Select **DevKit-E8@Handwriting_Release** to build/load/debug. Continue from the
 initial main breakpoint; startup is autonomous and has no debugger start gate.
@@ -97,11 +113,16 @@ Generate from either directory with the repository Python environment:
 
 Host checks compile the production editor, sender, display and layout wrappers,
 compare partial updates against full-frame reference pixels, verify both buffer
-ownership and declared cache regions, and exercise editing/backpressure:
+ownership and declared cache regions, and exercise editing/backpressure.
+The model-chain checks compile the production controller, five wrapper instances
+and recurrence code with deterministic dense outputs. They check input packing,
+one method per node, stage order, cancellation between nodes, EOS/step limits,
+result-before-ACK ordering, runtime errors and queue overflow:
 
 ```powershell
 .venv/Scripts/python.exe tests/run_handwriting_tests.py --vcvars path/to/vcvars64.bat
 # or use --cxx with an installed host C++17 compiler
+.venv/Scripts/python.exe -m unittest discover -s tests -p test_handwriting_graph.py
 ```
 
 [Host rendering preview](host-layout-preview.png) uses 1,952 saved quantized

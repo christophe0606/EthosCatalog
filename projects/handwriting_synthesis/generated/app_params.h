@@ -19,18 +19,28 @@ typedef struct {
 
 typedef struct {
     HardwareParams hw_;
+    int32_t method;
+} HandwritingNetworkParams;
+
+typedef struct {
+    HardwareParams hw_;
 } HandwritingDisplayParams;
 
 typedef struct {
     HardwareParams hw_;
-} HandwritingNetworkParams;
+} HandwritingSynthesisParams;
 
 typedef struct {
     SentenceInputParams editor;
     SendToNetworkParams send;
     UartSourceParams uart;
+    HandwritingNetworkParams attention;
     HandwritingDisplayParams display;
-    HandwritingNetworkParams network;
+    HandwritingNetworkParams gmm;
+    HandwritingNetworkParams lstm1;
+    HandwritingNetworkParams lstm2;
+    HandwritingNetworkParams lstm3;
+    HandwritingSynthesisParams synthesis;
 } AppParams;
 #ifdef __cplusplus
 extern "C" {

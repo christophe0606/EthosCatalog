@@ -74,6 +74,7 @@ project:
         - file: hardware_params.h
         - file: nodes_impl/handwriting_engine.hpp
         - file: nodes_impl/handwriting_engine.cpp
+        - file: nodes_impl/handwriting_runtime.cpp
     - group: Generated CMSIS Stream graph
       for-context: [.Debug, .Release]
       files:

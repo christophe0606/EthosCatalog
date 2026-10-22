@@ -106,14 +106,20 @@ Internal ID identification for the nodes
 #define EDITOR_INTERNAL_ID 0
 #define SEND_INTERNAL_ID 1
 #define UART_INTERNAL_ID 2
-#define DISPLAY_INTERNAL_ID 3
-#define NETWORK_INTERNAL_ID 4
+#define ATTENTION_INTERNAL_ID 3
+#define DISPLAY_INTERNAL_ID 4
+#define GMM_INTERNAL_ID 5
+#define LSTM1_INTERNAL_ID 6
+#define LSTM2_INTERNAL_ID 7
+#define LSTM3_INTERNAL_ID 8
+#define SYNTHESIS_INTERNAL_ID 9
 
 /* Initialize the selectors global IDs in each class */
 template<>
 std::array<uint16_t,2> SendToNetwork<SentenceSnapshot,1>::selectors = {SEL_REQUEST_ID, SEL_ACK_ID};
+std::array<uint16_t,1> HandwritingNetwork::selectors = {SEL_ADVANCE_ID};
 std::array<uint16_t,1> HandwritingDisplay::selectors = {SEL_STROKE_ID};
-std::array<uint16_t,3> HandwritingNetwork::selectors = {SEL_REQUEST_ID, SEL_ACK_ID, SEL_STROKE_ID};
+std::array<uint16_t,4> HandwritingSynthesis::selectors = {SEL_REQUEST_ID, SEL_ACK_ID, SEL_STROKE_ID, SEL_ADVANCE_ID};
 
 
 /* No identified nodes found so array is forced to length 1*/
@@ -146,8 +152,13 @@ typedef struct {
     SentenceInput<UartBlock,1,SentenceSnapshot,1> *editor;
     SendToNetwork<SentenceSnapshot,1> *send;
     UartSource<UartBlock,1> *uart;
+    HandwritingNetwork *attention;
     HandwritingDisplay *display;
-    HandwritingNetwork *network;
+    HandwritingNetwork *gmm;
+    HandwritingNetwork *lstm1;
+    HandwritingNetwork *lstm2;
+    HandwritingNetwork *lstm3;
+    HandwritingSynthesis *synthesis;
 } nodes_t;
 
 
@@ -206,23 +217,59 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
+    nodes.attention = new (std::nothrow) HandwritingNetwork(evtQueue,params->attention);
+    if (nodes.attention==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
     nodes.display = new (std::nothrow) HandwritingDisplay(params->display);
     if (nodes.display==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.network = new (std::nothrow) HandwritingNetwork(evtQueue,params->network);
-    if (nodes.network==NULL)
+    nodes.gmm = new (std::nothrow) HandwritingNetwork(evtQueue,params->gmm);
+    if (nodes.gmm==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.lstm1 = new (std::nothrow) HandwritingNetwork(evtQueue,params->lstm1);
+    if (nodes.lstm1==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.lstm2 = new (std::nothrow) HandwritingNetwork(evtQueue,params->lstm2);
+    if (nodes.lstm2==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.lstm3 = new (std::nothrow) HandwritingNetwork(evtQueue,params->lstm3);
+    if (nodes.lstm3==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.synthesis = new (std::nothrow) HandwritingSynthesis(evtQueue,params->synthesis);
+    if (nodes.synthesis==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
 
 /* Subscribe nodes for the event system*/
-    nodes.send->subscribe(0,*nodes.network,0);
-    nodes.network->subscribe(0,*nodes.send,0);
-    nodes.network->subscribe(1,*nodes.display,0);
+    nodes.send->subscribe(0,*nodes.synthesis,0);
+    nodes.synthesis->subscribe(0,*nodes.send,0);
+    nodes.synthesis->subscribe(1,*nodes.display,0);
+    nodes.synthesis->subscribe(2,*nodes.lstm1,0);
+    nodes.lstm1->subscribe(0,*nodes.attention,0);
+    nodes.attention->subscribe(0,*nodes.lstm2,0);
+    nodes.lstm2->subscribe(0,*nodes.lstm3,0);
+    nodes.lstm3->subscribe(0,*nodes.gmm,0);
+    nodes.gmm->subscribe(0,*nodes.synthesis,1);
 
     initError = CG_SUCCESS;
     initError = nodes.editor->init();
@@ -237,11 +284,31 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     if (initError != CG_SUCCESS)
         return(initError);
 
+    initError = nodes.attention->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
     initError = nodes.display->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
-    initError = nodes.network->init();
+    initError = nodes.gmm->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.lstm1->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.lstm2->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.lstm3->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.synthesis->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -275,13 +342,33 @@ void free_scheduler_app()
     {
         delete nodes.uart;
     }
+    if (nodes.attention!=NULL)
+    {
+        delete nodes.attention;
+    }
     if (nodes.display!=NULL)
     {
         delete nodes.display;
     }
-    if (nodes.network!=NULL)
+    if (nodes.gmm!=NULL)
     {
-        delete nodes.network;
+        delete nodes.gmm;
+    }
+    if (nodes.lstm1!=NULL)
+    {
+        delete nodes.lstm1;
+    }
+    if (nodes.lstm2!=NULL)
+    {
+        delete nodes.lstm2;
+    }
+    if (nodes.lstm3!=NULL)
+    {
+        delete nodes.lstm3;
+    }
+    if (nodes.synthesis!=NULL)
+    {
+        delete nodes.synthesis;
     }
 }
 

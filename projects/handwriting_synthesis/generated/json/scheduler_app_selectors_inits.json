@@ -14,18 +14,25 @@
     "isTemplate": true,
     "selectors": []
   },
+  "HandwritingNetwork": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
   "HandwritingDisplay": {
     "isTemplate": false,
     "selectors": [
       "SEL_STROKE_ID"
     ]
   },
-  "HandwritingNetwork": {
+  "HandwritingSynthesis": {
     "isTemplate": false,
     "selectors": [
       "SEL_REQUEST_ID",
       "SEL_ACK_ID",
-      "SEL_STROKE_ID"
+      "SEL_STROKE_ID",
+      "SEL_ADVANCE_ID"
     ]
   }
 }

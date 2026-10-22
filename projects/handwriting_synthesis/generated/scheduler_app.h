@@ -31,7 +31,8 @@ extern "C"
 /* Selectors global identifiers */
 #define SEL_REQUEST_ID 100
 #define SEL_ACK_ID 101
-#define SEL_STROKE_ID 102
+#define SEL_ADVANCE_ID 102
+#define SEL_STROKE_ID 103
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);
 

@@ -4,6 +4,7 @@
 #pragma once
 #include "../nodes_impl/HandwritingDisplay.hpp"
 #include "../nodes_impl/HandwritingNetwork.hpp"
+#include "../nodes_impl/HandwritingSynthesis.hpp"
 #include "../nodes_impl/SendToNetwork.hpp"
 #include "../nodes_impl/SentenceInput.hpp"
 #include "../nodes_impl/UartSource.hpp"

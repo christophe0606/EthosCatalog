@@ -41,6 +41,13 @@ uart [label=<
   </TR>
 </TABLE>>];
 
+attention [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">attention<BR/>(HandwritingNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
 display [label=<
 <TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
@@ -48,18 +55,50 @@ display [label=<
   </TR>
 </TABLE>>];
 
+gmm [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gmm<BR/>(HandwritingNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
 
-network [label=<
+lstm1 [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm1<BR/>(HandwritingNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+lstm2 [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm2<BR/>(HandwritingNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+lstm3 [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm3<BR/>(HandwritingNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+synthesis [label=<
 <TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
-    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">network<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="3"><FONT COLOR="black" POINT-SIZE="14.0">synthesis<BR/>(HandwritingSynthesis)</FONT></TD>
     <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
   </TR>
 <TR>
+<TD PORT="iev1"><FONT POINT-SIZE="12.0" COLOR="black">iev1</FONT></TD>
+
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR><TR>
 
 <TD></TD>
-<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+<TD PORT="oev2"><FONT POINT-SIZE="12.0" COLOR="black">oev2</FONT></TD>
 </TR>
 
 </TABLE>>];
@@ -76,13 +115,31 @@ editor:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black
 
 
 
-send:oev0 -> network:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+send:oev0 -> synthesis:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
-network:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+synthesis:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
-network:oev1 -> display:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+synthesis:oev1 -> display:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+synthesis:oev2 -> lstm1:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+lstm1:i -> attention:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+attention:i -> lstm2:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+lstm2:i -> lstm3:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+lstm3:i -> gmm:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+gmm:i -> synthesis:iev1 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
 
