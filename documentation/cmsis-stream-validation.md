@@ -324,7 +324,7 @@ remained, COM5 was closed, and the updated MRAM firmware was left running.
 The initial spectrum UI appeared but capture, animation and touch handling did
 not start. Live debugging found `app_result == pipeline_error == -401`, zero
 NPU interrupts, and both gain self-test completion flags clear. Only the
-application, idle and timer threads existed. The shared `ai_layer/` generation
+application, idle and timer threads existed. The then-shared `ai_layer/` generation
 record identified the object-detection YOLO model; the flashed firmware's
 `model_pte_size` confirmed its 407,440-byte size. The gain template was loading
 that model instead of its own network.

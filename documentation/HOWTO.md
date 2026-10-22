@@ -52,8 +52,8 @@ downloadable error reports.
 ### Choose the application
 
 Open `EthosCatalog.csolution.yml` and select a target set in the CMSIS Solution
-extension. Select exactly one application for building; other applications can
-remain in the solution's `projects` list.
+extension. Each application references its own generated AI layer. Target sets
+select the application and build type to build and load on the board.
 
 | VS Code target set | Project/build context | Purpose |
 | --- | --- | --- |
@@ -136,8 +136,21 @@ command exits nonzero if any file fails, so it can also be used in CI.
 
 ### Generate the AI layer
 
+See [project-local layer validation](ai-layer-validation.md) for the regeneration,
+build and board checks covering this layout.
+
 ```powershell
 uv run scripts/create_ai_layer.py
+```
+
+Pass `--project <name>` to generate a project's layer independently of the UI
+selection. To generate every application layer from the repository root:
+
+```powershell
+Get-ChildItem projects/*/*.cproject.yml | ForEach-Object {
+    uv run scripts/create_ai_layer.py --project $_.FullName
+    if ($LASTEXITCODE -ne 0) { throw "AI layer generation failed: $($_.Name)" }
+}
 ```
 
 On the first run, the script calls the selected project's `quantize` script with
@@ -154,15 +167,16 @@ calibration data or quantization policy, run:
 uv run scripts/create_ai_layer.py --quantize
 ```
 
-The generated `ai_layer/` contains `model.pte`, its C interface, the runtime and
-operator layer, and `generation.json`. There is one shared AI layer per solution.
-Regenerate it whenever you switch projects or change Vela or storage settings.
-Check the selected project in the script output and in `ai_layer/generation.json`
-before building.
+The generated `projects/<project>/ai_layer/` contains `model.pte`, its C interface,
+the runtime and operator layer, and `generation.json`. Each cproject references
+its own `ai_layer/ai_layer.clayer.yml`. Generate each project once, then regenerate
+only after its model, quantization, Vela or storage settings change. Switching
+projects does not require regeneration. Check the project in the script output
+and in `projects/<project>/ai_layer/generation.json` before building.
 
 The generator reads the NPU configuration from the solution's `mlops.npu` node
-and the model settings from the selected project. `mlops.model.clayer` identifies
-the generated layer. A legacy `.cbuild-mlops.yml` argument only locates the
+and the model settings from the selected project. The cproject identifies
+its generated layer. A legacy `.cbuild-mlops.yml` argument only locates the
 matching solution; its contents are not used.
 
 ### Generate the Stream graph and build
@@ -258,7 +272,7 @@ Complete the [tool setup](#set-up-the-tools) first. The example below creates
    uv run projects/my_network/app.py
    ```
 
-   Confirm that the AI layer output and `ai_layer/generation.json` identify
+   Confirm that the AI layer output and `projects/my_network/ai_layer/generation.json` identify
    `projects/my_network/my_network.cproject.yml`. The VS Code task
    **Model: Requantize and create AI layer** is an alternative to the first
    command and uses the saved CMSIS selection.
@@ -272,9 +286,9 @@ Complete the [tool setup](#set-up-the-tools) first. The example below creates
     your application and update its context to `my_network.Release+DevKit-E8`.
 
 After changing the model or quantization policy, regenerate the AI layer with
-`--quantize` and rebuild. When switching projects without changing the model,
-regenerate it without `--quantize`. The shared AI layer must always belong to the
-application being built.
+`--quantize` and rebuild. For Vela or storage changes, regenerate without
+`--quantize`. Other projects retain their generated layers and can be built
+without regenerating them.
 
 Reusable Python node descriptions live in `common/nodes/`; implementations live
 in `common/nodes_impl/` under the appropriate backend. Keep application-specific
@@ -356,7 +370,7 @@ processing contracts. Verify firmware changes on the board as well as on the hos
 `projects/object_detection` ports the original 192x192 INT8 face network through
 PyTorch and ExecuTorch/Vela, preserving its quantization and two output heads.
 Select `DevKit-E8@Detection_Release` with only `object_detection.Release` enabled;
-the shared AI layer must belong to that project. Build/load/debug and UART capture
+its cproject uses `projects/object_detection/ai_layer/`. Build/load/debug and UART capture
 use the CMSIS Developer Assistant tools. Startup runs the four-fixture network
 self-test, 100 measured forwards and optimized C preprocessing/decode checks.
 The seven application nodes perform single-shot camera capture, crop, grayscale,

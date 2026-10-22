@@ -80,10 +80,10 @@ def main():
     for s in samples:
         assert abs(float(s[2])-1000*int(s[1])/npu)<=.000001
         assert abs(float(s[4])-1000*int(s[3])/timer)<=.000001
-    generation=json.loads((ROOT/'ai_layer/generation.json').read_text())
+    generation=json.loads((MODEL.parent/'ai_layer/generation.json').read_text())
     assert generation['project']=='projects/object_detection/object_detection.cproject.yml'
     assert generation['delegates']==1 and generation['operators']==[]
-    assert generation['pte_sha256']==sha256(ROOT/'ai_layer/model.pte') and int(model)==generation['pte_bytes']
+    assert generation['pte_sha256']==sha256(MODEL.parent/'ai_layer/model.pte') and int(model)==generation['pte_bytes']
     assert generation['safetensors_sha256']==fixtures['safetensors_sha256']
     firmware=ROOT/'out/object_detection/DevKit-E8/Release/object_detection.axf'
     build=yaml.safe_load(firmware.with_name('object_detection.Release+DevKit-E8.cbuild.yml').read_text())['build']

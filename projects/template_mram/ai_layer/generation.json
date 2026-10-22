@@ -1,0 +1,20 @@
+{
+  "project": "projects/template_mram/template_mram.cproject.yml",
+  "config_sha256": "bf3ef057e50f4a0060e242fea9bc4529231f2253dda55b22521b3e862e8a5b0a",
+  "pte_sha256": "d8aea17ab0db08a82220bcc20e11e260a52d7b08a01080b5257613679ce5330e",
+  "graph_sha256": "36133aa52202d21a2f70f7d610518e461b8c7694111495b82a26faa40079afab",
+  "safetensors_sha256": "782c188f18a121169fee843ae9840905671f06d9483a627635564a7767704fda",
+  "assets": {},
+  "flash_ospi": false,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_MRAM",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 1,
+  "operators": [
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 2816
+}

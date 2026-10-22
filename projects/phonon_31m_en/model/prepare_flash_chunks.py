@@ -104,7 +104,7 @@ def main():
     manifest = prepare_parts(run, output_dir, args.chunk_bytes)
     manifest["algorithm"] = {"file": algorithm.relative_to(ROOT).as_posix(),
                              "sha256": digest(algorithm.read_bytes())}
-    generation = ROOT / "ai_layer/generation.json"
+    generation = PROJECT / "ai_layer/generation.json"
     manifest["generation"] = json.loads(generation.read_text(encoding="utf-8"))
     manifest_file = output_dir / "manifest.json"
     manifest_file.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

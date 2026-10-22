@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[3]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pte", type=Path, default=ROOT / "ai_layer/model.pte")
+    parser.add_argument("--pte", type=Path, default=Path(__file__).resolve().parents[1] / "ai_layer/model.pte")
     args = parser.parse_args()
     data = args.pte.read_bytes()
     start = data.index(b"vela_bin_stream\x00")

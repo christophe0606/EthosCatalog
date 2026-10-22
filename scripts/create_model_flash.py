@@ -5,7 +5,7 @@
 
 MRAM projects need only the ordinary application load and produce no separate
 model programming file. OSPI projects use their model/network.yml partition and the
-current root ai_layer/model.pte. Program the resulting file with CMSIS flash.
+project-local ai_layer/model.pte. Program the resulting file with CMSIS flash.
 """
 import argparse
 from copy import deepcopy
@@ -39,7 +39,7 @@ def main():
         return
     if not args.run:
         parser.error("OSPI projects require --run <application>.cbuild-run.yml")
-    model = solution_file.parent / "ai_layer/model.pte"
+    model = project_file.parent / "ai_layer/model.pte"
     report = json.loads((model.parent / "generation.json").read_text(encoding="utf-8"))
     assets = model_assets(project_file.parent, network, model.stat().st_size)
     if (report["project"] != project_file.relative_to(solution_file.parent).as_posix()
@@ -56,6 +56,11 @@ def main():
         raise ValueError("Model exceeds its project's OSPI partition")
     algorithms = [item for item in run.get("programming", [])
                   if item["start"] <= address and address + partition_size <= item["start"] + item["size"]]
+    if args.algorithm and len(algorithms) > 1:
+        # A project loader can overlap the pack's default flash range. Preserve
+        # the RAM/range settings of the explicitly selected existing entry.
+        algorithms = [item for item in algorithms
+                      if (args.run.resolve().parent / item["algorithm"]).resolve() == args.algorithm.resolve()]
     if len(algorithms) != 1:
         raise ValueError("Expected one programming algorithm covering the entire project model partition")
     if args.algorithm:

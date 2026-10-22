@@ -9,10 +9,10 @@ This project is current only targeting Alif E8 DevKit.
 
 * This repository uses executorch. Network saved in .pt2 / .safetensor format are loaded from pytorch and use the executorch flow to be compiled by vela.
 
-* Only one project should be built at a given time because there is only one ai_layer that is generated for a specific project.
-So building all projects is wrong since the same ai_layer would be used by all of them.
-
-Only one project must be enabled when building the solution.
+* Each application owns its generated `projects/<project>/ai_layer/`, referenced by its cproject.
+Generate the layer when its model, quantization or Vela/storage settings change.
+Switching projects does not require regeneration. Select the intended target set
+when building or loading firmware for the board.
 
 * Format of the solution must be respected : folder organization, purpose of each folder. The constraimts are detailed in the agents that need them.
 

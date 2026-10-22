@@ -1,0 +1,244 @@
+{
+  "date": "2026-10-22",
+  "board": "Alif DevKit-E8 M55_HP / Ethos-U85-256",
+  "runtime_pack": "PyTorch::ExecuTorch@1.4.1",
+  "compiler": "AC6 6.24.0",
+  "global_ai_layer_exists": false,
+  "generated_layers_integrity": "PASS: all five PTE/config/cache hashes, lengths, header CRCs and layer descriptions",
+  "project_local_layers_in_build_metadata": "PASS: all five application Release contexts",
+  "builds": {
+    "template_mram": {
+      "target": "DevKit-E8@Release",
+      "job": "b-1",
+      "status": "PASS"
+    },
+    "kws_micronet_l": {
+      "target": "DevKit-E8@KWS_Release",
+      "job": "b-4",
+      "status": "PASS"
+    },
+    "template_ospi_programming": {
+      "target": "DevKit-E8@ProgramModel",
+      "job": "b-6",
+      "status": "PASS"
+    },
+    "template_ospi": {
+      "target": "DevKit-E8@OSPI_Release",
+      "job": "b-8",
+      "status": "PASS"
+    },
+    "phonon_31m_en": {
+      "target": "DevKit-E8@Phonon_Release",
+      "job": "b-10",
+      "status": "PASS",
+      "runtime": "excluded at user request"
+    },
+    "FlashLoader": {
+      "target": "DevKit-E8@FlashLoader",
+      "job": "b-11",
+      "status": "PASS"
+    },
+    "object_detection": {
+      "target": "DevKit-E8@Detection_Release",
+      "job": "b-12",
+      "status": "PASS"
+    }
+  },
+  "host_checks": {
+    "project_script_tests": 23,
+    "ci_tests": 23,
+    "flash_chunk_tests": 3,
+    "network_schemas": "PASS",
+    "isolated_generator_cli": [
+      "kws_micronet_l",
+      "object_detection"
+    ]
+  },
+  "runtime": {
+    "template_mram": {
+      "snapshots": [
+        {
+          "gain_test_passed": 1,
+          "gain_benchmark_complete": 1,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 9304,
+          "stream_stats.spectrum_frames": 9304,
+          "stream_stats.frames_presented": 1996,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "microphone_drops": 0,
+          "microphone_overflows": 1
+        },
+        {
+          "gain_test_passed": 1,
+          "gain_benchmark_complete": 1,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 11776,
+          "stream_stats.spectrum_frames": 11776,
+          "stream_stats.frames_presented": 2527,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "microphone_drops": 0,
+          "microphone_overflows": 3
+        }
+      ],
+      "load_job": "d-3"
+    },
+    "kws_micronet_l": {
+      "snapshots": [
+        {
+          "kws_test_passed": 1,
+          "kws_mfcc_test_passed": 1,
+          "kws_speech_test_passed": 1,
+          "kws_self_test_cases": 270,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 2240,
+          "stream_stats.mfcc_frames": 2240,
+          "stream_stats.inferences": 84,
+          "stream_stats.frames_presented": 895,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "stream_stats.audio_discontinuities": 2,
+          "microphone_drops": 0,
+          "microphone_overflows": 2
+        },
+        {
+          "kws_test_passed": 1,
+          "kws_mfcc_test_passed": 1,
+          "kws_speech_test_passed": 1,
+          "kws_self_test_cases": 270,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 3236,
+          "stream_stats.mfcc_frames": 3236,
+          "stream_stats.inferences": 122,
+          "stream_stats.frames_presented": 1294,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "stream_stats.audio_discontinuities": 3,
+          "microphone_drops": 0,
+          "microphone_overflows": 4
+        }
+      ],
+      "load_job": "r-5"
+    },
+    "template_ospi": {
+      "programming_ready": {
+        "model_programming_ready": 1,
+        "app_stage": 5,
+        "app_error": 0,
+        "app_service_error": 0
+      },
+      "flash": "PASS",
+      "snapshots": [
+        {
+          "model_verified": 1,
+          "model_crc32": 3421939796,
+          "gain_test_passed": 1,
+          "gain_benchmark_complete": 1,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 1760,
+          "stream_stats.spectrum_frames": 1760,
+          "stream_stats.frames_presented": 378,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "microphone_drops": 0,
+          "microphone_overflows": 2
+        },
+        {
+          "model_verified": 1,
+          "model_crc32": 3421939796,
+          "gain_test_passed": 1,
+          "gain_benchmark_complete": 1,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.audio_blocks": 5236,
+          "stream_stats.spectrum_frames": 5236,
+          "stream_stats.frames_presented": 1124,
+          "stream_stats.audio_deadline_misses": 0,
+          "stream_stats.lcd_deadline_misses": 0,
+          "stream_stats.lcd_events_dropped": 0,
+          "microphone_drops": 0,
+          "microphone_overflows": 4
+        }
+      ],
+      "load_job": "r-9"
+    },
+    "object_detection": {
+      "snapshots": [
+        {
+          "detection_test_passed": 1,
+          "detection_preprocess_passed": 1,
+          "detection_decode_passed": 1,
+          "detection_demo_started": 1,
+          "detection_benchmark_complete": 1,
+          "detection_results.cases": 4,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.captured": 162,
+          "stream_stats.cropped": 162,
+          "stream_stats.grayscaled": 162,
+          "stream_stats.inferences": 162,
+          "stream_stats.decoded": 162,
+          "stream_stats.nms": 162,
+          "stream_stats.frames_presented": 162,
+          "stream_stats.frame_deadline_misses": 0,
+          "stream_stats.capture_timeouts": 0,
+          "stream_stats.dropped_frames": 0,
+          "stream_stats.dropped_events": 0,
+          "stream_stats.ownership_errors": 0
+        },
+        {
+          "detection_test_passed": 1,
+          "detection_preprocess_passed": 1,
+          "detection_decode_passed": 1,
+          "detection_demo_started": 1,
+          "detection_benchmark_complete": 1,
+          "detection_results.cases": 4,
+          "pipeline_error": 0,
+          "app_result": 0,
+          "npu_error": 0,
+          "stream_stats.error": 0,
+          "stream_stats.captured": 355,
+          "stream_stats.cropped": 355,
+          "stream_stats.grayscaled": 355,
+          "stream_stats.inferences": 355,
+          "stream_stats.decoded": 355,
+          "stream_stats.nms": 355,
+          "stream_stats.frames_presented": 355,
+          "stream_stats.frame_deadline_misses": 0,
+          "stream_stats.capture_timeouts": 0,
+          "stream_stats.dropped_frames": 0,
+          "stream_stats.dropped_events": 0,
+          "stream_stats.ownership_errors": 0
+        }
+      ],
+      "load_job": "r-13"
+    }
+  },
+  "limits": "Microphone overflows/discontinuities were nonzero and increased around debugger halts. These snapshots verify startup correctness and pipeline progress; they are not an uninterrupted audio-loss measurement. Phonon was built, not loaded or runtime-tested.",
+  "final_target": "DevKit-E8@Detection_Release running; serial port closed"
+}

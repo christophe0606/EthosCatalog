@@ -372,8 +372,7 @@ def build(root, names, report):
         except (ValueError, KeyError, TypeError) as error:
             report.add(name, "Build selection", [str(error)])
             continue
-        # Deliberately sequential: ai_layer belongs to this project until every
-        # one of its target sets has finished building. Never reuse another's.
+        # Keep CI builds sequential; each cproject references its own AI layer.
         graph_ok = command(root, report, name, "Generate CMSIS Stream graph",
                            [sys.executable, cproject.parent / "app.py"])
         layer_ok = command(root, report, name, "Generate project AI layer",

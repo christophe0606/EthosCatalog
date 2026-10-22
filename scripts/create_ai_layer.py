@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
-"""Generate root ai_layer for the application selected in the CMSIS UI.
+"""Generate project-local ai_layer for the application selected in the CMSIS UI.
 
 Run with `uv run scripts/create_ai_layer.py [--quantize]`.
 First-run quantization and --quantize call the script configured in the selected
 project's model/network.yml. That project owns model loading, calibration and
 quantization policy. This script compiles the saved quantized graph/weights
-with Vela and emits the shared layer; it never generates firmware test data.
+with Vela and emits the project's layer; it never generates firmware test data.
 """
 from __future__ import annotations
 
@@ -217,8 +217,7 @@ def main():
     assets = model_assets(project_file.parent, network, len(pte))
     model_source = c_array(pte, network)
     model_header = header(network, pte, assets)
-    # This directory is shared by the single selected project, never project-local.
-    layer_dir = solution_file.parent / "ai_layer"
+    layer_dir = project_file.parent / "ai_layer"
     layer_dir.mkdir(exist_ok=True)
     (layer_dir / "model.pte").write_bytes(pte)
     (layer_dir / "model_pte.c").write_text(model_source, encoding="utf-8", newline="\n")

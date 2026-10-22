@@ -162,7 +162,7 @@ KWS firmware symbols. Regenerate fixtures only when the model changes:
 
 The recorder reads `model/benchmark_uart.txt`, checks all outputs and samples,
 and writes `board_validation.json` and `benchmark.yml`. It requires the matching
-shared AI layer and Release build artifacts, plus the original fixture hashes.
+project-local AI layer and Release build artifacts, plus the original fixture hashes.
 
 ## Model interface and provenance
 
@@ -202,13 +202,13 @@ uv run scripts/create_ai_layer.py --project kws_micronet_l --quantize
 
 Both commands consume `model/model_quantized.pt2` and
 `model/model_quantized.safetensors`, then use ExecuTorch to lower to Ethos-U85
-through Vela and generate the shared `ai_layer`. The second command calls this
+through Vela and generate `projects/kws_micronet_l/ai_layer/`. The second command calls this
 project's `model/quantize.py`, which verifies and reuses the imported cache.
 It never recalibrates or changes its weights. Missing or stale conversion
 artifacts require the explicit conversion command below.
 
-The shared `ai_layer` belongs to the selected application; these commands
-replace it. Generating it does not build firmware or execute the network on
+These commands replace only this project's `ai_layer/`; other applications keep
+their generated layers. Generating it does not build firmware or execute the network on
 hardware. The network-only harness uses this KWS tensor interface directly.
 
 ## Reproduce conversion and host validation
@@ -245,7 +245,7 @@ steps. See `model/validation.json` for both comparisons.
 
 Run `.venv/Scripts/python.exe projects/kws_micronet_l/model/check_ai_layer.py`
 from the repository root to exercise the real generator CLI in a temporary
-solution, including `--quantize`, without replacing the shared AI layer.
+solution, including `--quantize`, without replacing the project AI layer.
 `model/lowering_validation.json` records one Ethos-U85 delegate, no CPU
 fallback operators and unchanged graph/weights. This check also generates and
 checks the `.pte`, C array, header and CMSIS layer in that temporary solution.

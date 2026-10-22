@@ -22,6 +22,16 @@ import create_ai_layer
 
 
 class ProjectScripts(unittest.TestCase):
+    def test_application_cprojects_reference_their_own_layers(self):
+        solution = yaml.safe_load((ROOT / "EthosCatalog.csolution.yml").read_text())["solution"]
+        for item in solution["projects"]:
+            project_file = ROOT / item["project"]
+            if not (project_file.parent / "model/network.yml").is_file():
+                continue
+            project = yaml.safe_load(project_file.read_text())["project"]
+            layers = [item["layer"] for item in project["layers"] if item.get("type") == "AI"]
+            self.assertEqual(layers, ["ai_layer/ai_layer.clayer.yml"], str(project_file))
+
     def setUp(self):
         (ROOT / "tmp").mkdir(exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(prefix="project-tests-", dir=ROOT / "tmp")
@@ -84,7 +94,7 @@ class ProjectScripts(unittest.TestCase):
         self.network["flash_ospi"] = True
         self.network["ospi"] = {"address": 0xC0010000, "size": 0x10000}
         self.write_config()
-        layer = self.root / "ai_layer"
+        layer = self.project / "ai_layer"
         layer.mkdir()
         pte = layer / "model.pte"
         pte.write_bytes(b"fixture network payload")
@@ -218,6 +228,9 @@ class ProjectScripts(unittest.TestCase):
 
     def test_ai_generation_uses_selected_project_with_multiple_listed(self):
         second = self.add_project("second")
+        original_layer = self.project / "ai_layer"
+        original_layer.mkdir()
+        (original_layer / "model.pte").write_bytes(b"first project PTE")
         self.select_contexts("second.Release")
         (second.parent / self.network["safetensors"]).write_bytes(b"second cache")
         (second.parent / self.network["graph"]).write_bytes(b"second graph")
@@ -229,12 +242,14 @@ class ProjectScripts(unittest.TestCase):
               patch.object(create_ai_layer, "export_model", return_value=(b"second PTE", 1)),
               patch.object(create_ai_layer, "components", return_value=(["Runtime"], []))):
             create_ai_layer.main()
-        layer = self.root / "ai_layer"
+        layer = second.parent / "ai_layer"
+        self.assertFalse((self.root / "ai_layer").exists())
         self.assertEqual((layer / "model.pte").read_bytes(), b"second PTE")
         report = json.loads((layer / "generation.json").read_text())
         self.assertEqual(report["project"], "projects/second/second.cproject.yml")
         self.assertEqual(yaml.safe_load((layer / "ai_layer.clayer.yml").read_text())["layer"]["description"], "second")
         self.assertFalse((self.project / self.network["safetensors"]).exists())
+        self.assertEqual((original_layer / "model.pte").read_bytes(), b"first project PTE")
 
     def test_mram_skips_programming_and_embeds_model(self):
         result = self.flash_script("--output", self.root / "unused.yml")
@@ -254,13 +269,17 @@ class ProjectScripts(unittest.TestCase):
 
     def test_ospi_uses_selected_model_address_and_preserves_relative_algorithm(self):
         self.prepare_ospi()
+        # A legacy global layer must never be selected, even if it exists.
+        legacy = self.root / "ai_layer"
+        legacy.mkdir()
+        (legacy / "model.pte").write_bytes(b"wrong global model")
         self.add_project("unselected")
         self.select_contexts("another.Release")
         result = self.flash_script("--run", self.run_file, "--output", self.output)
         self.assertEqual(result.returncode, 0, result.stderr)
         run = yaml.safe_load(self.output.read_text())["cbuild-run"]
         self.assertEqual(len(run["output"]), 1)
-        self.assertEqual(run["output"][0]["file"], (self.root / "ai_layer/model.pte").as_posix())
+        self.assertEqual(run["output"][0]["file"], (self.project / "ai_layer/model.pte").as_posix())
         self.assertEqual(run["output"][0]["load-offset"], 0xC0010000)
         self.assertIn("AnotherNetwork", run["output"][0]["info"])
         self.assertEqual(run["programming"][0]["algorithm"], (self.run_file.parent / "algorithm.FLM").as_posix())
@@ -270,7 +289,7 @@ class ProjectScripts(unittest.TestCase):
 
     def test_ospi_rejects_stale_model_and_too_small_partition(self):
         self.prepare_ospi()
-        (self.root / "ai_layer/model.pte").write_bytes(b"changed payload")
+        (self.project / "ai_layer/model.pte").write_bytes(b"changed payload")
         result = self.flash_script("--run", self.run_file, "--output", self.output)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("does not match", result.stderr)
@@ -278,6 +297,24 @@ class ProjectScripts(unittest.TestCase):
         self.network["ospi"]["size"] = 1
         with self.assertRaisesRegex(ValueError, "does not fit"):
             c_array(b"\x01\x02", self.network)
+
+    def test_ospi_explicit_algorithm_selects_matching_overlapping_range(self):
+        self.prepare_ospi()
+        loader = self.run_file.parent / "project.FLM"
+        loader.write_bytes(b"project loader")
+        run = yaml.safe_load(self.run_file.read_text())
+        selected = {"algorithm": "project.FLM", "start": 0xC0000000,
+                    "size": 0x04000000, "ram-start": 0, "ram-size": 0x40000}
+        run["cbuild-run"]["programming"].append(selected)
+        self.run_file.write_text(yaml.safe_dump(run))
+        result = self.flash_script("--run", self.run_file, "--output", self.output)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Expected one programming algorithm", result.stderr)
+        result = self.flash_script("--run", self.run_file, "--output", self.output,
+                                   "--algorithm", loader)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        programmed = yaml.safe_load(self.output.read_text())["cbuild-run"]
+        self.assertEqual(programmed["programming"], [{**selected, "algorithm": loader.as_posix()}])
 
     def test_ospi_assets_are_bounded_hashed_and_programmed(self):
         self.prepare_ospi()
@@ -293,7 +330,7 @@ class ProjectScripts(unittest.TestCase):
         generated = header(self.network, b"pte", assets)
         self.assertIn("#define MODEL_ASSET_PREFIX_SIZE_BYTES 9U", generated)
         self.assertIn("#define MODEL_ASSET_PREFIX_CRC32 0xcbf43926U", generated)
-        report_path = self.root / "ai_layer/generation.json"
+        report_path = self.project / "ai_layer/generation.json"
         report = json.loads(report_path.read_text())
         report.update(config_sha256=sha256(self.config_file), assets=assets)
         report_path.write_text(json.dumps(report))
@@ -349,7 +386,7 @@ class ProjectScripts(unittest.TestCase):
                 (self.project / method[key]).write_bytes(f"{name} {key}".encode())
         self.write_config()
         self.assertEqual(selected_project(self.solution_file)[4]["methods"], self.network["methods"])
-        report_path = self.root / "ai_layer/generation.json"
+        report_path = self.project / "ai_layer/generation.json"
         report = json.loads(report_path.read_text())
         report.pop("safetensors_sha256")
         report.update(cache_provenance(self.project, self.network))

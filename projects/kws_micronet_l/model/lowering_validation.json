@@ -5,20 +5,20 @@
     "graph": "16e00b6f4e4a2ed82750644a1f38d4febde4404809f345af3a267f9780c68a9a",
     "safetensors": "e5122224befd06c6cb9fe2a05bedc6a328d1762382364339a0283f6247069002"
   },
-  "config_sha256": "af1465bbe01f382726feab48fd4be5fc485576bae718f602d1f6095ccf173fa3",
-  "pte_sha256": "d4bb9119b0350ba7e994b1e6984610f1e8c85ed1017eb04039ff85177413d9f2",
+  "config_sha256": "810f375426eebc7f1e8da0d6dafc8fbaf087338e76763b6f40a519a3a081d45a",
+  "pte_sha256": "19344cbf4321d1dc4bce29970d8baca7c22dfbbd7cad6bdf9f125b2c30f945e4",
   "pte_bytes": 559712,
   "delegates": 1,
   "cpu_operators": [],
   "quantize_is_noop": true,
   "executorch": "1.4.1",
   "full_generator_cli_passed": true,
-  "shared_ai_layer_modified": false,
+  "project_ai_layer_modified": false,
   "scope": "Host create_ai_layer CLI through ExecuTorch and Vela; no firmware build/run",
   "sources": {
-    "create_ai_layer.py": "cb07841e218490e2bcdfe7c63a2d5edd414b1e73569f492fa68dc375d24a1c9d",
-    "quantized_model.py": "6a775830b2af0265f24db3b7b206c76c4e975e82488bd9664dee3b0b3278a2ef",
-    "project_config.py": "4aaf2f628434f3cea24c7b1b9ff6a86b325b9997ad0d49c19f0579f67d069b2b"
+    "create_ai_layer.py": "a94e17038063d40d9e0a3b2222b7b56e8e1a05457e64cfb72412dada631530e4",
+    "quantized_model.py": "7e788a237074351699f63be3da4ee2232654e9bfb607aff81b709ff31764a68a",
+    "project_config.py": "a09294719a3afa82667d604c6d7ee79632ba819134e7c2e7714f6259fb1139f5"
   },
-  "check_sha256": "1a34c9d08d2af49bc09d3dc1c01e1258a18d7fb12e5bef142375f96431987955"
+  "check_sha256": "6fc2e63d897eadf5b9a945eab1ee234a82d407223dbec809a4a4e1cac2faf24c"
 }

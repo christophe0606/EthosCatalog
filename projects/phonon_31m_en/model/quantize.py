@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Calibrate the complete trained q8 Phonon frame and attempt Ethos-U lowering.
 
-Direct execution writes only project-local artifacts, never root ai_layer.
+Direct execution writes only project-local artifacts, without generating the project ai_layer.
 Synthetic calibration is for compiler feasibility; it is not a speech-quality
 validation or permission to publish an unvalidated firmware model.
 """

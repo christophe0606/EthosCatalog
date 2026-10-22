@@ -97,7 +97,7 @@ project:
   layers:
     - layer: $Board-Layer$
       type: Board
-    - layer: $AI-Layer$
+    - layer: ai_layer/ai_layer.clayer.yml
       type: AI
       for-context:
         - .Debug

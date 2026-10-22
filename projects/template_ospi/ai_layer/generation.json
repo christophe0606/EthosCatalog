@@ -1,0 +1,20 @@
+{
+  "project": "projects/template_ospi/template_ospi.cproject.yml",
+  "config_sha256": "1fe4054a9626706077d4fb68652db4f45e40430c045077bc4d689b549fb67f46",
+  "pte_sha256": "3674e8befb4ff5e71bfcfd6c7daf3475c7acd8b0169c5c1652d207176d2a2df3",
+  "graph_sha256": "f0504907d4d456d553cd4ec1380177533c0389fe46281c86c6b77edfc7e641cd",
+  "safetensors_sha256": "cabb2c73b774d059d6f34ffbc5d9ac61d024528396c0e3435675b45e868ed1aa",
+  "assets": {},
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 1,
+  "operators": [
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 2816
+}

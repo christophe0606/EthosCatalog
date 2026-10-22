@@ -181,6 +181,10 @@ been exercised with the supplied template on DevKit-E8.
 
     The VS Code alternative is **Terminal > Run Task > Model: Create AI layer**.
     Confirm that `[ai_layer] selected project:` names `template_ospi.cproject.yml`.
+    The layer and PTE are in `projects/template_ospi/ai_layer/`. Generate them
+    once and regenerate only after model, quantization, Vela or storage changes;
+    switching target sets preserves this project's layer. The model-only flash
+    generator reads this same project-local PTE.
     If the model or quantization policy changed, use **Model: Requantize and
     create AI layer**, or run `uv run scripts/create_ai_layer.py --quantize`
     instead.
@@ -189,8 +193,10 @@ been exercised with the supplied template on DevKit-E8.
     its `programming` list contains an algorithm whose `start` and `size` cover
     the entire configured OSPI partition. If it does not, complete the board's
     memory/flash-algorithm configuration and rebuild before continuing.
-    `--algorithm` in the next command replaces an existing covering algorithm;
-    it does not create a missing programming entry.
+    `--algorithm` in the next command replaces a unique covering algorithm. If
+    several entries cover the partition, it selects the matching existing
+    algorithm and preserves that entry's RAM/range settings. It does not create
+    a missing programming entry.
 13. Prepare the model-only programming file:
 
     ```powershell

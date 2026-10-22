@@ -1,4 +1,4 @@
-# List application projects below; select one in the CMSIS UI and regenerate ai_layer.
+# Each application owns its generated ai_layer; select a target set in the CMSIS UI.
 solution:
   created-for: CMSIS-Toolbox@2.14.1
   cdefault:
@@ -32,7 +32,6 @@ solution:
           size: 0x04000000
       variables:
         - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
-        - AI-Layer: $SolutionDir()$/ai_layer/ai_layer.clayer.yml
       target-set:
         - set: Debug
           images:
@@ -120,7 +119,7 @@ solution:
             clock: 10000000
             protocol: swd
           images:
-            - project-context: template_mram.Release
+            - project-context: object_detection.Release
   build-types:
     - type: FlashLoader
       debug: on
@@ -164,5 +163,3 @@ solution:
     npu:
       type: Ethos-U85
       macs: 256
-    model:
-      clayer: $AI-Layer$

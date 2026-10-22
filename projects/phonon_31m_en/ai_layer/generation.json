@@ -1,0 +1,75 @@
+{
+  "project": "projects/phonon_31m_en/phonon_31m_en.cproject.yml",
+  "config_sha256": "45ae6a263baea6fa8282a4fd35a04f05d6eecf6f38aba71cc7a74f00e3f7623d",
+  "pte_sha256": "a2f0a57d8b2f7d628aeeea7f391c2070445b215e4398fed967b6161363b90dd5",
+  "method_caches": {
+    "backbone": {
+      "graph_sha256": "c81c4b46efdf0993eb8ed4aab1415b12fbd42a4273677d2711589248538e0e6c",
+      "safetensors_sha256": "1d9eaf836e1b76498e5e63a5ed43a976bfa1f94629fd1cef8230f7ce84145363"
+    },
+    "synthesize": {
+      "graph_sha256": "818031adb2d7e147ff27ac347fc4406e127eb56bad35793ce9d1724c27f13958",
+      "safetensors_sha256": "b10a20bab13646e83aa72514763b9a249c59cb1ad6a02fc57a6dba86ed518692"
+    },
+    "text_embedding": {
+      "graph_sha256": "0acb7cb5ce25beb95acdd0d15a90d894637ede3d5caee8db0a0a56cc3035c288",
+      "safetensors_sha256": "d1dbcd76b3930067e27c6d39b7c3f5b7f7ed54a148b3b38f99f91686882cba95"
+    }
+  },
+  "assets": {
+    "voice_prefix": {
+      "file": "model/weights/voice_prefix.bin",
+      "address": 3271557120,
+      "size": 12582912,
+      "sha256": "45bcb0df2bdc153a47568847dafa7a3b14c68fdb7d3b73087ce0ad6ea51deb2b",
+      "crc32": 2642843943
+    },
+    "bos_embedding": {
+      "file": "model/weights/bos_embedding.bin",
+      "address": 3284140032,
+      "size": 2048,
+      "sha256": "cd56ca9e3fcbb90c9f8d7bc995339a2aaeb0560d16617604f8113e3003d326b3",
+      "crc32": 3697084148
+    }
+  },
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Dedicated_Sram"
+  },
+  "delegates": 61,
+  "operators": [
+    "Portable add",
+    "Portable arange",
+    "Portable bmm",
+    "Portable cat",
+    "Portable clone_dim_order",
+    "Portable cos",
+    "Portable elu",
+    "Portable embedding",
+    "Portable expand_copy",
+    "Portable full_like",
+    "Portable ge",
+    "Portable gelu",
+    "Portable le",
+    "Portable mean",
+    "Portable mul",
+    "Portable permute_copy",
+    "Portable rsqrt",
+    "Portable select_copy",
+    "Portable sigmoid",
+    "Portable sin",
+    "Portable slice_copy",
+    "Portable softmax",
+    "Portable split_with_sizes_copy",
+    "Portable squeeze_copy",
+    "Portable sub",
+    "Portable unsqueeze_copy",
+    "Portable view_copy",
+    "Portable where",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 44678800
+}

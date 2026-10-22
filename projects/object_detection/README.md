@@ -25,7 +25,7 @@ conditions, as detailed in that notice.
 ## Run
 
 Select `DevKit-E8@Detection_Release` and enable **only** `object_detection.Release`.
-The shared `ai_layer/generation.json` must identify `projects/object_detection`.
+The project-local `projects/object_detection/ai_layer/generation.json` must identify `projects/object_detection`.
 Build and load with the CMSIS Developer Assistant. UART4 is COM5, 115200 8N1.
 Startup validates four network fixtures, benchmarks 100 forwards, then checks
 the actual optimized C grayscale conversion and two-face decoder before starting

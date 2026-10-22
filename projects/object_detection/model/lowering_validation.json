@@ -6,19 +6,19 @@
     "safetensors": "dca436eca716156d6be04ee86ed8bd4bf7ca65486e774d0e56b4be1056ac04c2"
   },
   "config_sha256": "ba7b8e367ca0faa6ced667ad62f5e9d3613369e68e739f56d0d3931f3e95edac",
-  "pte_sha256": "2b8b90bfe54c48f937ce81d068633b413bb5daaa404a7946437ebc1b7b543888",
+  "pte_sha256": "c19540a2408044aaeae624a5c58b5486c3773b70a35e9485ca026060d4d2983e",
   "pte_bytes": 407472,
   "delegates": 1,
   "cpu_operators": [],
   "quantize_is_noop": true,
   "executorch": "1.4.1",
   "full_generator_cli_passed": true,
-  "shared_ai_layer_modified": false,
+  "project_ai_layer_modified": false,
   "scope": "Host create_ai_layer CLI through ExecuTorch and Vela; no firmware build/run",
   "sources": {
-    "create_ai_layer.py": "cb07841e218490e2bcdfe7c63a2d5edd414b1e73569f492fa68dc375d24a1c9d",
-    "quantized_model.py": "6a775830b2af0265f24db3b7b206c76c4e975e82488bd9664dee3b0b3278a2ef",
-    "project_config.py": "e3a7742bc42399b41ed80a47e3bcf18443e1706b302e60c87099f6583b5207c5"
+    "create_ai_layer.py": "a94e17038063d40d9e0a3b2222b7b56e8e1a05457e64cfb72412dada631530e4",
+    "quantized_model.py": "7e788a237074351699f63be3da4ee2232654e9bfb607aff81b709ff31764a68a",
+    "project_config.py": "a09294719a3afa82667d604c6d7ee79632ba819134e7c2e7714f6259fb1139f5"
   },
-  "check_sha256": "1458759cb47b98072522fc63e02650064dd814f219526e9bcd9df94a5584b6ea"
+  "check_sha256": "3ccbd6aba5adc09dd4f95a11b1af25e13b04d5bab7d7778b62d8e78a4fa21a58"
 }

@@ -198,5 +198,5 @@ repeated numerical acceptance and new complete-path timing before application
 coding. Optional LCD work remains deferred.
 
 Preserve unrelated existing edits. Board/build/debug/serial and target manuals
-use CMSIS Developer Assistant tools only. Build only the selected Phonon project
-because the generated root ai_layer is shared.
+use CMSIS Developer Assistant tools only. The Phonon cproject references its own generated `ai_layer/`. Switching target
+sets preserves all project layers.

@@ -1,0 +1,17 @@
+{
+  "project": "projects/kws_micronet_l/kws_micronet_l.cproject.yml",
+  "config_sha256": "810f375426eebc7f1e8da0d6dafc8fbaf087338e76763b6f40a519a3a081d45a",
+  "pte_sha256": "4446aff4ae5ffdfac6185bbd05187be3a324632bbe5dc36dd3efd0dded0fffbd",
+  "graph_sha256": "16e00b6f4e4a2ed82750644a1f38d4febde4404809f345af3a267f9780c68a9a",
+  "safetensors_sha256": "e5122224befd06c6cb9fe2a05bedc6a328d1762382364339a0283f6247069002",
+  "assets": {},
+  "flash_ospi": false,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_MRAM",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 1,
+  "operators": [],
+  "pte_bytes": 559680
+}

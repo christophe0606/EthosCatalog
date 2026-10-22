@@ -42,11 +42,12 @@ def main():
         shutil.copyfile(ROOT / 'schema/network.schema.yml', temp / 'schema/network.schema.yml')
         env = dict(os.environ, CMSIS_PACK_ROOT=str(pack.parents[2]))
         # The real CLI generates all layer files here, including the --quantize
-        # subprocess. The original shared ai_layer and CMSIS selection are untouched.
+        # subprocess. The original project ai_layer and CMSIS selection are untouched.
         subprocess.run([sys.executable, str(ROOT / 'scripts/create_ai_layer.py'),
                         '--solution', str(temp / 'EthosCatalog.csolution.yml'),
                         '--project', 'kws_micronet_l', '--quantize'], cwd=temp, env=env, check=True)
-        layer = temp / 'ai_layer'
+        layer = temp / 'projects/kws_micronet_l/ai_layer'
+        assert not (temp / 'ai_layer').exists()
         generated = json.loads((layer / 'generation.json').read_text())
         assert generated['delegates'] == 1, generated
         assert generated['operators'] == [], generated
@@ -62,7 +63,7 @@ def main():
               'pte_sha256': generated['pte_sha256'], 'pte_bytes': generated['pte_bytes'],
               'delegates': generated['delegates'], 'cpu_operators': generated['operators'],
               'quantize_is_noop': True, 'executorch': version,
-              'full_generator_cli_passed': True, 'shared_ai_layer_modified': False,
+              'full_generator_cli_passed': True, 'project_ai_layer_modified': False,
               'scope': 'Host create_ai_layer CLI through ExecuTorch and Vela; no firmware build/run'}
     report['sources'] = {name: sha256(ROOT / 'scripts' / name)
                          for name in ('create_ai_layer.py', 'quantized_model.py', 'project_config.py')}

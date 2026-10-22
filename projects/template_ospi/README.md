@@ -65,6 +65,10 @@ Rev. A14, May 12, 2026, page 24, Table 6.6.
    parameters, includes, metadata and DOT/PDF diagrams. Graphviz PDF failure
    emits a warning and leaves the other outputs usable.
 
+   The layer is written to `projects/template_ospi/ai_layer/` and used directly
+   by this cproject. Switching applications preserves it. Regenerate after model,
+   quantization, Vela or storage changes, then reprogram OSPI if the PTE changes.
+
 2. Select **DevKit-E8@OSPI_Release** in the CMSIS UI.
 3. Run **CMSIS: Build Solution** from the Command Palette.
 4. To build the programming preparation firmware, select

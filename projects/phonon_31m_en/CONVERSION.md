@@ -195,7 +195,7 @@ It serializes 61 actual Ethos-U85-256 delegates (24 backbone, 37 synthesis),
 The source caches are produced before any Vela conversion.
 
 The repository CLI subsequently generated the hardware-programmed Shared_Sram
-`ai_layer/model.pte`: **44,675,472 bytes**, SHA-256
+`projects/phonon_31m_en/ai_layer/model.pte`: **44,675,472 bytes**, SHA-256
 `cf07d603198495055f45bdc6eae73d119823c0d196cff65e4bf84c849844fab7`.
 It has the same three methods, 61 delegates and planned arena sizes. Record
 the actual generated PTE hash for firmware/programming; do not substitute the
@@ -288,12 +288,12 @@ python projects/phonon_31m_en/model/lower_stages.py --memory-mode Dedicated_Sram
 experiment. The current accepted-for-feasibility caches use capacity 512;
 a smaller export must reject/split any sequence exceeding its complete
 voice+text+generation budget, never silently truncate context. All scripts
-write project-local artifacts and do not replace root `ai_layer`.
+write model artifacts and do not regenerate the project's `ai_layer/`.
 
 The source weights, method caches and generated startup binaries are ignored
 by Git. On a fresh checkout run the import/export/startup commands before
 generating the project AI layer; the existing benchmark fixture header is
-bound to the recorded caches, so regenerate it after any export. Root generation
+bound to the recorded caches, so regenerate it after any export. AI layer generation
 uses `scripts/create_ai_layer.py --project projects/phonon_31m_en/phonon_31m_en.cproject.yml`.
 Select and build only the Phonon project through CMSIS, then program and verify
 the exact resulting PTE/assets before model use. A successful host export is

@@ -1,0 +1,17 @@
+{
+  "project": "projects/object_detection/object_detection.cproject.yml",
+  "config_sha256": "ba7b8e367ca0faa6ced667ad62f5e9d3613369e68e739f56d0d3931f3e95edac",
+  "pte_sha256": "25c3a095d1a80d51ccdf8e3ac64b7d480ce63c93da519003da665c1219300244",
+  "graph_sha256": "0326dc8fd2bcd70f28a3ce38dbc6703bacd5da4ed46aa594b1b2c608b2c83225",
+  "safetensors_sha256": "dca436eca716156d6be04ee86ed8bd4bf7ca65486e774d0e56b4be1056ac04c2",
+  "assets": {},
+  "flash_ospi": false,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_MRAM",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 1,
+  "operators": [],
+  "pte_bytes": 407440
+}

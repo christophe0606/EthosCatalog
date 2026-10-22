@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/phonon_31m_en/DevKit-E8/Release/phonon_31m_en.axf",
+            "program": "out/object_detection/DevKit-E8/Release/object_detection.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -46,7 +46,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/phonon_31m_en/DevKit-E8/Release/phonon_31m_en.axf",
+            "program": "out/object_detection/DevKit-E8/Release/object_detection.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

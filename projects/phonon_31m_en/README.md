@@ -30,6 +30,11 @@ Reproduce the model caches and startup assets locally using CONVERSION.md before
 building. Remove this CI policy when the project is accepted and its model
 reproduction is integrated into automated builds.
 
+Generate its project-local layer with
+`uv run scripts/create_ai_layer.py --project phonon_31m_en`. The cproject uses
+`projects/phonon_31m_en/ai_layer/ai_layer.clayer.yml`; other applications retain
+their own layers when Phonon is generated or built.
+
 The retained `EthosGain` wrapper is reusable across compatible signal-processing
 models, as in the MRAM/OSPI templates. `LCD` and `SendToLCD` retain the template's
 application-specific spectrum/touch/statistics policies and remain local UI

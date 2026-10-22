@@ -23,3 +23,5 @@ have not yet been implemented in this repository.
 
 See the [build and usage guide](documentation/HOWTO.md) for setup instructions
 and details on building, running and extending the projects.
+Each application keeps its generated AI layer in `projects/<project>/ai_layer/`,
+so switching projects does not require regenerating the model.

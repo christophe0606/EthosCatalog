@@ -84,7 +84,8 @@ There is one sequential build loop, with no compiler or project matrix:
 1. Run the project's `app.py` to regenerate its Stream graph.
 2. Run `scripts/create_ai_layer.py --project <cproject>` to generate its AI layer.
 3. Build only that project's target sets with `--active <target>@<set>` and CLANG.
-4. Move to the next project and regenerate the shared AI layer for it.
+4. Move to the next project and generate its project-local AI layer. Previously
+   generated project layers remain available; switching projects does not replace them.
 
 A generation failure skips that project's builds. Other projects still get their
 own generation attempt. A build failure does not stop the remaining target sets

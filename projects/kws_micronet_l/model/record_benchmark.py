@@ -76,10 +76,10 @@ def main():
     for sample in samples:
         assert abs(float(sample[2])-1000*int(sample[1])/npu_hz) <= .000001
         assert abs(float(sample[4])-1000*int(sample[3])/timer_hz) <= .000001
-    generation = json.loads((ROOT / "ai_layer/generation.json").read_text())
+    generation = json.loads((MODEL.parent / "ai_layer/generation.json").read_text())
     assert generation["project"] == "projects/kws_micronet_l/kws_micronet_l.cproject.yml"
     assert generation["delegates"] == 1 and generation["operators"] == []
-    assert generation["pte_sha256"] == sha256(ROOT / "ai_layer/model.pte") and int(model_bytes) == generation["pte_bytes"]
+    assert generation["pte_sha256"] == sha256(MODEL.parent / "ai_layer/model.pte") and int(model_bytes) == generation["pte_bytes"]
     assert generation["safetensors_sha256"] == fixtures["safetensors_sha256"]
     firmware = ROOT / "out/kws_micronet_l/DevKit-E8/Release/kws_micronet_l.axf"
     build = yaml.safe_load(firmware.with_name("kws_micronet_l.Release+DevKit-E8.cbuild.yml").read_text())["build"]
