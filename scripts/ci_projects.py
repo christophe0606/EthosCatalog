@@ -388,9 +388,13 @@ def build(root, names, report):
 
 def finish(report):
     steps = json.loads(os.environ.get("CI_STEPS", "{}"))
+    setup_logs = {"system": "system-setup.log", "executorch": "python-setup.log"}
     for name, step in steps.items():
         if step.get("outcome") == "failure":
-            report.add("Workflow", name, [f"Step '{name}' failed. See the Actions job log."])
+            log = setup_logs.get(name)
+            if log and not (report.directory / log).is_file():
+                log = None
+            report.add("Workflow", name, [f"Step '{name}' failed. See the Actions job log."], log=log)
     if report.data["projects"] and steps and steps.get("build", {}).get("outcome") == "skipped":
         report.add("Workflow", "LLVM builds", ["Builds were skipped because a required setup step failed."])
     _, failed = report.markdown()

@@ -321,6 +321,26 @@ class CIProjects(unittest.TestCase):
         self.assertIn("Builds were skipped", self.errors())
         self.assertIn("**FAIL**", (self.root / "summary").read_text())
 
+    def test_setup_failure_report_embeds_captured_output_when_available(self):
+        for step, filename in (("system", "system-setup.log"),
+                               ("executorch", "python-setup.log")):
+            with self.subTest(step=step):
+                report = ci.Report(self.root / step)
+                diagnostic = "E: Failed to fetch package: 503 Service Unavailable"
+                (report.directory / filename).write_text(diagnostic + "\n", encoding="utf-8")
+                with patch.dict(os.environ, {"CI_STEPS": json.dumps({step: {"outcome": "failure"}})}):
+                    self.assertEqual(ci.finish(report), 1)
+                self.assertEqual(report.data["checks"][-1]["log"], filename)
+                text = (report.directory / "validation-errors.md").read_text(encoding="utf-8")
+                self.assertIn(diagnostic, text)
+                self.assertIn(f"[{filename}]({filename})", text)
+
+    def test_setup_failure_without_captured_output_still_reports_failure(self):
+        with patch.dict(os.environ, {"CI_STEPS": json.dumps({"system": {"outcome": "failure"}})}):
+            self.assertEqual(ci.finish(self.report), 1)
+        self.assertIsNone(self.report.data["checks"][-1]["log"])
+        self.assertIn("Actions job log", self.errors())
+
     def test_documentation_only_change_passes_with_no_build(self):
         with patch.dict(os.environ, {"CI_STEPS": json.dumps({"build": {"outcome": "skipped"}})}):
             self.assertEqual(ci.finish(self.report), 0)

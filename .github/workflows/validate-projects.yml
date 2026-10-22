@@ -72,9 +72,12 @@ jobs:
         if: steps.changes.outputs.has_projects == 'true'
         continue-on-error: true
         run: |
-          sudo add-apt-repository -y ppa:deadsnakes/ppa
-          sudo apt-get update
-          sudo apt-get install -y libpython3.12 libtinfo5 graphviz
+          mkdir -p ci-reports
+          {
+            sudo add-apt-repository -y ppa:deadsnakes/ppa
+            sudo apt-get -o Acquire::Retries=5 update
+            sudo apt-get -o Acquire::Retries=5 install -y libpython3.12 libtinfo5 graphviz
+          } 2>&1 | tee ci-reports/system-setup.log
 
       - name: Activate vcpkg
         id: vcpkg

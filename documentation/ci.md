@@ -64,6 +64,8 @@ Remove the explicit policy when a port is accepted and reproducible in CI.
 
 The Arm setup follows CMSIS-DSP's `runtest.yaml`: Ubuntu 22.04, Python 3.12,
 system dependencies, the CMSIS vcpkg action and Arm license activation.
+System package downloads use APT's `Acquire::Retries=5` to tolerate temporary
+package-server failures such as HTTP 503. Setup output is saved in the report.
 The [CI manifest](../.github/ci/vcpkg-configuration.json) adds LLVM Embedded
 22.1.0. It retains armclang to provide the license tooling used by the reference
 setup. The license action uses its default evaluation configuration.
@@ -105,14 +107,16 @@ Open the Actions run and download **project-validation-report** from its
 - `validation-errors.md`: the failed checks and diagnostics, grouped by project,
   including full output for failed generation and build commands.
 - `command-*.log`: complete command output, including successful commands.
+- `system-setup.log`: output from system repository setup and package installation.
 - `python-setup.log`: output from `setup_venv.py`.
 - `results.json`: the selected work list and check results.
 
 The job summary lists failed checks. The report and artifact steps run even if
 validation, tool activation, Python setup or compilation fails. Any recorded
 failure makes the job fail. Reports are also uploaded for successful runs and
-retained for 14 days. Setup action failures are identified by step name, with
-their detailed output in the Actions job log.
+retained for 14 days. System package and ExecuTorch setup failures include their
+captured output in `validation-errors.md`. Other setup action failures are
+identified by step name, with their detailed output in the Actions job log.
 
 ## Local checks
 
