@@ -72,39 +72,49 @@ int Engine::stage(unsigned method,Stroke &point) {
     if(method==0 && s.steps>=s.limit) return 2;
     float xy[3]={s.previous.dx,s.previous.dy,s.previous.pen_up};
     if(method<=1) {
-        std::memcpy(input_,s.window,73*4); std::memcpy(input_+73,xy,3*4);
+        // Attention reuses the old window/xy packed for lstm1. Only h0 changed.
+        if(method==0) {
+            std::memcpy(input_,s.window,73*sizeof(float));
+            std::memcpy(input_+73,xy,3*sizeof(float));
+        }
         std::memcpy(input_+76,s.h[0],400*4);
     } else if(method<=3) {
         const unsigned k=method-1;
-        std::memcpy(input_,xy,3*4); std::memcpy(input_+3,s.h[k-1],400*4);
-        std::memcpy(input_+403,s.window,73*4); std::memcpy(input_+476,s.h[k],400*4);
+        // lstm3 keeps the xy/new window packed for lstm2; both h slices change.
+        if(method==2) {
+            std::memcpy(input_,xy,3*sizeof(float));
+            std::memcpy(input_+403,s.window,73*sizeof(float));
+        }
+        std::memcpy(input_+3,s.h[k-1],400*sizeof(float));
+        std::memcpy(input_+476,s.h[k],400*sizeof(float));
     }
-    int error=dense(method,method==4?s.h[2]:input_,output_); if(error) return error;
+    const float *output=nullptr;
+    int error=dense_view(method,method==4?s.h[2]:input_,output); if(error) return error;
     next_method_=(method+1)%MethodCount;
-    if(method==1) window(output_,s);
-    else if(method<4) cell(output_,s.h[method==0?0:method-1],s.c[method==0?0:method-1]);
+    if(method==1) window(output,s);
+    else if(method<4) cell(output,s.h[method==0?0:method-1],s.c[method==0?0:method-1]);
     if(method<4) return 0;
-    float pen=sigmoid(output_[120]);
+    float pen=sigmoid(output[120]);
     pen=pen<.01f?0:std::clamp(pen,1e-8f,1.0f-1e-8f);
     unsigned best=0; for(unsigned u=1;u<s.length;++u) if(s.phi[u]>s.phi[best]) best=u;
     ++s.steps;
     // The source termination pen draw is independent of the emitted pen draw.
     if(best==s.length-1 && uniform()<pen) return 1;
-    float p[20],total=0,maxlog=output_[0]*1.5f;
-    for(unsigned k=1;k<20;++k) maxlog=std::max(maxlog,output_[k]*1.5f);
-    for(unsigned k=0;k<20;++k) { p[k]=std::exp(output_[k]*1.5f-maxlog); total+=p[k]; }
+    float p[20],total=0,maxlog=output[0]*1.5f;
+    for(unsigned k=1;k<20;++k) maxlog=std::max(maxlog,output[k]*1.5f);
+    for(unsigned k=0;k<20;++k) { p[k]=std::exp(output[k]*1.5f-maxlog); total+=p[k]; }
     float threshold_total=0;
     for(unsigned k=0;k<20;++k) { p[k]/=total; if(p[k]<.01f) p[k]=0; threshold_total+=p[k]; }
     float draw=uniform()*threshold_total,cumulative=0; unsigned chosen=19;
     for(unsigned k=0;k<20;++k) { cumulative+=p[k]; if(draw<cumulative) { chosen=k; break; } }
     float radius=std::sqrt(-2.0f*std::log(uniform())), angle=6.28318530718f*uniform();
     float z1=radius*std::cos(angle),z2=radius*std::sin(angle);
-    float sx=std::max(std::exp(output_[20+chosen]-.5f),.0001f);
-    float sy=std::max(std::exp(output_[40+chosen]-.5f),.0001f);
+    float sx=std::max(std::exp(output[20+chosen]-.5f),.0001f);
+    float sy=std::max(std::exp(output[40+chosen]-.5f),.0001f);
     // 1e-8 rounds to zero at 1 in float32. Use the nearest interior float.
-    float rho=std::clamp(std::tanh(output_[60+chosen]),-.9999999403953552f,.9999999403953552f);
-    point={output_[80+chosen]+sx*z1,
-        output_[100+chosen]+sy*(rho*z1+std::sqrt(std::max(0.0f,1-rho*rho))*z2),
+    float rho=std::clamp(std::tanh(output[60+chosen]),-.9999999403953552f,.9999999403953552f);
+    point={output[80+chosen]+sx*z1,
+        output[100+chosen]+sy*(rho*z1+std::sqrt(std::max(0.0f,1-rho*rho))*z2),
         uniform()<pen?1.0f:0.0f};
     s.previous=point;
     return finite()?0:-425;

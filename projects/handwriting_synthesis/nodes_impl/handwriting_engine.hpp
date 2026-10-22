@@ -35,10 +35,13 @@ public:
     static void cell(const float *gates, float *h, float *c);
     static void window(const float *attention, State &state);
 private:
+    // Borrowed method output: consume before another execution or module unload.
+    // The loaded ExecuTorch method owns its tensor and planned storage.
+    int dense_view(unsigned method, const float *input, const float *&output, uint32_t *ticks=nullptr);
     float uniform();
     arm::embedded::EmbeddedModule *module_;
     State state_{};
     unsigned next_method_=0;
-    alignas(32) float input_[876], output_[1600];
+    alignas(32) float input_[876];
 };
 }

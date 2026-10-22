@@ -22,6 +22,9 @@ Final timing and acceptance evidence are recorded in
 ## Terminal behavior
 
 - Enter **1..75 supported ASCII characters**. CRLF submits once; LF also submits.
+- The demo echoes characters while you type; terminal local echo should be off.
+  Backspace/Delete erases the displayed character, and Ctrl-U/Escape erases the
+  unfinished line. Q/X/Z echo as their normalized lowercase characters.
 - Backspace/Delete removes the last typed byte, including an unsupported byte.
   Ctrl-U or Escape clears the unfinished input. Empty lines do not replace the canvas.
 - Uppercase Q, X and Z normalize to lowercase; the accepted line is printed on UART.
@@ -56,6 +59,13 @@ owns recurrent state and sends each stroke through five separate model nodes:
 PTE module. Each node runs exactly one dense NPU method and its associated CPU
 recurrence, attention or sampling; the final node returns to the controller.
 All model nodes and the controller execute serially on the event thread.
+A stage consumes the ExecuTorch method's output directly before another model
+executes. The engine reuses unchanged packed window/coordinate slices between
+adjacent stages. Together these remove 20,412 copied bytes per stroke and the
+6,400-byte output staging buffer (Engine: 20,288 to 13,888 bytes). The small
+recurrent-state copies remain on the CPU in DTCM: measured DMA transfers were
+slower. The isolated output-copy comparison saved about 0.05% of step time;
+see [transfer measurements and reproduction](TRANSFER_OPTIMIZATION.md).
 A completion acknowledgment releases
 the next request after the prior result has been rendered. Sentence ownership,
 layout, styling and animation are project nodes; the shared board layer supplies

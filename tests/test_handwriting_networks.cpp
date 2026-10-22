@@ -28,7 +28,11 @@ static std::vector<unsigned> calls;
 static int failing_method=-1;
 static bool complete=false;
 namespace handwriting {
-int Engine::dense(unsigned method,const float* input,float* output,uint32_t*) {
+int Engine::dense_view(unsigned method,const float* input,const float*& view,uint32_t*) {
+    // Every method reuses and overwrites this storage, like a shared arena.
+    // The production stage must consume its view before invoking another method.
+    static float output[1600];
+    view=nullptr;
     calls.push_back(method);
     if(int(method)==failing_method) return -421;
     const auto& s=state();
@@ -50,6 +54,7 @@ int Engine::dense(unsigned method,const float* input,float* output,uint32_t*) {
         if(complete) std::fill(output+20,output+30,25.0f*(s.length-1));
     }
     if(method==4) output[120]=complete?100.0f:-100.0f;
+    view=output;
     ++ethos_benchmark.invocations; ethos_benchmark.cycles+=100; ethos_benchmark.active_cycles+=100;
     return 0;
 }
@@ -162,5 +167,22 @@ int main() {
     handwriting::Work work{&engine,{},0,0}; queue.reject=true;
     Event advance(103,kNormalPriority,uint64_t(reinterpret_cast<uintptr_t>(&work)));
     assert(attention.processEvent(0,std::move(advance))==CG_BUFFER_ERROR && stats.event_drops==1);
+    // A failed stage may be retried without losing the retained packed prefix.
+    // A replacement sentence must rebuild that prefix at stage 0.
+    for(unsigned failure=0;failure<5;++failure) {
+        failing_method=-1; calls.clear();
+        assert(engine.begin("AB")==0);
+        for(unsigned method=0;method<5;++method) {
+            if(method==failure) {
+                failing_method=int(method);
+                const auto before=engine.state();
+                assert(engine.stage(method,point)==-421);
+                assert(std::memcmp(&before,&engine.state(),sizeof(before))==0);
+                failing_method=-1;
+            }
+            assert(engine.stage(method,point)==0);
+        }
+        assert(engine.state().steps==1 && engine.finite());
+    }
     std::cout<<"PASS: five model nodes, recurrence, stage order, backpressure, replacement, EOS, step bound and errors\n";
 }

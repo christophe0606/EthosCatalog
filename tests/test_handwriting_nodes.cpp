@@ -8,6 +8,10 @@
 #include <fstream>
 #include <memory_resource>
 #include <limits>
+#if defined(_WIN32)
+#include <fcntl.h>
+#include <io.h>
+#endif
 std::pmr::synchronized_pool_resource pool;
 void* EventQueue::handlerData=nullptr;
 EventQueue::AppHandler EventQueue::handler=nullptr;
@@ -52,6 +56,10 @@ static int acquire() {
     held_count=0;return 0;
 }
 int main(int argc,char** argv) {
+#if defined(_WIN32)
+    // Compare the actual UART bytes, without Windows text-mode LF conversion.
+    _setmode(_fileno(stdout),_O_BINARY);
+#endif
     StreamStats stats{}; HardwareParams hw{}; hw.stats=&stats;hw.lcd_init=display_init;hw.lcd_acquire=acquire;hw.lcd_present=present;
     UartBlock block{};SentenceSnapshot snapshot{};
     FIFO<UartBlock,1,1,0> bytes(&block); FIFO<SentenceSnapshot,1,1,0> text(&snapshot);

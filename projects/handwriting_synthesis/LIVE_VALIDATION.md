@@ -245,3 +245,38 @@ ordering, EOS/step limits, dense errors and queue overflow. Two graph regression
 tests verify all event ports and shared-wrapper code generation. Graph generation
 passed from both working directories with three dataflow firings and 120-byte
 FIFO storage; the seven shared graph tests and catalog test also passed.
+
+## 2026-10-22: recurrent transfer optimization
+
+The production engine now consumes borrowed ExecuTorch outputs within each
+stage and retains unchanged window/coordinate input slices between dependent
+methods. This removes 20,412 copied bytes per stroke and reduces Engine from
+20,288 to 13,888 bytes. The CPU retains the small DTCM state copies: DMA1 was
+slower at every tested size. The same-binary output-copy comparison saved about
+16.26 us (0.048%) per 33.6 ms step. All six 64-step trajectories matched the
+original hash `65bfb6d3`; no large latency or sentence-throughput improvement
+is claimed. See [transfer measurements](TRANSFER_OPTIMIZATION.md).
+
+Both host C++ suites, the renderer's 1,952-point fixture, stage-failure/retry
+checks at all five methods and both graph regressions passed. With the benchmark
+disabled, Release build b-4 and CMSIS load l-5 succeeded. All startup fixtures
+and CRC passed and the normal demo reached READY. UART `Hi` completed with
+49 points on one line in 1,753 ticks at 1 kHz. This adds functional validation;
+it does not add user visual acceptance. MRAM LOAD usage is 517,488 bytes and
+SRAM0 LOAD usage 1,732,624 bytes. The target remains running, with serial released.
+
+## 2026-10-22: UART input echo
+
+SentenceInput now echoes each input block immediately, including partial lines.
+Backspace/Delete emits backspace-space-backspace; Ctrl-U/Escape erases the
+unfinished line. Q/X/Z echo normalized lowercase, invalid nonprinting bytes
+display as `?`, and CRLF submits only once. Enter and editor status messages use
+CRLF. No graph or shared UART-driver change was required.
+
+Release build b-6 and CMSIS load l-7 passed. Startup fixtures/CRC reached READY.
+The board returned bytes `0d 48 69 78` after sending `Hix` without a terminator,
+confirming echo before Enter. Sending backspace followed by CRLF returned
+`08 20 08 0d 0a` followed by exactly one `Sentence 1 (2 chars): Hi` response.
+Host suites passed, including byte-level echo/edit/normalization/CRLF assertions;
+the Windows host uses binary stdout to avoid host-only newline translation.
+The board was left running and COM7 released.

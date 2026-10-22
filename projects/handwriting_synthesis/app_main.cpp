@@ -14,6 +14,9 @@
 #include "main.h"
 #include "se_services_port.h"
 #include "stream_init.hpp"
+#if defined(HANDWRITING_TRANSFER_BENCHMARK)
+int handwriting_transfer_benchmark(handwriting::Engine &engine);
+#endif
 extern "C" {
 volatile int32_t pipeline_error;
 volatile uint32_t handwriting_test_passed, handwriting_benchmark_complete;
@@ -63,6 +66,9 @@ int self_test(handwriting::Engine &engine) {
     }
     auto usage=arm::embedded::runtime_memory_usage();
     printf("POOLS method_peak=%u temp_peak=%u\n",(unsigned)usage.method_peak,(unsigned)usage.temp_peak);
+#if defined(HANDWRITING_TRANSFER_BENCHMARK)
+    error=handwriting_transfer_benchmark(engine); if(error) return error;
+#endif
     handwriting_test_passed=1; return 0;
 }
 }

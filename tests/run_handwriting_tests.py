@@ -41,7 +41,19 @@ def main():
         else:
             subprocess.run([args.cxx,'-std=c++17','-O2','-ffast-math',*[f'-I{p}' for p in includes],
                             *map(str,sources),'-o',str(binary)],check=True)
-        subprocess.run([str(binary),str(fixture)],check=True)
+        result=subprocess.run([str(binary),str(fixture)],stdout=subprocess.PIPE,check=True)
+        if name=='test_handwriting_nodes':
+            # Terminal protocol: echo edited input, submit CRLF only once,
+            # display normalization, and visibly clear the unfinished line.
+            for expected in (
+                b'\rab\b \bcd\r\nSentence 1 (3 chars): acd\r\n',
+                b'\rqxz\r\nSentence 2 (3 chars): qxz\r\n',
+                b'\rHi@\b \b there\r\nSentence 3 (8 chars): Hi there\r\n',
+                b'\runfinished'+b'\b \b'*10+b'\rHello\r\nSentence 6 (5 chars): Hello\r\n',
+            ):
+                assert expected in result.stdout,repr(expected)
+            assert b'acd\r\n\r\n' not in result.stdout
+        print(result.stdout.decode(errors='replace'),end='')
     raw=Path(str(fixture)+'.ppm').read_bytes().split(b'\n',3)[3]
     def chunk(tag,payload):
         return struct.pack('>I',len(payload))+tag+payload+struct.pack('>I',zlib.crc32(tag+payload)&0xffffffff)

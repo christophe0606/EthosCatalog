@@ -12,6 +12,8 @@ project:
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
   define:
+    # Opt-in CPU/DMA and copied/direct-output comparison; see TRANSFER_OPTIMIZATION.md.
+    # - HANDWRITING_TRANSFER_BENCHMARK
     # U85 MEM_ATTR_2/3 route command stream and weights to AXI_EXT (OSPI).
     # Writable activation/scratch memory remains on AXI_SRAM.
     - NPU_QCONFIG: 2
@@ -75,6 +77,7 @@ project:
         - file: nodes_impl/handwriting_engine.hpp
         - file: nodes_impl/handwriting_engine.cpp
         - file: nodes_impl/handwriting_runtime.cpp
+        - file: ../../tests/handwriting/board_transfers.cpp
     - group: Generated CMSIS Stream graph
       for-context: [.Debug, .Release]
       files:
