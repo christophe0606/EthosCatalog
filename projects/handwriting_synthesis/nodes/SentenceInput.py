@@ -8,5 +8,5 @@ class SentenceInput(ProjectNode, GenericNode):
     def __init__(self, name):
         GenericNode.__init__(self, name, identified=False)
         self.addInput('i', CStructType('UartBlock', 36), 1)
-        self.addOutput('o', CStructType('SentenceSnapshot', 84), 1)
+        self.addOutput('o', CStructType('SentenceSnapshot', 92), 1)
         self.parameters()

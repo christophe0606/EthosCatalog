@@ -33,6 +33,23 @@ Final timing and acceptance evidence are recorded in
 - A new accepted sentence cancels unfinished generation. Generation IDs suppress
   stale results; the canvas clears before the new generation's first point.
 
+The demo now starts at **legibility bias 1.0**, with seed 42. Enter commands on
+their own lines, then submit the sentence again:
+
+```text
+:bias 1.0
+:seed 42
+abcdefgh
+```
+
+`:bias` accepts 0..2; larger values reduce sampling variation and often produce
+neater writing. Try 0.75 or 1.25 as alternatives; increasing it is not a guarantee
+of correct characters. `:seed 123` gives a different repeatable sample. Settings
+apply to the next sentence; they do not interrupt the current one. `:bias` or
+`:seed` without a value reports the settings, and `:help` lists commands. Use
+`::` to start literal text with a colon. Input echo and editing also work for
+commands.
+
 Supported characters, in addition to space, are:
 
 ```text
@@ -41,6 +58,9 @@ Supported characters, in addition to space, are:
 
 The renderer keeps a fixed 3-pixel/model-unit scale and continues on successive
 landscape lines, preferring spaces and attended character changes at pen lifts.
+The pen retains fractional coordinates and draws round, antialiased white
+strokes with gray edges. Finishing punctuation, including a preceding space and
+strokes attended by NUL, can use the reserved right margin before wrapping.
 There are three generously spaced lines. An extreme continuous stroke has a
 hard edge wrap; this can split a glyph. Excess lines, extreme coordinate outliers
 or ink outside the viewport produce UART feedback and diagnostic counters.
@@ -48,6 +68,8 @@ Outliers are rejected before arithmetic/conversion, and the next valid point
 starts a new stroke connection. Text is never squeezed into one
 small line. Stochastic unprimed generation can add trailing strokes, terminate
 early or reach the original 40*length bound; text accuracy is not guaranteed.
+Float/quantized comparisons and the appearance changes are documented in
+[QUALITY_IMPROVEMENTS.md](QUALITY_IMPROVEMENTS.md).
 
 ## Execution and storage
 

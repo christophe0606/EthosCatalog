@@ -1,0 +1,78 @@
+{
+  "firmware": {
+    "build": "b-12",
+    "load_debug": "d-13",
+    "axf_sha256": "af2f07591ef2da2954de9b62152894d0a78915208fe76705200aae32ddae5d79",
+    "bias": 1,
+    "seed": 42
+  },
+  "startup": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 165 byte(s)\n--- text ---\nOSPI read clock=100000000 Hz AXI=400000000 Hz divider=4; model CRC=cf5a91ed PASS\nModel=3355648 bytes; engine=13888 bytes; method_reserved=131072 temp_reserved=65536\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 1173 byte(s)\n--- text ---\nCPU fixture: max_error=0.000000477 tolerance=0.000003\nStartup lstm1 PASS max_error=0.001420975 NPU=1\nREGION lstm1 weights=696672 weights_address=0xc02766d0 arena=4160 arena_address=0x02020000 max_error=0.001420975 tolerance=0.005683333\nStartup attention PASS max_error=0.000000000 NPU=1\nREGION attention weights=15424 weights_address=0xc032d140 arena=1024 arena_address=0x02020000 max_error=0.000000000 tolerance=0.002247680\nStartup lstm2 PASS max_error=0.001415491 NPU=1\nREGION lstm2 weights=1285856 weights_address=0xc013c540 arena=4960 arena_address=0x02020000 max_error=0.001415491 tolerance=0.005661312\nStartup lstm3 PASS max_error=0.001286507 NPU=1\nREGION lstm3 weights=1294432 weights_address=0xc0000230 arena=4960 arena_address=0x02020000 max_error=0.001286507 tolerance=0.005145366\nStartup gmm PASS max_error=0.001420736 NPU=1\nREGION gmm weights=50096 weights_address=0xc0320ae0 arena=1056 arena_address=0x02020000 max_error=0.001420736 tolerance=0.005682605\nPOOLS method_peak=37336 temp_peak=4960\nHandwriting READY. UART4 115200 8N1; 1..75 characters, Return starts. White on black, 800x480.\r\nLegibility bias=1.00, seed=42. Commands: :bias 0..2, :seed N, :help.\r\n"
+        }
+      ]
+    }
+  ],
+  "uart": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Serial RX (owned): 552 byte(s)\n--- text ---\n\rThis is not working very well ...\r\nSentence 2 (33 chars): This is not working very well ...\r\n\r:bias .75\r\nLegibility bias=0.75; seed=42 (next sentence).\r\n\r:seed 123\r\nLegibility bias=0.75; seed=123 (next sentence).\r\n\r:bias nan\r\nInvalid setting. Use :bias 0..2 or :seed 1..4294967295.\r\n\r:seed 4294967296\r\nInvalid setting. Use :bias 0..2 or :seed 1..4294967295.\r\n\r:bias 1\r\nLegibility bias=1.00; seed=123 (next sentence).\r\n\r:seed 42\r\nLegibility bias=1.00; seed=42 (next sentence).\r\nSentence 2 complete; lines=1 points=725 elapsed_ticks=25435 tick_hz=1000.\n"
+      }
+    ]
+  },
+  "stats": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  uart_bytes: 115 (volatile uint32_t)\n  sentences: 2 (volatile uint32_t)\n  rejected: 2 (volatile uint32_t)\n  normalized: 0 (volatile uint32_t)\n  generation: 2 (volatile uint32_t)\n  requests: 975 (volatile uint32_t)\n  acknowledgments: 975 (volatile uint32_t)\n  inferences: 975 (volatile uint32_t)\n  generated: 973 (volatile uint32_t)\n  drawn: 973 (volatile uint32_t)\n  clears: 2 (volatile uint32_t)\n  frames_presented: 947 (volatile uint32_t)\n  wraps: 0 (volatile uint32_t)\n  lines: 1 (volatile uint32_t)\n  screen_full: 0 (volatile uint32_t)\n  stale_results: 0 (volatile uint32_t)\n  completed: 2 (volatile uint32_t)\n  step_limits: 0 (volatile uint32_t)\n  event_drops: 0 (volatile uint32_t)\n  source_ticks_max: 1566 (volatile uint32_t)\n  source_deadline_misses: 0 (volatile uint32_t)\n  forward_ticks_max: 20790478 (volatile uint32_t)\n  lcd_ticks_max: 172853 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  ink_overflows: 0 (volatile uint32_t)\n  sentence_started_ms: 93831 (volatile uint32_t)\n  sentence_elapsed_ms: 25435 (volatile uint32_t)\n  sentence_points: 725 (volatile uint32_t)\n  lcd_wait_ticks_max: 622 (volatile uint32_t)\n  forward_ticks_sum: 9714404513 (volatile uint64_t)\n  lcd_ticks_sum: 1865550 (volatile uint64_t)\n  \u2026 2 more \u2014 evaluate a field or element by name to read it"
+      }
+    ]
+  },
+  "memory": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 \u2014 from out/EthosCatalog+DevKit-E8.cbuild-run.yml\nImage handwriting_synthesis (M55_HP): out/handwriting_synthesis/DevKit-E8/Release/handwriting_synthesis.axf, map out/handwriting_synthesis/DevKit-E8/Release/handwriting_synthesis.axf.map (armlink)\n[handwriting_synthesis.axf] size: text 507936 + data 11120 + bss 2047212 = 2566268 B (ROM \u2248 519056 B, RAM \u2248 2058332 B)\n[handwriting_synthesis.axf.map] totals: code 415642, ro-data 90442, rw-data 11081, zi-data 2047168 \u2192 RO 506084, RW 2058249, ROM 517165 B\nNote: no \"Image component sizes\" in the map (link without --info sizes); per-object sizes are summed from the memory map\n\nRegions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from handwriting_synthesis.axf LOAD segments):\n  MRAM           0x80000000    519056 /   5767168 B   9.0%  ER_ROM_VECTORS ER_ROM\n  SRAM0          0x02000000   1732624 /   4194304 B    41%  RW_SRAM0 PADDING\n  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH, OSPI_FLASH_REMAINDER\n  outside the listed regions: 0x20000000 +158572 B  RW_RAM RW_RAM\n  outside the listed regions: 0x20028000 +3296 B  NS_REGION_0\n  outside the listed regions: 0x2002c000 +131072 B  ARM_LIB_HEAP APP_HEAP\n  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK\n  [handwriting_synthesis.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 1732608/4194304 B, PADDING 16/16 B, RW_RAM 158572/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 505952/4294967295 B, MRAM_USER 0/1572864 B\n\nLargest symbols [handwriting_synthesis.axf] (top 3, object from handwriting_synthesis.axf.map):\n   1536000 B  obj   0x02030000  _ZN18HandwritingDisplay7frames_E  RW_SRAM0 @SRAM0  \u2190 HandwritingDisplay.o\n    131072 B  obj   0x02000000  _ZN12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  \u2190 hardware_params.o\n     65536 B  obj   0x02020000  _ZN12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  \u2190 hardware_params.o\n\nLargest objects [handwriting_synthesis.axf.map] (top 3 of 379; code / ro-data / rw-data / zi-data):\n   1536047 B  HandwritingDisplay.o  42 / 4 / 0 / 1536001\n    197531 B  hardware_params.o  674 / 77 / 0 / 196780\n    163904 B  anon$$obj.o  0 / 48 / 0 / 163856\nLibraries [handwriting_synthesis.axf.map]:\n     87678 B  libcpp_wnux.l  69006 / 15711 / 28 / 2933\n     23797 B  c_wu.l  22482 / 943 / 24 / 348\n      8654 B  libcppabi_wnux.l  6416 / 1698 / 8 / 532\n\nNext: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists.\n\nNote: 110 new errors in this window since you last looked \u2014 get_recent_problems {sinceSeq: 29}"
+      }
+    ]
+  },
+  "additional_trials": [
+    {
+      "bias": 1.25,
+      "seed": 42,
+      "text": "This is not working very well ...",
+      "points": 755,
+      "lines": 2,
+      "elapsed_ticks": 26463,
+      "tick_hz": 1000
+    },
+    {
+      "bias": 1.0,
+      "seed": 42,
+      "text": "This is not working very well ...",
+      "points": 725,
+      "lines": 1,
+      "elapsed_ticks": 25417,
+      "tick_hz": 1000
+    }
+  ],
+  "final_state": {
+    "bias": 1.0,
+    "seed": 42,
+    "target": "running; both setting queries answered after debugger closed",
+    "serial": "COM7 released",
+    "debug_session": "closed"
+  }
+}

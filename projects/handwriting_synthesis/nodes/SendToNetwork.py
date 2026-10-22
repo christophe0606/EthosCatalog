@@ -7,7 +7,7 @@ class SendToNetwork(ProjectNode, GenericSink):
     needsHardware = True
     def __init__(self, name):
         GenericSink.__init__(self, name, identified=False, selectors=['request', 'ack'])
-        self.addInput('i', CStructType('SentenceSnapshot', 84), 1)
+        self.addInput('i', CStructType('SentenceSnapshot', 92), 1)
         self.addEventOutput()
         self.addEventInput()
         self.parameters()

@@ -280,3 +280,39 @@ confirming echo before Enter. Sending backspace followed by CRLF returned
 Host suites passed, including byte-level echo/edit/normalization/CRLF assertions;
 the Windows host uses binary stdout to avoid host-only newline translation.
 The board was left running and COM7 released.
+
+## 2026-10-22: handwriting appearance
+
+Release **b-12**, loaded with matching symbols by **d-13**, adds adjustable
+sampling (`:bias`, `:seed`, `:help`), default bias 1.0/seed 42, fractional
+round antialiased LCD strokes, and a punctuation-aware soft wrap. Settings
+travel in the sentence snapshot; commands do not alter active generation.
+The existing model/PTE is unchanged and all startup CRC/CPU/NPU fixtures passed.
+
+At default settings, `abcdefgh` completed with 248 points on one line in 8717
+ticks, and `This is not working very well ...` completed with 725 points on one
+line in 25435 ticks (1 kHz). Before the punctuation fix the identical NPU
+trajectory occupied two lines. Bias/seed changes during generation preserved
+the current sentence. Invalid NaN bias and overflowing seed commands were
+rejected. At the recorded readback, both sentences completed; requests,
+acknowledgments and inferences were all 975. Pipeline errors, dropped events,
+deadline misses, ink overflows, screen-full and step-limit counters were zero.
+
+The investigation used the actual C++ recurrence/sampler with float and saved
+quantized host dense methods on both reported sentences, biases 0.5/1.0 and
+seeds 42/7/123. Twelve quantized runs showed no out-of-range inputs; per-method
+normalized RMS errors were 0.170–0.456%. Float also produced poor endings, and
+one float run reached its step budget. These are numerical checks, not OCR
+accuracy measurements. Higher bias was not uniformly better. A board trial at
+1.25 used two lines, so the production default remains 1.0.
+
+Both C++ suites and graph regressions passed. Partial updates exactly matched
+the full-frame reference over 1952 quantized trajectory points, including gray
+coverage edges and buffer/cache ownership. MRAM LOAD usage is 519056 bytes,
+SRAM0 remains 1732624 bytes, and RW_RAM is 158572 bytes. Engine is 13888 bytes.
+
+See [appearance findings and direct framebuffer captures](QUALITY_IMPROVEMENTS.md)
+and [retained tool readbacks](model/quality_board_validation.json). The captured
+sentence still has a stray finishing mark; user visual acceptance is pending.
+The target was resumed, the debug session closed and COM7 released after tests,
+with settings restored to bias 1.0 and seed 42.

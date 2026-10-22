@@ -10,6 +10,7 @@
 #include <cmath>
 #include <deque>
 #include <memory_resource>
+#include <limits>
 #include <vector>
 
 std::pmr::synchronized_pool_resource pool;
@@ -27,6 +28,7 @@ void ethos_benchmark_reset() {
 static std::vector<unsigned> calls;
 static int failing_method=-1;
 static bool complete=false;
+static bool attend_end=false;
 namespace handwriting {
 int Engine::dense_view(unsigned method,const float* input,const float*& view,uint32_t*) {
     // Every method reuses and overwrites this storage, like a shared arena.
@@ -51,7 +53,7 @@ int Engine::dense_view(unsigned method,const float* input,const float*& view,uin
     std::fill(output,output+output_sizes[method],.01f*(method+1));
     if(method==1) {
         std::fill(output,output+30,-10.0f);
-        if(complete) std::fill(output+20,output+30,25.0f*(s.length-1));
+        if(complete || attend_end) std::fill(output+20,output+30,25.0f*(s.length-1));
     }
     if(method==4) output[120]=complete?100.0f:-100.0f;
     view=output;
@@ -115,6 +117,7 @@ int main() {
     HandwritingNetwork invalid(&queue,{hw,5}); assert(invalid.init()==CG_BUFFER_ERROR);
     std::atomic<uint32_t> generation{1};
     SentenceSnapshot request{}; request.generation=1; request.current=&generation;
+    request.seed=42;request.bias=1;
     std::strcpy(request.text,"A");
     auto start=[&] {
         calls.clear(); results.order.clear();
@@ -152,8 +155,15 @@ int main() {
     request.generation=4; generation=4; complete=true;
     assert(start()==0); queue.drain();
     assert(stats.completed==1 && results.done && results.order==std::vector<unsigned>({1,2,10}));
+    // NUL attention can precede the final pen lift. Retain the final character's
+    // punctuation policy so its finishing strokes stay on the preceding line.
+    complete=false;attend_end=true;
+    request.generation=5;generation=5;std::strcpy(request.text,"Hi...");
+    assert(start()==0);queue.drain();
+    assert(results.last.kind==0 && results.last.character==5 && results.last.punctuation);
+    attend_end=false;
     // A failed method stops the chain before subsequent methods/results/ACK.
-    request.generation=5; generation=5; complete=false; failing_method=2;
+    request.generation=6; generation=6; complete=false; failing_method=2;
     assert(start()==0);
     assert(queue.dispatch()==0 && queue.dispatch()==0 && queue.dispatch()==-421);
     assert(queue.isEmpty() && calls==std::vector<unsigned>({0,1,2}));
@@ -184,5 +194,19 @@ int main() {
         }
         assert(engine.state().steps==1 && engine.finite());
     }
-    std::cout<<"PASS: five model nodes, recurrence, stage order, backpressure, replacement, EOS, step bound and errors\n";
+    // Bias scales the Gaussian sampling noise without changing dense layers or
+    // recurrent state. The old default remains reproducible for benchmarks.
+    handwriting::Stroke baseline{},repeat{},legible{};
+    assert(engine.begin("AB",42,.5f)==0 && engine.step(baseline)==0);
+    assert(engine.begin("AB",42)==0 && engine.step(repeat)==0);
+    assert(std::memcmp(&baseline,&repeat,sizeof(baseline))==0);
+    assert(engine.begin("AB",42,1)==0 && engine.step(legible)==0);
+    assert(std::fabs((legible.dx-.05f)-(baseline.dx-.05f)*std::exp(-.5f))<.00001f);
+    assert(std::fabs((legible.dy-.05f)-(baseline.dy-.05f)*std::exp(-.5f))<.00001f);
+    const auto saved_state=engine.state();
+    for(float bias:{-1.0f,2.1f,std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity()}) {
+        assert(engine.begin("AB",42,bias)==-424);
+        assert(std::memcmp(&saved_state,&engine.state(),sizeof(saved_state))==0);
+    }
+    std::cout<<"PASS: five model nodes, recurrence, sampling bias, stage order, backpressure, replacement, EOS, step bound and errors\n";
 }

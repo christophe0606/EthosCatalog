@@ -4,6 +4,7 @@
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "handwriting_protocol.hpp"
 #include "handwriting_layout.hpp"
+#include "handwriting_ink.hpp"
 #include "handwriting_damage.hpp"
 #include <cstdio>
 class HandwritingDisplay:public StreamNode {
@@ -37,7 +38,7 @@ public:
             return CG_SUCCESS;
         }
         if(full_) return CG_SUCCESS;
-        auto segment=layout_.add(result.point.dx,result.point.dy,result.point.pen_up,result.character,result.word_boundary);
+        auto segment=layout_.add(result.point.dx,result.point.dy,result.point.pen_up,result.character,result.word_boundary,result.punctuation);
         if(segment.rejected) { report_overflow();return CG_SUCCESS; }
         if(segment.full) {
             full_=true;++hw_.stats->screen_full;
@@ -54,10 +55,12 @@ public:
         hw_.stats->lcd_copy_bytes+=pending_damage_.copy(frames_[back_],frames_[back_^1]);
         handwriting::Damage stroke_damage;
         bool clipped=false;
-        if(!handwriting::draw_line(segment.x0,segment.y0,segment.x1,segment.y1,[&](int x,int y) {
+        if(!handwriting::draw_ink(segment.fx0,segment.fy0,segment.fx1,segment.fy1,[&](int x,int y,uint16_t color) {
             if(x>=0 && x<800 && y>=0 && y<480) {
-                frames_[back_][handwriting::Layout::native_index(x,y)]=0xffff;
-                stroke_damage.include(x,y);
+                auto &old=frames_[back_][handwriting::Layout::native_index(x,y)];
+                // Union of round pen segments: joining/overlapping segments
+                // must never darken an edge or repeatedly brighten it.
+                if(color>old) { old=color;stroke_damage.include(x,y); }
             }
             else clipped=true;
         })) clipped=true;

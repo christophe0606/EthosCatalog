@@ -138,7 +138,7 @@ FIFO buffers
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf0[BUFFERSIZE0]={0};
 
-#define BUFFERSIZE1 84
+#define BUFFERSIZE1 92
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf1[BUFFERSIZE1]={0};
 

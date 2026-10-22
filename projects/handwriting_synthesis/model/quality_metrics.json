@@ -1,0 +1,683 @@
+{
+  "description": "Production C++ recurrence, xorshift RNG and sampler; float/PTQ dense layers on host. Pre-Vela PTQ is not bit-identical to the NPU; no OCR score. PNG rows follow JSON order per text; SVG includes labels.",
+  "primary_provenance": {
+    "handwriting_engine.cpp": "8f6e01bdf0817b0b6373a1832a7921a459ce6b5fb97a5736ad10e00756747c0d",
+    "quality_engine.cpp": "25898fdb162601a803688b6805214325d40d31910b91184bf8ffcf21c69cf675",
+    "lstm1_quantized.pt2": "79ef865179803e03bd2cd9b996247323c0a1f5cf66094f6ea3c69177b35a34e1",
+    "attention_quantized.pt2": "78297646b000e11688b43c0dadddb6e29a06d290263912f73803bd7e7f02d744",
+    "lstm2_quantized.pt2": "72ba44a7c1003fc2a05cc2a18131e7256363ab8223910603481fc38c38c14e0c",
+    "lstm3_quantized.pt2": "cd180280c51e29269b3488f0df9af17c424f1f9845a1381ba74064480b0d58fd",
+    "gmm_quantized.pt2": "7bf51d022b8998fb036e4c52647121b7e5360693ddd0706b4685ba6f827edd31"
+  },
+  "additional_seed_provenance": {
+    "handwriting_engine.cpp": "8f6e01bdf0817b0b6373a1832a7921a459ce6b5fb97a5736ad10e00756747c0d",
+    "quality_engine.cpp": "081eb7eea67fc7dc0ce6d3c4a2f9d6748b93f40ab646cc4982f68f8fa7908de6",
+    "lstm1_quantized.pt2": "79ef865179803e03bd2cd9b996247323c0a1f5cf66094f6ea3c69177b35a34e1",
+    "attention_quantized.pt2": "78297646b000e11688b43c0dadddb6e29a06d290263912f73803bd7e7f02d744",
+    "lstm2_quantized.pt2": "72ba44a7c1003fc2a05cc2a18131e7256363ab8223910603481fc38c38c14e0c",
+    "lstm3_quantized.pt2": "cd180280c51e29269b3488f0df9af17c424f1f9845a1381ba74064480b0d58fd",
+    "gmm_quantized.pt2": "7bf51d022b8998fb036e4c52647121b7e5360693ddd0706b4685ba6f827edd31"
+  },
+  "results": [
+    {
+      "text": "abcdefgh",
+      "seed": 42,
+      "bias": 0.5,
+      "model": "float",
+      "points": 250,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 42,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 247,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.07688713073730469,
+          "elements": 396800,
+          "normalized_rmse_percent": 0.35211468595602163
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.032222747802734375,
+          "elements": 7440,
+          "normalized_rmse_percent": 0.1757646947066762
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.10726737976074219,
+          "elements": 396800,
+          "normalized_rmse_percent": 0.3854718832461096
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.17297649383544922,
+          "elements": 396800,
+          "normalized_rmse_percent": 0.3534422675392857
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1405620574951172,
+          "elements": 30008,
+          "normalized_rmse_percent": 0.4423575117047978
+        }
+      }
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 42,
+      "bias": 1.0,
+      "model": "float",
+      "points": 259,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 42,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 235,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.08760404586791992,
+          "elements": 377600,
+          "normalized_rmse_percent": 0.37494479946948045
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.0406641960144043,
+          "elements": 7080,
+          "normalized_rmse_percent": 0.17711584167665295
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1160128116607666,
+          "elements": 377600,
+          "normalized_rmse_percent": 0.39476278439952855
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1747426986694336,
+          "elements": 377600,
+          "normalized_rmse_percent": 0.3629616518653982
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.12355804443359375,
+          "elements": 28556,
+          "normalized_rmse_percent": 0.45585556721773124
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 42,
+      "bias": 0.5,
+      "model": "float",
+      "points": 1180,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 42,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 710,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.11865592002868652,
+          "elements": 1137600,
+          "normalized_rmse_percent": 0.38253317852726887
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.05265188217163086,
+          "elements": 21330,
+          "normalized_rmse_percent": 0.1752180850981214
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.20662569999694824,
+          "elements": 1137600,
+          "normalized_rmse_percent": 0.3960031940538169
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.2541332244873047,
+          "elements": 1137600,
+          "normalized_rmse_percent": 0.3683875210905617
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.13338661193847656,
+          "elements": 86031,
+          "normalized_rmse_percent": 0.4507336489890959
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 42,
+      "bias": 1.0,
+      "model": "float",
+      "points": 651,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 42,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 737,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1195363998413086,
+          "elements": 1180800,
+          "normalized_rmse_percent": 0.3788611848350534
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.0514225959777832,
+          "elements": 22140,
+          "normalized_rmse_percent": 0.17017590173073685
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.20536494255065918,
+          "elements": 1180800,
+          "normalized_rmse_percent": 0.39391520447723555
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.27335643768310547,
+          "elements": 1180800,
+          "normalized_rmse_percent": 0.36655400603592664
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.13991355895996094,
+          "elements": 89298,
+          "normalized_rmse_percent": 0.44563897137552344
+        }
+      }
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 7,
+      "bias": 0.5,
+      "model": "float",
+      "points": 284,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 7,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 257,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.08880841732025146,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3561693729850672
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.0347898006439209,
+          "elements": 7740,
+          "normalized_rmse_percent": 0.18075087730406475
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.08251285552978516,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3931874717319934
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.14000892639160156,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3567210623290814
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.14305686950683594,
+          "elements": 31218,
+          "normalized_rmse_percent": 0.43688065821769867
+        }
+      }
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 7,
+      "bias": 1.0,
+      "model": "float",
+      "points": 248,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 7,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 257,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.054605722427368164,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3483470313448039
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.026430130004882812,
+          "elements": 7740,
+          "normalized_rmse_percent": 0.17133558346873048
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.07854866981506348,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3842335528266763
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1279010772705078,
+          "elements": 412800,
+          "normalized_rmse_percent": 0.3506759100389317
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.14155960083007812,
+          "elements": 31218,
+          "normalized_rmse_percent": 0.4416071638223933
+        }
+      }
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 123,
+      "bias": 0.5,
+      "model": "float",
+      "points": 195,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 123,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 211,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.09375882148742676,
+          "elements": 339200,
+          "normalized_rmse_percent": 0.38391204669523166
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.04334759712219238,
+          "elements": 6360,
+          "normalized_rmse_percent": 0.1815472546278251
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.12009191513061523,
+          "elements": 339200,
+          "normalized_rmse_percent": 0.4043261809291757
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.18061566352844238,
+          "elements": 339200,
+          "normalized_rmse_percent": 0.37004169333282394
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.14383316040039062,
+          "elements": 25652,
+          "normalized_rmse_percent": 0.4454402046438796
+        }
+      }
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 123,
+      "bias": 1.0,
+      "model": "float",
+      "points": 211,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "abcdefgh",
+      "seed": 123,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 210,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.08939778804779053,
+          "elements": 337600,
+          "normalized_rmse_percent": 0.3832409382008839
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.04144120216369629,
+          "elements": 6330,
+          "normalized_rmse_percent": 0.17808048967509457
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.11482906341552734,
+          "elements": 337600,
+          "normalized_rmse_percent": 0.4017951222198839
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1807851791381836,
+          "elements": 337600,
+          "normalized_rmse_percent": 0.3677522220738055
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.13863706588745117,
+          "elements": 25531,
+          "normalized_rmse_percent": 0.45420855818180733
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 7,
+      "bias": 0.5,
+      "model": "float",
+      "points": 777,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 7,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 763,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.17390859127044678,
+          "elements": 1222400,
+          "normalized_rmse_percent": 0.4069737793433977
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.08897018432617188,
+          "elements": 22920,
+          "normalized_rmse_percent": 0.1836126701879592
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.2870981693267822,
+          "elements": 1222400,
+          "normalized_rmse_percent": 0.41514502251637053
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.3569755554199219,
+          "elements": 1222400,
+          "normalized_rmse_percent": 0.3851588634244246
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1219778060913086,
+          "elements": 92444,
+          "normalized_rmse_percent": 0.43941451722433833
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 7,
+      "bias": 1.0,
+      "model": "float",
+      "points": 1013,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 7,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 867,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.13096141815185547,
+          "elements": 1388800,
+          "normalized_rmse_percent": 0.3747811535985155
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.05158679187297821,
+          "elements": 26040,
+          "normalized_rmse_percent": 0.17352541019887882
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.22585749626159668,
+          "elements": 1388800,
+          "normalized_rmse_percent": 0.3920508475945084
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.2839469909667969,
+          "elements": 1388800,
+          "normalized_rmse_percent": 0.365822444864851
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.12615299224853516,
+          "elements": 105028,
+          "normalized_rmse_percent": 0.43461779612612805
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 123,
+      "bias": 0.5,
+      "model": "float",
+      "points": 580,
+      "termination": "eos",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 123,
+      "bias": 0.5,
+      "model": "quantized",
+      "points": 653,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.10960197448730469,
+          "elements": 1046400,
+          "normalized_rmse_percent": 0.38461240638720595
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.04838991165161133,
+          "elements": 19620,
+          "normalized_rmse_percent": 0.1700414786655523
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.19010698795318604,
+          "elements": 1046400,
+          "normalized_rmse_percent": 0.39481883657200073
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.24123477935791016,
+          "elements": 1046400,
+          "normalized_rmse_percent": 0.3644060725009945
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.12905216217041016,
+          "elements": 79134,
+          "normalized_rmse_percent": 0.445881995992519
+        }
+      }
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 123,
+      "bias": 1.0,
+      "model": "float",
+      "points": 1320,
+      "termination": "step_limit",
+      "finite": true
+    },
+    {
+      "text": "This is not working very well ...",
+      "seed": 123,
+      "bias": 1.0,
+      "model": "quantized",
+      "points": 655,
+      "termination": "eos",
+      "finite": true,
+      "dense_error_on_quantized_trajectory": {
+        "lstm1": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.14883971214294434,
+          "elements": 1049600,
+          "normalized_rmse_percent": 0.4068264631765119
+        },
+        "attention": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.07444524765014648,
+          "elements": 19680,
+          "normalized_rmse_percent": 0.18066734386895522
+        },
+        "lstm2": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.25704216957092285,
+          "elements": 1049600,
+          "normalized_rmse_percent": 0.4125333070843883
+        },
+        "lstm3": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.34615516662597656,
+          "elements": 1049600,
+          "normalized_rmse_percent": 0.3796982956268087
+        },
+        "gmm": {
+          "input_clipped": 0,
+          "output_out_of_range": 0,
+          "max_abs_error": 0.1246042251586914,
+          "elements": 79376,
+          "normalized_rmse_percent": 0.443595418639721
+        }
+      }
+    }
+  ]
+}

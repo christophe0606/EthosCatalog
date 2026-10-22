@@ -23,7 +23,7 @@ class Engine {
 public:
     explicit Engine(arm::embedded::EmbeddedModule *module): module_(module) {}
     int dense(unsigned method, const float *input, float *output, uint32_t *ticks=nullptr);
-    int begin(const char *sentence, uint32_t seed=42);
+    int begin(const char *sentence, uint32_t seed=42, float bias=0.5f);
     // 0 emits a point, 1 completes normally, 2 reaches the source step bound.
     // Negative values indicate runtime, input or non-finite-state errors.
     int step(Stroke &point);
@@ -41,6 +41,7 @@ private:
     float uniform();
     arm::embedded::EmbeddedModule *module_;
     State state_{};
+    float bias_=0.5f;
     unsigned next_method_=0;
     alignas(32) float input_[876];
 };

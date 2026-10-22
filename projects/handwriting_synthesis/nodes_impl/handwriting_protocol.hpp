@@ -26,5 +26,6 @@ struct Result {
     uint32_t kind; // 0 point, 1 clear, 2 completion, 3 step bound
     uint32_t character;
     bool word_boundary;
+    bool punctuation=false;
 };
 }

@@ -4,6 +4,7 @@
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "EventQueue.hpp"
 #include "handwriting_protocol.hpp"
+#include "handwriting_layout.hpp"
 #include <cstdio>
 #include "main.h"
 class HandwritingSynthesis:public StreamNode {
@@ -29,7 +30,7 @@ public:
         const auto request=*reinterpret_cast<const SentenceSnapshot*>(uintptr_t(evt.get<uint64_t>()));
         if(!handwriting::current(request)) return acknowledge(request.generation,false);
         if(generation_!=request.generation) {
-            int error=engine_.begin(request.text,42); if(error) return static_cast<cg_status>(error);
+            int error=engine_.begin(request.text,request.seed,request.bias); if(error) return static_cast<cg_status>(error);
             generation_=request.generation; result_={request,{},1,0,false};
             profile_count_=0;
             results_.sendSync(kNormalPriority,selectors[selStroke],uint64_t(reinterpret_cast<uintptr_t>(&result_)));
@@ -73,8 +74,13 @@ private:
         if(error==0) ++stats_->generated; else if(error==1) ++stats_->completed; else ++stats_->step_limits;
         unsigned character=0; const auto& s=engine_.state();
         for(unsigned u=1;u<s.length;++u) if(s.phi[u]>s.phi[character]) character=u;
-        bool word=character<std::strlen(request.text) && request.text[character]==' ';
-        result_={request,point,error==0?0U:error==1?2U:3U,character,word};
+        const unsigned length=unsigned(std::strlen(request.text));
+        // Attention may reach NUL while the final mark is still being drawn.
+        // Retain its punctuation policy through those finishing strokes.
+        bool punctuation=length && (handwriting::is_punctuation(request.text[std::min(character,length-1)]) ||
+                                    handwriting::punctuation_suffix(request.text,character));
+        bool word=character<length && request.text[character]==' ' && !punctuation;
+        result_={request,point,error==0?0U:error==1?2U:3U,character,word,punctuation};
         if(!results_.sendAsync(kNormalPriority,selectors[selStroke],uint64_t(reinterpret_cast<uintptr_t>(&result_)))) {
             ++stats_->event_drops; return CG_BUFFER_ERROR;
         }

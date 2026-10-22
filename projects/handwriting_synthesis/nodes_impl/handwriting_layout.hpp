@@ -6,6 +6,21 @@
 #include <algorithm>
 #include <cstring>
 namespace handwriting {
+inline bool is_punctuation(char value) {
+    return value && std::strchr(".,:;!?'\")",value);
+}
+inline bool punctuation_suffix(const char *text,unsigned character) {
+    const unsigned length=unsigned(std::strlen(text));
+    if(!length) return false;
+    const char *tail=text+std::min(character,length-1);
+    bool mark=false;
+    for(;*tail;++tail) {
+        if(*tail==' ') continue;
+        if(!is_punctuation(*tail)) return false;
+        mark=true;
+    }
+    return mark;
+}
 // Online geometry at fixed readable scale. Prefer spaces, then attended
 // character changes at pen lifts; a hard edge also bounds unusual long strokes.
 class Layout {
@@ -16,8 +31,13 @@ public:
     // Generous bounds relative to an 800x480 viewport. Test IEEE bits before
     // floating arithmetic: isfinite alone can be optimized away by fast-math.
     static constexpr float MaxModelDelta=256.0f,MaxState=8192.0f,MaxScreen=4096.0f;
-    struct Segment { int x0,y0,x1,y1; bool ink,wrapped,full,rejected; };
-    Segment add(float dx,float dy,float pen,unsigned character,bool word) {
+    struct Segment {
+        int x0,y0,x1,y1; bool ink,wrapped,full,rejected;
+        // Retain subpixel endpoints for the antialiased renderer. Integer
+        // endpoints remain available for geometry checks and legacy previews.
+        float fx0=0,fy0=0,fx1=0,fy1=0;
+    };
+    Segment add(float dx,float dy,float pen,unsigned character,bool word,bool punctuation=false) {
         if(!bounded(dx,MaxModelDelta) || !bounded(dy,MaxModelDelta)) return reject();
         // The operands are now bounded, so multiplication and addition cannot
         // overflow. Reject without changing the retained geometry.
@@ -26,7 +46,7 @@ public:
         float screen_x=nx-origin_x_+Margin;
         bool boundary=previous_up_ && (character!=character_ || word);
         bool wrap=(screen_x>640 && word && previous_up_) ||
-                  (screen_x>710 && boundary) || screen_x>Width-Margin;
+                  (screen_x>710 && boundary && !punctuation) || screen_x>Width-Margin;
         unsigned next_line=line_;
         float next_origin_x=origin_x_,next_origin_y=origin_y_;
         if(wrap) {
@@ -38,7 +58,7 @@ public:
         if(!bounded(x0,MaxScreen) || !bounded(y0,MaxScreen) ||
            !bounded(x1,MaxScreen) || !bounded(y1,MaxScreen)) return reject();
         Segment segment{int(std::lround(x0)),int(std::lround(y0)),
-            int(std::lround(x1)),int(std::lround(y1)),!previous_up_ && !wrap,wrap,false,false};
+            int(std::lround(x1)),int(std::lround(y1)),!previous_up_ && !wrap,wrap,false,false,x0,y0,x1,y1};
         x_=nx;y_=ny;origin_x_=next_origin_x;origin_y_=next_origin_y;line_=next_line;
         previous_up_=pen>=.5f;character_=character;
         return segment;

@@ -43,16 +43,22 @@ is needed on the MCU. Positions beyond the encoded sequence are masked out.
 ## Decoder, sampling and termination
 
 GMM121 order is **pi logits[20], log_sigma_x[20], log_sigma_y[20], rho logits[20],
-mu_x[20], mu_y[20], pen logit[1]**. At default bias 0.5:
+mu_x[20], mu_y[20], pen logit[1]**. For a sampling bias b:
 
-- pi=softmax(pi_logits*1.5), zero pi values below 0.01, then renormalize.
-- sigma=exp(log_sigma-0.5), lower bound 0.0001.
+- pi=softmax(pi_logits*(1+b)), zero pi values below 0.01, then renormalize.
+- sigma=exp(log_sigma-b), lower bound 0.0001.
 - rho=tanh(rho_logits), clip to (-1+1e-8,1-1e-8).
 - pen_probability=sigmoid(pen_logit), clip to (1e-8,1-1e-8), set to0 if below 0.01.
 - Select k categorically from pi and independent standard normals z1,z2.
   dx=mu_x[k]+sigma_x[k]*z1;
   dy=mu_y[k]+sigma_y[k]*(rho[k]*z1+sqrt(1-rho[k]^2)*z2).
   Draw pen_up from the Bernoulli pen_probability. Feed all three back next step.
+
+The interactive demo uses b=1.0 by default and accepts `:bias 0..2` and
+`:seed 1..4294967295` for the next submitted sentence. Both values travel in
+the immutable sentence snapshot. Engine::begin and historical calibration,
+conversion fixtures and benchmarks retain b=0.5 unless explicitly overridden.
+Changing bias is a CPU sampling operation and requires no new PTE.
 
 The source checks termination with an **independent Bernoulli pen draw** when
 argmax(phi) reaches the null terminator; stop before emitting a final point.
@@ -82,7 +88,11 @@ Buffer UART input and start on Return; reset recurrent state, clear the previous
 drawing and animate **white** pen strokes on a **black** 800x480 landscape LCD.
 A point's pen_up flag controls whether the **following** point starts a new
 stroke. Plot cumsum(dx,dy); invert y for LCD coordinates. The source SVG uses
-optional alignment/denoising; raw model paths remain valid handwriting.
+optional alignment/denoising. The LCD uses fractional endpoints and a round
+antialiased 1.8-pixel pen; gray RGB565 edge coverage is combined with max
+coverage at joins. The renderer does not change the stroke fed back to the
+model. Finishing punctuation may use the soft right margin; the hard viewport
+bound remains. Raw model paths remain valid handwriting.
 
 ## Benchmark units
 

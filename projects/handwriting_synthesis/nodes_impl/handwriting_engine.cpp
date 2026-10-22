@@ -14,8 +14,8 @@ static bool is_finite(float x) {
 }
 static float sigmoid(float x) { return 1.0f/(1.0f+std::exp(-x)); }
 static float softplus(float x) { return std::max(x,0.0f)+std::log1p(std::exp(-std::fabs(x))); }
-int Engine::begin(const char *sentence,uint32_t seed) {
-    if(!sentence) return -424;
+int Engine::begin(const char *sentence,uint32_t seed,float bias) {
+    if(!sentence || !is_finite(bias) || bias<0 || bias>2) return -424;
     const size_t length=std::strlen(sentence);
     if(!length || length>MaxCharacters) return -424;
     State clean{};
@@ -26,7 +26,7 @@ int Engine::begin(const char *sentence,uint32_t seed) {
     }
     clean.length=length+1; clean.limit=40*length;
     clean.previous={0,0,1}; clean.rng=seed?seed:1;
-    state_=clean; next_method_=0; return 0;
+    state_=clean; bias_=bias; next_method_=0; return 0;
 }
 void Engine::cell(const float *g,float *h,float *c) {
     for(unsigned i=0;i<Hidden;++i) {
@@ -100,17 +100,18 @@ int Engine::stage(unsigned method,Stroke &point) {
     ++s.steps;
     // The source termination pen draw is independent of the emitted pen draw.
     if(best==s.length-1 && uniform()<pen) return 1;
-    float p[20],total=0,maxlog=output[0]*1.5f;
-    for(unsigned k=1;k<20;++k) maxlog=std::max(maxlog,output[k]*1.5f);
-    for(unsigned k=0;k<20;++k) { p[k]=std::exp(output[k]*1.5f-maxlog); total+=p[k]; }
+    const float concentration=1.0f+bias_;
+    float p[20],total=0,maxlog=output[0]*concentration;
+    for(unsigned k=1;k<20;++k) maxlog=std::max(maxlog,output[k]*concentration);
+    for(unsigned k=0;k<20;++k) { p[k]=std::exp(output[k]*concentration-maxlog); total+=p[k]; }
     float threshold_total=0;
     for(unsigned k=0;k<20;++k) { p[k]/=total; if(p[k]<.01f) p[k]=0; threshold_total+=p[k]; }
     float draw=uniform()*threshold_total,cumulative=0; unsigned chosen=19;
     for(unsigned k=0;k<20;++k) { cumulative+=p[k]; if(draw<cumulative) { chosen=k; break; } }
     float radius=std::sqrt(-2.0f*std::log(uniform())), angle=6.28318530718f*uniform();
     float z1=radius*std::cos(angle),z2=radius*std::sin(angle);
-    float sx=std::max(std::exp(output[20+chosen]-.5f),.0001f);
-    float sy=std::max(std::exp(output[40+chosen]-.5f),.0001f);
+    float sx=std::max(std::exp(output[20+chosen]-bias_),.0001f);
+    float sy=std::max(std::exp(output[40+chosen]-bias_),.0001f);
     // 1e-8 rounds to zero at 1 in float32. Use the nearest interior float.
     float rho=std::clamp(std::tanh(output[60+chosen]),-.9999999403953552f,.9999999403953552f);
     point={output[80+chosen]+sx*z1,

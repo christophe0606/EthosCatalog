@@ -37,7 +37,7 @@ class HandwritingGraph(unittest.TestCase):
         })
         self.assertEqual(Counter(schedule.allNodes[i].nodeName for i in schedule.schedule),
                          dict(uart=1, editor=1, send=1))
-        self.assertEqual(schedule.memory, 120)
+        self.assertEqual(schedule.memory, 128)
 
     def test_reused_wrapper_has_one_parameter_type_and_selector_definition(self):
         temporary_root = (ROOT/'out/handwriting-tests').resolve()

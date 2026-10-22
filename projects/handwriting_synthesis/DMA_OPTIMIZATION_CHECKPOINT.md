@@ -2,6 +2,14 @@
 
 ## Current status after resuming on 2026-10-22
 
+Later appearance follow-up: Release b-12 / load-debug d-13 adds default bias
+1.0, UART `:bias 0..2`, `:seed N`, `:help`, round antialiased strokes and
+punctuation-aware soft wrapping. See QUALITY_IMPROVEMENTS.md for float/PTQ
+comparisons, actual LCD captures and limitations (including a remaining stray
+finishing mark). The model/PTE is unchanged. Host checks and both reported
+sentences passed on the board; final settings are 1.0/42, target running and
+COM7 released. The transfer results below are historical at bias 0.5.
+
 Later user-requested follow-up: UART typing/editing echo is implemented and
 loaded in Release build b-6 / load l-7. COM7 verified partial-line echo before
 Enter and backspace plus CRLF submission. Host suites passed; the board is
