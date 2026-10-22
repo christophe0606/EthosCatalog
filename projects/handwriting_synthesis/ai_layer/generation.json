@@ -1,0 +1,40 @@
+{
+  "project": "projects/handwriting_synthesis/handwriting_synthesis.cproject.yml",
+  "config_sha256": "c6a3dee32b058fb3531db7f0d2b4172026dd4ee2fd94a625fe6b4841d2fbf3a4",
+  "pte_sha256": "8991565f2c6ef468942789f458d6809f6879a1315c9610035b5e7a6f4390f3d3",
+  "method_caches": {
+    "lstm1": {
+      "graph_sha256": "79ef865179803e03bd2cd9b996247323c0a1f5cf66094f6ea3c69177b35a34e1",
+      "safetensors_sha256": "c802598b501eb31a0346290be8747017c2231cf1b469450b4dd4814f891ef230"
+    },
+    "attention": {
+      "graph_sha256": "78297646b000e11688b43c0dadddb6e29a06d290263912f73803bd7e7f02d744",
+      "safetensors_sha256": "37a2f5d514eb2af8c0bdf3acb72ebfa10cf2f6cce4b94741591c4c39f0ba0a63"
+    },
+    "lstm2": {
+      "graph_sha256": "72ba44a7c1003fc2a05cc2a18131e7256363ab8223910603481fc38c38c14e0c",
+      "safetensors_sha256": "f62fbb8ee0fdf3b01918e27ddc5c7e6603015bf92fe40023b5905c72a6af4b39"
+    },
+    "lstm3": {
+      "graph_sha256": "cd180280c51e29269b3488f0df9af17c424f1f9845a1381ba74064480b0d58fd",
+      "safetensors_sha256": "eb0cf371c2f504a3261efbc49141dee2f39125245142587e876d29641b3f0903"
+    },
+    "gmm": {
+      "graph_sha256": "7bf51d022b8998fb036e4c52647121b7e5360693ddd0706b4685ba6f827edd31",
+      "safetensors_sha256": "54d67c89bb86591d20962e6d5a29100dc6224ca948e86f22be168a6cad6504e1"
+    }
+  },
+  "assets": {},
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 5,
+  "operators": [
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 3355648
+}

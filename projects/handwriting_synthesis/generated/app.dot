@@ -1,0 +1,89 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+editor [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">editor<BR/>(SentenceInput)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+send [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">send<BR/>(SendToNetwork)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+uart [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+display [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">display<BR/>(HandwritingDisplay)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+network [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">network<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+
+uart:i -> editor:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<UartBlock>
+
+]
+
+editor:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<SentenceSnapshot>
+
+]
+
+
+
+send:oev0 -> network:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+network:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+network:oev1 -> display:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+
+}

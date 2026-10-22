@@ -1,0 +1,187 @@
+[
+  {
+    "name": "attention",
+    "non_const_buffer_sizes": [
+      0,
+      2864
+    ],
+    "delegates": [
+      "EthosUBackend"
+    ],
+    "inputs": [
+      0
+    ],
+    "outputs": [
+      8
+    ],
+    "values": [
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 476], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 476], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=1904, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0012824615696445107)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 30], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=128, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 30], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0005619200528599322)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Null()"
+    ],
+    "operators": [
+      "Operator(name='quantized_decomposed::quantize_per_tensor', overload='out')",
+      "Operator(name='quantized_decomposed::dequantize_per_tensor', overload='out')"
+    ]
+  },
+  {
+    "name": "gmm",
+    "non_const_buffer_sizes": [
+      0,
+      2400
+    ],
+    "delegates": [
+      "EthosUBackend"
+    ],
+    "inputs": [
+      0
+    ],
+    "outputs": [
+      8
+    ],
+    "values": [
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 400], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 400], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=1600, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=4.577652725856751e-05)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 121], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=496, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 121], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0014206513296812773)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Null()"
+    ],
+    "operators": [
+      "Operator(name='quantized_decomposed::quantize_per_tensor', overload='out')",
+      "Operator(name='quantized_decomposed::dequantize_per_tensor', overload='out')"
+    ]
+  },
+  {
+    "name": "lstm1",
+    "non_const_buffer_sizes": [
+      0,
+      9600
+    ],
+    "delegates": [
+      "EthosUBackend"
+    ],
+    "inputs": [
+      0
+    ],
+    "outputs": [
+      8
+    ],
+    "values": [
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 476], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 476], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=1904, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0012824615696445107)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=6400, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0014208332868292928)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Null()"
+    ],
+    "operators": [
+      "Operator(name='quantized_decomposed::quantize_per_tensor', overload='out')",
+      "Operator(name='quantized_decomposed::dequantize_per_tensor', overload='out')"
+    ]
+  },
+  {
+    "name": "lstm2",
+    "non_const_buffer_sizes": [
+      0,
+      9600
+    ],
+    "delegates": [
+      "EthosUBackend"
+    ],
+    "inputs": [
+      0
+    ],
+    "outputs": [
+      8
+    ],
+    "values": [
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 876], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 876], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=3504, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0012824615696445107)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=6400, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0014153278898447752)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Null()"
+    ],
+    "operators": [
+      "Operator(name='quantized_decomposed::quantize_per_tensor', overload='out')",
+      "Operator(name='quantized_decomposed::dequantize_per_tensor', overload='out')"
+    ]
+  },
+  {
+    "name": "lstm3",
+    "non_const_buffer_sizes": [
+      0,
+      9600
+    ],
+    "delegates": [
+      "EthosUBackend"
+    ],
+    "inputs": [
+      0
+    ],
+    "outputs": [
+      8
+    ],
+    "values": [
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 876], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 876], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=3504, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0012824615696445107)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Tensor(scalar_type=<ScalarType.SHORT: 2>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=6400, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Tensor(scalar_type=<ScalarType.FLOAT: 6>, storage_offset=0, sizes=[1, 1600], dim_order=[0, 1], requires_grad=False, layout=0, data_buffer_idx=0, allocation_info=AllocationDetails(memory_id=1, memory_offset_low=0, memory_offset_high=0), shape_dynamism=<TensorShapeDynamism.STATIC: 0>, extra_tensor_info=None)",
+      "Double(double_val=0.0012863415759056807)",
+      "Int(int_val=0)",
+      "Int(int_val=-32767)",
+      "Int(int_val=32767)",
+      "Int(int_val=2)",
+      "Null()"
+    ],
+    "operators": [
+      "Operator(name='quantized_decomposed::quantize_per_tensor', overload='out')",
+      "Operator(name='quantized_decomposed::dequantize_per_tensor', overload='out')"
+    ]
+  }
+]

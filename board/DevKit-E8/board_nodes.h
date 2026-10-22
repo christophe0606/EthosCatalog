@@ -8,6 +8,10 @@ extern "C" {
 #endif
 #define MICROPHONE_BLOCK_SAMPLES 512U
 #define LCD_PIXELS (480U * 800U)
+// Optional UART4 interrupt ring, enabled by BOARD_UART_ASYNC_RX.
+int board_uart_rx_start(void);
+int board_uart_rx_read(void); // -1 when empty; one consumer
+extern volatile uint32_t board_uart_rx_drops, board_uart_rx_errors;
 #define BOARD_CAMERA_WIDTH 640U
 #define BOARD_CAMERA_HEIGHT 480U
 #define BOARD_CAMERA_BYTES (BOARD_CAMERA_WIDTH * BOARD_CAMERA_HEIGHT * 2U)
@@ -31,6 +35,16 @@ int lcd_init(uint16_t *initial_frame);
 // initializes GT911 and retains that bus callback; the two cannot own it together.
 int lcd_init_display(uint16_t *initial_frame);
 int lcd_present(uint16_t *frame);
+// Optional split presentation, one owning thread. Before mutating the previous
+// front buffer, wait for release; submit the new immutable front buffer, then
+// do independent work while two scanline events release the previous buffer.
+// Do not mix the split API with another presentation caller.
+int lcd_wait_for_release(void);
+int lcd_submit(uint16_t *frame);
+// Native RGB565 rectangle (480x800). Only this rectangle may have changed since
+// the buffer was last cleaned. Cache-line rounding stays inside the framebuffer.
+// Zero-sized damage submits an unchanged buffer. Same release contract as submit.
+int lcd_submit_region(uint16_t *frame,unsigned x,unsigned y,unsigned width,unsigned height);
 int lcd_touch(unsigned *x, unsigned *y, bool *contact);
 #ifdef __cplusplus
 }

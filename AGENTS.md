@@ -32,3 +32,5 @@ when building or loading firmware for the board.
 * Demos using LCD uses the LCD in landscape mode
 
 * You are not allowed to modify files from imported libraries and packs. You can only modify files from this project.
+
+* You can have several models in the .pte file. But if a demo uses several models, they should appear as several CMSIS Stream nodes (one per model) so that the structure of the application is clearer.

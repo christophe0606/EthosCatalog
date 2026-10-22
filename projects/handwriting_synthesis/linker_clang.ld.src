@@ -1,0 +1,4 @@
+/* Copyright 2026 Arm Limited and/or its affiliates.
+ * SPDX-License-Identifier: Apache-2.0
+ * LLVM Embedded linker layout shared by the DevKit-E8 applications. */
+#include "../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_clang.ld.src"

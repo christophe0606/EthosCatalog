@@ -1,0 +1,427 @@
+benchmarks:
+  network:
+    operation: 'One autoregressive handwriting stroke step: three LSTM dense gates,
+      text attention dense and GMM dense on NPU; recurrent state/attention/window/mixture
+      sampling on CPU. Text and persistent state are initialized/retained internally.'
+    input_shape:
+    - 1
+    - 3
+    output_shape:
+    - 1
+    - 3
+    samples_per_forward: 1
+    float_boundary: true
+    quantization: Five a16w8 dense methods; int16 activations/int8 weights; float32
+      method boundaries and CPU state.
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h
+            OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 3355648
+        input_tensor_bytes: 12
+        ethos:
+          weights_region_bytes: 3342480
+          arena_region_bytes: 4960
+        executorch:
+          method_pool_peak_bytes: 37336
+          temp_pool_peak_bytes: 4960
+      time:
+        ms: 112.8710975
+        cycles: 45148439.0
+        statistic: median
+        min_cycles: 45148419
+        max_cycles: 45148455
+        mean_cycles: 45148437.890625
+        forward_ms: 117.017505
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 45148443
+        - 45148441
+        - 45148441
+        - 45148443
+        - 45148436
+        - 45148433
+        - 45148429
+        - 45148453
+        - 45148439
+        - 45148439
+        - 45148445
+        - 45148443
+        - 45148441
+        - 45148427
+        - 45148449
+        - 45148427
+        - 45148429
+        - 45148453
+        - 45148442
+        - 45148436
+        - 45148437
+        - 45148429
+        - 45148419
+        - 45148439
+        - 45148439
+        - 45148443
+        - 45148419
+        - 45148455
+        - 45148447
+        - 45148437
+        - 45148445
+        - 45148434
+        - 45148449
+        - 45148447
+        - 45148443
+        - 45148449
+        - 45148433
+        - 45148441
+        - 45148431
+        - 45148441
+        - 45148429
+        - 45148441
+        - 45148427
+        - 45148443
+        - 45148437
+        - 45148425
+        - 45148445
+        - 45148447
+        - 45148431
+        - 45148449
+        - 45148439
+        - 45148435
+        - 45148437
+        - 45148433
+        - 45148435
+        - 45148442
+        - 45148450
+        - 45148423
+        - 45148441
+        - 45148439
+        - 45148425
+        - 45148421
+        - 45148422
+        - 45148443
+        forward_ticks_samples:
+        - 46823194
+        - 46812521
+        - 46809564
+        - 46812747
+        - 46816406
+        - 46820386
+        - 46826116
+        - 46825168
+        - 46823922
+        - 46821322
+        - 46817160
+        - 46813504
+        - 46810852
+        - 46809052
+        - 46810172
+        - 46847986
+        - 46874656
+        - 46815280
+        - 46807526
+        - 46806604
+        - 46811252
+        - 46813042
+        - 46810310
+        - 46808032
+        - 46806734
+        - 46804772
+        - 46802896
+        - 46804036
+        - 46847648
+        - 46842806
+        - 46803232
+        - 46806236
+        - 46808424
+        - 46814136
+        - 46810098
+        - 46809586
+        - 46807270
+        - 46805046
+        - 46801250
+        - 46798592
+        - 46799380
+        - 46798318
+        - 46799174
+        - 46799320
+        - 46799547
+        - 46798096
+        - 46795906
+        - 46797148
+        - 46797616
+        - 46801602
+        - 46800910
+        - 46801250
+        - 46797644
+        - 46795378
+        - 46793468
+        - 46796194
+        - 46796164
+        - 46835160
+        - 46852074
+        - 46797204
+        - 46794076
+        - 46793512
+        - 46797346
+        - 46798098
+    run:
+      recorded_at: '2026-10-22T06:35:00Z'
+      context: handwriting_synthesis.Release+DevKit-E8
+      target: DevKit-E8@Handwriting_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        driver: ARM::CMSIS-Ethos-U@1.0.0
+        driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic
+          U85@2.0.0
+        board: AlifSemiconductor::Ensemble@2.2.1
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-22
+      execution_job: d-23
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 1
+      samples: 64
+      pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) after every dense and
+        full-step measurement
+      pmu_overflow: 0
+      npu_invocations_per_forward: 5
+      test_result: PASS
+      uart: benchmark_uart.txt
+      model_sha256: 8991565f2c6ef468942789f458d6809f6879a1315c9610035b5e7a6f4390f3d3
+      firmware_sha256: 375531b1e4d5f481cc1430cb066220c4747605140e1f15b7aa8a5b6c9fb41bea
+      input: 75 supported characters plus NUL, seed42, evolving sampled feedback;
+        first step warmup then64 measured steps; per-method held-out dense fixtures10
+        samples each
+      timing_scope: 'ms/cycles: sum of five real NPU_ACTIVE intervals. forward_ms:
+        complete Engine::step including input assembly, five float-boundary dense
+        calls, output copies, all LSTM gates, full76-position attention/window, mixture/pen
+        sampling, termination check, finite validation and PMU hooks. Excludes UART
+        prints between samples, model load/CRC, method warmup, LCD and UART input.'
+      uart_run: Uninterrupted explicitly triggered Release benchmark after CMSIS debugger
+        startup settled; no breakpoints or debug reads during measured execution.
+      measurement_source: UART4 COM7 115200 8N1; aggregate PMU callbacks, per-method
+        region snapshots, PeakAllocator high-water marks; benchmark_dense_methods.json
+        has separate dense statistics.
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 100.0
+          clock_source: projects/handwriting_synthesis/hardware_params.cpp APP_READ_CLOCK_HZ;
+            guarded e8_flash_set_read_clock; observed AXI400MHz/divider4
+        activations:
+          type: SRAM0
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 3355648
+        input_tensor_bytes: 12
+        ethos:
+          weights_region_bytes: 3342480
+          arena_region_bytes: 4960
+        executorch:
+          method_pool_peak_bytes: 37336
+          temp_pool_peak_bytes: 4960
+      time:
+        ms: 30.30937375
+        cycles: 12123749.5
+        statistic: median
+        min_cycles: 12123745
+        max_cycles: 12123754
+        mean_cycles: 12123749.203125
+        forward_ms: 33.5217875
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 12123750
+        - 12123748
+        - 12123748
+        - 12123751
+        - 12123746
+        - 12123750
+        - 12123752
+        - 12123748
+        - 12123750
+        - 12123748
+        - 12123746
+        - 12123753
+        - 12123750
+        - 12123750
+        - 12123746
+        - 12123750
+        - 12123751
+        - 12123746
+        - 12123748
+        - 12123751
+        - 12123748
+        - 12123751
+        - 12123751
+        - 12123747
+        - 12123746
+        - 12123748
+        - 12123748
+        - 12123748
+        - 12123750
+        - 12123750
+        - 12123749
+        - 12123749
+        - 12123753
+        - 12123749
+        - 12123750
+        - 12123751
+        - 12123751
+        - 12123753
+        - 12123747
+        - 12123746
+        - 12123750
+        - 12123750
+        - 12123754
+        - 12123751
+        - 12123751
+        - 12123747
+        - 12123745
+        - 12123750
+        - 12123748
+        - 12123746
+        - 12123748
+        - 12123749
+        - 12123748
+        - 12123754
+        - 12123750
+        - 12123749
+        - 12123750
+        - 12123745
+        - 12123746
+        - 12123746
+        - 12123750
+        - 12123749
+        - 12123752
+        - 12123754
+        forward_ticks_samples:
+        - 13426877
+        - 13412370
+        - 13411175
+        - 13414595
+        - 13417483
+        - 13420506
+        - 13425018
+        - 13425053
+        - 13423679
+        - 13422672
+        - 13419738
+        - 13414367
+        - 13410905
+        - 13409905
+        - 13409687
+        - 13447945
+        - 13476575
+        - 13414253
+        - 13409375
+        - 13410018
+        - 13410972
+        - 13412255
+        - 13410301
+        - 13409021
+        - 13408409
+        - 13405014
+        - 13404690
+        - 13404197
+        - 13447446
+        - 13443137
+        - 13406795
+        - 13406826
+        - 13409459
+        - 13413005
+        - 13412454
+        - 13410601
+        - 13406676
+        - 13406933
+        - 13401791
+        - 13400543
+        - 13399259
+        - 13398425
+        - 13399451
+        - 13400543
+        - 13400171
+        - 13398497
+        - 13396104
+        - 13397065
+        - 13398054
+        - 13401264
+        - 13401654
+        - 13401654
+        - 13397921
+        - 13396805
+        - 13392377
+        - 13394735
+        - 13396631
+        - 13438062
+        - 13452751
+        - 13398821
+        - 13393061
+        - 13394766
+        - 13397245
+        - 13397573
+    run:
+      recorded_at: '2026-10-22T07:20:00Z'
+      context: handwriting_synthesis.Release+DevKit-E8
+      target: DevKit-E8@Handwriting_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        driver: ARM::CMSIS-Ethos-U@1.0.0
+        driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic
+          U85@2.0.0
+        board: AlifSemiconductor::Ensemble@2.2.1
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-35
+      execution_job: d-36
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 1
+      samples: 64
+      pmu_cross_check: PMCCNTR equals PMEVCNTR0 (NPU_ACTIVE) after every dense and
+        full-step measurement
+      pmu_overflow: 0
+      npu_invocations_per_forward: 5
+      test_result: PASS
+      uart: benchmark_100mhz_uart.txt
+      model_sha256: 8991565f2c6ef468942789f458d6809f6879a1315c9610035b5e7a6f4390f3d3
+      firmware_sha256: 46e1296da296f0341d1abe4c3418466ad94c16389084779b3ef0173bc1e92040
+      input: 75 supported characters plus NUL, seed42, evolving sampled feedback;
+        one warmup then64 measured steps; five startup held-out dense fixtures
+      timing_scope: 'ms/cycles: sum of five real NPU_ACTIVE intervals. forward_ms:
+        complete Engine::step including input assembly, five float-boundary dense
+        calls, output copies, all LSTM gates, full76-position attention/window, mixture/pen
+        sampling, termination check, finite validation and PMU hooks. Excludes UART
+        prints between samples, model load/CRC, method warmup, LCD and UART input.'
+      uart_run: Autonomous Release demo with concurrent UART/LCD; no halt or debugger
+        reads during the64 measured Engine steps. Completion snapshot taken after
+        the full sentence.
+      measurement_source: Preserved CMSIS serial chunks benchmark_100mhz_demo_startup.json
+        and benchmark_100mhz_demo_profile.json; per-step production PMU checks; demo_b35_75char_live.json;
+        benchmark_100mhz_provenance.json. No per-method ten-sample timing at100MHz
+        is claimed.

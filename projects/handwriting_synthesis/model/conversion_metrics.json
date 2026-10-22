@@ -1,0 +1,102 @@
+{
+  "scheme": "post-training symmetric a16w8, per-channel int8 weights/int16 activations",
+  "observer": "Full MinMax over all float trajectory steps, symmetric range with 50% activation guard",
+  "reference": "Original pretrained checkpoint mapped to float PyTorch; no training",
+  "calibration_sentences": [
+    "Hello world",
+    "The quick brown fox jumps over the lazy dog.",
+    "Handwriting on Arm",
+    "0123456789 !?",
+    "A little pen writes white on black.",
+    "Now try another sentence",
+    "Welcome to the demo",
+    "OpenAI and Ethos"
+  ],
+  "evaluation_sentences": [
+    "This is a test.",
+    "Animated handwriting",
+    "A new sentence replaces the old one."
+  ],
+  "dense_methods": {
+    "lstm1": {
+      "calibration_samples": 4861,
+      "evaluation_samples": 775,
+      "max_absolute_error": 0.13534021377563477,
+      "mean_absolute_error": 0.0030032936483621597,
+      "root_mean_square_error": 0.004750347696244717,
+      "normalized_rmse_percent": 0.4070245027542114,
+      "input_quantization_scale": 0.0012824615696445107,
+      "output_quantization_scale": 0.0014208332868292928
+    },
+    "attention": {
+      "calibration_samples": 4861,
+      "evaluation_samples": 775,
+      "max_absolute_error": 0.07277870178222656,
+      "mean_absolute_error": 0.003700567176565528,
+      "root_mean_square_error": 0.005224805790930986,
+      "normalized_rmse_percent": 0.183412104845047,
+      "input_quantization_scale": 0.0012824615696445107,
+      "output_quantization_scale": 0.0005619200528599322
+    },
+    "lstm2": {
+      "calibration_samples": 4861,
+      "evaluation_samples": 775,
+      "max_absolute_error": 0.23328518867492676,
+      "mean_absolute_error": 0.004572989419102669,
+      "root_mean_square_error": 0.006735062692314386,
+      "normalized_rmse_percent": 0.42130976915359497,
+      "input_quantization_scale": 0.0012824615696445107,
+      "output_quantization_scale": 0.0014153278898447752
+    },
+    "lstm3": {
+      "calibration_samples": 4861,
+      "evaluation_samples": 775,
+      "max_absolute_error": 0.2885017395019531,
+      "mean_absolute_error": 0.004412378650158644,
+      "root_mean_square_error": 0.006521102972328663,
+      "normalized_rmse_percent": 0.3834226727485657,
+      "input_quantization_scale": 0.0012824615696445107,
+      "output_quantization_scale": 0.0012863415759056807
+    },
+    "gmm": {
+      "calibration_samples": 4861,
+      "evaluation_samples": 775,
+      "max_absolute_error": 0.12799644470214844,
+      "mean_absolute_error": 0.006893622688949108,
+      "root_mean_square_error": 0.012861078605055809,
+      "normalized_rmse_percent": 0.44027039408683777,
+      "input_quantization_scale": 4.577652725856751e-05,
+      "output_quantization_scale": 0.0014206513296812773
+    }
+  },
+  "closed_loop_sequences": [
+    {
+      "sentence": "This is a test.",
+      "seed": 801,
+      "float_points": 287,
+      "quantized_points": 320,
+      "float_final_kappa_mean": 12.640275955200195,
+      "quantized_final_kappa_mean": 13.888648986816406,
+      "finite": true
+    },
+    {
+      "sentence": "Animated handwriting",
+      "seed": 802,
+      "float_points": 594,
+      "quantized_points": 607,
+      "float_final_kappa_mean": 18.35361099243164,
+      "quantized_final_kappa_mean": 18.291706085205078,
+      "finite": true
+    },
+    {
+      "sentence": "A new sentence replaces the old one.",
+      "seed": 803,
+      "float_points": 1440,
+      "quantized_points": 1025,
+      "float_final_kappa_mean": 46.70264434814453,
+      "quantized_final_kappa_mean": 33.119651794433594,
+      "finite": true
+    }
+  ],
+  "limitations": "Synthetic text/float-generated traces; no IAM held-out ground-truth recognition evaluation. Stochastic paths diverge after PTQ."
+}

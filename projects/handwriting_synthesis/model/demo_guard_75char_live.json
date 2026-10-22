@@ -1,0 +1,123 @@
+[
+  {
+    "expression": "stream_stats",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  uart_bytes: 77 (volatile uint32_t)\n  sentences: 1 (volatile uint32_t)\n  rejected: 0 (volatile uint32_t)\n  normalized: 0 (volatile uint32_t)\n  generation: 1 (volatile uint32_t)\n  requests: 1740 (volatile uint32_t)\n  acknowledgments: 1740 (volatile uint32_t)\n  inferences: 1740 (volatile uint32_t)\n  generated: 1739 (volatile uint32_t)\n  drawn: 1739 (volatile uint32_t)\n  clears: 1 (volatile uint32_t)\n  frames_presented: 1678 (volatile uint32_t)\n  wraps: 2 (volatile uint32_t)\n  lines: 3 (volatile uint32_t)\n  screen_full: 0 (volatile uint32_t)\n  stale_results: 0 (volatile uint32_t)\n  completed: 1 (volatile uint32_t)\n  step_limits: 0 (volatile uint32_t)\n  event_drops: 0 (volatile uint32_t)\n  source_ticks_max: 1310 (volatile uint32_t)\n  source_deadline_misses: 0 (volatile uint32_t)\n  forward_ticks_max: 13478024 (volatile uint32_t)\n  lcd_ticks_max: 169616 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  ink_overflows: 0 (volatile uint32_t)\n  sentence_started_ms: 31824 (volatile uint32_t)\n  sentence_elapsed_ms: 61013 (volatile uint32_t)\n  sentence_points: 1739 (volatile uint32_t)\n  lcd_wait_ticks_max: 588 (volatile uint32_t)\n  forward_ticks_sum: 23327139706 (volatile uint64_t)\n  lcd_ticks_sum: 3752665 (volatile uint64_t)\n  … 2 more — evaluate a field or element by name to read it"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "stream_stats.lcd_copy_bytes",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: stream_stats.lcd_copy_bytes\nResult: 813300\nType: volatile uint64_t\n\nNote: 19 new errors in this window since you last looked — get_recent_problems {sinceSeq: 796}"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "stream_stats.lcd_clean_bytes",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: stream_stats.lcd_clean_bytes\nResult: 2309152\nType: volatile uint64_t\n\nNote: 22 new errors in this window since you last looked — get_recent_problems {sinceSeq: 796}"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "pipeline_error",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t\n\nNote: 25 new errors in this window since you last looked — get_recent_problems {sinceSeq: 796}"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "app_result",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: app_result\nResult: 0\nType: volatile int32_t\n\nNote: 26 new errors in this window since you last looked — get_recent_problems {sinceSeq: 796}"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "handwriting_test_passed",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: handwriting_test_passed\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "model_verified",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: model_verified\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "board_uart_rx_drops",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: board_uart_rx_drops\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "board_uart_rx_errors",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: board_uart_rx_errors\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "ospi_flash_config.ospi_clock",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: ospi_flash_config.ospi_clock\nResult: 100000000\nType: uint32_t"
+        }
+      ]
+    }
+  },
+  {
+    "expression": "ospi_flash_config.regs->baudr",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: ospi_flash_config.regs->baudr\nResult: 4\nType: volatile uint32_t"
+        }
+      ]
+    }
+  }
+]

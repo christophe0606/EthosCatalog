@@ -75,6 +75,27 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: Handwriting_Debug
+          images:
+            - project-context: handwriting_synthesis.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Handwriting_Release
+          images:
+            - project-context: handwriting_synthesis.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: Handwriting_ProgramModel
+          images:
+            - project-context: handwriting_synthesis.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
         - set: Phonon_Release
           images:
             - project-context: phonon_31m_en.Release
@@ -155,6 +176,7 @@ solution:
         - .Debug
         - .Release
     - project: projects/phonon_31m_en/phonon_31m_en.cproject.yml
+    - project: projects/handwriting_synthesis/handwriting_synthesis.cproject.yml
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

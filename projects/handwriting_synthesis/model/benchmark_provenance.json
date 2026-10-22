@@ -1,0 +1,31 @@
+{
+  "sources_sha256": {
+    "projects/handwriting_synthesis/app_main.cpp": "9cb617f58996e7dd10c30af5532d5a9470b6a3278f566afe6407e99f3ccebf2b",
+    "projects/handwriting_synthesis/hardware_params.cpp": "c6ec573b484acba389215dca93f3380ca7c4932103d111627dc7afdaa931cae7",
+    "projects/handwriting_synthesis/handwriting_synthesis.cproject.yml": "408a3dc953da9177bdd1428c701cdae2c55ba396bad04ff40b280817050ac455",
+    "projects/handwriting_synthesis/nodes_impl/handwriting_engine.hpp": "101165af25632a82752e2c97257955acb49452a49382f5e7fe47d1f593a1977a",
+    "projects/handwriting_synthesis/nodes_impl/handwriting_engine.cpp": "a0877b8dc77ea16c43447f26a6af556f820505e9f6b212d5650dabf7113c61c7",
+    "projects/handwriting_synthesis/model/cpu_test_data.h": "5a0149bc20cdbb759950c39b849d78726926a5e93f6c9a5d0a8ce5237706f9cc",
+    "projects/handwriting_synthesis/model/model_test_data.h": "0a67ee6644592bd195041fb42bee090ff1c6af56290c12e2722c17928e3eeb96",
+    "common/arm_embedded_module.cpp": "0d69673e62652c4ee1ebe235363902afecec483958f82b049492d1fe1bf59876",
+    "common/nodes_impl/c/embedded_runtime.cpp": "5dcfdbb818fee2668193e849f3b05b223fbcb2c5e1cafdd52721d8de36947e64",
+    "EthosCatalog.csolution.yml": "c5d1810455ae688cddccfadcdbf16a73414ae06a705ce044b555bd0bb3cde6bf",
+    "board/DevKit-E8/ethos_setup.c": "cd0daf054944caea212fdda252f78b395fa5959bb7a44d801a54aa5db62bb081",
+    "board/DevKit-E8/main.c": "f05cec72205d5b3b0062001af0c16091727b6ece893004d12a0f7b46906be3dd",
+    ".cmsis/ensemble_vela.ini": "987eae279faa938e560220621278a54af1f8581ae1c3b5f9cf4e9ae32e7083b2"
+  },
+  "firmware_sha256": "375531b1e4d5f481cc1430cb066220c4747605140e1f15b7aa8a5b6c9fb41bea",
+  "model_sha256": "8991565f2c6ef468942789f458d6809f6879a1315c9610035b5e7a6f4390f3d3",
+  "weights_regions_disjoint": true,
+  "shared_arena_counted_once": true,
+  "clock_hz": 400000000,
+  "full_step_count": 64,
+  "npu_interrupts_after_run": 380,
+  "debug_validation": {
+    "benchmark_complete": 1,
+    "test_passed": 1,
+    "pipeline_error": 0,
+    "model_verified": 1,
+    "model_crc32": 3478819309
+  }
+}

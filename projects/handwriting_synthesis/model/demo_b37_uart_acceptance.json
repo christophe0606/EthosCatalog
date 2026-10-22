@@ -1,0 +1,115 @@
+{
+  "uart": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 101 byte(s)\n--- text ---\nSentence 1 (5 chars): Hello\nSentence 1 complete; lines=1 points=101 elapsed_ticks=3573 tick_hz=1000.\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 73 byte(s)\n--- text ---\nSentence 2 complete; lines=1 points=134 elapsed_ticks=4728 tick_hz=1000.\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 134 byte(s)\n--- text ---\nSentence 3 (75 chars): The quick brown fox writes white words on black. This sentence fills a LCD.\nSentence 4 (11 chars): Replacement\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 206 byte(s)\n--- text ---\nSentence 4 complete; lines=1 points=315 elapsed_ticks=11063 tick_hz=1000.\nInput rejected: unsupported character or more than 75 characters.\nInput rejected: unsupported character or more than 75 characters.\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 171 byte(s)\n--- text ---\nSentence 5 (8 chars): Hi there\nSentence 6 (2 chars): ac\nSentence 7 (3 chars): qxz\nSentence 7 reached model step limit; lines=1 points=120 elapsed_ticks=4235 tick_hz=1000.\n"
+        }
+      ]
+    }
+  ],
+  "stats": [
+    {
+      "expression": "stream_stats",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "[TARGET_RUNNING] There is no active stack frame.\nCall wait_for_stop, which returns once the target is stopped at a frame, or pause_execution if it is running; then retry."
+          }
+        ],
+        "structuredContent": {
+          "status": "error",
+          "error_code": "TARGET_RUNNING",
+          "message": "There is no active stack frame.",
+          "hint": "Call wait_for_stop, which returns once the target is stopped at a frame, or pause_execution if it is running; then retry."
+        },
+        "isError": true
+      }
+    },
+    {
+      "expression": "stream_stats.lcd_copy_bytes",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "[TARGET_RUNNING] There is no active stack frame.\nCall wait_for_stop, which returns once the target is stopped at a frame, or pause_execution if it is running; then retry."
+          }
+        ],
+        "structuredContent": {
+          "status": "error",
+          "error_code": "TARGET_RUNNING",
+          "message": "There is no active stack frame.",
+          "hint": "Call wait_for_stop, which returns once the target is stopped at a frame, or pause_execution if it is running; then retry."
+        },
+        "isError": true
+      }
+    },
+    {
+      "expression": "stream_stats.lcd_clean_bytes",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: stream_stats.lcd_clean_bytes\nResult: 10913952\nType: volatile uint64_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "board_uart_rx_drops",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: board_uart_rx_drops\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "board_uart_rx_errors",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: board_uart_rx_errors\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "reference": "Independent float32 NumPy equations using original TensorFlow checkpoint tensors; not original TensorFlow runtime",
+  "forced_steps": 300,
+  "sentence": "Independent numerical reference.",
+  "seed": 191,
+  "max_absolute_error": {
+    "h1": 4.3213367462158203e-07,
+    "c1": 3.814697265625e-06,
+    "h2": 9.08970832824707e-07,
+    "c2": 3.4570693969726562e-06,
+    "h3": 1.7285346984863281e-06,
+    "c3": 3.814697265625e-06,
+    "w": 4.76837158203125e-07,
+    "kappa": 4.76837158203125e-07,
+    "gmm": 2.47955322265625e-05,
+    "phi": 4.76837158203125e-07
+  },
+  "decoder_max_absolute_error": 4.098345576153406e-05,
+  "parameter_count": 3632431
+}

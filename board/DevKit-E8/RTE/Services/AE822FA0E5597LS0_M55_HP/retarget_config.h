@@ -66,7 +66,7 @@ extern "C" {
 
 #define UART_BLOCKING(n) _UART_BLOCKING_(n)
 
-#if (UART_BLOCKING(PRINTF_UART_CONSOLE) == 0)
+#if (UART_BLOCKING(PRINTF_UART_CONSOLE) == 0) && !defined(BOARD_UART_ASYNC_RX)
 #if (PRINTF_UART_CONSOLE == LP)
 #pragma message("Selected UART : LPUART")
 #else

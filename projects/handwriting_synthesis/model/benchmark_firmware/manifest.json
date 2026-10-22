@@ -1,0 +1,30 @@
+{
+  "app_main.cpp": {
+    "snapshot": "model/benchmark_firmware/app_main.cpp",
+    "sha256": "9cb617f58996e7dd10c30af5532d5a9470b6a3278f566afe6407e99f3ccebf2b"
+  },
+  "hardware_params.cpp": {
+    "snapshot": "model/benchmark_firmware/hardware_params.cpp",
+    "sha256": "c6ec573b484acba389215dca93f3380ca7c4932103d111627dc7afdaa931cae7"
+  },
+  "hardware_params.h": {
+    "snapshot": "model/benchmark_firmware/hardware_params.h",
+    "sha256": "2badc19ad7236413f45f266980da2488ef9d13bbc74b35bd83844117646e7d12"
+  },
+  "stream_types.h": {
+    "snapshot": "model/benchmark_firmware/stream_types.h",
+    "sha256": "dcd4bd8ef15bfd4334c85f1d72bcc4b07727677790c4071a8593cddd90084a8f"
+  },
+  "handwriting_synthesis.cproject.yml": {
+    "snapshot": "model/benchmark_firmware/handwriting_synthesis.cproject.yml",
+    "sha256": "408a3dc953da9177bdd1428c701cdae2c55ba396bad04ff40b280817050ac455"
+  },
+  "nodes_impl/handwriting_engine.hpp": {
+    "snapshot": "model/benchmark_firmware/nodes_impl/handwriting_engine.hpp",
+    "sha256": "101165af25632a82752e2c97257955acb49452a49382f5e7fe47d1f593a1977a"
+  },
+  "nodes_impl/handwriting_engine.cpp": {
+    "snapshot": "model/benchmark_firmware/nodes_impl/handwriting_engine.cpp",
+    "sha256": "a0877b8dc77ea16c43447f26a6af556f820505e9f6b212d5650dabf7113c61c7"
+  }
+}

@@ -53,6 +53,52 @@ void _ttywrch(int ch)
 /* Reference to the underlying USART driver */
 #define ptrUSART (&ARM_Driver_USART_(RETARGET_STDIO_UART))
 
+#if defined(BOARD_UART_ASYNC_RX)
+/* Optional interrupt reception. The board owns its transport ring; application
+ * nodes own line editing and protocol policy. Installed on the FIRST Initialize:
+ * Ensemble's driver deliberately ignores later Initialize callbacks. */
+#include "board_nodes.h"
+#include CMSIS_device_header
+static uint8_t uart_rx_byte, uart_rx_ring[512];
+static volatile uint32_t uart_rx_head, uart_rx_tail;
+volatile uint32_t board_uart_rx_drops, board_uart_rx_errors;
+static void uart_rx_callback(uint32_t events)
+{
+    if (events & ARM_USART_EVENT_RECEIVE_COMPLETE) {
+        uint32_t head = uart_rx_head;
+        if (head - uart_rx_tail < sizeof(uart_rx_ring)) {
+            uart_rx_ring[head & (sizeof(uart_rx_ring)-1)] = uart_rx_byte;
+            __DMB(); uart_rx_head = head + 1;
+        } else ++board_uart_rx_drops;
+        if (ptrUSART->Receive(&uart_rx_byte,1) != ARM_DRIVER_OK) ++board_uart_rx_errors;
+    }
+    if (events & (ARM_USART_EVENT_RX_OVERFLOW | ARM_USART_EVENT_RX_FRAMING_ERROR |
+                  ARM_USART_EVENT_RX_PARITY_ERROR | ARM_USART_EVENT_RX_BREAK)) ++board_uart_rx_errors;
+}
+int board_uart_rx_start(void) { return ptrUSART->Receive(&uart_rx_byte,1); }
+int board_uart_rx_read(void)
+{
+    uint32_t tail=uart_rx_tail;
+    if (tail==uart_rx_head) return -1;
+    __DMB(); int value=uart_rx_ring[tail & (sizeof(uart_rx_ring)-1)];
+    __DMB(); uart_rx_tail=tail+1; return value;
+}
+/* The vendor polling adapter tests GetTxCount()==1, which can still describe
+ * the PREVIOUS byte when interrupt Send returns. Wait for tx_busy to clear so
+ * the stack-backed byte remains valid until this transfer really completes. */
+int stdout_init(void) { return 0; }
+int stderr_init(void) { return 0; }
+int stdout_putchar(int ch)
+{
+    uint8_t byte=(uint8_t)ch;
+    while(ptrUSART->GetStatus().tx_busy) {}
+    if(ptrUSART->Send(&byte,1)!=ARM_DRIVER_OK) return -1;
+    while(ptrUSART->GetStatus().tx_busy) {}
+    return ch;
+}
+int stderr_putchar(int ch) { return stdout_putchar(ch); }
+#endif
+
 /**
   Initialize stdio
 
@@ -61,7 +107,13 @@ void _ttywrch(int ch)
 int stdio_init(void)
 {
 
-    if (ptrUSART->Initialize(NULL) != ARM_DRIVER_OK) {
+    if (ptrUSART->Initialize(
+#if defined(BOARD_UART_ASYNC_RX)
+        uart_rx_callback
+#else
+        NULL
+#endif
+        ) != ARM_DRIVER_OK) {
         return -1;
     }
 

@@ -1,3 +1,5 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
 """Check portable benchmark structure, validation failures and Vela provenance."""
 from copy import deepcopy
 from contextlib import redirect_stderr, redirect_stdout
@@ -210,10 +212,45 @@ class BenchmarkSchema(unittest.TestCase):
             if "uart" not in record["run"] or "memory" not in record["measurements"]:
                 continue
             with self.subTest(path=path, index=index):
-                uart = (path.parent / record["run"]["uart"]).read_text()
+                uart_path = path.parent / record["run"]["uart"]
+                # The schema also permits a transport description in this
+                # text field. Only file references supply observations to parse.
+                if not uart_path.suffix and not uart_path.is_file():
+                    continue
+                uart = uart_path.read_text(encoding="utf-8")
                 observed = re.findall(r"Benchmark memory: model=(\d+) B, arena=(\d+) B at 0x[0-9a-fA-F]+, weights=(\d+) B", uart)
-                model, arena, weights = map(int, observed[-1])
-                method, temp = map(int, re.findall(r"Benchmark pools: method peak=(\d+) B, temp peak=(\d+) B", uart)[-1])
+                if observed:
+                    model, arena, weights = map(int, observed[-1])
+                    pools = re.findall(r"Benchmark pools: method peak=(\d+) B, temp peak=(\d+) B", uart)
+                else:
+                    # Multi-method models report each region separately. Count
+                    # the union of address ranges so a reused scratch arena is
+                    # counted once, while disjoint method weights are summed.
+                    regions = re.findall(
+                        r"^REGION (\w+) weights=(\d+) weights_address=(0x[0-9a-fA-F]+) "
+                        r"arena=(\d+) arena_address=(0x[0-9a-fA-F]+)", uart, re.MULTILINE)
+                    self.assertTrue(regions, "UART has no recognized memory observations")
+                    self.assertEqual(len({region[0] for region in regions}), len(regions),
+                                     "UART contains repeated method observations")
+
+                    def region_union_bytes(size_index, address_index):
+                        intervals = sorted((int(region[address_index], 16), int(region[size_index]))
+                                           for region in regions)
+                        total, previous_end = 0, 0
+                        for start, size in intervals:
+                            end = start + size
+                            total += max(0, end - max(start, previous_end))
+                            previous_end = max(previous_end, end)
+                        return total
+
+                    weights = region_union_bytes(1, 2)
+                    arena = region_union_bytes(3, 4)
+                    models = re.findall(r"^Model=(\d+) bytes;", uart, re.MULTILINE)
+                    self.assertEqual(len(models), 1, "UART must describe one complete run")
+                    model = int(models[0])
+                    pools = re.findall(r"^POOLS method_peak=(\d+) temp_peak=(\d+)", uart, re.MULTILINE)
+                self.assertTrue(pools, "UART has no recognized pool observations")
+                method, temp = map(int, pools[-1])
                 memory = record["measurements"]["memory"]
                 self.assertEqual(memory["model_bytes"], model)
                 if network.get("float_boundary"):

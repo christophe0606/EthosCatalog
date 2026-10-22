@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-22T07:20:00Z",
+  "build_job": "b-35",
+  "execution_job": "d-36",
+  "firmware_sha256": "46e1296da296f0341d1abe4c3418466ad94c16389084779b3ef0173bc1e92040",
+  "model_sha256": "8991565f2c6ef468942789f458d6809f6879a1315c9610035b5e7a6f4390f3d3",
+  "cpu_clock_hz": 400000000,
+  "npu_clock_hz": 400000000,
+  "ospi_read_clock_hz": 100000000,
+  "startup_uart": "benchmark_100mhz_demo_startup.json",
+  "profile_uart": "benchmark_100mhz_demo_profile.json",
+  "completed_sentence_validation": "demo_b35_75char_live.json",
+  "linked_memory": "demo_memory.json",
+  "profile_scope": "One warmup then 64 evolving full Engine::step calls on 75 supported characters, seed 42. The production network node rejects any measured step without exactly five NPU invocations, equal cycle/active counts, positive cycles and zero PMU overflow before recording it.",
+  "display_configuration": "Two RGB565 buffers; split LCD submit/release safety wait overlapped with inference; full framebuffer copy/cache clean per point. Later dirty-region rendering changes do not describe this measured binary."
+}

@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Serial RX (owned): 688 byte(s)\n--- text ---\nHandwriting Release benchmark: CPU=400000000 AXI_NPU=400000000 timer=400000000 Hz\nModel=3355648 bytes; engine=20288 bytes; method_reserved=131072 temp_reserved=65536\nCPU fixture: max_error=0.000000477 tolerance=0.000003\nE: ethosu_driver.c:1038: Inference already running, or waiting to be cleared...\nW: Release on driver called while it's still running or ethosu_wait() not called\nW: No power request left to release, reference counter is 0\nW: No power request left to release, reference counter is 0\nE: ethosu_driver.c:984: Error(s) for ethos-u85 occured during inference.\nE: ethosu_backend_u85.c:174: NPU status=0x00000000, qread=0, cmd_end_reached=0\nHandwriting benchmark FAILED: -421\n"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "SentenceInput<UartBlock,1,SentenceSnapshot,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SendToNetwork<SentenceSnapshot,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_ACK_ID"
+    ]
+  },
+  "UartSource<UartBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "HandwritingDisplay": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_STROKE_ID"
+    ]
+  },
+  "HandwritingNetwork": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_ACK_ID",
+      "SEL_STROKE_ID"
+    ]
+  }
+}

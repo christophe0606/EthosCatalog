@@ -1,0 +1,212 @@
+{
+  "lstm1": {
+    "time": {
+      "ms": 23.5247175,
+      "cycles": 9409887.0,
+      "statistic": "median",
+      "min_cycles": 9409881,
+      "max_cycles": 9409891,
+      "mean_cycles": 9409887.4,
+      "forward_ms": 23.9670075,
+      "forward_timer_hz": 400000000,
+      "cycles_samples": [
+        9409891,
+        9409887,
+        9409887,
+        9409881,
+        9409883,
+        9409891,
+        9409889,
+        9409891,
+        9409887,
+        9409887
+      ],
+      "forward_ticks_samples": [
+        9588702,
+        9587466,
+        9586788,
+        9586284,
+        9586698,
+        9587106,
+        9586980,
+        9586413,
+        9586590,
+        9586818
+      ]
+    },
+    "weights_bytes": 696672,
+    "weights_address": "0xc02766d0",
+    "arena_bytes": 4160,
+    "arena_address": "0x02020000",
+    "max_absolute_error": 0.001420975,
+    "tolerance": 0.005683333
+  },
+  "attention": {
+    "time": {
+      "ms": 0.5322325,
+      "cycles": 212893.0,
+      "statistic": "median",
+      "min_cycles": 212887,
+      "max_cycles": 212899,
+      "mean_cycles": 212892.7,
+      "forward_ms": 0.9367325,
+      "forward_timer_hz": 400000000,
+      "cycles_samples": [
+        212892,
+        212893,
+        212889,
+        212895,
+        212899,
+        212897,
+        212893,
+        212893,
+        212887,
+        212889
+      ],
+      "forward_ticks_samples": [
+        374893,
+        374572,
+        374958,
+        374676,
+        374580,
+        374994,
+        374556,
+        374628,
+        374710,
+        375162
+      ]
+    },
+    "weights_bytes": 15424,
+    "weights_address": "0xc032d140",
+    "arena_bytes": 1024,
+    "arena_address": "0x02020000",
+    "max_absolute_error": 0.0,
+    "tolerance": 0.00224768
+  },
+  "lstm2": {
+    "time": {
+      "ms": 43.4097475,
+      "cycles": 17363899.0,
+      "statistic": "median",
+      "min_cycles": 17363893,
+      "max_cycles": 17363907,
+      "mean_cycles": 17363899.4,
+      "forward_ms": 43.903395,
+      "forward_timer_hz": 400000000,
+      "cycles_samples": [
+        17363895,
+        17363893,
+        17363907,
+        17363899,
+        17363899,
+        17363907,
+        17363897,
+        17363895,
+        17363901,
+        17363901
+      ],
+      "forward_ticks_samples": [
+        17562129,
+        17561482,
+        17560908,
+        17561700,
+        17561178,
+        17560782,
+        17561244,
+        17561712,
+        17561076,
+        17561472
+      ]
+    },
+    "weights_bytes": 1285856,
+    "weights_address": "0xc013c540",
+    "arena_bytes": 4960,
+    "arena_address": "0x02020000",
+    "max_absolute_error": 0.001415491,
+    "tolerance": 0.005661312
+  },
+  "lstm3": {
+    "time": {
+      "ms": 43.70096,
+      "cycles": 17480384.0,
+      "statistic": "median",
+      "min_cycles": 17480377,
+      "max_cycles": 17480389,
+      "mean_cycles": 17480383.1,
+      "forward_ms": 44.20202,
+      "forward_timer_hz": 400000000,
+      "cycles_samples": [
+        17480385,
+        17480383,
+        17480385,
+        17480381,
+        17480380,
+        17480377,
+        17480385,
+        17480389,
+        17480387,
+        17480379
+      ],
+      "forward_ticks_samples": [
+        17681419,
+        17680656,
+        17680968,
+        17681154,
+        17680662,
+        17680954,
+        17680528,
+        17680422,
+        17681184,
+        17680446
+      ]
+    },
+    "weights_bytes": 1294432,
+    "weights_address": "0xc0000230",
+    "arena_bytes": 4960,
+    "arena_address": "0x02020000",
+    "max_absolute_error": 0.001286507,
+    "tolerance": 0.005145366
+  },
+  "gmm": {
+    "time": {
+      "ms": 1.7034425,
+      "cycles": 681377.0,
+      "statistic": "median",
+      "min_cycles": 681367,
+      "max_cycles": 681381,
+      "mean_cycles": 681376,
+      "forward_ms": 2.1046425,
+      "forward_timer_hz": 400000000,
+      "cycles_samples": [
+        681377,
+        681377,
+        681377,
+        681379,
+        681367,
+        681373,
+        681381,
+        681375,
+        681377,
+        681377
+      ],
+      "forward_ticks_samples": [
+        841903,
+        842074,
+        841602,
+        841638,
+        841344,
+        841944,
+        841872,
+        842108,
+        841842,
+        841626
+      ]
+    },
+    "weights_bytes": 50096,
+    "weights_address": "0xc0320ae0",
+    "arena_bytes": 1056,
+    "arena_address": "0x02020000",
+    "max_absolute_error": 0.001420736,
+    "tolerance": 0.005682605
+  }
+}

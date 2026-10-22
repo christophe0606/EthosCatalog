@@ -43,3 +43,9 @@ so switching projects does not require regenerating the model.
 | Project name | Description | Application graph | Benchmark |
 | --- | --- | --- | --- |
 | [object_detection](projects/object_detection/README.md) | Live camera face detection on Ethos-U85 with CMSIS Stream, RGB565 preview and rotated LCD boxes. | [![object_detection graph](projects/object_detection/generated/app.png)](projects/object_detection/generated/app.pdf) | [benchmark.yml](projects/object_detection/model/benchmark.yml) |
+
+## text
+
+| Project name | Description | Application graph | Benchmark |
+| --- | --- | --- | --- |
+| [handwriting_synthesis](projects/handwriting_synthesis/README.md) | UART-driven animated white handwriting on a black landscape LCD using Ethos-U85 and OSPI weights. | [![handwriting_synthesis graph](projects/handwriting_synthesis/generated/app.png)](projects/handwriting_synthesis/generated/app.pdf) | [benchmark.yml](projects/handwriting_synthesis/model/benchmark.yml) |

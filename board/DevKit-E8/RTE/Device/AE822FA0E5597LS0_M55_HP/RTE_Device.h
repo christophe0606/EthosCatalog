@@ -8,6 +8,10 @@
  *
  */
 
+/* New Arm contribution: optional BOARD_UART_ASYNC_RX UART4 configuration.
+ * Copyright 2026 Arm Limited and/or its affiliates.
+ * New Arm contributions are licensed under Apache-2.0; the existing Alif
+ * material retains its notice and license above. */
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
 
 #ifndef __RTE_DEVICE_H
@@ -3662,7 +3666,13 @@
 //    <1=> ENABLE
 // <i> Defines Blocking mode support for UART4
 // <i> Default: DISABLE
+#if defined(BOARD_UART_ASYNC_RX)
+// UART Stream demos need interrupt reception while inference is executing.
+// The default polling stdio transport remains selected by other applications.
+#define RTE_UART4_BLOCKING_MODE_ENABLE 0
+#else
 #define RTE_UART4_BLOCKING_MODE_ENABLE 1
+#endif
 
 #endif  // UART4
 

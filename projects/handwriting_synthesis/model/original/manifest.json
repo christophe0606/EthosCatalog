@@ -1,0 +1,27 @@
+{
+  "author": "Sean Vasquez (sjvasquez)",
+  "revision": "5f58984c3bc793bd8930bad7012cd2008d4a4a66",
+  "license": "No stated reuse license; see ../../THIRD_PARTY_NOTICES.md",
+  "files": {
+    "rnn.py": {
+      "url": "https://raw.githubusercontent.com/sjvasquez/handwriting-synthesis/5f58984c3bc793bd8930bad7012cd2008d4a4a66/rnn.py",
+      "bytes": 8386,
+      "sha256": "03ab8362f2070ae0ff44c900ce5edaba9e72d42ad3abf2b07bf4b419e7e4e3ef"
+    },
+    "rnn_cell.py": {
+      "url": "https://raw.githubusercontent.com/sjvasquez/handwriting-synthesis/5f58984c3bc793bd8930bad7012cd2008d4a4a66/rnn_cell.py",
+      "bytes": 7276,
+      "sha256": "89806239d0927424f664f374d4f835d5d288b6121e557d9a757c7eb86bd8c48c"
+    },
+    "checkpoints/model-17900.index": {
+      "url": "https://raw.githubusercontent.com/sjvasquez/handwriting-synthesis/5f58984c3bc793bd8930bad7012cd2008d4a4a66/checkpoints/model-17900.index",
+      "bytes": 1240,
+      "sha256": "2ef3d25b586a622452bd511dcb762d767bf91bdc2568cf456acddb62757834db"
+    },
+    "checkpoints/model-17900.data-00000-of-00001": {
+      "url": "https://raw.githubusercontent.com/sjvasquez/handwriting-synthesis/5f58984c3bc793bd8930bad7012cd2008d4a4a66/checkpoints/model-17900.data-00000-of-00001",
+      "bytes": 43589184,
+      "sha256": "046f30989097e75968b5f37ef98f25ba096d7a6e418d25c5481a648970929889"
+    }
+  }
+}

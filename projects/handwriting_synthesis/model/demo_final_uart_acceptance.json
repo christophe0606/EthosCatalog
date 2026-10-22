@@ -1,0 +1,199 @@
+{
+  "commands": [
+    {
+      "name": "short CR",
+      "data": "Hello\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 6 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "CRLF replacement",
+      "data": "World\r\n",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 7 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unsupported byte corrected",
+      "data": "Hi@\b there\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 11 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "mixed invalid edit order",
+      "data": "a@b\b\bc\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 7 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unsupported and overflow rejection",
+      "data": "bad@\raaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 82 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "normalization",
+      "data": "QXZ\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 4 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "clear unfinished line",
+      "data": "unfinished\u0015Done\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 16 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "overflow corrected by backspace",
+      "data": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\b\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 78 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "final visible sentence",
+      "data": "Hello\r",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 6 byte(s) to owned serial port."
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty CRLF",
+      "data": "\r\n",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 2 byte(s) to owned serial port."
+          }
+        ]
+      }
+    }
+  ],
+  "uart": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 424 byte(s)\n--- text ---\nSentence 2 (5 chars): Hello\nSentence 3 (5 chars): World\nSentence 4 (8 chars): Hi there\nSentence 5 (2 chars): ac\nInput rejected: unsupported character or more than 75 characters.\nInput rejected: unsupported character or more than 75 characters.\nSentence 6 (3 chars): qxz\nSentence 7 (4 chars): Done\nSentence 8 (75 chars): aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nSentence 9 (5 chars): Hello\n"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 73 byte(s)\n--- text ---\nSentence 9 complete; lines=1 points=101 elapsed_ticks=3573 tick_hz=1000.\n"
+        }
+      ]
+    }
+  ],
+  "stats": [
+    {
+      "expression": "stream_stats",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  uart_bytes: 296 (volatile uint32_t)\n  sentences: 9 (volatile uint32_t)\n  rejected: 2 (volatile uint32_t)\n  normalized: 3 (volatile uint32_t)\n  generation: 9 (volatile uint32_t)\n  requests: 1916 (volatile uint32_t)\n  acknowledgments: 1916 (volatile uint32_t)\n  inferences: 1916 (volatile uint32_t)\n  generated: 1908 (volatile uint32_t)\n  drawn: 1908 (volatile uint32_t)\n  clears: 9 (volatile uint32_t)\n  frames_presented: 1841 (volatile uint32_t)\n  wraps: 2 (volatile uint32_t)\n  lines: 1 (volatile uint32_t)\n  screen_full: 0 (volatile uint32_t)\n  stale_results: 6 (volatile uint32_t)\n  completed: 2 (volatile uint32_t)\n  step_limits: 0 (volatile uint32_t)\n  event_drops: 0 (volatile uint32_t)\n  source_ticks_max: 1571 (volatile uint32_t)\n  source_deadline_misses: 0 (volatile uint32_t)\n  forward_ticks_max: 16727907 (volatile uint32_t)\n  lcd_ticks_max: 173346 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  ink_overflows: 0 (volatile uint32_t)\n  sentence_started_ms: 163821 (volatile uint32_t)\n  sentence_elapsed_ms: 3573 (volatile uint32_t)\n  sentence_points: 101 (volatile uint32_t)\n  lcd_wait_ticks_max: 11327720 (volatile uint32_t)\n  forward_ticks_sum: 1354592166 (volatile uint64_t)\n  lcd_ticks_sum: 522320 (volatile uint64_t)\n  … 2 more — evaluate a field or element by name to read it"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "app_result",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: app_result\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "board_uart_rx_drops",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: board_uart_rx_drops\nResult: 0\nType: volatile uint32_t\n\nNote: 34 new errors in this window since you last looked — get_recent_problems {sinceSeq: 736}"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "board_uart_rx_errors",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: board_uart_rx_errors\nResult: 0\nType: volatile uint32_t\n\nNote: 35 new errors in this window since you last looked — get_recent_problems {sinceSeq: 736}"
+          }
+        ]
+      }
+    }
+  ]
+}
