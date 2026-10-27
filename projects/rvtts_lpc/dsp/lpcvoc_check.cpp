@@ -48,7 +48,7 @@ int lpcvoc_optimization_check() {
             signal+=double(reference[i])*reference[i];noise+=double(delta)*delta;
         }
         const double snr=noise?10*std::log10(signal/noise):999.0;
-        printf("LPC_DSP mode=%u samples=%u timer_hz=%lu reference_ticks=%lu optimized_ticks=%lu max_pcm_error=%d snr_db=%.3f mve=%u cmsis_mvef=%u\n",
+        printf("LPC_DSP mode=%u samples=%u timer_hz=%lu reference_ticks=%lu optimized_ticks=%lu max_pcm_error=%d snr_db=%.3f mve=%u cmsis_mvef=%u\r\n",
                mode,Samples,(unsigned long)osKernelGetSysTimerFreq(),
                (unsigned long)base[1],(unsigned long)fast[1],peak,snr,
 #if defined(__ARM_FEATURE_MVE)

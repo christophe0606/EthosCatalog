@@ -25,7 +25,7 @@ public:
             }
             if(c=='\r'||c=='\n') {if(c=='\n'&&cr_){cr_=false;continue;}cr_=c=='\r';
                 std::fputs("\r\n",stdout);
-                if(overflow_){++stats_->rejected;printf("REJECT line exceeds160 ASCII characters\n");}
+                if(overflow_){++stats_->rejected;printf("REJECT line exceeds160 ASCII characters\r\n");}
                 else if(length_){editing_[length_]=0;std::memcpy(line_.text,editing_,length_+1);line_.generation=++generation_;}
                 length_=0;overflow_=false;
             } else if(c==8||c==127){if(length_){--length_;std::fputs("\b \b",stdout);}}

@@ -14,11 +14,11 @@ public:
         stats_->utterance_started=work_.started;
         int error=tts_frontend_process(l.text,&work_.frontend,0);work_.frames=unsigned(work_.frontend.frame_count);
         if(error||!work_.frames||work_.frames>rvtts::MaxFrames){++stats_->rejected;
-            printf("REJECT frontend=%d frames=%lu maximum=%u; shorten the sentence\n",error,(unsigned long)work_.frames,rvtts::MaxFrames);
+            printf("REJECT frontend=%d frames=%lu maximum=%u; shorten the sentence\r\n",error,(unsigned long)work_.frames,rvtts::MaxFrames);
             return ack_.sendAsync(kNormalPriority,selectors[selAck],l.generation)?CG_SUCCESS:CG_BUFFER_ERROR;}
         word_vocab_assign_frames_indexed(l.text,work_.frontend.frame_word,work_.frames,work_.words);
         stats_->frontend_ticks=osKernelGetSysTimerCount()-work_.started;stats_->neural_ticks=0;stats_->frames=work_.frames;
-        printf("SYNTH generation=%lu frames=%lu text=\"%s\"\n",(unsigned long)l.generation,(unsigned long)work_.frames,l.text);
+        printf("SYNTH generation=%lu frames=%lu text=\"%s\"\r\n",(unsigned long)l.generation,(unsigned long)work_.frames,l.text);
         return next_.sendAsync(kNormalPriority,selectors[selAdvance],rvtts::address(&work_))?CG_SUCCESS:CG_BUFFER_ERROR;
     }
 private:EventOutput next_,ack_;StreamStats*stats_;static rvtts::Work work_;

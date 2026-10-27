@@ -52,7 +52,7 @@ public:
         stats_->vocoder_ticks64=active_;stats_->synthesis_ticks64=prefix_+active_;
         stats_->vocoder_ticks=uint32_t(stats_->vocoder_ticks64);stats_->synthesis_ticks=uint32_t(stats_->synthesis_ticks64);
         stats_->pcm_peak=writer_.peak;stats_->pcm_nonzero=writer_.nonzero;stats_->pcm_hash=writer_.hash;
-        printf("READY generation=%lu frames=%lu audio_frames=%lu timer_hz=%lu frontend=%lu neural=%lu pitch=%lu vocoder=%llu total=%llu init=%lu frame_min=%lu frame_max=%lu peak=%lu nonzero=%lu done=%lu hash=%08lx queue=%lu waits=%lu\n",
+        printf("READY generation=%lu frames=%lu audio_frames=%lu timer_hz=%lu frontend=%lu neural=%lu pitch=%lu vocoder=%llu total=%llu init=%lu frame_min=%lu frame_max=%lu peak=%lu nonzero=%lu done=%lu hash=%08lx queue=%lu waits=%lu\r\n",
             (unsigned long)w->generation,(unsigned long)w->frames,(unsigned long)w->audio_frames,(unsigned long)osKernelGetSysTimerFreq(),
             (unsigned long)stats_->frontend_ticks,(unsigned long)stats_->neural_ticks,(unsigned long)stats_->pitch_ticks,
             (unsigned long long)stats_->vocoder_ticks64,(unsigned long long)stats_->synthesis_ticks64,

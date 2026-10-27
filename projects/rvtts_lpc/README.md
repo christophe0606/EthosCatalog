@@ -16,6 +16,8 @@ Connect a powered speaker or suitable amplifier to the green **Audio Out** jack.
 The WM8904 headphone output does not directly drive a passive loudspeaker.
 UART4 is the PRG USB connection: 115200 baud, 8 data bits, no parity, 1 stop bit.
 The firmware echoes typed characters, so leave terminal local echo disabled.
+Diagnostic lines use CRLF, so xterm-compatible terminals such as MobaXterm
+return to column 1 without enabling implicit LF-to-CRLF conversion.
 Enter a short English sentence, then CR or LF. Press **Up arrow** to recall the
 last submitted sentence; edit it if needed, then press Enter to speak it again.
 Recall replaces any text currently being edited. Backspace/Delete erase the previous

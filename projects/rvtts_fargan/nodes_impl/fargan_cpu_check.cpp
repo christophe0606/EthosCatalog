@@ -27,7 +27,7 @@ int rvtts_fargan_cpu_selftest(){
     const double rmse=std::sqrt(error/(RVTTS_CPU_FIXTURE_FRAMES*160));
     const double snr=10*std::log10(power/(error>1e-30?error:1e-30));
     fargan_cpu_source_max_error=maximum;fargan_cpu_source_rmse=float(rmse);fargan_cpu_source_snr_db=float(snr);fargan_cpu_host_max_error=host_maximum;
-    printf("FARGAN_CPU selftest frames=%u mve=%lu rows=%lu packed=%lu dtcm=%lu source_max=%g source_rmse=%g source_snr_db=%g host_max=%g\n",
+    printf("FARGAN_CPU selftest frames=%u mve=%lu rows=%lu packed=%lu dtcm=%lu source_max=%g source_rmse=%g source_snr_db=%g host_max=%g\r\n",
         RVTTS_CPU_FIXTURE_FRAMES,(unsigned long)fargan_cpu_kernel_mve,(unsigned long)fargan_cpu_kernel_rows,
         (unsigned long)fargan_cpu_kernel_packed,(unsigned long)fargan_cpu_dtcm_bytes,double(maximum),rmse,snr,double(host_maximum));
     // Declared host/board gates preserve the float source reference separately.

@@ -36,7 +36,7 @@ public:
         stats_->generation_done_ticks=osKernelGetSysTimerCount()-w->started;
         stats_->vocoder_ticks=active_;stats_->synthesis_ticks=prefix_+active_;
         stats_->pcm_peak=writer_.peak;stats_->pcm_nonzero=writer_.nonzero;stats_->pcm_hash=writer_.hash;
-        printf("READY generation=%lu frames=%lu timer_hz=%lu frontend=%lu neural=%lu pitch=%lu vocoder=%lu total=%lu peak=%lu nonzero=%lu done=%lu hash=%08lx queue=%lu waits=%lu\n",
+        printf("READY generation=%lu frames=%lu timer_hz=%lu frontend=%lu neural=%lu pitch=%lu vocoder=%lu total=%lu peak=%lu nonzero=%lu done=%lu hash=%08lx queue=%lu waits=%lu\r\n",
             (unsigned long)w->generation,(unsigned long)w->frames,(unsigned long)osKernelGetSysTimerFreq(),
             (unsigned long)stats_->frontend_ticks,(unsigned long)stats_->neural_ticks,(unsigned long)stats_->pitch_ticks,
             (unsigned long)stats_->vocoder_ticks,(unsigned long)stats_->synthesis_ticks,
