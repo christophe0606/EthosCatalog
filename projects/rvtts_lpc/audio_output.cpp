@@ -15,7 +15,7 @@ extern "C" ARM_DRIVER_SAI Driver_SAI3;
 extern "C" ARM_DRIVER_WM8904 WM8904;
 extern "C" WM8904_CODEC_SLAVE_I2C_CONFIG i2c_cnfg;
 namespace {
-constexpr unsigned Slots=8,Samples=320;
+constexpr unsigned Slots=2,Samples=320;
 alignas(32) int32_t ring[Slots][Samples],silence[Samples];
 uint32_t generations[Slots];
 std::atomic<uint32_t> produced{0},consumed{0};
@@ -66,5 +66,5 @@ extern "C" int rvtts_audio_write(const int16_t*mono,unsigned generation){
     uint32_t write=produced.load(std::memory_order_relaxed);auto*dst=ring[write%Slots];
     for(unsigned i=0;i<160;++i){int32_t value=int32_t(mono[i])*65536;dst[2*i]=dst[2*i+1]=value;}
     generations[write%Slots]=generation;produced.store(write+1,std::memory_order_release);
-    if(!started&&write+1>=4){started=true;arm_next();}return stream_stats.error;
+    if(!started&&write+1>=Slots){started=true;arm_next();}return stream_stats.error;
 }

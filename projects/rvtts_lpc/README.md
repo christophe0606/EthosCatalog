@@ -32,9 +32,11 @@ line can be retained while busy; rapid multiple lines are not a command queue.
 
 `app.py` generates the CMSIS Stream graph from the repository root or this folder.
 UART dataflow feeds a one-request/ack bridge. An event thread runs text processing,
-then separate prosody pre/GRU/head/acoustic nodes, whole-utterance pitch correction
-and the LPC vocoder. Playback dataflow remains at realtime priority, independent of
-inference. The I2S3 interrupt maintains an eight-block stereo queue at 16 kHz with
+then separate prosody pre/GRU/head/acoustic nodes and whole-utterance pitch
+correction before the LPC vocoder. The vocoder then generates one frame per event while
+playback drains a four-block PCM queue at realtime priority. A 20 ms initial
+reserve absorbs scheduling variability; a full queue applies backpressure.
+The I2S3 interrupt maintains a two-block stereo queue at 16 kHz with
 32-bit slots, duplicating 16-bit mono speech into the high 16 bits of each channel.
 The landscape LCD shows the queued waveform at 20 updates/s and playback progress.
 LCD updates are coalesced while inference occupies the event thread; these skips
@@ -68,8 +70,18 @@ spectral dot products, with a source comparison on the target before startup.
 The imported scalar implementation remains unchanged. See `dsp/README.md` for
 the numerical contract and `LIVE_VALIDATION.md` for board evidence.
 
-With the optimized CPU vocoder and SRAM model cache, Release synthesis takes
-89.8 / 119.7 / 170.3 ms for the three validated phrases, versus 920 / 1220 /
+The earlier buffered Release with the optimized CPU vocoder and SRAM model
+cache measured synthesis times of 89.8 / 119.7 / 170.3 ms for the three validated phrases, versus 920 / 1220 /
 1720 ms of audio (RTF 0.0976-0.0990). All 386 I2S blocks complete without
 underruns, deadline misses or UART/pipeline errors. See
 `dsp/board_sram_validation.json`; SRAM0 usage is 3,331,108 / 4,194,304 bytes.
+
+The current firmware starts playback while later PCM blocks are still being
+generated. There is no utterance-sized PCM buffer. Sentence feature inference
+and pitch statistics still precede the first block. Measured first-audio delays
+are 98 / 118 / 189 ms for `Hello.`, `One two three.` and
+`This is a working demo.`. See the
+[streaming design and validation](../../documentation/rvtts-streaming.md) and
+[streaming board results](streaming_validation.json) for first-audio latency,
+buffer limits and the distinction between processing time and elapsed generation
+time under playback backpressure.

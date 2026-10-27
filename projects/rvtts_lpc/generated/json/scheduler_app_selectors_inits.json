@@ -70,7 +70,8 @@
   "LpcVocoder": {
     "isTemplate": false,
     "selectors": [
-      "SEL_ADVANCE_ID"
+      "SEL_ADVANCE_ID",
+      "SEL_STEP_ID"
     ]
   }
 }

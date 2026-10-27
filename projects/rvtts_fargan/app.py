@@ -1,6 +1,6 @@
 # Copyright 2026 Arm Limited and/or its affiliates.
 # SPDX-License-Identifier: Apache-2.0
-"""UART to whole-utterance hybrid FARGAN speech, independent clocked audio and LCD flow."""
+"""UART to streaming hybrid FARGAN speech, independent clocked audio and LCD flow."""
 from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,6 +20,7 @@ def make_graph():
     g.connect(send['oev0'], frontend['iev0']); g.connect(frontend['oev1'], send['iev0'])
     chain = [frontend, *nets, pitch, voc, pcm]
     for a, b in zip(chain, chain[1:]): g.connect(a['oev0'], b['iev0'])
+    g.connect(voc['oev1'], voc['iev1'])  # One bounded vocoder frame per event.
     g.connect(pcm['oev0'], send['iev0'])
     g.connect(pcm.o, speaker.i); g.connect(pcm.o, wave.i)
     g.connect(wave['oev0'], lcd['iev0'])

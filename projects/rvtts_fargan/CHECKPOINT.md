@@ -1,5 +1,9 @@
 # Hybrid FARGAN checkpoint
 
+Current playback overlaps generation using bounded PCM queues. See
+[streaming design](../../documentation/rvtts-streaming.md) and the project streaming validation JSON.
+The buffered timing and memory figures below describe earlier firmware.
+
 Updated 2026-10-27. The user authorized CPU FARGAN and CMSIS-DSP/Helium
 optimization after accepting the LPC speaker sound.
 

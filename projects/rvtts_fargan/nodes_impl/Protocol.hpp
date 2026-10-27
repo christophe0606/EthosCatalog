@@ -4,6 +4,7 @@
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "EventQueue.hpp"
 #include "rvtts_engine.hpp"
+#include "../../../common/rvtts/PcmQueue.hpp"
 #include <atomic>
 #include <cstdio>
 #include <cmath>
@@ -16,7 +17,7 @@ struct Work {
     TtsFrontendResult frontend;
     uint16_t words[MaxFrames];
     float features[MaxFrames*20];
-    int16_t pcm[(MaxFrames+1)*160];
+    PcmQueue pcm;
     uint32_t generation,started,started_tick,frames,audio_frames;
 };
 struct Waveform { int16_t samples[160]; uint32_t position,total; std::atomic<bool> pending{false}; };

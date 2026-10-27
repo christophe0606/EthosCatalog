@@ -1,5 +1,9 @@
 # LPC demo board validation
 
+Current playback overlaps generation using bounded PCM queues. See
+[streaming design](../../documentation/rvtts-streaming.md) and the project streaming validation JSON.
+The buffered timing and memory figures below describe earlier firmware.
+
 2026-10-27, DevKit-E8 M55_HP, Arm Compiler 6.24 Release. CMSIS build **b-22**
 was loaded and run as **r-23**. The following samples were collected without a
 debugger halt or concurrent host compilation. The target remains running.

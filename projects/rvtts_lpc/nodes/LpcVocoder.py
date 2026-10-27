@@ -6,6 +6,6 @@ class LpcVocoder(ProjectNode, BaseNode):
     folder='../nodes_impl'
     needsHardware=True
     def __init__(self,name):
-        BaseNode.__init__(self,name,identified=False,selectors=['advance'])
-        self.addEventInput(); self.addEventOutput()
+        BaseNode.__init__(self,name,identified=False,selectors=['advance','step'])
+        self.addEventInput(2); self.addEventOutput(2)
         self.parameters()

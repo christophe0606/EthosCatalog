@@ -9,7 +9,7 @@ class FarganVocoder(ProjectNode, BaseNode):
     needsHardware=True
 
     def __init__(self,name):
-        BaseNode.__init__(self,name,identified=False,selectors=['advance'])
-        self.addEventInput()
-        self.addEventOutput()
+        BaseNode.__init__(self,name,identified=False,selectors=['advance','step'])
+        self.addEventInput(2)
+        self.addEventOutput(2)
         self.parameters()

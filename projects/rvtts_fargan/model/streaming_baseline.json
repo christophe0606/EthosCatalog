@@ -1,0 +1,6 @@
+{
+  "source": "Original whole-utterance firmware, captured through CMSIS debugger before streaming changes",
+  "phrase": "Hello.",
+  "samples": 14880,
+  "pcm_fnv1a": "9dbfeb0e"
+}

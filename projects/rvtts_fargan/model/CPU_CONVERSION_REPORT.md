@@ -1,5 +1,9 @@
 # Hybrid CPU FARGAN conversion
 
+Current playback overlaps generation using bounded PCM queues. See
+[streaming design](../../../documentation/rvtts-streaming.md) and the project streaming validation JSON.
+The buffered timing and memory figures below describe earlier firmware.
+
 The current demo keeps the four shared prosody/acoustic ExecuTorch methods on
 Ethos-U85. FARGAN's complete recurrent vocoder runs on Cortex-M55 using the
 original synthesis order and LUT activations. The earlier six-method NPU

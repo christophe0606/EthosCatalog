@@ -140,11 +140,20 @@ pre [label=<
   </TR>
 </TABLE>>];
 
+
 vocoder [label=<
 <TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">vocoder<BR/>(LpcVocoder)</FONT></TD>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">vocoder<BR/>(LpcVocoder)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
   </TR>
+<TR>
+<TD PORT="iev1"><FONT POINT-SIZE="12.0" COLOR="black">iev1</FONT></TD>
+
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
 </TABLE>>];
 
 
@@ -199,10 +208,13 @@ head:i -> acoustic:i [style="dashed",color="black",fontsize="12.0",fontcolor="bl
 acoustic:i -> pitch:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
-pitch:i -> vocoder:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+pitch:i -> vocoder:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
-vocoder:i -> pcm:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+vocoder:oev0 -> pcm:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+vocoder:oev1 -> vocoder:iev1 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
 
 ]
 pcm:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>

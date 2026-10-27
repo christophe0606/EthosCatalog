@@ -136,7 +136,7 @@ std::array<uint16_t,1> RvttsNetwork::selectors = {SEL_ADVANCE_ID};
 std::array<uint16_t,3> TextFrontend::selectors = {SEL_REQUEST_ID, SEL_ADVANCE_ID, SEL_ACK_ID};
 std::array<uint16_t,1> WaveformDisplay::selectors = {SEL_WAVE_ID};
 std::array<uint16_t,1> PitchCorrect::selectors = {SEL_ADVANCE_ID};
-std::array<uint16_t,1> LpcVocoder::selectors = {SEL_ADVANCE_ID};
+std::array<uint16_t,2> LpcVocoder::selectors = {SEL_ADVANCE_ID, SEL_STEP_ID};
 
 
 /* No identified nodes found so array is forced to length 1*/
@@ -350,6 +350,7 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     nodes.acoustic->subscribe(0,*nodes.pitch,0);
     nodes.pitch->subscribe(0,*nodes.vocoder,0);
     nodes.vocoder->subscribe(0,*nodes.pcm,0);
+    nodes.vocoder->subscribe(1,*nodes.vocoder,1);
     nodes.pcm->subscribe(0,*nodes.send,0);
     nodes.wave->subscribe(0,*nodes.lcd,0);
 

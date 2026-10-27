@@ -33,6 +33,7 @@ extern "C"
 #define SEL_ACK_ID 101
 #define SEL_REQUEST_ID 102
 #define SEL_WAVE_ID 103
+#define SEL_STEP_ID 104
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);
 

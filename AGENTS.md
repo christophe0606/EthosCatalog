@@ -31,6 +31,12 @@ when building or loading firmware for the board.
 
 * Demos using LCD uses the LCD in landscape mode
 
+* Real-time audio demos must deliver generated audio to the audio output as soon
+  as it is available, with generation and playback overlapping. Do not accumulate
+  the entire utterance in a large intermediate audio buffer before playback.
+  A small, bounded buffer is acceptable to absorb processing and scheduling
+  variability; keep its duration reasonable and document the buffering latency.
+
 * You are not allowed to modify files from imported libraries and packs. You can only modify files from this project.
 
 * Don't use inline asm since it will make a port to Cortex-A more difficult

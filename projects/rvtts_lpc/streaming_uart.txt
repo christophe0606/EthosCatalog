@@ -1,0 +1,88 @@
+Serial RX (owned): 3968 byte(s)
+--- text ---
+LPC_DSP mode=0 samples=25120 timer_hz=400000000 reference_ticks=28943285 optimized_ticks=14609687 max_pcm_error=1 snr_db=93.473 mve=3 cmsis_mvef=1
+LPC_DSP mode=1 samples=25120 timer_hz=400000000 reference_ticks=28958922 optimized_ticks=14700798 max_pcm_error=1 snr_db=90.198 mve=3 cmsis_mvef=1
+LPC_DSP mode=2 samples=25120 timer_hz=400000000 reference_ticks=28940220 optimized_ticks=14566343 max_pcm_error=1 snr_db=92.235 mve=3 cmsis_mvef=1
+rvTTS LPC self-test PASS. UART4 115200 8N1; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=501 interval_min=3999836 interval_max=4000126 lcd=100 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=0 queue=0 waits=0 done=0 hash=00000000 played_hash=00000000 starves=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1004 interval_min=3999836 interval_max=4000126 lcd=201 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=0 queue=0 waits=0 done=0 hash=00000000 played_hash=00000000 starves=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1506 interval_min=3999836 interval_max=4000126 lcd=301 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=0 queue=0 waits=0 done=0 hash=00000000 played_hash=00000000 starves=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2008 interval_min=3999836 interval_max=4000126 lcd=402 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=0 queue=0 waits=0 done=0 hash=00000000 played_hash=00000000 starves=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2511 interval_min=3999836 interval_max=4000126 lcd=502 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=0 queue=0 waits=0 done=0 hash=00000000 played_hash=00000000 starves=0
+Hello.
+SYNTH generation=1 frames=92 text="Hello."
+LIVE error=0 requests=1 acks=0 played=67 completed=65 first_ticks=39350786 irq=3013 interval_min=3999824 interval_max=4000271 lcd=603 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=72 queue=4 waits=672 done=0 hash=00000000 played_hash=00000000 starves=0
+READY generation=1 frames=92 timer_hz=400000000 frontend=158713 neural=25234485 pitch=8658 vocoder=9237004 total=36531883 peak=16631 nonzero=14673 done=380176288 hash=567e6b3c queue=4 waits=863
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=39350786 irq=3515 interval_min=3999824 interval_max=4000271 lcd=703 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=863 done=380176288 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=39350786 irq=4018 interval_min=3999733 interval_max=4000271 lcd=804 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=863 done=380176288 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=39350786 irq=4520 interval_min=3999733 interval_max=4000271 lcd=904 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=863 done=380176288 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=39350786 irq=5023 interval_min=3999733 interval_max=4000271 lcd=1005 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=863 done=380176288 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=39350786 irq=5525 interval_min=3999733 interval_max=4000271 lcd=1105 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=863 done=380176288 hash=567e6b3c played_hash=567e6b3c starves=0
+
+Serial RX (owned): 2036 byte(s)
+--- text ---
+One two three.
+SYNTH generation=2 frames=122 text="One two three."
+READY generation=2 frames=122 timer_hz=400000000 frontend=355545 neural=33528384 pitch=11256 vocoder=12234167 total=48335437 peak=14381 nonzero=19455 done=507638423 hash=40042da9 queue=4 waits=1154
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=6028 interval_min=3999733 interval_max=4000327 lcd=1206 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=6531 interval_min=3999733 interval_max=4000327 lcd=1306 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=7033 interval_min=3999733 interval_max=4000327 lcd=1407 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=7536 interval_min=3999733 interval_max=4000327 lcd=1507 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=8038 interval_min=3999733 interval_max=4000327 lcd=1608 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=47211406 irq=8541 interval_min=3999733 interval_max=4000327 lcd=1708 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=122 queue=4 waits=1154 done=507638423 hash=40042da9 played_hash=40042da9 starves=0
+
+Serial RX (owned): 2058 byte(s)
+--- text ---
+This is a working demo.
+SYNTH generation=3 frames=172 text="This is a working demo."
+READY generation=3 frames=172 timer_hz=400000000 frontend=602689 neural=48132370 pitch=15263 vocoder=17257736 total=68918717 peak=14365 nonzero=27443 done=736097566 hash=546caf90 queue=4 waits=1633
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=9043 interval_min=3999705 interval_max=4000327 lcd=1809 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=9546 interval_min=3999705 interval_max=4000327 lcd=1909 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=10048 interval_min=3999705 interval_max=4000327 lcd=2010 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=10551 interval_min=3999705 interval_max=4000327 lcd=2110 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=11054 interval_min=3999705 interval_max=4000327 lcd=2211 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=75669509 irq=11556 interval_min=3999705 interval_max=4000327 lcd=2311 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=172 queue=4 waits=1633 done=736097566 hash=546caf90 played_hash=546caf90 starves=0
+
+Serial RX (owned): 1486 byte(s)
+--- text ---
+The meter is reading forty four.
+SYNTH generation=4 frames=213 text="The meter is reading forty four."
+READY generation=4 frames=213 timer_hz=400000000 frontend=695483 neural=58601197 pitch=18786 vocoder=21350403 total=84285827 peak=11316 nonzero=34009 done=896380500 hash=83af94d7 queue=4 waits=2037
+LIVE error=0 requests=4 acks=4 played=599 completed=599 first_ticks=71952530 irq=12059 interval_min=3999538 interval_max=4000327 lcd=2412 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=4 acks=4 played=599 completed=599 first_ticks=71952530 irq=12561 interval_min=3999538 interval_max=4000327 lcd=2512 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=4 acks=4 played=599 completed=599 first_ticks=71952530 irq=13064 interval_min=3999538 interval_max=4000327 lcd=2613 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=4 acks=4 played=599 completed=599 first_ticks=71952530 irq=13566 interval_min=3999538 interval_max=4000327 lcd=2713 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+
+Serial RX (owned): 1873 byte(s)
+--- text ---
+The meter is reading forty five.
+REJECT frontend=0 frames=227 maximum=224; shorten the sentence
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=14069 interval_min=3999538 interval_max=4000327 lcd=2814 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=14571 interval_min=3999538 interval_max=4000327 lcd=2914 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=15074 interval_min=3999538 interval_max=4000327 lcd=3015 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=15576 interval_min=3999538 interval_max=4000327 lcd=3115 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=16079 interval_min=3999538 interval_max=4000327 lcd=3216 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+LIVE error=0 requests=5 acks=5 played=599 completed=599 first_ticks=71952530 irq=16582 interval_min=3999538 interval_max=4000327 lcd=3316 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=213 queue=4 waits=2037 done=896380500 hash=83af94d7 played_hash=83af94d7 starves=0
+
+Serial RX (owned): 1711 byte(s)
+--- text ---
+Helo lo.
+SYNTH generation=6 frames=92 text="Hello."
+LIVE error=0 requests=6 acks=5 played=621 completed=619 first_ticks=35600180 irq=17084 interval_min=3999500 interval_max=4000418 lcd=3417 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=27 queue=4 waits=223 done=0 hash=00000000 played_hash=00000000 starves=0
+READY generation=6 frames=92 timer_hz=400000000 frontend=154224 neural=25221270 pitch=8625 vocoder=9239090 total=36515266 peak=16631 nonzero=14673 done=376028232 hash=567e6b3c queue=4 waits=853
+LIVE error=0 requests=6 acks=6 played=691 completed=691 first_ticks=35600180 irq=17587 interval_min=3999500 interval_max=4000418 lcd=3517 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376028232 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=6 acks=6 played=691 completed=691 first_ticks=35600180 irq=18089 interval_min=3999500 interval_max=4000418 lcd=3618 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376028232 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=6 acks=6 played=691 completed=691 first_ticks=35600180 irq=18592 interval_min=3999500 interval_max=4000418 lcd=3718 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376028232 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=6 acks=6 played=691 completed=691 first_ticks=35600180 irq=19094 interval_min=3999500 interval_max=4000418 lcd=3819 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376028232 hash=567e6b3c played_hash=567e6b3c starves=0
+
+Serial RX (owned): 2009 byte(s)
+--- text ---
+Hello.
+SYNTH generation=7 frames=92 text="Hello."
+READY generation=7 frames=92 timer_hz=400000000 frontend=158909 neural=25237200 pitch=8630 vocoder=9230465 total=36526453 peak=16631 nonzero=14673 done=376168533 hash=567e6b3c queue=4 waits=853
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=19597 interval_min=3999500 interval_max=4000418 lcd=3919 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=20099 interval_min=3999500 interval_max=4000418 lcd=4020 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=20602 interval_min=3999500 interval_max=4000418 lcd=4120 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=21105 interval_min=3999500 interval_max=4000418 lcd=4221 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=21607 interval_min=3999500 interval_max=4000418 lcd=4321 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0
+LIVE error=0 requests=7 acks=7 played=783 completed=783 first_ticks=35741324 irq=22110 interval_min=3999500 interval_max=4000418 lcd=4422 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0 generated=92 queue=4 waits=853 done=376168533 hash=567e6b3c played_hash=567e6b3c starves=0

@@ -9,4 +9,6 @@ typedef struct {
     volatile uint32_t frontend_ticks,neural_ticks,pitch_ticks,vocoder_ticks,synthesis_ticks;
     volatile uint32_t first_audio_ticks,deadline_misses,lcd_ticks_max,pcm_peak,pcm_nonzero;
     volatile uint32_t utterance_started,audio_callbacks,completed_blocks,audio_interval_min,audio_interval_max;
+    volatile uint32_t generated_blocks,pcm_queue_max,pcm_queue_waits,pcm_hash,played_hash;
+    volatile uint32_t generation_done_ticks,playback_starvations;
 } StreamStats;
