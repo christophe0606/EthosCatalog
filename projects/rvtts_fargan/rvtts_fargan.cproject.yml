@@ -7,27 +7,50 @@ project:
   add-path:
   - .
   - ../../common
+  - ../../common/stream
+  - generated
+  - model/upstream
+  - ../rvtts_lpc/upstream
+  - ../rvtts_lpc/model/upstream
   - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
   - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
-  - model/upstream
   define:
   - NPU_QCONFIG: 2
   - NPU_REGIONCFG_0: 3
   - NPU_REGIONCFG_1: 0
-  - NPU_MEM_ATTR_2: 36
-  - NPU_MEM_ATTR_3: 36
+  # U85 TRM 102685 r0p0 pp.59,63: normal NC memory on SRAM AXI ports.
+  # Command streams and weights are copied from OSPI into SRAM at startup.
+  - NPU_MEM_ATTR_2: 0x20
+  - NPU_MEM_ATTR_3: 0x20
   - APP_MODEL_OSPI
+  - APP_METHOD_POOL_SIZE: 196608
+  - APP_TEMP_POOL_SIZE: 131072
   - APP_POOL_SECTION: \".bss.ai_pool\"
-  - APP_METHOD_POOL_SIZE: 1048576
-  - APP_TEMP_POOL_SIZE: 524288
-  - OS_THREAD_NUM: 1
-  - OS_DYNAMIC_MEM_SIZE: 16384
+  - BOARD_UART_ASYNC_RX
+  - OS_THREAD_NUM: 3
+  - OS_DYNAMIC_MEM_SIZE: 65536
   components:
   - component: BSP:OSPI FLASH XIP:core
   - component: CMSIS:RTOS2:Keil RTX5&Source
   - component: CMSIS:OS Tick:SysTick
+  - component: CMSIS:STREAM&Source
+    for-context:
+    - .Debug
+    - .Release
+  - component: CMSIS:DSP&Source
+    optimize: speed
+    misc:
+    - C-CPP:
+      - -O3
+      - -ffast-math
+    for-context:
+    - .Debug
+    - .Release
+  - component: CMSIS Driver:SAI
+  - component: BSP:External peripherals:WM8904 CODEC
+  - component: BSP:External peripherals:GT911 Touch Controller
   connections:
-  - connect: rvTTS FARGAN benchmark
+  - connect: rvTTS hybrid FARGAN speech application
     provides:
     - CMSIS-RTOS2
   linker:
@@ -56,7 +79,7 @@ project:
     - file: ospi_startup.c
     - file: ../../board/DevKit-E8/model_storage.c
     - file: ../../board/DevKit-E8/e8_issi_flash.c
-  - group: FARGAN benchmark
+  - group: rvTTS hybrid speech application
     for-context:
     - .Debug
     - .Release
@@ -65,9 +88,21 @@ project:
     - file: rvtts_engine.cpp
     - file: rvtts_engine.hpp
     - file: model/model_test_data.h
-    - file: model/benchmark_inputs.h
-    - file: model/fargan_params.h
-  - group: Embedded ExecuTorch
+    - file: hardware_params.cpp
+    - file: audio_output.cpp
+    - file: generated/scheduler_app.cpp
+    - file: generated/app_params.c
+    - file: nodes_impl/WaveformDisplay.cpp
+    - file: ../../common/nodes_impl/alif_e8/lcd.c
+    - file: ../rvtts_lpc/upstream/tts_frontend.c
+    - file: ../rvtts_lpc/upstream/textnorm.c
+    - file: ../rvtts_lpc/upstream/reciter.c
+    - file: ../rvtts_lpc/upstream/duration_model.c
+    - file: ../rvtts_lpc/nodes_impl/pron_dictionary.c
+    - file: ../rvtts_lpc/upstream/word_vocab_packed.c
+    - file: nodes_impl/fargan_cpu.c
+    - file: nodes_impl/fargan_cpu_check.cpp
+  - group: Embedded ExecuTorch module
     for-context:
     - .Debug
     - .Release
@@ -77,7 +112,7 @@ project:
     - file: ../../common/embedded_runtime.hpp
     - file: ../../common/nodes_impl/c/embedded_runtime.cpp
   layers:
-  - layer: $Board-Layer$
+  - layer: ../../board/DevKit-E8/Board_HP-U85-UART.clayer.yml
     type: Board
   - layer: ai_layer/ai_layer.clayer.yml
     type: AI

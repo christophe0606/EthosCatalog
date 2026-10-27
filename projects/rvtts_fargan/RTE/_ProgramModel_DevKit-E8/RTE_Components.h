@@ -34,8 +34,12 @@
 #define RTE_Drivers_CAMERA_SENSOR_MT9M114            /* Driver CAMERA Sensor */
 /* AlifSemiconductor::BSP:External peripherals:Ethernet PHY@2.2.0 */
 #define RTE_Drivers_PHY_GENERIC           /* Driver PHY generic */
+/* AlifSemiconductor::BSP:External peripherals:GT911 Touch Controller@2.2.0 */
+#define RTE_Drivers_GT911
 /* AlifSemiconductor::BSP:External peripherals:ILI9806E LCD panel@2.2.0 */
 #define RTE_Drivers_MIPI_DSI_ILI9806E_PANEL    /* Driver ILI9806E LCD panel*/
+/* AlifSemiconductor::BSP:External peripherals:WM8904 CODEC@2.2.0 */
+#define RTE_Drivers_WM8904_CODEC      1           /* Driver */
 /* AlifSemiconductor::BSP:OSPI FLASH XIP:core@2.2.0 */
 #define RTE_Drivers_ISSI_FLASH_XIP_CORE              /* OSPI XIP CORE */
 /* AlifSemiconductor::CMSIS Driver:Ethernet MAC@2.2.0 */
@@ -44,6 +48,8 @@
 #define RTE_Drivers_GPIO   1           /* Driver GPIO */
 /* AlifSemiconductor::CMSIS Driver:I2C@2.2.0 */
 #define RTE_Drivers_I2C              /* Driver I2C */
+/* AlifSemiconductor::CMSIS Driver:SAI@2.2.0 */
+#define RTE_Drivers_SAI              /* Driver SAI */
 /* AlifSemiconductor::CMSIS Driver:SPI@2.2.0 */
 #define RTE_Drivers_SPI              /* Driver SPI */
 /* AlifSemiconductor::CMSIS Driver:USART@2.2.0 */

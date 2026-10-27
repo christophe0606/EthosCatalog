@@ -1,0 +1,20 @@
+{
+  "build": "b-49",
+  "run": "r-50",
+  "kernel": "two row, row-major int16, all weights SRAM",
+  "timer_hz": 400000000,
+  "hello": {
+    "frames": 92,
+    "audio_frames": 93,
+    "audio_ms": 930,
+    "vocoder_ms": 2064.5434625,
+    "total_ms": 2588.64083,
+    "rtf": 2.78348476344086,
+    "init_ms": 23.8364725,
+    "frame_min_ms": 21.698835,
+    "frame_max_ms": 21.726105
+  },
+  "source_snr_db": 51.9549,
+  "accuracy_pass": true,
+  "realtime_pass": false
+}

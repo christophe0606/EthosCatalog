@@ -1,0 +1,215 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+dup0 [shape=point,label="dup0"]
+
+editor [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">editor<BR/>(LineInput)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+pcm [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">pcm<BR/>(PlaybackSource)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+
+<TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+send [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">send<BR/>(SendToNetwork)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+
+<TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+speaker [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">speaker<BR/>(I2SSink)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+uart [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+wave [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">wave<BR/>(WaveformSink)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+acoustic [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">acoustic<BR/>(RvttsNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+frontend [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">frontend<BR/>(TextFrontend)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+gru [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gru<BR/>(RvttsNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+head [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">head<BR/>(RvttsNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+lcd [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+pitch [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">pitch<BR/>(PitchCorrect)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+pre [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">pre<BR/>(RvttsNetwork)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+vocoder [label=<
+<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">vocoder<BR/>(FarganVocoder)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+
+uart:i -> editor:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<UartBlock>
+
+]
+
+editor:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<TextLine>
+
+]
+
+send:o -> pcm:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<u32>
+
+]
+
+pcm:o ->
+dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<AudioBlock>
+
+]
+
+
+dup0 -> speaker:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<AudioBlock>
+
+]
+
+
+dup0 -> wave:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<AudioBlock>
+
+]
+
+
+
+send:oev0 -> frontend:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+frontend:oev1 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+frontend:oev0 -> pre:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+pre:i -> gru:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+gru:i -> head:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+head:i -> acoustic:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+acoustic:i -> pitch:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+pitch:i -> vocoder:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+vocoder:i -> pcm:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+pcm:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+wave:oev0 -> lcd:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+
+}

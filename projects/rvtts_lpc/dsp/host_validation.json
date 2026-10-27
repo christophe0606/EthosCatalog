@@ -1,0 +1,106 @@
+{
+  "scope": "Native scalar CMSIS-DSP dot and sparse FIR versus preserved scalar source; MVE checked separately on board",
+  "cmsis_dsp_release": "1.18.0",
+  "acceptance": {
+    "max_pcm_error": 64,
+    "minimum_pcm_snr_db": 60
+  },
+  "cases": [
+    {
+      "frames": 2,
+      "pitch_mode": 0,
+      "samples": 320,
+      "max_pcm_error": 0,
+      "pcm_snr_db": null,
+      "rmse": 0.0
+    },
+    {
+      "frames": 16,
+      "pitch_mode": 0,
+      "samples": 2560,
+      "max_pcm_error": 0,
+      "pcm_snr_db": null,
+      "rmse": 0.0
+    },
+    {
+      "frames": 8,
+      "pitch_mode": 1,
+      "samples": 1280,
+      "max_pcm_error": 0,
+      "pcm_snr_db": null,
+      "rmse": 0.0
+    },
+    {
+      "frames": 8,
+      "pitch_mode": 2,
+      "samples": 1280,
+      "max_pcm_error": 0,
+      "pcm_snr_db": null,
+      "rmse": 0.0
+    },
+    {
+      "frames": 81,
+      "pitch_mode": 0,
+      "samples": 12960,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 93.83086263409015,
+      "rmse": 0.062112999374994156
+    },
+    {
+      "frames": 648,
+      "pitch_mode": 0,
+      "samples": 103680,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 94.13733477500514,
+      "rmse": 0.05973836991001824
+    },
+    {
+      "frames": 324,
+      "pitch_mode": 1,
+      "samples": 51840,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 93.04720603748686,
+      "rmse": 0.05007710104811096
+    },
+    {
+      "frames": 324,
+      "pitch_mode": 2,
+      "samples": 51840,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 95.26427864563553,
+      "rmse": 0.041666666666666664
+    },
+    {
+      "frames": 157,
+      "pitch_mode": 0,
+      "samples": 25120,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 92.80909965417861,
+      "rmse": 0.0691163516376137
+    },
+    {
+      "frames": 1256,
+      "pitch_mode": 0,
+      "samples": 200960,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 93.59050466927766,
+      "rmse": 0.06289682938349767
+    },
+    {
+      "frames": 628,
+      "pitch_mode": 1,
+      "samples": 100480,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 90.64247108416501,
+      "rmse": 0.05221983175026015
+    },
+    {
+      "frames": 628,
+      "pitch_mode": 2,
+      "samples": 100480,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 92.43448728560313,
+      "rmse": 0.04636465818554495
+    }
+  ]
+}

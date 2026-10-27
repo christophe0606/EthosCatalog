@@ -1,5 +1,11 @@
 # Experimental FARGAN board benchmark
 
+This is the historical six-method NPU vocoder trial. The current CPU FARGAN
+hybrid has passed real-time, numerical and user listening checks; see
+[CPU_CONVERSION_REPORT.md](CPU_CONVERSION_REPORT.md). Its catalog benchmark
+is [benchmark.yml](benchmark.yml); the original result below is preserved in
+[benchmark_npu_81.yml](benchmark_npu_81.yml).
+
 FARGAN executes on Ethos-U85 but **fails the real-time budget and both vocoder
 method numerical checks** in the measured configuration. This cproject remains
 an experimental benchmark, not a validated speaker demo. No speed/quality
@@ -109,7 +115,7 @@ capture begins at the last startup of `load_and_run`; the load/run handoff's
 earlier partial startup is excluded. No debugger stop or reset occurred during
 the saved final samples.
 
-[benchmark.yml](benchmark.yml) records the 81-frame synthesis with FAIL.
+[benchmark_npu_81.yml](benchmark_npu_81.yml) records the 81-frame synthesis with FAIL.
 Separate method, shorter-sequence and complete-frame YAML records preserve
 their own shapes and scopes. All 12 FARGAN YAML files pass the repository
 benchmark schema. Raw evidence is in [benchmark_uart.txt](benchmark_uart.txt),

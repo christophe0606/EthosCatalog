@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-27",
+  "build": "b-44 / b-47",
+  "run": "r-48",
+  "implementation": "row-major int16 CPU weights; four-row MVE int16 dot with 64-bit sums",
+  "weight_crc32": "b61f4515",
+  "clock_hz": 400000000,
+  "numerical": {
+    "frames": 173,
+    "source_max_error": 0.000597819,
+    "source_rmse": 0.0000636759,
+    "source_snr_db": 51.9549,
+    "host_max_error": 0.0000875145,
+    "passed": true
+  },
+  "demo": {
+    "text": "Hello.",
+    "feature_frames": 92,
+    "audio_frames": 93,
+    "audio_ms": 930,
+    "vocoder_ms": 2152.4617025,
+    "init_ms": 24.8044325,
+    "frame_min_ms": 22.623665,
+    "frame_max_ms": 22.64738,
+    "synthesis_ms": 2676.4349,
+    "rtf": 2.8778869892473122,
+    "completed_blocks": 93,
+    "underruns": 0,
+    "deadline_misses": 0,
+    "pipeline_errors": 0,
+    "lcd_presentations": 556
+  },
+  "memory": {
+    "sram0_bytes": 4036708,
+    "sram0_capacity": 4194304,
+    "mram_bytes": 878128,
+    "dtcm_ordinary_bytes": 158956
+  },
+  "result": "Numerical and functional path pass; CPU synthesis fails real time. Retain as baseline for kernel optimization."
+}

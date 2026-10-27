@@ -1,0 +1,26 @@
+{
+  "variant": "Hybrid four-method Ethos / CPU FARGAN, two-row s16 MVE exact s64 dots",
+  "build": "b49",
+  "board_run": "r50",
+  "cpu_hz": 400000000,
+  "kernel_snapshot": "r50_fargan_cpu.c.txt",
+  "kernel_snapshot_sha256": "9b3eaae7557f2c5a18ecfff74f5e478b872c45d7690ae5cc9e4b19a851b01b3e",
+  "accuracy": {
+    "frames": 173,
+    "source_max_absolute_error": 0.000597819,
+    "source_rmse": 0.0000636759,
+    "source_snr_db": 51.9549,
+    "host_max_absolute_error": 0.0000875145,
+    "result": "PASS"
+  },
+  "hello_demo": {
+    "feature_frames": 92,
+    "audio_frames": 93,
+    "neural_ticks": 207190280,
+    "vocoder_ticks": 825817385,
+    "init_ticks": 9534589,
+    "frame_min_ticks": 8679534,
+    "frame_max_ticks": 8690442
+  },
+  "provenance": "Board measurements reported by the coordinating agent. Source accuracy identical to r48; about 4 percent faster vocoder, still about 21.7 ms per 10 ms frame. Its raw UART/build/debug evidence remains authoritative."
+}

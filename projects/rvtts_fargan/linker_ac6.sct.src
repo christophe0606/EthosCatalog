@@ -90,6 +90,7 @@ LR_ROM __ROM_BASE NOCOMPRESS __ROM_SIZE  {    ; load region size_region
   ; initialize allocated contents; startup must not zero them before that.
   RW_SRAM0 APP_SRAM0_BASE UNINIT APP_SRAM0_SIZE  {
    * (.bss.lcd_frame_buf)
+   * (.bss.stream_fifo)
    * (.bss.ai_pool)                    ; NPU-visible method, scratch and input pools.
   }
   PADDING +0 OVERLAY ALIGN 16 FILL 0 16

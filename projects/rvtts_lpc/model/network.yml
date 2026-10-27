@@ -111,6 +111,8 @@ network:
       safetensors: model/acoustic_quantized.safetensors
       graph: model/acoustic_quantized.pt2
   flash_ospi: true
+  # Application-owned SRAM cache; storage remains OSPI. The existing Vela
+  # schedule uses conservative OSPI latency and is valid for faster SRAM.
   ospi:
     address: 3221225472
     size: 33554432

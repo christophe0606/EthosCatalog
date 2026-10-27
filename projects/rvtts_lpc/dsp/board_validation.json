@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-27",
+  "board": "Alif DevKit-E8 M55_HP / Ethos-U85-256 at 400MHz",
+  "compiler": "Arm Compiler6.24 Release -O3 -ffast-math",
+  "cmsis_dsp": "1.18.0",
+  "build": "b-38",
+  "run": "r-41",
+  "scope": "Clean unhalted Release run; host compilation paused; whole synthesis includes frontend, four Ethos stages, LPC, copies and intervening LCD work; I2S playback timed independently.",
+  "startup_comparison": [
+    {
+      "mode": 0,
+      "reference_ticks": 28946214,
+      "optimized_ticks": 14609611,
+      "reference_ms": 72.365535,
+      "optimized_ms": 36.5240275,
+      "speedup": 1.9813131232583812,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 93.473,
+      "mve_feature": 3,
+      "cmsis_mvef": 1
+    },
+    {
+      "mode": 1,
+      "reference_ticks": 28959307,
+      "optimized_ticks": 14700389,
+      "reference_ms": 72.3982675,
+      "optimized_ms": 36.7509725,
+      "speedup": 1.9699687538880775,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 90.198,
+      "mve_feature": 3,
+      "cmsis_mvef": 1
+    },
+    {
+      "mode": 2,
+      "reference_ticks": 28937958,
+      "optimized_ticks": 14566320,
+      "reference_ms": 72.344895,
+      "optimized_ms": 36.4158,
+      "speedup": 1.9866347849010595,
+      "max_pcm_error": 1,
+      "pcm_snr_db": 92.235,
+      "mve_feature": 3,
+      "cmsis_mvef": 1
+    }
+  ],
+  "demo": [
+    {
+      "text": "Hello.",
+      "frames": 92,
+      "synthesis_ms": 544.8357925,
+      "rtf": 0.5922128179347826,
+      "vocoder_ms": 21.4413375,
+      "prior_synthesis_ms": 566.339,
+      "synthesis_improvement_percent": 3.7968791660118812
+    },
+    {
+      "text": "One two three.",
+      "frames": 122,
+      "synthesis_ms": 724.4754125,
+      "rtf": 0.5938323053278688,
+      "vocoder_ms": 28.4212575,
+      "prior_synthesis_ms": 752.057,
+      "synthesis_improvement_percent": 3.667486307553825
+    },
+    {
+      "text": "This is a working demo.",
+      "frames": 172,
+      "synthesis_ms": 1059.5423875,
+      "rtf": 0.616013015988372,
+      "vocoder_ms": 40.03513,
+      "prior_synthesis_ms": 1088.708,
+      "synthesis_improvement_percent": 2.6789196460391747
+    }
+  ],
+  "audio": {
+    "completed_blocks": 386,
+    "samples": 61760,
+    "duration_s": 3.86,
+    "callback_interval_min_ms": 9.99885,
+    "callback_interval_max_ms": 10.00124,
+    "underruns": 0,
+    "deadline_misses": 0,
+    "pipeline_errors": 0,
+    "event_drops": 0,
+    "uart_errors": 0,
+    "lcd_presentations": 768,
+    "lcd_coalesced_updates": 36
+  },
+  "memory": {
+    "source": "CMSIS get_memory_usage for b-38",
+    "sram0_bytes": 2802948,
+    "sram0_capacity": 4194304,
+    "mram_bytes": 673328
+  },
+  "limitations": [
+    "CPU microbenchmark fixture timing precedes LCD/stream startup; full demo timing recorded separately.",
+    "Physical listening accepted earlier scalar LPC; optimized full-target PCM fixtures differ by at most one count.",
+    "An initial hot reload r-39 failed at Ethos startup and was excluded. Fresh debugger load and subsequent clean r-41 passed without source changes."
+  ]
+}

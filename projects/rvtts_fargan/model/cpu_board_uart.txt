@@ -1,0 +1,50 @@
+FARGAN_CPU selftest frames=173 mve=1 rows=4 packed=1 dtcm=605184 source_max=0.000597819 source_rmse=6.36759e-05 source_snr_db=51.9549 host_max=8.75145e-05
+rvTTS FARGAN CPU + Ethos prosody/acoustic self-test PASS. UART4 115200 8N1 with input echo; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=502 interval_min=3999905 interval_max=4000048 lcd=102 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1003 interval_min=3999905 interval_max=4000054 lcd=202 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1505 interval_min=3999905 interval_max=4000054 lcd=302 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2007 interval_min=3999905 interval_max=4000054 lcd=403 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2508 interval_min=3999905 interval_max=4000054 lcd=503 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=3010 interval_min=3999905 interval_max=4000054 lcd=603 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+Hello.
+SYNTH generation=1 frames=92 text="Hello."
+READY generation=1 frames=92 audio_frames=93 timer_hz=400000000 frontend=158805 neural=25372146 pitch=8788 vocoder=280626437 total=308454679 init=3342619 frame_min=2943224 frame_max=2956166 peak=8915 nonzero=14843
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=3512 interval_min=3999679 interval_max=4000404 lcd=691 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=4013 interval_min=3999679 interval_max=4000404 lcd=791 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=4515 interval_min=3999679 interval_max=4000404 lcd=891 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=5017 interval_min=3999679 interval_max=4000404 lcd=992 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=5518 interval_min=3999679 interval_max=4000404 lcd=1092 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=6020 interval_min=3999679 interval_max=4000404 lcd=1192 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=6522 interval_min=3999679 interval_max=4000404 lcd=1293 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=7024 interval_min=3999679 interval_max=4000404 lcd=1393 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=351739438 irq=7525 interval_min=3999679 interval_max=4000404 lcd=1493 skips=13 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+One two three.
+SYNTH generation=2 frames=122 text="One two three."
+READY generation=2 frames=122 audio_frames=123 timer_hz=400000000 frontend=355923 neural=33706098 pitch=11326 vocoder=369093293 total=405764528 init=3352501 frame_min=2941784 frame_max=2954768 peak=8716 nonzero=19622
+LIVE error=0 requests=2 acks=1 played=93 completed=93 first_ticks=351739438 irq=8091 interval_min=3999679 interval_max=4000404 lcd=1589 skips=30 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=2 acks=2 played=216 completed=216 first_ticks=447455885 irq=8593 interval_min=3999679 interval_max=4000404 lcd=1690 skips=30 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=2 acks=2 played=216 completed=216 first_ticks=447455885 irq=9094 interval_min=3999679 interval_max=4000404 lcd=1790 skips=30 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+This is a working demo.
+SYNTH generation=3 frames=172 text="This is a working demo."
+READY generation=3 frames=172 audio_frames=173 timer_hz=400000000 frontend=603812 neural=48376212 pitch=15526 vocoder=516575099 total=568476133 init=3359844 frame_min=2943290 frame_max=2953868 peak=8204 nonzero=27620
+LIVE error=0 requests=3 acks=2 played=269 completed=261 first_ticks=611138710 irq=9596 interval_min=3999679 interval_max=4000404 lcd=1864 skips=56 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=3 acks=3 played=389 completed=389 first_ticks=611138710 irq=10098 interval_min=3999679 interval_max=4000404 lcd=1965 skips=56 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=3 acks=3 played=389 completed=389 first_ticks=611138710 irq=10600 interval_min=3999679 interval_max=4000404 lcd=2065 skips=56 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=3 acks=3 played=389 completed=389 first_ticks=611138710 irq=11101 interval_min=3999679 interval_max=4000404 lcd=2165 skips=56 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=3 acks=3 played=389 completed=389 first_ticks=611138710 irq=11603 interval_min=3999679 interval_max=4000404 lcd=2266 skips=56 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+The meter is reading forty five.
+REJECT frontend=0 frames=227 maximum=224; shorten the sentence
+Hx Y ello.
+SYNTH generation=5 frames=92 text="Hello."
+READY generation=5 frames=92 audio_frames=93 timer_hz=400000000 frontend=152107 neural=25362210 pitch=8698 vocoder=280635653 total=308049315 init=3352511 frame_min=2943080 frame_max=2955902 peak=8915 nonzero=14843
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=13607 interval_min=3999679 interval_max=4000404 lcd=2653 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=14108 interval_min=3999679 interval_max=4000404 lcd=2753 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=14610 interval_min=3999679 interval_max=4000404 lcd=2853 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=15112 interval_min=3999679 interval_max=4000404 lcd=2954 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=15614 interval_min=3999679 interval_max=4000404 lcd=3054 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=16115 interval_min=3999679 interval_max=4000404 lcd=3154 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=16617 interval_min=3999679 interval_max=4000404 lcd=3255 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=17119 interval_min=3999679 interval_max=4000404 lcd=3355 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=17620 interval_min=3999679 interval_max=4000404 lcd=3455 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=5 acks=5 played=482 completed=482 first_ticks=351493594 irq=18122 interval_min=3999679 interval_max=4000404 lcd=3556 skips=70 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=

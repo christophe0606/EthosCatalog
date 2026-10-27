@@ -16,7 +16,7 @@ layer:
   - component: Machine Learning:ExecuTorch Operators:Quantized dequantize
   - component: Machine Learning:ExecuTorch Operators:Quantized quantize
   groups:
-  - group: Model rvTTS LPC (prosody and acoustic)
+  - group: Model rvTTS LPC prosody and acoustic
     files:
     - file: ./model_pte.c
     - file: ./model_pte.h

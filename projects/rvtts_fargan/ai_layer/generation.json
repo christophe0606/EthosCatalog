@@ -1,7 +1,7 @@
 {
   "project": "projects/rvtts_fargan/rvtts_fargan.cproject.yml",
-  "config_sha256": "562fa07b514a47ff600b1f8684dfe259b5d5a9b2c41d6ee4f02c462366f82d12",
-  "pte_sha256": "61ff0e022412af2507cf7ad085150affda951d18487c7c80064568b02c0e77c7",
+  "config_sha256": "6949a00b2459be97bdc9fd18bd5e1ce481c831202de1b0dfc53a9699783ac13a",
+  "pte_sha256": "763c3041689cf61a97c96ac3e66d6adae762621a61bfa8906e48857fdd9cbc11",
   "method_caches": {
     "prosody_pre": {
       "graph_sha256": "e869a1de5c9c2f325006bf6613f548988e2835c8d61f0a53f3a1566c61179be7",
@@ -18,30 +18,43 @@
     "acoustic": {
       "graph_sha256": "879efb5a0b88d8ce5d8ccdebc6862ac8172fc31f15bc5b5748a7e5d8c9097301",
       "safetensors_sha256": "d8a754b84b183912542f088ced64f651acf18115a31801aa0fc6ad612e291243"
-    },
-    "fargan_init": {
-      "graph_sha256": "96c17bb620355e7d944be06ab892fb792b0af8b27c55a9da3cae9fd501843a9f",
-      "safetensors_sha256": "8aeb633ee081a2ef27b489bcaccba1bac2ab4b2af351077235d9d38dc00e5581"
-    },
-    "fargan_frame": {
-      "graph_sha256": "a94b5c7d5b00780ec16a4cad157ba396d20264fab5818de54c0bbae9bfe137b9",
-      "safetensors_sha256": "b73d8fc95c64b2fd502c61a4b39a83fd4e25119f499bf7333dfa5c8615cc62f6"
     }
   },
   "assets": {
     "prosody_source": {
       "file": "model/upstream/PROSODY.bin",
-      "address": 3246391296,
+      "address": 3229614080,
       "size": 201120,
       "sha256": "951777e3ef8baf82fbfecd4384e8a024ec0e2648ad0d98bcafbdb0ea6c9bdf7a",
       "crc32": 2231941535
     },
     "acoustic_source": {
       "file": "model/upstream/ACOUSTIC.bin",
-      "address": 3246653440,
+      "address": 3229876224,
       "size": 406524,
       "sha256": "1f321eecdea80ed04b64cbbb9519b0168c9b33d5eef7509cf41dc14a4111e027",
       "crc32": 4088118934
+    },
+    "dictionary": {
+      "file": "model/upstream/PRONDICT.bin",
+      "address": 3230662656,
+      "size": 1456675,
+      "sha256": "0282879d60a5a1d4dd96d3a54c5367216b04cc65478f54b18192bb2f638bb6b4",
+      "crc32": 1646138238
+    },
+    "words": {
+      "file": "model/upstream/WORDVOC.bin",
+      "address": 3232235520,
+      "size": 111947,
+      "sha256": "3e51503d2739cb575c88169d8e5200fc12073967b83e0c7b16c3cfd2dea8e0e6",
+      "crc32": 2529199378
+    },
+    "fargan_cpu": {
+      "file": "model/fargan_cpu_weights.bin",
+      "address": 3238002688,
+      "size": 1661600,
+      "sha256": "3ff83ff98b2df746419253ca248c1176811fa76437ac4ec4c64c0db25ff66d93",
+      "crc32": 1422540644
     }
   },
   "flash_ospi": true,
@@ -50,11 +63,10 @@
     "system_config": "Ethos_U85_SRAM_OSPI",
     "memory_mode": "Shared_Sram"
   },
-  "delegates": 6,
+  "delegates": 4,
   "operators": [
-    "Portable to_dim_order_copy",
     "Quantized dequantize",
     "Quantized quantize"
   ],
-  "pte_bytes": 2608624
+  "pte_bytes": 528144
 }

@@ -19,6 +19,9 @@ const char *const names[MethodCount]={"prosody_pre","prosody_gru","prosody_head"
 const unsigned input_sizes[MethodCount]={5888,256,4096,17000};
 const unsigned output_sizes[MethodCount]={2048,128,192,544};
 namespace {
+// Read the PTE from OSPI once. Both command stream and neural weights then use
+// the NPU SRAM ports; the stored model and its quantization remain unchanged.
+alignas(32) uint8_t pte_cache[MODEL_PTE_SIZE_BYTES] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) uint8_t method_pool[APP_METHOD_POOL_SIZE] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) uint8_t temp_pool[APP_TEMP_POOL_SIZE] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) float input[17000] __attribute__((section(APP_POOL_SECTION)));
@@ -74,7 +77,9 @@ int initialize() {
     if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_ACOUSTIC_SOURCE_ADDRESS),MODEL_ASSET_ACOUSTIC_SOURCE_SIZE_BYTES)!=MODEL_ASSET_ACOUSTIC_SOURCE_CRC32)return -313;
     if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_DICTIONARY_ADDRESS),MODEL_ASSET_DICTIONARY_SIZE_BYTES)!=MODEL_ASSET_DICTIONARY_CRC32)return -314;
     if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_WORDS_ADDRESS),MODEL_ASSET_WORDS_SIZE_BYTES)!=MODEL_ASSET_WORDS_CRC32)return -315;
-    model_verified=1;module=arm::embedded::initialize_runtime(model_pte,model_pte_size,method_pool,sizeof(method_pool),temp_pool,sizeof(temp_pool));
+    std::memcpy(pte_cache,model_pte,model_pte_size);
+    if(crc32(pte_cache,model_pte_size)!=MODEL_PTE_CRC32)return -316;
+    model_verified=1;module=arm::embedded::initialize_runtime(pte_cache,model_pte_size,method_pool,sizeof(method_pool),temp_pool,sizeof(temp_pool));
     if(!module)return -400;
     for(unsigned i=0;i<MethodCount;++i)if(module->load_method(names[i])!=executorch::runtime::Error::Ok)return -401-static_cast<int>(i);
     return 0;

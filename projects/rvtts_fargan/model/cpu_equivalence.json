@@ -1,0 +1,16 @@
+{
+  "reference": "Original rvTTS FARGAN scalar float matrix synthesis with original LUT activations",
+  "implementation": "Per-output source float weight requantization to int16; dynamic int16 inputs; exact int64 dot sums; float32 nonlinearities/state",
+  "frames": 173,
+  "samples": 27680,
+  "max_absolute_error": 0.0005928026512265205,
+  "rmse": 6.482183780979762e-05,
+  "reference_rms": 0.025218654508788536,
+  "snr_db": 51.800011441498214,
+  "limits": {
+    "min_snr_db": 30,
+    "max_rmse": 0.001,
+    "max_absolute_error": 0.01
+  },
+  "result": "PASS"
+}

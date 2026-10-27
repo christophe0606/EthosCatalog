@@ -7,6 +7,7 @@
 #include "cmsis_os2.h"
 #include "main.h"
 #include "board_nodes.h"
+#include "dsp/lpcvoc_check.hpp"
 #include <cmath>
 #include <cstdio>
 extern "C" {volatile int32_t pipeline_error;volatile uint32_t rvtts_selftest_pass;}
@@ -22,6 +23,7 @@ int selftest(){
 }
 extern "C" int app_main(){
     HardwareParams hw{};int error=hardware_params_init(&hw);if(!error)error=selftest();
+    if(!error)error=lpcvoc_optimization_check();
     if(!error)error=stream_configure_and_start(&hw);pipeline_error=error;
     if(error){printf("rvTTS startup failed error=%ld\n",(long)error);return error;}
     printf("rvTTS LPC self-test PASS. UART4 115200 8N1; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.\n");fflush(stdout);

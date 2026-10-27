@@ -1,4 +1,4 @@
-﻿// Copyright 2026 Arm Limited and/or its affiliates.
+// Copyright 2026 Arm Limited and/or its affiliates.
 // SPDX-License-Identifier: Apache-2.0
 // Feature construction and scan derived from rvTTS by Armstrong Subero,
 // Apache-2.0; original notices are preserved in model/upstream/.
@@ -9,17 +9,19 @@
 #include "model/upstream/acoustic_stage2_weights_int8_meta.h"
 #include "cmsis_os2.h"
 #include "main.h"
-#include "model/fargan_params.h"
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstring>
 extern "C" { volatile uint32_t model_verified,model_crc32; }
 namespace rvtts {
-const char *const names[MethodCount]={"prosody_pre","prosody_gru","prosody_head","acoustic","fargan_init","fargan_frame"};
-const unsigned input_sizes[MethodCount]={5888,256,4096,17000,32,996};
-const unsigned output_sizes[MethodCount]={2048,128,192,544,964,1124};
+const char *const names[MethodCount]={"prosody_pre","prosody_gru","prosody_head","acoustic"};
+const unsigned input_sizes[MethodCount]={5888,256,4096,17000};
+const unsigned output_sizes[MethodCount]={2048,128,192,544};
 namespace {
+// Read the PTE from OSPI once. Both command stream and neural weights then use
+// the NPU SRAM ports; the stored model and its quantization remain unchanged.
+alignas(32) uint8_t pte_cache[MODEL_PTE_SIZE_BYTES] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) uint8_t method_pool[APP_METHOD_POOL_SIZE] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) uint8_t temp_pool[APP_TEMP_POOL_SIZE] __attribute__((section(APP_POOL_SECTION)));
 alignas(32) float input[17000] __attribute__((section(APP_POOL_SECTION)));
@@ -73,14 +75,18 @@ int initialize() {
     if(model_pte_size!=MODEL_PTE_SIZE_BYTES||model_crc32!=MODEL_PTE_CRC32)return -311;
     if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_PROSODY_SOURCE_ADDRESS),MODEL_ASSET_PROSODY_SOURCE_SIZE_BYTES)!=MODEL_ASSET_PROSODY_SOURCE_CRC32)return -312;
     if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_ACOUSTIC_SOURCE_ADDRESS),MODEL_ASSET_ACOUSTIC_SOURCE_SIZE_BYTES)!=MODEL_ASSET_ACOUSTIC_SOURCE_CRC32)return -313;
-    model_verified=1;module=arm::embedded::initialize_runtime(model_pte,model_pte_size,method_pool,sizeof(method_pool),temp_pool,sizeof(temp_pool));
+    if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_DICTIONARY_ADDRESS),MODEL_ASSET_DICTIONARY_SIZE_BYTES)!=MODEL_ASSET_DICTIONARY_CRC32)return -314;
+    if(crc32(reinterpret_cast<const uint8_t*>(MODEL_ASSET_WORDS_ADDRESS),MODEL_ASSET_WORDS_SIZE_BYTES)!=MODEL_ASSET_WORDS_CRC32)return -315;
+    std::memcpy(pte_cache,model_pte,model_pte_size);
+    if(crc32(pte_cache,model_pte_size)!=MODEL_PTE_CRC32)return -316;
+    model_verified=1;module=arm::embedded::initialize_runtime(pte_cache,model_pte_size,method_pool,sizeof(method_pool),temp_pool,sizeof(temp_pool));
     if(!module)return -400;
     for(unsigned i=0;i<MethodCount;++i)if(module->load_method(names[i])!=executorch::runtime::Error::Ok)return -401-static_cast<int>(i);
     return 0;
 }
 int execute(unsigned method,const float *src,float *dst,Timing *timing) {
     using namespace executorch::aten;
-    if(method>=4||!module||!src||!dst)return -420;
+    if(method>=MethodCount||!module||!src||!dst)return -420;
     if(src!=input)std::memcpy(input,src,input_sizes[method]*4);
     std::array<SizesType,3> sizes{32,184,0};unsigned rank=2;
     if(method==Gru){sizes={1,256,0};}else if(method==Head){sizes={32,128,0};}else if(method==Acoustic){sizes={1,100,170};rank=3;}
@@ -109,103 +115,7 @@ int feature_stage(unsigned stage,const uint8_t *phones,const uint8_t *stress,con
 }
 int features(const uint8_t *p,const uint8_t *s,const uint16_t *w,unsigned n,float *out,Timing *timing) {
     Timing sum{}; const uint32_t start=osKernelGetSysTimerCount();
-    for(unsigned stage=0;stage<4;++stage) {Timing t{};int e=feature_stage(stage,p,s,w,n,out,&t);if(e)return e;sum.cycles+=t.cycles;sum.invocations+=t.invocations;sum.overflow+=t.overflow;}
+    for(unsigned stage=0;stage<MethodCount;++stage) {Timing t{};int e=feature_stage(stage,p,s,w,n,out,&t);if(e)return e;sum.cycles+=t.cycles;sum.invocations+=t.invocations;sum.overflow+=t.overflow;}
     sum.ticks=osKernelGetSysTimerCount()-start;if(timing)*timing=sum;return 0;
 }
-
-Timer::Timer() : cycles(osKernelGetSysTimerCount()), ticks(osKernelGetTickCount()) {}
-uint64_t Timer::elapsed() const {
-    const uint32_t end_cycles=osKernelGetSysTimerCount();
-    const uint32_t end_ticks=osKernelGetTickCount();
-    const uint64_t approximate=uint64_t(end_ticks-ticks)*osKernelGetSysTimerFreq()/osKernelGetTickFreq();
-    const uint32_t low=end_cycles-cycles;
-    // Resolve counter wraps against the independent millisecond RTOS timebase.
-    const uint64_t wraps=(approximate+(1ULL<<31)-low)>>32;
-    return (wraps<<32)+low;
 }
-
-namespace {
-alignas(32) float vocoder_input[996] __attribute__((section(APP_POOL_SECTION)));
-alignas(32) float vocoder_zero[964] __attribute__((section(APP_POOL_SECTION)));
-alignas(32) int64_t vocoder_indices[44] __attribute__((section(APP_POOL_SECTION)));
-alignas(32) float vocoder_output[1124] __attribute__((section(APP_POOL_SECTION)));
-
-int pitch_input(const float *frame) {
-    std::memcpy(vocoder_input,frame,20*sizeof(float));
-    int period=std::max(1,int(std::floor(.5f+256.0f/std::exp2(frame[18]+1.5f))));
-    const int embedding_index=std::min(223,std::max(0,period-32));
-    std::memcpy(vocoder_input+20,rvtts_fargan_pitch_embedding+embedding_index*12,12*sizeof(float));
-    return period;
-}
-void indices_for(int period) {
-    int pos=256-period-2;
-    for(unsigned i=0;i<44;++i) {
-        vocoder_indices[i]=std::max(0,pos);
-        if(++pos==256)pos-=period;
-    }
-}
-}
-
-int vocoder_method(unsigned method,const float *src,const int64_t *indices,float *dst,Timing *timing) {
-    using namespace executorch::aten;
-    if((method!=Init&&method!=Frame)||!module||!src||!indices||!dst)return -450;
-    if(src!=vocoder_input)std::memcpy(vocoder_input,src,input_sizes[method]*sizeof(float));
-    if(indices!=vocoder_indices)std::memcpy(vocoder_indices,indices,44*sizeof(int64_t));
-    std::array<SizesType,2> shape{1,SizesType(input_sizes[method])},index_shape{1,44},zero_shape{1,964};
-    std::array<DimOrderType,2> order{0,1};
-    TensorImpl in(ScalarType::Float,2,shape.data(),vocoder_input,order.data());
-    TensorImpl idx(ScalarType::Long,2,index_shape.data(),vocoder_indices,order.data());
-    TensorImpl zero(ScalarType::Float,2,zero_shape.data(),vocoder_zero,order.data());
-    std::vector<executorch::runtime::EValue> args{Tensor(&in),Tensor(&idx)};
-    if(method==Init){std::memset(vocoder_zero,0,sizeof(vocoder_zero));args.emplace_back(Tensor(&zero));}
-    ethos_benchmark_reset();Timer start;
-    auto out=module->execute(names[method],args);
-    const uint64_t elapsed=start.elapsed();
-    if(!out.ok()||out->size()!=1||!out->front().isTensor())return -451;
-    auto tensor=out->front().toTensor();
-    if(tensor.scalar_type()!=ScalarType::Float||tensor.numel()!=output_sizes[method])return -452;
-    std::memcpy(dst,tensor.const_data_ptr<float>(),output_sizes[method]*sizeof(float));
-    for(unsigned i=0;i<output_sizes[method];++i)if(!finite(dst[i]))return -453;
-    if(ethos_benchmark.invocations!=1||ethos_benchmark.overflow||!ethos_benchmark.cycles||ethos_benchmark.cycles!=ethos_benchmark.active_cycles)return -454;
-    if(timing)*timing={elapsed,ethos_benchmark.cycles,ethos_benchmark.invocations,ethos_benchmark.overflow};
-    return 0;
-}
-
-Timing vocoder_full_frame_timing[MaxFrames+2];
-int synthesize(float *f,unsigned n,int16_t *pcm,unsigned capacity,unsigned *samples,Timing *timing) {
-    if(!f||!n||n>MaxFrames||!pcm||!samples||capacity<(n+1)*160)return -460;
-    Timer start;Timing sum{};
-    float mean=0,variance=0;
-    for(unsigned t=0;t<n;++t)mean+=f[t*20+18];
-    mean/=n;
-    for(unsigned t=0;t<n;++t){float delta=f[t*20+18]-mean;variance+=delta*delta;}
-    const float deviation=std::max(1e-5f,std::sqrt(variance/n));
-    for(unsigned t=0;t<n;++t)f[t*20+18]=std::min(2.5f,std::max(-2.5f,(f[t*20+18]-mean)/deviation))*.3615f+.2120f;
-    int previous_period=pitch_input(f);indices_for(previous_period);
-    Timing call{};int e=vocoder_method(Init,vocoder_input,vocoder_indices,vocoder_output,&call);if(e)return e;
-    sum.cycles+=call.cycles;sum.invocations+=call.invocations;
-    std::memcpy(vocoder_input+32,vocoder_output,964*sizeof(float));
-    unsigned produced=0;float memory=0;
-    for(unsigned t=0;t<n+2;++t) {
-        Timer frame_timer;
-        const unsigned frame=std::min(t,n-1);
-        int period=pitch_input(f+frame*20);indices_for(previous_period);
-        e=vocoder_method(Frame,vocoder_input,vocoder_indices,vocoder_output,&call);if(e)return e;
-        sum.cycles+=call.cycles;sum.invocations+=call.invocations;sum.overflow+=call.overflow;
-        std::memcpy(vocoder_input+32,vocoder_output+160,964*sizeof(float));
-        previous_period=period;
-        for(unsigned j=0;j<160;++j) {
-            memory=vocoder_output[j]+.85f*memory;
-            if(!finite(memory))return -461;
-            if((t==0&&j<80)||(t==n+1&&j>=80))continue;
-            const float limited=std::max(-32768.0f,std::min(32767.0f,memory*32768.0f));
-            pcm[produced++]=static_cast<int16_t>(std::lrint(limited));
-        }
-        vocoder_full_frame_timing[t]=call;
-        vocoder_full_frame_timing[t].ticks=frame_timer.elapsed();
-    }
-    *samples=produced;sum.ticks=start.elapsed();if(timing)*timing=sum;
-    return produced==(n+1)*160?0:-462;
-}
-}
-

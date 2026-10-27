@@ -94,3 +94,60 @@ with the line partially entered. Completing the line with
 once (`requests=1`, `acks=1`), with 92 completed audio blocks and zero pipeline,
 UART, underrun, deadline or event-drop errors. The serial port was released
 and r-37 remains running for terminal use with local echo disabled.
+
+## CMSIS-DSP and Helium optimization
+
+After speaker acceptance, the user authorized CPU optimization. Release b-38
+and clean load/run r-41 validate the project-owned optimized LPC vocoder.
+The three target comparison fixtures each synthesize 157 frames. Median CPU
+times decrease from 72.34-72.40 ms to 36.42-36.75 ms (1.97-1.99 times faster).
+The actual MVE floating-point and CMSIS-DSP MVE paths are enabled. Maximum
+PCM error against preserved scalar C is one count; SNR is 90.20-93.47 dB.
+
+| UART text | Frames | Complete synthesis | RTF | LPC CPU vocoder |
+|---|---:|---:|---:|---:|
+| Hello. | 92 | 544.836 ms | 0.5922 | 21.441 ms |
+| One two three. | 122 | 724.475 ms | 0.5938 | 28.421 ms |
+| This is a working demo. | 172 | 1059.542 ms | 0.6160 | 40.035 ms |
+
+Complete synthesis improves by 2.68-3.80 percent relative to the earlier
+unoptimized demo; shared Ethos inference still dominates. All 386 I2S blocks
+(61,760 samples / 3.86 seconds) complete with zero underruns, deadline misses,
+event drops, UART errors or pipeline errors. Callback intervals are
+9.99885-10.00124 ms. The landscape LCD continues updating. SRAM0 uses
+2,802,948/4,194,304 bytes, including the startup reference comparison buffers.
+`dsp/board_uart.txt` and `dsp/board_validation.json` preserve the measurements.
+
+An initial hot reload r-39 failed during Ethos startup before the LPC checks.
+Live inspection and a fresh debug load restored startup without a source
+change. The reported run r-41 is a subsequent unhalted Release load/run with
+all self-tests passing; failed-run timing is excluded.
+
+## SRAM model cache: b-51 / r-52
+
+The engine now copies the unchanged 528,144-byte PTE from OSPI into SRAM0
+once, verifies the copied CRC (`7e22fd20`) and loads all four methods there.
+Command streams and neural weights use U85 SRAM AXI ports. The existing
+driver performs cache maintenance and barriers at NPU ownership transitions.
+This storage optimization preserves the saved quantized graphs and fixtures.
+Both project AI layers were regenerated.
+
+All four neural fixtures and the three target LPC/reference comparisons pass.
+Maximum LPC difference remains one PCM count, with SNR 90.198-93.473 dB.
+
+| Text | Audio | Synthesis | RTF | Speedup over CPU optimization alone |
+|---|---:|---:|---:|---:|
+| Hello. | 920 ms | 89.775 ms | 0.09758 | 6.07x |
+| One two three. | 1220 ms | 119.745 ms | 0.09815 | 6.05x |
+| This is a working demo. | 1720 ms | 170.292 ms | 0.09901 | 6.22x |
+
+Synthesis includes frontend, feature inference, pitch, vocoder and PCM
+publication; subsequent playback is excluded from RTF. Playback still uses
+whole-utterance buffering. All 386 blocks (61,760 samples) complete, with
+zero underruns, deadline misses, event drops, UART errors and pipeline errors.
+The 9.99919-10.00112 ms callback intervals meet the 10 ms block period.
+The landscape LCD records 904 presentations and no coalesced updates.
+
+Actual SRAM0 usage is 3,331,108 / 4,194,304 bytes, MRAM 673,680 bytes,
+ordinary DTCM 158,412 bytes. Raw UART and calculations are in
+`dsp/board_sram_uart.txt` and `dsp/board_sram_validation.json`.

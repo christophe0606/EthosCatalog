@@ -48,6 +48,7 @@ so switching projects does not require regenerating the model.
 
 | Project name | Description | Application graph | Benchmark |
 | --- | --- | --- | --- |
+| [rvtts_fargan](projects/rvtts_fargan/README.md) | Hybrid UART text-to-speech with Ethos-U85 prosody/acoustic inference and a Helium CPU FARGAN vocoder. | [![rvtts_fargan graph](projects/rvtts_fargan/generated/app.png)](projects/rvtts_fargan/generated/app.pdf) | [benchmark.yml](projects/rvtts_fargan/model/benchmark.yml) |
 | [rvtts_lpc](projects/rvtts_lpc/README.md) | Real-time UART text-to-speech on Ethos-U85 with I2S playback and an animated landscape waveform. | [![rvtts_lpc graph](projects/rvtts_lpc/generated/app.png)](projects/rvtts_lpc/generated/app.pdf) | [benchmark.yml](projects/rvtts_lpc/model/benchmark.yml) |
 
 ## text

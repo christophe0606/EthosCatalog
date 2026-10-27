@@ -1,5 +1,10 @@
 # rvTTS FARGAN conversion
 
+This report records the earlier six-method NPU vocoder experiment. The current
+hybrid demo uses four Ethos prosody/acoustic methods and the CPU vocoder described
+in [CPU_CONVERSION_REPORT.md](CPU_CONVERSION_REPORT.md). Its separate source,
+numerical gates and performance results must not be conflated with this trial.
+
 Source is [rvTTS](https://github.com/ArmstrongSubero/rvTTS), revision
 `b30af35f5366197f1a8845ef55af01a6c7c39a64`. This variant contains the shared
 prosody/acoustic conversion documented in

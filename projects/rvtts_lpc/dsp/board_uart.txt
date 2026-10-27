@@ -1,0 +1,21 @@
+LPC_DSP mode=0 samples=25120 timer_hz=400000000 reference_ticks=28946214 optimized_ticks=14609611 max_pcm_error=1 snr_db=93.473 mve=3 cmsis_mvef=1
+LPC_DSP mode=1 samples=25120 timer_hz=400000000 reference_ticks=28959307 optimized_ticks=14700389 max_pcm_error=1 snr_db=90.198 mve=3 cmsis_mvef=1
+LPC_DSP mode=2 samples=25120 timer_hz=400000000 reference_ticks=28937958 optimized_ticks=14566320 max_pcm_error=1 snr_db=92.235 mve=3 cmsis_mvef=1
+rvTTS LPC self-test PASS. UART4 115200 8N1; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=501 interval_min=3999832 interval_max=4000231 lcd=101 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1003 interval_min=3999832 interval_max=4000231 lcd=202 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1505 interval_min=3999832 interval_max=4000231 lcd=302 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2006 interval_min=3999832 interval_max=4000231 lcd=402 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+Hello.
+SYNTH generation=1 frames=92 text="Hello."
+READY generation=1 frames=92 timer_hz=400000000 frontend=158345 neural=206909419 pitch=8966 vocoder=8576535 total=217934317 peak=16631 nonzero=14673
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=255736641 irq=2508 interval_min=3999548 interval_max=4000470 lcd=495 skips=8 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+One two three.
+SYNTH generation=2 frames=122 text="One two three."
+READY generation=2 frames=122 timer_hz=400000000 frontend=355503 neural=275071041 pitch=11319 vocoder=11368503 total=289790165 peak=14381 nonzero=19455
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=331455967 irq=3010 interval_min=3999540 interval_max=4000496 lcd=584 skips=19 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+This is a working demo.
+SYNTH generation=3 frames=172 text="This is a working demo."
+READY generation=3 frames=172 timer_hz=400000000 frontend=602303 neural=399461844 pitch=15549 vocoder=16014052 total=423816955 peak=14365 nonzero=27443
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=463668353 irq=3511 interval_min=3999540 interval_max=4000496 lcd=667 skips=36 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=463668353 irq=4013 interval_min=3999540 interval_max=4000496 lcd=768 skips=36 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0

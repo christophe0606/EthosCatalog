@@ -1,0 +1,33 @@
+{
+  "variant": "Hybrid four-method Ethos / CPU FARGAN, four-row s16 MVE exact s64 dots",
+  "builds": ["b44", "b47"],
+  "board_run": "r48",
+  "cpu_hz": 400000000,
+  "kernel_snapshot": "r48_fargan_cpu.c.txt",
+  "kernel_snapshot_sha256": "b0a1f46bf80f4a15e44e23970398fc34404dbf3f98c7448ba0d2d247aa419f39",
+  "sram_bytes": 4036708,
+  "sram_capacity": 4194304,
+  "accuracy": {
+    "frames": 173,
+    "mve": 1,
+    "source_max_absolute_error": 0.000597819,
+    "source_rmse": 0.0000636759,
+    "source_snr_db": 51.9549,
+    "host_max_absolute_error": 0.0000875145,
+    "result": "PASS"
+  },
+  "hello_demo": {
+    "feature_frames": 92,
+    "audio_frames": 93,
+    "vocoder_calls": 94,
+    "vocoder_ticks": 860984681,
+    "init_ticks": 9921773,
+    "frame_min_ticks": 9049466,
+    "frame_max_ticks": 9058952,
+    "total_ms": 2676.435,
+    "audio_ms": 930,
+    "real_time_factor": 2.878,
+    "audio_errors": 0
+  },
+  "provenance": "Board measurements reported by the coordinating agent; its raw UART/build/debug evidence is authoritative. This snapshot preserves the pre-two-row baseline."
+}

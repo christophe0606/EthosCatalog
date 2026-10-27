@@ -9,7 +9,8 @@ Select `DevKit-E8@RvTTS_LPC_Release` and build/load through CMSIS Developer Assi
 The four-method PTE, source embedding tables, PDK2 pronunciation dictionary and
 packed word vocabulary reside in OSPI1. `model/network.yml` records their
 non-overlapping addresses; `ai_layer/generation.json` records sizes and hashes.
-The PTE is unchanged by addition of the frontend assets.
+Startup copies the 528,144-byte PTE to SRAM0, verifies its CRC and runs the
+four neural methods from SRAM. The stored PTE and its quantization are unchanged.
 
 Connect a powered speaker or suitable amplifier to the green **Audio Out** jack.
 The WM8904 headphone output does not directly drive a passive loudspeaker.
@@ -58,7 +59,15 @@ The project-owned `nodes_impl/pron_dictionary.c` instead probes self-contained
 bucket entries through the existing offset index; host validation confirms every
 pronunciation and stress value. This correction is required to meet real time.
 
-First-phase work includes only correctness and deadline requirements. No optional
-Helium optimization or memory-pool shrinking has been performed. The user
-completed the speaker listening check on 2026-10-27 and reported that the sound
-is OK; see `LIVE_VALIDATION.md`.
+The user completed the speaker listening check on 2026-10-27 and reported that
+the sound is OK, then authorized CMSIS-DSP and Helium optimization. The LPC
+vocoder now uses sparse pulse-dispersion overlap-add and bounded CMSIS-DSP
+spectral dot products, with a source comparison on the target before startup.
+The imported scalar implementation remains unchanged. See `dsp/README.md` for
+the numerical contract and `LIVE_VALIDATION.md` for board evidence.
+
+With the optimized CPU vocoder and SRAM model cache, Release synthesis takes
+89.8 / 119.7 / 170.3 ms for the three validated phrases, versus 920 / 1220 /
+1720 ms of audio (RTF 0.0976-0.0990). All 386 I2S blocks complete without
+underruns, deadline misses or UART/pipeline errors. See
+`dsp/board_sram_validation.json`; SRAM0 usage is 3,331,108 / 4,194,304 bytes.

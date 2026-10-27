@@ -1,0 +1,18 @@
+LPC_DSP mode=0 samples=25120 timer_hz=400000000 reference_ticks=28944072 optimized_ticks=14618151 max_pcm_error=1 snr_db=93.473 mve=3 cmsis_mvef=1
+LPC_DSP mode=0 samples=25120 timer_hz=400000000 reference_ticks=28946273 optimized_ticks=14617715 max_pcm_error=1 snr_db=93.473 mve=3 cmsis_mvef=1
+LPC_DSP mode=1 samples=25120 timer_hz=400000000 reference_ticks=28959325 optimized_ticks=14709982 max_pcm_error=1 snr_db=90.198 mve=3 cmsis_mvef=1
+LPC_DSP mode=2 samples=25120 timer_hz=400000000 reference_ticks=28940355 optimized_ticks=14576732 max_pcm_error=1 snr_db=92.235 mve=3 cmsis_mvef=1
+rvTTS LPC self-test PASS. UART4 115200 8N1; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=501 interval_min=3999904 interval_max=4000096 lcd=101 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+Hello.
+SYNTH generation=1 frames=92 text="Hello."
+READY generation=1 frames=92 timer_hz=400000000 frontend=159466 neural=25262058 pitch=8954 vocoder=8587449 total=35910053 peak=16631 nonzero=14673
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=75736795 irq=1003 interval_min=3999675 interval_max=4000186 lcd=202 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=75736795 irq=1505 interval_min=3999675 interval_max=4000186 lcd=302 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+One two three.
+SYNTH generation=2 frames=122 text="One two three."
+READY generation=2 frames=122 timer_hz=400000000 frontend=355701 neural=33562809 pitch=11318 vocoder=11372081 total=47897840 peak=14381 nonzero=19455
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=87455230 irq=2007 interval_min=3999675 interval_max=4000448 lcd=403 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+This is a working demo.
+SYNTH generation=3 frames=172 text="This is a working demo."
+READY generation=3 frames=172 timer_hz=400000000 frontend=602818 neural=48178741 pitch=15550 vocoder=16022577 total=68116790 peak=14365 nonzero=27443

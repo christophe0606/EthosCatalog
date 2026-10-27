@@ -1,0 +1,15 @@
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=1111737582 irq=46681 interval_min=3999652 interval_max=4000431 lcd=9286 skips=51 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+FARGAN_CPU selftest frames=173 mve=1 rows=2 source_max=0.000597819 source_rmse=6.36759e-05 source_snr_db=51.9549 host_max=8.75145e-05
+rvTTS FARGAN CPU + Ethos prosody/acoustic self-test PASS. UART4 115200 8N1 with input echo; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=502 interval_min=3999900 interval_max=4000100 lcd=102 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1003 interval_min=3999900 interval_max=4000100 lcd=202 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=1505 interval_min=3999900 interval_max=4000104 lcd=302 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=0 acks=0 played=0 completed=0 first_ticks=0 irq=2007 interval_min=3999900 interval_max=4000104 lcd=403 skips=0 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+Hello.
+SYNTH generation=1 frames=92 text="Hello."
+READY generation=1 frames=92 audio_frames=93 timer_hz=400000000 frontend=158558 neural=207190280 pitch=9003 vocoder=825817385 total=1035456332 init=9534589 frame_min=8679534 frame_max=8690442 peak=8915 nonzero=14843
+LIVE error=0 requests=1 acks=0 played=0 completed=0 first_ticks=0 irq=2618 interval_min=3999621 interval_max=4000397 lcd=476 skips=49 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=1079350761 irq=3119 interval_min=3999621 interval_max=4000397 lcd=576 skips=49 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=1079350761 irq=3621 interval_min=3999621 interval_max=4000397 lcd=676 skips=49 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=1079350761 irq=4123 interval_min=3999621 interval_max=4000397 lcd=777 skips=49 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=1 acks=1 played=93 completed=93 first_ticks=1079350761 irq=4624 interval_min=3999621 interval_max=4000397 lcd=877 skips=49 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0

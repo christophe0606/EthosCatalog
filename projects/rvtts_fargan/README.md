@@ -1,51 +1,79 @@
 ---
-description: Experimental FARGAN text-to-speech benchmark; numerical and real-time checks fail on DevKit-E8.
+description: Hybrid UART text-to-speech with Ethos-U85 prosody/acoustic inference and a Helium CPU FARGAN vocoder.
 category: speech
-catalog: false
+catalog: true
 ---
 
-# rvTTS FARGAN experimental benchmark
+# Hybrid FARGAN UART speech demo
 
-This separate CMSIS cproject runs the converted rvTTS prosody, acoustic and
-FARGAN vocoder models on Alif DevKit-E8. It is an **experimental, non-real-time
-benchmark**, not an accepted UART/I2S/LCD speech demo.
+This separate cproject keeps the prosody and acoustic networks on Ethos-U85 and
+runs the FARGAN vocoder on Cortex-M55. Its four-method ExecuTorch layer belongs
+to this project. CPU weights are copied once from OSPI into SRAM0 and DTCM and
+processed with a CMSIS-DSP maximum reduction and Helium int16 matrix kernels.
 
-The Release board benchmark establishes:
+The packed Helium kernel and DTCM weight placement pass the on-board
+173-frame comparison against the original float C vocoder: 51.955 dB SNR,
+0.0000636759 normalized PCM RMSE and 0.000597819 maximum difference.
+The shared neural PTE is copied once from OSPI into SRAM0 and CRC-checked;
+the four Ethos methods then read command streams and weights through SRAM ports.
 
-- Six Ethos-U85 delegates execute and memory fits.
-- A complete vocoder frame costs 108.258 ms for 10 ms of audio.
-- An 81-frame prosody-to-PCM schedule costs 9,562.321 ms for 820 ms of output
-  (real-time factor 11.661).
-- Both vocoder methods fail the strict quantized-host reference checks.
-  Tolerances remain unchanged. The four shared methods pass.
-- The 81-frame board waveform comparison has 5.289 dB synthetic SNR versus its
-  float reference. The earlier 173-frame host PTQ result is a different test
-  at 13.109 dB. Neither establishes audible speech quality.
+Release b-53 / r-57 meets real time on all three measured phrases:
 
-See [CHECKPOINT.md](CHECKPOINT.md) and
-[model/BENCHMARK_REPORT.md](model/BENCHMARK_REPORT.md) for measurements, memory,
-numerical diagnosis and exact limitations. The measured benchmark is
-[model/benchmark.yml](model/benchmark.yml); raw UART and per-method records are
-stored beside it. All benchmark YAML files pass the repository schema.
+| Text | Audio | Complete synthesis | RTF |
+|---|---:|---:|---:|
+| Hello. | 930 ms | 771.137 ms | 0.8292 |
+| One two three. | 1230 ms | 1014.411 ms | 0.8247 |
+| This is a working demo. | 1730 ms | 1421.190 ms | 0.8215 |
 
-The target sets are `DevKit-E8@RvTTS_FARGAN_Debug`,
-`DevKit-E8@RvTTS_FARGAN_Release` and `DevKit-E8@RvTTS_FARGAN_ProgramModel`.
-Select the intended set and use CMSIS Developer Assistant for building,
-programming, running, debugging and serial. Release uses `-O3 -ffast-math`.
-The generated [ai_layer](ai_layer/ai_layer.clayer.yml) belongs to this project.
-Follow the repository [OSPI programming procedure](../../documentation/alif-e8-flashing.md)
-for the PTE and source assets. Both TTS projects use the model partition
-starting at `0xC0000000`, so switching firmware also requires programming the
-selected variant's model when the bytes differ.
+CPU frame processing is 7.354-7.390 ms per 10 ms audio frame. All 389 audio
+blocks complete without underruns, missed deadlines or UART/pipeline errors;
+the landscape LCD animates playback. Actual SRAM0 usage is 3,959,684 /
+4,194,304 bytes, with 764,164 / 884,736 bytes ordinary DTCM.
+Synthesis uses whole-utterance buffering: first audio starts after 0.879 /
+1.119 / 1.528 seconds for these phrases. The user completed the FARGAN speaker
+check on 2026-10-27 and reported: "FARGAN sounds much better". The demo is
+accepted and included in the catalog.
+See [CPU conversion](model/CPU_CONVERSION_REPORT.md),
+[board results](model/cpu_board_validation.json) and
+[raw UART](model/cpu_board_uart.txt).
 
-The benchmark starts at boot, tests held-out method fixtures, generates complete
-synthetic utterance PCM into SRAM, prints samples and a final FAIL over UART4,
-then remains running in an idle RTOS thread. It does not play that PCM through
-I2S or animate it on LCD. The working LPC listening demo is the first-phase
-demonstration; no FARGAN speed or quality optimization follows these failures
-in this phase.
+Select `DevKit-E8@RvTTS_FARGAN_Release`. Build, program, run and use serial through
+CMSIS Developer Assistant. Follow the repository
+[OSPI procedure](../../documentation/alif-e8-flashing.md) to program its own PTE
+and assets, including the packed CPU weight payload at `0xC1000000` (1,661,600
+bytes, CRC32 `54ca3f64`). The shared model
+partition starts at `0xC0000000` as in LPC; program the selected variant's assets
+when changing projects.
 
-Source/provenance and reconstruction are documented in
-[model/CONVERSION_REPORT.md](model/CONVERSION_REPORT.md) and
-[model/ADAPTER_CONTRACT.md](model/ADAPTER_CONTRACT.md). Original Apache-2.0 and
-BSD-3-Clause notices are preserved in `model/upstream/`.
+Connect a powered speaker or suitable amplifier to the green **Audio Out** jack.
+UART4 uses the PRG USB connection at 115200 baud, 8 data bits, no parity, 1 stop
+bit. Firmware echoes typed characters; keep terminal local echo disabled.
+Enter a short English sentence, then CR or LF. Backspace/Delete erase the
+previous character; CRLF submits once and echoes one newline. Periodic status
+output pauses while a line is being edited.
+
+Input limits are 160 printable ASCII characters and 224 frontend feature frames.
+Long utterances are rejected explicitly. Submit one sentence at a time and wait
+for playback to finish. Source FARGAN warmup, initial 80-sample delay removal and
+final flush produce `(feature_frames+1)*160` samples at 16 kHz. The bounded PCM
+buffer holds all 225 possible audio blocks. The landscape LCD plots those same
+queued audio blocks; playback runs independently at realtime priority.
+
+`app.py` generates the CMSIS Stream graph from the root or project directory.
+The request/acknowledgment bridge permits one inference request at a time.
+Separate nodes represent prosody pre/GRU/head, acoustic inference, pitch
+normalization and CPU FARGAN. Inference and whole-utterance synthesis run on the
+event thread, while UART input, I2S delivery and waveform publication remain in
+the dataflow. The existing frontend/dictionary/vocabulary implementation is
+shared with `../rvtts_lpc/` through repository-relative source references.
+
+The old six-method **NPU FARGAN** trial failed real time (108.258 ms per 10 ms
+frame) and strict numerical checks. Its original measurements remain in
+[model/BENCHMARK_REPORT.md](model/BENCHMARK_REPORT.md), `model/benchmark_*.yml`
+and raw UART/memory reports. Source snapshots and its project configuration are
+in `npu_benchmark/`; `model/npu_network.yml` preserves its model configuration.
+Those results describe the historical NPU vocoder, not the current CPU path.
+The original catalog benchmark is preserved in `model/benchmark_npu_81.yml`;
+`model/benchmark.yml` records the accepted hybrid demo.
+Original Apache and BSD notices are preserved; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

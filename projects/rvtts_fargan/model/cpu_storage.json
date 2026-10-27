@@ -1,0 +1,144 @@
+{
+  "format": "int16 matrices packed [four-row-group,column-block8,row-in-group,lane8]; final partial rows row-major; float32 per-row scales/biases/embedding; 32-byte alignment; cold SRAM payload then hot DTCM payload",
+  "source": "upstream/fargan_data.c float arrays",
+  "bytes": 1661600,
+  "crc32": "54ca3f64",
+  "sram_bytes": 1056416,
+  "dtcm_bytes": 605184,
+  "dtcm_payload_offset": 1056416,
+  "matrices": {
+    "cond_net_fdense1": {
+      "inputs": 32,
+      "outputs": 64,
+      "storage": "SRAM0",
+      "weight_bytes": 4096,
+      "max_weight_error": 1.2878328561782837e-05
+    },
+    "cond_net_fconv1": {
+      "inputs": 192,
+      "outputs": 128,
+      "storage": "SRAM0",
+      "weight_bytes": 49152,
+      "max_weight_error": 2.482207491993904e-05
+    },
+    "cond_net_fdense2": {
+      "inputs": 128,
+      "outputs": 320,
+      "storage": "SRAM0",
+      "weight_bytes": 81920,
+      "max_weight_error": 2.838257933035493e-05
+    },
+    "sig_net_cond_gain_dense": {
+      "inputs": 80,
+      "outputs": 1,
+      "storage": "SRAM0",
+      "weight_bytes": 160,
+      "max_weight_error": 7.584691047668457e-06
+    },
+    "sig_net_fwc0_conv": {
+      "inputs": 328,
+      "outputs": 192,
+      "storage": "SRAM0",
+      "weight_bytes": 125952,
+      "max_weight_error": 4.3392181396484375e-05
+    },
+    "sig_net_fwc0_glu_gate": {
+      "inputs": 192,
+      "outputs": 192,
+      "storage": "SRAM0",
+      "weight_bytes": 73728,
+      "max_weight_error": 4.589557647705078e-05
+    },
+    "sig_net_gru1_input": {
+      "inputs": 272,
+      "outputs": 480,
+      "storage": "DTCM",
+      "weight_bytes": 261120,
+      "max_weight_error": 6.13480806350708e-05
+    },
+    "sig_net_gru1_recurrent": {
+      "inputs": 160,
+      "outputs": 480,
+      "storage": "SRAM0",
+      "weight_bytes": 153600,
+      "max_weight_error": 9.171850979328156e-05
+    },
+    "sig_net_gru2_input": {
+      "inputs": 240,
+      "outputs": 384,
+      "storage": "DTCM",
+      "weight_bytes": 184320,
+      "max_weight_error": 7.019937038421631e-05
+    },
+    "sig_net_gru2_recurrent": {
+      "inputs": 128,
+      "outputs": 384,
+      "storage": "SRAM0",
+      "weight_bytes": 98304,
+      "max_weight_error": 2.783164381980896e-05
+    },
+    "sig_net_gru3_input": {
+      "inputs": 208,
+      "outputs": 384,
+      "storage": "DTCM",
+      "weight_bytes": 159744,
+      "max_weight_error": 3.4809112548828125e-05
+    },
+    "sig_net_gru3_recurrent": {
+      "inputs": 128,
+      "outputs": 384,
+      "storage": "SRAM0",
+      "weight_bytes": 98304,
+      "max_weight_error": 2.0802021026611328e-05
+    },
+    "sig_net_gru1_glu_gate": {
+      "inputs": 160,
+      "outputs": 160,
+      "storage": "SRAM0",
+      "weight_bytes": 51200,
+      "max_weight_error": 3.52710485458374e-05
+    },
+    "sig_net_gru2_glu_gate": {
+      "inputs": 128,
+      "outputs": 128,
+      "storage": "SRAM0",
+      "weight_bytes": 32768,
+      "max_weight_error": 5.054101347923279e-05
+    },
+    "sig_net_gru3_glu_gate": {
+      "inputs": 128,
+      "outputs": 128,
+      "storage": "SRAM0",
+      "weight_bytes": 32768,
+      "max_weight_error": 3.3989548683166504e-05
+    },
+    "sig_net_skip_glu_gate": {
+      "inputs": 128,
+      "outputs": 128,
+      "storage": "SRAM0",
+      "weight_bytes": 32768,
+      "max_weight_error": 1.9103288650512695e-05
+    },
+    "sig_net_skip_dense": {
+      "inputs": 688,
+      "outputs": 128,
+      "storage": "SRAM0",
+      "weight_bytes": 176128,
+      "max_weight_error": 2.7991831302642822e-05
+    },
+    "sig_net_sig_dense_out": {
+      "inputs": 128,
+      "outputs": 40,
+      "storage": "SRAM0",
+      "weight_bytes": 10240,
+      "max_weight_error": 6.884336471557617e-06
+    },
+    "sig_net_gain_dense_out": {
+      "inputs": 192,
+      "outputs": 4,
+      "storage": "SRAM0",
+      "weight_bytes": 1536,
+      "max_weight_error": 6.412994116544724e-05
+    }
+  }
+}
