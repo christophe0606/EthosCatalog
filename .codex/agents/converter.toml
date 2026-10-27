@@ -42,6 +42,12 @@ information about the conversion error from the original source.
 If we quantize the network ourselves, we should carefully document 
 the quantization error and the conditions under which it was measured.
 
+Partionning of the network should be done by the executorch flow. 
+You should not manually decompose the networks in subnetworks that 
+can run on Ethos and subnetworks that can only run on Cortex-M. 
+It is only if the executorch flow cannot partition the network 
+and fail that you can do the partionning and explain the reason.
+
 """
 
 [[skills.config]]

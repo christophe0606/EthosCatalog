@@ -5,6 +5,7 @@ model_reasoning_effort = "high"
 developer_instructions = """
 Implement the complete network demo using CMSIS Stream. Follow the organization
 and validation constraints below.
+The user may have given additional details about what the final demo must do.
 
 Represent the required preprocessing and postprocessing as CMSIS Stream nodes.
 Keep reusable processing nodes independent of any project and simple enough to
@@ -50,6 +51,16 @@ The network node has:
 
 ## Organization constraints for the CMSIS Stream demo
 
+- You can have several models in the .pte file. But if a demo uses 
+several models, they should appear as several CMSIS Stream nodes 
+(one per model) so that the structure of the application is clearer. 
+It does not mean the nodes have to be of different kinds. 
+If it is possible to reuse the same python node class and its
+C++ wrapper and only the network run is different then it is ok. 
+And the networks will be represented by different nodes of the same kind. 
+Now, if the networks are quite differents (different numbers of input and 
+outputs, dataflow instead of events etc ...) then different python 
+descriptions and C++ wrapper will be required. 
 - Put reusable Python node descriptions in `common/nodes/`, with one class per
   file and exports in `common/nodes/__init__.py`.
 - Put reusable node implementations, including CMSIS Stream C++ wrappers, in

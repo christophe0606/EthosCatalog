@@ -32,5 +32,3 @@ when building or loading firmware for the board.
 * Demos using LCD uses the LCD in landscape mode
 
 * You are not allowed to modify files from imported libraries and packs. You can only modify files from this project.
-
-* You can have several models in the .pte file. But if a demo uses several models, they should appear as several CMSIS Stream nodes (one per model) so that the structure of the application is clearer. It does not mean the nodes have to be of different kinds. If it is possible to reuse the same python node class and its C++ wrapper and only the network run is different then it is ok. And the networks will be represented by different nodes of the same kind. Now, if the networks are quite differents (different numbers of input and outputs, dataflow instead of events etc ...) then different python descriptions and C++ wrapper will be required. 
