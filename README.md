@@ -44,6 +44,12 @@ so switching projects does not require regenerating the model.
 | --- | --- | --- | --- |
 | [object_detection](projects/object_detection/README.md) | Live camera face detection on Ethos-U85 with CMSIS Stream, RGB565 preview and rotated LCD boxes. | [![object_detection graph](projects/object_detection/generated/app.png)](projects/object_detection/generated/app.pdf) | [benchmark.yml](projects/object_detection/model/benchmark.yml) |
 
+## speech
+
+| Project name | Description | Application graph | Benchmark |
+| --- | --- | --- | --- |
+| [rvtts_lpc](projects/rvtts_lpc/README.md) | Real-time UART text-to-speech on Ethos-U85 with I2S playback and an animated landscape waveform. | [![rvtts_lpc graph](projects/rvtts_lpc/generated/app.png)](projects/rvtts_lpc/generated/app.pdf) | [benchmark.yml](projects/rvtts_lpc/model/benchmark.yml) |
+
 ## text
 
 | Project name | Description | Application graph | Benchmark |

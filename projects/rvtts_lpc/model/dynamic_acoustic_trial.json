@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "exception": "ValueError",
+  "error": "No Ethos-U delegate was generated for methods: ['forward']",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\chrfav01\\benchresults\\EthosCatalog\\projects\\rvtts_lpc\\model\\trial_dynamic.py\", line 31, in main\n    pte, count = export_model(program, spec)\n                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"C:\\Users\\chrfav01\\benchresults\\EthosCatalog\\scripts\\create_ai_layer.py\", line 100, in export_model\n    raise ValueError(f\"No Ethos-U delegate was generated for methods: {missing}\")\nValueError: No Ethos-U delegate was generated for methods: ['forward']\n"
+}

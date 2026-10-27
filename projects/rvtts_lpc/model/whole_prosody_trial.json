@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "delegates": 1,
+  "bytes": 136848,
+  "operators": [
+    "Quantized dequantize",
+    "Quantized quantize"
+  ]
+}

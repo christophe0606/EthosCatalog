@@ -1,0 +1,232 @@
+{
+  "fargan_init": {
+    "worst_call": 0,
+    "max_error_by_output_group": {
+      "state": 0.03242487832903862
+    },
+    "saturation_on_worst_call": [
+      {
+        "node": "quantize_per_tensor_185",
+        "values": 384,
+        "clipped": 1,
+        "range": [
+          -3.890784502029419,
+          1.4829610586166382
+        ],
+        "quantized_range": [
+          -3.767079782264773,
+          3.767079782264773
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_259",
+        "values": 128,
+        "clipped": 1,
+        "range": [
+          -4.8651123046875,
+          1.7351363897323608
+        ],
+        "quantized_range": [
+          -4.843215954169864,
+          4.843215954169864
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_274",
+        "values": 128,
+        "clipped": 1,
+        "range": [
+          -2.455199956893921,
+          2.9305479526519775
+        ],
+        "quantized_range": [
+          -2.9276679151225835,
+          2.9276679151225835
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_280",
+        "values": 384,
+        "clipped": 1,
+        "range": [
+          -3.393463134765625,
+          1.088327407836914
+        ],
+        "quantized_range": [
+          -3.0267118380215834,
+          3.0267118380215834
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_319",
+        "values": 4,
+        "clipped": 1,
+        "range": [
+          -7.192327976226807,
+          0.7207687497138977
+        ],
+        "quantized_range": [
+          -6.874657158143236,
+          6.874657158143236
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_354",
+        "values": 128,
+        "clipped": 1,
+        "range": [
+          -6.62612247467041,
+          0.26702919602394104
+        ],
+        "quantized_range": [
+          -6.021576694169198,
+          6.021576694169198
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_369",
+        "values": 128,
+        "clipped": 1,
+        "range": [
+          -2.672382354736328,
+          3.350916862487793
+        ],
+        "quantized_range": [
+          -3.2282738133289968,
+          3.2282738133289968
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_375",
+        "values": 384,
+        "clipped": 1,
+        "range": [
+          -3.2336325645446777,
+          1.0881332159042358
+        ],
+        "quantized_range": [
+          -2.932466657832265,
+          2.932466657832265
+        ]
+      }
+    ]
+  },
+  "fargan_frame": {
+    "worst_call": 8,
+    "max_error_by_output_group": {
+      "excitation": 0.07086992263793945,
+      "pitch": 0.07086992263793945,
+      "condition": 0.018047912046313286,
+      "fwc": 0.05254342406988144,
+      "h1": 0.23971611261367798,
+      "h2": 0.19640786945819855,
+      "h3": 0.29199838638305664
+    },
+    "saturation_on_worst_call": [
+      {
+        "node": "quantize_per_tensor_22",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          239.42547607421875,
+          239.42547607421875
+        ],
+        "quantized_range": [
+          -200.25630913022906,
+          200.25630913022906
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_27",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          239.42547607421875,
+          239.42547607421875
+        ],
+        "quantized_range": [
+          -200.25630913022906,
+          200.25630913022906
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_133",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          211.63470458984375,
+          211.63470458984375
+        ],
+        "quantized_range": [
+          -179.82396455528215,
+          179.82396455528215
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_138",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          211.63470458984375,
+          211.63470458984375
+        ],
+        "quantized_range": [
+          -179.82396455528215,
+          179.82396455528215
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_244",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          198.1274871826172,
+          198.1274871826172
+        ],
+        "quantized_range": [
+          -173.72550259996206,
+          173.72550259996206
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_249",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          198.1274871826172,
+          198.1274871826172
+        ],
+        "quantized_range": [
+          -173.72550259996206,
+          173.72550259996206
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_355",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          191.52713012695312,
+          191.52713012695312
+        ],
+        "quantized_range": [
+          -171.98288000095636,
+          171.98288000095636
+        ]
+      },
+      {
+        "node": "quantize_per_tensor_360",
+        "values": 1,
+        "clipped": 1,
+        "range": [
+          191.52713012695312,
+          191.52713012695312
+        ],
+        "quantized_range": [
+          -171.98288000095636,
+          171.98288000095636
+        ]
+      }
+    ]
+  }
+}

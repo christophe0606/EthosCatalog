@@ -1,0 +1,76 @@
+{
+  "Duplicate<AudioBlock,1,AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "LineInput<UartBlock,1,TextLine,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
+  "PlaybackSource<uint32_t,1,AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_ADVANCE_ID",
+      "SEL_ACK_ID"
+    ]
+  },
+  "SendToNetwork<TextLine,1,uint32_t,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_ACK_ID"
+    ]
+  },
+  "I2SSink<AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
+  "UartSource<UartBlock,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
+  "WaveformSink<AudioBlock,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_WAVE_ID"
+    ]
+  },
+  "RvttsNetwork": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
+  "TextFrontend": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_ADVANCE_ID",
+      "SEL_ACK_ID"
+    ]
+  },
+  "WaveformDisplay": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_WAVE_ID"
+    ]
+  },
+  "PitchCorrect": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  },
+  "LpcVocoder": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_ADVANCE_ID"
+    ]
+  }
+}

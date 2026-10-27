@@ -1,10 +1,10 @@
 {
     "activeSolution": "../EthosCatalog.csolution.yml",
-    "activeTarget": "DevKit-E8@Handwriting_Release",
+    "activeTarget": "DevKit-E8@RvTTS_LPC_Release",
     "targetSet": {
         "EthosCatalog": {
             "activeTargetType": "DevKit-E8",
-            "DevKit-E8": 7
+            "DevKit-E8": 17
         },
         "board/flash/loader/FlashLoader": {
             "activeTargetType": "DevKit-E8"

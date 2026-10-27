@@ -1,0 +1,105 @@
+# Measured on Alif DevKit-E8; no template data or compiler time estimates.
+benchmarks:
+  network:
+    operation: rvTTS LPC full neural feature schedule, 81 frames; logical phone/stress/word
+      input columns
+    input_shape:
+    - 81
+    - 3
+    output_shape:
+    - 81
+    - 20
+    float_boundary: true
+    quantization: symmetric int16 activations and supplied per-tensor int8 weights;
+      float graph boundaries
+    samples_per_forward: 12960
+    sample_rate_hz: 16000
+    block_deadline_ms: 810
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 528144
+        input_tensor_bytes: 324
+        ethos:
+          weights_region_bytes: 489200
+          arena_region_bytes: 93216
+        executorch:
+          method_pool_peak_bytes: 166072
+          temp_pool_peak_bytes: 93216
+      time:
+        ms: 412.1042575
+        cycles: 164841703.0
+        statistic: median
+        min_cycles: 164841627
+        max_cycles: 164841822
+        mean_cycles: 164841710
+        forward_ms: 483.67172125
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 164841669
+        - 164841697
+        - 164841627
+        - 164841822
+        - 164841698
+        - 164841634
+        - 164841742
+        - 164841708
+        - 164841792
+        - 164841711
+        forward_ticks_samples:
+        - 193466412
+        - 193465738
+        - 193467970
+        - 193466676
+        - 193469407
+        - 193470732
+        - 193470418
+        - 193470768
+        - 193463494
+        - 193471924
+    run:
+      recorded_at: '2026-10-27T10:39:00Z'
+      context: rvtts_lpc.Release+DevKit-E8
+      target: DevKit-E8@RvTTS_LPC_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-7
+      execution_job: r-9
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 10
+      pmu_cross_check: CYCLE == NPU_ACTIVE for every invocation; summed for complete
+        schedules
+      pmu_overflow: 0
+      npu_invocations_per_forward: 90
+      test_result: PASS
+      max_absolute_error: 0.002174795
+      tolerance: 0.01
+      uart: COM5 115200 8N1 via CMSIS Developer Assistant serial tools
+      model_sha256: 763c3041689cf61a97c96ac3e66d6adae762621a61bfa8906e48857fdd9cbc11
+      firmware_sha256: 0b93ca98c4ffc20281e2016faf0335e2b325890d96f7b7d3b0bf2c96fe1cb9b4
+      input: 'benchmark_inputs.h: 81 frames, seed 802; phone/stress uint8 and word
+        uint16 arrays; reference supplied int8 weights with float activations.'
+      timing_scope: 'Full feature schedule: OSPI embedding lookup, input assembly,
+        paired bidirectional GRU scan, head, halo tiles, state/output copies, finite
+        checks. Feature inference only; excludes text frontend, LPC vocoder, PCM conversion,
+        UART, LCD and playback.'
+      uart_run: benchmark_uart.txt
+      measurement_source: CMSIS load_and_run r-9; firmware PMU and osKernelGetSysTimerCount;
+        raw samples in benchmark_uart.txt

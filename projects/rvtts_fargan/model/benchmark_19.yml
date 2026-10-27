@@ -1,0 +1,90 @@
+# Measured experimental FARGAN; strict numerical FAIL preserved.
+benchmarks:
+  network:
+    operation: rvTTS FARGAN full prosody/acoustic/vocoder synthesis, 19 frames, PCM16
+      output
+    input_shape:
+    - 19
+    - 3
+    output_shape:
+    - 3200
+    float_boundary: true
+    quantization: symmetric int16 activations; supplied per-tensor int8 shared weights
+      and per-channel int8 vocoder weights
+    samples_per_forward: 3200
+    sample_rate_hz: 16000
+    block_deadline_ms: 200
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 2608624
+        input_tensor_bytes: 76
+        ethos:
+          weights_region_bytes: 2471184
+          arena_region_bytes: 93216
+        executorch:
+          method_pool_peak_bytes: 184852
+          temp_pool_peak_bytes: 93216
+      time:
+        ms: 2469.4221625
+        cycles: 987768865
+        statistic: median
+        min_cycles: 987768847
+        max_cycles: 987768873
+        mean_cycles: 987768861.6666666
+        forward_ms: 2502.7866025
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 987768873
+        - 987768865
+        - 987768847
+        forward_ticks_samples:
+        - 1001114025
+        - 1001115674
+        - 1001114641
+    run:
+      recorded_at: '2026-10-27T11:30:00Z'
+      context: rvtts_fargan.Release+DevKit-E8
+      target: DevKit-E8@RvTTS_FARGAN_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-27
+      execution_job: r-28
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 3
+      pmu_cross_check: CYCLE == NPU_ACTIVE for every invocation; sums for schedules
+      pmu_overflow: 0
+      npu_invocations_per_forward: 44
+      test_result: FAIL
+      uart: COM5 115200 8N1 via CMSIS Developer Assistant
+      model_sha256: 61ff0e022412af2507cf7ad085150affda951d18487c7c80064568b02c0e77c7
+      firmware_sha256: 758f2ecf12310785377c966bf7c2754965202f13d40ab87d19dbd8115989ad75
+      uart_run: benchmark_uart.txt
+      measurement_source: CMSIS load_and_run r-28; firmware PMU and extended RTOS
+        system timer
+      max_absolute_error: 0.053781919
+      input: benchmark_inputs.h seed 801; logical phone/stress/word columns stored
+        uint8/uint8/uint16; reference float source-model PCM.
+      timing_scope: OSPI feature/embedding construction, paired bidirectional GRU,
+        acoustic halos, pitch normalization, FARGAN init, N+2 recurrent frames, state
+        feedback/copies, de-emphasis, 80-sample delay removal and final flush, clipped/rounded
+        PCM16. Reference checks and printing excluded. Excludes text frontend, UART,
+        LCD and I2S. FAIL retains both vocoder method numerical failures; waveform
+        error is not a listening-quality acceptance test.

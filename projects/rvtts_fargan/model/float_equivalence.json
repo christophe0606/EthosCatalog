@@ -1,0 +1,14 @@
+{
+  "reference": "original rvTTS FARGAN neural/synthesis function bodies and LUT activations; float matrix kernels",
+  "activation_change": "PyTorch uses standard tanh/sigmoid; original uses linearly interpolated LUTs",
+  "init_state": {
+    "max_absolute_error": 0.0026610493659973145,
+    "rmse": 0.0004518692730925977,
+    "reference_rms": 0.2991415560245514
+  },
+  "40_frame_pcm": {
+    "max_absolute_error": 0.000305861234664917,
+    "rmse": 3.645928154583089e-05,
+    "reference_rms": 0.010249491780996323
+  }
+}

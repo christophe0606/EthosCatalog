@@ -1,0 +1,22 @@
+{
+  "fargan_init": {
+    "worst_call": 0,
+    "max_error_by_output_group": {
+      "state": 0.032495055347681046
+    },
+    "saturation_on_worst_call": []
+  },
+  "fargan_frame": {
+    "worst_call": 42,
+    "max_error_by_output_group": {
+      "excitation": 0.016187481582164764,
+      "pitch": 0.016187481582164764,
+      "condition": 0.0179373100399971,
+      "fwc": 0.060059819370508194,
+      "h1": 0.3191941976547241,
+      "h2": 0.17316418886184692,
+      "h3": 0.2637211084365845
+    },
+    "saturation_on_worst_call": []
+  }
+}

@@ -1,0 +1,81 @@
+rvTTS LPC benchmark clocks CPU=400000000 AXI=400000000 timer=400000000 model=528144
+Method prosody_pre error=0.000134170 tolerance=0.000135132 weights=11968 arena=15872
+MethodSample prosody_pre 1 ticks=576464 cycles=167963 invocations=1 overflow=0
+MethodSample prosody_pre 2 ticks=575404 cycles=167967 invocations=1 overflow=0
+MethodSample prosody_pre 3 ticks=574352 cycles=167959 invocations=1 overflow=0
+MethodSample prosody_pre 4 ticks=574314 cycles=167959 invocations=1 overflow=0
+MethodSample prosody_pre 5 ticks=574754 cycles=167973 invocations=1 overflow=0
+MethodSample prosody_pre 6 ticks=574922 cycles=167961 invocations=1 overflow=0
+MethodSample prosody_pre 7 ticks=574616 cycles=167963 invocations=1 overflow=0
+MethodSample prosody_pre 8 ticks=575078 cycles=167973 invocations=1 overflow=0
+MethodSample prosody_pre 9 ticks=574962 cycles=167961 invocations=1 overflow=0
+MethodSample prosody_pre 10 ticks=575034 cycles=167973 invocations=1 overflow=0
+Method prosody_gru error=0.000100434 tolerance=0.000134939 weights=63008 arena=1664
+MethodSample prosody_gru 1 ticks=1058000 cycles=901969 invocations=1 overflow=0
+MethodSample prosody_gru 2 ticks=1057658 cycles=901977 invocations=1 overflow=0
+MethodSample prosody_gru 3 ticks=1058066 cycles=901971 invocations=1 overflow=0
+MethodSample prosody_gru 4 ticks=1057112 cycles=901967 invocations=1 overflow=0
+MethodSample prosody_gru 5 ticks=1057352 cycles=901979 invocations=1 overflow=0
+MethodSample prosody_gru 6 ticks=1057752 cycles=901973 invocations=1 overflow=0
+MethodSample prosody_gru 7 ticks=1057350 cycles=901969 invocations=1 overflow=0
+MethodSample prosody_gru 8 ticks=1057370 cycles=901977 invocations=1 overflow=0
+MethodSample prosody_gru 9 ticks=1057482 cycles=901977 invocations=1 overflow=0
+MethodSample prosody_gru 10 ticks=1056800 cycles=901969 invocations=1 overflow=0
+Method prosody_head error=0.000809669 tolerance=0.001619695 weights=19136 arena=12672
+MethodSample prosody_head 1 ticks=606212 cycles=284387 invocations=1 overflow=0
+MethodSample prosody_head 2 ticks=605438 cycles=284375 invocations=1 overflow=0
+MethodSample prosody_head 3 ticks=605472 cycles=284393 invocations=1 overflow=0
+MethodSample prosody_head 4 ticks=605678 cycles=284383 invocations=1 overflow=0
+MethodSample prosody_head 5 ticks=605802 cycles=284375 invocations=1 overflow=0
+MethodSample prosody_head 6 ticks=605726 cycles=284391 invocations=1 overflow=0
+MethodSample prosody_head 7 ticks=604962 cycles=284381 invocations=1 overflow=0
+MethodSample prosody_head 8 ticks=605240 cycles=284389 invocations=1 overflow=0
+MethodSample prosody_head 9 ticks=605312 cycles=284393 invocations=1 overflow=0
+MethodSample prosody_head 10 ticks=605133 cycles=284381 invocations=1 overflow=0
+Method acoustic error=0.001083851 tolerance=0.001084467 weights=395088 arena=93216
+MethodSample acoustic 1 ticks=30993068 cycles=30141658 invocations=1 overflow=0
+MethodSample acoustic 2 ticks=30991850 cycles=30141668 invocations=1 overflow=0
+MethodSample acoustic 3 ticks=30992516 cycles=30141666 invocations=1 overflow=0
+MethodSample acoustic 4 ticks=30991548 cycles=30141672 invocations=1 overflow=0
+MethodSample acoustic 5 ticks=30992442 cycles=30141668 invocations=1 overflow=0
+MethodSample acoustic 6 ticks=30992648 cycles=30141672 invocations=1 overflow=0
+MethodSample acoustic 7 ticks=30992582 cycles=30141672 invocations=1 overflow=0
+MethodSample acoustic 8 ticks=30992448 cycles=30141664 invocations=1 overflow=0
+MethodSample acoustic 9 ticks=30992372 cycles=30141664 invocations=1 overflow=0
+MethodSample acoustic 10 ticks=30992960 cycles=30141664 invocations=1 overflow=0
+Sequence frames=2 audio_ms=20 max_error=0.001083910 tolerance=0.01
+SequenceSample 2 1 ticks=34512171 cycles=32397943 invocations=5 overflow=0
+SequenceSample 2 2 ticks=34511981 cycles=32397942 invocations=5 overflow=0
+SequenceSample 2 3 ticks=34512261 cycles=32397959 invocations=5 overflow=0
+SequenceSample 2 4 ticks=34511445 cycles=32397966 invocations=5 overflow=0
+SequenceSample 2 5 ticks=34512993 cycles=32397970 invocations=5 overflow=0
+SequenceSample 2 6 ticks=34512927 cycles=32397954 invocations=5 overflow=0
+SequenceSample 2 7 ticks=34512071 cycles=32397945 invocations=5 overflow=0
+SequenceSample 2 8 ticks=34512491 cycles=32397961 invocations=5 overflow=0
+SequenceSample 2 9 ticks=34512039 cycles=32397950 invocations=5 overflow=0
+SequenceSample 2 10 ticks=34511955 cycles=32397960 invocations=5 overflow=0
+Sequence frames=81 audio_ms=810 max_error=0.002174795 tolerance=0.01
+SequenceSample 81 1 ticks=193466412 cycles=164841669 invocations=90 overflow=0
+SequenceSample 81 2 ticks=193465738 cycles=164841697 invocations=90 overflow=0
+SequenceSample 81 3 ticks=193467970 cycles=164841627 invocations=90 overflow=0
+SequenceSample 81 4 ticks=193466676 cycles=164841822 invocations=90 overflow=0
+SequenceSample 81 5 ticks=193469407 cycles=164841698 invocations=90 overflow=0
+SequenceSample 81 6 ticks=193470732 cycles=164841634 invocations=90 overflow=0
+SequenceSample 81 7 ticks=193470418 cycles=164841742 invocations=90 overflow=0
+SequenceSample 81 8 ticks=193470768 cycles=164841708 invocations=90 overflow=0
+SequenceSample 81 9 ticks=193463494 cycles=164841792 invocations=90 overflow=0
+SequenceSample 81 10 ticks=193471924 cycles=164841711 invocations=90 overflow=0
+Sequence frames=157 audio_ms=1570 max_error=0.002066970 tolerance=0.01
+SequenceSample 157 1 ticks=348846078 cycles=294579647 invocations=172 overflow=0
+SequenceSample 157 2 ticks=348849606 cycles=294579581 invocations=172 overflow=0
+SequenceSample 157 3 ticks=348851226 cycles=294579597 invocations=172 overflow=0
+SequenceSample 157 4 ticks=348850284 cycles=294579660 invocations=172 overflow=0
+SequenceSample 157 5 ticks=348848346 cycles=294579576 invocations=172 overflow=0
+SequenceSample 157 6 ticks=348851906 cycles=294579626 invocations=172 overflow=0
+SequenceSample 157 7 ticks=348846194 cycles=294579551 invocations=172 overflow=0
+SequenceSample 157 8 ticks=348850458 cycles=294579603 invocations=172 overflow=0
+SequenceSample 157 9 ticks=348848630 cycles=294579502 invocations=172 overflow=0
+SequenceSample 157 10 ticks=348848208 cycles=294579647 invocations=172 overflow=0
+Pools method=166072 temp=93216 reserved=655360
+Scope: method execute excludes input/output copy and validation; schedule includes input construction, recurrent state copies, tiling and finite checks; excludes vocoder, PCM, UART, LCD and playback.
+Test_result: PASS

@@ -1,0 +1,210 @@
+rvTTS FARGAN benchmark clocks CPU=400000000 AXI=400000000 timer=400000000 model=2608624
+Method prosody_pre error=0.000134170 tolerance=0.000135132 weights=11968 arena=15872
+MethodSample prosody_pre 1 ticks=582012 cycles=167960 invocations=1 overflow=0
+MethodSample prosody_pre 2 ticks=580219 cycles=167962 invocations=1 overflow=0
+MethodSample prosody_pre 3 ticks=580488 cycles=167964 invocations=1 overflow=0
+MethodSample prosody_pre 4 ticks=580553 cycles=167956 invocations=1 overflow=0
+MethodSample prosody_pre 5 ticks=580490 cycles=167960 invocations=1 overflow=0
+MethodSample prosody_pre 6 ticks=580541 cycles=167968 invocations=1 overflow=0
+MethodSample prosody_pre 7 ticks=580394 cycles=167956 invocations=1 overflow=0
+MethodSample prosody_pre 8 ticks=581270 cycles=167956 invocations=1 overflow=0
+MethodSample prosody_pre 9 ticks=580995 cycles=167960 invocations=1 overflow=0
+MethodSample prosody_pre 10 ticks=580190 cycles=167962 invocations=1 overflow=0
+Method prosody_gru error=0.000100434 tolerance=0.000134939 weights=63008 arena=1664
+MethodSample prosody_gru 1 ticks=1063658 cycles=901973 invocations=1 overflow=0
+MethodSample prosody_gru 2 ticks=1063210 cycles=901961 invocations=1 overflow=0
+MethodSample prosody_gru 3 ticks=1063862 cycles=901973 invocations=1 overflow=0
+MethodSample prosody_gru 4 ticks=1063100 cycles=901982 invocations=1 overflow=0
+MethodSample prosody_gru 5 ticks=1063022 cycles=901971 invocations=1 overflow=0
+MethodSample prosody_gru 6 ticks=1063078 cycles=901967 invocations=1 overflow=0
+MethodSample prosody_gru 7 ticks=1062836 cycles=901975 invocations=1 overflow=0
+MethodSample prosody_gru 8 ticks=1062998 cycles=901969 invocations=1 overflow=0
+MethodSample prosody_gru 9 ticks=1063418 cycles=901975 invocations=1 overflow=0
+MethodSample prosody_gru 10 ticks=1063172 cycles=901971 invocations=1 overflow=0
+Method prosody_head error=0.000809669 tolerance=0.001619695 weights=19136 arena=12672
+MethodSample prosody_head 1 ticks=611690 cycles=284376 invocations=1 overflow=0
+MethodSample prosody_head 2 ticks=611368 cycles=284384 invocations=1 overflow=0
+MethodSample prosody_head 3 ticks=611375 cycles=284376 invocations=1 overflow=0
+MethodSample prosody_head 4 ticks=611390 cycles=284384 invocations=1 overflow=0
+MethodSample prosody_head 5 ticks=610796 cycles=284392 invocations=1 overflow=0
+MethodSample prosody_head 6 ticks=611126 cycles=284380 invocations=1 overflow=0
+MethodSample prosody_head 7 ticks=611580 cycles=284376 invocations=1 overflow=0
+MethodSample prosody_head 8 ticks=611278 cycles=284384 invocations=1 overflow=0
+MethodSample prosody_head 9 ticks=611690 cycles=284389 invocations=1 overflow=0
+MethodSample prosody_head 10 ticks=611156 cycles=284386 invocations=1 overflow=0
+Method acoustic error=0.001083851 tolerance=0.001084467 weights=395088 arena=93216
+MethodSample acoustic 1 ticks=30996999 cycles=30145445 invocations=1 overflow=0
+MethodSample acoustic 2 ticks=30996355 cycles=30145436 invocations=1 overflow=0
+MethodSample acoustic 3 ticks=30996272 cycles=30145453 invocations=1 overflow=0
+MethodSample acoustic 4 ticks=30995864 cycles=30145441 invocations=1 overflow=0
+MethodSample acoustic 5 ticks=30996180 cycles=30145438 invocations=1 overflow=0
+MethodSample acoustic 6 ticks=30995940 cycles=30145446 invocations=1 overflow=0
+MethodSample acoustic 7 ticks=30996380 cycles=30145444 invocations=1 overflow=0
+MethodSample acoustic 8 ticks=30996032 cycles=30145434 invocations=1 overflow=0
+MethodSample acoustic 9 ticks=30996428 cycles=30145440 invocations=1 overflow=0
+MethodSample acoustic 10 ticks=30996032 cycles=30145444 invocations=1 overflow=0
+Method fargan_init error=0.007872820 tolerance=0.000184089 weights=913120 arena=8208
+MethodSample fargan_init 1 ticks=36737823 cycles=36434993 invocations=1 overflow=0
+MethodSample fargan_init 2 ticks=36737469 cycles=36434999 invocations=1 overflow=0
+MethodSample fargan_init 3 ticks=36737523 cycles=36435005 invocations=1 overflow=0
+MethodSample fargan_init 4 ticks=36737126 cycles=36434999 invocations=1 overflow=0
+MethodSample fargan_init 5 ticks=36737203 cycles=36435005 invocations=1 overflow=0
+MethodSample fargan_init 6 ticks=36737065 cycles=36434993 invocations=1 overflow=0
+MethodSample fargan_init 7 ticks=36737505 cycles=36434997 invocations=1 overflow=0
+MethodSample fargan_init 8 ticks=36737163 cycles=36435005 invocations=1 overflow=0
+MethodSample fargan_init 9 ticks=36737497 cycles=36435005 invocations=1 overflow=0
+MethodSample fargan_init 10 ticks=36737443 cycles=36435005 invocations=1 overflow=0
+Method fargan_frame error=0.037712593 tolerance=0.002012338 weights=1068864 arena=10240
+MethodSample fargan_frame 1 ticks=43285891 cycles=43028514 invocations=1 overflow=0
+MethodSample fargan_frame 2 ticks=43285261 cycles=43028512 invocations=1 overflow=0
+MethodSample fargan_frame 3 ticks=43284344 cycles=43028512 invocations=1 overflow=0
+MethodSample fargan_frame 4 ticks=43284279 cycles=43028506 invocations=1 overflow=0
+MethodSample fargan_frame 5 ticks=43284804 cycles=43028508 invocations=1 overflow=0
+MethodSample fargan_frame 6 ticks=43284666 cycles=43028500 invocations=1 overflow=0
+MethodSample fargan_frame 7 ticks=43284488 cycles=43028508 invocations=1 overflow=0
+MethodSample fargan_frame 8 ticks=43285219 cycles=43028510 invocations=1 overflow=0
+MethodSample fargan_frame 9 ticks=43284116 cycles=43028510 invocations=1 overflow=0
+MethodSample fargan_frame 10 ticks=43284601 cycles=43028502 invocations=1 overflow=0
+SequenceStart frames=2
+SequenceProgress frames=2 sample=0 ticks=244517812
+FullFrameSample 2 0 ticks=43299372 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 2 1 ticks=43303817 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 2 2 ticks=43304128 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 2 3 ticks=43300446 cycles=43028514 invocations=1 overflow=0
+SequenceProgress frames=2 sample=1 ticks=244510208
+SequenceProgress frames=2 sample=2 ticks=244510081
+SequenceProgress frames=2 sample=3 ticks=244508372
+Sequence frames=2 samples=480 audio_ms=30 max_error=0.001083910 tolerance=0.01
+PCM frames=2 max_error=0.004793361 rmse=0.001560123 reference_rms=0.007335512 snr_db=13.445434 clipped=0
+SequenceSample 2 1 ticks=244510208 cycles=240950749 invocations=10 overflow=0
+SequenceSample 2 2 ticks=244510081 cycles=240950737 invocations=10 overflow=0
+SequenceSample 2 3 ticks=244508372 cycles=240950744 invocations=10 overflow=0
+SequenceStart frames=19
+SequenceProgress frames=19 sample=0 ticks=1001119983
+FullFrameSample 19 0 ticks=43299999 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 19 1 ticks=43303016 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 19 2 ticks=43302580 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 19 3 ticks=43302619 cycles=43028521 invocations=1 overflow=0
+FullFrameSample 19 4 ticks=43303294 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 19 5 ticks=43303828 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 19 6 ticks=43302241 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 19 7 ticks=43303483 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 19 8 ticks=43303264 cycles=43028521 invocations=1 overflow=0
+FullFrameSample 19 9 ticks=43303318 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 19 10 ticks=43302481 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 19 11 ticks=43303096 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 19 12 ticks=43303897 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 19 13 ticks=43302994 cycles=43028518 invocations=1 overflow=0
+FullFrameSample 19 14 ticks=43303087 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 19 15 ticks=43302613 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 19 16 ticks=43303417 cycles=43028513 invocations=1 overflow=0
+FullFrameSample 19 17 ticks=43303807 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 19 18 ticks=43303057 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 19 19 ticks=43303318 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 19 20 ticks=43300584 cycles=43028504 invocations=1 overflow=0
+SequenceProgress frames=19 sample=1 ticks=1001114025
+SequenceProgress frames=19 sample=2 ticks=1001115674
+SequenceProgress frames=19 sample=3 ticks=1001114641
+Sequence frames=19 samples=3200 audio_ms=200 max_error=0.001755612 tolerance=0.01
+PCM frames=19 max_error=0.053781919 rmse=0.006674478 reference_rms=0.032609383 snr_db=13.778505 clipped=0
+SequenceSample 19 1 ticks=1001114025 cycles=987768873 invocations=44 overflow=0
+SequenceSample 19 2 ticks=1001115674 cycles=987768865 invocations=44 overflow=0
+SequenceSample 19 3 ticks=1001114641 cycles=987768847 invocations=44 overflow=0
+SequenceStart frames=81
+SequenceProgress frames=81 sample=0 ticks=3824932821
+FullFrameSample 81 0 ticks=43299267 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 1 ticks=43302881 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 2 ticks=43302841 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 3 ticks=43302406 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 4 ticks=43302523 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 5 ticks=43303543 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 6 ticks=43304086 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 81 7 ticks=43303483 cycles=43028511 invocations=1 overflow=0
+FullFrameSample 81 8 ticks=43303111 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 9 ticks=43303465 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 10 ticks=43303594 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 11 ticks=43303366 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 12 ticks=43303021 cycles=43028517 invocations=1 overflow=0
+FullFrameSample 81 13 ticks=43303615 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 14 ticks=43303549 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 15 ticks=43302877 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 16 ticks=43303231 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 17 ticks=43303375 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 18 ticks=43303729 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 19 ticks=43303603 cycles=43028511 invocations=1 overflow=0
+FullFrameSample 81 20 ticks=43303297 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 21 ticks=43303345 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 81 22 ticks=43303639 cycles=43028515 invocations=1 overflow=0
+FullFrameSample 81 23 ticks=43303348 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 24 ticks=43303606 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 25 ticks=43303017 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 26 ticks=43302446 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 27 ticks=43302760 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 28 ticks=43303630 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 29 ticks=43303708 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 30 ticks=43303717 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 31 ticks=43302940 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 32 ticks=43303549 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 33 ticks=43303210 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 34 ticks=43303129 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 35 ticks=43302937 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 36 ticks=43303615 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 37 ticks=43303633 cycles=43028520 invocations=1 overflow=0
+FullFrameSample 81 38 ticks=43302937 cycles=43028521 invocations=1 overflow=0
+FullFrameSample 81 39 ticks=43302697 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 40 ticks=43303381 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 41 ticks=43303885 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 42 ticks=43303051 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 43 ticks=43303144 cycles=43028507 invocations=1 overflow=0
+FullFrameSample 81 44 ticks=43303564 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 45 ticks=43304020 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 81 46 ticks=43302778 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 47 ticks=43303102 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 48 ticks=43302802 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 49 ticks=43303069 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 50 ticks=43303060 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 51 ticks=43303126 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 52 ticks=43303006 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 53 ticks=43303306 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 54 ticks=43302883 cycles=43028519 invocations=1 overflow=0
+FullFrameSample 81 55 ticks=43303612 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 56 ticks=43303036 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 57 ticks=43302553 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 58 ticks=43302187 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 59 ticks=43303171 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 81 60 ticks=43303585 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 61 ticks=43302697 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 62 ticks=43303183 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 63 ticks=43303369 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 64 ticks=43303519 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 65 ticks=43303435 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 66 ticks=43302409 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 67 ticks=43302919 cycles=43028502 invocations=1 overflow=0
+FullFrameSample 81 68 ticks=43303117 cycles=43028504 invocations=1 overflow=0
+FullFrameSample 81 69 ticks=43302526 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 70 ticks=43302841 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 71 ticks=43303432 cycles=43028500 invocations=1 overflow=0
+FullFrameSample 81 72 ticks=43303261 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 73 ticks=43303201 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 74 ticks=43303561 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 75 ticks=43303519 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 76 ticks=43303747 cycles=43028514 invocations=1 overflow=0
+FullFrameSample 81 77 ticks=43302961 cycles=43028506 invocations=1 overflow=0
+FullFrameSample 81 78 ticks=43303141 cycles=43028508 invocations=1 overflow=0
+FullFrameSample 81 79 ticks=43303807 cycles=43028521 invocations=1 overflow=0
+FullFrameSample 81 80 ticks=43302904 cycles=43028512 invocations=1 overflow=0
+FullFrameSample 81 81 ticks=43303120 cycles=43028510 invocations=1 overflow=0
+FullFrameSample 81 82 ticks=43300287 cycles=43028508 invocations=1 overflow=0
+SequenceProgress frames=81 sample=1 ticks=3824926797
+SequenceProgress frames=81 sample=2 ticks=3824928458
+SequenceProgress frames=81 sample=3 ticks=3824931338
+Sequence frames=81 samples=13120 audio_ms=820 max_error=0.002174795 tolerance=0.01
+PCM frames=81 max_error=0.169768542 rmse=0.029899406 reference_rms=0.054967439 snr_db=5.288859 clipped=0
+SequenceSample 81 1 ticks=3824926797 cycles=3772654139 invocations=174 overflow=0
+SequenceSample 81 2 ticks=3824928458 cycles=3772654080 invocations=174 overflow=0
+SequenceSample 81 3 ticks=3824931338 cycles=3772654090 invocations=174 overflow=0
+Pools method=184852 temp=93216 reserved=1572864
+Scope: methods execute only; full frame includes input pitch/embedding, state copies, de-emphasis and PCM conversion. Complete schedule includes shared feature inference, pitch normalization, init, N+2 frame calls, delay/flush and PCM16; excludes text frontend, UART, LCD and I2S.
+Numeric_failures: 2
+Test_result: FAIL
+rvTTS FARGAN benchmark failed error=-470 stage=30

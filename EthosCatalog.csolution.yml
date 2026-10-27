@@ -141,6 +141,48 @@ solution:
             protocol: swd
           images:
             - project-context: object_detection.Release
+        - set: RvTTS_LPC_Debug
+          images:
+            - project-context: rvtts_lpc.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RvTTS_LPC_Release
+          images:
+            - project-context: rvtts_lpc.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RvTTS_LPC_ProgramModel
+          images:
+            - project-context: rvtts_lpc.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RvTTS_FARGAN_Debug
+          images:
+            - project-context: rvtts_fargan.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RvTTS_FARGAN_Release
+          images:
+            - project-context: rvtts_fargan.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RvTTS_FARGAN_ProgramModel
+          images:
+            - project-context: rvtts_fargan.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -177,6 +219,8 @@ solution:
         - .Release
     - project: projects/phonon_31m_en/phonon_31m_en.cproject.yml
     - project: projects/handwriting_synthesis/handwriting_synthesis.cproject.yml
+    - project: projects/rvtts_lpc/rvtts_lpc.cproject.yml
+    - project: projects/rvtts_fargan/rvtts_fargan.cproject.yml
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

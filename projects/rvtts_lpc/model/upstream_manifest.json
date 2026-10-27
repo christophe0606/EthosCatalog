@@ -1,0 +1,16 @@
+{
+  "upstream_commit": "b30af35f5366197f1a8845ef55af01a6c7c39a64",
+  "files": {
+    "ACOUSTIC.bin": "1f321eecdea80ed04b64cbbb9519b0168c9b33d5eef7509cf41dc14a4111e027",
+    "acoustic_stage2.c": "1c0424ba974b30c8d6a90416f244baec6a9b98c3ce6be3c7cce315466d6161eb",
+    "acoustic_stage2.h": "dd2fb581f9c13e7eb955ef76b93ac335cf71d773b33fd2d75f9996adceb2e85d",
+    "acoustic_stage2_weights_int8_meta.h": "55179cb491c57412a7a951cf9d5cd0ad1becb05b6748706f8ca7a95ef554a836",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "phonemes.h": "ceaa7af1d6e33220a74e8ae4c2ad6a42beae357b47ab6b2bad4b0efe1a48fd39",
+    "PROSODY.bin": "951777e3ef8baf82fbfecd4384e8a024ec0e2648ad0d98bcafbdb0ea6c9bdf7a",
+    "prosody_model.h": "db588ae614df0a273eca58f6decd433bab755e9f8cef50a78914c14eae84cbe9",
+    "prosody_model_int8.c": "dc3693c419e4a10021e7bf44c7075d6b065431b28324dfdd0b3d693ae2f35143",
+    "prosody_weights_int8_meta.h": "b87a32cdb699694a2ad0784c3b0921e762a264371ffe60851d10a6db540e58e9",
+    "README.md": "e7f3fa6269a2d41d7b5e72e48771ac9309a2f397bb9e77af21d8811a60fdf4b7"
+  }
+}

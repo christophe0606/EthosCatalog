@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/handwriting_synthesis/DevKit-E8/Release/handwriting_synthesis.axf",
+            "program": "out/rvtts_lpc/DevKit-E8/Release/rvtts_lpc.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -46,7 +46,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/handwriting_synthesis/DevKit-E8/Release/handwriting_synthesis.axf",
+            "program": "out/rvtts_lpc/DevKit-E8/Release/rvtts_lpc.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

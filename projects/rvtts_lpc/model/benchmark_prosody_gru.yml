@@ -1,0 +1,99 @@
+# Measured on Alif DevKit-E8; no template data or compiler time estimates.
+benchmarks:
+  network:
+    operation: rvTTS prosody_gru; all four methods remain loaded
+    input_shape:
+    - 1
+    - 256
+    output_shape:
+    - 1
+    - 128
+    float_boundary: true
+    quantization: symmetric int16 activations and supplied per-tensor int8 weights;
+      float graph boundaries
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 528144
+        input_tensor_bytes: 1024
+        ethos:
+          weights_region_bytes: 63008
+          arena_region_bytes: 1664
+        executorch:
+          method_pool_peak_bytes: 166072
+          temp_pool_peak_bytes: 93216
+      time:
+        ms: 2.25493
+        cycles: 901972.0
+        statistic: median
+        min_cycles: 901967
+        max_cycles: 901979
+        mean_cycles: 901972.8
+        forward_ms: 2.643565
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 901969
+        - 901977
+        - 901971
+        - 901967
+        - 901979
+        - 901973
+        - 901969
+        - 901977
+        - 901977
+        - 901969
+        forward_ticks_samples:
+        - 1058000
+        - 1057658
+        - 1058066
+        - 1057112
+        - 1057352
+        - 1057752
+        - 1057350
+        - 1057370
+        - 1057482
+        - 1056800
+    run:
+      recorded_at: '2026-10-27T10:39:00Z'
+      context: rvtts_lpc.Release+DevKit-E8
+      target: DevKit-E8@RvTTS_LPC_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-7
+      execution_job: r-9
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 10
+      pmu_cross_check: CYCLE == NPU_ACTIVE for every invocation; summed for complete
+        schedules
+      pmu_overflow: 0
+      npu_invocations_per_forward: 1
+      test_result: PASS
+      max_absolute_error: 0.000100434
+      tolerance: 0.000134939
+      uart: COM5 115200 8N1 via CMSIS Developer Assistant serial tools
+      model_sha256: 763c3041689cf61a97c96ac3e66d6adae762621a61bfa8906e48857fdd9cbc11
+      firmware_sha256: 0b93ca98c4ffc20281e2016faf0335e2b325890d96f7b7d3b0bf2c96fe1cb9b4
+      input: Independent held-out quantized method fixture in model_test_data.h; float
+        tolerance is 4 output LSB plus 1e-6 for float arithmetic.
+      timing_scope: ExecuTorch execute only, including float boundary quantize/dequantize;
+        excludes caller input/output copies and validation.
+      uart_run: benchmark_uart.txt
+      measurement_source: CMSIS load_and_run r-9; firmware PMU and osKernelGetSysTimerCount;
+        raw samples in benchmark_uart.txt

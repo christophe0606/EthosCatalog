@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "method": "fargan_frame",
+  "compilation": "ExecuTorch automatic Ethos-U partitioning and Vela Shared_Sram, final 50% activation guard cache",
+  "delegates": 1,
+  "pte_bytes": 1121904,
+  "npu_operators": 376,
+  "cpu_operators_in_vela_graph": 0,
+  "vela_total_sram_kib": 10.00,
+  "vela_total_dram_kib": 1043.81,
+  "neural_macs_per_frame": 3074320,
+  "remaining": "Compile full six-method project, then measure on board and validate speech quality"
+}

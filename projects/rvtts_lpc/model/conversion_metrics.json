@@ -1,0 +1,112 @@
+{
+  "scheme": "symmetric int16 activations and per-tensor int8 weights, PTQ; no training",
+  "reference": "PyTorch reconstruction of supplied int8-weight/float-activation C",
+  "original_quantization_error": "trained float weights and error are not supplied by upstream",
+  "calibration": "8 synthetic phoneme/word sequences, 1 to 223 frames; MinMax with 10% range guard",
+  "evaluation": "4 independently seeded synthetic sequences, 2/19/81/157 frames",
+  "methods": {
+    "prosody_pre": {
+      "calibration_calls": 25,
+      "evaluation_calls": 10,
+      "max_absolute_error": 0.00017356500029563904,
+      "mean_absolute_error": 2.79429314105073e-05,
+      "rmse": 3.5721732274396345e-05,
+      "reference_rms": 0.5163689851760864,
+      "output_quantization_scale": 3.353311331011355e-05
+    },
+    "prosody_gru": {
+      "calibration_calls": 724,
+      "evaluation_calls": 259,
+      "max_absolute_error": 0.00026088953018188477,
+      "mean_absolute_error": 3.190623101545498e-05,
+      "rmse": 4.297981649870053e-05,
+      "reference_rms": 0.39874809980392456,
+      "output_quantization_scale": 3.3484870073152706e-05
+    },
+    "prosody_head": {
+      "calibration_calls": 25,
+      "evaluation_calls": 10,
+      "max_absolute_error": 0.0006012916564941406,
+      "mean_absolute_error": 0.00012088981020497158,
+      "rmse": 0.00015102939505595714,
+      "reference_rms": 3.014591932296753,
+      "output_quantization_scale": 0.0004046738613396883
+    },
+    "acoustic": {
+      "calibration_calls": 25,
+      "evaluation_calls": 10,
+      "max_absolute_error": 0.0009178519248962402,
+      "mean_absolute_error": 0.00010534049215493724,
+      "rmse": 0.00013296636461745948,
+      "reference_rms": 0.8736453056335449,
+      "output_quantization_scale": 0.00027086681802757084
+    }
+  },
+  "closed_loop_sequences": [
+    {
+      "frames": 2,
+      "features": {
+        "max_absolute_error": 0.0005661696195602417,
+        "mean_absolute_error": 0.00016772121307440102,
+        "rmse": 0.00020841795776505023,
+        "reference_rms": 0.5853103399276733
+      },
+      "prosody": {
+        "max_absolute_error": 0.00032317638397216797,
+        "mean_absolute_error": 0.00025678426027297974,
+        "rmse": 0.0002644373453222215,
+        "reference_rms": 1.2276474237442017
+      },
+      "finite": true
+    },
+    {
+      "frames": 19,
+      "features": {
+        "max_absolute_error": 0.0011839866638183594,
+        "mean_absolute_error": 0.0001521795056760311,
+        "rmse": 0.00023819634225219488,
+        "reference_rms": 1.5653340816497803
+      },
+      "prosody": {
+        "max_absolute_error": 0.0011839866638183594,
+        "mean_absolute_error": 0.0003195954777766019,
+        "rmse": 0.00044754272676073015,
+        "reference_rms": 3.291839838027954
+      },
+      "finite": true
+    },
+    {
+      "frames": 81,
+      "features": {
+        "max_absolute_error": 0.0013155937194824219,
+        "mean_absolute_error": 0.00015226601681206375,
+        "rmse": 0.00022627873113378882,
+        "reference_rms": 1.892089605331421
+      },
+      "prosody": {
+        "max_absolute_error": 0.0013155937194824219,
+        "mean_absolute_error": 0.0002654030395206064,
+        "rmse": 0.00038706636405549943,
+        "reference_rms": 4.237276554107666
+      },
+      "finite": true
+    },
+    {
+      "frames": 157,
+      "features": {
+        "max_absolute_error": 0.0017960965633392334,
+        "mean_absolute_error": 0.00016745961329434067,
+        "rmse": 0.0002423174591967836,
+        "reference_rms": 1.9139844179153442
+      },
+      "prosody": {
+        "max_absolute_error": 0.0014295578002929688,
+        "mean_absolute_error": 0.0002184916811529547,
+        "rmse": 0.0003076516150031239,
+        "reference_rms": 4.456676483154297
+      },
+      "finite": true
+    }
+  ],
+  "limitation": "Synthetic features do not establish speech quality; speaker listening validation is required."
+}

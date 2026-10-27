@@ -1,0 +1,34 @@
+{
+  "scope": "Saved PT2/SafeTensors cache checks only; no Vela recompilation or board mutation.",
+  "methods": {
+    "fargan_init": {
+      "fixture_cache_max_absolute_error": 0.0,
+      "index_dtype": "torch.int64",
+      "index_shape": [
+        1,
+        44
+      ],
+      "indices_min": 160,
+      "indices_max": 203,
+      "constant_index_output_delta": {
+        "0": 0.0,
+        "255": 0.0
+      }
+    },
+    "fargan_frame": {
+      "fixture_cache_max_absolute_error": 0.0,
+      "index_dtype": "torch.int64",
+      "index_shape": [
+        1,
+        44
+      ],
+      "indices_min": 167,
+      "indices_max": 210,
+      "constant_index_output_delta": {
+        "0": 0.3042149245738983,
+        "255": 0.3042149245738983
+      }
+    }
+  },
+  "interpretation": "Initialization remains identical with every pitch index set to 0 or 255 because its pitch history is zero throughout initialization. Its board discrepancy is therefore not explained by selecting different valid pitch indices. Frame pitch sensitivity alone cannot localize its board discrepancy. Both observed board errors exceed final-output quantization rounding by many LSB; the internal lowering difference remains unresolved."
+}

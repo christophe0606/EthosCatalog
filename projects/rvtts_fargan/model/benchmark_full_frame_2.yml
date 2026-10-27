@@ -1,0 +1,89 @@
+# Measured experimental FARGAN; strict numerical FAIL preserved.
+benchmarks:
+  network:
+    operation: rvTTS FARGAN complete 10ms frame, recurrent feedback in 2-frame synthesis
+    input_shape:
+    - 1
+    - 996
+    output_shape:
+    - 160
+    float_boundary: true
+    quantization: symmetric int16 activations; supplied per-tensor int8 shared weights
+      and per-channel int8 vocoder weights
+    samples_per_forward: 160
+    sample_rate_hz: 16000
+    block_deadline_ms: 10
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 2608624
+        input_tensor_bytes: 4336
+        ethos:
+          weights_region_bytes: 1068864
+          arena_region_bytes: 10240
+        executorch:
+          method_pool_peak_bytes: 184852
+          temp_pool_peak_bytes: 93216
+      time:
+        ms: 107.57127
+        cycles: 43028508.0
+        statistic: median
+        min_cycles: 43028502
+        max_cycles: 43028514
+        mean_cycles: 43028508
+        forward_ms: 108.25532875
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 43028502
+        - 43028504
+        - 43028512
+        - 43028514
+        forward_ticks_samples:
+        - 43299372
+        - 43303817
+        - 43304128
+        - 43300446
+    run:
+      recorded_at: '2026-10-27T11:30:00Z'
+      context: rvtts_fargan.Release+DevKit-E8
+      target: DevKit-E8@RvTTS_FARGAN_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-27
+      execution_job: r-28
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 4
+      pmu_cross_check: CYCLE == NPU_ACTIVE for every invocation; sums for schedules
+      pmu_overflow: 0
+      npu_invocations_per_forward: 1
+      test_result: FAIL
+      uart: COM5 115200 8N1 via CMSIS Developer Assistant
+      model_sha256: 61ff0e022412af2507cf7ad085150affda951d18487c7c80064568b02c0e77c7
+      firmware_sha256: 758f2ecf12310785377c966bf7c2754965202f13d40ab87d19dbd8115989ad75
+      uart_run: benchmark_uart.txt
+      measurement_source: CMSIS load_and_run r-28; firmware PMU and extended RTOS
+        system timer
+      input: First timed complete schedule after one warmup; N+2 consecutive frame
+        calls including flush. input_shape is float feature/state tensor; also int64[1,44]
+        indices.
+      timing_scope: Pitch/embedding input lookup, previous-period indices, neural
+        frame execute, persistent state copies, de-emphasis and PCM16 clipping/rounding.
+        Excludes one-time init, utterance pitch statistics, shared features, UART,
+        LCD and I2S. FAIL retains independent frame-fixture numerical failure.

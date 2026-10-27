@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "method": "fargan_init",
+  "change": "Pass the 964-value zero state as an explicit float32 input instead of embedding torch.zeros constants in the integer TOSA partition",
+  "reference_check": "validate.py: 40-frame C comparison unchanged; PCM max error 0.000305861 and RMSE 0.0000364593",
+  "compilation": "ExecuTorch automatic Ethos-U partitioning and Vela Shared_Sram",
+  "delegates": 1,
+  "pte_bytes": 959008,
+  "npu_operators": 311,
+  "cpu_operators_in_vela_graph": 0,
+  "vela_total_sram_kib": 8.02,
+  "vela_total_dram_kib": 891.72,
+  "remaining": "Compile fargan_frame and full six-method project, then measure on board"
+}

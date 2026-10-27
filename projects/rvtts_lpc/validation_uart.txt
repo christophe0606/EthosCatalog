@@ -1,0 +1,61 @@
+Release build b-22; uninterrupted CMSIS execution r-23; 2026-10-27.
+Serial RX (owned): 199 byte(s)
+--- text ---
+rvTTS LPC self-test PASS. UART4 115200 8N1; enter a short English sentence and CR/LF. Maximum160 ASCII characters /224 frontend frames. I2S3 WM8904 stereo16kHz; connect powered speaker to Audio Out.
+
+Serial RX (owned): 348 byte(s)
+--- text ---
+READY generation=1 frames=92 timer_hz=400000000 frontend=158261 neural=207047628 pitch=8912 vocoder=17035158 total=226535710 peak=16631 nonzero=14673
+LIVE error=0 requests=1 acks=1 played=92 completed=92 first_ticks=267991293 irq=501 interval_min=3999838 interval_max=4000268 lcd=92 skips=9 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+Serial RX (owned): 610 byte(s)
+--- text ---
+SYNTH generation=2 frames=122 text="One two three."
+READY generation=2 frames=122 timer_hz=400000000 frontend=355124 neural=275276401 pitch=11160 vocoder=22581706 total=300822604 peak=14381 nonzero=19455
+LIVE error=0 requests=2 acks=2 played=214 completed=207 first_ticks=339990432 irq=1003 interval_min=3999642 interval_max=4000352 lcd=181 skips=21 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=2 acks=2 played=214 completed=214 first_ticks=339990432 irq=1505 interval_min=3999642 interval_max=4000352 lcd=281 skips=21 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+Serial RX (owned): 355 byte(s)
+--- text ---
+READY generation=3 frames=172 timer_hz=400000000 frontend=601940 neural=399739568 pitch=15546 vocoder=31825958 total=435483106 peak=14365 nonzero=27443
+LIVE error=0 requests=3 acks=3 played=386 completed=386 first_ticks=475990139 irq=3512 interval_min=3999593 interval_max=4000369 lcd=665 skips=39 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+UART edit fixture: HelloX <backspace> . CR LF
+Serial RX (owned): 43 byte(s)
+--- text ---
+SYNTH generation=5 frames=92 text="Hello."
+
+Serial RX (owned): 355 byte(s)
+--- text ---
+READY generation=5 frames=92 timer_hz=400000000 frontend=153788 neural=207051589 pitch=8523 vocoder=17030961 total=226921612 peak=16631 nonzero=14673
+LIVE error=0 requests=5 acks=5 played=478 completed=478 first_ticks=267991695 irq=10034 interval_min=3999593 interval_max=4000369 lcd=1961 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+UART length fixture:161 printable ASCII characters followed by CR LF
+Serial RX (owned): 205 byte(s)
+--- text ---
+LIVE error=0 requests=5 acks=5 played=478 completed=478 first_ticks=267991695 irq=10536 interval_min=3999593 interval_max=4000369 lcd=2061 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+Serial RX (owned): 245 byte(s)
+--- text ---
+REJECT line exceeds160 ASCII characters
+LIVE error=0 requests=5 acks=5 played=478 completed=478 first_ticks=267991695 irq=11038 interval_min=3999593 interval_max=4000369 lcd=2162 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+
+UART frame-limit fixture: The meter is reading forty five. CR LF
+Serial RX (owned): 63 byte(s)
+--- text ---
+REJECT frontend=0 frames=227 maximum=224; shorten the sentence
+
+Serial RX (owned): 2255 byte(s)
+--- text ---
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=11539 interval_min=3999593 interval_max=4000369 lcd=2262 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=12041 interval_min=3999593 interval_max=4000369 lcd=2362 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=12543 interval_min=3999593 interval_max=4000369 lcd=2463 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=13045 interval_min=3999593 interval_max=4000369 lcd=2563 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=13546 interval_min=3999593 interval_max=4000369 lcd=2663 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=14048 interval_min=3999593 interval_max=4000369 lcd=2764 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=14550 interval_min=3999593 interval_max=4000369 lcd=2864 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=15052 interval_min=3999593 interval_max=4000369 lcd=2965 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=15553 interval_min=3999593 interval_max=4000369 lcd=3065 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=16055 interval_min=3999593 interval_max=4000369 lcd=3165 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+LIVE error=0 requests=6 acks=6 played=478 completed=478 first_ticks=267991695 irq=16557 interval_min=3999593 interval_max=4000369 lcd=3266 skips=47 underruns=0 deadlines=0 drops=0 uart_drop=0 uart_error=0
+

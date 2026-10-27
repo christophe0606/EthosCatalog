@@ -1,0 +1,102 @@
+# Measured experimental FARGAN; strict numerical FAIL preserved.
+benchmarks:
+  network:
+    operation: rvTTS FARGAN fargan_frame; all six methods remain loaded
+    input_shape:
+    - 1
+    - 996
+    output_shape:
+    - 1
+    - 1124
+    float_boundary: true
+    quantization: symmetric int16 activations; supplied per-tensor int8 shared weights
+      and per-channel int8 vocoder weights
+    samples_per_forward: 160
+    sample_rate_hz: 16000
+    block_deadline_ms: 10
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 25
+          clock_source: RTE/BSP/AE822FA0E5597LS0_M55_HP/ospi_xip_user.h OSPI_CLOCK_MHZ
+        activations:
+          type: SRAM0
+          clock_mhz: 400.0
+    measurements:
+      memory:
+        model_bytes: 2608624
+        input_tensor_bytes: 4336
+        ethos:
+          weights_region_bytes: 1068864
+          arena_region_bytes: 10240
+        executorch:
+          method_pool_peak_bytes: 184852
+          temp_pool_peak_bytes: 93216
+      time:
+        ms: 107.5712725
+        cycles: 43028509.0
+        statistic: median
+        min_cycles: 43028500
+        max_cycles: 43028514
+        mean_cycles: 43028508.2
+        forward_ms: 108.21158375
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 43028514
+        - 43028512
+        - 43028512
+        - 43028506
+        - 43028508
+        - 43028500
+        - 43028508
+        - 43028510
+        - 43028510
+        - 43028502
+        forward_ticks_samples:
+        - 43285891
+        - 43285261
+        - 43284344
+        - 43284279
+        - 43284804
+        - 43284666
+        - 43284488
+        - 43285219
+        - 43284116
+        - 43284601
+    run:
+      recorded_at: '2026-10-27T11:30:00Z'
+      context: rvtts_fargan.Release+DevKit-E8
+      target: DevKit-E8@RvTTS_FARGAN_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-27
+      execution_job: r-28
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 1
+      samples: 10
+      pmu_cross_check: CYCLE == NPU_ACTIVE for every invocation; sums for schedules
+      pmu_overflow: 0
+      npu_invocations_per_forward: 1
+      test_result: FAIL
+      uart: COM5 115200 8N1 via CMSIS Developer Assistant
+      model_sha256: 61ff0e022412af2507cf7ad085150affda951d18487c7c80064568b02c0e77c7
+      firmware_sha256: 758f2ecf12310785377c966bf7c2754965202f13d40ab87d19dbd8115989ad75
+      uart_run: benchmark_uart.txt
+      measurement_source: CMSIS load_and_run r-28; firmware PMU and extended RTOS
+        system timer
+      max_absolute_error: 0.037712593
+      tolerance: 0.002012338
+      input: model_test_data.h held-out quantized-host fixture; input_shape is first
+        float tensor; vocoder methods also take int64[1,44] pitch indices, and init
+        takes zero float[1,964].
+      timing_scope: ExecuTorch execute, including CPU boundary operators and one Ethos
+        delegate; excludes caller copies, validation, pitch lookup and output DSP.

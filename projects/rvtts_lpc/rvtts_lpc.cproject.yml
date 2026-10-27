@@ -1,0 +1,93 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+project:
+  device: :M55_HP
+  packs:
+    - pack: ARM::CMSIS-RTX@^5.9.0
+  add-path:
+    - .
+    - ../../common
+    - ../../common/stream
+    - generated
+    - model/upstream
+    - upstream
+    - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
+    - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
+  define:
+    - NPU_QCONFIG: 2
+    - NPU_REGIONCFG_0: 3
+    - NPU_REGIONCFG_1: 0
+    - NPU_MEM_ATTR_2: 0x24
+    - NPU_MEM_ATTR_3: 0x24
+    - APP_MODEL_OSPI
+    - APP_METHOD_POOL_SIZE: 524288
+    - APP_TEMP_POOL_SIZE: 131072
+    - APP_POOL_SECTION: \".bss.ai_pool\"
+    - BOARD_UART_ASYNC_RX
+    - OS_THREAD_NUM: 3
+    - OS_DYNAMIC_MEM_SIZE: 65536
+  components:
+    - component: BSP:OSPI FLASH XIP:core
+    - component: CMSIS:RTOS2:Keil RTX5&Source
+    - component: CMSIS:OS Tick:SysTick
+    - component: CMSIS:STREAM&Source
+      for-context: [.Debug, .Release]
+    - component: CMSIS Driver:SAI
+    - component: BSP:External peripherals:WM8904 CODEC
+    - component: BSP:External peripherals:GT911 Touch Controller
+  connections:
+    - connect: rvTTS LPC speech application
+      provides: [CMSIS-RTOS2]
+  linker:
+    - script: linker_ac6.sct.src
+      for-compiler: AC6
+    - script: linker_clang.ld.src
+      for-compiler: CLANG
+    - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
+  misc:
+    - for-compiler: AC6
+      C: [-ffunction-sections, -fdata-sections]
+      CPP: [-ffunction-sections, -fdata-sections]
+      Link: [--remove]
+    - CPP: [-std=gnu++17, -Wno-deprecated-declarations, -fno-color-diagnostics]
+  groups:
+    - group: OSPI startup and programming preparation
+      files:
+        - file: ospi_startup.c
+        - file: ../../board/DevKit-E8/model_storage.c
+        - file: ../../board/DevKit-E8/e8_issi_flash.c
+    - group: rvTTS application
+      for-context: [.Debug, .Release]
+      files:
+        - file: app_main.cpp
+        - file: rvtts_engine.cpp
+        - file: rvtts_engine.hpp
+        - file: model/model_test_data.h
+        - file: hardware_params.cpp
+        - file: audio_output.cpp
+        - file: generated/scheduler_app.cpp
+        - file: generated/app_params.c
+        - file: nodes_impl/WaveformDisplay.cpp
+        - file: ../../common/nodes_impl/alif_e8/lcd.c
+        - file: upstream/tts_frontend.c
+        - file: upstream/textnorm.c
+        - file: upstream/reciter.c
+        - file: upstream/duration_model.c
+        - file: nodes_impl/pron_dictionary.c
+        - file: upstream/word_vocab_packed.c
+        - file: upstream/lpcvoc.c
+    - group: Embedded ExecuTorch module
+      for-context: [.Debug, .Release]
+      files:
+        - file: ../../common/arm_embedded_module.cpp
+        - file: ../../common/arm_embedded_module.hpp
+        - file: ../../common/embedded_runtime.hpp
+        - file: ../../common/nodes_impl/c/embedded_runtime.cpp
+  layers:
+    - layer: ../../board/DevKit-E8/Board_HP-U85-UART.clayer.yml
+      type: Board
+    - layer: ai_layer/ai_layer.clayer.yml
+      type: AI
+      for-context: [.Debug, .Release]
+  output:
+    type: [elf, bin, hex, map]

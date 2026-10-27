@@ -1,0 +1,60 @@
+{
+  "project": "projects/rvtts_fargan/rvtts_fargan.cproject.yml",
+  "config_sha256": "562fa07b514a47ff600b1f8684dfe259b5d5a9b2c41d6ee4f02c462366f82d12",
+  "pte_sha256": "61ff0e022412af2507cf7ad085150affda951d18487c7c80064568b02c0e77c7",
+  "method_caches": {
+    "prosody_pre": {
+      "graph_sha256": "e869a1de5c9c2f325006bf6613f548988e2835c8d61f0a53f3a1566c61179be7",
+      "safetensors_sha256": "07e5e065b5b96c087952782bce40c96dcf40c6bdb63b96ac8659f3373d8299f1"
+    },
+    "prosody_gru": {
+      "graph_sha256": "da2fab7608c7b1b71cb0aa912b710b6d151d46088be7d9694f869226deefc01a",
+      "safetensors_sha256": "fe574e39ddac526b5497e6eabd940ab96ff56765006ad0a400bf27ab63cc5ba2"
+    },
+    "prosody_head": {
+      "graph_sha256": "785fcd1613f825120e8914571c550face5578af31490df86fe4b679735fa6b10",
+      "safetensors_sha256": "555dcad1cd92eae5bfeb8743f99e77da3c1fdd233f706725a196661571085c5c"
+    },
+    "acoustic": {
+      "graph_sha256": "879efb5a0b88d8ce5d8ccdebc6862ac8172fc31f15bc5b5748a7e5d8c9097301",
+      "safetensors_sha256": "d8a754b84b183912542f088ced64f651acf18115a31801aa0fc6ad612e291243"
+    },
+    "fargan_init": {
+      "graph_sha256": "96c17bb620355e7d944be06ab892fb792b0af8b27c55a9da3cae9fd501843a9f",
+      "safetensors_sha256": "8aeb633ee081a2ef27b489bcaccba1bac2ab4b2af351077235d9d38dc00e5581"
+    },
+    "fargan_frame": {
+      "graph_sha256": "a94b5c7d5b00780ec16a4cad157ba396d20264fab5818de54c0bbae9bfe137b9",
+      "safetensors_sha256": "b73d8fc95c64b2fd502c61a4b39a83fd4e25119f499bf7333dfa5c8615cc62f6"
+    }
+  },
+  "assets": {
+    "prosody_source": {
+      "file": "model/upstream/PROSODY.bin",
+      "address": 3246391296,
+      "size": 201120,
+      "sha256": "951777e3ef8baf82fbfecd4384e8a024ec0e2648ad0d98bcafbdb0ea6c9bdf7a",
+      "crc32": 2231941535
+    },
+    "acoustic_source": {
+      "file": "model/upstream/ACOUSTIC.bin",
+      "address": 3246653440,
+      "size": 406524,
+      "sha256": "1f321eecdea80ed04b64cbbb9519b0168c9b33d5eef7509cf41dc14a4111e027",
+      "crc32": 4088118934
+    }
+  },
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 6,
+  "operators": [
+    "Portable to_dim_order_copy",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 2608624
+}

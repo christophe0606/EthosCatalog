@@ -1,0 +1,249 @@
+{
+  "recorded_at": "2026-10-27T10:39:00Z",
+  "methods": {
+    "prosody_pre": {
+      "max_absolute_error": 0.00013417,
+      "tolerance": 0.000135132,
+      "weights_region_bytes": 11968,
+      "arena_region_bytes": 15872,
+      "cycles_samples": [
+        167963,
+        167967,
+        167959,
+        167959,
+        167973,
+        167961,
+        167963,
+        167973,
+        167961,
+        167973
+      ],
+      "forward_ticks_samples": [
+        576464,
+        575404,
+        574352,
+        574314,
+        574754,
+        574922,
+        574616,
+        575078,
+        574962,
+        575034
+      ],
+      "invocations": 1,
+      "npu_ms": 0.4199075,
+      "forward_ms": 1.437355
+    },
+    "prosody_gru": {
+      "max_absolute_error": 0.000100434,
+      "tolerance": 0.000134939,
+      "weights_region_bytes": 63008,
+      "arena_region_bytes": 1664,
+      "cycles_samples": [
+        901969,
+        901977,
+        901971,
+        901967,
+        901979,
+        901973,
+        901969,
+        901977,
+        901977,
+        901969
+      ],
+      "forward_ticks_samples": [
+        1058000,
+        1057658,
+        1058066,
+        1057112,
+        1057352,
+        1057752,
+        1057350,
+        1057370,
+        1057482,
+        1056800
+      ],
+      "invocations": 1,
+      "npu_ms": 2.25493,
+      "forward_ms": 2.643565
+    },
+    "prosody_head": {
+      "max_absolute_error": 0.000809669,
+      "tolerance": 0.001619695,
+      "weights_region_bytes": 19136,
+      "arena_region_bytes": 12672,
+      "cycles_samples": [
+        284387,
+        284375,
+        284393,
+        284383,
+        284375,
+        284391,
+        284381,
+        284389,
+        284393,
+        284381
+      ],
+      "forward_ticks_samples": [
+        606212,
+        605438,
+        605472,
+        605678,
+        605802,
+        605726,
+        604962,
+        605240,
+        605312,
+        605133
+      ],
+      "invocations": 1,
+      "npu_ms": 0.7109625,
+      "forward_ms": 1.5136375
+    },
+    "acoustic": {
+      "max_absolute_error": 0.001083851,
+      "tolerance": 0.001084467,
+      "weights_region_bytes": 395088,
+      "arena_region_bytes": 93216,
+      "cycles_samples": [
+        30141658,
+        30141668,
+        30141666,
+        30141672,
+        30141668,
+        30141672,
+        30141672,
+        30141664,
+        30141664,
+        30141664
+      ],
+      "forward_ticks_samples": [
+        30993068,
+        30991850,
+        30992516,
+        30991548,
+        30992442,
+        30992648,
+        30992582,
+        30992448,
+        30992372,
+        30992960
+      ],
+      "invocations": 1,
+      "npu_ms": 75.3541675,
+      "forward_ms": 77.481205
+    }
+  },
+  "sequences": {
+    "2": {
+      "frames": 2,
+      "audio_ms": 20,
+      "max_absolute_error": 0.00108391,
+      "tolerance": 0.01,
+      "cycles_samples": [
+        32397943,
+        32397942,
+        32397959,
+        32397966,
+        32397970,
+        32397954,
+        32397945,
+        32397961,
+        32397950,
+        32397960
+      ],
+      "forward_ticks_samples": [
+        34512171,
+        34511981,
+        34512261,
+        34511445,
+        34512993,
+        34512927,
+        34512071,
+        34512491,
+        34512039,
+        34511955
+      ],
+      "invocations": 5,
+      "npu_ms": 80.99489125,
+      "forward_ms": 86.2803025,
+      "real_time_factor_features_only": 4.314015125
+    },
+    "81": {
+      "frames": 81,
+      "audio_ms": 810,
+      "max_absolute_error": 0.002174795,
+      "tolerance": 0.01,
+      "cycles_samples": [
+        164841669,
+        164841697,
+        164841627,
+        164841822,
+        164841698,
+        164841634,
+        164841742,
+        164841708,
+        164841792,
+        164841711
+      ],
+      "forward_ticks_samples": [
+        193466412,
+        193465738,
+        193467970,
+        193466676,
+        193469407,
+        193470732,
+        193470418,
+        193470768,
+        193463494,
+        193471924
+      ],
+      "invocations": 90,
+      "npu_ms": 412.1042575,
+      "forward_ms": 483.67172125,
+      "real_time_factor_features_only": 0.5971255817901234
+    },
+    "157": {
+      "frames": 157,
+      "audio_ms": 1570,
+      "max_absolute_error": 0.00206697,
+      "tolerance": 0.01,
+      "cycles_samples": [
+        294579647,
+        294579581,
+        294579597,
+        294579660,
+        294579576,
+        294579626,
+        294579551,
+        294579603,
+        294579502,
+        294579647
+      ],
+      "forward_ticks_samples": [
+        348846078,
+        348849606,
+        348851226,
+        348850284,
+        348848346,
+        348851906,
+        348846194,
+        348850458,
+        348848630,
+        348848208
+      ],
+      "invocations": 172,
+      "npu_ms": 736.449,
+      "forward_ms": 872.122795,
+      "real_time_factor_features_only": 0.5554922261146497
+    }
+  },
+  "scope": "Feature inference only; excludes text frontend, LPC vocoder, PCM conversion, UART, LCD and playback.",
+  "model_sha256": "763c3041689cf61a97c96ac3e66d6adae762621a61bfa8906e48857fdd9cbc11",
+  "firmware_sha256": "0b93ca98c4ffc20281e2016faf0335e2b325890d96f7b7d3b0bf2c96fe1cb9b4",
+  "pools": {
+    "method_peak_bytes": 166072,
+    "temp_peak_bytes": 93216,
+    "reserved_bytes": 655360
+  }
+}

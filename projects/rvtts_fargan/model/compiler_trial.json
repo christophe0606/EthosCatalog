@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "elapsed_seconds_approximate": 500,
+  "timeout_seconds": 600,
+  "command": "uv run scripts/create_ai_layer.py --project rvtts_fargan",
+  "trial_activation_range_guard_percent": 10,
+  "final_activation_range_guard_percent": 50,
+  "final_caches_recompiled": false,
+  "stage": "automatic ExecuTorch Arm integer TOSA preprocessing, after shared methods compiled",
+  "error": "TOSA-1.0+INT+int16+int4+cf doesn't support tensor TosaArg(name='aten_view_copy_default_12_fused_const', dtype=FP32, shape=(1, 256, 1))",
+  "outer_error": "Failed processing buffer placeholder: aten_view_copy_default_12_fused_const. Is the original torch function supported?",
+  "suspected_source": "Initialization constant zero pitch buffer; inferred from shape, not yet confirmed in lowered graph",
+  "raw_log": "tmp/rvtts-fargan-vela.log",
+  "ai_layer_ready": false,
+  "next_step": "Inspect constant/partition eligibility, make a focused initialization fix and retry final complete graphs; do not infer impossibility from this error"
+}

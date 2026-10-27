@@ -1,0 +1,13 @@
+{
+  "vocabulary_entries": 14681,
+  "dictionary_entries": 124912,
+  "frontend_frames": {
+    "Hello.": 92,
+    "The meter is reading forty five.": 227,
+    "One two three.": 122,
+    "This sentence is deliberately long enough to exceed the bounded inference context and must be rejected by the application.": 762
+  },
+  "source_vocoder_samples": 25120,
+  "pcm_crc32": "752c020c",
+  "pcm_peak": 16706
+}

@@ -1,0 +1,44 @@
+Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml
+Image rvtts_lpc (M55_HP): out/rvtts_lpc/DevKit-E8/Release/rvtts_lpc.axf, map out/rvtts_lpc/DevKit-E8/Release/rvtts_lpc.axf.map (armlink)
+[rvtts_lpc.axf] size: text 627464 + data 11504 + bss 3016500 = 3655468 B (ROM ˜ 638968 B, RAM ˜ 3028004 B)
+[rvtts_lpc.axf.map] totals: code 444042, ro-data 181493, rw-data 11455, zi-data 3016458 ? RO 625535, RW 3027913, ROM 636990 B
+Note: no "Image component sizes" in the map (link without --info sizes); per-object sizes are summed from the memory map
+
+Regions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from rvtts_lpc.axf LOAD segments):
+  MRAM           0x80000000    638992 /   5767168 B    11%  ER_ROM_VECTORS ER_ROM
+  SRAM0          0x02000000   2702468 /   4194304 B    64%  RW_SRAM0 PADDING
+  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH, OSPI_FLASH_REMAINDER
+  outside the listed regions: 0x20000000 +158400 B  RW_RAM RW_RAM
+  outside the listed regions: 0x20028000 +3296 B  NS_REGION_0
+  outside the listed regions: 0x2002c000 +131072 B  ARM_LIB_HEAP APP_HEAP
+  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK
+  [rvtts_lpc.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 2702452/4194304 B, PADDING 16/16 B, RW_RAM 158400/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 625480/4294967295 B, MRAM_USER 0/1572864 B
+
+Largest symbols [rvtts_lpc.axf] (top 8, object from rvtts_lpc.axf.map):
+   1536000 B  obj   0x0211cb00  _ZN15WaveformDisplay8buffers_E  RW_SRAM0 @SRAM0  ? WaveformDisplay.o
+    524288 B  obj   0x02000000  _ZN5rvtts12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  ? rvtts_engine.o
+    152320 B  obj   0x020dd420  _ZN5rvtts12_GLOBAL__N_114acoustic_inputE  RW_SRAM0 @SRAM0  ? rvtts_engine.o
+    131072 B  obj   0x02080000  _ZN5rvtts12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  ? rvtts_engine.o
+    114688 B  obj   0x020c09a0  _ZN5rvtts12_GLOBAL__N_16hiddenE  RW_SRAM0 @SRAM0  ? rvtts_engine.o
+    107480 B  obj   0x02102720  _ZN12TextFrontend5work_E  RW_SRAM0 @SRAM0  ? WaveformDisplay.o
+     68000 B  obj   0x80271984  _ZL20rvtts_acoustic_input  ER_ROM @MRAM  ? app_main.o
+     68000 B  obj   0x020a0000  _ZN5rvtts12_GLOBAL__N_15inputE  RW_SRAM0 @SRAM0  ? rvtts_engine.o
+
+Largest objects [rvtts_lpc.axf.map] (top 8 of 384; code / ro-data / rw-data / zi-data):
+   1650869 B  WaveformDisplay.o  7290 / 98 / 0 / 1643481
+   1066035 B  rvtts_engine.o  7166 / 265 / 0 / 1058604
+    163904 B  anon$$obj.o  0 / 48 / 0 / 163856
+    130297 B  app_main.o  1076 / 121021 / 0 / 8200
+    101972 B  op_dequantize.o  101524 / 448 / 0 / 0
+     72746 B  libcpp_wnux.l(locale.cpp.o)  58988 / 11874 / 24 / 1860
+     68100 B  rtx_lib.o  390 / 297 / 0 / 67413
+     61911 B  scheduler_app.o  48326 / 13104 / 24 / 457
+Libraries [rvtts_lpc.axf.map]:
+     87598 B  libcpp_wnux.l  68968 / 15669 / 28 / 2933
+     23815 B  c_wu.l  22500 / 943 / 24 / 348
+      8702 B  libcppabi_wnux.l  6456 / 1706 / 8 / 532
+      4880 B  libunwind_wnux.l  4468 / 411 / 0 / 1
+      1404 B  m_wv.l  1340 / 64 / 0 / 0
+       998 B  fz_wv.l  982 / 16 / 0 / 0
+
+Next: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists.

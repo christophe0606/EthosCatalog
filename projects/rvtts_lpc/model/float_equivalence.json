@@ -1,0 +1,99 @@
+{
+  "reference": "unmodified upstream C, deterministic temperature=0",
+  "original_fp32_training_model_error": "not supplied by upstream",
+  "cases": {
+    "1": {
+      "prosody": {
+        "max_absolute_error": 4.470348358154297e-08,
+        "mean_absolute_error": 1.9868215517249155e-08,
+        "rmse": 2.7205674157926296e-08,
+        "reference_rms": 1.1805180311203003
+      },
+      "acoustic": {
+        "max_absolute_error": 1.7881393432617188e-07,
+        "mean_absolute_error": 5.237319911088889e-08,
+        "rmse": 7.587917849605219e-08,
+        "reference_rms": 0.29677873849868774
+      }
+    },
+    "2": {
+      "prosody": {
+        "max_absolute_error": 2.384185791015625e-06,
+        "mean_absolute_error": 4.842877388000488e-07,
+        "rmse": 9.927089195116423e-07,
+        "reference_rms": 0.7573181986808777
+      },
+      "acoustic": {
+        "max_absolute_error": 5.364418029785156e-07,
+        "mean_absolute_error": 7.962808012962341e-08,
+        "rmse": 1.4533766545810067e-07,
+        "reference_rms": 0.3634984493255615
+      }
+    },
+    "7": {
+      "prosody": {
+        "max_absolute_error": 1.430511474609375e-06,
+        "mean_absolute_error": 1.216928211533741e-07,
+        "rmse": 3.3480273486929946e-07,
+        "reference_rms": 3.1617789268493652
+      },
+      "acoustic": {
+        "max_absolute_error": 1.1920928955078125e-06,
+        "mean_absolute_error": 1.225041330599197e-07,
+        "rmse": 2.2335680682772363e-07,
+        "reference_rms": 0.888917088508606
+      }
+    },
+    "32": {
+      "prosody": {
+        "max_absolute_error": 2.6226043701171875e-06,
+        "mean_absolute_error": 2.4515125573998375e-07,
+        "rmse": 5.589629950009112e-07,
+        "reference_rms": 3.9026479721069336
+      },
+      "acoustic": {
+        "max_absolute_error": 2.1457672119140625e-06,
+        "mean_absolute_error": 1.3087479544537928e-07,
+        "rmse": 2.475231895004981e-07,
+        "reference_rms": 0.8564618825912476
+      }
+    },
+    "96": {
+      "prosody": {
+        "max_absolute_error": 2.86102294921875e-06,
+        "mean_absolute_error": 2.996013108713669e-07,
+        "rmse": 6.035585329300375e-07,
+        "reference_rms": 2.844033718109131
+      },
+      "acoustic": {
+        "max_absolute_error": 3.814697265625e-06,
+        "mean_absolute_error": 1.538126070954604e-07,
+        "rmse": 3.463137545622885e-07,
+        "reference_rms": 1.22465181350708
+      }
+    },
+    "173": {
+      "prosody": {
+        "max_absolute_error": 2.384185791015625e-06,
+        "mean_absolute_error": 2.489053656518081e-07,
+        "rmse": 5.099784630147042e-07,
+        "reference_rms": 2.3571112155914307
+      },
+      "acoustic": {
+        "max_absolute_error": 5.245208740234375e-06,
+        "mean_absolute_error": 1.5636972250376857e-07,
+        "rmse": 3.382546367447503e-07,
+        "reference_rms": 1.1977437734603882
+      }
+    }
+  },
+  "dynamic_export": {
+    "prosody": {
+      "export": "FAIL",
+      "error": "Constraints violated (frames)! For more information, run with TORCH_LOGS=\"+dynamic\".\n  - You marked frames as dynamic but your code specialized it to be a constant (8). If you're using mark_dynamic, either remove it or use maybe_mark_dynamic. If you're using Dim.DYNAMIC, replace it with either Dim.STATIC or Dim.AUTO.\nSuggested fixes:\n  frames = 8\n\nThe error above occurred when calling torch.export.export. If you would like to view some more information about this error, and get a list of all other errors that may occur in your export call, you can replace your `export()` call with `draft_export()`."
+    },
+    "acoustic": {
+      "export": "PASS"
+    }
+  }
+}
