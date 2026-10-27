@@ -151,3 +151,19 @@ The landscape LCD records 904 presentations and no coalesced updates.
 Actual SRAM0 usage is 3,331,108 / 4,194,304 bytes, MRAM 673,680 bytes,
 ordinary DTCM 158,412 bytes. Raw UART and calculations are in
 `dsp/board_sram_uart.txt` and `dsp/board_sram_validation.json`.
+
+## UART Up-arrow history: b-58 / r-59
+
+Up arrow recalls the last nonempty, non-overflowed submission into the editable
+line; Enter submits it. Both CSI (`ESC [ A`) and application cursor (`ESC O A`)
+encodings work, including sequences split across UART reads. A recall replaces
+partial input and preserves echo, Backspace/Delete and single CRLF submission.
+Empty history is ignored; blank submissions preserve history. Other arrow
+sequences are consumed without inserting their bytes into the sentence.
+
+Board checks cover split CSI, SS3 replacement of partial text, editing the
+recall, recalling the edited submission, repeated Up and parameterized CSI.
+Recall alone does not synthesize, and periodic status remains quiet through
+six seconds of editing. Four submissions complete 426 I2S blocks without
+errors, underruns or missed deadlines. Startup neural/LPC checks pass.
+See `uart_history_validation.json` and `uart_history_uart.txt`.

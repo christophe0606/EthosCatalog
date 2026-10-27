@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-27",
+  "build": "b-60",
+  "run": "r-61",
+  "feature": "One-entry editable UART history recalled by Up; Enter submits",
+  "cases": {
+    "empty_history_up_no_effect": true,
+    "down_arrow_ignored": true,
+    "split_csi_escape_bracket_a_recall": true,
+    "recall_no_submission_before_enter": true,
+    "status_quiet_during_6_second_edit": true,
+    "ss3_escape_o_a_replaces_partial_line": true,
+    "recalled_line_backspace_edit": true,
+    "edited_submission_becomes_history": true,
+    "blank_enter_preserves_history": true,
+    "parameterized_csi_one_a": true,
+    "repeated_up_does_not_duplicate_input": true,
+    "crlf_single_submission": true
+  },
+  "submissions": [
+    {
+      "generation": 1,
+      "frames": 92,
+      "text": "Hello."
+    },
+    {
+      "generation": 2,
+      "frames": 92,
+      "text": "Hello."
+    },
+    {
+      "generation": 3,
+      "frames": 121,
+      "text": "Hello again."
+    },
+    {
+      "generation": 4,
+      "frames": 121,
+      "text": "Hello again."
+    }
+  ],
+  "synthesis": [
+    {
+      "generation": 1,
+      "total_ms": 773.7254375,
+      "rtf": 0.8319628360215053,
+      "peak": 8915,
+      "nonzero": 14843
+    },
+    {
+      "generation": 2,
+      "total_ms": 773.6096225,
+      "rtf": 0.8318383037634408,
+      "peak": 8915,
+      "nonzero": 14843
+    },
+    {
+      "generation": 3,
+      "total_ms": 1010.76524,
+      "rtf": 0.8284960983606557,
+      "peak": 11482,
+      "nonzero": 19464
+    },
+    {
+      "generation": 4,
+      "total_ms": 1010.51234,
+      "rtf": 0.8282888032786885,
+      "peak": 11482,
+      "nonzero": 19464
+    }
+  ],
+  "final_delivery": {
+    "error": 0,
+    "requests": 4,
+    "acks": 4,
+    "played": 430,
+    "completed": 430,
+    "first_ticks": 445797668,
+    "irq": 11036,
+    "interval_min": 3999604,
+    "interval_max": 4000324,
+    "lcd": 2145,
+    "skips": 63,
+    "underruns": 0,
+    "deadlines": 0,
+    "drops": 0,
+    "uart_drop": 0,
+    "uart_error": 0
+  },
+  "source_selftests_pass": true
+}

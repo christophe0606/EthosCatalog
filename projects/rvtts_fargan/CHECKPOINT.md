@@ -80,7 +80,13 @@ Acceptance:
 - FARGAN is included in the catalog. The current `model/benchmark.yml` records
   the accepted hybrid demo; the previous NPU-only result is preserved as
   `model/benchmark_npu_81.yml`.
-- Release r-57 remains running, with COM5 released. No required work remains
+- UART Up-arrow history is implemented and validated in both demos. FARGAN
+  b-60/r-61 passes split CSI and SS3 recall, partial-line replacement, editing,
+  new-history recall, blank Enter, repeated Up and single CRLF submission.
+  Recall waits for Enter; empty history is ignored. Four submissions complete
+  430 I2S blocks without errors, underruns or deadline misses. All startup
+  numerical checks still pass. See `uart_history_validation.json` and its raw UART.
+- Release r-61 remains running, with COM5 released. No required work remains
   for the requested port, real-time checks, UART echo, speaker and LCD demo.
 
 Parent coordinates board work and shared checkpoint .flow/rvtts/CHECKPOINT.md.

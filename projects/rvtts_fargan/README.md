@@ -48,7 +48,9 @@ when changing projects.
 Connect a powered speaker or suitable amplifier to the green **Audio Out** jack.
 UART4 uses the PRG USB connection at 115200 baud, 8 data bits, no parity, 1 stop
 bit. Firmware echoes typed characters; keep terminal local echo disabled.
-Enter a short English sentence, then CR or LF. Backspace/Delete erase the
+Enter a short English sentence, then CR or LF. Press **Up arrow** to recall the
+last submitted sentence; edit it if needed, then press Enter to speak it again.
+Recall replaces any text currently being edited. Backspace/Delete erase the
 previous character; CRLF submits once and echoes one newline. Periodic status
 output pauses while a line is being edited.
 
