@@ -33,11 +33,11 @@ not in the RTE folder but in the project-specific configuration files or directo
 
 There is a lot of flexibility in how CMSIS Stream can be configured so in general some guidelines and constraint are to be defined by the user.
 
-This skill is defining reasonable consraints and organization that will apply to all projects of the solution.
+This skill is defining reasonable constraints and organization that will apply to all projects of the solution.
 
 ## Python description
 
-The python descriptino is a file in the project folder.
+The python description is a file in the project folder.
 It may be called either from the project folder or the root folder.
 It may references python packages defined in common/nodes
 
@@ -411,3 +411,12 @@ To summarize, the main issue is that some API of the generated scheduler and soe
 If the API of CMSIS Stream had been based on void and void*, the file could have been genereic.
 
 The CMSIS scheduler receives the pointer to a nested struct to configure all settings of the node so they have different type in different project so they need a different stream_init.cpp implementation.
+
+# Styling
+
+The graph generation is also generating a `.dot` file that cab be processed with graphviz dot command to generate a `.png` or `.pdf` representing the graph.
+
+The graph style can be customized.
+
+Look at the file `style.md` to know how to customize the style of the graphical representation of the graph.
+

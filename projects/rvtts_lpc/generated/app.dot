@@ -14,7 +14,7 @@ digraph structs {
 dup0 [shape=point,label="dup0"]
 
 editor [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">editor<BR/>(LineInput)</FONT></TD>
   </TR>
@@ -22,7 +22,7 @@ editor [label=<
 
 
 pcm [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">pcm<BR/>(PlaybackSource)</FONT></TD>
@@ -38,7 +38,7 @@ pcm [label=<
 
 
 send [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">send<BR/>(SendToNetwork)</FONT></TD>
@@ -53,22 +53,22 @@ send [label=<
 </TABLE>>];
 
 speaker [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">speaker<BR/>(I2SSink)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">speaker<BR/>(I2SSink)</FONT></TD>
   </TR>
 </TABLE>>];
 
 uart [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
   </TR>
 </TABLE>>];
 
 
 wave [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">wave<BR/>(WaveformSink)</FONT></TD>
@@ -83,15 +83,15 @@ wave [label=<
 </TABLE>>];
 
 acoustic [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#4B50A5" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">acoustic<BR/>(RvttsNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#4B50A5" POINT-SIZE="14.0">acoustic<BR/>(RvttsNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 
 frontend [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">frontend<BR/>(TextFrontend)</FONT></TD>
@@ -106,43 +106,43 @@ frontend [label=<
 </TABLE>>];
 
 gru [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#4B50A5" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gru<BR/>(RvttsNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#4B50A5" POINT-SIZE="14.0">gru<BR/>(RvttsNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 head [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#4B50A5" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">head<BR/>(RvttsNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#4B50A5" POINT-SIZE="14.0">head<BR/>(RvttsNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 lcd [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
   </TR>
 </TABLE>>];
 
 pitch [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">pitch<BR/>(PitchCorrect)</FONT></TD>
   </TR>
 </TABLE>>];
 
 pre [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#4B50A5" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">pre<BR/>(RvttsNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#4B50A5" POINT-SIZE="14.0">pre<BR/>(RvttsNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 
 vocoder [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">vocoder<BR/>(LpcVocoder)</FONT></TD>

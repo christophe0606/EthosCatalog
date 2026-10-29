@@ -195,6 +195,23 @@ thumbnail, `generated/app.png`, bounded by 320 x 240 pixels. Graphviz is optiona
 if rendering is unavailable or fails, the generated code and DOT diagram remain
 available.
 
+To update only the graph pictures after a styling change, use:
+
+```powershell
+uv run projects/template_mram/app.py --graph-only
+```
+
+This updates only `generated/app.dot`, `app.png` and `app.pdf`. Each implemented
+project's `app.py` supplies `GRAPH_STYLE`: white rectangles with black borders
+and labels by default, a fixed `PTE_COLOR` for all methods in its
+`ai_layer/model.pte`, and shared saddle-brown borders and labels for explicitly
+listed driver nodes. Keep each PTE's color stable and choose a distinct color
+for a different PTE, including when adding a project. The generic `GraphStyle`
+helper takes a mapping from node names to colors; it does not infer roles from
+node classes or hardware requirements. CPU processing, including the speech
+vocoders, uses the default style. The reserved Phonon entry point has no Stream
+graph or graph artifacts yet.
+
 Build the selected target with **CMSIS: Build Solution**. When using the CMSIS
 Developer Assistant, use `cmsis_action` with `action: build`. Release uses
 `-O3 -ffast-math`; Debug disables optimization.

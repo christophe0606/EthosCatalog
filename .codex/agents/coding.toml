@@ -138,6 +138,17 @@ descriptions and C++ wrapper will be required.
   audio/LCD progress, including deadline and dropped-event counters.
 - Before finishing, resume the target and leave the firmware running. If board
   verification is blocked, report the concrete blocker and do not claim it passed.
+
+## Graph Styling
+
+The generated png or pdf for the graph must follow the following style constraints:
+* By default, the nodes rectangle are blacks and filled white
+* If the node represents a method from a `.pte` file then it is colored (not black)
+* Methods from same `.pte` file share the same color
+* Methods from different `.pte` files have different colors
+* The color assignment should be consistent across different graph generations for the same `.pte` file.
+* Drivers nodes (microphone, LCD, etc.) are colored differently 
+  (a dark color like brown but quite distinct from black) and have a consistent color across graph generations.
 """
 
 [[skills.config]]

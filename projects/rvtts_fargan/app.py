@@ -6,8 +6,17 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
-from common.stream_graph import mk_app
+from common.stream_graph import DRIVER_COLOR, GraphStyle, graph_only_requested, mk_app
 from projects.rvtts_fargan.nodes import *
+
+# Fixed color for this project's ai_layer/model.pte; all its methods share it.
+# Keep this assignment stable and distinct from the other projects' PTE colors.
+PTE_COLOR = '#558000'
+GRAPH_STYLE = GraphStyle({
+    **dict.fromkeys(('pre', 'gru', 'head', 'acoustic'), PTE_COLOR),
+    **dict.fromkeys(('uart', 'speaker', 'lcd'), DRIVER_COLOR),
+})
+
 
 def make_graph():
     g = Graph()
@@ -26,8 +35,9 @@ def make_graph():
     g.connect(wave['oev0'], lcd['iev0'])
     return g
 
-def generate():
+def generate(graph_only=False):
     return mk_app(make_graph(), Path(__file__).resolve().parent/'generated',
+        style=GRAPH_STYLE, graph_only=graph_only,
         globals=dict(MAX_TEXT=160, AUDIO_FRAME=160), runtime=dict(
         CMSISSTREAM_EVENT_QUEUE_LENGTH=8, CMSISSTREAM_EVT_THREAD_STACK_SIZE=32768,
         CMSISSTREAM_STREAM_THREAD_STACK_SIZE=8192,
@@ -35,4 +45,4 @@ def generate():
         CMSISSTREAM_EVT_NORMAL_PRIORITY='osPriorityHigh',
         CMSISSTREAM_NB_MAX_EVENTS=16, CMSISSTREAM_NB_MAX_BUFS=4),
         source_notice='// Copyright 2026 Arm Limited and/or its affiliates.\n// SPDX-License-Identifier: Apache-2.0\n')
-if __name__ == '__main__': generate()
+if __name__ == '__main__': generate(graph_only=graph_only_requested())

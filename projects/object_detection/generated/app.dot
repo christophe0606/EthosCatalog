@@ -12,14 +12,14 @@ digraph structs {
 
 
 camera [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">camera<BR/>(CameraCapture)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">camera<BR/>(CameraCapture)</FONT></TD>
   </TR>
 </TABLE>>];
 
 crop [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">crop<BR/>(Rgb565CenterCrop)</FONT></TD>
   </TR>
@@ -27,7 +27,7 @@ crop [label=<
 
 
 decode [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">decode<BR/>(FaceDecode)</FONT></TD>
@@ -43,10 +43,10 @@ decode [label=<
 
 
 display [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="boxes"><FONT POINT-SIZE="12.0" COLOR="black">boxes</FONT></TD>
-    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">display<BR/>(FaceDisplay)</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#8B4513" POINT-SIZE="14.0">display<BR/>(FaceDisplay)</FONT></TD>
     <TD></TD>
   </TR>
 <TR>
@@ -60,7 +60,7 @@ display [label=<
 dup0 [shape=point,label="dup0"]
 
 gray [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gray<BR/>(Rgb888ToGrayInt8)</FONT></TD>
   </TR>
@@ -68,10 +68,10 @@ gray [label=<
 
 
 network [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#C62828" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
-    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">network<BR/>(FaceInference)</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#C62828" POINT-SIZE="14.0">network<BR/>(FaceInference)</FONT></TD>
     <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
   </TR>
 <TR>
@@ -83,7 +83,7 @@ network [label=<
 </TABLE>>];
 
 nms [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">nms<BR/>(NonMaximumSuppression)</FONT></TD>
   </TR>

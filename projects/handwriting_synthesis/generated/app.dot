@@ -12,7 +12,7 @@ digraph structs {
 
 
 editor [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">editor<BR/>(SentenceInput)</FONT></TD>
   </TR>
@@ -20,7 +20,7 @@ editor [label=<
 
 
 send [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">send<BR/>(SendToNetwork)</FONT></TD>
@@ -35,57 +35,57 @@ send [label=<
 </TABLE>>];
 
 uart [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">uart<BR/>(UartSource)</FONT></TD>
   </TR>
 </TABLE>>];
 
 attention [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#AD1457" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">attention<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#AD1457" POINT-SIZE="14.0">attention<BR/>(HandwritingNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 display [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">display<BR/>(HandwritingDisplay)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">display<BR/>(HandwritingDisplay)</FONT></TD>
   </TR>
 </TABLE>>];
 
 gmm [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#AD1457" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">gmm<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#AD1457" POINT-SIZE="14.0">gmm<BR/>(HandwritingNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 lstm1 [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#AD1457" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm1<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#AD1457" POINT-SIZE="14.0">lstm1<BR/>(HandwritingNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 lstm2 [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#AD1457" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm2<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#AD1457" POINT-SIZE="14.0">lstm2<BR/>(HandwritingNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 lstm3 [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="#AD1457" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
-    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lstm3<BR/>(HandwritingNetwork)</FONT></TD>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#AD1457" POINT-SIZE="14.0">lstm3<BR/>(HandwritingNetwork)</FONT></TD>
   </TR>
 </TABLE>>];
 
 
 synthesis [label=<
-<TABLE color="black" bgcolor="none" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
     <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
     <TD ALIGN="CENTER" ROWSPAN="3"><FONT COLOR="black" POINT-SIZE="14.0">synthesis<BR/>(HandwritingSynthesis)</FONT></TD>

@@ -6,13 +6,22 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
 from common.nodes import MicrophoneSource, PCMToFloat, SlidingBuffer, MFCC
-from common.stream_graph import mk_app
+from common.stream_graph import DRIVER_COLOR, GraphStyle, graph_only_requested, mk_app
 from projects.kws_micronet_l.nodes import KwsInference, KwsEvents, KeywordLCD
 
 SAMPLE_RATE, AUDIO_HOP, FRAME, FEATURES, CONTEXT = 16000, 320, 640, 10, 49
 # 49-24 = 25 new MFCC blocks -> 500 ms, matching KwsPreProcess.
 # Set overlap to 48 for inference every new MFCC block (20 ms).
 MFCC_OVERLAP = 24
+
+# Fixed color for this project's ai_layer/model.pte; all its methods share it.
+# Keep this assignment stable and distinct from the other projects' PTE colors.
+PTE_COLOR = '#7B1FA2'
+GRAPH_STYLE = GraphStyle({
+    **dict.fromkeys(('inference',), PTE_COLOR),
+    **dict.fromkeys(('microphone', 'lcd'), DRIVER_COLOR),
+})
+
 
 def make_graph(overlap=MFCC_OVERLAP):
     if isinstance(overlap, bool) or not isinstance(overlap, int) or not 0 <= overlap < CONTEXT:
@@ -34,8 +43,8 @@ def make_graph(overlap=MFCC_OVERLAP):
     graph.connect(inference['oev0'], lcd['iev0'])
     return graph
 
-def generate():
-    return mk_app(make_graph(), Path(__file__).resolve().parent/'generated', globals=dict(
+def generate(graph_only=False):
+    return mk_app(make_graph(), Path(__file__).resolve().parent/'generated', style=GRAPH_STYLE, graph_only=graph_only, globals=dict(
         MIC_BLOCK_SAMPLES=AUDIO_HOP, MIC_SAMPLE_RATE=SAMPLE_RATE, KWS_FRAME_SAMPLES=FRAME,
         KWS_FEATURES=FEATURES, KWS_CONTEXT_FRAMES=CONTEXT, KWS_MFCC_OVERLAP=MFCC_OVERLAP,
         KWS_INFERENCE_HOP_FRAMES=CONTEXT-MFCC_OVERLAP, LCD_FPS=20), runtime=dict(
@@ -46,4 +55,4 @@ def generate():
         CMSISSTREAM_NB_MAX_BUFS=4))
 
 if __name__ == '__main__':
-    generate()
+    generate(graph_only=graph_only_requested())

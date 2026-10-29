@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
 from common.nodes import MicrophoneSource, PCMToFloat, SlidingBuffer, RemoveDC, HannWindow, FFT, RFFTMagnitude
-from common.stream_graph import mk_app
+from common.stream_graph import DRIVER_COLOR, GraphStyle, graph_only_requested, mk_app
 from projects.template_ospi.nodes import EthosGain, SendToLCD, LCD
 
 BLOCK, FFT_SIZE, SAMPLE_RATE, FPS = 512, 2048, 48000, 20
@@ -16,6 +16,15 @@ BLOCK, FFT_SIZE, SAMPLE_RATE, FPS = 512, 2048, 48000, 20
 # The board backend enables PDM channel 4 only: mono signed 16-bit PCM at 48 kHz.
 # A stereo backend would require a stereo sample type and conversion to mono
 # before this graph's mono audio/FFT processing.
+
+# Fixed color for this project's ai_layer/model.pte; all its methods share it.
+# Keep this assignment stable and distinct from the other projects' PTE colors.
+PTE_COLOR = '#00796B'
+GRAPH_STYLE = GraphStyle({
+    **dict.fromkeys(('gain',), PTE_COLOR),
+    **dict.fromkeys(('microphone', 'lcd'), DRIVER_COLOR),
+})
+
 
 def make_graph(pcm_samples=BLOCK):
     graph = Graph()
@@ -30,9 +39,9 @@ def make_graph(pcm_samples=BLOCK):
     graph.connect(stages[-1]['oev0'], lcd['iev0'])
     return graph
 
-def generate():
+def generate(graph_only=False):
     output = Path(__file__).resolve().parent/'generated'
-    return mk_app(make_graph(), output, globals=dict(
+    return mk_app(make_graph(), output, style=GRAPH_STYLE, graph_only=graph_only, globals=dict(
         MIC_BLOCK_SAMPLES=BLOCK, MIC_SAMPLE_RATE=SAMPLE_RATE,
         SPECTRUM_FFT_SIZE=FFT_SIZE, SPECTRUM_BINS=FFT_SIZE//2+1, LCD_FPS=FPS), runtime=dict(
         CMSISSTREAM_EVENT_QUEUE_LENGTH=3,
@@ -44,4 +53,4 @@ def generate():
         CMSISSTREAM_NB_MAX_BUFS=4))
 
 if __name__ == '__main__':
-    generate()
+    generate(graph_only=graph_only_requested())

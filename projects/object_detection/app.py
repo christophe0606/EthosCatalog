@@ -6,9 +6,18 @@ import sys
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
-from common.stream_graph import mk_app
+from common.stream_graph import DRIVER_COLOR, GraphStyle, graph_only_requested, mk_app
 from projects.object_detection.nodes import CameraCapture, FaceInference, FaceDecode, FaceDisplay
 from common.nodes import Rgb565CenterCrop, Rgb888ToGrayInt8, NonMaximumSuppression
+
+# Fixed color for this project's ai_layer/model.pte; all its methods share it.
+# Keep this assignment stable and distinct from the other projects' PTE colors.
+PTE_COLOR = '#C62828'
+GRAPH_STYLE = GraphStyle({
+    **dict.fromkeys(('network',), PTE_COLOR),
+    **dict.fromkeys(('camera', 'display'), DRIVER_COLOR),
+})
+
 
 def make_graph():
     graph=Graph()
@@ -29,8 +38,9 @@ def make_graph():
     graph.connect(nms.o,display.boxes)
     return graph
 
-def generate():
-    return mk_app(make_graph(),Path(__file__).resolve().parent/'generated',globals=dict(DETECTION_IMAGE_SIZE=192,DETECTION_FRAME_PERIOD_MS=200),runtime=dict(
+def generate(graph_only=False):
+    return mk_app(make_graph(), Path(__file__).resolve().parent/'generated',
+        style=GRAPH_STYLE, graph_only=graph_only, globals=dict(DETECTION_IMAGE_SIZE=192,DETECTION_FRAME_PERIOD_MS=200),runtime=dict(
         CMSISSTREAM_EVENT_QUEUE_LENGTH=3,
         CMSISSTREAM_EVT_THREAD_STACK_SIZE=4096,
         CMSISSTREAM_STREAM_THREAD_STACK_SIZE=16384,
@@ -39,4 +49,4 @@ def generate():
         CMSISSTREAM_NB_MAX_EVENTS=8,
         CMSISSTREAM_NB_MAX_BUFS=4),source_notice='// Copyright 2026 Arm Limited and/or its affiliates.\n// SPDX-License-Identifier: Apache-2.0\n')
 
-if __name__=='__main__': generate()
+if __name__=='__main__': generate(graph_only=graph_only_requested())
