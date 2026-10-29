@@ -1,0 +1,46 @@
+{
+  "AudioWindow<float,160,float,400>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_COMPLETE_ID",
+      "SEL_RESULT_ID"
+    ]
+  },
+  "LogMel<float,400,float,64>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<int16_t,160>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PCMToFloat<int16_t,160,float,160>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SendToNetwork<float,64>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_COMPLETE_ID",
+      "SEL_RESULT_ID"
+    ]
+  },
+  "EventLCD": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_COMPLETE_ID",
+      "SEL_RESULT_ID"
+    ]
+  },
+  "YAMNet": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_REQUEST_ID",
+      "SEL_COMPLETE_ID",
+      "SEL_RESULT_ID"
+    ]
+  }
+}

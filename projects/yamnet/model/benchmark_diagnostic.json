@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-10-29T09:37:10.088739+00:00",
+  "build_job": "b-31",
+  "execution_job": "d-32",
+  "status": "stalled first NPU invocation; no measurements",
+  "crc_pass": true,
+  "qread": 1084,
+  "qsize": 10204,
+  "status_register": 1,
+  "qconfig": 0,
+  "regioncfg": 16,
+  "weights_address": 33564880,
+  "weights_bytes": 1563040,
+  "arena_address": 35195744,
+  "arena_bytes": 509360,
+  "completed_invocations": 0,
+  "files": {
+    "projects/yamnet/ai_layer/model.pte": "434da6112355e3dd8be9443a6fe4820adf2bdf79850800dd2c42cdaed6a56782",
+    "out/yamnet/DevKit-E8/Release/yamnet.axf": "d286361c38c769ef98c881d8df235c08353cb33bd257437a74903a79b5168c06"
+  },
+  "historical_only": true,
+  "superseded_by": "board_validation_provenance.json and HARDWARE_INVESTIGATION.md"
+}

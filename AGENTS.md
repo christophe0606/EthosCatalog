@@ -5,6 +5,10 @@ on Ethos NPU.
 
 This project is current only targeting Alif E8 DevKit.
 
+For models executed directly from OSPI without an SRAM copy, use the verified
+configuration in [documentation/ospi-in-place-inference.md](documentation/ospi-in-place-inference.md).
+The `template_ospi` and `handwriting_synthesis` projects are the direct-OSPI references.
+
 ## Mandatory Repository guidelines
 
 * This repository uses executorch. Network saved in .pt2 / .safetensor format are loaded from pytorch and use the executorch flow to be compiled by vela.

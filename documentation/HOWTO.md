@@ -20,6 +20,11 @@ Changed projects are checked automatically on pushes and pull requests. See
 [GitHub CI validation](ci.md) for build order, required project files and
 downloadable error reports.
 
+For models that must remain in external flash, use the reusable
+[direct OSPI inference configuration](ospi-in-place-inference.md). It records
+the NPU routing, startup/MPU policy, programming sequence and verification used
+by the working template and handwriting projects.
+
 ## Set up the tools
 
 1. Open the repository root in VS Code. Install the CMSIS Solution extension,

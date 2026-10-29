@@ -1,0 +1,37 @@
+{
+  "build_job": "b-77",
+  "execution_job": "d-78",
+  "board": "Alif DevKit-E8 M55_HP+Ethos-U85-256",
+  "status": "40 completed classification fixtures and10 warmedtiming calls; strict scoreparityFAIL retained",
+  "crc_pass": true,
+  "delegates_per_forward": 14,
+  "pmu_overflow": 0,
+  "clock_hz": {
+    "cpu": 400000000,
+    "axi_npu": 400000000,
+    "timer": 400000000,
+    "ospi": 100000000
+  },
+  "routing": {
+    "qconfig": 2,
+    "regioncfg": 19,
+    "mem_attr2": 36,
+    "mem_attr3": 36
+  },
+  "method_peak_bytes": 829016,
+  "temp_peak_bytes": 298752,
+  "reserved_method_bytes": 1048576,
+  "reserved_temp_bytes": 1179648,
+  "planned_tensor_bytes": 807168,
+  "npu_ms_median": 60.73555375,
+  "forward_ms_median": 1482.13657125,
+  "interrupted_fixture_index": 38,
+  "timing_note": "Ten final warmed benchmark calls uninterrupted. A debugger inspection paused validation during fixture38, so its end-to-end fixture ticks are excluded from latency aggregation.",
+  "files": {
+    "projects/yamnet/ai_layer/model.pte": "bd5c2b892839f8d42467f284a448cbc35a2510a4930959ae1dd5e4987deb86b4",
+    "out/yamnet/DevKit-E8/Release/yamnet.axf": "d24377505efeb0bc0614f57cca7308a71c890b52d3f9bb68cc67ae4558c47c14",
+    "projects/yamnet/model/board_validation_scores.npz": "82f39f5e563d8a8bbf13bb2aadf9dd8ada7fca44e5fdd13bf841a73782ea0e58",
+    "projects/yamnet/model/board_validation_metrics.json": "b00bb92fe3e0355d6524e63c9fde5458694ccfa5236fade3d03c0d66031e8174",
+    "projects/yamnet/model/board_validation_uart.txt": "ae32a05d0fa08273ecfe7462da0f2c59c14a1d87091b7d43c22f74a863f964d8"
+  }
+}

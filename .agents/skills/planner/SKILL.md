@@ -22,6 +22,7 @@ The project will not be added to the catalog if it cannot be successfully ported
 7 - Launch the review agent with the last checkpoint file
 If the review agent finds no problems, consider the goal is reached. Otherwise, according to the problems found, you may have to restart the coding step with the feedback from the review.
 Run the final release version of the project on the board and let it run.
+8 - Document all the findings in project folder : problems found during quantizations, performances issues, Ethos crashs etc ...
 
 If the step converter or the step benchmarks are failing then we consider that the network cannot be ported to Ethos and the reason should be clearly documented in the project folder.
 

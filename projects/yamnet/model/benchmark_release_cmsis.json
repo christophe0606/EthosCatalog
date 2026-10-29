@@ -1,0 +1,161 @@
+{
+  "recorded_at": "2026-10-29 11:07:27 UTC",
+  "build_job": "b-80",
+  "execution_job": "d-81",
+  "serial_chunks": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): <no data>"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 41 byte(s)\n--- text ---\nYAMNet vector check: 40 patches, 521 scor"
+        }
+      ]
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Serial RX (owned): 1567 byte(s)\n--- text ---\nes each\nErrors: backend=0.064208984, original_float=0.118445352\nClassification: PTQ top1=40/40, TensorFlow top1=39/40, TensorFlow top1 in board top5=40/40\nBenchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz\nBenchmark memory: model=3601536 B, method peak=829016 B, temp peak=298752 B, reserved=1572864 B\nBenchmark regions: weights=1384256 B at 0xc00006a0, arena=163840 B at 0x02100000\nBenchmark sample 1: NPU=24294203 cycles (60.735507 ms), forward=592870747 ticks (1482.176868 ms)\nBenchmark sample 2: NPU=24294187 cycles (60.735467 ms), forward=592816759 ticks (1482.041898 ms)\nBenchmark sample 3: NPU=24294196 cycles (60.735490 ms), forward=592865803 ticks (1482.164507 ms)\nBenchmark sample 4: NPU=24294190 cycles (60.735475 ms), forward=592869133 ticks (1482.172832 ms)\nBenchmark sample 5: NPU=24294186 cycles (60.735465 ms), forward=592816657 ticks (1482.041643 ms)\nBenchmark sample 6: NPU=24294186 cycles (60.735465 ms), forward=592883917 ticks (1482.209793 ms)\nBenchmark sample 7: NPU=24294190 cycles (60.735475 ms), forward=592861657 ticks (1482.154143 ms)\nBenchmark sample 8: NPU=24294196 cycles (60.735490 ms), forward=592819891 ticks (1482.049728 ms)\nBenchmark sample 9: NPU=24294192 cycles (60.735480 ms), forward=592880419 ticks (1482.201047 ms)\nBenchmark sample 10: NPU=24294210 cycles (60.735525 ms), forward=592862274 ticks (1482.155685 ms)\nBenchmark PMU: invocations=14, active=24294210 cycles, overflow=0\nStrict score parity (0.005): FAIL (-405)\nTest_result: PASS (classification acceptance; score parity reported separately)\n"
+        }
+      ]
+    }
+  ],
+  "completion_snapshot": {
+    "yamnet_test_passed": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_test_passed\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "yamnet_benchmark_complete": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "pipeline_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    },
+    "model_verified": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: model_verified\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "yamnet_fixture_cases_complete": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_fixture_cases_complete\nResult: 40\nType: volatile uint32_t\n\nNote: 17 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2355}"
+        }
+      ]
+    },
+    "yamnet_ptq_top1_matches": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_ptq_top1_matches\nResult: 40\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "yamnet_float_top1_matches": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_float_top1_matches\nResult: 39\nType: volatile uint32_t\n\nNote: 19 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2355}"
+        }
+      ]
+    },
+    "yamnet_float_top1_in_top5": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_float_top1_in_top5\nResult: 40\nType: volatile uint32_t\n\nNote: 21 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2355}"
+        }
+      ]
+    },
+    "yamnet_score_parity_passed": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_score_parity_passed\nResult: 0\nType: volatile uint32_t\n\nNote: 24 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2355}"
+        }
+      ]
+    },
+    "yamnet_score_parity_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_score_parity_error\nResult: -405\nType: volatile int32_t"
+        }
+      ]
+    },
+    "yamnet_clock_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_clock_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    },
+    "yamnet_cpu_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_cpu_hz\nResult: 400000000\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "yamnet_axi_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_axi_hz\nResult: 400000000\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "yamnet_timer_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: yamnet_timer_hz\nResult: 400000000\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "ethos_benchmark": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: ethos_benchmark\nResult: {...}\nType: volatile ethos_benchmark_t\nFields:\n  cycles: 24294210 (uint64_t)\n  active_cycles: 24294210 (uint64_t)\n  invocations: 14 (uint32_t)\n  overflow: 0 (uint32_t)\n  weights_address: 3221227168 (uint32_t)\n  weights_size: 1384256 (uint32_t)\n  arena_address: 34603008 (uint32_t)\n  arena_size: 163840 (uint32_t)"
+        }
+      ]
+    }
+  },
+  "memory_usage": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml\nImage yamnet (M55_HP): out/yamnet/DevKit-E8/Release/yamnet.axf, map out/yamnet/DevKit-E8/Release/yamnet.axf.map (armlink)\n[yamnet.axf] size: text 1491080 + data 10576 + bss 1973960 = 3475616 B (ROM ≈ 1501656 B, RAM ≈ 1984536 B)\n[yamnet.axf.map] totals: code 323148, ro-data 1166663, rw-data 10549, zi-data 1973938 → RO 1489811, RW 1984487, ROM 1500360 B\nNote: no \"Image component sizes\" in the map (link without --info sizes); per-object sizes are summed from the memory map\n\nRegions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from yamnet.axf LOAD segments):\n  MRAM           0x80000000   1501680 /   5767168 B    26%  ER_ROM_VECTORS ER_ROM\n  SRAM0          0x02000000   1597456 /   4194304 B    38%  RW_SRAM0 PADDING\n  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH, OSPI_FLASH_REMAINDER\n  outside the listed regions: 0x20000000 +219944 B  RW_RAM RW_RAM\n  outside the listed regions: 0x20038000 +3296 B  NS_REGION_0\n  outside the listed regions: 0x2003c000 +131072 B  ARM_LIB_HEAP APP_HEAP\n  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK\n  [yamnet.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 1597440/4194304 B, PADDING 16/16 B, RW_RAM 219944/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 1489096/4294967295 B, MRAM_USER 0/1572864 B\n\nLargest symbols [yamnet.axf] (top 4, object from yamnet.axf.map):\n   1048576 B  obj   0x02000000  _ZN12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  ← hardware_params.o\n    524288 B  obj   0x02100000  _ZN12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  ← hardware_params.o\n     83360 B  obj   0x20021588  yamnet_test_scores  RW_RAM  ← app_main.o\n     65536 B  obj   0x200109d0  os_mem  RW_RAM  ← rtx_lib.o\n\nLargest objects [yamnet.axf.map] (top 4 of 245; code / ro-data / rw-data / zi-data):\n   1598108 B  hardware_params.o  604 / 8 / 0 / 1597496\n   1240664 B  app_main.o  3610 / 1150882 / 0 / 86172\n    163904 B  anon$$obj.o  0 / 48 / 0 / 163856\n    101924 B  op_dequantize.o  101484 / 440 / 0 / 0\nLibraries [yamnet.axf.map]:\n     11423 B  c_wu.l  10810 / 241 / 24 / 348\n      8273 B  libcppabi_wnux.l  6290 / 1443 / 8 / 532\n      4872 B  libunwind_wnux.l  4468 / 403 / 0 / 1\n      2892 B  libcpp_wnux.l  2072 / 820 / 0 / 0\n\nNext: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists."
+      }
+    ]
+  }
+}

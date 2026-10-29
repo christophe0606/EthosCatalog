@@ -1,0 +1,2 @@
+YAMNet live: audio=41223 features=41221 infer=260 lcd=260 skipped=596 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=1548.017 npu_ms=60.737 stack_free_audio=31792 stack_free_infer=14104 method_peak=829016 temp_peak=298752
+YAMNet live: audio=42805 features=42803 infer=270 lcd=270 skipped=619 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=1548.322 npu_ms=60.736 stack_free_audio=31792 stack_free_infer=14104 method_peak=829016 temp_peak=298752

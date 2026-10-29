@@ -1,0 +1,6 @@
+{
+  "audio_window": 0,
+  "send": 1,
+  "lcd": 2,
+  "network": 3
+}

@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/silero_vad/DevKit-E8/Release/silero_vad.axf",
+            "program": "out/yamnet/DevKit-E8/Release/yamnet.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -46,7 +46,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/silero_vad/DevKit-E8/Release/silero_vad.axf",
+            "program": "out/yamnet/DevKit-E8/Release/yamnet.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

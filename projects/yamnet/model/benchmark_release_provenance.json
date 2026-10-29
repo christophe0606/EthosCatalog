@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-29T11:07:27Z",
+  "build_job": "b-80",
+  "execution_job": "d-81",
+  "target": "DevKit-E8@YAMNet_Release",
+  "model_sha256": "bd5c2b892839f8d42467f284a448cbc35a2510a4930959ae1dd5e4987deb86b4",
+  "firmware_sha256": "f0f13464534162aa9eb8a5434c90d9497896e82e36b7efd61abdce050fabbe51",
+  "uart_sha256": "634ed87169c556cda89f6dc628d2c7b94a27fbf9d59c89baaee128cf62849607",
+  "cmsis_snapshot_sha256": "069fb14a57753374cd1b1b5bce6dbe1485138c4996d4e21d80b6967ac468751f",
+  "classification_acceptance": "PASS: PTQ40/40 top1, TF39/40 top1 (>=95%), TFtop1 in boardtop5 for40/40; finite scores[0,1]; PMU14 completed calls/forward, equal active/total cycles,nooverflow",
+  "strict_score_parity": {
+    "status": "FAIL",
+    "error": -405,
+    "tolerance": 0.005,
+    "max_board_ptq_error": 0.064208984375,
+    "max_board_tf_error": 0.11844535171985626
+  },
+  "crc_pass": true,
+  "autonomous_startup": true,
+  "manual_start_gate": false,
+  "timing_note": "Continued matching-ELF session from startup main. No breakpoints or debugger inspection during all50 forwards; completion snapshot taken only after UART PASS. Forty validation calls then ten warmed measurements.",
+  "cpu_hz": 400000000,
+  "axi_npu_hz": 400000000,
+  "timer_hz": 400000000,
+  "ospi_hz": 100000000,
+  "no_full_model_sram_copy": true,
+  "reserved_method_bytes": 1048576,
+  "reserved_temp_bytes": 524288,
+  "method_peak_bytes": 829016,
+  "temp_peak_bytes": 298752,
+  "sram0_linked_bytes_including_padding": 1597456,
+  "double_framebuffer_budget_bytes": 1536000,
+  "sram0_remaining_after_framebuffer_budget": 1060848,
+  "mram_linked_load_bytes": 1501680,
+  "mram_app_region_bytes": 2097152,
+  "mram_app_headroom_bytes": 595472,
+  "ethos_regions_note": "Shared hook reports only final delegate: weights1384256B at0xC00006A0 and arena163840B at0x02100000. Not all14 delegates aggregate. Maximum temp arena298752B is allocator-observed; compiler metadata retained separately.",
+  "original_strict_failure_evidence": [
+    "board_validation_provenance.json",
+    "board_validation_scores.npz",
+    "board_validation_metrics.json",
+    "board_validation_uart.txt"
+  ],
+  "source_files": {
+    "projects/yamnet/app_main.cpp": "961652b68a64da417c6a37eeb3344b7ef154dae8b9f8e1ad2297a462302c1e24",
+    "projects/yamnet/yamnet_selftest.h": "eb6a0282c1d9962e894d751f880b7bb28060fbe4ba2930e38240eeea2f766928",
+    "projects/yamnet/yamnet.cproject.yml": "2e3782fa06047abaf96761fedf26f0a19c791d1c8220fbd30ece354e99585f02",
+    "projects/yamnet/hardware_params.cpp": "ee358fbfcaa894cceeafebd4136d5b92790fe16842e09a31d643bd8895b9209c",
+    "projects/yamnet/nodes_impl/embedded_yamnet.cpp": "8cb4f2543d413056350f2f9590e8462258db6448fe38023fb93bacf5bda7cda1"
+  }
+}

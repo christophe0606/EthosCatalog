@@ -197,6 +197,27 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: YAMNet_Debug
+          images:
+            - project-context: yamnet.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: YAMNet_Release
+          images:
+            - project-context: yamnet.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: YAMNet_ProgramModel
+          images:
+            - project-context: yamnet.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -239,6 +260,7 @@ solution:
       for-context:
         - .Debug
         - .Release
+    - project: projects/yamnet/yamnet.cproject.yml
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

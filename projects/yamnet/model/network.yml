@@ -1,0 +1,103 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+network:
+  name: YAMNet
+  model: model/model.py
+  quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    error:
+      reference: official pinned Keras YAMNet on 38 independently seeded synthetic
+        patterns plus shared silence/440Hz controls
+      activation: int16
+      depthwise_activation: float
+      depthwise_implementation: depthwise
+      float_variant_max_abs_error: 2.7418136596679688e-06
+      first_conv_activation: float
+      weights: int8 per output channel for quantized pointwise/head; float32 first/depthwise
+        when excluded
+      partition_policy: Automatic EthosUPartitioner; unquantized float spatial modules
+        use CPU fallback
+      calibration_patterns: 96
+      evaluation_patterns: 40
+      calibration_seed: 51773
+      evaluation_seed: 19429
+      mean_absolute_score_error: 0.0002928997855633497
+      max_absolute_score_error: 0.09920978546142578
+      top1_agreement: 0.975
+      top1_agreement_independent_patterns: 0.9736842105263158
+      mean_top5_set_overlap: 0.9099999999999999
+      reference_top1_in_quantized_top5: 1.0
+      shared_controls:
+      - silence
+      - sine_440
+      per_pattern_max_abs_error:
+      - 8.634642512106439e-08
+      - 0.03694671392440796
+      - 0.07619777321815491
+      - 0.059988826513290405
+      - 0.01085670292377472
+      - 0.014060407876968384
+      - 0.025648266077041626
+      - 0.017276525497436523
+      - 0.032052040100097656
+      - 1.854941001511179e-05
+      - 0.00014891341561451554
+      - 0.03255194425582886
+      - 0.014030814170837402
+      - 0.035996824502944946
+      - 0.027015864849090576
+      - 0.00025600194931030273
+      - 0.047864556312561035
+      - 0.07549411058425903
+      - 0.04803916811943054
+      - 0.01548176258802414
+      - 0.030733823776245117
+      - 0.027658112347126007
+      - 0.01754547655582428
+      - 0.023052722215652466
+      - 0.06849896907806396
+      - 0.01775987446308136
+      - 0.01732712984085083
+      - 0.027857989072799683
+      - 0.09920978546142578
+      - 0.06538382172584534
+      - 0.05018654465675354
+      - 0.08020153641700745
+      - 0.009091198444366455
+      - 0.05304136872291565
+      - 0.0022731684148311615
+      - 0.029354482889175415
+      - 0.03619581460952759
+      - 0.01345062255859375
+      - 0.03690910339355469
+      - 0.04258447885513306
+      float_parity:
+        reference_commit: c14bf9ad91962cf189f9f58db2132c06247fcd53
+        tensorflow: 2.20.0
+        tf_keras: 2.20.1
+        torch: 2.13.0+cpu
+        calibration:
+          patterns: 96
+          float_score_max_abs_error: 2.950429916381836e-06
+          float_embedding_max_abs_error: 1.0013580322265625e-05
+          numpy_frontend_max_abs_error: 0.005478382110595703
+        evaluation:
+          patterns: 40
+          float_score_max_abs_error: 2.7418136596679688e-06
+          float_embedding_max_abs_error: 1.0013580322265625e-05
+          numpy_frontend_max_abs_error: 0.0033054351806640625
+      limitation: Synthetic numerical validation only; no labelled AudioSet accuracy
+        or real-sound generalization established.
+  safetensors: model/model_quantized.safetensors
+  graph: model/model_quantized.pt2
+  flash_ospi: true
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Shared_Sram
+  ospi:
+    address: 3221225472
+    size: 33554432
+    pname: M55_HP

@@ -48,6 +48,8 @@ can run on Ethos and subnetworks that can only run on Cortex-M.
 It is only if the executorch flow cannot partition the network 
 and fail that you can do the partionning and explain the reason.
 
+Memory buffers for the Ethos and the executorch layer must be 
+big enough or there may be crashes and stalls at runtime.
 """
 
 [[skills.config]]

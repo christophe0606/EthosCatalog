@@ -1,0 +1,4 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+# CMSIS generates this editor configuration for each local workspace.
+/.clangd

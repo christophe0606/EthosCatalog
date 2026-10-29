@@ -11,3 +11,5 @@ from .MFCC import MFCC
 from .Rgb565CenterCrop import Rgb565CenterCrop
 from .Rgb888ToGrayInt8 import Rgb888ToGrayInt8
 from .NonMaximumSuppression import NonMaximumSuppression
+
+from .LogMel import LogMel

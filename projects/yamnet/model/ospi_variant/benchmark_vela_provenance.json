@@ -1,0 +1,23 @@
+{
+  "board_pte_sha256": "4d4b522d1d7b3a8a28fddd5b93c648499d8a48d77b57214640c2da455cbeffb3",
+  "estimate_container_sha256": "156ef628dc86e913d18dfada3c566ea89a33be1a0071a8b49502b7ed051524ab",
+  "estimate_container_bytes": 1575664,
+  "summary_sha256": "3876cf2b1ad73c12115c3f072287077928911249a302242c6a9482e0fa1c0bd5",
+  "blocks": {
+    "cmd_data": {
+      "pte_bytes": 10044,
+      "estimate_bytes": 10044,
+      "pte_sha256": "89fd11ffbd6e75d296bb081d90698ec7f05f71e898facdbb311aa0438002fa7a",
+      "estimate_sha256": "89fd11ffbd6e75d296bb081d90698ec7f05f71e898facdbb311aa0438002fa7a",
+      "identical": true
+    },
+    "weight_data": {
+      "pte_bytes": 1563040,
+      "estimate_bytes": 1563040,
+      "pte_sha256": "a6d4fe8e0e214360861385a08bc175dc8cc60fff40c5294e75bb329a57957fd6",
+      "estimate_sha256": "a6d4fe8e0e214360861385a08bc175dc8cc60fff40c5294e75bb329a57957fd6",
+      "identical": true
+    }
+  },
+  "scope": "Compiler estimates; identical executable streams, different export metadata container"
+}

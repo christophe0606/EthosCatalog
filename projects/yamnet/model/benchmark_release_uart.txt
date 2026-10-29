@@ -1,0 +1,19 @@
+YAMNet vector check: 40 patches, 521 scores each
+Errors: backend=0.064208984, original_float=0.118445352
+Classification: PTQ top1=40/40, TensorFlow top1=39/40, TensorFlow top1 in board top5=40/40
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=3601536 B, method peak=829016 B, temp peak=298752 B, reserved=1572864 B
+Benchmark regions: weights=1384256 B at 0xc00006a0, arena=163840 B at 0x02100000
+Benchmark sample 1: NPU=24294203 cycles (60.735507 ms), forward=592870747 ticks (1482.176868 ms)
+Benchmark sample 2: NPU=24294187 cycles (60.735467 ms), forward=592816759 ticks (1482.041898 ms)
+Benchmark sample 3: NPU=24294196 cycles (60.735490 ms), forward=592865803 ticks (1482.164507 ms)
+Benchmark sample 4: NPU=24294190 cycles (60.735475 ms), forward=592869133 ticks (1482.172832 ms)
+Benchmark sample 5: NPU=24294186 cycles (60.735465 ms), forward=592816657 ticks (1482.041643 ms)
+Benchmark sample 6: NPU=24294186 cycles (60.735465 ms), forward=592883917 ticks (1482.209793 ms)
+Benchmark sample 7: NPU=24294190 cycles (60.735475 ms), forward=592861657 ticks (1482.154143 ms)
+Benchmark sample 8: NPU=24294196 cycles (60.735490 ms), forward=592819891 ticks (1482.049728 ms)
+Benchmark sample 9: NPU=24294192 cycles (60.735480 ms), forward=592880419 ticks (1482.201047 ms)
+Benchmark sample 10: NPU=24294210 cycles (60.735525 ms), forward=592862274 ticks (1482.155685 ms)
+Benchmark PMU: invocations=14, active=24294210 cycles, overflow=0
+Strict score parity (0.005): FAIL (-405)
+Test_result: PASS (classification acceptance; score parity reported separately)

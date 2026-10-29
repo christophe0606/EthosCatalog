@@ -1,0 +1,80 @@
+{
+  "recorded_at": "2026-10-29T11:43:04.581170+00:00",
+  "target": "DevKit-E8@YAMNet_Release",
+  "build_job": "b-91",
+  "execution_job": "d-92",
+  "firmware_sha256": "b8a6d3bfb0dfefa9f6cdaaff48e11bea769f185b0f9550fd3d40612b2072a034",
+  "model_sha256": "bd5c2b892839f8d42467f284a448cbc35a2510a4930959ae1dd5e4987deb86b4",
+  "model_bytes": 3601536,
+  "storage": "direct OSPI100MHz; no full PTE SRAM copy",
+  "cpu_hz": 400000000,
+  "axi_npu_hz": 400000000,
+  "timer_hz": 400000000,
+  "startup": {
+    "frontend_pass": true,
+    "frontend_max_log_mel_error": 4.77e-07,
+    "frontend_tolerance": 0.001,
+    "tensorflow_windows_start_samples": [
+      0,
+      160,
+      320
+    ],
+    "classification_pass": true,
+    "fixtures": 40,
+    "ptq_top1_matches": 40,
+    "tensorflow_top1_matches": 39,
+    "tensorflow_top1_in_board_top5": 40,
+    "score_parity_pass": false,
+    "score_parity_error": -405,
+    "max_board_ptq_score_error": 0.064208984,
+    "max_board_tensorflow_score_error": 0.118445352
+  },
+  "live": {
+    "uart": "demo_live_uart.txt",
+    "uninterrupted_capture_blocks": 12755,
+    "features": 12753,
+    "inferences": 80,
+    "lcd_frames": 80,
+    "coalesced_windows": 183,
+    "audio_deadline_misses": 0,
+    "capture_drops": 0,
+    "capture_overflows": 0,
+    "request_errors": 0,
+    "pipeline_error": 0,
+    "forward_ms_samples": [
+      1548.427,
+      1548.387,
+      1547.769
+    ],
+    "npu_ms_samples": [
+      60.736,
+      60.737,
+      60.737
+    ],
+    "unused_audio_stack_bytes": 31792,
+    "reserved_audio_stack_bytes": 32768,
+    "unused_inference_stack_bytes": 14104,
+    "reserved_inference_stack_bytes": 16384,
+    "method_peak_bytes": 829016,
+    "temporary_peak_bytes": 298752
+  },
+  "linked_memory": {
+    "mram_load_bytes": 1857296,
+    "application_mram_limit_bytes": 2097152,
+    "mram_headroom_bytes": 239856,
+    "sram0_bytes_including_padding": 3108880,
+    "sram0_limit_bytes": 4194304,
+    "sram0_headroom_bytes": 1085424,
+    "dtcm_rw_bytes": 258632,
+    "c_library_heap_reserved_bytes": 98304,
+    "application_heap_reserved_bytes": 32768,
+    "main_stack_reserved_bytes": 32768
+  },
+  "limits": [
+    "Synthetic numerical agreement only, no labelled accuracy measurement.",
+    "Strict score parity fails separately.",
+    "Heap high-water mark not instrumented; actual complete Stream/node initialization succeeded.",
+    "UI image review used host rendering; LCD progress is actual successful board present calls."
+  ],
+  "method": "CMSIS build/load/session/device/memory tools, serial_* only; final run not paused."
+}

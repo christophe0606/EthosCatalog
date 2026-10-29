@@ -1,0 +1,133 @@
+project:
+  device: :M55_HP
+  packs:
+  - pack: ARM::CMSIS-RTX@^5.9.0
+  add-path:
+  - .
+  - ../../common
+  - ../../common/stream
+  - generated
+  - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
+  - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
+  define:
+  - NPU_QCONFIG: 2
+  - NPU_REGIONCFG_0: 3
+  - NPU_REGIONCFG_1: 0
+  - APP_METHOD_POOL_SIZE: 1048576
+  - APP_TEMP_POOL_SIZE: 524288
+  - OS_THREAD_NUM: 3
+  - OS_DYNAMIC_MEM_SIZE: 65536
+  - APP_POOL_SECTION: \".bss.ai_pool\"
+  - NPU_MEM_ATTR_2: 36
+  - NPU_MEM_ATTR_3: 36
+  - APP_MODEL_OSPI
+  - OS_STACK_WATERMARK: 1
+  components:
+  - component: BSP:OSPI FLASH XIP:core
+  - component: CMSIS:RTOS2:Keil RTX5&Source
+  - component: CMSIS:OS Tick:SysTick
+  - component: CMSIS:STREAM&Source
+    for-context:
+    - .Debug
+    - .Release
+  - component: CMSIS:DSP&Source
+    optimize: speed
+    misc:
+    - C-CPP:
+      - -O3
+      - -ffast-math
+  - component: Device:SOC Peripherals:PDM
+  - component: BSP:External peripherals:GT911 Touch Controller
+  connections:
+  - connect: YAMNet sound event classification application
+    provides:
+    - CMSIS-RTOS2
+  linker:
+  - script: linker_ac6.sct.src
+    for-compiler: AC6
+  - script: linker_clang.ld.src
+    for-compiler: CLANG
+  - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
+  misc:
+  - for-compiler: AC6
+    C:
+    - -ffunction-sections
+    - -fdata-sections
+    CPP:
+    - -ffunction-sections
+    - -fdata-sections
+    Link:
+    - --remove
+  - CPP:
+    - -std=gnu++17
+    - -Wno-deprecated-declarations
+    - -fno-color-diagnostics
+    - -fdiagnostics-format=clang
+  groups:
+  - group: OSPI startup and programming preparation
+    files:
+    - file: ospi_startup.c
+    - file: ../../board/DevKit-E8/model_storage.c
+    - file: ../../board/DevKit-E8/e8_issi_flash.c
+  - group: YAMNet sound event classification
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: app_main.cpp
+    - file: model/model_test_data.h
+    - file: hardware_params.cpp
+    - file: hardware_params.h
+    - file: datatypes.h
+    - file: stream_types.h
+    - file: frontend.cpp
+    - file: yamnet_selftest.cpp
+    - file: nodes_impl/yamnet_ui.cpp
+    - file: nodes_impl/audio_window.c
+    - file: diagnostics.cpp
+  - group: Embedded ExecuTorch module
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: ../../common/arm_embedded_module.cpp
+    - file: ../../common/arm_embedded_module.hpp
+  - group: Reusable processing nodes
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: ../../common/embedded_runtime.hpp
+    - file: ../../common/nodes_impl/c/embedded_runtime.cpp
+    - file: ../../common/nodes_impl/c/log_mel.c
+    - file: ../../common/nodes_impl/alif_e8/microphone.c
+    - file: ../../common/nodes_impl/alif_e8/lcd.c
+    - file: ../../common/nodes_impl/c/window.c
+  - group: YAMNet runtime adapter
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: nodes_impl/embedded_yamnet.cpp
+    - file: nodes_impl/embedded_yamnet.h
+  - group: Generated CMSIS Stream graph
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: generated/scheduler_app.cpp
+    - file: generated/app_params.c
+  layers:
+  - layer: $Board-Layer$
+    type: Board
+  - layer: ai_layer/ai_layer.clayer.yml
+    type: AI
+    for-context:
+    - .Debug
+    - .Release
+  output:
+    type:
+    - elf
+    - bin
+    - hex
+    - map

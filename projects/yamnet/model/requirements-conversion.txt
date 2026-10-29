@@ -1,0 +1,7 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+# Apache/BSD host tools needed only to regenerate official Keras comparisons.
+# The root requirements.txt supplies PyTorch/ExecuTorch/Vela/NumPy.
+tensorflow==2.20.0
+tf-keras==2.20.1
+h5py==3.16.0

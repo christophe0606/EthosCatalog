@@ -1,0 +1,20 @@
+{
+  "project": "projects/yamnet/yamnet.cproject.yml",
+  "config_sha256": "49ddd1caff18cd6df1a870ac7aefebcb4d9605450fc353bb4d0b5dfcb277abb2",
+  "pte_sha256": "4d4b522d1d7b3a8a28fddd5b93c648499d8a48d77b57214640c2da455cbeffb3",
+  "graph_sha256": "822ac95861ae1fab77969024854bbf20f4cb38cc163bf5c58724f18610fbcc0b",
+  "safetensors_sha256": "9d8496b08774341335fa97c7b4f30d8724365da54fe66d4fb18785f264eef4e1",
+  "assets": {},
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 1,
+  "operators": [
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 1575568
+}

@@ -31,6 +31,9 @@ root.
 
 ## Program an OSPI model
 
+For reusable NPU routing, compiler settings and runtime initialization that
+leave the model in flash, see [direct OSPI inference](ospi-in-place-inference.md).
+
 For an OSPI project, set `flash_ospi: true` and add its reserved partition:
 
 ```yaml

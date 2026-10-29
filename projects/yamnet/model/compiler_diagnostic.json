@@ -1,0 +1,29 @@
+{
+  "diagnostic_only": true,
+  "vela": "5.1.0",
+  "extra_flags": [
+    "--disable-chaining",
+    "--disable-fwd"
+  ],
+  "generation": {
+    "project": "projects/yamnet/yamnet.cproject.yml",
+    "config_sha256": "68ce529658aa387b997ac5c5cce78222ff6b671a581547c0864b6769ef108881",
+    "pte_sha256": "cac65a40ccb4439e29211d090bf5024270cfec6ed96ac5dea8412b7078b3e792",
+    "graph_sha256": "822ac95861ae1fab77969024854bbf20f4cb38cc163bf5c58724f18610fbcc0b",
+    "safetensors_sha256": "9d8496b08774341335fa97c7b4f30d8724365da54fe66d4fb18785f264eef4e1",
+    "assets": {},
+    "flash_ospi": true,
+    "vela": {
+      "ini": "../../.cmsis/ensemble_vela.ini",
+      "system_config": "Ethos_U85_SRAM_OSPI",
+      "memory_mode": "Shared_Sram"
+    },
+    "delegates": 1,
+    "operators": [
+      "Quantized dequantize",
+      "Quantized quantize"
+    ],
+    "pte_bytes": 1575600
+  },
+  "result": "Rejected: zero completed invocations; STATUS1 QREAD1060/QSIZE10012. Original default compiler settings selected for final hybrid."
+}

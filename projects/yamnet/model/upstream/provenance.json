@@ -1,0 +1,35 @@
+{
+  "commit": "c14bf9ad91962cf189f9f58db2132c06247fcd53",
+  "assets": {
+    "yamnet.py": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/research/audioset/yamnet/yamnet.py",
+      "sha256": "7ef3df32b7ecb782490b5a04d7581a23cfcf701dbf476bc4d03deefe22cdb040"
+    },
+    "features.py": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/research/audioset/yamnet/features.py",
+      "sha256": "e6cd53f81d072c7c43be4c7fff2b9dd0c5ccc7d64f2fbcfc85b44013d6d2ed5e"
+    },
+    "params.py": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/research/audioset/yamnet/params.py",
+      "sha256": "925bb1e62461016031f98aea09aeac28975dd516f5747513767de5d1b06b6145"
+    },
+    "yamnet_test.py": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/research/audioset/yamnet/yamnet_test.py",
+      "sha256": "29a623a7504703aaf67d84a92d249201f254100302705e49b5ef08c906c6242a"
+    },
+    "yamnet_class_map.csv": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/research/audioset/yamnet/yamnet_class_map.csv",
+      "sha256": "cdf24d193e196d9e95912a2667051ae203e92a2ba09449218ccb40ef787c6df2"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/tensorflow/models/c14bf9ad91962cf189f9f58db2132c06247fcd53/LICENSE",
+      "sha256": "5b17814bf0de8cf65069bc6d7cc38cff19fcaa864d243423ad3ef3db01b52385",
+      "bytes": 11512
+    },
+    "yamnet.h5": {
+      "url": "https://storage.googleapis.com/audioset/yamnet.h5",
+      "sha256": "13c3308955bbfaef262f175ac9c40e47b134573a93984f009220dd7cc12a1744",
+      "bytes": 15296092
+    }
+  }
+}
