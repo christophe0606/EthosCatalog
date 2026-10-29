@@ -6,6 +6,7 @@
 #include "embedded_runtime.hpp"
 #include "model_pte.h"
 #include "nodes_impl/yamnet_ui.h"
+#include "helium/convolution.h"
 #include <cstring>
 extern "C" int e8_flash_set_read_clock(uint32_t hz);
 namespace {
@@ -46,6 +47,8 @@ int hardware_params_init(HardwareParams *params) {
         model_pte, model_pte_size, method_pool, sizeof(method_pool), temp_pool, sizeof(temp_pool));
     if (!module)
         return -400;
+    if (int error = yamnet_install_helium(module))
+        return error;
     *params = {};
     params->module = module;
     params->stats = &stream_stats;

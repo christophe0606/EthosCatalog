@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Summarize the retained CMSIS Release UART capture; never accesses hardware."""
 import hashlib
+import argparse
 import json
 from pathlib import Path
 import re
@@ -13,9 +14,14 @@ HERE = Path(__file__).resolve().parent
 
 
 def main():
-    uart = (HERE / 'benchmark_release_uart.txt').read_text()
-    provenance = json.loads((HERE / 'benchmark_release_provenance.json').read_text())
-    assert hashlib.sha256((HERE / 'benchmark_release_uart.txt').read_bytes()).hexdigest() == provenance['uart_sha256']
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--uart', type=Path, default=HERE / 'helium_release_uart.txt')
+    parser.add_argument('--provenance', type=Path, default=HERE / 'helium_release_provenance.json')
+    parser.add_argument('--output', type=Path, default=HERE / 'benchmark.yml')
+    args = parser.parse_args()
+    uart = args.uart.read_text()
+    provenance = json.loads(args.provenance.read_text())
+    assert hashlib.sha256(args.uart.read_bytes()).hexdigest() == provenance['uart_sha256']
     assert 'Test_result: PASS (classification acceptance; score parity reported separately)' in uart
     assert 'Strict score parity (0.005): FAIL (-405)' in uart
     assert 'Classification: PTQ top1=40/40, TensorFlow top1=39/40, TensorFlow top1 in board top5=40/40' in uart
@@ -56,13 +62,29 @@ def main():
                 'pmu_cross_check': 'Every forward: exactly14 completed calls, PMCCNTR sum equals NPU_ACTIVE sum, nonzero cycles, no overflow.',
                 'pmu_overflow': overflow, 'npu_invocations_per_forward': calls,
                 'test_result': 'PASS', 'max_absolute_error': backend,
-                'uart': 'benchmark_release_uart.txt', 'model_sha256': provenance['model_sha256'],
+                'uart': args.uart.name, 'model_sha256': provenance['model_sha256'],
                 'firmware_sha256': provenance['firmware_sha256'],
                 'input': 'Forty synthetic fixtures (38 independent plus silence/440Hz controls), then ten warmed calls cycling fixtures0,1,2. Classification acceptance: 40/40 PTQ top1; at least95% TensorFlow top1 (observed39/40); TensorFlow top1 in board top5 for40/40; finite scores in[0,1]. No labelled-dataset accuracy claim.',
                 'timing_scope': 'ms/cycles are the sum of14 NPU PMU intervals only. forward_ms measures complete module.forward including CPU convolutions/padding/ReLU and Q/DQ; excludes input assembly, output copy, validation, CRC/loading, UART, frontend and LCD. Full-forward latency is the scheduling constraint.',
                 'uart_run': 'Autonomous startup with no manual start gate. Matching-ELF debug session continued from main; all50 forwards complete without breakpoints, halts or debug reads during execution.',
                 'measurement_source': f'CMSIS serial COM5 1152008N1 and completion debugger snapshot in benchmark_release_provenance.json. Method/temp reservations1048576/524288B; observed peaks{method}/{temp}B. Strict score parity0.005 FAIL(-405), independently of classification PASS: max board/PTQ error{backend}, max board/TensorFlow error{original}. Original exhaustive scores/metrics and strict failure remain in board_validation_*.'}}]}}
-    (HERE / 'benchmark.yml').write_text(yaml.safe_dump(result, sort_keys=False, width=100))
+    if 'Helium CPU convolutions:' in uart:
+        cpu_calls, vector, fallback, cpu_ms = re.search(
+            r'Helium CPU convolutions: calls=(\d+) vector=(\d+) fallback=(\d+) time_ms=([\d.]+)', uart).groups()
+        assert (int(cpu_calls), int(vector), int(fallback)) == (14, 14, 0)
+        result['benchmarks']['network']['operation'] = (
+            'YAMNet sound event classification of one 96x64 log-mel patch; '
+            'project-owned Helium float32 first/depthwise convolutions and '
+            'fourteen automatic Ethos delegates for pointwise/head work.')
+    result['benchmarks']['benchmark'][0]['run']['measurement_source'] = (
+        f'CMSIS COM5 UART {args.uart.name}; completion snapshot and hashes in {args.provenance.name}. '
+        '40 classification fixtures plus ten warmed forwards; strict score parity remains FAIL(-405).')
+    if 'Helium CPU convolutions:' in uart:
+        result['benchmarks']['benchmark'][0]['run']['measurement_source'] += (
+            f' All 14 CPU convolutions used the optimized path (12 vectorized, '
+            f'two width-2 layers use scalar tails); portable fallback count 0; '
+            f'last warmed CPU convolution subtotal {cpu_ms} ms.')
+    args.output.write_text(yaml.safe_dump(result, sort_keys=False, width=100))
     print(json.dumps(result['benchmarks']['benchmark'][0]['measurements'], indent=2))
 
 

@@ -15,8 +15,12 @@ ExecuTorch and Vela. Its backbone is MobileNet V1-style; see the
 The complete 3,601,536-byte PTE executes directly from OSPI at 100 MHz, without a
 full-model SRAM copy. Float first/depthwise convolutions run on the CPU, while
 14 automatically partitioned Ethos-U85 delegates run a16w8 pointwise/head work.
+The CPU convolutions use project-owned Helium float32 kernels; the original
+portable implementation remains available for unsupported shapes.
 [The hardware investigation](model/HARDWARE_INVESTIGATION.md) preserves all
 rejected quantization, convolution and storage experiments and their limitations.
+[Exact convolution shapes and recovery steps](model/ETHOS_CONVOLUTION_REPRO.md)
+support future investigation; the individual failing NPU operator is unresolved.
 
 ## Build and run
 
@@ -28,7 +32,7 @@ rejected quantization, convolution and storage experiments and their limitations
 Use `DevKit-E8@YAMNet_ProgramModel` and the
 [direct OSPI programming procedure](../../documentation/ospi-in-place-inference.md),
 then build/load `DevKit-E8@YAMNet_Release` through CMSIS tools. The startup screen
-remains visible for about 75 seconds while all 40 synthetic fixtures and ten
+remains visible for about ten seconds while all 40 synthetic fixtures and ten
 warmed forwards are checked. Capture begins after validation, with no manual gate.
 Make a sound near the microphone; there is no audio playback.
 
@@ -67,14 +71,21 @@ the request. The LCD receives ordered, display-ready labels and scores; it
 only formats text/percentages, draws and presents the frame. All three event
 nodes run outside the audio dataflow.
 
-The standalone median forward is **1482.160 ms**, including **60.735 ms** on the
-NPU, at 400 MHz. With live capture, the forward takes about 1.55 seconds.
-Displayed results arrive about every 1.58 seconds (roughly 0.63 results/s),
-including presentation and request handoff. CPU spatial convolutions dominate. A pending
-patch may be up to 480 ms old at submission; the result follows after inference.
-Skipped windows can miss brief events. This application cannot classify every
-480 ms patch in real time. [model/benchmark.yml](model/benchmark.yml) contains
-raw timings, clocks and hashes; compiler estimates are separate.
+The Helium version computes one prediction in about **168 ms**, including
+**60.736 ms** on the NPU, at 400 MHz. Live capture raises the forward to about
+172 ms. It processes every 480 ms patch (about 2.08 results/s) in the verified
+run, with zero coalesced windows. The original portable CPU implementation
+took **1482.160 ms** per forward and about 1.55 seconds during live capture.
+The optimization improves complete-forward latency by about **8.8x**.
+
+Forward time means computation after the patch is ready, not audio duration.
+A patch needs 975 ms of audio plus the documented 5 ms lookahead; the first
+result follows after computation and LCD presentation. Continuous capture
+overlaps inference, so later results update every 480 ms.
+[HELIUM_OPTIMIZATION.md](HELIUM_OPTIMIZATION.md) records the implementation,
+board evidence and numerical comparison. [model/benchmark.yml](model/benchmark.yml)
+contains current timings, clocks and hashes; the old measurements remain in
+[model/benchmark_portable_cpu.yml](model/benchmark_portable_cpu.yml).
 
 ## Validation and memory
 
@@ -92,6 +103,8 @@ The integrated application reserves about 2.97 MiB in SRAM0, plus DTCM state,
 heap and stacks. See [LIVE_VALIDATION.md](LIVE_VALIDATION.md) for the final image
 and the original uninterrupted live results. The explicit postprocessing node
 is verified in [POSTPROCESSING_VALIDATION.md](POSTPROCESSING_VALIDATION.md).
+Current firmware performance and memory are recorded in
+[HELIUM_OPTIMIZATION.md](HELIUM_OPTIMIZATION.md).
 
 ## Reproduce
 
@@ -112,6 +125,8 @@ The native tests exercise production window, publisher, network, CPU postprocess
 and LCD wrappers:
 exact sample alignment, one request, immutable input, latest-patch selection after
 acknowledgment, invalid-score rejection and ordered display-ready label routing.
+They also cover 864 convolution layout/stride/tail combinations; the same
+scalar-reference check runs with actual MVE instructions during board startup.
 The graph test forbids a direct network-to-LCD connection. `app.py` also runs from this project
 directory. Shared `LogMel` is under `common/nodes` and `common/nodes_impl/c`;
 YAMNet patching, event policy and UI are application-owned.

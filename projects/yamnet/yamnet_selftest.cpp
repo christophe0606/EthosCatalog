@@ -7,6 +7,7 @@
 #include "main.h"
 #include "model/model_test_data.h"
 #include "nodes_impl/embedded_yamnet.h"
+#include "helium/convolution.h"
 #include "se_services_port.h"
 #include <cmath>
 #include <cstdio>
@@ -75,10 +76,14 @@ extern "C" int yamnet_run_selftest(HardwareParams *params) {
         unsigned test = sample < YAMNET_TEST_CASES ? sample : (sample - YAMNET_TEST_CASES) % 3;
         std::memcpy(selftest_input, yamnet_test_inputs[test], 6144 * sizeof(float));
         uint32_t ticks = 0;
+        yamnet_conv_stats = {};
         ethos_benchmark_reset();
         error = yamnet_forward(hardware.module, selftest_input, scores, &ticks);
         if (error)
             return pipeline_error = error;
+        if (yamnet_conv_stats.calls != 14 || yamnet_conv_stats.vector_calls != 14 ||
+            yamnet_conv_stats.fallback_calls)
+            return pipeline_error = -436;
         if (!yamnet_delegates_per_forward)
             yamnet_delegates_per_forward = ethos_benchmark.invocations;
         if (ethos_benchmark.invocations != 14 || !ethos_benchmark.cycles ||
@@ -135,6 +140,9 @@ extern "C" int yamnet_run_selftest(HardwareParams *params) {
            (unsigned long)ethos_benchmark.invocations,
            (unsigned long long)ethos_benchmark.active_cycles,
            (unsigned long)ethos_benchmark.overflow);
+    printf("Helium CPU convolutions: calls=%lu vector=%lu fallback=%lu time_ms=%.6f\n",
+           (unsigned long)yamnet_conv_stats.calls, (unsigned long)yamnet_conv_stats.vector_calls,
+           (unsigned long)yamnet_conv_stats.fallback_calls, 1000.0 * yamnet_conv_stats.ticks / timer);
     yamnet_benchmark_complete = 1;
     // Classification acceptance and strict score parity are distinct claims.
     yamnet_score_parity_passed = yamnet_backend_error <= 0.005f;

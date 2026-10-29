@@ -1,5 +1,11 @@
 # YAMNet conversion report
 
+The conversion and quantization below are unchanged. Current CPU execution uses
+project-owned Helium convolutions: median complete forward **167.678814 ms**,
+with all retained board scores bitwise unchanged. See
+[the optimization report](../HELIUM_OPTIMIZATION.md); older timing figures below
+describe the original portable CPU implementation.
+
 The official pretrained TensorFlow/Keras classifier is reconstructed in PyTorch and statically quantized without training. The selected executable candidate uses float32 first/depthwise spatial convolutions on the CPU and a16w8 pointwise convolutions/classifier on Ethos-U85. ExecuTorch partitions the complete graph automatically into14 delegates; no hand-authored subnetworks are used. Saved `.pt2` and `.safetensors` contain the quantized graph before Vela compilation.
 
 ## Source and license

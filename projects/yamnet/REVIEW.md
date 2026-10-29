@@ -1,5 +1,24 @@
 # YAMNet review
 
+The original port review below concerns b-91/d-92. Current CPU optimization,
+firmware identity and board evidence are in
+[HELIUM_OPTIMIZATION.md](HELIUM_OPTIMIZATION.md); the PTE and explicit CPU
+postprocessing/display boundary are unchanged.
+
+## Helium follow-up review
+
+Independent read-only review: **PASS**, no blocking kernel, fallback or runtime
+integration finding. Reviewed physical-stride addressing, shape/dtype dispatch
+guards, bias handling, vector bounds and scalar tails, static method-registry
+lifetime and the empty default for other applications. The retained 864-case
+startup check, all 50 optimized-dispatch gates and 20,840 bitwise-identical
+scores support the measured result. `vector_calls` counts optimized dispatches;
+the final two width-two layers use scalar tails. NPU queue observations are
+documented without attributing the unresolved stall to an individual operator.
+The reviewer did not edit files or touch the running target.
+
+## Original port review
+
 Parent disposition: **PASS**. Generated .clangd editor metadata is now excluded
 by projects/yamnet/.gitignore, resolving the packaging note below. Final serial
 verification reached 270 inference/LCD results with zero capture, deadline,

@@ -85,6 +85,7 @@ project:
     - file: nodes_impl/yamnet_ui.cpp
     - file: nodes_impl/audio_window.c
     - file: diagnostics.cpp
+    - file: helium/convolution.cpp
   - group: Embedded ExecuTorch module
     for-context:
     - .Debug

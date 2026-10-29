@@ -1,0 +1,111 @@
+benchmarks:
+  network:
+    operation: YAMNet sound event classification of one 96x64 log-mel patch; CPU float first/depthwise
+      convolutions and fourteen automatically partitioned Ethos delegates for pointwise/head work.
+    input_shape:
+    - 1
+    - 96
+    - 64
+    output_shape:
+    - 1
+    - 521
+    sample_rate_hz: 16000
+    samples_per_forward: 15600
+    float_boundary: true
+    quantization: Float first/depthwise CPU convolutions; symmetric int16 activations and per-channel
+      int8 pointwise/head weights on Ethos-U85.
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; read in place without a full model SRAM copy
+          clock_mhz: 100
+          clock_source: hardware_params.cpp guarded e8_flash_set_read_clock(100000000); AXI400MHz/divider4
+            verified in board_validation_provenance.json
+        activations:
+          type: SRAM0
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 3601536
+        input_tensor_bytes: 24576
+        executorch:
+          method_pool_peak_bytes: 829016
+          temp_pool_peak_bytes: 298752
+      time:
+        ms: 60.7354775
+        cycles: 24294191.0
+        statistic: median
+        min_cycles: 24294186
+        max_cycles: 24294210
+        mean_cycles: 24294193.6
+        forward_ms: 1482.16009625
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 24294203
+        - 24294187
+        - 24294196
+        - 24294190
+        - 24294186
+        - 24294186
+        - 24294190
+        - 24294196
+        - 24294192
+        - 24294210
+        forward_ticks_samples:
+        - 592870747
+        - 592816759
+        - 592865803
+        - 592869133
+        - 592816657
+        - 592883917
+        - 592861657
+        - 592819891
+        - 592880419
+        - 592862274
+    run:
+      recorded_at: '2026-10-29T11:07:27Z'
+      context: yamnet.Release+DevKit-E8
+      target: DevKit-E8@YAMNet_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        driver: ARM::CMSIS-Ethos-U@1.0.0
+        driver_component: ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0
+        board: AlifSemiconductor::Ensemble@2.2.1
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-80
+      execution_job: d-81
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 40
+      samples: 10
+      pmu_cross_check: 'Every forward: exactly14 completed calls, PMCCNTR sum equals NPU_ACTIVE sum, nonzero
+        cycles, no overflow.'
+      pmu_overflow: 0
+      npu_invocations_per_forward: 14
+      test_result: PASS
+      max_absolute_error: 0.064208984
+      uart: benchmark_release_uart.txt
+      model_sha256: bd5c2b892839f8d42467f284a448cbc35a2510a4930959ae1dd5e4987deb86b4
+      firmware_sha256: f0f13464534162aa9eb8a5434c90d9497896e82e36b7efd61abdce050fabbe51
+      input: 'Forty synthetic fixtures (38 independent plus silence/440Hz controls), then ten warmed calls
+        cycling fixtures0,1,2. Classification acceptance: 40/40 PTQ top1; at least95% TensorFlow top1
+        (observed39/40); TensorFlow top1 in board top5 for40/40; finite scores in[0,1]. No labelled-dataset
+        accuracy claim.'
+      timing_scope: ms/cycles are the sum of14 NPU PMU intervals only. forward_ms measures complete module.forward
+        including CPU convolutions/padding/ReLU and Q/DQ; excludes input assembly, output copy, validation,
+        CRC/loading, UART, frontend and LCD. Full-forward latency is the scheduling constraint.
+      uart_run: Autonomous startup with no manual start gate. Matching-ELF debug session continued from
+        main; all50 forwards complete without breakpoints, halts or debug reads during execution.
+      measurement_source: 'CMSIS serial COM5 1152008N1 and completion debugger snapshot in benchmark_release_provenance.json.
+        Method/temp reservations1048576/524288B; observed peaks829016/298752B. Strict score parity0.005
+        FAIL(-405), independently of classification PASS: max board/PTQ error0.064208984, max board/TensorFlow
+        error0.118445352. Original exhaustive scores/metrics and strict failure remain in board_validation_*.'

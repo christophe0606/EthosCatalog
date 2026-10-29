@@ -1,5 +1,9 @@
 # Explicit CPU postprocessing
 
+This is the b-93/d-94 graph-boundary validation. The same graph now runs with
+faster project-owned CPU convolution kernels; see
+[current performance and evidence](HELIUM_OPTIMIZATION.md).
+
 The graph now separates model execution, CPU interpretation and display:
 
 `YAMNet -> YAMNetPostprocess -> EventLCD`

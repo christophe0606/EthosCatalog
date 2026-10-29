@@ -125,7 +125,8 @@ namespace arm
         auto res_method = program_->load_method(
             method_name.c_str(),
             method_holder.memory_manager.get(),
-            event_tracer ? event_tracer : this->event_tracer());
+            event_tracer ? event_tracer : this->event_tracer(),
+            nullptr, nullptr, kernel_registry_);
         if (!res_method.ok())
         {
           return res_method.error();

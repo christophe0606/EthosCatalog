@@ -30,3 +30,15 @@ else:
     command += ['-I' + name for name in includes] + sources + ['-o', str(exe)]
 subprocess.run(command, cwd=ROOT, check=True)
 subprocess.run([str(exe)], cwd=ROOT, check=True)
+
+# The same differential check also runs on the board with the MVE path enabled.
+conv_exe = output / 'test_yamnet_conv.exe'
+if Path(args.compiler).stem.lower() == 'cl':
+    command = [args.compiler, '/nologo', '/std:c++17', '/EHsc', '/O2', '/I.',
+               'tests/test_yamnet_conv.cpp', '/Fe:' + str(conv_exe),
+               '/Fo:' + str(output / 'test_yamnet_conv.obj')]
+else:
+    command = [args.compiler, '-std=c++17', '-O2', '-I.', 'tests/test_yamnet_conv.cpp',
+               '-o', str(conv_exe)]
+subprocess.run(command, cwd=ROOT, check=True)
+subprocess.run([str(conv_exe)], cwd=ROOT, check=True)

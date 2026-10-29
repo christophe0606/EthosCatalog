@@ -1,0 +1,34 @@
+YAMNet frontend: PASS max log-mel error 0.000000477
+YAMNet vector check: 40 patches, 521 scores each
+Errors: backend=0.064208984, original_float=0.118445352
+Classification: PTQ top1=40/40, TensorFlow top1=39/40, TensorFlow top1 in board top5=40/40
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=3601536 B, method peak=829016 B, temp peak=298752 B, reserved=1572864 B
+Benchmark regions: weights=1384256 B at 0xc00006a0, arena=163840 B at 0x02100000
+Benchmark sample 1: NPU=24294494 cycles (60.736235 ms), forward=67092890 ticks (167.732225 ms)
+Benchmark sample 2: NPU=24294515 cycles (60.736288 ms), forward=67025540 ticks (167.563850 ms)
+Benchmark sample 3: NPU=24294550 cycles (60.736375 ms), forward=67061747 ticks (167.654368 ms)
+Benchmark sample 4: NPU=24294434 cycles (60.736085 ms), forward=67073141 ticks (167.682852 ms)
+Benchmark sample 5: NPU=24294528 cycles (60.736320 ms), forward=67056774 ticks (167.641935 ms)
+Benchmark sample 6: NPU=24294595 cycles (60.736488 ms), forward=67135292 ticks (167.838230 ms)
+Benchmark sample 7: NPU=24294560 cycles (60.736400 ms), forward=67069910 ticks (167.674775 ms)
+Benchmark sample 8: NPU=24294538 cycles (60.736345 ms), forward=67017026 ticks (167.542565 ms)
+Benchmark sample 9: NPU=24294483 cycles (60.736207 ms), forward=67077511 ticks (167.693778 ms)
+Benchmark sample 10: NPU=24294505 cycles (60.736263 ms), forward=67131185 ticks (167.827963 ms)
+Benchmark PMU: invocations=14, active=24294505 cycles, overflow=0
+Helium CPU convolutions: calls=14 vector=14 fallback=0 time_ms=46.857780
+Strict score parity (0.005): FAIL (-405)
+Test_result: PASS (classification acceptance; score parity reported separately)
+YAMNet live: audio=1509 features=1507 infer=30 lcd=30 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.503 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=1990 features=1988 infer=40 lcd=40 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.408 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=2469 features=2467 infer=50 lcd=50 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.446 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=2950 features=2948 infer=60 lcd=60 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.354 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=3429 features=3427 infer=70 lcd=70 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.437 npu_ms=60.737 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=3910 features=3908 infer=80 lcd=80 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=173.346 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=4389 features=4387 infer=90 lcd=90 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.378 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=4870 features=4868 infer=100 lcd=100 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=173.008 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=5349 features=5347 infer=110 lcd=110 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.436 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=5830 features=5828 infer=120 lcd=120 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=173.174 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=6309 features=6307 infer=130 lcd=130 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.427 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=6789 features=6787 infer=140 lcd=140 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=172.996 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752
+YAMNet live: audio=7270 features=7268 infer=150 lcd=150 skipped=0 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=173.385 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14376 method_peak=829016 temp_peak=298752

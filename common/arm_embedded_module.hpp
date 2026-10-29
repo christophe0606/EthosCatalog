@@ -524,6 +524,16 @@ namespace arm
         return event_tracer_.get();
       }
 
+      // Optional project-owned kernels. The table and names must outlive this
+      // module. Install before loading methods; other operators use the global
+      // pack registry. Existing applications keep the empty default.
+      Error set_kernel_registry(Span<const Kernel> kernels)
+      {
+        if (!methods_.empty()) return Error::InvalidState;
+        kernel_registry_ = kernels;
+        return Error::Ok;
+      }
+
     private:
       struct MethodHolder
       {
@@ -541,6 +551,7 @@ namespace arm
       // std::unique_ptr<NamedDataMap> merged_data_map_;
 
       std::unique_ptr<EventTracer> event_tracer_;
+      Span<const Kernel> kernel_registry_{};
 
       const unsigned char *pte_data_;
       size_t pte_size_;

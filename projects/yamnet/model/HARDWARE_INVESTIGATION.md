@@ -3,6 +3,12 @@
 This report retains unsuccessful trials as well as successful checks. A compiler
 export or host comparison does not establish completed inference on the board.
 
+[ETHOS_CONVOLUTION_REPRO.md](ETHOS_CONVOLUTION_REPRO.md) provides the exact
+logical operator/weight/output shapes, padding/stride/groups, strongest failed
+trials and controls, artifact recovery links and next isolation steps. The
+specific failing command has not been proven; the CPU fallback scope must not
+be mistaken for a list of individually reproduced failing operators.
+
 ## Initial integration and memory experiments
 
 The a16w8 classifier passed original-Keras float parity and host PTQ checks
@@ -172,6 +178,15 @@ support proceeding to a documented demo-quality benchmark review. Raw scores,
 timings, UART and firmware/model hashes are retained in board_validation_*.
 The specific source of backend score drift remains unisolated. No further
 model or imported-code changes are hidden by a relaxed score-parity threshold.
+
+## CPU performance follow-up
+
+The fully delegated NPU stall remains unresolved; no new NPU-convolution success
+is claimed. Project-owned Helium kernels now accelerate the working CPU float
+convolutions: b-100/d-101 median complete forward167.678814ms, NPU60.736304ms,
+versus1482.160096ms originally. All20,840 retained board scores are bitwise
+unchanged. See [HELIUM_OPTIMIZATION.md](../HELIUM_OPTIMIZATION.md) for source,
+dispatch checks, raw measurements, direct OSPI preservation and live results.
 
 All figures above describe synthetic numerical checks or explicit tool results;
 no labelled-dataset accuracy or fabricated board benchmark is included.

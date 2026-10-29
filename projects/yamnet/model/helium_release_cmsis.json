@@ -1,0 +1,155 @@
+{
+  "stack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Call stack (2 frames):\n  # 0  app_main  @ projects\\yamnet\\app_main.cpp:19 [frameId=1002]\n  # 1  application_thread  @ board\\DevKit-E8\\main.c:55 [frameId=1003]\n\nTip: use get_frame_variables with a frameId to inspect variables of a specific frame."
+      }
+    ]
+  },
+  "globals": [
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "model_verified",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: model_verified\nResult: 1\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "model_crc32",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: model_crc32\nResult: 2732668361\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_test_passed",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_test_passed\nResult: 1\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_benchmark_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_benchmark_complete\nResult: 1\nType: volatile uint32_t\n\nNote: 42 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2815}"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_fixture_cases_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_fixture_cases_complete\nResult: 40\nType: volatile uint32_t\n\nNote: 44 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2815}"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_ptq_top1_matches",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_ptq_top1_matches\nResult: 40\nType: volatile uint32_t\n\nNote: 48 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2815}"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_float_top1_matches",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_float_top1_matches\nResult: 39\nType: volatile uint32_t\n\nNote: 49 new errors in this window since you last looked — get_recent_problems {sinceSeq: 2815}"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_float_top1_in_top5",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_float_top1_in_top5\nResult: 40\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_score_parity_passed",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_score_parity_passed\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_score_parity_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_score_parity_error\nResult: -405\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "yamnet_conv_stats",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: yamnet_conv_stats\nResult: {...}\nType: YAMNetConvStats\nFields:\n  calls: 14 (uint32_t)\n  fallback_calls: 0 (uint32_t)\n  vector_calls: 14 (uint32_t)\n  ticks: 18743112 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "stream_stats",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  audio_blocks: 0 (volatile uint32_t)\n  feature_frames: 0 (volatile uint32_t)\n  patches: 0 (volatile uint32_t)\n  coalesced_windows: 0 (volatile uint32_t)\n  inference_requests: 0 (volatile uint32_t)\n  inferences: 0 (volatile uint32_t)\n  frames_presented: 0 (volatile uint32_t)\n  request_errors: 0 (volatile uint32_t)\n  audio_started: 0 (volatile uint32_t)\n  audio_ticks_max: 0 (volatile uint32_t)\n  audio_deadline_misses: 0 (volatile uint32_t)\n  audio_stack_free: 0 (volatile uint32_t)\n  inference_stack_free: 0 (volatile uint32_t)\n  forward_ticks: 0 (volatile uint32_t)\n  npu_cycles: 0 (volatile uint32_t)\n  discontinuities: 0 (volatile uint32_t)"
+          }
+        ]
+      }
+    }
+  ]
+}
