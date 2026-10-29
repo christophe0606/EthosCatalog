@@ -40,7 +40,15 @@
     "selectors": [
       "SEL_REQUEST_ID",
       "SEL_COMPLETE_ID",
-      "SEL_RESULT_ID"
+      "SEL_SCORES_ID"
+    ]
+  },
+  "YAMNetPostprocess": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_SCORES_ID",
+      "SEL_RESULT_ID",
+      "SEL_COMPLETE_ID"
     ]
   }
 }

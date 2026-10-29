@@ -9,3 +9,4 @@
 #include "../nodes_impl/EventLCD.hpp"
 #include "../nodes_impl/SendToNetwork.hpp"
 #include "../nodes_impl/YAMNet.hpp"
+#include "../nodes_impl/YAMNetPostprocess.hpp"

@@ -110,6 +110,7 @@ Internal ID identification for the nodes
 #define SEND_INTERNAL_ID 4
 #define LCD_INTERNAL_ID 5
 #define NETWORK_INTERNAL_ID 6
+#define POSTPROCESS_INTERNAL_ID 7
 
 /* Initialize the selectors global IDs in each class */
 template<>
@@ -117,7 +118,8 @@ std::array<uint16_t,3> AudioWindow<float,160,float,400>::selectors = {SEL_REQUES
 template<>
 std::array<uint16_t,3> SendToNetwork<float,64>::selectors = {SEL_REQUEST_ID, SEL_COMPLETE_ID, SEL_RESULT_ID};
 std::array<uint16_t,3> EventLCD::selectors = {SEL_REQUEST_ID, SEL_COMPLETE_ID, SEL_RESULT_ID};
-std::array<uint16_t,3> YAMNet::selectors = {SEL_REQUEST_ID, SEL_COMPLETE_ID, SEL_RESULT_ID};
+std::array<uint16_t,3> YAMNet::selectors = {SEL_REQUEST_ID, SEL_COMPLETE_ID, SEL_SCORES_ID};
+std::array<uint16_t,3> YAMNetPostprocess::selectors = {SEL_SCORES_ID, SEL_RESULT_ID, SEL_COMPLETE_ID};
 
 
 /***********
@@ -162,6 +164,7 @@ typedef struct {
     SendToNetwork<float,64> *send;
     EventLCD *lcd;
     YAMNet *network;
+    YAMNetPostprocess *postprocess;
 } nodes_t;
 
 
@@ -262,11 +265,21 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     identifiedNodes[STREAM_APP_NETWORK_ID]=createStreamNode(*nodes.network);
     nodes.network->setID(STREAM_APP_NETWORK_ID);
 
+    nodes.postprocess = new (std::nothrow) YAMNetPostprocess(evtQueue);
+    if (nodes.postprocess==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    identifiedNodes[STREAM_APP_POSTPROCESS_ID]=createStreamNode(*nodes.postprocess);
+    nodes.postprocess->setID(STREAM_APP_POSTPROCESS_ID);
+
 
 /* Subscribe nodes for the event system*/
     nodes.send->subscribe(0,*nodes.network,0);
     nodes.network->subscribe(0,*nodes.send,0);
-    nodes.network->subscribe(1,*nodes.lcd,0);
+    nodes.network->subscribe(1,*nodes.postprocess,0);
+    nodes.postprocess->subscribe(0,*nodes.lcd,0);
+    nodes.postprocess->subscribe(1,*nodes.network,1);
 
     initError = CG_SUCCESS;
     initError = nodes.audio_window->init();
@@ -294,6 +307,10 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(initError);
 
     initError = nodes.network->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.postprocess->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -350,6 +367,10 @@ void free_scheduler_app()
     if (nodes.network!=NULL)
     {
         delete nodes.network;
+    }
+    if (nodes.postprocess!=NULL)
+    {
+        delete nodes.postprocess;
     }
 }
 

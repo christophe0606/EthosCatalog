@@ -58,7 +58,14 @@ a lower-priority Stream event thread runs inference. Exactly one request remains
 outstanding until acknowledgment. Node-owned history, latest-patch and immutable
 in-flight buffers bound memory; intermediate pending patches are replaced and
 counted. A single network node represents the complete PTE forward, including
-its 14 delegates. Postprocessing and LCD presentation run on the event thread.
+its 14 delegates. It publishes the 521 raw sigmoid scores to a separate CPU
+`YAMNetPostprocess` node, which validates finite scores in [0,1], selects the
+top five and maps class indices to labels. This multilabel model already
+includes sigmoid; no additional softmax or temporal smoothing is applied.
+The postprocessor acknowledges score consumption before the network releases
+the request. The LCD receives ordered, display-ready labels and scores; it
+only formats text/percentages, draws and presents the frame. All three event
+nodes run outside the audio dataflow.
 
 The standalone median forward is **1482.160 ms**, including **60.735 ms** on the
 NPU, at 400 MHz. With live capture, the forward takes about 1.55 seconds.
@@ -83,7 +90,8 @@ Inference peaks are 829,016 bytes in the 1 MiB method pool and 298,752 bytes in
 the 512 KiB temporary pool. Two 800x480 RGB565 framebuffers use 1,536,000 bytes.
 The integrated application reserves about 2.97 MiB in SRAM0, plus DTCM state,
 heap and stacks. See [LIVE_VALIDATION.md](LIVE_VALIDATION.md) for the final image
-and uninterrupted live results.
+and the original uninterrupted live results. The explicit postprocessing node
+is verified in [POSTPROCESSING_VALIDATION.md](POSTPROCESSING_VALIDATION.md).
 
 ## Reproduce
 
@@ -100,8 +108,10 @@ preserved. No GPL code, AudioSet media or separately licensed ontology is includ
 .venv/Scripts/python.exe projects/yamnet/model/prepare_frontend_stream_test.py
 ```
 
-The native tests exercise production window, publisher, network and LCD wrappers:
+The native tests exercise production window, publisher, network, CPU postprocessing
+and LCD wrappers:
 exact sample alignment, one request, immutable input, latest-patch selection after
-acknowledgment and ordered top-five routing. `app.py` also runs from this project
+acknowledgment, invalid-score rejection and ordered display-ready label routing.
+The graph test forbids a direct network-to-LCD connection. `app.py` also runs from this project
 directory. Shared `LogMel` is under `common/nodes` and `common/nodes_impl/c`;
 YAMNet patching, event policy and UI are application-owned.

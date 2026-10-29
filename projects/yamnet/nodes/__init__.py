@@ -3,4 +3,5 @@
 from .AudioWindow import AudioWindow
 from .SendToNetwork import SendToNetwork
 from .YAMNet import YAMNet
+from .YAMNetPostprocess import YAMNetPostprocess
 from .EventLCD import EventLCD

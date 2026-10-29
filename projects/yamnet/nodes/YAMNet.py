@@ -6,7 +6,7 @@ class YAMNet(ProjectNode,BaseNode):
     folder='../nodes_impl'
     needsHardware=True
     def __init__(self,name):
-        BaseNode.__init__(self,name,identified=True,selectors=['request','complete','result'])
-        self.addEventInput()
+        BaseNode.__init__(self,name,identified=True,selectors=['request','complete','scores'])
+        self.addEventInput(2)
         self.addEventOutput(2)
         self.parameters()

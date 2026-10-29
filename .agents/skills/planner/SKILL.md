@@ -12,7 +12,7 @@ When the user asks to port a new network and gives some URLs as source you shoul
 1 - Launch the analyze agent. If the agents confirm that the network can be ported (or it is likely to be ported) you can proceed to the next step
 2 - Create a .flow folder in the root project folder if none exists. 
 In the .flow folder, create a new subfolder that will be used for the work and used to save markdown reflecting the state of the work, remaining work to do, problems found. The path to this folder will be communicated to each agent at each step
-After each step, save a CHECKPOINT.md in this folder that describes where we are, what remains to be done, what is the long term goal.
+After each step, save a CHECKPOINT.md in this folder that describes where we are, what remains to be done, what is the long term goal. CHECKPOINT.md are never saved in the project folder.
 3 - Create a project folder based on one of the template `remplate_mram` or `template_ospi` depending on the memory analysis done by the analyze agent.
 4 - Launch the converter agent
 5 - Once the conversion is successful, launch the benchmarking agent

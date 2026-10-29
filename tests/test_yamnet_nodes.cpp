@@ -3,6 +3,7 @@
 #include "EventLCD.hpp"
 #include "SendToNetwork.hpp"
 #include "YAMNet.hpp"
+#include "YAMNetPostprocess.hpp"
 #define YAMNET_WINDOW_BACKEND_ONLY
 #include "AudioWindow.hpp"
 #include <cassert>
@@ -32,9 +33,10 @@ int yamnet_forward(void *, float *input, float *scores, uint32_t *ticks) {
 }
 static unsigned renders, presents;
 void yamnet_print_health(const StreamStats *) {}
-void yamnet_render(uint16_t *, const unsigned *top, const float *scores, const StreamStats *) {
+void yamnet_render(uint16_t *, const char *const *labels, const float *scores, const StreamStats *) {
+    const char *expected[] = {"Roaring cats (lions, tigers)", "Wild animals", "Honk", "Goose", "Quack"};
     for (unsigned i = 0; i < 5; ++i) {
-        assert(top[i] == 104 - i);
+        assert(std::strcmp(labels[i], expected[i]) == 0);
         assert(scores[i] == float(5 - i) / 10);
     }
     ++renders;
@@ -43,7 +45,8 @@ int present(uint16_t *) {
     ++presents;
     return 0;
 }
-std::array<uint16_t, 3> YAMNet::selectors{100, 101, 102};
+std::array<uint16_t, 3> YAMNet::selectors{100, 101, 103};
+std::array<uint16_t, 3> YAMNetPostprocess::selectors{103, 102, 101};
 std::array<uint16_t, 3> EventLCD::selectors{100, 101, 102};
 class Queue : public EventQueue {
   public:
@@ -111,13 +114,21 @@ int main() {
     hw.framebuffers[1] = fb + 1;
     hw.lcd_present = present;
     YAMNet network(&q, YAMNetParams{hw});
+    YAMNetPostprocess postprocess(&q);
     EventLCD lcd(EventLCDParams{hw});
     network.subscribe(0, send, 0);
-    network.subscribe(1, lcd, 0);
+    network.subscribe(1, postprocess, 0);
+    postprocess.subscribe(0, lcd, 0);
+    postprocess.subscribe(1, network, 1);
     assert(network.init() == CG_SUCCESS && lcd.init() == CG_SUCCESS);
     Event request(100, kNormalPriority, uint64_t(reinterpret_cast<uintptr_t>(latest)));
     assert(network.processEvent(0, std::move(request)) == CG_SUCCESS);
-    assert(q.messages.size() == 6);
+    assert(q.messages.size() == 1); // inference publishes raw scores, not classified LCD rows
+    Event duplicate(100, kNormalPriority, uint64_t(reinterpret_cast<uintptr_t>(latest)));
+    assert(network.processEvent(0, std::move(duplicate)) == CG_BUFFER_ERROR);
+    Event wrong_sequence(101, kNormalPriority, uint32_t(99));
+    assert(network.processEvent(1, std::move(wrong_sequence)) == CG_BUFFER_ERROR);
+    assert(send.run() == CG_SUCCESS && stats.inference_requests == 2);
     while (!q.isEmpty()) {
         auto m = std::move(q.messages.front());
         q.messages.pop_front();
@@ -125,6 +136,43 @@ int main() {
         assert(dst.dst->processEvent(dst.dstPort, std::move(m.event)) == CG_SUCCESS);
     }
     assert(renders == 1 && presents == 1 && stats.inferences == 1 && stats.frames_presented == 1);
+
+    // Invalid scores must fail on the CPU before publishing any display data or acknowledgment.
+    float invalid_scores[521]{};
+    auto reject_scores = [&]() {
+        Event scores(103, kNormalPriority,
+                     uint64_t(reinterpret_cast<uintptr_t>(invalid_scores)), uint32_t(2));
+        assert(postprocess.processEvent(0, std::move(scores)) == CG_BUFFER_ERROR);
+        assert(q.isEmpty());
+    };
+    invalid_scores[520] = -0.1f;
+    reject_scores();
+    invalid_scores[520] = 1.1f;
+    reject_scores();
+    uint32_t nan_bits = 0x7fc00000U;
+    std::memcpy(invalid_scores + 520, &nan_bits, sizeof(nan_bits));
+    reject_scores();
+    uint32_t infinity_bits = 0x7f800000U;
+    std::memcpy(invalid_scores + 520, &infinity_bits, sizeof(infinity_bits));
+    reject_scores();
+
+    // Equal independent scores retain class-index order and are not normalized with softmax.
+    std::fill_n(invalid_scores, 521, 0.25f);
+    Event ties(103, kNormalPriority, uint64_t(reinterpret_cast<uintptr_t>(invalid_scores)), uint32_t(2));
+    assert(postprocess.processEvent(0, std::move(ties)) == CG_SUCCESS);
+    const char *tie_labels[] = {"Speech", "Child speech, kid speaking", "Conversation",
+                                "Narration, monologue", "Babbling"};
+    assert(q.messages.size() == 6);
+    for (unsigned i = 0; i < 5; ++i) {
+        q.messages.front().event.apply<uint32_t, uint64_t, float>(
+            [&](uint32_t row, uint64_t address, float value) {
+                assert(row == i && value == 0.25f);
+                const char *label = reinterpret_cast<const char *>(uintptr_t(address));
+                assert(std::strcmp(label, tie_labels[i]) == 0);
+            });
+        q.messages.pop_front();
+    }
+    q.clear();
     std::cout
-        << "YAMNet alignment, bounded requests, immutable input and latest-window tests PASS\n";
+        << "YAMNet alignment, bounded requests, CPU postprocessing and display routing tests PASS\n";
 }

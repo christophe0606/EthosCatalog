@@ -128,6 +128,23 @@ descriptions and C++ wrapper will be required.
   files, include paths, host checks, and documentation. Regenerate graph outputs
   through the project's `app.py`; verify generation from both the repository
   root and the project folder.
+- A LCD node is only displaying data. It is not computing it. 
+  A LCD node should not contain classifier logic or any data processing beyond 
+  what is necessary for display.
+- A node using a method from a pte should not contain
+  anything else if it does not have an impact on the
+  working of the final demo.
+  Like that a pte method is well isolated in a node
+  and further processing related to that method is contained 
+  within a different node.
+  If doing this separation is not possible, 
+  clearly document the reason and the impact on 
+  the final demo.
+  The goal is for the final graph to clearly show what's
+  processed on the Ethos, and what processed on the CPU.
+  If a node is containing both Ethos and CPU processing,
+  we can't see clearly which part is processed on the Ethos 
+  and which part is processed on the CPU.
 
 ## Validation constraints
 

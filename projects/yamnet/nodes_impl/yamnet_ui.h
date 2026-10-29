@@ -3,4 +3,4 @@
 #pragma once
 #include "stream_types.h"
 #include <stdint.h>
-void yamnet_render(uint16_t *, const unsigned *, const float *, const StreamStats *);
+void yamnet_render(uint16_t *, const char *const *, const float *, const StreamStats *);

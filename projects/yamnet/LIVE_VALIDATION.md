@@ -1,5 +1,10 @@
 # YAMNet live validation
 
+This report preserves the original b-91/d-92 measurements. The subsequent
+separation of CPU postprocessing from inference and display is recorded in
+[POSTPROCESSING_VALIDATION.md](POSTPROCESSING_VALIDATION.md), with the current
+firmware hash and fresh board results.
+
 Final Release build **b-91**, loaded with matching Release symbols in **d-92**,
 passed on Alif DevKit-E8 M55_HP / Ethos-U85-256 on 2026-10-29. The final run was
 left running without debugger pauses. The model executes directly from OSPI at

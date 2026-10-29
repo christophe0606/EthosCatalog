@@ -24,11 +24,12 @@ extern "C"
 
 
 /* Node identifiers */
-#define STREAM_APP_NB_IDENTIFIED_NODES 4
+#define STREAM_APP_NB_IDENTIFIED_NODES 5
 #define STREAM_APP_AUDIO_WINDOW_ID 0
 #define STREAM_APP_SEND_ID 1
 #define STREAM_APP_LCD_ID 2
 #define STREAM_APP_NETWORK_ID 3
+#define STREAM_APP_POSTPROCESS_ID 4
 
 #define STREAM_APP_SCHED_LEN 5
 
@@ -36,6 +37,7 @@ extern "C"
 #define SEL_REQUEST_ID 100
 #define SEL_COMPLETE_ID 101
 #define SEL_RESULT_ID 102
+#define SEL_SCORES_ID 103
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);
 

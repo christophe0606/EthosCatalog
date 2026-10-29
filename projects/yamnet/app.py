@@ -9,7 +9,7 @@ sys.path.insert(0, str(ROOT))
 from cmsis_stream.cg.scheduler import Graph
 from common.nodes import MicrophoneSource, PCMToFloat, LogMel
 from common.stream_graph import DRIVER_COLOR, GraphStyle, graph_only_requested, mk_app
-from projects.yamnet.nodes import AudioWindow, SendToNetwork, YAMNet, EventLCD
+from projects.yamnet.nodes import AudioWindow, SendToNetwork, YAMNet, YAMNetPostprocess, EventLCD
 
 # Fixed color for the one forward method in this project's PTE.
 STYLE = GraphStyle({
@@ -27,13 +27,17 @@ def make_graph():
     mel = LogMel('log_mel', 400, 64, 'yamnet_log_mel_config')
     publisher = SendToNetwork('send')
     network = YAMNet('network')
+    postprocess = YAMNetPostprocess('postprocess')
     lcd = EventLCD('lcd')
     stages = [microphone, pcm, window, mel, publisher]
     for source, destination in zip(stages, stages[1:]):
         graph.connect(source.o, destination.i)
     graph.connect(publisher['oev0'], network['iev0'])
     graph.connect(network['oev0'], publisher['iev0'])
-    graph.connect(network['oev1'], lcd['iev0'])
+    graph.connect(network['oev1'], postprocess['iev0'])
+    graph.connect(postprocess['oev0'], lcd['iev0'])
+    # Release the in-flight request after postprocessing has consumed its scores.
+    graph.connect(postprocess['oev1'], network['iev1'])
     return graph
 
 

@@ -1,7 +1,6 @@
 // Copyright 2026 Arm Limited and/or its affiliates.
 // SPDX-License-Identifier: Apache-2.0
 #include "yamnet_ui.h"
-#include "model/class_names.h"
 #include <cctype>
 #include <cstdio>
 #include <cstring>
@@ -37,18 +36,18 @@ static void text(uint16_t *fb, const char *s, unsigned x, unsigned y, unsigned s
                             fb[(x + c * scale + dx) * 480 + 479 - (y + r * scale + dy)] = color;
     }
 }
-void yamnet_render(uint16_t *fb, const unsigned *top, const float *scores,
+void yamnet_render(uint16_t *fb, const char *const *labels, const float *scores,
                    const StreamStats *stats) {
     std::memset(fb, 0, 800 * 480 * 2);
     text(fb, "YAMNET SOUND EVENTS", 28, 24, 4, 0x07ff);
     text(fb, "LIVE MICROPHONE   16 KHZ", 28, 68, 2, 0x7bef);
-    if (!top) {
+    if (!labels) {
         text(fb, "VALIDATING MODEL AND FRONTEND", 28, 210, 3, 0xffff);
         text(fb, "LISTENING STARTS AFTER SELF TEST", 28, 260, 2, 0x7bef);
         return;
     }
     for (unsigned i = 0; i < 5; ++i) {
-        text(fb, yamnet_class_names[top[i]], 28, 120 + 53 * i, 2, 0xffff);
+        text(fb, labels[i], 28, 120 + 53 * i, 2, 0xffff);
         char pct[20];
         std::snprintf(pct, sizeof(pct), "%u PCT", unsigned(scores[i] * 100 + 0.5f));
         text(fb, pct, 650, 120 + 53 * i, 2, 0x07e0);

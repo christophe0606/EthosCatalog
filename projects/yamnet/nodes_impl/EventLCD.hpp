@@ -12,21 +12,23 @@ class EventLCD : public StreamNode {
         return p_.hw_.framebuffers[0] && p_.hw_.lcd_present ? CG_SUCCESS : CG_INIT_FAILURE;
     }
     cg_status processEvent(int port, Event &&e) final {
-        if (port != 0 || e.event_id != selectors[2] || !e.wellFormed<uint32_t, uint32_t, float>())
+        if (port != 0 || e.event_id != selectors[2] || !e.wellFormed<uint32_t, uint64_t, float>())
             return CG_BUFFER_ERROR;
-        unsigned row = 5, index = 521;
+        unsigned row = 5;
+        const char *label = nullptr;
         float score = 0;
-        e.apply<uint32_t, uint32_t, float>([&](uint32_t r, uint32_t i, float v) {
+        e.apply<uint32_t, uint64_t, float>([&](uint32_t r, uint64_t address, float v) {
             row = r;
-            index = i;
+            label = reinterpret_cast<const char *>(uintptr_t(address));
             score = v;
         });
-        if (row >= 5 || index >= 521)
+        if (row >= 5 || row != next_row_ || !label)
             return CG_BUFFER_ERROR;
-        top_[row] = index;
+        labels_[row] = label;
         scores_[row] = score;
+        next_row_ = (row + 1) % 5;
         if (row == 4) {
-            yamnet_render(p_.hw_.framebuffers[back_], top_, scores_, p_.hw_.stats);
+            yamnet_render(p_.hw_.framebuffers[back_], labels_, scores_, p_.hw_.stats);
             int error = p_.hw_.lcd_present(p_.hw_.framebuffers[back_]);
             if (error)
                 return static_cast<cg_status>(error);
@@ -40,7 +42,8 @@ class EventLCD : public StreamNode {
 
   private:
     EventLCDParams p_;
-    unsigned top_[5]{};
+    const char *labels_[5]{};
     float scores_[5]{};
     unsigned back_ = 1;
+    unsigned next_row_ = 0;
 };

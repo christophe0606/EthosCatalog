@@ -1,0 +1,23 @@
+YAMNet frontend: PASS max log-mel error 0.000000477
+YAMNet vector check: 40 patches, 521 scores each
+Errors: backend=0.064208984, original_float=0.118445352
+Classification: PTQ top1=40/40, TensorFlow top1=39/40, TensorFlow top1 in board top5=40/40
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=3601536 B, method peak=829016 B, temp peak=298752 B, reserved=1572864 B
+Benchmark regions: weights=1384256 B at 0xc00006a0, arena=163840 B at 0x02100000
+Benchmark sample 1: NPU=24294510 cycles (60.736275 ms), forward=592609246 ticks (1481.523115 ms)
+Benchmark sample 2: NPU=24294457 cycles (60.736142 ms), forward=592632044 ticks (1481.580110 ms)
+Benchmark sample 3: NPU=24294533 cycles (60.736333 ms), forward=592759472 ticks (1481.898680 ms)
+Benchmark sample 4: NPU=24294591 cycles (60.736477 ms), forward=592729688 ticks (1481.824220 ms)
+Benchmark sample 5: NPU=24294472 cycles (60.736180 ms), forward=592661912 ticks (1481.654780 ms)
+Benchmark sample 6: NPU=24294478 cycles (60.736195 ms), forward=592706552 ticks (1481.766380 ms)
+Benchmark sample 7: NPU=24294560 cycles (60.736400 ms), forward=592754618 ticks (1481.886545 ms)
+Benchmark sample 8: NPU=24294479 cycles (60.736198 ms), forward=592644176 ticks (1481.610440 ms)
+Benchmark sample 9: NPU=24294430 cycles (60.736075 ms), forward=592623512 ticks (1481.558780 ms)
+Benchmark sample 10: NPU=24294653 cycles (60.736632 ms), forward=592709596 ticks (1481.773990 ms)
+Benchmark PMU: invocations=14, active=24294653 cycles, overflow=0
+Strict score parity (0.005): FAIL (-405)
+Test_result: PASS (classification acceptance; score parity reported separately)
+YAMNet live: audio=255 features=253 infer=1 lcd=1 skipped=2 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=1550.805 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14176 method_peak=829016 temp_peak=298752
+YAMNet live: audio=1681 features=1679 infer=10 lcd=10 skipped=22 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=1550.036 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14176 method_peak=829016 temp_peak=298752
+YAMNet live: audio=3264 features=3262 infer=20 lcd=20 skipped=45 deadline=0 capture_drops=0 overflow=0 requests_error=0 pipeline=0 forward_ms=1550.137 npu_ms=60.736 stack_free_audio=31824 stack_free_infer=14176 method_peak=829016 temp_peak=298752
