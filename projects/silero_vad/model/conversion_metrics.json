@@ -1,0 +1,14 @@
+{
+  "reference": "official pinned TorchScript 16k branch",
+  "float_probability_and_state_max_absolute_error": 0.0,
+  "calibration_frames": 937,
+  "evaluation_frames": 937,
+  "evaluation_max_probability_absolute_error": 0.5641487017273903,
+  "evaluation_mean_probability_absolute_error": 0.022689745523048074,
+  "threshold": 0.5,
+  "decision_disagreements": 18,
+  "reference_positive_frames": 713,
+  "activation": "int16",
+  "weights": "int8",
+  "data": "upstream tests/data/test.wav first30s calibration last30s evaluation; continuous recurrent state independently propagated"
+}

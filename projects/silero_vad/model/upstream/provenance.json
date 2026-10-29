@@ -1,0 +1,32 @@
+{
+  "repository": "https://github.com/snakers4/silero-vad",
+  "commit": "066409f3d9db45a30d21dfcbf9147826ffdd7052",
+  "files": {
+    "silero_vad_16k.safetensors": {
+      "path": "src/silero_vad/data/silero_vad_16k.safetensors",
+      "sha256": "c59271c284ae9c8335d795d60e0bfdb71aaaceec578d9bd9ffc1b8153c319ea1",
+      "size": 1239748,
+      "status": "inspected_only_removed_different_snapshot"
+    },
+    "silero_vad.jit": {
+      "path": "src/silero_vad/data/silero_vad.jit",
+      "sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "size": 2272526
+    },
+    "tinygrad_model.py": {
+      "path": "src/silero_vad/tinygrad_model.py",
+      "sha256": "79afb8aae28bb9d20735df4053bef1191a85b74a0db335a5fc16c302ddda7e86",
+      "size": 2563
+    },
+    "LICENSE": {
+      "path": "LICENSE",
+      "sha256": "2e63e9a38b6e8fc0c7bc37ce174caca1862870856c6daf5697cfb785e925520b",
+      "size": 1075
+    },
+    "test.wav": {
+      "path": "tests/data/test.wav",
+      "sha256": "89f17d9c94c4b31eb320f424628bcbc920abaddbee6e2760fd868bfb1d9a2e47",
+      "size": 1920044
+    }
+  }
+}

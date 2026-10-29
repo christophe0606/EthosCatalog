@@ -1,0 +1,26 @@
+{
+  "VADDisplayClock<float,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_VAD_SNAPSHOT_ID"
+    ]
+  },
+  "SileroInference<float,512,float,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<int16_t,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PCMToFloat<int16_t,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "VADLCD": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_VAD_SNAPSHOT_ID"
+    ]
+  }
+}

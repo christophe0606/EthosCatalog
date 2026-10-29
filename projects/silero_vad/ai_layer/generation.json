@@ -1,0 +1,21 @@
+{
+  "project": "projects/silero_vad/silero_vad.cproject.yml",
+  "config_sha256": "50d01a96c6b33a278cd1a1ca0f0c3363457c7bb8a7bff77d53c244b1b8889047",
+  "pte_sha256": "70714d5f62399e3dda7fca87add83a876b4fb29688262ddf4a6f12615c755c44",
+  "graph_sha256": "8dc45de33a798b484a3244ab419fbade32ece3104dd57a20d61d675cf9794265",
+  "safetensors_sha256": "d80e73321bf91b508b5ade13078109f0f935d278b4cc88ce9dfadd5072f2a926",
+  "assets": {},
+  "flash_ospi": false,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_MRAM",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 2,
+  "operators": [
+    "Portable pow",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 393504
+}

@@ -1,0 +1,82 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+
+display_clock [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">display_clock<BR/>(VADDisplayClock)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+inference [label=<
+<TABLE color="#00695C" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#00695C" POINT-SIZE="14.0">inference<BR/>(SileroInference)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+microphone [label=<
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">microphone<BR/>(MicrophoneSource)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+pcm [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">pcm<BR/>(PCMToFloat)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+lcd [label=<
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">lcd<BR/>(VADLCD)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+
+microphone:i -> pcm:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<s16(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+pcm:i -> inference:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+inference:i -> display_clock:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32>
+
+]
+
+
+
+display_clock:oev0 -> lcd:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+
+}

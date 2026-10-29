@@ -1,0 +1,20 @@
+Silero VAD vector check: PASS (silence and speech probabilities; finite h/c, state drift measured)
+Probabilities: 0.000488057 0.998106480; max probability error 0.000274539; max state error 0.551103532
+Benchmark clocks: CPU=400000000 Hz, AXI/NPU=400000000 Hz, timer=400000000 Hz
+Benchmark memory: model=393504 B; method peak=10876 B; temp peak=104048 B; reserved=655360 B
+Benchmark regions: last weights=280864 B at 0x80277fb0; arena=3616 B at 0x02080000
+Benchmark sample 1: NPU=356467 cycles (0.891168 ms), forward=659862 ticks (1.649655 ms)
+Benchmark sample 2: NPU=356407 cycles (0.891018 ms), forward=877008 ticks (2.192520 ms)
+Benchmark sample 3: NPU=356497 cycles (0.891243 ms), forward=659546 ticks (1.648865 ms)
+Benchmark sample 4: NPU=356467 cycles (0.891168 ms), forward=876498 ticks (2.191245 ms)
+Benchmark sample 5: NPU=356407 cycles (0.891018 ms), forward=659417 ticks (1.648543 ms)
+Benchmark sample 6: NPU=356473 cycles (0.891182 ms), forward=876456 ticks (2.191140 ms)
+Benchmark sample 7: NPU=356467 cycles (0.891168 ms), forward=660451 ticks (1.651128 ms)
+Benchmark sample 8: NPU=356437 cycles (0.891092 ms), forward=876486 ticks (2.191215 ms)
+Benchmark sample 9: NPU=356437 cycles (0.891092 ms), forward=660302 ticks (1.650755 ms)
+Benchmark sample 10: NPU=356497 cycles (0.891243 ms), forward=876302 ticks (2.190755 ms)
+Benchmark PMU: invocations=2, active=356497 cycles, overflow=0
+Continuous held-out stream: frames=192, positive=116, disagreements=6, max error=0.548514724, mean error=0.027852293
+Final silence probability: 0.000152518 (host 0.000183021)
+Test_result: PASS
+

@@ -64,10 +64,13 @@ select the application and build type to build and load on the board.
 | `DevKit-E8@ProgramModel` | `template_ospi.ProgramModel` | Prepare OSPI for programming, without inference |
 | `DevKit-E8@KWS_Debug` | `kws_micronet_l.Debug` | Live MicroNet Large keyword-spotting demo |
 | `DevKit-E8@KWS_Release` | `kws_micronet_l.Release` | Keyword-spotting demo with optimization enabled |
+| `DevKit-E8@SileroVAD_Debug` | `silero_vad.Debug` | Live microphone voice-activity detection with a fading LCD message |
+| `DevKit-E8@SileroVAD_Release` | `silero_vad.Release` | Voice-activity demo with optimization enabled |
 
 See the [MRAM template](../projects/template_mram/README.md),
-[OSPI template](../projects/template_ospi/README.md) and
-[keyword-spotting project](../projects/kws_micronet_l/README.md) for application
+[OSPI template](../projects/template_ospi/README.md),
+[keyword-spotting project](../projects/kws_micronet_l/README.md), and
+[Silero VAD project](../projects/silero_vad/README.md) for application
 behavior and validation details.
 
 The Python scripts follow the saved target-set selection in `.vscode/cmsis.json`.

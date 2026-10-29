@@ -183,6 +183,20 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: SileroVAD_Debug
+          images:
+            - project-context: silero_vad.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: SileroVAD_Release
+          images:
+            - project-context: silero_vad.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -221,6 +235,10 @@ solution:
     - project: projects/handwriting_synthesis/handwriting_synthesis.cproject.yml
     - project: projects/rvtts_lpc/rvtts_lpc.cproject.yml
     - project: projects/rvtts_fargan/rvtts_fargan.cproject.yml
+    - project: projects/silero_vad/silero_vad.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

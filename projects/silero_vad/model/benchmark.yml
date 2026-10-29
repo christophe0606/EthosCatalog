@@ -1,0 +1,109 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+benchmarks:
+  network:
+    operation: 'Streaming Silero VAD16k: STFT, convolutional encoder, explicit LSTM
+      cell and probability head; inputs audio[1,576],h/c[1,128]'
+    input_shape:
+    - 1
+    - 576
+    output_shapes:
+    - - 1
+      - 1
+    - - 1
+      - 128
+    - - 1
+      - 128
+    samples_per_forward: 512
+    sample_rate_hz: 16000
+    block_deadline_ms: 32
+    float_boundary: true
+    quantization: Post-training int16 activations, int8 weights; two Ethos delegates
+      and CPU pow/quantization remainder
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: MRAM
+        activations:
+          type: SRAM0
+    measurements:
+      memory:
+        model_bytes: 393504
+        input_tensor_bytes: 3328
+        executorch:
+          method_pool_peak_bytes: 10876
+          temp_pool_peak_bytes: 104048
+      time:
+        ms: 0.8911675
+        cycles: 356467.0
+        statistic: median
+        min_cycles: 356407
+        max_cycles: 356497
+        mean_cycles: 356455.6
+        forward_ms: 1.92094125
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 356467
+        - 356407
+        - 356497
+        - 356467
+        - 356407
+        - 356473
+        - 356467
+        - 356437
+        - 356437
+        - 356497
+        forward_ticks_samples:
+        - 659862
+        - 877008
+        - 659546
+        - 876498
+        - 659417
+        - 876456
+        - 660451
+        - 876486
+        - 660302
+        - 876302
+    run:
+      recorded_at: '2026-10-29T08:19:08.486486+00:00'
+      context: silero_vad.Release+DevKit-E8
+      target: DevKit-E8@SileroVAD_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        runtime: PyTorch::ExecuTorch@1.4.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-9
+      execution_job: d-10
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 2
+      samples: 10
+      pmu_cross_check: Sum PMCCNTR equals sum NPU_ACTIVE over both delegates on every
+        measured forward
+      pmu_overflow: 0
+      npu_invocations_per_forward: 2
+      test_result: PASS
+      max_absolute_error: 0.000274539
+      tolerance: 0.04
+      uart: benchmark_uart.txt
+      model_sha256: 70714d5f62399e3dda7fca87add83a876b4fb29688262ddf4a6f12615c755c44
+      firmware_sha256: 4fcdc4cad7b1aaba8476106572a4fedd09fe89a81c81077b9a7ca4af9d35cbb2
+      input: Alternating cold silence and warm-state speech vectors; each measured
+        forward supplies original explicit h/c. Separate192block continuous held-out
+        speech+silence validation, see BENCHMARK.md.
+      timing_scope: module.forward only, includes CPU pow and boundary quantization,
+        both delegates and PMU hooks; excludes TensorImpl construction, output copying,
+        validation, UART, capture and LCD. Complete adapter overhead is additional.
+      uart_run: Second startup in load-and-debug d-10, continued after debugger startup
+        breakpoint
+      measurement_source: UART4 COM5 1152008N1; Ethos PMU; runtime allocator high-water
+        marks. State drift max0.551104; continuous board-vsPTQ MAE0.0278523,max0.548515,6/192decision
+        disagreements. Board-vsfloat MAE0.02530046,max0.489224,5/192decision disagreements.
+        Demo validation, no exact-state parity or production accuracy claim.
