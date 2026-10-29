@@ -145,6 +145,10 @@ descriptions and C++ wrapper will be required.
   If a node is containing both Ethos and CPU processing,
   we can't see clearly which part is processed on the Ethos 
   and which part is processed on the CPU.
+  The separation is not absolute : an executorch network
+  can use some CPU fallbacks. They would be represented
+  in the same node as the Ethos code since the granularity
+  is an executorch method.
 
 ## Validation constraints
 
