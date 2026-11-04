@@ -1,0 +1,79 @@
+[ai_layer] selected project: <repo>\projects\rnnoise\rnnoise.cproject.yml
+[ai_layer] calling project quantizer: <repo>\projects\rnnoise\model\quantize.py
+W1103 08:00:01.917000 25848 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1103 08:00:16.024000 25848 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[ai_layer] Vela: {'target': 'ethos-u85-256', 'system_config': 'Ethos_U85_SRAM_MRAM', 'memory_mode': 'Shared_Sram', 'config_ini': '<repo>\\.cmsis\\ensemble_vela.ini'}
+Original RNNoise int8 weights/scales imported; no PTQ performed.
+W1103 08:00:50.154000 27900 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1103 08:00:57.035000 27900 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[ai_layer] Vela: {'target': 'ethos-u85-256', 'system_config': 'Ethos_U85_SRAM_MRAM', 'memory_mode': 'Shared_Sram', 'config_ini': '<repo>\\.cmsis\\ensemble_vela.ini'}
+[ai_layer] reusing <repo>\projects\rnnoise\model\model_quantized.safetensors (no quantization)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_MRAM
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak Off-chip Flash bandwidth             0.72 GB/s
+
+Total SRAM used                                  0.53 KiB
+Total Off-chip Flash used                       35.05 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 21 (100.0%)
+
+Average SRAM bandwidth                           0.05 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average Off-chip Flash bandwidth                 0.71 GB/s
+Input   Off-chip Flash bandwidth                 0.00 MB/batch
+Weight  Off-chip Flash bandwidth                 0.03 MB/batch
+Output  Off-chip Flash bandwidth                 0.00 MB/batch
+Total   Off-chip Flash bandwidth                 0.03 MB/batch
+Total   Off-chip Flash bandwidth  per input      0.03 MB/inference (batch size 1)
+
+Neural network macs                             24684 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_MRAM
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak Off-chip Flash bandwidth             0.72 GB/s
+
+Total SRAM used                                  0.91 KiB
+Total Off-chip Flash used                       77.61 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 19 (100.0%)
+
+Average SRAM bandwidth                           0.04 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average Off-chip Flash bandwidth                 0.72 GB/s
+Input   Off-chip Flash bandwidth                 0.00 MB/batch
+Weight  Off-chip Flash bandwidth                 0.07 MB/batch
+Output  Off-chip Flash bandwidth                 0.00 MB/batch
+Total   Off-chip Flash bandwidth                 0.07 MB/batch
+Total   Off-chip Flash bandwidth  per input      0.07 MB/inference (batch size 1)
+
+Neural network macs                             62994 MACs/batch
+
+[ai_layer] wrote <repo>\projects\rnnoise\ai_layer: 217048 bytes, 2 Ethos-U delegate(s), ['Portable add', 'Portable relu', 'Quantized dequantize', 'Quantized quantize']

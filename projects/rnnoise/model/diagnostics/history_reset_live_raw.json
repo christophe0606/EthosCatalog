@@ -1,0 +1,46 @@
+{
+  "target": "DevKit-E8@RNNoise_Release",
+  "build_job": "b-21",
+  "load_job": "d-22",
+  "purpose": "History-only reset after intentional capture interruptions; no FFT table reconstruction",
+  "stream_stats": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  audio_blocks: 3168 (volatile uint32_t)\n  audio_discontinuities: 3 (volatile uint32_t)\n  last_discontinuity_block: 2458 (volatile uint32_t)\n  audio_started: 4270520788 (volatile uint32_t)\n  audio_ticks_max: 3130076 (volatile uint32_t)\n  audio_deadline_misses: 0 (volatile uint32_t)\n  inferences: 3168 (volatile uint32_t)\n  inference_ticks_max: 186927 (volatile uint32_t)\n  state_resets: 3 (volatile uint32_t)\n  analysis_ticks_max: 1973728 (volatile uint32_t)\n  synthesis_ticks_max: 963295 (volatile uint32_t)\n  synthesized_frames: 3167 (volatile uint32_t)\n  null_samples: 1520160 (volatile uint32_t)\n  frames_presented: 317 (volatile uint32_t)\n  lcd_events_sent: 317 (volatile uint32_t)\n  lcd_events_received: 317 (volatile uint32_t)\n  lcd_events_dropped: 0 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  last_probability: 0.00390625 (volatile float)\n  input_dbfs: -56.5068855 (volatile float)\n  mean_gain: 0.585227311 (volatile float)\n  suppression_db: 4.65350819 (volatile float)\n  output_rms: 0.000802580034 (volatile float)\n\nNote: 144 new errors in this window since you last looked — get_recent_problems {sinceSeq: 467}"
+      }
+    ]
+  },
+  "pipeline_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+      }
+    ]
+  },
+  "rnnoise_test_passed + rnnoise_parity_passed + rnnoise_benchmark_complete + rnnoise_numerical_passed": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_test_passed + rnnoise_parity_passed + rnnoise_benchmark_complete + rnnoise_numerical_passed\nResult: 4\nType: unsigned int"
+      }
+    ]
+  },
+  "microphone_drops": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_drops\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "microphone_overflows": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_overflows\nResult: 3\nType: volatile uint32_t\n\nNote: 156 new errors in this window since you last looked — get_recent_problems {sinceSeq: 467}"
+      }
+    ]
+  }
+}

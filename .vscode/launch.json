@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/yamnet/DevKit-E8/Release/yamnet.axf",
+            "program": "out/rnnoise/DevKit-E8/Release/rnnoise.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -34,7 +34,8 @@
                     "--log",
                     "*.cbuild_run,*server=info"
                 ],
-                "port": "3333"
+                "port": "3333",
+                "serverDisconnectTimeout": 3000
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -46,7 +47,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/yamnet/DevKit-E8/Release/yamnet.axf",
+            "program": "out/rnnoise/DevKit-E8/Release/rnnoise.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

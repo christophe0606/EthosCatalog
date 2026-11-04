@@ -13,3 +13,6 @@ from .Rgb888ToGrayInt8 import Rgb888ToGrayInt8
 from .NonMaximumSuppression import NonMaximumSuppression
 
 from .LogMel import LogMel
+
+from .RNNoiseAnalysis import RNNoiseAnalysis
+from .RNNoiseSynthesis import RNNoiseSynthesis

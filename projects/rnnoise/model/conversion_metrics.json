@@ -1,0 +1,77 @@
+{
+  "source_fixture_max_lsb_vs_upstream": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "source_fixture_pytorch_vs_tflite_max_lsb": [
+    25,
+    8,
+    2,
+    0,
+    0
+  ],
+  "sequence_frames": 160,
+  "sequence_description": "160 continuous 10ms frames: 16 silence, 112 amplitude-modulated 173/346Hz harmonic tone plus seeded noise, 32 silence; independently fed-back states. Not a speech quality test.",
+  "sequence_max_lsb": [
+    103,
+    37,
+    10,
+    23,
+    20
+  ],
+  "sequence_mean_lsb": [
+    7.375,
+    6.1335227272727275,
+    0.7233072916666666,
+    2.0395833333333333,
+    1.475
+  ],
+  "output_order": [
+    "denoise_state",
+    "gains",
+    "noise_state",
+    "vad_state",
+    "voice_probability"
+  ],
+  "sequence_max_absolute_error": [
+    0.8078431850299239,
+    0.14453125,
+    0.4794248566031456,
+    0.18039216753095388,
+    0.078125
+  ],
+  "sequence_mean_absolute_error": [
+    0.0578431406756863,
+    0.023959073153409092,
+    0.03467714945873013,
+    0.01599673297217426,
+    0.00576171875
+  ],
+  "sequence_max_fraction_of_tensor_range": [
+    0.403921568627451,
+    0.1450980392156863,
+    0.0392156862745098,
+    0.09019607843137255,
+    0.0784313725490196
+  ],
+  "shared_state_one_step_max_lsb": [
+    53,
+    16,
+    12,
+    1,
+    0
+  ],
+  "shared_state_one_step_mean_lsb": [
+    1.6455729166666666,
+    1.8801136363636364,
+    0.30963541666666666,
+    0.019791666666666666,
+    0.0
+  ],
+  "recovered_weight_float_vs_int8_gain_mean_absolute_error": 0.022470280665121127,
+  "recovered_weight_float_vs_int8_gain_max_absolute_error": 0.2669377326965332,
+  "original_float_quantization_error": "Not published by upstream; original FP32 checkpoint unavailable. PESQ 2.945 is an upstream end-task score, not quantization error."
+}

@@ -1,0 +1,30 @@
+{
+  "RNNoiseAnalysis<int16_t,480,float,42,float,1993>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RNNoiseInference<float,42,float,23>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MicrophoneSource<int16_t,480>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RNNoiseMetrics<float,483>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_RN_SNAPSHOT_ID"
+    ]
+  },
+  "RNNoiseSynthesis<float,1993,float,23,float,483>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RNNoiseLCD": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_RN_SNAPSHOT_ID"
+    ]
+  }
+}

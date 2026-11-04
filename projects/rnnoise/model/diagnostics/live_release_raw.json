@@ -1,0 +1,87 @@
+{
+  "time": "2026-11-03",
+  "target": "DevKit-E8@RNNoise_Release",
+  "build_job": "b-19",
+  "load_job": "d-20",
+  "fresh_run_before_first_halt": true,
+  "stream_stats": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  audio_blocks: 3006 (volatile uint32_t)\n  audio_discontinuities: 0 (volatile uint32_t)\n  last_discontinuity_block: 0 (volatile uint32_t)\n  audio_started: 3616312419 (volatile uint32_t)\n  audio_ticks_max: 3122051 (volatile uint32_t)\n  audio_deadline_misses: 0 (volatile uint32_t)\n  inferences: 3005 (volatile uint32_t)\n  inference_ticks_max: 188097 (volatile uint32_t)\n  state_resets: 0 (volatile uint32_t)\n  analysis_ticks_max: 1971332 (volatile uint32_t)\n  synthesis_ticks_max: 960167 (volatile uint32_t)\n  synthesized_frames: 3005 (volatile uint32_t)\n  null_samples: 1442400 (volatile uint32_t)\n  frames_presented: 301 (volatile uint32_t)\n  lcd_events_sent: 301 (volatile uint32_t)\n  lcd_events_received: 301 (volatile uint32_t)\n  lcd_events_dropped: 0 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  last_probability: 0 (volatile float)\n  input_dbfs: -49.8793068 (volatile float)\n  mean_gain: 0.082386367 (volatile float)\n  suppression_db: 21.6828918 (volatile float)\n  output_rms: 0.000122293888 (volatile float)\n\nNote: 92 new errors in this window since you last looked — get_recent_problems {sinceSeq: 467}"
+      }
+    ]
+  },
+  "pipeline_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+      }
+    ]
+  },
+  "rnnoise_test_passed": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_test_passed\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "rnnoise_parity_passed": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_parity_passed\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "rnnoise_benchmark_complete": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "rnnoise_numerical_passed": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_numerical_passed\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "rnnoise_clock_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_clock_hz\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 400000000 (uint32_t)\n  [1]: 400000000 (uint32_t)\n  [2]: 400000000 (uint32_t)"
+      }
+    ]
+  },
+  "rnnoise_pool_peaks": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: rnnoise_pool_peaks\nResult: [2]\nType: uint32_t [2]\nFields:\n  [0]: 3824 (uint32_t)\n  [1]: 928 (uint32_t)"
+      }
+    ]
+  },
+  "microphone_drops": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_drops\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "microphone_overflows": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_overflows\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  }
+}

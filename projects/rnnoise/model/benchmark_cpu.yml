@@ -1,0 +1,119 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+benchmarks:
+  network:
+    operation: RNNoise INT8 42-feature frame and explicit GRU states24/48/96; output
+      denoise96,gains22,noise48,VADstate24,probability1
+    input_shape:
+    - 1
+    - 1
+    - 42
+    output_shapes:
+    - - 1
+      - 1
+      - 96
+    - - 1
+      - 1
+      - 22
+    - - 1
+      - 1
+      - 48
+    - - 1
+      - 1
+      - 24
+    - - 1
+      - 1
+      - 1
+    samples_per_forward: 480
+    sample_rate_hz: 48000
+    block_deadline_ms: 10
+    float_boundary: false
+    quantization: Original ML-zoo INT8 Q/DQ retained. Seven automatic Ethos delegates;
+      dense convolutions and other CPU fallbacks dominate.
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: MRAM
+        activations:
+          type: SRAM0
+    measurements:
+      memory:
+        model_bytes: 168040
+        input_tensor_bytes: 210
+        executorch:
+          method_pool_peak_bytes: 392968
+          temp_pool_peak_bytes: 864
+      time:
+        ms: 0.00887625
+        cycles: 3550.5
+        statistic: median
+        min_cycles: 3459
+        max_cycles: 3597
+        mean_cycles: 3544.8
+        forward_ms: 35.0491575
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 3509
+        - 3459
+        - 3569
+        - 3550
+        - 3516
+        - 3530
+        - 3551
+        - 3574
+        - 3597
+        - 3593
+        forward_ticks_samples:
+        - 14017872
+        - 14020722
+        - 14022558
+        - 14015460
+        - 14020548
+        - 14050194
+        - 14020428
+        - 14018898
+        - 14017242
+        - 14018280
+    run:
+      recorded_at: '2026-11-03T06:55:10.181047+00:00'
+      context: rnnoise.Release+DevKit-E8
+      target: DevKit-E8@RNNoise_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        runtime: PyTorch::ExecuTorch@1.4.1
+        board: AlifSemiconductor::Ensemble@2.2.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-11
+      execution_job: d-12
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 2
+      samples: 10
+      pmu_cross_check: Seven invocations per measured forward; summed PMCCNTR equals
+        summed NPU_ACTIVE; final accumulator includes last measured forward plus160sequence
+        forwards (1127 invocations).
+      pmu_overflow: 0
+      npu_invocations_per_forward: 7
+      test_result: PASS
+      max_absolute_error: 0
+      tolerance: 8
+      model_sha256: ced0773de436f527349a4a58bc849710e0e2cb9ef8ab27d1e76d9919be2b58f6
+      firmware_sha256: 82e0e53f511875b61b551ed3f1fd0bf391387e0d59fb95faef8da997ac42ea08
+      input: Original fixture with explicit cold states for timing; separate160frame
+        independently recurrent synthetic silence/harmonic+noise/silence replay.
+      timing_scope: module.forward including CPU fallback,Q/DQ,all7delegates andPMU
+        hooks; excludes TensorImpl/vector setup,load_method check,output copy,validation,capture,DSP,LCD
+        andUART. Two warmups exclude method-load initialization.
+      measurement_source: Matching RNNoise ELF debugger globals in benchmark_debug.txt;
+        clocks fromSEservices andosKernelGetSysTimerFreq; allocator peaks. Board exactly
+        matches imported host on fixture and160frames. Source gain MAE0.0239590704,VAD
+        MAE0.00576171977. Median forward exceeds10ms; no realtime or speech-quality
+        claim.

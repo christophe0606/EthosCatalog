@@ -1,0 +1,35 @@
+{
+  "purpose": "Recovery after intentional debugger halt; timing includes halt and is not deadline evidence",
+  "stream_stats": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  audio_blocks: 5183 (volatile uint32_t)\n  audio_discontinuities: 1 (volatile uint32_t)\n  last_discontinuity_block: 3007 (volatile uint32_t)\n  audio_started: 3737484068 (volatile uint32_t)\n  audio_ticks_max: 4056027 (volatile uint32_t)\n  audio_deadline_misses: 1 (volatile uint32_t)\n  inferences: 5182 (volatile uint32_t)\n  inference_ticks_max: 188097 (volatile uint32_t)\n  state_resets: 1 (volatile uint32_t)\n  analysis_ticks_max: 2432834 (volatile uint32_t)\n  synthesis_ticks_max: 1435814 (volatile uint32_t)\n  synthesized_frames: 5182 (volatile uint32_t)\n  null_samples: 2487360 (volatile uint32_t)\n  frames_presented: 518 (volatile uint32_t)\n  lcd_events_sent: 519 (volatile uint32_t)\n  lcd_events_received: 518 (volatile uint32_t)\n  lcd_events_dropped: 0 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  last_probability: 0 (volatile float)\n  input_dbfs: -53.7193489 (volatile float)\n  mean_gain: 0.104048297 (volatile float)\n  suppression_db: 19.6553001 (volatile float)\n  output_rms: 0.000257984299 (volatile float)\n\nNote: 110 new errors in this window since you last looked — get_recent_problems {sinceSeq: 467}"
+      }
+    ]
+  },
+  "microphone_drops": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_drops\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "microphone_overflows": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: microphone_overflows\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "pipeline_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+      }
+    ]
+  }
+}

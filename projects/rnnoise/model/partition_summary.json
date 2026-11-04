@@ -1,0 +1,35 @@
+{
+  "delegates": 2,
+  "dense_ops": 9,
+  "dense_ops_delegated": 9,
+  "original_dense_macs": 86952,
+  "vela_macs_per_delegate": [
+    24684,
+    62994
+  ],
+  "vela_total_macs_including_elementwise": 87678,
+  "pte_bytes": 217048,
+  "cpu_operators": [
+    "add",
+    "relu",
+    "quantize",
+    "dequantize"
+  ],
+  "dense_partition_tags": {
+    "aten_convolution_default": "tag0",
+    "aten_convolution_default_1": "tag1",
+    "aten_convolution_default_2": "tag1",
+    "aten_convolution_default_3": "tag1",
+    "aten_convolution_default_4": "tag1",
+    "aten_convolution_default_5": "tag1",
+    "aten_convolution_default_6": "tag0",
+    "aten_convolution_default_7": "tag0",
+    "aten_convolution_default_8": "tag0"
+  },
+  "versions": {
+    "torch": "2.13.0",
+    "executorch": "1.4.1",
+    "ethos-u-vela": "5.1.0",
+    "tensorflow": "2.20.0"
+  }
+}

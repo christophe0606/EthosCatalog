@@ -26,4 +26,7 @@ Run the final release version of the project on the board and let it run.
 
 If the step converter or the step benchmarks are failing then we consider that the network cannot be ported to Ethos and the reason should be clearly documented in the project folder.
 
+The first time you build a new project you need to do a rebuild to ensure there is nothing remaining from a previous build.
+Make sure to clean the build directory before starting the rebuild to avoid any conflicts or leftover artifacts.
+
 

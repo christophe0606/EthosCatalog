@@ -1,0 +1,10 @@
+{
+  "integer_structure": 59,
+  "aten.conv2d.default": 9,
+  "aten.tanh.default": 3,
+  "aten.add.Tensor": 12,
+  "aten.sigmoid.default": 8,
+  "aten.sub.Tensor": 3,
+  "aten.mul.Tensor": 9,
+  "aten.relu.default": 1
+}

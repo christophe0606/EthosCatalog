@@ -1,0 +1,162 @@
+Evaluated: pipeline_error
+Result: 0
+Type: volatile int32_t
+
+Evaluated: rnnoise_benchmark_complete
+Result: 1
+Type: volatile uint32_t
+
+Evaluated: rnnoise_load_error
+Result: 0
+Type: volatile int32_t
+
+Evaluated: rnnoise_runtime_error
+Result: 0
+Type: volatile int32_t
+
+Evaluated: rnnoise_test_passed
+Result: 1
+Type: volatile uint32_t
+
+Evaluated: rnnoise_parity_passed
+Result: 1
+Type: volatile uint32_t
+
+Evaluated: rnnoise_numerical_passed
+Result: 1
+Type: volatile uint32_t
+
+Evaluated: rnnoise_ticks
+Result: [10]
+Type: uint32_t [10]
+Fields:
+  [0]: 155251 (uint32_t)
+  [1]: 154497 (uint32_t)
+  [2]: 154810 (uint32_t)
+  [3]: 154851 (uint32_t)
+  [4]: 154357 (uint32_t)
+  [5]: 154971 (uint32_t)
+  [6]: 154707 (uint32_t)
+  [7]: 154419 (uint32_t)
+  [8]: 154407 (uint32_t)
+  [9]: 154600 (uint32_t)
+
+Evaluated: rnnoise_cycles
+Result: [10]
+Type: uint64_t [10]
+Fields:
+  [0]: 60866 (uint64_t)
+  [1]: 60792 (uint64_t)
+  [2]: 60841 (uint64_t)
+  [3]: 60848 (uint64_t)
+  [4]: 60663 (uint64_t)
+  [5]: 60966 (uint64_t)
+  [6]: 60921 (uint64_t)
+  [7]: 60903 (uint64_t)
+  [8]: 60733 (uint64_t)
+  [9]: 60847 (uint64_t)
+
+Evaluated: rnnoise_clock_hz
+Result: [3]
+Type: uint32_t [3]
+Fields:
+  [0]: 400000000 (uint32_t)
+  [1]: 400000000 (uint32_t)
+  [2]: 400000000 (uint32_t)
+
+Evaluated: rnnoise_pool_peaks
+Result: [2]
+Type: uint32_t [2]
+Fields:
+  [0]: 3824 (uint32_t)
+  [1]: 928 (uint32_t)
+
+Evaluated: rnnoise_fixture_max
+Result: [5]
+Type: uint32_t [5]
+Fields:
+  [0]: 0 (uint32_t)
+  [1]: 0 (uint32_t)
+  [2]: 0 (uint32_t)
+  [3]: 0 (uint32_t)
+  [4]: 0 (uint32_t)
+
+Evaluated: rnnoise_fixture_source_max
+Result: [5]
+Type: uint32_t [5]
+Fields:
+  [0]: 25 (uint32_t)
+  [1]: 8 (uint32_t)
+  [2]: 2 (uint32_t)
+  [3]: 0 (uint32_t)
+  [4]: 0 (uint32_t)
+
+Evaluated: rnnoise_sequence_max
+Result: [5]
+Type: uint32_t [5]
+Fields:
+  [0]: 0 (uint32_t)
+  [1]: 0 (uint32_t)
+  [2]: 0 (uint32_t)
+  [3]: 0 (uint32_t)
+  [4]: 0 (uint32_t)
+
+Evaluated: rnnoise_sequence_source_max
+Result: [5]
+Type: uint32_t [5]
+Fields:
+  [0]: 103 (uint32_t)
+  [1]: 37 (uint32_t)
+  [2]: 10 (uint32_t)
+  [3]: 23 (uint32_t)
+  [4]: 20 (uint32_t)
+
+Evaluated: rnnoise_sequence_mae_lsb
+Result: [5]
+Type: float [5]
+Fields:
+  [0]: 0 (float)
+  [1]: 0 (float)
+  [2]: 0 (float)
+  [3]: 0 (float)
+  [4]: 0 (float)
+
+Evaluated: rnnoise_sequence_source_mae_lsb
+Result: [5]
+Type: float [5]
+Fields:
+  [0]: 7.37516737 (float)
+  [1]: 6.13353682 (float)
+  [2]: 0.723317027 (float)
+  [3]: 2.03960919 (float)
+  [4]: 1.47500026 (float)
+
+Evaluated: rnnoise_gain_mae
+Result: 0
+Type: float
+
+Evaluated: rnnoise_vad_mae
+Result: 0
+Type: float
+
+Evaluated: rnnoise_source_gain_mae
+Result: 0.0239590704
+Type: float
+
+Evaluated: rnnoise_source_vad_mae
+Result: 0.00576171977
+Type: float
+
+Evaluated: ethos_benchmark
+Result: {...}
+Type: volatile ethos_benchmark_t
+Fields:
+  cycles: 9832065 (uint64_t)
+  active_cycles: 9832065 (uint64_t)
+  invocations: 322 (uint32_t)
+  overflow: 0 (uint32_t)
+  weights_address: 2149953584 (uint32_t)
+  weights_size: 79472 (uint32_t)
+  arena_address: 34078720 (uint32_t)
+  arena_size: 928 (uint32_t)
+

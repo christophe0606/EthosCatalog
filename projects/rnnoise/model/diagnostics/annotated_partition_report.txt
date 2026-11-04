@@ -1,0 +1,14 @@
+TOSAPartitioner::partition
+Partitioning for EthosUBackend: TOSA-1.0+INT+int16+int4+cf
+The following nodes were rejected for TOSA-1.0+INT+int16+int4+cf:
+
+╒═══════════════════╤═══════════════════╤════════════════════════════════════╤══════════════════════════════╕
+│ Node name         │ Target            │ Torch func                         │ Reason                       │
+╞═══════════════════╪═══════════════════╪════════════════════════════════════╪══════════════════════════════╡
+│ aten_relu_default │ aten.relu.default │ ('relu_1', 'function.relu')        │ One or more inputs were not  │
+│                   │                   │                                    │ quantized.                   │
+├───────────────────┼───────────────────┼────────────────────────────────────┼──────────────────────────────┤
+│ aten_add_tensor_6 │ aten.add.Tensor   │ ('add_7', 'method_descriptor.add') │ One or more outputs were not │
+│                   │                   │                                    │ quantized.                   │
+╘═══════════════════╧═══════════════════╧════════════════════════════════════╧══════════════════════════════╛
+(Placeholders and outputs are not included in this list)

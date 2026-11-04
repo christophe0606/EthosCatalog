@@ -1,0 +1,13 @@
+{
+  "frames": 160,
+  "feature_max_abs": 0.019570767879486084,
+  "feature_mean_abs": 0.00014599788119085133,
+  "quantized_feature_max_lsb": 1,
+  "quantized_feature_different_values": 6,
+  "feature_values": 6720,
+  "synthesis_max_normalized_abs": 1.9910683459425926e-05,
+  "synthesis_mean_normalized_abs": 2.003895857882193e-06,
+  "reset_bit_exact": true,
+  "silence_zero": true,
+  "zero_mask_max_normalized_abs": 8.313798389281146e-06
+}

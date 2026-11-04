@@ -1,0 +1,75 @@
+{
+  "commit": "fec0bb5bcd486eb2839cdb7d437d466067402a6a",
+  "files": [
+    {
+      "file": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/LICENSE",
+      "sha256": "c5accbbd8546e94c34aed24afe689a617627d18eed5a6c48277e48db57c23851"
+    },
+    {
+      "file": "definition.yaml",
+      "url": "https://raw.githubusercontent.com/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/definition.yaml",
+      "sha256": "1106417af0cc26680bd5917fdd0812f7bc1bf2d3523025191e4c14dcda7215e1"
+    },
+    {
+      "file": "model.py",
+      "url": "https://raw.githubusercontent.com/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/recreate_model/model.py",
+      "sha256": "28b0e94967252d01add4fbeb22dfa076c799079d1b6ba44195d91185cd817339"
+    },
+    {
+      "file": "rnnoise_pre_processing.py",
+      "url": "https://raw.githubusercontent.com/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/recreate_model/rnnoise_pre_processing.py",
+      "sha256": "079c84fa960801c3e1743c83e7753ea450752d81633ba024d51f9ce2a9dc0e6c"
+    },
+    {
+      "file": "rnnoise_INT8.tflite",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/rnnoise_INT8.tflite",
+      "sha256": "9c582545b7c13af44616c44b654f4fe721aa2585630b0ca173ca3589f6f11c2c"
+    },
+    {
+      "file": "testing_input_denoise_gru_prev_state_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_input/denoise_gru_prev_state_int8/0.npy",
+      "sha256": "427d58fb50aecd53ecb22ca6d0de8a068ae3e1a1f2fb8b28126267a3c4076c48"
+    },
+    {
+      "file": "testing_input_main_input_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_input/main_input_int8/0.npy",
+      "sha256": "7028e23f411623c409f704ea55a26230b7d0c63ec01e4c73ffbcdc99be588f7e"
+    },
+    {
+      "file": "testing_input_noise_gru_prev_state_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_input/noise_gru_prev_state_int8/0.npy",
+      "sha256": "4f7f3b47c96f52843728df2ca83ee968c45fa1c1f57d2d30df3a08adda36d039"
+    },
+    {
+      "file": "testing_input_vad_gru_prev_state_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_input/vad_gru_prev_state_int8/0.npy",
+      "sha256": "3050901964cb681bc57a8eb484d63e7e264197d4b00840017e27b1ecad83ae57"
+    },
+    {
+      "file": "testing_output_Identity_1_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_output/Identity_1_int8/0.npy",
+      "sha256": "ee0d3f36d43246b80e74431cab8b85917082a845c03c922b77887a99739d5789"
+    },
+    {
+      "file": "testing_output_Identity_2_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_output/Identity_2_int8/0.npy",
+      "sha256": "605d758f172a3bcd4c11d13dcd1df8232b5cd8eac02344716f3d017e18497a9d"
+    },
+    {
+      "file": "testing_output_Identity_3_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_output/Identity_3_int8/0.npy",
+      "sha256": "6df79eec775860d81783c16a602214e5e5906a7462751346ff84bf593c308c04"
+    },
+    {
+      "file": "testing_output_Identity_4_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_output/Identity_4_int8/0.npy",
+      "sha256": "4ede4d14fb1c3ab0e6dac0bf029cdf516320032909f3b02a1e82eb15a2aaae97"
+    },
+    {
+      "file": "testing_output_Identity_int8_0.npy",
+      "url": "https://media.githubusercontent.com/media/Arm-Examples/ML-zoo/fec0bb5bcd486eb2839cdb7d437d466067402a6a/models/noise_suppression/RNNoise/tflite_int8/testing_output/Identity_int8/0.npy",
+      "sha256": "632c56e71c9d4f22079f03d0cdc70321ba6116fe76a64fee695a80b4462eb876"
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "normalized": {
+    "date": "2026-11-03",
+    "target": "DevKit-E8@RNNoise_Release",
+    "build_job": "b-23",
+    "debug_load_job": "d-24",
+    "matching_program": "out/rnnoise/DevKit-E8/Release/rnnoise.axf",
+    "initial_breakpoint": "board/DevKit-E8/main.c:115",
+    "initial_synthesized_frames": 0,
+    "initial_startup_flag": 0,
+    "resumed_utc": "2026-11-03 07:47:31 UTC",
+    "pause_requested_utc": "2026-11-03 07:48:19 UTC",
+    "first_snapshot_before_any_audio_halt": true,
+    "capture_duration_from_complete_frames_seconds": 46.87,
+    "stream_stats": {
+      "error": 0,
+      "audio_blocks": 4688,
+      "audio_discontinuities": 0,
+      "last_discontinuity_block": 0,
+      "audio_started": 1754336203,
+      "audio_ticks_max": 3122070,
+      "audio_deadline_misses": 0,
+      "inferences": 4687,
+      "inference_ticks_max": 187198,
+      "state_resets": 0,
+      "analysis_ticks_max": 1971316,
+      "synthesis_ticks_max": 960791,
+      "synthesized_frames": 4687,
+      "null_samples": 2249760,
+      "frames_presented": 469,
+      "lcd_events_sent": 469,
+      "lcd_events_received": 469,
+      "lcd_events_dropped": 0,
+      "lcd_deadline_misses": 0,
+      "last_probability": 0,
+      "input_dbfs": -62.5274849,
+      "mean_gain": 0.647904873,
+      "suppression_db": 3.76977491,
+      "output_rms": 0.00149339833
+    },
+    "pipeline_error": 0,
+    "startup_flags": {
+      "rnnoise_test_passed": 1,
+      "rnnoise_parity_passed": 1,
+      "rnnoise_benchmark_complete": 1,
+      "rnnoise_numerical_passed": 1
+    },
+    "timer_hz": 400000000,
+    "clock_hz": {
+      "[0]": 400000000,
+      "[1]": 400000000,
+      "[2]": 400000000
+    },
+    "pool_peaks": {
+      "[0]": 3824,
+      "[1]": 928
+    },
+    "fixture_max_lsb": {
+      "[0]": 0,
+      "[1]": 0,
+      "[2]": 0,
+      "[3]": 0,
+      "[4]": 0
+    },
+    "sequence_max_lsb": {
+      "[0]": 0,
+      "[1]": 0,
+      "[2]": 0,
+      "[3]": 0,
+      "[4]": 0
+    },
+    "microphone_drops": 0,
+    "microphone_overflows": 0,
+    "max_ms": {
+      "analysis": 4.92829,
+      "inference_adapter": 0.467995,
+      "synthesis": 2.4019775,
+      "complete_frame": 7.805175
+    },
+    "rom_bytes_approx": 814952,
+    "ram_bytes_reserved_approx": 2220916,
+    "final_state": "running",
+    "breakpoints": "empty",
+    "note": "Pre-halt counters establish uninterrupted performance. The final inspection halt can itself cause a capture interruption after resuming.",
+    "tool_diagnostics_note": "Raw tool notes counting new errors are historical VS Code aggregate diagnostics, not firmware runtime errors. The fresh pre-halt pipeline/error counters and all deadline/drop counters were zero."
+  },
+  "raw": {
+    "date": "2026-11-03",
+    "target": "DevKit-E8@RNNoise_Release",
+    "build_job": "b-23",
+    "debug_load_job": "d-24",
+    "review": "R1 and R2 cleared; final reviewed source",
+    "device_info": {
+      "content": [
+        {
+          "type": "text",
+          "text": "=== Debug Session Info ===\n  Session name: M55_HP CMSIS_DAP@pyOCD (launch)\n  Debug type: gdbtarget\n  Program: out/rnnoise/DevKit-E8/Release/rnnoise.axf\n  GDB: <vscode>\\extensions\\arm.vscode-cmsis-debugger-1.10.1-win32-x64\\tools\\gdb\\bin\\arm-none-eabi-gdb.exe\n  Server: <vscode>\\extensions\\arm.vscode-cmsis-debugger-1.10.1-win32-x64\\tools\\pyocd\\pyocd.exe\n  Port: 3333\n  cbuild-run: <repo>\\out\\EthosCatalog+DevKit-E8.cbuild-run.yml\n  CMSIS target: DevKit-E8@RNNoise_Release\n\nNote: 20 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "initial_breakpoint": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Call stack (1 frame):\n  # 0  main  @ board\\DevKit-E8\\main.c:115 [frameId=1003]\n\nTip: use get_frame_variables with a frameId to inspect variables of a specific frame."
+        }
+      ]
+    },
+    "initial_synthesized_frames": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: stream_stats.synthesized_frames\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "initial_startup_flag": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_test_passed\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "resumed_utc": {
+      "current_time": "2026-11-03 07:47:31 UTC"
+    },
+    "start_continue": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+        }
+      ],
+      "structuredContent": {
+        "status": "running",
+        "message": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+      }
+    },
+    "pause_requested_utc": {
+      "current_time": "2026-11-03 07:48:19 UTC"
+    },
+    "pause": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Target paused. {\n  \"sessionActive\": true,\n  \"frameName\": null,\n  \"fileFullPath\": null,\n  \"currentLine\": null,\n  \"currentLineContent\": null,\n  \"nextLines\": [],\n  \"frameId\": null,\n  \"threadId\": null,\n  \"stackTrace\": [],\n  \"breakpointsUnchanged\": 0\n}"
+        }
+      ]
+    },
+    "wait_for_stop": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Target was already stopped (reason: SIGINT).\n\n{\n  \"sessionActive\": true,\n  \"frameName\": null,\n  \"fileFullPath\": null,\n  \"currentLine\": null,\n  \"currentLineContent\": null,\n  \"nextLines\": [],\n  \"frameId\": null,\n  \"threadId\": null,\n  \"stackTrace\": [],\n  \"breakpointsUnchanged\": 0\n}"
+        }
+      ]
+    },
+    "stopped_call_stack": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Call stack (3 frames):\n  # 0  arm::app::math::MathUtils::transform  @ common\\nodes_impl\\c\\rnnoise\\rnnoise_math.hpp:19 [frameId=1015]\n  # 1  arm::app::math::MathUtils::transform  @ common\\nodes_impl\\c\\rnnoise\\rnnoise_math.hpp:18 [frameId=1016]\n  # 2  arm::app::math::MathUtils::transform  @ common\\nodes_impl\\c\\rnnoise\\rnnoise_math.hpp:18 [frameId=1017]\n\nTip: use get_frame_variables with a frameId to inspect variables of a specific frame."
+        }
+      ]
+    },
+    "stream_stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: stream_stats\nResult: {...}\nType: StreamStats\nFields:\n  error: 0 (volatile int32_t)\n  audio_blocks: 4688 (volatile uint32_t)\n  audio_discontinuities: 0 (volatile uint32_t)\n  last_discontinuity_block: 0 (volatile uint32_t)\n  audio_started: 1754336203 (volatile uint32_t)\n  audio_ticks_max: 3122070 (volatile uint32_t)\n  audio_deadline_misses: 0 (volatile uint32_t)\n  inferences: 4687 (volatile uint32_t)\n  inference_ticks_max: 187198 (volatile uint32_t)\n  state_resets: 0 (volatile uint32_t)\n  analysis_ticks_max: 1971316 (volatile uint32_t)\n  synthesis_ticks_max: 960791 (volatile uint32_t)\n  synthesized_frames: 4687 (volatile uint32_t)\n  null_samples: 2249760 (volatile uint32_t)\n  frames_presented: 469 (volatile uint32_t)\n  lcd_events_sent: 469 (volatile uint32_t)\n  lcd_events_received: 469 (volatile uint32_t)\n  lcd_events_dropped: 0 (volatile uint32_t)\n  lcd_deadline_misses: 0 (volatile uint32_t)\n  last_probability: 0 (volatile float)\n  input_dbfs: -62.5274849 (volatile float)\n  mean_gain: 0.647904873 (volatile float)\n  suppression_db: 3.76977491 (volatile float)\n  output_rms: 0.00149339833 (volatile float)"
+        }
+      ]
+    },
+    "pipeline_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    },
+    "rnnoise_test_passed": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_test_passed\nResult: 1\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "rnnoise_parity_passed": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_parity_passed\nResult: 1\nType: volatile uint32_t\n\nNote: 21 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "rnnoise_benchmark_complete": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_benchmark_complete\nResult: 1\nType: volatile uint32_t\n\nNote: 22 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "rnnoise_numerical_passed": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_numerical_passed\nResult: 1\nType: volatile uint32_t\n\nNote: 27 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "rnnoise_clock_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_clock_hz\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 400000000 (uint32_t)\n  [1]: 400000000 (uint32_t)\n  [2]: 400000000 (uint32_t)\n\nNote: 28 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "rnnoise_pool_peaks": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_pool_peaks\nResult: [2]\nType: uint32_t [2]\nFields:\n  [0]: 3824 (uint32_t)\n  [1]: 928 (uint32_t)"
+        }
+      ]
+    },
+    "rnnoise_fixture_max": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_fixture_max\nResult: [5]\nType: uint32_t [5]\nFields:\n  [0]: 0 (uint32_t)\n  [1]: 0 (uint32_t)\n  [2]: 0 (uint32_t)\n  [3]: 0 (uint32_t)\n  [4]: 0 (uint32_t)"
+        }
+      ]
+    },
+    "rnnoise_sequence_max": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: rnnoise_sequence_max\nResult: [5]\nType: uint32_t [5]\nFields:\n  [0]: 0 (uint32_t)\n  [1]: 0 (uint32_t)\n  [2]: 0 (uint32_t)\n  [3]: 0 (uint32_t)\n  [4]: 0 (uint32_t)"
+        }
+      ]
+    },
+    "microphone_drops": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: microphone_drops\nResult: 0\nType: volatile uint32_t\n\nNote: 29 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "microphone_overflows": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: microphone_overflows\nResult: 0\nType: volatile uint32_t\n\nNote: 33 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "breakpoints": {
+      "content": [
+        {
+          "type": "text",
+          "text": "The breakpoint list is empty.\n\nNote: 36 new errors in this window since you last looked - get_recent_problems {sinceSeq: 689}"
+        }
+      ]
+    },
+    "final_continue": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+        }
+      ],
+      "structuredContent": {
+        "status": "running",
+        "message": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+      }
+    },
+    "final_status": {
+      "content": [
+        {
+          "type": "text",
+          "text": "State: running\nSession: M55_HP CMSIS_DAP@pyOCD (launch)\nType: gdbtarget\nConfiguration: M55_HP CMSIS_DAP@pyOCD (launch)\nDAP responsive: true (probe 30ms)\nDiagnostics: serverVersion=2.5.20, liveSessionsInThisWindow=1 [M55_HP CMSIS_DAP@pyOCD (launch)], vscodeActiveDebugSession=set\nCMSIS tasks: last load_and_debug \u2705 104 s ago; last build \u2705 175 s ago\nHint: target is running. Add a breakpoint then continue_execution, or call pause_execution to inspect now.\nProblems: 36 new errors since #689 - get_recent_problems {sinceSeq: 689}\n\nTool stats (this session): 39 calls \u00b7 20.2 kB returned \u00b7 76.2 s in tools \u00b7 0 timeouts \u00b7 0 errors\n  largest: get_session_status 4.4 kB over 5 calls \u00b7 cmsis_action 4.1 kB over 6 calls \u00b7 evaluate_expression 3.5 kB over 14 calls"
+        }
+      ]
+    },
+    "final_status_utc": {
+      "current_time": "2026-11-03 07:48:46 UTC"
+    }
+  }
+}

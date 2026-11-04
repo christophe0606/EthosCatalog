@@ -1,0 +1,208 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+benchmarks:
+  network:
+    operation: RNNoise INT8 42-feature frame and explicit GRU states24/48/96; output
+      denoise96,gains22,noise48,VADstate24,probability1
+    input_shape:
+    - 1
+    - 1
+    - 42
+    output_shapes:
+    - - 1
+      - 1
+      - 96
+    - - 1
+      - 1
+      - 22
+    - - 1
+      - 1
+      - 48
+    - - 1
+      - 1
+      - 24
+    - - 1
+      - 1
+      - 1
+    samples_per_forward: 480
+    sample_rate_hz: 48000
+    block_deadline_ms: 10
+    float_boundary: false
+    quantization: Original ML-zoo INT8 Q/DQ retained. Baseline seven delegates with
+      dense CPU; optimized two delegates with all nine dense operators on NPU. CPU
+      add/relu/QDQ remain.
+  benchmark:
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: MRAM
+        activations:
+          type: SRAM0
+    measurements:
+      memory:
+        model_bytes: 168040
+        input_tensor_bytes: 210
+        executorch:
+          method_pool_peak_bytes: 392968
+          temp_pool_peak_bytes: 864
+      time:
+        ms: 0.00887625
+        cycles: 3550.5
+        statistic: median
+        min_cycles: 3459
+        max_cycles: 3597
+        mean_cycles: 3544.8
+        forward_ms: 35.0491575
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 3509
+        - 3459
+        - 3569
+        - 3550
+        - 3516
+        - 3530
+        - 3551
+        - 3574
+        - 3597
+        - 3593
+        forward_ticks_samples:
+        - 14017872
+        - 14020722
+        - 14022558
+        - 14015460
+        - 14020548
+        - 14050194
+        - 14020428
+        - 14018898
+        - 14017242
+        - 14018280
+    run:
+      recorded_at: '2026-11-03T06:55:10.181047+00:00'
+      context: rnnoise.Release+DevKit-E8
+      target: DevKit-E8@RNNoise_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        runtime: PyTorch::ExecuTorch@1.4.1
+        board: AlifSemiconductor::Ensemble@2.2.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-11
+      execution_job: d-12
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 2
+      samples: 10
+      pmu_cross_check: Seven invocations per measured forward; summed PMCCNTR equals
+        summed NPU_ACTIVE; final accumulator includes last measured forward plus160sequence
+        forwards (1127 invocations).
+      pmu_overflow: 0
+      npu_invocations_per_forward: 7
+      test_result: PASS
+      max_absolute_error: 0
+      tolerance: 8
+      model_sha256: ced0773de436f527349a4a58bc849710e0e2cb9ef8ab27d1e76d9919be2b58f6
+      firmware_sha256: 82e0e53f511875b61b551ed3f1fd0bf391387e0d59fb95faef8da997ac42ea08
+      input: Original fixture with explicit cold states for timing; separate160frame
+        independently recurrent synthetic silence/harmonic+noise/silence replay.
+      timing_scope: module.forward including CPU fallback,Q/DQ,all7delegates andPMU
+        hooks; excludes TensorImpl/vector setup,load_method check,output copy,validation,capture,DSP,LCD
+        andUART. Two warmups exclude method-load initialization.
+      measurement_source: Matching RNNoise ELF debugger globals in benchmark_cpu_debug.txt;
+        clocks fromSEservices andosKernelGetSysTimerFreq; allocator peaks. Board exactly
+        matches imported host on fixture and160frames. Source gain MAE0.0239590704,VAD
+        MAE0.00576171977. Median forward exceeds10ms; no realtime or speech-quality
+        claim. Frozen source/config hashes in BENCHMARK.md and .flow/rnnoise/baseline_int8_cpu.
+  - platform:
+      os: RTX5
+      os_version: 5.9.1
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: MRAM
+        activations:
+          type: SRAM0
+    measurements:
+      memory:
+        model_bytes: 217048
+        input_tensor_bytes: 210
+        executorch:
+          method_pool_peak_bytes: 3824
+          temp_pool_peak_bytes: 928
+      time:
+        ms: 0.15211875
+        cycles: 60847.5
+        statistic: median
+        min_cycles: 60663
+        max_cycles: 60966
+        mean_cycles: 60838
+        forward_ms: 0.38663375
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 60866
+        - 60792
+        - 60841
+        - 60848
+        - 60663
+        - 60966
+        - 60921
+        - 60903
+        - 60733
+        - 60847
+        forward_ticks_samples:
+        - 155251
+        - 154497
+        - 154810
+        - 154851
+        - 154357
+        - 154971
+        - 154707
+        - 154419
+        - 154407
+        - 154600
+    run:
+      recorded_at: '2026-11-03T07:11:32.190828+00:00'
+      context: rnnoise.Release+DevKit-E8
+      target: DevKit-E8@RNNoise_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      packs:
+        runtime: PyTorch::ExecuTorch@1.4.1
+        board: AlifSemiconductor::Ensemble@2.2.1
+      compiler: AC6@6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-13
+      execution_job: d-14
+      cpu_clock_mhz: 400.0
+      npu_clock_mhz: 400.0
+      warmup: 2
+      samples: 10
+      pmu_cross_check: 'Two invocations per measured forward; summed PMCCNTR equals
+        summed NPU_ACTIVE. Final aggregate includes last measured forward plus 160
+        sequence forwards: 322 invocations, cycles=active=9832065, overflow=0.'
+      pmu_overflow: 0
+      npu_invocations_per_forward: 2
+      test_result: PASS
+      max_absolute_error: 0
+      tolerance: 8
+      model_sha256: fdb9f9290446b7bc0d6a450747d38e248aa2065035dab99ab8501c5d4e6e5106
+      firmware_sha256: 06ef64187ab7594cb3cb47cfe5e0c460669225ed71d2147f54ab1cebdd7b3e0c
+      input: Original fixture with explicit cold states for timing; separate160frame
+        independently recurrent synthetic silence/harmonic+noise/silence replay.
+      timing_scope: module.forward including CPU add/relu/QDQ, both NPU delegates
+        and PMU hooks; excludes TensorImpl/vector setup, load_method check, output
+        copy, validation, capture, DSP, LCD and UART. Two warmups exclude method-load
+        initialization.
+      measurement_source: Matching RNNoise ELF globals in benchmark_debug.txt; memory
+        report benchmark_build_memory.txt. CPU/AXI-NPU/timer each 400 MHz. All five
+        fixture/160-frame outputs exactly match imported host, 0 LSB. Separate fixture
+        tolerance remains 8 LSB. Source sequence gain MAE .0239590704, VAD MAE .00576171977
+        pass predeclared DEMO thresholds .05/.03. Full source errors/config hashes
+        in BENCHMARK.md; no speech-quality claim.

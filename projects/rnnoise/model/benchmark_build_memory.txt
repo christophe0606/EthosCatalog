@@ -1,0 +1,38 @@
+Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml
+Image rnnoise (M55_HP): out/rnnoise/DevKit-E8/Release/rnnoise.axf, map out/rnnoise/DevKit-E8/Release/rnnoise.axf.map (armlink)
+[rnnoise.axf] size: text 592712 + data 10480 + bss 1077396 = 1680588 B (ROM ≈ 603192 B, RAM ≈ 1087876 B)
+[rnnoise.axf.map] totals: code 289096, ro-data 302299, rw-data 10449, zi-data 1077351 → RO 591395, RW 1087800, ROM 601844 B
+Note: no "Image component sizes" in the map (link without --info sizes); per-object sizes are summed from the memory map
+
+Regions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from rnnoise.axf LOAD segments):
+  MRAM           0x80000000    603216 /   5767168 B    10%  ER_ROM_VECTORS ER_ROM
+  SRAM0          0x02000000    786448 /   4194304 B    19%  RW_SRAM0 PADDING
+  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH, OSPI_FLASH_REMAINDER
+  outside the listed regions: 0x20000000 +134292 B  RW_RAM RW_RAM
+  outside the listed regions: 0x20024000 +3296 B  NS_REGION_0
+  outside the listed regions: 0x20028000 +131072 B  ARM_LIB_HEAP APP_HEAP
+  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK
+  [rnnoise.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 786432/4194304 B, PADDING 16/16 B, RW_RAM 134292/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 590728/4294967295 B, MRAM_USER 0/1572864 B
+
+Largest symbols [rnnoise.axf] (top 5, object from rnnoise.axf.map):
+    524288 B  obj   0x02000000  _ZN12_GLOBAL__N_111method_poolE  RW_SRAM0 @SRAM0  ← benchmark.o
+    262144 B  obj   0x02080000  _ZN12_GLOBAL__N_19temp_poolE  RW_SRAM0 @SRAM0  ← benchmark.o
+    217048 B  obj   0x80259f80  model_pte  ER_ROM @MRAM  ← model_pte.o
+     65536 B  obj   0x200102b8  os_mem  RW_RAM  ← rtx_lib.o
+     32992 B  func  0x-7fddad4c  _ZN5torch8executor6native26dequantize_per_channel_outERKN10executorch7runtime7etensor6TensorES7_RKNSt3__28optionalIS5_EExxxNS4_10ScalarTypeENS9_ISD_EERS5_  ER_ROM
+
+Largest objects [rnnoise.axf.map] (top 5 of 239; code / ro-data / rw-data / zi-data):
+    860779 B  benchmark.o  4996 / 68654 / 0 / 787129
+    217052 B  model_pte.o  0 / 217052 / 0 / 0
+    163904 B  anon$$obj.o  0 / 48 / 0 / 163856
+    101964 B  op_dequantize.o  101524 / 440 / 0 / 0
+     68100 B  rtx_lib.o  390 / 297 / 0 / 67413
+Libraries [rnnoise.axf.map]:
+     11359 B  c_wu.l  10746 / 241 / 24 / 348
+      8273 B  libcppabi_wnux.l  6290 / 1443 / 8 / 532
+      4872 B  libunwind_wnux.l  4468 / 403 / 0 / 1
+      2892 B  libcpp_wnux.l  2072 / 820 / 0 / 0
+      1054 B  fz_wv.l  1054 / 0 / 0 / 0
+
+Next: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists.
+

@@ -45,7 +45,7 @@
         },
         {
             "label": "CMSIS Load",
-            "type": "shell",
+            "type": "cmsis-csolution.pyocd",
             "command": "pyocd",
             "options": {
                 "cwd": "${workspaceFolder}/",
@@ -68,7 +68,7 @@
         },
         {
             "label": "CMSIS Run",
-            "type": "shell",
+            "type": "cmsis-csolution.pyocd",
             "command": "pyocd",
             "options": {
                 "cwd": "${workspaceFolder}/",
@@ -248,7 +248,9 @@
                 }
             },
             "args": [
-                "list",
+                "info",
+                "--probe",
+                "cmsisdap:",
                 "--cbuild-run",
                 "${command:cmsis-csolution.getCbuildRunFile}"
             ],

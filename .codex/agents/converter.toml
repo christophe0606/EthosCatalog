@@ -50,6 +50,18 @@ and fail that you can do the partionning and explain the reason.
 
 Memory buffers for the Ethos and the executorch layer must be 
 big enough or there may be crashes and stalls at runtime.
+
+Document any bugs found during the conversion process, including their impact on the network's functionality and accuracy.
+Write this bug report in the project's folder, ensuring it is easily accessible for future reference and review.
+The bugs may be executorch bugs, issues with the conversion process, or problems related to the network itself.
+
+If the network is coming from Arm ML Zoo, from TFLite and known to work on Ethos then the executorch bugs causing 
+issues must be clearly explained and detailed and documented in the bug report. One should also try to
+understand why there is no issue on TFLite side. What is the difference between the TFLite execution and the executorch 
+execution that could explain the observed issue.
+
+If the network is not coming from Arm ML Zoo or TFLite, then any bug encountered during the conversion 
+process should be thoroughly investigated and documented in the bug report.
 """
 
 [[skills.config]]

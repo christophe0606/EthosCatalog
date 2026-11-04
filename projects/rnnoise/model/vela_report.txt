@@ -1,0 +1,61 @@
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_MRAM
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak Off-chip Flash bandwidth             0.72 GB/s
+
+Total SRAM used                                  0.53 KiB
+Total Off-chip Flash used                       35.05 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 21 (100.0%)
+
+Average SRAM bandwidth                           0.05 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average Off-chip Flash bandwidth                 0.71 GB/s
+Input   Off-chip Flash bandwidth                 0.00 MB/batch
+Weight  Off-chip Flash bandwidth                 0.03 MB/batch
+Output  Off-chip Flash bandwidth                 0.00 MB/batch
+Total   Off-chip Flash bandwidth                 0.03 MB/batch
+Total   Off-chip Flash bandwidth  per input      0.03 MB/inference (batch size 1)
+
+Neural network macs                             24684 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_MRAM
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak Off-chip Flash bandwidth             0.72 GB/s
+
+Total SRAM used                                  0.91 KiB
+Total Off-chip Flash used                       77.61 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 19 (100.0%)
+
+Average SRAM bandwidth                           0.04 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average Off-chip Flash bandwidth                 0.72 GB/s
+Input   Off-chip Flash bandwidth                 0.00 MB/batch
+Weight  Off-chip Flash bandwidth                 0.07 MB/batch
+Output  Off-chip Flash bandwidth                 0.00 MB/batch
+Total   Off-chip Flash bandwidth                 0.07 MB/batch
+Total   Off-chip Flash bandwidth  per input      0.07 MB/inference (batch size 1)
+
+Neural network macs                             62994 MACs/batch
+

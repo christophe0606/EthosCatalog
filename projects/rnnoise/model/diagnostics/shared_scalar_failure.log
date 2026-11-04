@@ -1,0 +1,140 @@
+[ai_layer] selected project: <repo>\projects\rnnoise\rnnoise.cproject.yml
+[ai_layer] calling project quantizer: <repo>\projects\rnnoise\model\quantize.py
+W1103 07:57:08.613000 31452 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1103 07:57:21.672000 31452 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[ai_layer] Vela: {'target': 'ethos-u85-256', 'system_config': 'Ethos_U85_SRAM_MRAM', 'memory_mode': 'Shared_Sram', 'config_ini': '<repo>\\.cmsis\\ensemble_vela.ini'}
+Original RNNoise int8 weights/scales imported; no PTQ performed.
+W1103 07:57:49.934000 22864 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1103 07:57:59.528000 22864 Lib\site-packages\torch\utils\_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[ai_layer] Vela: {'target': 'ethos-u85-256', 'system_config': 'Ethos_U85_SRAM_MRAM', 'memory_mode': 'Shared_Sram', 'config_ini': '<repo>\\.cmsis\\ensemble_vela.ini'}
+[ai_layer] reusing <repo>\projects\rnnoise\model\model_quantized.safetensors (no quantization)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+<python>/Lib/copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_MRAM
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak Off-chip Flash bandwidth             0.72 GB/s
+
+Total SRAM used                                  0.53 KiB
+Total Off-chip Flash used                       35.03 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 21 (100.0%)
+
+Average SRAM bandwidth                           0.06 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average Off-chip Flash bandwidth                 0.71 GB/s
+Input   Off-chip Flash bandwidth                 0.00 MB/batch
+Weight  Off-chip Flash bandwidth                 0.03 MB/batch
+Output  Off-chip Flash bandwidth                 0.00 MB/batch
+Total   Off-chip Flash bandwidth                 0.03 MB/batch
+Total   Off-chip Flash bandwidth  per input      0.03 MB/inference (batch size 1)
+
+Neural network macs                             24684 MACs/batch
+
+Traceback (most recent call last):
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\pass_manager.py", line 213, in __call__
+    ep_res = fn(exported_program)
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\pass_base.py", line 248, in __call__
+    res = self.call(exported_program)
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\arm_pass_manager.py", line 228, in call
+    result = self.graph_pass(exported_program.graph_module)
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\arm_pass.py", line 220, in __call__
+    res = self.call(graph_module)
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\fuse_equal_placeholders_pass.py", line 118, in call
+    delete_constant_placeholder(self.exported_program, node)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\transforms\utils.py", line 197, in delete_constant_placeholder
+    del exp_program.state_dict[target]
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'constant_14'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<repo>\scripts\create_ai_layer.py", line 246, in <module>
+    main()
+    ~~~~^^
+  File "<repo>\scripts\create_ai_layer.py", line 219, in main
+    pte, delegated = export_model(program, spec)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<repo>\scripts\create_ai_layer.py", line 93, in export_model
+    edge = to_edge_transform_and_lower(methods, partitioner=partitioners,
+                                      compile_config=EdgeCompileConfig(_check_ir_validity=False))
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\program\_program.py", line 113, in wrapper
+    return func(*args, **kwargs)
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\program\_program.py", line 1360, in to_edge_transform_and_lower
+    edge_manager = edge_manager.to_backend(method_to_partitioner)
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\program\_program.py", line 113, in wrapper
+    return func(*args, **kwargs)
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\program\_program.py", line 1669, in to_backend
+    new_edge_programs = to_backend(method_to_programs_and_partitioners)
+  File "<python>/Lib/functools.py", line 934, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\backend\backend_api.py", line 762, in _
+    lower_all_submodules_to_backend(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        backend_id,
+        ^^^^^^^^^^^
+        method_to_submodule_nodes,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        method_to_tagged_exported_program,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\backend\backend_api.py", line 591, in lower_all_submodules_to_backend
+    backend_name_to_subclass[backend_id].preprocess_multimethod(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        method_to_partitioned_program, method_to_compile_specs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\backend\backend_details.py", line 145, in preprocess_multimethod
+    preprocess_result = cls.preprocess(program, compile_spec_for_program)
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\ethosu\backend.py", line 109, in preprocess
+    tosa_preprocess = TOSABackend._preprocess(edge_program, tosa_compile_spec)
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\tosa\backend.py", line 248, in _preprocess
+    TOSABackend._preprocess_module(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        edge_program.graph_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        debug_hook,
+        ^^^^^^^^^^^
+    )
+    ^
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\tosa\backend.py", line 386, in _preprocess_module
+    graph_module = ArmPassManager(compile_spec).transform_to_backend_pipeline(  # type: ignore
+        exported_program=edge_program, graph_module=graph_module
+    )
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\arm_pass_manager.py", line 685, in transform_to_backend_pipeline
+    return self._tosa_pipeline(exported_program, graph_module)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\arm_pass_manager.py", line 669, in _tosa_pipeline
+    return self._transform(exported_program, graph_module)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\.venv\Lib\site-packages\executorch\backends\arm\_passes\arm_pass_manager.py", line 463, in _transform
+    transformed_program = ExportedProgramPassManager(passes)(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        exported_program
+        ^^^^^^^^^^^^^^^^
+    ).exported_program
+    ^
+  File "<repo>\.venv\Lib\site-packages\executorch\exir\pass_manager.py", line 234, in __call__
+    raise Exception(msg) from e  # noqa: TRY002
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Exception: An error occurred when running the '_ExportedProgramGraphPassAdapter' pass after the following passes: ['_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter', '_ExportedProgramGraphPassAdapter']

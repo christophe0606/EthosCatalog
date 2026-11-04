@@ -1,6 +1,6 @@
 {
     "activeSolution": "../EthosCatalog.csolution.yml",
-    "activeTarget": "DevKit-E8@YAMNet_Release",
+    "activeTarget": "DevKit-E8@RNNoise_Release",
     "targetSet": {
         "EthosCatalog": {
             "activeTargetType": "DevKit-E8",

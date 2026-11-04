@@ -1,0 +1,1265 @@
+{
+  "delegate_tags": [
+    "tag0",
+    "tag1"
+  ],
+  "dense": [
+    {
+      "name": "aten_convolution_default",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_1",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_2",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_3",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_4",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_5",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_6",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_7",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_8",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "aten_view_copy_default",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_1",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_1",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem_1",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem_2",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_2",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_3",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_1",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_2",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_3",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_1",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_1",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_4",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_2",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_tanh_default",
+      "target": "<EdgeOpOverload: aten.tanh.default>: schema = aten::tanh(Tensor self) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_2",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_5",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_squeeze_copy_dims",
+      "target": "<EdgeOpOverload: aten.squeeze_copy.dims>: schema = aten::squeeze_copy.dims(Tensor self, int[] dim) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_6",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_3",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_4",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_5",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_2",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_3",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_7",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default_1",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_3",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_4",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_5",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_8",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_4",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_6",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_7",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_3",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_4",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_9",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default_2",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_6",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_7",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_8",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_10",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_5",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_8",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_9",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_4",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_5",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_11",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default_3",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_9",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_10",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_11",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_6",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_7",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_add_tensor",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_6",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_8",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_sigmoid_default",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_7",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_9",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_10",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_sub_tensor",
+      "target": "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_8",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_11",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_12",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_add_tensor_1",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_9",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_13",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_sigmoid_default_1",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_10",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_14",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_15",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_mul_tensor",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_11",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_16",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_17",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_add_tensor_2",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_12",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_18",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_tanh_default_1",
+      "target": "<EdgeOpOverload: aten.tanh.default>: schema = aten::tanh(Tensor self) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_13",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_19",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_20",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_mul_tensor_1",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_14",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_21",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_22",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_mul_tensor_2",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_15",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_23",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_24",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_add_tensor_3",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_16",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_cat_default",
+      "target": "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_12",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_25",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_17",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_26",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_18",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_cat_default_1",
+      "target": "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_squeeze_copy_dims_1",
+      "target": "<EdgeOpOverload: aten.squeeze_copy.dims>: schema = aten::squeeze_copy.dims(Tensor self, int[] dim) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_13",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_27",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_10",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_11",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_convolution_default_5",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_19",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_view_copy_default_14",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default_4",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_12",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_13",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "getitem_14",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_28",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_29",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_4",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_20",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_30",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sigmoid_default_2",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_21",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_31",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_32",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_mul_tensor_3",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_22",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_33",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_34",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sub_tensor_1",
+      "target": "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_23",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_35",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_36",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_add_tensor_5",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_24",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_37",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_sigmoid_default_3",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_25",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_38",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_39",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "aten_mul_tensor_4",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_26",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag1"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_40",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": null
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_41",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": null
+    },
+    {
+      "name": "aten_add_tensor_6",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": null
+    },
+    {
+      "name": "aten_relu_default",
+      "target": "<EdgeOpOverload: aten.relu.default>: schema = aten::relu(Tensor self) -> Tensor",
+      "delegation_tag": null
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_27",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": null
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_42",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_43",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_mul_tensor_5",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_28",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_44",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_45",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_7",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_29",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_cat_default_2",
+      "target": "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_15",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_46",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_30",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_47",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_31",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_cat_default_3",
+      "target": "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_squeeze_copy_dims_2",
+      "target": "<EdgeOpOverload: aten.squeeze_copy.dims>: schema = aten::squeeze_copy.dims(Tensor self, int[] dim) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_16",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_48",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_12",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_13",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_6",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_32",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_17",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_split_with_sizes_copy_default_5",
+      "target": "<EdgeOpOverload: aten.split_with_sizes_copy.default>: schema = aten::split_with_sizes_copy(Tensor self, SymInt[] split_sizes, int dim=0) -> Tensor[]",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem_15",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem_16",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "getitem_17",
+      "target": "<built-in function getitem>",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_49",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_50",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_8",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_33",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_51",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sigmoid_default_4",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_34",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_52",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_53",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_mul_tensor_6",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_35",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_54",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_55",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sub_tensor_2",
+      "target": "<EdgeOpOverload: aten.sub.Tensor>: schema = aten::sub.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_36",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_56",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_57",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_9",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_37",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_58",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sigmoid_default_5",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_38",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_59",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_60",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_mul_tensor_7",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_39",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_61",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_62",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_10",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_40",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_63",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_tanh_default_2",
+      "target": "<EdgeOpOverload: aten.tanh.default>: schema = aten::tanh(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_41",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_64",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_65",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_mul_tensor_8",
+      "target": "<EdgeOpOverload: aten.mul.Tensor>: schema = aten::mul.Tensor(Tensor self, Tensor other) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_42",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_66",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_67",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_add_tensor_11",
+      "target": "<EdgeOpOverload: aten.add.Tensor>: schema = aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_43",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_cat_default_4",
+      "target": "<EdgeOpOverload: aten.cat.default>: schema = aten::cat(Tensor[] tensors, int dim=0) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_18",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_19",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_20",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_68",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_14",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_15",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_7",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_44",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_21",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_22",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_69",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sigmoid_default_6",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_45",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_23",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_24",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_70",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_16",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_channel_default_17",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_channel.default>: schema = quantized_decomposed::dequantize_per_channel(Tensor input, Tensor scales, Tensor? zero_points, int axis, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_convolution_default_8",
+      "target": "<EdgeOpOverload: aten.convolution.default>: schema = aten::convolution(Tensor input, Tensor weight, Tensor? bias, SymInt[] stride, SymInt[] padding, SymInt[] dilation, bool transposed, SymInt[] output_padding, SymInt groups) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_46",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_25",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_view_copy_default_26",
+      "target": "<EdgeOpOverload: aten.view_copy.default>: schema = aten::view_copy(Tensor self, SymInt[] size) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_dequantize_per_tensor_default_71",
+      "target": "<EdgeOpOverload: quantized_decomposed.dequantize_per_tensor.default>: schema = quantized_decomposed::dequantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype, *, ScalarType? out_dtype=None) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "aten_sigmoid_default_7",
+      "target": "<EdgeOpOverload: aten.sigmoid.default>: schema = aten::sigmoid(Tensor self) -> Tensor",
+      "delegation_tag": "tag0"
+    },
+    {
+      "name": "quantized_decomposed_quantize_per_tensor_default_47",
+      "target": "<EdgeOpOverload: quantized_decomposed.quantize_per_tensor.default>: schema = quantized_decomposed::quantize_per_tensor(Tensor input, float scale, int zero_point, int quant_min, int quant_max, ScalarType dtype) -> Tensor",
+      "delegation_tag": "tag0"
+    }
+  ]
+}

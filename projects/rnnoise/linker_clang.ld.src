@@ -1,0 +1,3 @@
+/* LLVM Embedded linker layout shared by the DevKit-E8 applications. */
+#define __HEAP_SIZE 0x00040000 /* Match the RNNoise AC6 heap. */
+#include "../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_clang.ld.src"

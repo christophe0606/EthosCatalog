@@ -197,6 +197,20 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: RNNoise_Debug
+          images:
+            - project-context: rnnoise.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: RNNoise_Release
+          images:
+            - project-context: rnnoise.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
         - set: YAMNet_Debug
           images:
             - project-context: yamnet.Debug
@@ -257,6 +271,10 @@ solution:
     - project: projects/rvtts_lpc/rvtts_lpc.cproject.yml
     - project: projects/rvtts_fargan/rvtts_fargan.cproject.yml
     - project: projects/silero_vad/silero_vad.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
+    - project: projects/rnnoise/rnnoise.cproject.yml
       for-context:
         - .Debug
         - .Release

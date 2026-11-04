@@ -1,0 +1,22 @@
+{
+  "project": "projects/rnnoise/rnnoise.cproject.yml",
+  "config_sha256": "61e65ab395bd2d7fec76e48c034c30e15a9a73ef7541bba8afe2a622a9173b50",
+  "pte_sha256": "fdb9f9290446b7bc0d6a450747d38e248aa2065035dab99ab8501c5d4e6e5106",
+  "graph_sha256": "f39585491650368b1a51440bab9ac6ab565c12f2fdea2e637eb869a5de00dfc0",
+  "safetensors_sha256": "2cb97a4299bb2140e5796ccee3a0699e961e9916ea0226822d652f342b3fbcb0",
+  "assets": {},
+  "flash_ospi": false,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_MRAM",
+    "memory_mode": "Shared_Sram"
+  },
+  "delegates": 2,
+  "operators": [
+    "Portable add",
+    "Portable relu",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 217048
+}

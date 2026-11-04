@@ -1,0 +1,50 @@
+{
+  "time": "2026-11-03",
+  "target": "DevKit-E8@RNNoise_Release",
+  "build_job": "b-19",
+  "load_job": "d-20",
+  "fresh_run_before_first_halt": true,
+  "format": "normalized debugger values; full tool response in live_release_raw.json",
+  "timer_hz": 400000000,
+  "stream_stats": {
+    "error": 0,
+    "audio_blocks": 3006,
+    "audio_discontinuities": 0,
+    "last_discontinuity_block": 0,
+    "audio_started": 3616312419,
+    "audio_ticks_max": 3122051,
+    "audio_deadline_misses": 0,
+    "inferences": 3005,
+    "inference_ticks_max": 188097,
+    "state_resets": 0,
+    "analysis_ticks_max": 1971332,
+    "synthesis_ticks_max": 960167,
+    "synthesized_frames": 3005,
+    "null_samples": 1442400,
+    "frames_presented": 301,
+    "lcd_events_sent": 301,
+    "lcd_events_received": 301,
+    "lcd_events_dropped": 0,
+    "lcd_deadline_misses": 0,
+    "last_probability": 0.0,
+    "input_dbfs": -49.8793068,
+    "mean_gain": 0.082386367,
+    "suppression_db": 21.6828918,
+    "output_rms": 0.000122293888
+  },
+  "checks": {
+    "pipeline_error": 0,
+    "rnnoise_test_passed": 1,
+    "rnnoise_parity_passed": 1,
+    "rnnoise_benchmark_complete": 1,
+    "rnnoise_numerical_passed": 1,
+    "microphone_drops": 0,
+    "microphone_overflows": 0
+  },
+  "observed_max_ms": {
+    "audio_ticks_max": 7.8051275,
+    "analysis_ticks_max": 4.92833,
+    "inference_ticks_max": 0.4702425,
+    "synthesis_ticks_max": 2.4004175
+  }
+}
