@@ -1,0 +1,165 @@
+{
+  "preprocessing": "Corrected upstream clip/rest conventions",
+  "score": "instrument0;score(seed9100);1000frames;4notes includingrest;middle held-float input for each method",
+  "address": 3250585600,
+  "bytes": 2078208,
+  "crc32": 3663573510,
+  "methods": {
+    "expression_forward": {
+      "float_max_absolute_error": 0.0009781122207641602,
+      "input": {
+        "offset": 0,
+        "count": 320,
+        "shape": [
+          1,
+          320
+        ]
+      },
+      "expected": {
+        "offset": 1280,
+        "count": 128,
+        "shape": [
+          1,
+          128
+        ]
+      }
+    },
+    "expression_backward": {
+      "float_max_absolute_error": 0.001733154058456421,
+      "input": {
+        "offset": 1792,
+        "count": 320,
+        "shape": [
+          1,
+          320
+        ]
+      },
+      "expected": {
+        "offset": 3072,
+        "count": 128,
+        "shape": [
+          1,
+          128
+        ]
+      }
+    },
+    "expression_step": {
+      "float_max_absolute_error": 0.004379432648420334,
+      "input": {
+        "offset": 3584,
+        "count": 518,
+        "shape": [
+          1,
+          518
+        ]
+      },
+      "expected": {
+        "offset": 5664,
+        "count": 262,
+        "shape": [
+          1,
+          262
+        ]
+      }
+    },
+    "precondition": {
+      "float_max_absolute_error": 0.015816211700439453,
+      "batch": 16,
+      "golden_evaluation": "Heterogeneous score frames; rowwise linear summation of saved quantized graph, preserving single-frame host arithmetic. Native GEMM differences recorded separately in precondition_batch_validation.json.",
+      "input": {
+        "offset": 6720,
+        "count": 160,
+        "shape": [
+          16,
+          10
+        ]
+      },
+      "expected": {
+        "offset": 7360,
+        "count": 4096,
+        "shape": [
+          16,
+          256
+        ]
+      }
+    },
+    "context_forward": {
+      "float_max_absolute_error": 0.006283700466156006,
+      "input": {
+        "offset": 23744,
+        "count": 576,
+        "shape": [
+          1,
+          576
+        ]
+      },
+      "expected": {
+        "offset": 26048,
+        "count": 256,
+        "shape": [
+          1,
+          256
+        ]
+      }
+    },
+    "context_backward": {
+      "float_max_absolute_error": 0.011522963643074036,
+      "input": {
+        "offset": 27072,
+        "count": 576,
+        "shape": [
+          1,
+          576
+        ]
+      },
+      "expected": {
+        "offset": 29376,
+        "count": 256,
+        "shape": [
+          1,
+          256
+        ]
+      }
+    },
+    "pitch_step": {
+      "float_max_absolute_error": 0.07699394226074219,
+      "input": {
+        "offset": 30400,
+        "count": 1225,
+        "shape": [
+          1,
+          1225
+        ]
+      },
+      "expected": {
+        "offset": 35328,
+        "count": 713,
+        "shape": [
+          1,
+          713
+        ]
+      }
+    },
+    "harmonic": {
+      "float_max_absolute_error": 0.11908960342407227,
+      "input": {
+        "offset": 38208,
+        "count": 384000,
+        "shape": [
+          1,
+          1000,
+          384
+        ]
+      },
+      "expected": {
+        "offset": 1574208,
+        "count": 126000,
+        "shape": [
+          1,
+          1000,
+          126
+        ]
+      }
+    }
+  }
+}

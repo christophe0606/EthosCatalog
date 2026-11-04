@@ -1,0 +1,906 @@
+{
+  "provenance": {
+    "file_sha256": {
+      "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+      "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+      "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+      "validate_closed_loop.py": "1d3802c72165b3a4dea8aed97e249604eeb1516af3f9167abf7f22bb2929ad37",
+      "expression_forward_quantized.pt2": "e996a740cc3ccf5da3af3c52db0bc95c5ccb22597f3f08cccc4f0d35b9570d79",
+      "expression_forward_quantized.safetensors": "ac7ab2d21bd7bde25d34639614762a3610b38b2fc5e22c620bb0d41b4f278aee",
+      "expression_backward_quantized.pt2": "c41b76008f4c1fd07597458b63b9e7298ed723efe8413789db7b411244eee163",
+      "expression_backward_quantized.safetensors": "44539a4af14bd92298c68cd267af891be656f084d0bf095582f828be7c6400c7",
+      "expression_step_quantized.pt2": "303a948b55b4adf6480b78408cb0858a8dd0b94106ac993e306662a430f6126d",
+      "expression_step_quantized.safetensors": "ee11c72ed0bbc32881f4fa9cb9460cea74f373826b9e41cdc8a84d1240d3cd5d",
+      "precondition_quantized.pt2": "d5d1c3d814e12143535b0116f037534cedf1a58f4a2a3cbe582ab8809a2e78c2",
+      "precondition_quantized.safetensors": "f0a042b1a18f39fda13475f0f96d3053702bd0834f551be3b92212ed83122bb6",
+      "context_forward_quantized.pt2": "532809a62972474a9f9066e5ca73f7e32b9358abd98b9c9984e62a4b6ae4c1ea",
+      "context_forward_quantized.safetensors": "8895dc6c721790962dff8b94d47ca7d5d6733feca4f1a75cd5aa2e2076597446",
+      "context_backward_quantized.pt2": "6c5fb9f34685a5901379a04a91e12c03395fc7b1c47824e97bbd55db6e2285e9",
+      "context_backward_quantized.safetensors": "f98b6a05f737ad1f2872d61cb2e06f4074b77efbd6b7c7dd527f623ff6c15ded",
+      "pitch_step_quantized.pt2": "1e5d99b7e7b1396e47b654448ca28124f5e34a6c2e7e7c1c04b54f4a65349e98",
+      "pitch_step_quantized.safetensors": "9aab3cdf1ddebef1b37bffbc707d6e20611c5f07cfcab877d6b2757a839a05d5",
+      "harmonic_quantized.pt2": "632da31931fcbabeb365f52274a83f9e1c69778c9dc1fcefc153403fe017c8db",
+      "harmonic_quantized.safetensors": "d3b064855244155c3c96d5b9627a3040f27ad049f6c9349c918d5d7fd8ec36e8"
+    },
+    "frames": 1000,
+    "uniform_seed_base": 9100
+  },
+  "complete": true,
+  "scheme": "a16w8 original learned methods; original float normalization and CPU top-p",
+  "preprocessing": "Clipped synthesis conditioning; raw masked expression feedback; zero rest position",
+  "reference": "Saved imported original weights; independent TF parity and held-state conditional reports alongside",
+  "closed_loop": [
+    {
+      "instrument_id": 0,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.28944945335388184,
+          "mae": 0.022637689486145973,
+          "rmse": 0.031492557376623154,
+          "reference_rms": 2.1676926612854004
+        },
+        {
+          "max_absolute_error": 0.2800025939941406,
+          "mae": 0.03475994989275932,
+          "rmse": 0.07057613134384155,
+          "reference_rms": 47.24856948852539
+        },
+        {
+          "max_absolute_error": 0.010555267333984375,
+          "mae": 0.0028018380980938673,
+          "rmse": 0.004014173988252878,
+          "reference_rms": 0.4186701476573944
+        },
+        {
+          "max_absolute_error": 24.341510772705078,
+          "mae": 1.0581965446472168,
+          "rmse": 2.330594062805176,
+          "reference_rms": 6.263409614562988
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.7783267498016357,
+      "mean_logits_total_variation": 0.3590714931488037,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 48,
+          "ptq_mean_cents": 4804.23193359375,
+          "float_mean_cents": 4803.3720703125,
+          "ptq_std_cents": 15.975799560546875,
+          "float_std_cents": 16.183746337890625
+        },
+        {
+          "region": 1,
+          "midi_note": 55,
+          "ptq_mean_cents": 5496.580078125,
+          "float_mean_cents": 5495.85595703125,
+          "ptq_std_cents": 10.228763580322266,
+          "float_std_cents": 10.452332496643066
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 60,
+          "ptq_mean_cents": 6001.408203125,
+          "float_mean_cents": 6001.64794921875,
+          "ptq_std_cents": 10.694369316101074,
+          "float_std_cents": 10.730708122253418
+        }
+      ]
+    },
+    {
+      "instrument_id": 1,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.5501829385757446,
+          "mae": 0.03723977878689766,
+          "rmse": 0.05051423981785774,
+          "reference_rms": 2.203214406967163
+        },
+        {
+          "max_absolute_error": 0.6800003051757812,
+          "mae": 0.03640998154878616,
+          "rmse": 0.0779004767537117,
+          "reference_rms": 48.12993240356445
+        },
+        {
+          "max_absolute_error": 0.0102347731590271,
+          "mae": 0.002763589145615697,
+          "rmse": 0.003949654754251242,
+          "reference_rms": 0.42482537031173706
+        },
+        {
+          "max_absolute_error": 20.660856246948242,
+          "mae": 0.9985971450805664,
+          "rmse": 2.074465751647949,
+          "reference_rms": 6.121389865875244
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.5778462886810303,
+      "mean_logits_total_variation": 0.3864695429801941,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 49,
+          "ptq_mean_cents": 4892.10400390625,
+          "float_mean_cents": 4893.30810546875,
+          "ptq_std_cents": 15.810792922973633,
+          "float_std_cents": 15.689650535583496
+        },
+        {
+          "region": 1,
+          "midi_note": 56,
+          "ptq_mean_cents": 5600.671875,
+          "float_mean_cents": 5600.22412109375,
+          "ptq_std_cents": 12.625863075256348,
+          "float_std_cents": 13.603448867797852
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 61,
+          "ptq_mean_cents": 6100.98388671875,
+          "float_mean_cents": 6111.64013671875,
+          "ptq_std_cents": 8.430880546569824,
+          "float_std_cents": 8.718165397644043
+        }
+      ]
+    },
+    {
+      "instrument_id": 2,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.2916065454483032,
+          "mae": 0.030990559607744217,
+          "rmse": 0.04238138720393181,
+          "reference_rms": 1.9982470273971558
+        },
+        {
+          "max_absolute_error": 0.2999992370605469,
+          "mae": 0.047019969671964645,
+          "rmse": 0.08020590990781784,
+          "reference_rms": 49.046234130859375
+        },
+        {
+          "max_absolute_error": 0.009694814682006836,
+          "mae": 0.0026887282729148865,
+          "rmse": 0.0038470355793833733,
+          "reference_rms": 0.42941391468048096
+        },
+        {
+          "max_absolute_error": 20.94835090637207,
+          "mae": 1.351209282875061,
+          "rmse": 2.484510660171509,
+          "reference_rms": 6.480978012084961
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 4.002175331115723,
+      "mean_logits_total_variation": 0.5271514058113098,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 50,
+          "ptq_mean_cents": 5009.27587890625,
+          "float_mean_cents": 5008.080078125,
+          "ptq_std_cents": 15.285019874572754,
+          "float_std_cents": 14.989649772644043
+        },
+        {
+          "region": 1,
+          "midi_note": 57,
+          "ptq_mean_cents": 5710.26806640625,
+          "float_mean_cents": 5708.67578125,
+          "ptq_std_cents": 10.280281066894531,
+          "float_std_cents": 11.288712501525879
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 62,
+          "ptq_mean_cents": 6207.759765625,
+          "float_mean_cents": 6208.9482421875,
+          "ptq_std_cents": 9.749995231628418,
+          "float_std_cents": 9.205286026000977
+        }
+      ]
+    },
+    {
+      "instrument_id": 3,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.7348625063896179,
+          "mae": 0.052630048245191574,
+          "rmse": 0.07366617769002914,
+          "reference_rms": 2.037583351135254
+        },
+        {
+          "max_absolute_error": 0.3100013732910156,
+          "mae": 0.03832006826996803,
+          "rmse": 0.06811612844467163,
+          "reference_rms": 49.900184631347656
+        },
+        {
+          "max_absolute_error": 0.010128140449523926,
+          "mae": 0.0027817587833851576,
+          "rmse": 0.004021995235234499,
+          "reference_rms": 0.40683919191360474
+        },
+        {
+          "max_absolute_error": 21.732393264770508,
+          "mae": 1.2495408058166504,
+          "rmse": 2.2868969440460205,
+          "reference_rms": 6.030398845672607
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 3.562192440032959,
+      "mean_logits_total_variation": 0.5009970664978027,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 51,
+          "ptq_mean_cents": 5108.34814453125,
+          "float_mean_cents": 5104.94384765625,
+          "ptq_std_cents": 19.601909637451172,
+          "float_std_cents": 19.966493606567383
+        },
+        {
+          "region": 1,
+          "midi_note": 58,
+          "ptq_mean_cents": 5804.755859375,
+          "float_mean_cents": 5804.99609375,
+          "ptq_std_cents": 12.501218795776367,
+          "float_std_cents": 13.200757026672363
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 63,
+          "ptq_mean_cents": 6310.73193359375,
+          "float_mean_cents": 6312.05615234375,
+          "ptq_std_cents": 7.908752918243408,
+          "float_std_cents": 9.475281715393066
+        }
+      ]
+    },
+    {
+      "instrument_id": 4,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 1.9959205389022827,
+          "mae": 0.048849817365407944,
+          "rmse": 0.07962987571954727,
+          "reference_rms": 2.3060226440429688
+        },
+        {
+          "max_absolute_error": 0.14000701904296875,
+          "mae": 0.02201990969479084,
+          "rmse": 0.036060988903045654,
+          "reference_rms": 50.679298400878906
+        },
+        {
+          "max_absolute_error": 0.010074377059936523,
+          "mae": 0.0026338722091168165,
+          "rmse": 0.0038121873512864113,
+          "reference_rms": 0.4082038402557373
+        },
+        {
+          "max_absolute_error": 18.119205474853516,
+          "mae": 0.9040104150772095,
+          "rmse": 1.7019189596176147,
+          "reference_rms": 6.08211612701416
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.5462307929992676,
+      "mean_logits_total_variation": 0.42457258701324463,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 52,
+          "ptq_mean_cents": 5194.14404296875,
+          "float_mean_cents": 5193.919921875,
+          "ptq_std_cents": 15.820090293884277,
+          "float_std_cents": 16.174596786499023
+        },
+        {
+          "region": 1,
+          "midi_note": 59,
+          "ptq_mean_cents": 5900.14794921875,
+          "float_mean_cents": 5898.1318359375,
+          "ptq_std_cents": 11.74930191040039,
+          "float_std_cents": 12.382672309875488
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.4000000059604645,
+          "float_mean_cents": 0.4000000059604645,
+          "ptq_std_cents": 6.311893463134766,
+          "float_std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 64,
+          "ptq_mean_cents": 6401.087890625,
+          "float_mean_cents": 6400.7998046875,
+          "ptq_std_cents": 12.744528770446777,
+          "float_std_cents": 13.40356731414795
+        }
+      ]
+    },
+    {
+      "instrument_id": 5,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.5022150278091431,
+          "mae": 0.02802693098783493,
+          "rmse": 0.03944242745637894,
+          "reference_rms": 2.273455858230591
+        },
+        {
+          "max_absolute_error": 0.160003662109375,
+          "mae": 0.018930023536086082,
+          "rmse": 0.034651096910238266,
+          "reference_rms": 51.77543258666992
+        },
+        {
+          "max_absolute_error": 0.010087549686431885,
+          "mae": 0.002942034276202321,
+          "rmse": 0.004254982341080904,
+          "reference_rms": 0.4128767251968384
+        },
+        {
+          "max_absolute_error": 18.587587356567383,
+          "mae": 0.9060122966766357,
+          "rmse": 1.6356687545776367,
+          "reference_rms": 6.228870391845703
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.4269907474517822,
+      "mean_logits_total_variation": 0.4215070307254791,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 53,
+          "ptq_mean_cents": 5329.52001953125,
+          "float_mean_cents": 5328.51220703125,
+          "ptq_std_cents": 17.46818733215332,
+          "float_std_cents": 17.481014251708984
+        },
+        {
+          "region": 1,
+          "midi_note": 60,
+          "ptq_mean_cents": 6023.412109375,
+          "float_mean_cents": 6023.0439453125,
+          "ptq_std_cents": 6.236846446990967,
+          "float_std_cents": 7.59329080581665
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 65,
+          "ptq_mean_cents": 6524.748046875,
+          "float_mean_cents": 6523.591796875,
+          "ptq_std_cents": 9.950458526611328,
+          "float_std_cents": 10.291014671325684
+        }
+      ]
+    },
+    {
+      "instrument_id": 6,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.25017809867858887,
+          "mae": 0.026177028194069862,
+          "rmse": 0.03512314707040787,
+          "reference_rms": 2.1569764614105225
+        },
+        {
+          "max_absolute_error": 0.20000457763671875,
+          "mae": 0.005780128296464682,
+          "rmse": 0.014846047386527061,
+          "reference_rms": 52.539852142333984
+        },
+        {
+          "max_absolute_error": 0.009824514389038086,
+          "mae": 0.0027884591836482286,
+          "rmse": 0.003974537365138531,
+          "reference_rms": 0.4093352258205414
+        },
+        {
+          "max_absolute_error": 12.568888664245605,
+          "mae": 0.45317670702934265,
+          "rmse": 0.8684398531913757,
+          "reference_rms": 4.929443836212158
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 0.7083421349525452,
+      "mean_logits_total_variation": 0.22958645224571228,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 54,
+          "ptq_mean_cents": 5412.0400390625,
+          "float_mean_cents": 5411.7158203125,
+          "ptq_std_cents": 24.53337287902832,
+          "float_std_cents": 24.680747985839844
+        },
+        {
+          "region": 1,
+          "midi_note": 61,
+          "ptq_mean_cents": 6108.43212890625,
+          "float_mean_cents": 6109.0439453125,
+          "ptq_std_cents": 5.9192376136779785,
+          "float_std_cents": 5.932458400726318
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.4000000059604645,
+          "float_mean_cents": 0.4000000059604645,
+          "ptq_std_cents": 6.311893463134766,
+          "float_std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 66,
+          "ptq_mean_cents": 6618.61181640625,
+          "float_mean_cents": 6618.8837890625,
+          "ptq_std_cents": 6.757295608520508,
+          "float_std_cents": 5.6523756980896
+        }
+      ]
+    },
+    {
+      "instrument_id": 7,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.42755794525146484,
+          "mae": 0.04212084785103798,
+          "rmse": 0.0555591881275177,
+          "reference_rms": 2.314366340637207
+        },
+        {
+          "max_absolute_error": 1.2700004577636719,
+          "mae": 0.027870094403624535,
+          "rmse": 0.06744996458292007,
+          "reference_rms": 53.46251678466797
+        },
+        {
+          "max_absolute_error": 0.010135471820831299,
+          "mae": 0.0027234386652708054,
+          "rmse": 0.00397866778075695,
+          "reference_rms": 0.385783314704895
+        },
+        {
+          "max_absolute_error": 18.493404388427734,
+          "mae": 1.226839303970337,
+          "rmse": 2.039888620376587,
+          "reference_rms": 5.735666751861572
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 3.4625792503356934,
+      "mean_logits_total_variation": 0.5466167330741882,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 55,
+          "ptq_mean_cents": 5508.15185546875,
+          "float_mean_cents": 5509.3759765625,
+          "ptq_std_cents": 12.899336814880371,
+          "float_std_cents": 13.172494888305664
+        },
+        {
+          "region": 1,
+          "midi_note": 62,
+          "ptq_mean_cents": 6207.65576171875,
+          "float_mean_cents": 6209.44384765625,
+          "ptq_std_cents": 9.466238021850586,
+          "float_std_cents": 11.344023704528809
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.4000000059604645,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 6.311893463134766,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 67,
+          "ptq_mean_cents": 6737.69580078125,
+          "float_mean_cents": 6739.34423828125,
+          "ptq_std_cents": 11.859343528747559,
+          "float_std_cents": 12.402008056640625
+        }
+      ]
+    },
+    {
+      "instrument_id": 8,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.5461010932922363,
+          "mae": 0.03356778621673584,
+          "rmse": 0.0468495674431324,
+          "reference_rms": 2.2124977111816406
+        },
+        {
+          "max_absolute_error": 0.2400054931640625,
+          "mae": 0.02064998634159565,
+          "rmse": 0.032395973801612854,
+          "reference_rms": 54.217716217041016
+        },
+        {
+          "max_absolute_error": 0.010287821292877197,
+          "mae": 0.0026719130109995604,
+          "rmse": 0.003938041627407074,
+          "reference_rms": 0.3904738128185272
+        },
+        {
+          "max_absolute_error": 17.007448196411133,
+          "mae": 0.9346085786819458,
+          "rmse": 1.7001224756240845,
+          "reference_rms": 6.461950778961182
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.827690362930298,
+      "mean_logits_total_variation": 0.48181307315826416,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 56,
+          "ptq_mean_cents": 5605.7880859375,
+          "float_mean_cents": 5605.5361328125,
+          "ptq_std_cents": 16.291563034057617,
+          "float_std_cents": 16.520069122314453
+        },
+        {
+          "region": 1,
+          "midi_note": 63,
+          "ptq_mean_cents": 6307.60009765625,
+          "float_mean_cents": 6305.89599609375,
+          "ptq_std_cents": 10.163875579833984,
+          "float_std_cents": 9.929247856140137
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.4000000059604645,
+          "float_mean_cents": 0.4000000059604645,
+          "ptq_std_cents": 6.311893463134766,
+          "float_std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 68,
+          "ptq_mean_cents": 6808.98779296875,
+          "float_mean_cents": 6811.42822265625,
+          "ptq_std_cents": 9.93601131439209,
+          "float_std_cents": 9.983447074890137
+        }
+      ]
+    },
+    {
+      "instrument_id": 9,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.5292797088623047,
+          "mae": 0.03248943015933037,
+          "rmse": 0.04637645184993744,
+          "reference_rms": 2.3178608417510986
+        },
+        {
+          "max_absolute_error": 1.0,
+          "mae": 0.02328004501760006,
+          "rmse": 0.06361456960439682,
+          "reference_rms": 55.172340393066406
+        },
+        {
+          "max_absolute_error": 0.009529829025268555,
+          "mae": 0.002656562952324748,
+          "rmse": 0.0038900175131857395,
+          "reference_rms": 0.4102769196033478
+        },
+        {
+          "max_absolute_error": 14.749698638916016,
+          "mae": 0.8714404702186584,
+          "rmse": 1.5409271717071533,
+          "reference_rms": 5.946958065032959
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.1682136058807373,
+      "mean_logits_total_variation": 0.45242637395858765,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 57,
+          "ptq_mean_cents": 5706.9521484375,
+          "float_mean_cents": 5705.6201171875,
+          "ptq_std_cents": 18.4914493560791,
+          "float_std_cents": 17.39228630065918
+        },
+        {
+          "region": 1,
+          "midi_note": 64,
+          "ptq_mean_cents": 6421.587890625,
+          "float_mean_cents": 6420.2158203125,
+          "ptq_std_cents": 17.7248592376709,
+          "float_std_cents": 17.87270736694336
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.4000000059604645,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 69,
+          "ptq_mean_cents": 6927.31982421875,
+          "float_mean_cents": 6927.14404296875,
+          "ptq_std_cents": 13.011425971984863,
+          "float_std_cents": 15.101114273071289
+        }
+      ]
+    },
+    {
+      "instrument_id": 10,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.6106524467468262,
+          "mae": 0.03417498990893364,
+          "rmse": 0.0497046634554863,
+          "reference_rms": 2.491454601287842
+        },
+        {
+          "max_absolute_error": 0.30999755859375,
+          "mae": 0.03469002619385719,
+          "rmse": 0.06070825457572937,
+          "reference_rms": 56.02089309692383
+        },
+        {
+          "max_absolute_error": 0.010531187057495117,
+          "mae": 0.002812286838889122,
+          "rmse": 0.004129675682634115,
+          "reference_rms": 0.3894852101802826
+        },
+        {
+          "max_absolute_error": 21.400989532470703,
+          "mae": 1.1224925518035889,
+          "rmse": 2.1086535453796387,
+          "reference_rms": 6.151742458343506
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 3.3857522010803223,
+      "mean_logits_total_variation": 0.48565781116485596,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 58,
+          "ptq_mean_cents": 5815.49609375,
+          "float_mean_cents": 5817.22802734375,
+          "ptq_std_cents": 22.937000274658203,
+          "float_std_cents": 20.587570190429688
+        },
+        {
+          "region": 1,
+          "midi_note": 65,
+          "ptq_mean_cents": 6513.84423828125,
+          "float_mean_cents": 6509.6640625,
+          "ptq_std_cents": 17.83266258239746,
+          "float_std_cents": 18.104562759399414
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 70,
+          "ptq_mean_cents": 7022.0517578125,
+          "float_mean_cents": 7022.591796875,
+          "ptq_std_cents": 13.50085735321045,
+          "float_std_cents": 13.570304870605469
+        }
+      ]
+    },
+    {
+      "instrument_id": 11,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.43541836738586426,
+          "mae": 0.027544714510440826,
+          "rmse": 0.03845991566777229,
+          "reference_rms": 2.308289051055908
+        },
+        {
+          "max_absolute_error": 0.5499954223632812,
+          "mae": 0.06250015646219254,
+          "rmse": 0.09688758105039597,
+          "reference_rms": 56.8312873840332
+        },
+        {
+          "max_absolute_error": 0.009857237339019775,
+          "mae": 0.0027592889964580536,
+          "rmse": 0.0039860038086771965,
+          "reference_rms": 0.394126296043396
+        },
+        {
+          "max_absolute_error": 23.428585052490234,
+          "mae": 1.89674973487854,
+          "rmse": 3.1548407077789307,
+          "reference_rms": 5.828721046447754
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 6.889168739318848,
+      "mean_logits_total_variation": 0.6556302309036255,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 59,
+          "ptq_mean_cents": 5913.97216796875,
+          "float_mean_cents": 5909.47607421875,
+          "ptq_std_cents": 22.05074119567871,
+          "float_std_cents": 22.99985694885254
+        },
+        {
+          "region": 1,
+          "midi_note": 66,
+          "ptq_mean_cents": 6616.15185546875,
+          "float_mean_cents": 6611.30810546875,
+          "ptq_std_cents": 11.816967010498047,
+          "float_std_cents": 12.151937484741211
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.800000011920929,
+          "float_mean_cents": 0.800000011920929,
+          "ptq_std_cents": 8.90842342376709,
+          "float_std_cents": 8.90842342376709
+        },
+        {
+          "region": 3,
+          "midi_note": 71,
+          "ptq_mean_cents": 7107.7158203125,
+          "float_mean_cents": 7110.52001953125,
+          "ptq_std_cents": 11.283390998840332,
+          "float_std_cents": 15.725194931030273
+        }
+      ]
+    },
+    {
+      "instrument_id": 12,
+      "frames": 1000,
+      "metrics_raw_pitch_expression_logits": [
+        {
+          "max_absolute_error": 0.44078731536865234,
+          "mae": 0.035003744065761566,
+          "rmse": 0.04974813014268875,
+          "reference_rms": 2.5646703243255615
+        },
+        {
+          "max_absolute_error": 0.17000579833984375,
+          "mae": 0.02200012281537056,
+          "rmse": 0.03840070962905884,
+          "reference_rms": 57.74704360961914
+        },
+        {
+          "max_absolute_error": 0.010373950004577637,
+          "mae": 0.0028603796381503344,
+          "rmse": 0.004206811543554068,
+          "reference_rms": 0.3380729854106903
+        },
+        {
+          "max_absolute_error": 16.576820373535156,
+          "mae": 0.8690639138221741,
+          "rmse": 1.7056467533111572,
+          "reference_rms": 5.983077526092529
+        }
+      ],
+      "mean_logits_kl_float_to_ptq": 2.5560784339904785,
+      "mean_logits_total_variation": 0.40580281615257263,
+      "finite": true,
+      "pitch_regions": [
+        {
+          "region": 0,
+          "midi_note": 60,
+          "ptq_mean_cents": 6021.5078125,
+          "float_mean_cents": 6021.56787109375,
+          "ptq_std_cents": 12.255037307739258,
+          "float_std_cents": 11.664534568786621
+        },
+        {
+          "region": 1,
+          "midi_note": 67,
+          "ptq_mean_cents": 6709.01611328125,
+          "float_mean_cents": 6708.97607421875,
+          "ptq_std_cents": 11.093791961669922,
+          "float_std_cents": 11.019240379333496
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "ptq_mean_cents": 0.0,
+          "float_mean_cents": 0.0,
+          "ptq_std_cents": 0.0,
+          "float_std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 72,
+          "ptq_mean_cents": 7219.7998046875,
+          "float_mean_cents": 7219.33984375,
+          "ptq_std_cents": 9.146363258361816,
+          "float_std_cents": 8.515403747558594
+        }
+      ]
+    }
+  ],
+  "limitations": "Synthetic scores only. Coupled random paths can diverge after categorical boundary flips. No final audio, seam, perceptual or board acceptance follows."
+}

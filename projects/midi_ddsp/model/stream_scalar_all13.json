@@ -1,0 +1,37 @@
+{
+  "context": "b77/d78 matching Release, scalar8192linear/FastTwoSum/Reverb256. All13 actual generated playback complete26windows/26000frames/104notes. Observed real-time FAIL. Several debugger pauses occurred between startup and final snapshot, so final maxNN4.242896395s/29starvation events are contaminated by debugging; first prehalt snapshot independently recorded4.197756495s and4starvation events. Not a sustained deadline acceptance.",
+  "results": {
+    "midi_demo": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_demo\nResult: {...}\nType: MidiDemoStats\nFields:\n  windows_started: 26 (uint32_t)\n  windows_ready: 26 (uint32_t)\n  windows_played: 26 (uint32_t)\n  frames: 26000 (uint32_t)\n  tail_frames: 31392 (uint32_t)\n  complete: 1 (uint32_t)\n  current_instrument: 12 (uint32_t)\n  instrument_mask: 8191 (uint32_t)\n  tail_steals: 12 (uint32_t)\n  control_waits: 51 (uint32_t)\n  deadline_misses: 17 (uint32_t)\n  max_regions: 16 (uint32_t)\n  method_calls: [8] (uint32_t [8])\n    [0]: 221 (uint32_t)\n    [1]: 221 (uint32_t)\n    [2]: 221 (uint32_t)\n    [3]: 1638 (uint32_t)\n    [4]: 26000 (uint32_t)\n    [5]: 26000 (uint32_t)\n    [6]: 26000 (uint32_t)\n    [7]: 26 (uint32_t)\n  neural_ticks: 42002225877 (uint64_t)\n  max_neural_ticks: 1697158558 (uint64_t)\n  control_wait_ticks: 1182530298 (uint64_t)\n  startup_ticks: 0 (uint64_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "midi_admission": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_admission\nResult: {...}\nType: midi_ddsp::ScoreWindowCounters\nFields:\n  windows: 26 (uint64_t)\n  note_ons: 104 (uint64_t)\n  unsupported_notes: 0 (uint64_t)\n  rejected_instrument_notes: 0 (uint64_t)\n  overlap_steals: 0 (uint64_t)\n  unmatched_note_offs: 0 (uint64_t)\n  quantized_away_notes: 0 (uint64_t)\n  program_changes: 13 (uint64_t)\n  instrument_switches: 12 (uint64_t)\n  dense_windows: 0 (uint64_t)\n  dense_regions: 0 (uint64_t)\n  dense_note_regions: 0 (uint64_t)\n  capacity_rest_frames: 0 (uint64_t)"
+        }
+      ]
+    },
+    "devkit_e8_audio_stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: devkit_e8_audio_stats\nResult: {...}\nType: volatile DevKitE8AudioStats\nFields:\n  queued_blocks: 14347 (uint32_t)\n  completed_blocks: 14341 (uint32_t)\n  callbacks: 14536 (uint32_t)\n  silence_blocks: 195 (uint32_t)\n  starvation_events: 29 (uint32_t)\n  driver_underflows: 0 (uint32_t)\n  deadline_misses: 0 (uint32_t)\n  queue_high_water: 6 (uint32_t)\n  write_timeouts: 0 (uint32_t)\n  frame_errors: 0 (uint32_t)\n  interval_min_ticks: 6113746 (uint32_t)\n  interval_max_ticks: 6400578 (uint32_t)\n  timer_hz: 400000000 (uint32_t)\n  started_ticks: 1596240393 (uint32_t)\n  first_audio_ticks: 1596241161 (uint32_t)\n  last_completed_ticks: 136776448 (uint32_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "pipeline_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    }
+  }
+}

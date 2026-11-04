@@ -1,0 +1,93 @@
+{
+  "context": "b50/d51 held sample0 cache first-use; samples1..3 warm; all intervals uninterrupted",
+  "results": [
+    {
+      "expression": "midi_method_timing[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[0]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 99916 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18904 (uint64_t)\n    active: 18904 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 86448 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18904 (uint64_t)\n    active: 18904 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 84965 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18904 (uint64_t)\n    active: 18904 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 84568 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18904 (uint64_t)\n    active: 18904 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[1]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[1]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 88127 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18835 (uint64_t)\n    active: 18835 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 84124 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18835 (uint64_t)\n    active: 18835 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 83519 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18835 (uint64_t)\n    active: 18835 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 83183 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 18835 (uint64_t)\n    active: 18835 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[2]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[2]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 462906 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 39718 (uint64_t)\n    active: 39718 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 451246 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 39719 (uint64_t)\n    active: 39719 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 450691 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 39719 (uint64_t)\n    active: 39719 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 450857 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 39719 (uint64_t)\n    active: 39719 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[3]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[3]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 2693855 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 222290 (uint64_t)\n    active: 222290 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 2692051 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 222290 (uint64_t)\n    active: 222290 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 2696968 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 222295 (uint64_t)\n    active: 222295 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 2690497 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 222288 (uint64_t)\n    active: 222288 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[4]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[4]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 135067 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 61876 (uint64_t)\n    active: 61876 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 130764 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 61876 (uint64_t)\n    active: 61876 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 128888 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 61876 (uint64_t)\n    active: 61876 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 129190 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 61876 (uint64_t)\n    active: 61876 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[5]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[5]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 132147 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 62512 (uint64_t)\n    active: 62512 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 129279 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 62518 (uint64_t)\n    active: 62518 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 128200 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 62512 (uint64_t)\n    active: 62512 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 127418 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 62512 (uint64_t)\n    active: 62512 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[6]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[6]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 385674 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 173610 (uint64_t)\n    active: 173610 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 376631 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 173610 (uint64_t)\n    active: 173610 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 376007 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 173610 (uint64_t)\n    active: 173610 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 376233 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 173610 (uint64_t)\n    active: 173610 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_timing[7]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_timing[7]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 168098893 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433509 (uint64_t)\n    active: 31433509 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 168081954 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433507 (uint64_t)\n    active: 31433507 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 168131155 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433490 (uint64_t)\n    active: 31433490 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 168069264 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433503 (uint64_t)\n    active: 31433503 (uint64_t)"
+          }
+        ]
+      }
+    }
+  ]
+}

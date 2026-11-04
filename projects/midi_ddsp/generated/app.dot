@@ -1,0 +1,356 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+audio [label=<
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">audio<BR/>(AudioOutput)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+controls [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">controls<BR/>(ControlSource)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+reverb [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">reverb<BR/>(DDSPReverb)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+score [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">score<BR/>(MidiScore)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+send [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="17"><FONT COLOR="black" POINT-SIZE="14.0">send<BR/>(SendToNetwork)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+
+<TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+</TR><TR>
+<TD PORT="iev1"><FONT POINT-SIZE="12.0" COLOR="black">iev1</FONT></TD>
+
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR><TR>
+<TD PORT="iev2"><FONT POINT-SIZE="12.0" COLOR="black">iev2</FONT></TD>
+
+<TD PORT="oev2"><FONT POINT-SIZE="12.0" COLOR="black">oev2</FONT></TD>
+</TR><TR>
+<TD PORT="iev3"><FONT POINT-SIZE="12.0" COLOR="black">iev3</FONT></TD>
+
+<TD PORT="oev3"><FONT POINT-SIZE="12.0" COLOR="black">oev3</FONT></TD>
+</TR><TR>
+<TD PORT="iev4"><FONT POINT-SIZE="12.0" COLOR="black">iev4</FONT></TD>
+
+<TD PORT="oev4"><FONT POINT-SIZE="12.0" COLOR="black">oev4</FONT></TD>
+</TR><TR>
+<TD PORT="iev5"><FONT POINT-SIZE="12.0" COLOR="black">iev5</FONT></TD>
+
+<TD PORT="oev5"><FONT POINT-SIZE="12.0" COLOR="black">oev5</FONT></TD>
+</TR><TR>
+<TD PORT="iev6"><FONT POINT-SIZE="12.0" COLOR="black">iev6</FONT></TD>
+
+<TD PORT="oev6"><FONT POINT-SIZE="12.0" COLOR="black">oev6</FONT></TD>
+</TR><TR>
+<TD PORT="iev7"><FONT POINT-SIZE="12.0" COLOR="black">iev7</FONT></TD>
+
+<TD PORT="oev7"><FONT POINT-SIZE="12.0" COLOR="black">oev7</FONT></TD>
+</TR><TR>
+<TD PORT="iev8"><FONT POINT-SIZE="12.0" COLOR="black">iev8</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev9"><FONT POINT-SIZE="12.0" COLOR="black">iev9</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev10"><FONT POINT-SIZE="12.0" COLOR="black">iev10</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev11"><FONT POINT-SIZE="12.0" COLOR="black">iev11</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev12"><FONT POINT-SIZE="12.0" COLOR="black">iev12</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev13"><FONT POINT-SIZE="12.0" COLOR="black">iev13</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev14"><FONT POINT-SIZE="12.0" COLOR="black">iev14</FONT></TD>
+
+
+<TD></TD></TR><TR>
+<TD PORT="iev15"><FONT POINT-SIZE="12.0" COLOR="black">iev15</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+synth [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">synth<BR/>(DDSPSynth)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+context_backward [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">context_backward<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+context_forward [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">context_forward<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+expression_backward [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">expression_backward<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+expression_forward [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">expression_forward<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+expression_step [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">expression_step<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+harmonic [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">harmonic<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+pitch_step [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">pitch_step<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+precondition [label=<
+<TABLE color="#6A1B9A" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="iev0"><FONT POINT-SIZE="12.0" COLOR="black">iev0</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#6A1B9A" POINT-SIZE="14.0">precondition<BR/>(MidiMethod)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="oev1"><FONT POINT-SIZE="12.0" COLOR="black">oev1</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+
+score:i -> send:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<u32>
+
+]
+
+send:o -> controls:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<u32>
+
+]
+
+controls:i -> synth:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(256)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
+</TD></TR></TABLE>>]
+
+synth:i -> reverb:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(256)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >64</FONT>
+</TD></TR></TABLE>>]
+
+reverb:i -> audio:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(256)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
+</TD></TR></TABLE>>]
+
+
+
+send:oev0 -> expression_forward:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_forward:oev0 -> send:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_forward:oev1 -> send:iev1 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev1 -> expression_backward:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_backward:oev0 -> send:iev2 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_backward:oev1 -> send:iev3 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev2 -> expression_step:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_step:oev0 -> send:iev4 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+expression_step:oev1 -> send:iev5 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev3 -> precondition:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+precondition:oev0 -> send:iev6 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+precondition:oev1 -> send:iev7 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev4 -> context_forward:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+context_forward:oev0 -> send:iev8 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+context_forward:oev1 -> send:iev9 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev5 -> context_backward:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+context_backward:oev0 -> send:iev10 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+context_backward:oev1 -> send:iev11 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev6 -> pitch_step:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+pitch_step:oev0 -> send:iev12 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+pitch_step:oev1 -> send:iev13 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+send:oev7 -> harmonic:iev0 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+harmonic:oev0 -> send:iev14 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+harmonic:oev1 -> send:iev15 [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+
+}

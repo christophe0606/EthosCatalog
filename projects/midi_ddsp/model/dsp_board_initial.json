@@ -1,0 +1,60 @@
+{
+  "context": "b55/d56 Release initial scalar precise oscillator; startup first launch failed Error35; successful retry; no audio output",
+  "results": [
+    {
+      "expression": "midi_dsp_profile",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_profile\nResult: {...}\nType: struct MidiDspProfile\nFields:\n  init_ticks: 25785521 (uint64_t)\n  harmonic_noise_ticks: 2493124040 (uint64_t)\n  reverb_ticks: 308606162 (uint64_t)\n  total_ticks: 2804982322 (uint64_t)\n  intervals: 1000 (uint32_t)\n  nonfinite: 0 (uint32_t)\n  clipped: 0 (uint32_t)\n  complete: 1 (uint32_t)\n  peak: 0.0326232202 (float)\n  rms: 0.00918287411 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_cpu_hz",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_cpu_hz\nResult: 400000000\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_timer_hz",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_timer_hz\nResult: 400000000\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_benchmark_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+          }
+        ]
+      }
+    }
+  ]
+}

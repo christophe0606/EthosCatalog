@@ -1,0 +1,405 @@
+{
+  "pte_sha256": "e1cf5cc94363f68cc76dec54347d75472d36b7e200b92be33e59c5e0355a1d52",
+  "timer_hz": 400000000,
+  "first": {
+    "total_ticks": 1143593372,
+    "forward_ms": 2858.9834299999998,
+    "caller_outside_methods_ms": 417.7251975,
+    "npu_cycles": 343750884,
+    "invocations": 4424,
+    "methods": [
+      {
+        "name": "expression_forward",
+        "wall_ms": 0.8802925,
+        "npu_cycles": 75616,
+        "npu_ms": 0.18903999999999999,
+        "invocations": 4,
+        "prepare_ms": 8.678185,
+        "memcpy_ms": 4.885574999999999,
+        "crc_ms": 3.2605675,
+        "quantize_ms": 0.0364425,
+        "dequantize_ms": 0.015985,
+        "normalization_ms": 0.0,
+        "cache_callbacks_ms": 0.1845975,
+        "other_within_method_ms": 0.4542275,
+        "method_peak_bytes": 49704,
+        "temp_peak_bytes": 2432
+      },
+      {
+        "name": "expression_backward",
+        "wall_ms": 0.8516225,
+        "npu_cycles": 75340,
+        "npu_ms": 0.18835,
+        "invocations": 4,
+        "prepare_ms": 8.61852,
+        "memcpy_ms": 4.8619425,
+        "crc_ms": 3.2619,
+        "quantize_ms": 0.035695000000000005,
+        "dequantize_ms": 0.0160875,
+        "normalization_ms": 0.0,
+        "cache_callbacks_ms": 0.181835,
+        "other_within_method_ms": 0.42965499999999995,
+        "method_peak_bytes": 49704,
+        "temp_peak_bytes": 2432
+      },
+      {
+        "name": "expression_step",
+        "wall_ms": 4.536912500000001,
+        "npu_cycles": 158869,
+        "npu_ms": 0.3971725,
+        "invocations": 16,
+        "prepare_ms": 20.907967499999998,
+        "memcpy_ms": 9.8540575,
+        "crc_ms": 6.597065,
+        "quantize_ms": 0.140935,
+        "dequantize_ms": 0.1738875,
+        "normalization_ms": 1.1003574999999999,
+        "cache_callbacks_ms": 0.7351150000000001,
+        "other_within_method_ms": 1.989445,
+        "method_peak_bytes": 58308,
+        "temp_peak_bytes": 3856
+      },
+      {
+        "name": "precondition",
+        "wall_ms": 424.5029625,
+        "npu_cycles": 14004373,
+        "npu_ms": 35.0109325,
+        "invocations": 378,
+        "prepare_ms": 59.707274999999996,
+        "memcpy_ms": 31.748289999999997,
+        "crc_ms": 21.223300000000002,
+        "quantize_ms": 45.481405,
+        "dequantize_ms": 51.404375,
+        "normalization_ms": 207.8385525,
+        "cache_callbacks_ms": 17.367677500000003,
+        "other_within_method_ms": 67.40002000000001,
+        "method_peak_bytes": 190180,
+        "temp_peak_bytes": 49152
+      },
+      {
+        "name": "context_forward",
+        "wall_ms": 323.37327999999997,
+        "npu_cycles": 61878536,
+        "npu_ms": 154.69634,
+        "invocations": 1000,
+        "prepare_ms": 21.9016475,
+        "memcpy_ms": 12.8279725,
+        "crc_ms": 8.5765975,
+        "quantize_ms": 12.67643,
+        "dequantize_ms": 5.010667499999999,
+        "normalization_ms": 0.0,
+        "cache_callbacks_ms": 45.5426525,
+        "other_within_method_ms": 105.44718999999999,
+        "method_peak_bytes": 51240,
+        "temp_peak_bytes": 4736
+      },
+      {
+        "name": "context_backward",
+        "wall_ms": 321.2661425,
+        "npu_cycles": 62514438,
+        "npu_ms": 156.28609500000002,
+        "invocations": 1000,
+        "prepare_ms": 21.753182499999998,
+        "memcpy_ms": 12.750340000000001,
+        "crc_ms": 8.524215,
+        "quantize_ms": 12.6726475,
+        "dequantize_ms": 5.024585,
+        "normalization_ms": 0.0,
+        "cache_callbacks_ms": 45.532575,
+        "other_within_method_ms": 101.75024,
+        "method_peak_bytes": 51240,
+        "temp_peak_bytes": 4736
+      },
+      {
+        "name": "pitch_step",
+        "wall_ms": 945.5310075,
+        "npu_cycles": 173610209,
+        "npu_ms": 434.02552249999997,
+        "invocations": 2000,
+        "prepare_ms": 51.091265,
+        "memcpy_ms": 29.5113625,
+        "crc_ms": 19.728982499999997,
+        "quantize_ms": 31.3011075,
+        "dequantize_ms": 24.4528,
+        "normalization_ms": 102.13578500000001,
+        "cache_callbacks_ms": 91.8917975,
+        "other_within_method_ms": 261.723995,
+        "method_peak_bytes": 57668,
+        "temp_peak_bytes": 8096
+      },
+      {
+        "name": "harmonic",
+        "wall_ms": 420.3160125,
+        "npu_cycles": 31433503,
+        "npu_ms": 78.5837575,
+        "invocations": 22,
+        "prepare_ms": 30.3045375,
+        "memcpy_ms": 1.2405525,
+        "crc_ms": 0.83389,
+        "quantize_ms": 42.770845,
+        "dequantize_ms": 73.19799,
+        "normalization_ms": 179.1809725,
+        "cache_callbacks_ms": 1.0127899999999999,
+        "other_within_method_ms": 45.5696575,
+        "method_peak_bytes": 99132,
+        "temp_peak_bytes": 1216000
+      }
+    ]
+  },
+  "held": [
+    {
+      "name": "expression_forward",
+      "first_use_ms": 0.24979,
+      "warm_median_ms": 0.2124125,
+      "max_ms": 0.24979,
+      "ticks": [
+        99916,
+        86448,
+        84965,
+        84568
+      ]
+    },
+    {
+      "name": "expression_backward",
+      "first_use_ms": 0.2203175,
+      "warm_median_ms": 0.2087975,
+      "max_ms": 0.2203175,
+      "ticks": [
+        88127,
+        84124,
+        83519,
+        83183
+      ]
+    },
+    {
+      "name": "expression_step",
+      "first_use_ms": 1.157265,
+      "warm_median_ms": 1.1271425,
+      "max_ms": 1.157265,
+      "ticks": [
+        462906,
+        451246,
+        450691,
+        450857
+      ]
+    },
+    {
+      "name": "precondition",
+      "first_use_ms": 6.7346375,
+      "warm_median_ms": 6.7301275,
+      "max_ms": 6.74242,
+      "ticks": [
+        2693855,
+        2692051,
+        2696968,
+        2690497
+      ]
+    },
+    {
+      "name": "context_forward",
+      "first_use_ms": 0.3376675,
+      "warm_median_ms": 0.32297499999999996,
+      "max_ms": 0.3376675,
+      "ticks": [
+        135067,
+        130764,
+        128888,
+        129190
+      ]
+    },
+    {
+      "name": "context_backward",
+      "first_use_ms": 0.3303675,
+      "warm_median_ms": 0.3205,
+      "max_ms": 0.3303675,
+      "ticks": [
+        132147,
+        129279,
+        128200,
+        127418
+      ]
+    },
+    {
+      "name": "pitch_step",
+      "first_use_ms": 0.964185,
+      "warm_median_ms": 0.9405825,
+      "max_ms": 0.964185,
+      "ticks": [
+        385674,
+        376631,
+        376007,
+        376233
+      ]
+    },
+    {
+      "name": "harmonic",
+      "first_use_ms": 420.2472325,
+      "warm_median_ms": 420.204885,
+      "max_ms": 420.3278875,
+      "ticks": [
+        168098893,
+        168081954,
+        168131155,
+        168069264
+      ]
+    }
+  ],
+  "sweep": [
+    {
+      "slot": 0,
+      "instrument": 0,
+      "total_ticks": 1135416871,
+      "seconds": 2.8385421775,
+      "npu_cycles": 343767405,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 1,
+      "instrument": 0,
+      "total_ticks": 1135292737,
+      "seconds": 2.8382318425,
+      "npu_cycles": 343767104,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 2,
+      "instrument": 0,
+      "total_ticks": 1135405420,
+      "seconds": 2.83851355,
+      "npu_cycles": 343767530,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 3,
+      "instrument": 1,
+      "total_ticks": 1134210378,
+      "seconds": 2.835525945,
+      "npu_cycles": 343767266,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 4,
+      "instrument": 2,
+      "total_ticks": 1134327186,
+      "seconds": 2.835817965,
+      "npu_cycles": 343767508,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 5,
+      "instrument": 3,
+      "total_ticks": 1133765329,
+      "seconds": 2.8344133225,
+      "npu_cycles": 343766887,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 6,
+      "instrument": 4,
+      "total_ticks": 1134090259,
+      "seconds": 2.8352256475,
+      "npu_cycles": 343767460,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 7,
+      "instrument": 5,
+      "total_ticks": 1133996065,
+      "seconds": 2.8349901625,
+      "npu_cycles": 343767732,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 8,
+      "instrument": 6,
+      "total_ticks": 1133578153,
+      "seconds": 2.8339453825,
+      "npu_cycles": 343767753,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 9,
+      "instrument": 7,
+      "total_ticks": 1133941723,
+      "seconds": 2.8348543075,
+      "npu_cycles": 343767574,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 10,
+      "instrument": 8,
+      "total_ticks": 1134036043,
+      "seconds": 2.8350901075,
+      "npu_cycles": 343767076,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 11,
+      "instrument": 9,
+      "total_ticks": 1134189800,
+      "seconds": 2.8354745,
+      "npu_cycles": 343767672,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 12,
+      "instrument": 10,
+      "total_ticks": 1134103051,
+      "seconds": 2.8352576275,
+      "npu_cycles": 343767424,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 13,
+      "instrument": 11,
+      "total_ticks": 1134072518,
+      "seconds": 2.835181295,
+      "npu_cycles": 343767564,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    },
+    {
+      "slot": 14,
+      "instrument": 12,
+      "total_ticks": 1134266179,
+      "seconds": 2.8356654475,
+      "npu_cycles": 343766865,
+      "cycles_count": 8,
+      "complete": 1,
+      "finite": 1
+    }
+  ],
+  "instrument0_repeat_median_ms": 2838.51355,
+  "sweep_min_ms": 2833.9453825,
+  "sweep_max_ms": 2838.5421775,
+  "observed_max_ms": 2858.9834299999998,
+  "accuracy": "Provisional harmonic max-error gate FAIL; coupled audio and seams unaccepted.",
+  "startup": "Third observed first-held InvalidProgram35 failure, origin unresolved; successful restarted sweep excluded that failed launch."
+}

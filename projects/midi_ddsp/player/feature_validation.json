@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "scope": "Contiguous integer-frame monophonic regions only; no MIDI time rounding, neural or audio validation",
+  "reference_sha256": {
+    "inference_utils.py": "82e75fbcbcd61db9c473a91bbb5022683fe3f08ff21c1be2f5e76b91d906edbd",
+    "ddsp_nn.py": "ba0a1aee5c0743c12b1a616812866983a8964d21c8e0a320a11f0dbce69bb47b"
+  },
+  "cases": [
+    {
+      "case": "notes_rests_and_one_frame_regions",
+      "notes_including_rests": 5,
+      "frames": 28,
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "case": "leading_rest",
+      "notes_including_rests": 3,
+      "frames": 12,
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "case": "all_rest",
+      "notes_including_rests": 1,
+      "frames": 1000,
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "case": "region_mask_limit",
+      "notes_including_rests": 102,
+      "frames": 102,
+      "maximum_absolute_error": 0.0
+    }
+  ]
+}

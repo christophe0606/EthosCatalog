@@ -106,6 +106,7 @@ project directory, one level above `model/`.
 | `quantization.error` | Network-dependent error or quality measurements of any structure; `null` if unavailable |
 | `safetensors` and `graph` | Cached quantized tensors and companion `.pt2` graph |
 | `methods` | Alternative to `safetensors`/`graph`: named method caches compiled into one PTE |
+| `extract_delegate_segments` | Optional boolean, default `false`: store delegate payloads as separately loadable segments in the same PTE |
 | `assets` | Optional OSPI binaries with project-relative `file` and integer `address`; bounded, nonoverlapping and hash checked |
 | `flash_ospi` | Whether to program the model separately in OSPI flash |
 | `vela.ini`, `vela.system_config`, `vela.memory_mode` | Vela compiler and memory configuration |
@@ -120,6 +121,13 @@ For a model with several entry points, replace the top-level `graph` and
 explicitly set `delegate: false`, for example for a CPU token embedding lookup.
 The exporter combines all methods into one PTE and flash preparation checks
 every method's cache hashes.
+
+Set `extract_delegate_segments: true` only when the application's DataLoader
+needs separate backend payload loads, for example to retain repeated weights
+in SRAM. This changes model serialization and requires AI-layer regeneration
+and programming of the resulting PTE. It does not itself copy weights or select
+a cache policy. The project must establish staging buffer lifetimes, alignment,
+NPU access and output/timing checks. Existing configurations keep inline storage.
 
 Use `full` for all original-source test patterns, `partial` for a subset,
 `synthetic` for generated calibration data, and `already` for an imported

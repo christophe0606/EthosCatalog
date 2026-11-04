@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/magenta/ddsp",
+  "revision": "676aa9d8016e9b0e962d02cb9133081439e4a435",
+  "files": {
+    "core.py": {
+      "url": "https://raw.githubusercontent.com/magenta/ddsp/676aa9d8016e9b0e962d02cb9133081439e4a435/ddsp/core.py",
+      "sha256": "58d2e8cdb6648c72732a11eb76e325e5b9b65bd5c026637bde0fd9a896e3c385"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/magenta/ddsp/676aa9d8016e9b0e962d02cb9133081439e4a435/LICENSE",
+      "sha256": "e841bcaa1b323bed2869e23f9832dc64c761d48987c4532ccbe0528d17186757"
+    }
+  }
+}

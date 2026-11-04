@@ -1,0 +1,125 @@
+{
+  "frames": 1000,
+  "frame_rate": 250,
+  "instrument_fixed_per_schedule": true,
+  "calls_per_block": "3001 + ceil(1000 / precondition_batch) + 3*N",
+  "note_region_count": "N",
+  "methods": {
+    "expression_forward": {
+      "input_shape": [
+        1,
+        320
+      ],
+      "output_shape": [
+        1,
+        128
+      ],
+      "input_count": 320,
+      "output_count": 128,
+      "calls_per_block": "N",
+      "fixture": "benchmark_fixtures.h"
+    },
+    "expression_backward": {
+      "input_shape": [
+        1,
+        320
+      ],
+      "output_shape": [
+        1,
+        128
+      ],
+      "input_count": 320,
+      "output_count": 128,
+      "calls_per_block": "N",
+      "fixture": "benchmark_fixtures.h"
+    },
+    "expression_step": {
+      "input_shape": [
+        1,
+        518
+      ],
+      "output_shape": [
+        1,
+        262
+      ],
+      "input_count": 518,
+      "output_count": 262,
+      "calls_per_block": "N",
+      "fixture": "benchmark_fixtures.h"
+    },
+    "precondition": {
+      "input_shape": [
+        16,
+        10
+      ],
+      "output_shape": [
+        16,
+        256
+      ],
+      "input_count": 160,
+      "output_count": 4096,
+      "calls_per_block": 63,
+      "fixture": "benchmark_fixtures.h",
+      "padded_frames": 8
+    },
+    "context_forward": {
+      "input_shape": [
+        1,
+        576
+      ],
+      "output_shape": [
+        1,
+        256
+      ],
+      "input_count": 576,
+      "output_count": 256,
+      "calls_per_block": 1000,
+      "fixture": "benchmark_fixtures.h"
+    },
+    "context_backward": {
+      "input_shape": [
+        1,
+        576
+      ],
+      "output_shape": [
+        1,
+        256
+      ],
+      "input_count": 576,
+      "output_count": 256,
+      "calls_per_block": 1000,
+      "fixture": "benchmark_fixtures.h"
+    },
+    "pitch_step": {
+      "input_shape": [
+        1,
+        1225
+      ],
+      "output_shape": [
+        1,
+        713
+      ],
+      "input_count": 1225,
+      "output_count": 713,
+      "calls_per_block": 1000,
+      "fixture": "benchmark_fixtures.h"
+    },
+    "harmonic": {
+      "input_shape": [
+        1,
+        1000,
+        384
+      ],
+      "output_shape": [
+        1,
+        1000,
+        126
+      ],
+      "input_count": 384000,
+      "output_count": 126000,
+      "calls_per_block": 1,
+      "fixture": "benchmark_assets.bin"
+    }
+  },
+  "precondition_batch": 16
+}

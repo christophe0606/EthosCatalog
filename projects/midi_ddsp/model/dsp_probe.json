@@ -1,0 +1,54 @@
+{
+  "frames": 1065,
+  "sample_rate_hz": 16000,
+  "raw_seed": 83217,
+  "white_seed": 19100,
+  "generator": "LCG32 state=1664525*state+1013904223; float32(int(state>>23)-256)/256",
+  "selected_intervals": [
+    0,
+    1,
+    16,
+    17,
+    749,
+    750,
+    998,
+    999,
+    1000,
+    1064
+  ],
+  "component_order": [
+    "harmonic",
+    "noise",
+    "dry",
+    "wet"
+  ],
+  "absolute_tolerance": 1e-05,
+  "phase": "precise oracle, persistent through1065 intervals",
+  "raw_ir_nonzero_indices": [
+    0,
+    1,
+    63,
+    64,
+    15999,
+    16000,
+    16001,
+    47999
+  ],
+  "raw_ir_values": [
+    1.0,
+    0.2,
+    -0.3,
+    0.4,
+    -0.5,
+    0.6,
+    -0.7,
+    0.8
+  ],
+  "scope": "Synthetic deterministic target numeric tests only; selected expected samples are comparison data, never playback input. Verifies FFT/filter/oscillator/reverb state including history wrap. No real-time or musical-quality claim.",
+  "file_sha256": {
+    "generator": "34062153f0fa6c2db9f411500479361fb305fcfc939c3b52f8c3a57e036f03f2",
+    "reference_synth.py": "68738e0d072aa759e33897e78ffe18b95b276149920039b9312b2a1a013eb951",
+    "dsp_probe.h": "33552fcca8279431c23413bc2dbfb52c79fbb16ae7cb0a0d7892e083c9dcb30d",
+    "dsp_probe.npz": "40e4916efb7cfb1ad1783de60c903e59cee1de6df970564f82ff32780633ded9"
+  }
+}

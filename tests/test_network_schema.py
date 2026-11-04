@@ -72,6 +72,16 @@ class NetworkSchema(unittest.TestCase):
             invalid["network"]["assets"] = assets
             self.assertTrue(self.errors(invalid))
 
+    def test_delegate_segment_storage_is_optional_boolean(self):
+        for value in (False, True):
+            document = deepcopy(self.ospi)
+            document['network']['extract_delegate_segments'] = value
+            self.assertEqual(self.errors(document), [])
+        for value in ('false', 0, None, {}):
+            document = deepcopy(self.ospi)
+            document['network']['extract_delegate_segments'] = value
+            self.assertTrue(self.errors(document))
+
     def test_required_fields(self):
         records = [
             ((), ("network",)),

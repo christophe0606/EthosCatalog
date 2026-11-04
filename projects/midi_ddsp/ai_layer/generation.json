@@ -1,0 +1,74 @@
+{
+  "project": "projects/midi_ddsp/midi_ddsp.cproject.yml",
+  "config_sha256": "e0d5d7548888a0a621c941d4a81bf7b336332204e410bb99ce0cb4ed3a492dff",
+  "pte_sha256": "e1cf5cc94363f68cc76dec54347d75472d36b7e200b92be33e59c5e0355a1d52",
+  "method_caches": {
+    "expression_forward": {
+      "graph_sha256": "e996a740cc3ccf5da3af3c52db0bc95c5ccb22597f3f08cccc4f0d35b9570d79",
+      "safetensors_sha256": "ac7ab2d21bd7bde25d34639614762a3610b38b2fc5e22c620bb0d41b4f278aee"
+    },
+    "expression_backward": {
+      "graph_sha256": "c41b76008f4c1fd07597458b63b9e7298ed723efe8413789db7b411244eee163",
+      "safetensors_sha256": "44539a4af14bd92298c68cd267af891be656f084d0bf095582f828be7c6400c7"
+    },
+    "expression_step": {
+      "graph_sha256": "303a948b55b4adf6480b78408cb0858a8dd0b94106ac993e306662a430f6126d",
+      "safetensors_sha256": "ee11c72ed0bbc32881f4fa9cb9460cea74f373826b9e41cdc8a84d1240d3cd5d"
+    },
+    "precondition": {
+      "graph_sha256": "dc9da15fc8142a2d1458e2f90ceab071b0358d702982c00e337a454cddeeace6",
+      "safetensors_sha256": "9e61b75ba5603c8e23932dc6ef2adc7fa18a91d8426baa27fb34b1651aa8fe00"
+    },
+    "context_forward": {
+      "graph_sha256": "532809a62972474a9f9066e5ca73f7e32b9358abd98b9c9984e62a4b6ae4c1ea",
+      "safetensors_sha256": "8895dc6c721790962dff8b94d47ca7d5d6733feca4f1a75cd5aa2e2076597446"
+    },
+    "context_backward": {
+      "graph_sha256": "6c5fb9f34685a5901379a04a91e12c03395fc7b1c47824e97bbd55db6e2285e9",
+      "safetensors_sha256": "f98b6a05f737ad1f2872d61cb2e06f4074b77efbd6b7c7dd527f623ff6c15ded"
+    },
+    "pitch_step": {
+      "graph_sha256": "1e5d99b7e7b1396e47b654448ca28124f5e34a6c2e7e7c1c04b54f4a65349e98",
+      "safetensors_sha256": "9aab3cdf1ddebef1b37bffbc707d6e20611c5f07cfcab877d6b2757a839a05d5"
+    },
+    "harmonic": {
+      "graph_sha256": "632da31931fcbabeb365f52274a83f9e1c69778c9dc1fcefc153403fe017c8db",
+      "safetensors_sha256": "d3b064855244155c3c96d5b9627a3040f27ad049f6c9349c918d5d7fd8ec36e8"
+    }
+  },
+  "assets": {
+    "cpu_weights": {
+      "file": "model/cpu_assets.bin",
+      "address": 3246391296,
+      "size": 2536448,
+      "sha256": "19ed82d68c4c68eaceab7c7471e25cdd94cf80eb520bae427316865418110523",
+      "crc32": 3818737745
+    },
+    "benchmark_fixtures": {
+      "file": "model/benchmark_assets.bin",
+      "address": 3250585600,
+      "size": 2078208,
+      "sha256": "af6a0d4c75e2d19603122d232940b14552bc35f8fa2ca5099031d1a1e12d77f2",
+      "crc32": 3663573510
+    }
+  },
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "extract_delegate_segments": true,
+  "delegates": 38,
+  "operators": [
+    "Portable add",
+    "Portable mean",
+    "Portable mul",
+    "Portable pow",
+    "Portable rsqrt",
+    "Portable sub",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 6221424
+}

@@ -1,0 +1,60 @@
+{
+  "context": "b61/d62 matching Release, first fresh startup success after NVIC lifecycle change. Instrument12 slot14; score60/67/rest/72. LUT DSP only; noSAI.",
+  "results": [
+    {
+      "expression": "midi_dsp_profile",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_profile\nResult: {...}\nType: struct MidiDspProfile\nFields:\n  init_ticks: 25788584 (uint64_t)\n  harmonic_noise_ticks: 747606666 (uint64_t)\n  reverb_ticks: 308302417 (uint64_t)\n  total_ticks: 1059162279 (uint64_t)\n  intervals: 1000 (uint32_t)\n  nonfinite: 0 (uint32_t)\n  clipped: 0 (uint32_t)\n  complete: 1 (uint32_t)\n  peak: 0.0326232202 (float)\n  rms: 0.00918287411 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_cpu_hz",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_cpu_hz\nResult: 400000000\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "npu_startup_pending_before",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: npu_startup_pending_before\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "npu_startup_pending_after_reset",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: npu_startup_pending_after_reset\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    }
+  ]
+}

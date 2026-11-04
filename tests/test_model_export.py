@@ -69,6 +69,43 @@ class ModelExport(unittest.TestCase):
                 _, operators = components(payload, pack)
                 self.assertIn("Portable embedding", operators)
                 self.assertIn("Portable softmax", operators)
+                # A project DataLoader must see real backend segments, while
+                # the same runtime operators and learned delegate bytes survive.
+                segmented, segment_delegates = export_model(
+                    programs, spec, cpu_methods=("text_embedding",),
+                    extract_delegate_segments=True)
+                from executorch.exir._serialize._program import _get_extended_header
+                from executorch.exir._serialize._flatbuffer_program import _flatbuffer_to_program
+                from executorch.exir.schema import DataLocation
+                header = _get_extended_header(segmented)
+                raw = _flatbuffer_to_program(segmented[:header.program_size])
+                self.assertEqual(segment_delegates, delegates)
+                self.assertTrue(any(d.processed.location == DataLocation.SEGMENT
+                                    for plan in raw.execution_plan for d in plan.delegates))
+                self.assertTrue(all(d.processed.location == DataLocation.INLINE
+                                    for plan in decoded.execution_plan for d in plan.delegates))
+                restored = deserialize_pte_binary(segmented).program
+                self.assertEqual([bytes(v.data) for v in restored.backend_delegate_data],
+                                 [bytes(v.data) for v in decoded.backend_delegate_data])
+                self.assertEqual(components(segmented, pack)[1], operators)
+                import importlib.util
+                module_spec = importlib.util.spec_from_file_location(
+                    "midi_ddsp_inspect_program", ROOT/"projects/midi_ddsp/model/inspect_program.py")
+                inspector = importlib.util.module_from_spec(module_spec)
+                module_spec.loader.exec_module(inspector)
+                segment_path = Path(directory)/'segmented.pte'
+                segment_path.write_bytes(segmented)
+                segment_report = inspector.inspect(segment_path)
+                stored = segment_report['methods']['backbone']['delegates'][0]
+                self.assertEqual(stored['location'], 'segment')
+                self.assertGreaterEqual(stored['file_offset'], segment_report['program_bytes'])
+                inline_path = Path(directory)/'inline.pte'
+                inline_path.write_bytes(payload)
+                inline_report = inspector.inspect(inline_path)
+                original = inline_report['methods']['backbone']['delegates'][0]
+                self.assertEqual(original['location'], 'inline')
+                for key in ('bytes', 'scratch_bytes', 'weight_bytes', 'command_bytes'):
+                    self.assertEqual(stored[key], original[key])
                 (pack / "fixture.pdsc").write_text('<component Csub="Portable embedding"/>')
                 with self.assertRaisesRegex(ValueError, "_softmax"):
                     components(payload, pack)

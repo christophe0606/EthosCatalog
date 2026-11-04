@@ -1,0 +1,60 @@
+{
+  "context": "b66/d67 Release first fresh startup, ID0 slot0. FastTwoSum boundary integral/masked harmonic skip. Reverb64. Actual target numerical selftest pass. NoSAI.",
+  "results": [
+    {
+      "expression": "midi_dsp_profile",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_profile\nResult: {...}\nType: struct MidiDspProfile\nFields:\n  init_ticks: 25772004 (uint64_t)\n  harmonic_noise_ticks: 471615693 (uint64_t)\n  reverb_ticks: 307330187 (uint64_t)\n  total_ticks: 782199128 (uint64_t)\n  intervals: 1000 (uint32_t)\n  nonfinite: 0 (uint32_t)\n  clipped: 0 (uint32_t)\n  complete: 1 (uint32_t)\n  instrument: 0 (uint32_t)\n  report_slot: 0 (uint32_t)\n  peak: 0.0567922518 (float)\n  rms: 0.0118890442 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_dsp_selftest_max",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_selftest_max\nResult: [4]\nType: float [4]\nFields:\n  [0]: 6.2957406e-07 (float)\n  [1]: 3.27418093e-11 (float)\n  [2]: 6.2957406e-07 (float)\n  [3]: 1.66893005e-06 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_dsp_selftest_cases",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_selftest_cases\nResult: 2560\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_dsp_selftest_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_dsp_selftest_complete\nResult: 1\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    }
+  ]
+}

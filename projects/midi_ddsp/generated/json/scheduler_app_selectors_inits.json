@@ -1,0 +1,38 @@
+{
+  "AudioOutput<float,256>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "ControlSource<uint32_t,1,float,256>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DDSPReverb<float,256,float,256>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MidiScore<uint32_t,1>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SendToNetwork<uint32_t,1,uint32_t,1>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_EXECUTE_ID",
+      "SEL_RESULT_ID",
+      "SEL_ACK_ID"
+    ]
+  },
+  "DDSPSynth<float,256,float,64>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "MidiMethod": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_EXECUTE_ID",
+      "SEL_RESULT_ID",
+      "SEL_ACK_ID"
+    ]
+  }
+}

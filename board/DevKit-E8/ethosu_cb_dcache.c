@@ -22,6 +22,18 @@
 #include "ethosu_driver.h"
 #include "app_mem_regions.h"
 
+#ifdef ETHOSU_CACHE_PROFILING
+#include "cmsis_os2.h"
+/* Optional project observer; no cache policy or ownership changes. */
+__WEAK void ethosu_cache_profile_record(unsigned operation,uint32_t ticks)
+{ (void)operation;(void)ticks; }
+#define CACHE_PROFILE_START() const uint32_t profile_start=osKernelGetSysTimerCount()
+#define CACHE_PROFILE_END(operation) ethosu_cache_profile_record(operation,osKernelGetSysTimerCount()-profile_start)
+#else
+#define CACHE_PROFILE_START() ((void)0)
+#define CACHE_PROFILE_END(operation) ((void)0)
+#endif
+
 #define ITCM_BASE APP_ITCM_BASE
 #define ITCM_SIZE APP_HP_ITCM_SIZE
 #define DTCM_BASE APP_DTCM_BASE
@@ -72,11 +84,13 @@ static bool check_mem_region(const void *p, size_t bytes)
 
 void ethosu_flush_dcache(const uint64_t *base_addr, const size_t *base_addr_size, int num_base_addr)
 {
+    CACHE_PROFILE_START();
     for (int i = 0; i < num_base_addr; i++) {
         if (check_mem_region((const void *)(uintptr_t)base_addr[i], base_addr_size[i])) {
             /* Call CleanDCache instead of CleanDCache_by_Addr to avoid delays.        */
             /* Memory regions size is usually large and calling by_Addr consumes time. */
             SCB_CleanDCache();
+            CACHE_PROFILE_END(0);
 
             /* Cache is cleaned, return immediately */
             return;
@@ -85,15 +99,18 @@ void ethosu_flush_dcache(const uint64_t *base_addr, const size_t *base_addr_size
 
     /* No cleaning, just ensure all memory accesses are completed before continuing */
     __DSB();
+    CACHE_PROFILE_END(0);
 }
 
 void ethosu_invalidate_dcache(const uint64_t *base_addr, const size_t *base_addr_size, int num_base_addr)
 {
+    CACHE_PROFILE_START();
     for (int i = 0; i < num_base_addr; i++) {
         if (check_mem_region((const void *)(uintptr_t)base_addr[i], base_addr_size[i])) {
             /* Call CleanInvalidateDCache instead of SCB_InvalidateDCache to avoid silently losing data. */
             /* This avoids losing dirty lines that the CPU has written but not yet committed to memory.  */
             SCB_CleanInvalidateDCache();
+            CACHE_PROFILE_END(1);
 
             /* Cache is cleaned and invalidated, return immediately */
             return;
@@ -102,4 +119,5 @@ void ethosu_invalidate_dcache(const uint64_t *base_addr, const size_t *base_addr
 
     /* No invalidation, just ensure all memory accesses are completed before continuing */
     __DSB();
+    CACHE_PROFILE_END(1);
 }

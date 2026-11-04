@@ -1,0 +1,388 @@
+{
+  "context": "b-22/d-23; fastCPU six overrides; four held executions/method then one uninterrupted full instrument0 schedule. Previous b-20/d-21 first method failure excluded (no fast counter ran); same code rerun succeeds with added runtime error capture.",
+  "recorded_at": "2026-11-04 12:43:59 UTC",
+  "pipeline_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+      }
+    ]
+  },
+  "midi_benchmark_complete": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "midi_method_runtime_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_runtime_error\nResult: 0\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_schedule_runtime_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule_runtime_error\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "midi_accuracy_warning": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_accuracy_warning\nResult: 128\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_bank_verified": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_bank_verified\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "model_verified": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: model_verified\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "midi_crc": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_crc\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 1450063030 (uint32_t)\n  [1]: 3818737745 (uint32_t)\n  [2]: 2876936117 (uint32_t)"
+      }
+    ]
+  },
+  "midi_cpu_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_cpu_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_axi_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_axi_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_timer_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_timer_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_ospi_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_ospi_hz\nResult: 100000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_startup_ticks": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_startup_ticks\nResult: 1859494169\nType: uint64_t"
+      }
+    ]
+  },
+  "midi_harmonic_load_ticks": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_harmonic_load_ticks\nResult: 11409797\nType: uint64_t"
+      }
+    ]
+  },
+  "midi_method_peak": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_peak\nResult: 107220\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_temp_peak": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_temp_peak\nResult: 1216000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_method_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_error\nResult: [8]\nType: float [8]\nFields:\n  [0]: 2.87294388e-05 (float)\n  [1]: 9.77739692e-05 (float)\n  [2]: 0.000106637366 (float)\n  [3]: 0.000207781792 (float)\n  [4]: 0.000305116177 (float)\n  [5]: 0.000228881836 (float)\n  [6]: 0.002615273 (float)\n  [7]: 0.0286214948 (float)"
+      }
+    ]
+  },
+  "midi_method_rms": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_rms\nResult: [8]\nType: float [8]\nFields:\n  [0]: 7.92540686e-06 (float)\n  [1]: 2.15876753e-05 (float)\n  [2]: 2.15169384e-05 (float)\n  [3]: 7.76422094e-05 (float)\n  [4]: 3.88032677e-05 (float)\n  [5]: 4.31137159e-05 (float)\n  [6]: 0.000477584807 (float)\n  [7]: 0.00356211816 (float)"
+      }
+    ]
+  },
+  "midi_method_nrmse": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_nrmse\nResult: [8]\nType: float [8]\nFields:\n  [0]: 6.1345323e-05 (float)\n  [1]: 0.000132400542 (float)\n  [2]: 6.19097773e-05 (float)\n  [3]: 0.000244338269 (float)\n  [4]: 6.31315925e-05 (float)\n  [5]: 5.92194083e-05 (float)\n  [6]: 0.000260330038 (float)\n  [7]: 0.00164406141 (float)"
+      }
+    ]
+  },
+  "midi_kernel_stats": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_kernel_stats\nResult: {...}\nType: struct MidiKernelStats\nFields:\n  fast: [6] (uint32_t [6])\n    [0]: 12306 (uint32_t)\n    [1]: 12306 (uint32_t)\n    [2]: 6153 (uint32_t)\n    [3]: 12306 (uint32_t)\n    [4]: 6153 (uint32_t)\n    [5]: 12306 (uint32_t)\n  fallback: [6] (uint32_t [6])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n    [4]: 0 (uint32_t)\n    [5]: 0 (uint32_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].complete": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].complete\nResult: 1\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_schedule[0].finite_outputs": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].finite_outputs\nResult: 1\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_schedule[0].total_ticks": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].total_ticks\nResult: 13766612853\nType: uint64_t"
+      }
+    ]
+  },
+  "midi_schedule[0].cpu_ticks": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].cpu_ticks\nResult: 80102740\nType: uint64_t"
+      }
+    ]
+  },
+  "midi_schedule[0].calls": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].calls\nResult: [8]\nType: uint32_t [8]\nFields:\n  [0]: 4 (uint32_t)\n  [1]: 4 (uint32_t)\n  [2]: 4 (uint32_t)\n  [3]: 1000 (uint32_t)\n  [4]: 1000 (uint32_t)\n  [5]: 1000 (uint32_t)\n  [6]: 1000 (uint32_t)\n  [7]: 1 (uint32_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].trace_max": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].trace_max\nResult: [8]\nType: float [8]\nFields:\n  [0]: 7.17937946e-05 (float)\n  [1]: 7.82180578e-05 (float)\n  [2]: 0.000248789787 (float)\n  [3]: 0.00145435333 (float)\n  [4]: 0.00293673575 (float)\n  [5]: 0.00423444062 (float)\n  [6]: 4.79981709 (float)\n  [7]: 0 (float)"
+      }
+    ]
+  },
+  "midi_schedule[0].pitch_mae": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].pitch_mae\nResult: 0.028380014\nType: float"
+      }
+    ]
+  },
+  "midi_schedule[0].raw_selected_max": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].raw_selected_max\nResult: 0.0163551569\nType: float"
+      }
+    ]
+  },
+  "midi_schedule[0].expression": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].expression\nResult: [24]\nType: float [24]\nFields:\n  [0]: 0.689623475 (float)\n  [1]: 0.245159179 (float)\n  [2]: 0.411726654 (float)\n  [3]: 0.485590786 (float)\n  [4]: 0.643058538 (float)\n  [5]: 0.388408631 (float)\n  [6]: 0.661897779 (float)\n  [7]: 0.278821021 (float)\n  [8]: 0.345966995 (float)\n  [9]: 0.404795229 (float)\n  [10]: 0.578614056 (float)\n  [11]: 0.335694253 (float)\n  [12]: 0 (float)\n  [13]: 0 (float)\n  [14]: 0 (float)\n  [15]: 0 (float)\n  [16]: 0 (float)\n  [17]: 0 (float)\n  [18]: 0.757978022 (float)\n  [19]: 0.195501745 (float)\n  [20]: 0.230976418 (float)\n  [21]: 0.403942138 (float)\n  [22]: 0.550959468 (float)\n  [23]: 0.600794613 (float)"
+      }
+    ]
+  },
+  "midi_schedule[0].pitch_mean": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].pitch_mean\nResult: [4]\nType: float [4]\nFields:\n  [0]: 47.9285583 (float)\n  [1]: 54.9364014 (float)\n  [2]: 0.00400000019 (float)\n  [3]: 59.9779587 (float)"
+      }
+    ]
+  },
+  "midi_schedule[0].pitch_std": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].pitch_std\nResult: [4]\nType: float [4]\nFields:\n  [0]: 0.136084124 (float)\n  [1]: 0.130165428 (float)\n  [2]: 0.0631189346 (float)\n  [3]: 0.0864819959 (float)"
+      }
+    ]
+  },
+  "midi_schedule[0].uniform_first_eight": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].uniform_first_eight\nResult: [8]\nType: float [8]\nFields:\n  [0]: 0.757539153 (float)\n  [1]: 0.679173291 (float)\n  [2]: 0.661515772 (float)\n  [3]: 0.516460717 (float)\n  [4]: 0.232482553 (float)\n  [5]: 0.784883976 (float)\n  [6]: 0.775105238 (float)\n  [7]: 0.62934804 (float)"
+      }
+    ]
+  },
+  "midi_method_timing[0]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[0]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 767515 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500442 (uint64_t)\n    active: 500442 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 593798 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500444 (uint64_t)\n    active: 500444 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 591342 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500444 (uint64_t)\n    active: 500444 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 590922 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500444 (uint64_t)\n    active: 500444 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[1]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[1]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 754620 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499392 (uint64_t)\n    active: 499392 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 589507 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499392 (uint64_t)\n    active: 499392 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 588333 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499392 (uint64_t)\n    active: 499392 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 588614 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499392 (uint64_t)\n    active: 499392 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[2]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[2]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 3483590 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185873 (uint64_t)\n    active: 1185873 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 1726765 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185870 (uint64_t)\n    active: 1185870 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 1725162 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185868 (uint64_t)\n    active: 1185868 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 1726486 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185870 (uint64_t)\n    active: 1185870 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[3]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[3]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 8051438 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202817 (uint64_t)\n    active: 4202817 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 5386921 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202822 (uint64_t)\n    active: 4202822 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 5384838 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202820 (uint64_t)\n    active: 4202820 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 5386374 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202821 (uint64_t)\n    active: 4202821 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[4]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[4]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 1865692 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 1700160 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599357 (uint64_t)\n    active: 1599357 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 1699776 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 1699693 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[5]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[5]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 1843626 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588935 (uint64_t)\n    active: 1588935 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 1687482 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588933 (uint64_t)\n    active: 1588933 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 1686864 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588935 (uint64_t)\n    active: 1588935 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 1686524 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588933 (uint64_t)\n    active: 1588933 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[6]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[6]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 4935312 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901737 (uint64_t)\n    active: 3901737 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 4217850 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901737 (uint64_t)\n    active: 3901737 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 4216824 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901737 (uint64_t)\n    active: 3901737 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 4217117 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901739 (uint64_t)\n    active: 3901739 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[7]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[7]\nResult: [4]\nType: struct MidiTiming [4]\nFields:\n  [0]: {...} (struct MidiTiming)\n    ticks: 682136372 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433600 (uint64_t)\n    active: 31433600 (uint64_t)\n  [1]: {...} (struct MidiTiming)\n    ticks: 682123658 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433594 (uint64_t)\n    active: 31433594 (uint64_t)\n  [2]: {...} (struct MidiTiming)\n    ticks: 682109006 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433597 (uint64_t)\n    active: 31433597 (uint64_t)\n  [3]: {...} (struct MidiTiming)\n    ticks: 682110958 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433592 (uint64_t)\n    active: 31433592 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[0]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[0]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 2368514 (uint64_t)\n  invocations: 4 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 2001774 (uint64_t)\n  active: 2001774 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[1]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[1]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 2355809 (uint64_t)\n  invocations: 4 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 1997576 (uint64_t)\n  active: 1997576 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[2]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[2]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 6906316 (uint64_t)\n  invocations: 16 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 4743493 (uint64_t)\n  active: 4743493 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[3]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[3]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 5387942261 (uint64_t)\n  invocations: 6000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 4202815770 (uint64_t)\n  active: 4202815770 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[4]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[4]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 1699795487 (uint64_t)\n  invocations: 1000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 1599358063 (uint64_t)\n  active: 1599358063 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[5]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[5]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 1687142884 (uint64_t)\n  invocations: 1000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 1588934092 (uint64_t)\n  active: 1588934092 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[6]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[6]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 4217876329 (uint64_t)\n  invocations: 2000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 3901737814 (uint64_t)\n  active: 3901737814 (uint64_t)"
+      }
+    ]
+  },
+  "midi_schedule[0].method[7]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_schedule[0].method[7]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 682122513 (uint64_t)\n  invocations: 22 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 31433592 (uint64_t)\n  active: 31433592 (uint64_t)"
+      }
+    ]
+  }
+}

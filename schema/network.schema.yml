@@ -93,6 +93,10 @@ properties:
       flash_ospi:
         type: boolean
         description: Whether the model is programmed separately into the OSPI partition.
+      extract_delegate_segments:
+        type: boolean
+        default: false
+        description: Store delegate payloads as separately loadable segments within the same PTE file. Requires a suitable project DataLoader for staging; the default retains inline delegate data.
       assets:
         type: object
         minProperties: 1

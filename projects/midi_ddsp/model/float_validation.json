@@ -1,0 +1,397 @@
+{
+  "reference": "TensorFlow Keras GRUCell and TF ops using original checkpoint; original architecture source audited; no upstream package installed",
+  "sampling": "Same uniform quantiles through original-order masked top-p CDF; tests avoid categorical RNG backend differences",
+  "cases": [
+    {
+      "instrument_id": 0,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.172325134277344e-07,
+        "pitch_logits": 3.337860107421875e-06
+      }
+    },
+    {
+      "instrument_id": 0,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 3.337860107421875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.172325134277344e-07,
+        "pitch_logits": 6.67572021484375e-06
+      }
+    },
+    {
+      "instrument_id": 0,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 7.152557373046875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.172325134277344e-07,
+        "pitch_logits": 1.33514404296875e-05
+      }
+    },
+    {
+      "instrument_id": 1,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 9.834766387939453e-07,
+        "pitch_logits": 4.291534423828125e-06
+      }
+    },
+    {
+      "instrument_id": 1,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 4.76837158203125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 9.834766387939453e-07,
+        "pitch_logits": 8.58306884765625e-06
+      }
+    },
+    {
+      "instrument_id": 1,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.0013580322265625e-05,
+        "sampled_pitch": 0.0,
+        "expression": 9.834766387939453e-07,
+        "pitch_logits": 1.52587890625e-05
+      }
+    },
+    {
+      "instrument_id": 2,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.384185791015625e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 4.76837158203125e-06
+      }
+    },
+    {
+      "instrument_id": 2,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 9.5367431640625e-06
+      }
+    },
+    {
+      "instrument_id": 2,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.0251998901367188e-05,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 2.002716064453125e-05
+      }
+    },
+    {
+      "instrument_id": 3,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 1.9073486328125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 2.86102294921875e-06
+      }
+    },
+    {
+      "instrument_id": 3,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 4.291534423828125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 6.67572021484375e-06
+      }
+    },
+    {
+      "instrument_id": 3,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 8.940696716308594e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.76837158203125e-07,
+        "pitch_logits": 1.621246337890625e-05
+      }
+    },
+    {
+      "instrument_id": 4,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 8.58306884765625e-06
+      }
+    },
+    {
+      "instrument_id": 4,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 5.7220458984375e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 8.106231689453125e-06
+      }
+    },
+    {
+      "instrument_id": 4,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.811981201171875e-05,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 2.288818359375e-05
+      }
+    },
+    {
+      "instrument_id": 5,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 5.4836273193359375e-06
+      }
+    },
+    {
+      "instrument_id": 5,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 3.337860107421875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 7.62939453125e-06
+      }
+    },
+    {
+      "instrument_id": 5,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 6.794929504394531e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 1.9073486328125e-05
+      }
+    },
+    {
+      "instrument_id": 6,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.384185791015625e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 5.7220458984375e-06
+      }
+    },
+    {
+      "instrument_id": 6,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 8.106231689453125e-06
+      }
+    },
+    {
+      "instrument_id": 6,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 9.059906005859375e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 1.52587890625e-05
+      }
+    },
+    {
+      "instrument_id": 7,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.384185791015625e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 3.6954879760742188e-06
+      }
+    },
+    {
+      "instrument_id": 7,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 3.933906555175781e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 4.76837158203125e-06
+      }
+    },
+    {
+      "instrument_id": 7,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.0251998901367188e-05,
+        "sampled_pitch": 0.0,
+        "expression": 5.364418029785156e-07,
+        "pitch_logits": 1.9073486328125e-05
+      }
+    },
+    {
+      "instrument_id": 8,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 3.814697265625e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.450580596923828e-07,
+        "pitch_logits": 4.351139068603516e-06
+      }
+    },
+    {
+      "instrument_id": 8,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 4.76837158203125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.450580596923828e-07,
+        "pitch_logits": 7.62939453125e-06
+      }
+    },
+    {
+      "instrument_id": 8,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.233816146850586e-05,
+        "sampled_pitch": 0.0,
+        "expression": 7.450580596923828e-07,
+        "pitch_logits": 2.384185791015625e-05
+      }
+    },
+    {
+      "instrument_id": 9,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 3.5762786865234375e-06,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 5.7220458984375e-06
+      }
+    },
+    {
+      "instrument_id": 9,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 1.049041748046875e-05,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 1.049041748046875e-05
+      }
+    },
+    {
+      "instrument_id": 9,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 3.0994415283203125e-05,
+        "sampled_pitch": 0.0,
+        "expression": 7.748603820800781e-07,
+        "pitch_logits": 2.6702880859375e-05
+      }
+    },
+    {
+      "instrument_id": 10,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 3.337860107421875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.066394805908203e-07,
+        "pitch_logits": 3.337860107421875e-06
+      }
+    },
+    {
+      "instrument_id": 10,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 4.76837158203125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 5.066394805908203e-07,
+        "pitch_logits": 6.198883056640625e-06
+      }
+    },
+    {
+      "instrument_id": 10,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.1444091796875e-05,
+        "sampled_pitch": 0.0,
+        "expression": 5.066394805908203e-07,
+        "pitch_logits": 1.52587890625e-05
+      }
+    },
+    {
+      "instrument_id": 11,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 2.421438694000244e-07,
+        "pitch_logits": 4.291534423828125e-06
+      }
+    },
+    {
+      "instrument_id": 11,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 2.421438694000244e-07,
+        "pitch_logits": 6.67572021484375e-06
+      }
+    },
+    {
+      "instrument_id": 11,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 7.152557373046875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 2.421438694000244e-07,
+        "pitch_logits": 1.1444091796875e-05
+      }
+    },
+    {
+      "instrument_id": 12,
+      "frames": 4,
+      "max_abs_errors": {
+        "raw_synthesis": 2.86102294921875e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.470348358154297e-07,
+        "pitch_logits": 3.814697265625e-06
+      }
+    },
+    {
+      "instrument_id": 12,
+      "frames": 17,
+      "max_abs_errors": {
+        "raw_synthesis": 4.76837158203125e-06,
+        "sampled_pitch": 0.0,
+        "expression": 4.470348358154297e-07,
+        "pitch_logits": 5.7220458984375e-06
+      }
+    },
+    {
+      "instrument_id": 12,
+      "frames": 129,
+      "max_abs_errors": {
+        "raw_synthesis": 1.049041748046875e-05,
+        "sampled_pitch": 0.0,
+        "expression": 4.470348358154297e-07,
+        "pitch_logits": 1.1444091796875e-05
+      }
+    }
+  ],
+  "passed": true
+}

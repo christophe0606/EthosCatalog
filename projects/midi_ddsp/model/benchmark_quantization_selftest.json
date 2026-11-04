@@ -1,0 +1,22 @@
+{
+  "context": "b39/d40 Release -O3 -ffast-math; corrected integer-bit vector guard",
+  "target": "Alif E8 Cortex-M55 HP",
+  "mve_feature_bitmap": 3,
+  "cases": 717,
+  "failures": 0,
+  "neural_guard_passed": true,
+  "coverage": [
+    "nearest-even positive and negative ties",
+    "adjacent float32 neighbours of511signed ties",
+    "full Short and[-2,3]saturation",
+    "vector and scalar tails1..18",
+    "unaligned element offsets0..3",
+    "dyadic dequantization exact outputs",
+    "destination prefix/suffix sentinels",
+    "NaN/Inf/unsafe conversion ranges in scalar and each vector lane"
+  ],
+  "source_sha256": {
+    "benchmark_quantization_selftest.hpp": "0866dc6f67e5964834bc63fbfa05b1b3bb7aee2503af080e314e7fbc465fd85a",
+    "kernels\\quantization_loops.hpp": "008bf803e9ced316ba113cc0b0003f02339d0e7b34b7842b16ea3953a195a43d"
+  }
+}

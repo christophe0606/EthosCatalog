@@ -1,0 +1,447 @@
+{
+  "context": "b43/d44 uninterrupted held plus complete instrument0 schedule; native DQ retained, fast MVE quantize",
+  "pte_sha256": "92be03a2be15307aaabc93d1a61c5ee86d52db49903c9b1d20a1a64e919aa1e9",
+  "timer_hz": 400000000,
+  "results": [
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_benchmark_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_crc",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_crc\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 3925186205 (uint32_t)\n  [1]: 3818737745 (uint32_t)\n  [2]: 2876936117 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0]\nResult: {...}\nType: struct MidiScheduleReport\nFields:\n  method: [8] (struct MidiTiming [8])\n    [0]: {...} (struct MidiTiming)\n    [1]: {...} (struct MidiTiming)\n    [2]: {...} (struct MidiTiming)\n    [3]: {...} (struct MidiTiming)\n    [4]: {...} (struct MidiTiming)\n    [5]: {...} (struct MidiTiming)\n    [6]: {...} (struct MidiTiming)\n    [7]: {...} (struct MidiTiming)\n  total_ticks: 1807003629 (uint64_t)\n  cpu_ticks: 168532855 (uint64_t)\n  staging: [8] (struct MidiStageStats [8])\n    [0]: {...} (struct MidiStageStats)\n    [1]: {...} (struct MidiStageStats)\n    [2]: {...} (struct MidiStageStats)\n    [3]: {...} (struct MidiStageStats)\n    [4]: {...} (struct MidiStageStats)\n    [5]: {...} (struct MidiStageStats)\n    [6]: {...} (struct MidiStageStats)\n    [7]: {...} (struct MidiStageStats)\n  quantization: [8] (struct MidiQuantizationStats [8])\n    [0]: {...} (struct MidiQuantizationStats)\n    [1]: {...} (struct MidiQuantizationStats)\n    [2]: {...} (struct MidiQuantizationStats)\n    [3]: {...} (struct MidiQuantizationStats)\n    [4]: {...} (struct MidiQuantizationStats)\n    [5]: {...} (struct MidiQuantizationStats)\n    [6]: {...} (struct MidiQuantizationStats)\n    [7]: {...} (struct MidiQuantizationStats)\n  normalization: [8] (struct MidiNormalizationStats [8])\n    [0]: {...} (struct MidiNormalizationStats)\n    [1]: {...} (struct MidiNormalizationStats)\n    [2]: {...} (struct MidiNormalizationStats)\n    [3]: {...} (struct MidiNormalizationStats)\n    [4]: {...} (struct MidiNormalizationStats)\n    [5]: {...} (struct MidiNormalizationStats)\n    [6]: {...} (struct MidiNormalizationStats)\n    [7]: {...} (struct MidiNormalizationStats)\n  cache: [8] (struct MidiCacheStats [8])\n    [0]: {...} (struct MidiCacheStats)\n    [1]: {...} (struct MidiCacheStats)\n    [2]: {...} (struct MidiCacheStats)\n    [3]: {...} (struct MidiCacheStats)\n    [4]: {...} (struct MidiCacheStats)\n    [5]: {...} (struct MidiCacheStats)\n    [6]: {...} (struct MidiCacheStats)\n    [7]: {...} (struct MidiCacheStats)\n  routes: [4] (uint32_t [4])\n    [0]: 20092 (uint32_t)\n    [1]: 20048 (uint32_t)\n    [2]: 22 (uint32_t)\n    [3]: 22 (uint32_t)\n  calls: [8] (uint32_t [8])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n    [2]: 4 (uint32_t)\n    [3]: 1000 (uint32_t)\n    [4]: 1000 (uint32_t)\n    [5]: 1000 (uint32_t)\n    [6]: 1000 (uint32_t)\n    [7]: 1 (uint32_t)\n  frames_done: 1000 (uint32_t)\n  complete: 1 (uint32_t)\n  finite_outputs: 1 (uint32_t)\n  trace_max: [8] (float [8])\n    [0]: 7.17937946e-05 (float)\n    [1]: 7.82180578e-05 (float)\n    [2]: 0.000248789787 (float)\n    [3]: 0.00145435333 (float)\n    [4]: 0.00293673575 (float)\n    [5]: 0.00423444062 (float)\n    [6]: 4.79981709 (float)\n    [7]: 0 (float)\n  expression: [24] (float [24])\n    [0]: 0.689623475 (float)\n    [1]: 0.245159179 (float)\n    [2]: 0.411726654 (float)\n    [3]: 0.485590786 (float)\n    [4]: 0.643058538 (float)\n    [5]: 0.388408631 (float)\n    [6]: 0.661897779 (float)\n    [7]: 0.278821021 (float)\n    [8]: 0.345966995 (float)\n    [9]: 0.404795229 (float)\n    [10]: 0.578614056 (float)\n    [11]: 0.335694253 (float)\n    [12]: 0 (float)\n    [13]: 0 (float)\n    [14]: 0 (float)\n    [15]: 0 (float)\n    [16]: 0 (float)\n    [17]: 0 (float)\n    [18]: 0.757978022 (float)\n    [19]: 0.195501745 (float)\n    [20]: 0.230976418 (float)\n    [21]: 0.403942138 (float)\n    [22]: 0.550959468 (float)\n    [23]: 0.600794613 (float)\n  pitch: [1000] (float [1000])\n    [0]: 47 (float)\n    [1]: 47 (float)\n    [2]: 47.5999985 (float)\n    [3]: 47.6699982 (float)\n    [4]: 47.6699982 (float)\n    [5]: 47.7599983 (float)\n    [6]: 47.8199997 (float)\n    [7]: 47.8600006 (float)\n    [8]: 47.9000015 (float)\n    [9]: 47.9199982 (float)\n    [10]: 47.9399986 (float)\n    [11]: 47.9599991 (float)\n    [12]: 47.9500008 (float)\n    [13]: 47.9500008 (float)\n    [14]: 47.9599991 (float)\n    [15]: 47.9799995 (float)\n    [16]: 47.9799995 (float)\n    [17]: 47.9900017 (float)\n    [18]: 47.9900017 (float)\n    [19]: 47.9900017 (float)\n    [20]: 47.9900017 (float)\n    [21]: 47.9799995 (float)\n    [22]: 47.9799995 (float)\n    [23]: 47.9799995 (float)\n    [24]: 47.9700012 (float)\n    [25]: 47.9700012 (float)\n    [26]: 47.9700012 (float)\n    [27]: 47.9799995 (float)\n    [28]: 47.9599991 (float)\n    [29]: 47.9599991 (float)\n    [30]: 47.9500008 (float)\n    [31]: 47.9500008 (float)\n    … 968 more — evaluate a field or element by name to read it\n  pitch_mean: [4] (float [4])\n    [0]: 47.9285583 (float)\n    [1]: 54.9364014 (float)\n    [2]: 0.00400000019 (float)\n    [3]: 59.9779587 (float)\n  pitch_std: [4] (float [4])\n    [0]: 0.13555643 (float)\n    [1]: 0.130769387 (float)\n    [2]: 0.0631189346 (float)\n    [3]: 0.0855349749 (float)\n  raw_mean: [126] (float [126])\n    [0]: -3.19471073 (float)\n    [1]: 0.570175529 (float)\n    [2]: 0.677392602 (float)\n    [3]: -0.318888545 (float)\n    [4]: -0.664589226 (float)\n    [5]: -0.946864605 (float)\n    [6]: -1.17610371 (float)\n    [7]: -1.18121219 (float)\n    [8]: -1.23266637 (float)\n    [9]: -1.26816881 (float)\n    [10]: -1.12043047 (float)\n    [11]: -1.3692205 (float)\n    [12]: -1.61991811 (float)\n    [13]: -1.60465908 (float)\n    [14]: -1.73865438 (float)\n    [15]: -1.75539315 (float)\n    [16]: -1.7798847 (float)\n    [17]: -1.90139484 (float)\n    [18]: -1.84532523 (float)\n    [19]: -1.82138813 (float)\n    [20]: -1.95309126 (float)\n    [21]: -1.93247211 (float)\n    [22]: -2.05445862 (float)\n    [23]: -2.04848194 (float)\n    [24]: -2.19031096 (float)\n    [25]: -2.35872078 (float)\n    [26]: -2.36818886 (float)\n    [27]: -2.45988297 (float)\n    [28]: -2.44980359 (float)\n    [29]: -2.79878116 (float)\n    [30]: -3.0301888 (float)\n    [31]: -2.93961 (float)\n    … 94 more — evaluate a field or element by name to read it\n  raw_rms: [126] (float [126])\n    [0]: 3.32102394 (float)\n    [1]: 0.94997704 (float)\n    [2]: 1.14718151 (float)\n    [3]: 0.758957565 (float)\n    [4]: 0.847845197 (float)\n    [5]: 0.991154373 (float)\n    [6]: 1.22333455 (float)\n    [7]: 1.21511781 (float)\n    [8]: 1.282323 (float)\n    [9]: 1.31924665 (float)\n    [10]: 1.18813086 (float)\n    [11]: 1.44986331 (float)\n    [12]: 1.70005333 (float)\n    [13]: 1.64919066 (float)\n    [14]: 1.78692329 (float)\n    [15]: 1.79010928 (float)\n    [16]: 1.82620621 (float)\n    [17]: 1.93986166 (float)\n    [18]: 1.89300179 (float)\n    [19]: 1.88699639 (float)\n    [20]: 1.99066782 (float)\n    [21]: 1.97424507 (float)\n    [22]: 2.12140822 (float)\n    [23]: 2.07530165 (float)\n    [24]: 2.23436499 (float)\n    [25]: 2.39603162 (float)\n    [26]: 2.41652727 (float)\n    [27]: 2.51921892 (float)\n    [28]: 2.47059822 (float)\n    [29]: 2.83558011 (float)\n    [30]: 3.10860538 (float)\n    [31]: 3.00094914 (float)\n    … 94 more — evaluate a field or element by name to read it\n  pitch_mae: 0.028380014 (float)\n  raw_selected_max: 0.0163551569 (float)\n  uniform_first_eight: [8] (float [8])\n    [0]: 0.757539153 (float)\n    [1]: 0.679173291 (float)\n    [2]: 0.661515772 (float)\n    [3]: 0.516460717 (float)\n    [4]: 0.232482553 (float)\n    [5]: 0.784883976 (float)\n    [6]: 0.775105238 (float)\n    [7]: 0.62934804 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_error\nResult: [8]\nType: float [8]\nFields:\n  [0]: 2.87294388e-05 (float)\n  [1]: 9.77739692e-05 (float)\n  [2]: 0.000106637366 (float)\n  [3]: 0.000207781792 (float)\n  [4]: 0.000305116177 (float)\n  [5]: 0.000228881836 (float)\n  [6]: 0.002615273 (float)\n  [7]: 0.0286214948 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_nrmse",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_nrmse\nResult: [8]\nType: float [8]\nFields:\n  [0]: 6.1345323e-05 (float)\n  [1]: 0.000132400542 (float)\n  [2]: 6.19097773e-05 (float)\n  [3]: 0.000244338269 (float)\n  [4]: 6.31315925e-05 (float)\n  [5]: 5.92194083e-05 (float)\n  [6]: 0.000260330038 (float)\n  [7]: 0.00164406141 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_quantization_test_cases",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_quantization_test_cases\nResult: 717\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_quantization_test_failures",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_quantization_test_failures\nResult: 0\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[0]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 353742 (uint64_t)\n  invocations: 4 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 75622 (uint64_t)\n  active: 75622 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[0]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 15477 (uint64_t)\n    [1]: 6907 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 1280 (uint32_t)\n    [1]: 512 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 4 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[0]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 0 (uint64_t)\n    [1]: 0 (uint64_t)\n    [2]: 0 (uint64_t)\n    [3]: 0 (uint64_t)\n    [4]: 0 (uint64_t)\n    [5]: 0 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n    [4]: 0 (uint32_t)\n    [5]: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[0]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 33902 (uint64_t)\n    [1]: 39568 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[1]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[1]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 345158 (uint64_t)\n  invocations: 4 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 75340 (uint64_t)\n  active: 75340 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[1]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[1]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 15522 (uint64_t)\n    [1]: 6855 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 1280 (uint32_t)\n    [1]: 512 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 4 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[1]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[1]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 0 (uint64_t)\n    [1]: 0 (uint64_t)\n    [2]: 0 (uint64_t)\n    [3]: 0 (uint64_t)\n    [4]: 0 (uint64_t)\n    [5]: 0 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n    [4]: 0 (uint32_t)\n    [5]: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[1]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[1]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 33673 (uint64_t)\n    [1]: 39516 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[2]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[2]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 1829967 (uint64_t)\n  invocations: 16 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 158875 (uint64_t)\n  active: 158875 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[2]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[2]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 59866 (uint64_t)\n    [1]: 68790 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 16 (uint32_t)\n    [1]: 40 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 3608 (uint32_t)\n    [1]: 5656 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 16 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 40 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[2]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[2]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 73705 (uint64_t)\n    [1]: 114762 (uint64_t)\n    [2]: 32974 (uint64_t)\n    [3]: 96619 (uint64_t)\n    [4]: 29682 (uint64_t)\n    [5]: 97518 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 24 (uint32_t)\n    [1]: 24 (uint32_t)\n    [2]: 12 (uint32_t)\n    [3]: 24 (uint32_t)\n    [4]: 12 (uint32_t)\n    [5]: 24 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[2]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[2]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 137189 (uint64_t)\n    [1]: 158068 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 16 (uint32_t)\n    [1]: 16 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[3]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[3]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 827866268 (uint64_t)\n  invocations: 6000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 172738306 (uint64_t)\n  active: 172738306 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[3]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[3]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 25931776 (uint64_t)\n    [1]: 36330244 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 6000 (uint32_t)\n    [1]: 16000 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 2570000 (uint32_t)\n    [1]: 7936000 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 6000 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 16000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[3]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[3]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 30110860 (uint64_t)\n    [1]: 49641480 (uint64_t)\n    [2]: 14004810 (uint64_t)\n    [3]: 40354408 (uint64_t)\n    [4]: 9223985 (uint64_t)\n    [5]: 42766275 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 10000 (uint32_t)\n    [1]: 10000 (uint32_t)\n    [2]: 5000 (uint32_t)\n    [3]: 10000 (uint32_t)\n    [4]: 5000 (uint32_t)\n    [5]: 10000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[3]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[3]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 51243624 (uint64_t)\n    [1]: 59285742 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 6000 (uint32_t)\n    [1]: 6000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[4]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[4]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 130268251 (uint64_t)\n  invocations: 1000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 61877478 (uint64_t)\n  active: 61877478 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[4]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[4]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 5204800 (uint64_t)\n    [1]: 2120308 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 1000 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 576000 (uint32_t)\n    [1]: 256000 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 1000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[4]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[4]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 0 (uint64_t)\n    [1]: 0 (uint64_t)\n    [2]: 0 (uint64_t)\n    [3]: 0 (uint64_t)\n    [4]: 0 (uint64_t)\n    [5]: 0 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n    [4]: 0 (uint32_t)\n    [5]: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[4]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[4]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 8374290 (uint64_t)\n    [1]: 9874046 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 1000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[5]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[5]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 129587868 (uint64_t)\n  invocations: 1000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 62513554 (uint64_t)\n  active: 62513554 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[5]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[5]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 5211783 (uint64_t)\n    [1]: 2113767 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 1000 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 576000 (uint32_t)\n    [1]: 256000 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 1000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[5]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[5]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 0 (uint64_t)\n    [1]: 0 (uint64_t)\n    [2]: 0 (uint64_t)\n    [3]: 0 (uint64_t)\n    [4]: 0 (uint64_t)\n    [5]: 0 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n    [2]: 0 (uint32_t)\n    [3]: 0 (uint32_t)\n    [4]: 0 (uint32_t)\n    [5]: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[5]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[5]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 8366981 (uint64_t)\n    [1]: 9906199 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 1000 (uint32_t)\n    [1]: 1000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[6]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[6]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 380087822 (uint64_t)\n  invocations: 2000 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 173610518 (uint64_t)\n  active: 173610518 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[6]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[6]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 12960578 (uint64_t)\n    [1]: 9816341 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 2000 (uint32_t)\n    [1]: 4000 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 1481000 (uint32_t)\n    [1]: 1481000 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 2000 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 4000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[6]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[6]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 6870567 (uint64_t)\n    [1]: 10853064 (uint64_t)\n    [2]: 3079550 (uint64_t)\n    [3]: 8556155 (uint64_t)\n    [4]: 2599508 (uint64_t)\n    [5]: 8941745 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 2000 (uint32_t)\n    [1]: 2000 (uint32_t)\n    [2]: 1000 (uint32_t)\n    [3]: 2000 (uint32_t)\n    [4]: 1000 (uint32_t)\n    [5]: 2000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[6]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[6]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 17179072 (uint64_t)\n    [1]: 19755105 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 2000 (uint32_t)\n    [1]: 2000 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].method[7]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].method[7]\nResult: {...}\nType: struct MidiTiming\nFields:\n  ticks: 168131698 (uint64_t)\n  invocations: 22 (uint32_t)\n  overflow: 0 (uint32_t)\n  cycles: 31433505 (uint64_t)\n  active: 31433505 (uint64_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].quantization[7]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].quantization[7]\nResult: {...}\nType: struct MidiQuantizationStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 17102529 (uint64_t)\n    [1]: 29281950 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 22 (uint32_t)\n    [1]: 64 (uint32_t)\n  elements: [2] (uint32_t [2])\n    [0]: 3072000 (uint32_t)\n    [1]: 8190000 (uint32_t)\n  dtype_mask: [2] (uint32_t [2])\n    [0]: 4 (uint32_t)\n    [1]: 4 (uint32_t)\n  nonzero_points: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 0 (uint32_t)\n  fast: [2] (uint32_t [2])\n    [0]: 22 (uint32_t)\n    [1]: 0 (uint32_t)\n  fallback: [2] (uint32_t [2])\n    [0]: 0 (uint32_t)\n    [1]: 64 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].normalization[7]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].normalization[7]\nResult: {...}\nType: struct MidiNormalizationStats\nFields:\n  ticks: [6] (uint64_t [6])\n    [0]: 9484347 (uint64_t)\n    [1]: 18520117 (uint64_t)\n    [2]: 7724665 (uint64_t)\n    [3]: 13386597 (uint64_t)\n    [4]: 51358 (uint64_t)\n    [5]: 22513490 (uint64_t)\n  calls: [6] (uint32_t [6])\n    [0]: 42 (uint32_t)\n    [1]: 42 (uint32_t)\n    [2]: 21 (uint32_t)\n    [3]: 42 (uint32_t)\n    [4]: 21 (uint32_t)\n    [5]: 42 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].cache[7]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].cache[7]\nResult: {...}\nType: struct MidiCacheStats\nFields:\n  ticks: [2] (uint64_t [2])\n    [0]: 188728 (uint64_t)\n    [1]: 217656 (uint64_t)\n  calls: [2] (uint32_t [2])\n    [0]: 22 (uint32_t)\n    [1]: 22 (uint32_t)"
+          }
+        ]
+      }
+    }
+  ]
+}

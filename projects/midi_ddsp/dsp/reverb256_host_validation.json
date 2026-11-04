@@ -1,0 +1,288 @@
+{
+  "passed": true,
+  "hop_samples": 256,
+  "fft_samples": 512,
+  "partitions": 188,
+  "coefficient_bytes": 385024,
+  "history_bytes": 385024,
+  "extra_accumulation_latency_samples": 192,
+  "extra_accumulation_latency_ms": 12,
+  "learned_fixture": {
+    "samples": 64000,
+    "max_abs": 2.60770320892334e-08,
+    "rmse": 3.4420361438213184e-09,
+    "finite": true,
+    "learned_init": false,
+    "inplace": false,
+    "tolerance": 1e-05
+  },
+  "sparse_signed_tails": [
+    {
+      "samples": 96256,
+      "max_abs": 1.1920928955078125e-07,
+      "rmse": 1.3741386388179065e-09,
+      "finite": true,
+      "learned_init": false,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 96256,
+      "max_abs": 1.1920928955078125e-07,
+      "rmse": 1.3741386388179065e-09,
+      "finite": true,
+      "learned_init": false,
+      "inplace": true,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 96256,
+      "max_abs": 1.1920928955078125e-07,
+      "rmse": 1.1188538126667562e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 96256,
+      "max_abs": 1.1920928955078125e-07,
+      "rmse": 1.1188538126667562e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": true,
+      "tolerance": 1e-05
+    }
+  ],
+  "lengths": [
+    {
+      "samples": 256,
+      "max_abs": 7.450580596923828e-09,
+      "rmse": 2.562790173426191e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 512,
+      "max_abs": 2.9802322387695312e-08,
+      "rmse": 5.457433852058358e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 768,
+      "max_abs": 2.9802322387695312e-08,
+      "rmse": 5.527282779779504e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 4352,
+      "max_abs": 4.470348358154297e-08,
+      "rmse": 7.830033621899281e-09,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 48128,
+      "max_abs": 5.960464477539063e-08,
+      "rmse": 1.3831185550000037e-08,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 48384,
+      "max_abs": 8.940696716308594e-08,
+      "rmse": 1.3846863117822558e-08,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    },
+    {
+      "samples": 64000,
+      "max_abs": 8.940696716308594e-08,
+      "rmse": 1.5381792170693803e-08,
+      "finite": true,
+      "learned_init": true,
+      "inplace": false,
+      "tolerance": 1e-05
+    }
+  ],
+  "all_13_learned_tails": [
+    {
+      "instrument_id": 0,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.2677825649782972e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 1,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.1449340861353987e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 2,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.1411810670356132e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 3,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 1.7428480441146369e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 4,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.6368157777504495e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 5,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.2593075247498264e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 6,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.157226718551297e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 7,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.365553890224919e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 8,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 1.828570627553364e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 9,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.642039470472883e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 10,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.3592894942262453e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 11,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 5.960464477539063e-08,
+        "rmse": 2.3552222778309148e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "instrument_id": 12,
+      "metrics": {
+        "samples": 96256,
+        "max_abs": 2.9802322387695312e-08,
+        "rmse": 1.597776505826568e-09,
+        "finite": true,
+        "learned_init": true,
+        "inplace": false,
+        "tolerance": 1e-05
+      }
+    }
+  ],
+  "file_sha256": {
+    "ddsp_reverb256.cpp": "21a57a75bfb6bf829e1527aaccd585d503cf544a84b62dbc8045a73700716ddd",
+    "ddsp_reverb256.hpp": "f5408ca5f42e5d5e9f8e2aa2e6a28849150e72d5d7b50150e7ade05bf355b0ac",
+    "test": "76de5e246275b6f082abb9a5d4f8d3e953df5d3fec88bd5b0fe69ac69124e1bb",
+    "cpu_assets.bin": "19ed82d68c4c68eaceab7c7471e25cdd94cf80eb520bae427316865418110523",
+    "reference_synth.py": "68738e0d072aa759e33897e78ffe18b95b276149920039b9312b2a1a013eb951"
+  },
+  "scope": "Host FFT comparison with independent full convolution. Includes full final partial partition, reset, inplace/disjoint use and guards. CMSIS FFT/board timing/audio playback remain unmeasured."
+}

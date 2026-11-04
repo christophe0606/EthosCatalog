@@ -1,0 +1,85 @@
+network:
+  name: MIDI-DDSP pretrained 13-instrument synthesis
+  model: model/model.py
+  quantize: model/quantize_deployment.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    error:
+      scope: Synthetic 1000-frame scores; control and conditional metrics do not establish
+        final audio quality.
+      original_four_region_gate:
+        passed: true
+        instruments: 13
+        report: model/deployment_conditionals.json
+        maximum_mean_top_p_total_variation: 0.00548664
+        maximum_mean_expected_pitch_shift_cents: 0.0278409
+        harmonic_relative_rmse_range:
+        - 0.004885
+        - 0.008227
+      closed_loop:
+        all_finite: true
+        instruments: 13
+        report: model/deployment_ptq_validation.json
+        maximum_raw_normalized_rmse: 0.036154
+        pitch_rmse_cents_range:
+        - 1.485
+        - 9.689
+      demo_register_gate:
+        passed: false
+        report: model/demo_conditionals.json
+        instrument_failing: tuba
+        mean_expected_pitch_shift_cents: 0.120217
+        gate_cents: 0.1
+      precondition_batching:
+        batch: 16
+        row_independence_bit_exact: true
+        state_and_quantization_parameters_identical: true
+        native_host_gemm_tight_gate_passed: false
+        native_host_gemm_max_absolute_error: 0.00041556358337402344
+        report: model/precondition_batch_validation.json
+        status: 'Board batch-one trace errors retained; memory and included sequential
+          music timing verified. Held-harmonic and tuba pitch-shift gates remain failed;
+          no acceptance by gate relaxation. See model/stream_final_b91.json.'
+  extract_delegate_segments: true
+  flash_ospi: true
+  ospi:
+    address: 3221225472
+    size: 33554432
+    pname: M55_HP
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Shared_Sram
+  methods:
+    expression_forward:
+      graph: model/expression_forward_quantized.pt2
+      safetensors: model/expression_forward_quantized.safetensors
+    expression_backward:
+      graph: model/expression_backward_quantized.pt2
+      safetensors: model/expression_backward_quantized.safetensors
+    expression_step:
+      graph: model/expression_step_quantized.pt2
+      safetensors: model/expression_step_quantized.safetensors
+    precondition:
+      graph: model/precondition_quantized.pt2
+      safetensors: model/precondition_quantized.safetensors
+    context_forward:
+      graph: model/context_forward_quantized.pt2
+      safetensors: model/context_forward_quantized.safetensors
+    context_backward:
+      graph: model/context_backward_quantized.pt2
+      safetensors: model/context_backward_quantized.safetensors
+    pitch_step:
+      graph: model/pitch_step_quantized.pt2
+      safetensors: model/pitch_step_quantized.safetensors
+    harmonic:
+      graph: model/harmonic_quantized.pt2
+      safetensors: model/harmonic_quantized.safetensors
+  assets:
+    cpu_weights:
+      file: model/cpu_assets.bin
+      address: 3246391296
+    benchmark_fixtures:
+      file: model/benchmark_assets.bin
+      address: 3250585600

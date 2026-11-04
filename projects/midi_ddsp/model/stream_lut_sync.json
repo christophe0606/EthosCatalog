@@ -1,0 +1,101 @@
+{
+  "context": "b82/d83 matching Release, amplitudeLUT+strictMVE+checked synchronous result/ack. Freshcontinue15:58:59UTC; firstpause16:01:48UTC afterfiniteaudio_complete1. All13 actualmusiccomplete. Clean real-time FAIL: maxNN4.04387883s,12starvationevents/32silenceblocks, zeroqueue/drivererrors/clipping/dropped,80327requests=completions. DSP1.0626284s/4saudio. Nodeownershipcleanupinb85notyetloaded.",
+  "results": {
+    "pipeline_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    },
+    "midi_dsp_selftest_complete": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_selftest_complete\nResult: 1\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_dsp_selftest_max": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_selftest_max\nResult: [4]\nType: float [4]\nFields:\n  [0]: 6.44475222e-07 (float)\n  [1]: 4.36557457e-11 (float)\n  [2]: 6.44475222e-07 (float)\n  [3]: 1.78813934e-06 (float)"
+        }
+      ]
+    },
+    "midi_dsp_profile": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_profile\nResult: {...}\nType: struct MidiDspProfile\nFields:\n  init_ticks: 26001447 (uint64_t)\n  harmonic_noise_ticks: 356559642 (uint64_t)\n  reverb_ticks: 65499643 (uint64_t)\n  total_ticks: 425051360 (uint64_t)\n  intervals: 1000 (uint32_t)\n  nonfinite: 0 (uint32_t)\n  clipped: 0 (uint32_t)\n  complete: 1 (uint32_t)\n  instrument: 0 (uint32_t)\n  report_slot: 0 (uint32_t)\n  peak: 0.0567922443 (float)\n  rms: 0.0118890433 (float)"
+        }
+      ]
+    },
+    "midi_demo": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_demo\nResult: {...}\nType: struct MidiDemoStats\nFields:\n  windows_started: 26 (uint32_t)\n  windows_ready: 26 (uint32_t)\n  windows_played: 26 (uint32_t)\n  frames: 26000 (uint32_t)\n  tail_frames: 752 (uint32_t)\n  complete: 1 (uint32_t)\n  audio_complete: 1 (uint32_t)\n  current_instrument: 12 (uint32_t)\n  instrument_mask: 8191 (uint32_t)\n  tail_steals: 12 (uint32_t)\n  control_waits: 52 (uint32_t)\n  deadline_misses: 21 (uint32_t)\n  max_regions: 16 (uint32_t)\n  method_calls: [8] (uint32_t [8])\n    [0]: 221 (uint32_t)\n    [1]: 221 (uint32_t)\n    [2]: 221 (uint32_t)\n    [3]: 1638 (uint32_t)\n    [4]: 26000 (uint32_t)\n    [5]: 26000 (uint32_t)\n    [6]: 26000 (uint32_t)\n    [7]: 26 (uint32_t)\n  neural_ticks: 41353952918 (uint64_t)\n  max_neural_ticks: 1617551532 (uint64_t)\n  control_wait_ticks: 1192457914 (uint64_t)\n  startup_ticks: 1303436753 (uint64_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "midi_admission": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_admission\nResult: {...}\nType: struct midi_ddsp::ScoreWindowCounters\nFields:\n  windows: 26 (uint64_t)\n  note_ons: 104 (uint64_t)\n  unsupported_notes: 0 (uint64_t)\n  rejected_instrument_notes: 0 (uint64_t)\n  overlap_steals: 0 (uint64_t)\n  unmatched_note_offs: 0 (uint64_t)\n  quantized_away_notes: 0 (uint64_t)\n  program_changes: 13 (uint64_t)\n  instrument_switches: 12 (uint64_t)\n  dense_windows: 0 (uint64_t)\n  dense_regions: 0 (uint64_t)\n  dense_note_regions: 0 (uint64_t)\n  capacity_rest_frames: 0 (uint64_t)"
+        }
+      ]
+    },
+    "devkit_e8_audio_stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: devkit_e8_audio_stats\nResult: {...}\nType: volatile DevKitE8AudioStats\nFields:\n  queued_blocks: 6688 (uint32_t)\n  completed_blocks: 6688 (uint32_t)\n  callbacks: 6719 (uint32_t)\n  silence_blocks: 32 (uint32_t)\n  starvation_events: 12 (uint32_t)\n  driver_underflows: 0 (uint32_t)\n  deadline_misses: 0 (uint32_t)\n  queue_high_water: 6 (uint32_t)\n  write_timeouts: 0 (uint32_t)\n  frame_errors: 0 (uint32_t)\n  interval_min_ticks: 6399533 (uint32_t)\n  interval_max_ticks: 6400452 (uint32_t)\n  timer_hz: 400000000 (uint32_t)\n  started_ticks: 1618341171 (uint32_t)\n  first_audio_ticks: 1618342037 (uint32_t)\n  last_completed_ticks: 1669970953 (uint32_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "midi_audio_nonfinite": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_audio_nonfinite\nResult: Error: could not evaluate expression"
+        }
+      ]
+    },
+    "midi_audio_clipped": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_audio_clipped\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_event_dropped": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_event_dropped\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_network_requests": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_network_requests\nResult: 80327\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_network_completions": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_network_completions\nResult: 80327\nType: volatile uint32_t"
+        }
+      ]
+    }
+  }
+}

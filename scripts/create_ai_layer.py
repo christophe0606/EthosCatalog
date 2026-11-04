@@ -72,12 +72,15 @@ def prepare_quantized_model(solution_file, project_file, network, force=False):
                        cwd=project_dir, check=True)
 
 
-def export_model(program, spec, *, cpu_methods=(), inspection_callback=None):
+def export_model(program, spec, *, cpu_methods=(), inspection_callback=None,
+                 extract_delegate_segments=False):
     """Lower one graph or named methods into one PTE.
 
     CPU-only methods, such as a token embedding lookup, must be named explicitly.
     Every other method must produce an Ethos delegate.
     An optional callback can record the lowered edge graphs before serialization.
+    Extracted delegates remain in the same PTE file, but a DataLoader can stage
+    their segments separately. Inline storage remains the existing default.
     """
     # Register CPU quantize/dequantize out variants used at float boundaries.
     import executorch.kernels.quantized  # noqa: F401
@@ -103,7 +106,8 @@ def export_model(program, spec, *, cpu_methods=(), inspection_callback=None):
         raise ValueError("No Ethos-U delegate was generated")
     if inspection_callback is not None:
         inspection_callback(edge)
-    output = edge.to_executorch(ExecutorchBackendConfig(extract_delegate_segments=False))
+    output = edge.to_executorch(ExecutorchBackendConfig(
+        extract_delegate_segments=extract_delegate_segments))
     return bytes(output.buffer), delegated
 
 
@@ -213,10 +217,12 @@ def main():
         programs = {name: load_quantized_program(spec.target, project_file.parent, method)
                     for name, method in settings.items()}
         cpu_methods = [name for name, method in settings.items() if not method.get("delegate", True)]
-        pte, delegated = export_model(programs, spec, cpu_methods=cpu_methods)
+        pte, delegated = export_model(programs, spec, cpu_methods=cpu_methods,
+            extract_delegate_segments=network.get("extract_delegate_segments", False))
     else:
         program = load_quantized_program(spec.target, project_file.parent, network)
-        pte, delegated = export_model(program, spec)
+        pte, delegated = export_model(program, spec,
+            extract_delegate_segments=network.get("extract_delegate_segments", False))
     runtime, operators = components(pte, pack)
     assets = model_assets(project_file.parent, network, len(pte))
     model_source = c_array(pte, network)
@@ -232,6 +238,7 @@ def main():
               **cache_provenance(project_file.parent, network),
               "assets": assets,
               "flash_ospi": network["flash_ospi"], "vela": network["vela"],
+              "extract_delegate_segments": network.get("extract_delegate_segments", False),
               "delegates": delegated, "operators": operators, "pte_bytes": len(pte)}
     (layer_dir / "generation.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(f"[ai_layer] wrote {layer_dir}: {len(pte)} bytes, {delegated} Ethos-U delegate(s), {operators}")

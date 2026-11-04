@@ -1,0 +1,832 @@
+{
+  "pte_bytes": 6221424,
+  "program_bytes": 128328,
+  "segment_base_offset": 128384,
+  "methods": {
+    "context_backward": {
+      "non_const_buffer_sizes": [
+        0,
+        3456
+      ],
+      "planned_buffer_sum": 3456,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 438176,
+          "location": "segment",
+          "segment_index": 1,
+          "file_offset": 175616,
+          "scratch_bytes": 4736,
+          "weight_bytes": 435936,
+          "command_bytes": 1892
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 4736,
+      "scratch_max_one_delegate": 4736,
+      "delegate_weight_bytes_total": 435936,
+      "delegate_command_bytes_total": 1892,
+      "calls_per_1000frame_block": 1000,
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor"
+      ]
+    },
+    "context_forward": {
+      "non_const_buffer_sizes": [
+        0,
+        3456
+      ],
+      "planned_buffer_sum": 3456,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 441120,
+          "location": "segment",
+          "segment_index": 2,
+          "file_offset": 613888,
+          "scratch_bytes": 4736,
+          "weight_bytes": 438896,
+          "command_bytes": 1876
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 4736,
+      "scratch_max_one_delegate": 4736,
+      "delegate_weight_bytes_total": 438896,
+      "delegate_command_bytes_total": 1876,
+      "calls_per_1000frame_block": 1000,
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor"
+      ]
+    },
+    "expression_backward": {
+      "non_const_buffer_sizes": [
+        0,
+        1920
+      ],
+      "planned_buffer_sum": 1920,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 137824,
+          "location": "segment",
+          "segment_index": 3,
+          "file_offset": 1055104,
+          "scratch_bytes": 2432,
+          "weight_bytes": 135584,
+          "command_bytes": 1892
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 2432,
+      "scratch_max_one_delegate": 2432,
+      "delegate_weight_bytes_total": 135584,
+      "delegate_command_bytes_total": 1892,
+      "calls_per_1000frame_block": "N score notes",
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor"
+      ]
+    },
+    "expression_forward": {
+      "non_const_buffer_sizes": [
+        0,
+        1920
+      ],
+      "planned_buffer_sum": 1920,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 138032,
+          "location": "segment",
+          "segment_index": 4,
+          "file_offset": 1192960,
+          "scratch_bytes": 2432,
+          "weight_bytes": 135808,
+          "command_bytes": 1876
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 2432,
+      "scratch_max_one_delegate": 2432,
+      "delegate_weight_bytes_total": 135808,
+      "delegate_command_bytes_total": 1876,
+      "calls_per_1000frame_block": "N score notes",
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor"
+      ]
+    },
+    "expression_step": {
+      "non_const_buffer_sizes": [
+        0,
+        3376
+      ],
+      "planned_buffer_sum": 3376,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 287968,
+          "location": "segment",
+          "segment_index": 5,
+          "file_offset": 1331072,
+          "scratch_bytes": 3856,
+          "weight_bytes": 283872,
+          "command_bytes": 3688
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 18352,
+          "location": "segment",
+          "segment_index": 6,
+          "file_offset": 1619072,
+          "scratch_bytes": 512,
+          "weight_bytes": 17680,
+          "command_bytes": 332
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 18816,
+          "location": "segment",
+          "segment_index": 7,
+          "file_offset": 1637504,
+          "scratch_bytes": 768,
+          "weight_bytes": 17696,
+          "command_bytes": 784
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 2640,
+          "location": "segment",
+          "segment_index": 8,
+          "file_offset": 1656320,
+          "scratch_bytes": 1296,
+          "weight_bytes": 1216,
+          "command_bytes": 1024
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 6432,
+      "scratch_max_one_delegate": 3856,
+      "delegate_weight_bytes_total": 320464,
+      "delegate_command_bytes_total": 5828,
+      "calls_per_1000frame_block": "N score notes",
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor",
+        "aten::mean",
+        "aten::sub",
+        "aten::pow",
+        "aten::add",
+        "aten::rsqrt",
+        "aten::mul"
+      ]
+    },
+    "harmonic": {
+      "non_const_buffer_sizes": [
+        0,
+        3072000
+      ],
+      "planned_buffer_sum": 3072000,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 257984,
+          "location": "segment",
+          "segment_index": 9,
+          "file_offset": 1659008,
+          "scratch_bytes": 1216000,
+          "weight_bytes": 256736,
+          "command_bytes": 868
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66192,
+          "location": "segment",
+          "segment_index": 10,
+          "file_offset": 1917056,
+          "scratch_bytes": 833056,
+          "weight_bytes": 65056,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 130928,
+          "location": "segment",
+          "segment_index": 11,
+          "file_offset": 1983360,
+          "scratch_bytes": 849152,
+          "weight_bytes": 129664,
+          "command_bytes": 860
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131088,
+          "location": "segment",
+          "segment_index": 12,
+          "file_offset": 2114304,
+          "scratch_bytes": 849136,
+          "weight_bytes": 129744,
+          "command_bytes": 940
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131280,
+          "location": "segment",
+          "segment_index": 13,
+          "file_offset": 2245504,
+          "scratch_bytes": 849136,
+          "weight_bytes": 129760,
+          "command_bytes": 1120
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66880,
+          "location": "segment",
+          "segment_index": 14,
+          "file_offset": 2376832,
+          "scratch_bytes": 833744,
+          "weight_bytes": 65744,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66352,
+          "location": "segment",
+          "segment_index": 15,
+          "file_offset": 2443776,
+          "scratch_bytes": 833216,
+          "weight_bytes": 65216,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 130912,
+          "location": "segment",
+          "segment_index": 16,
+          "file_offset": 2510208,
+          "scratch_bytes": 849104,
+          "weight_bytes": 129648,
+          "command_bytes": 860
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131168,
+          "location": "segment",
+          "segment_index": 17,
+          "file_offset": 2641152,
+          "scratch_bytes": 849136,
+          "weight_bytes": 129824,
+          "command_bytes": 940
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 130592,
+          "location": "segment",
+          "segment_index": 18,
+          "file_offset": 2772352,
+          "scratch_bytes": 848640,
+          "weight_bytes": 129072,
+          "command_bytes": 1120
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66688,
+          "location": "segment",
+          "segment_index": 19,
+          "file_offset": 2903040,
+          "scratch_bytes": 833552,
+          "weight_bytes": 65552,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66272,
+          "location": "segment",
+          "segment_index": 20,
+          "file_offset": 2969728,
+          "scratch_bytes": 833136,
+          "weight_bytes": 65136,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131808,
+          "location": "segment",
+          "segment_index": 21,
+          "file_offset": 3036032,
+          "scratch_bytes": 849616,
+          "weight_bytes": 130544,
+          "command_bytes": 860
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131968,
+          "location": "segment",
+          "segment_index": 22,
+          "file_offset": 3167872,
+          "scratch_bytes": 849680,
+          "weight_bytes": 130624,
+          "command_bytes": 940
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131920,
+          "location": "segment",
+          "segment_index": 23,
+          "file_offset": 3299840,
+          "scratch_bytes": 849552,
+          "weight_bytes": 130400,
+          "command_bytes": 1120
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66880,
+          "location": "segment",
+          "segment_index": 24,
+          "file_offset": 3431808,
+          "scratch_bytes": 833744,
+          "weight_bytes": 65744,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 66624,
+          "location": "segment",
+          "segment_index": 25,
+          "file_offset": 3498752,
+          "scratch_bytes": 833488,
+          "weight_bytes": 65488,
+          "command_bytes": 728
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 132976,
+          "location": "segment",
+          "segment_index": 26,
+          "file_offset": 3565440,
+          "scratch_bytes": 858480,
+          "weight_bytes": 131712,
+          "command_bytes": 860
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 133616,
+          "location": "segment",
+          "segment_index": 27,
+          "file_offset": 3698432,
+          "scratch_bytes": 858880,
+          "weight_bytes": 132272,
+          "command_bytes": 940
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 131888,
+          "location": "segment",
+          "segment_index": 28,
+          "file_offset": 3832064,
+          "scratch_bytes": 849520,
+          "weight_bytes": 130368,
+          "command_bytes": 1120
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 752,
+          "location": "segment",
+          "segment_index": 29,
+          "file_offset": 3964032,
+          "scratch_bytes": 512000,
+          "weight_bytes": 1,
+          "command_bytes": 364
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 18640,
+          "location": "segment",
+          "segment_index": 30,
+          "file_offset": 3964800,
+          "scratch_bytes": 523520,
+          "weight_bytes": 17760,
+          "command_bytes": 544
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 18295488,
+      "scratch_max_one_delegate": 1216000,
+      "delegate_weight_bytes_total": 2296065,
+      "delegate_command_bytes_total": 18552,
+      "calls_per_1000frame_block": 1,
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor",
+        "aten::mean",
+        "aten::sub",
+        "aten::pow",
+        "aten::add",
+        "aten::rsqrt",
+        "aten::mul"
+      ]
+    },
+    "pitch_step": {
+      "non_const_buffer_sizes": [
+        0,
+        7376
+      ],
+      "planned_buffer_sum": 7376,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 1023376,
+          "location": "segment",
+          "segment_index": 31,
+          "file_offset": 3983488,
+          "scratch_bytes": 8096,
+          "weight_bytes": 1019280,
+          "command_bytes": 3684
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 52880,
+          "location": "segment",
+          "segment_index": 32,
+          "file_offset": 5006976,
+          "scratch_bytes": 2976,
+          "weight_bytes": 51952,
+          "command_bytes": 528
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 11072,
+      "scratch_max_one_delegate": 8096,
+      "delegate_weight_bytes_total": 1071232,
+      "delegate_command_bytes_total": 4212,
+      "calls_per_1000frame_block": 1000,
+      "input_batch": 1,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor",
+        "aten::mean",
+        "aten::sub",
+        "aten::pow",
+        "aten::add",
+        "aten::rsqrt",
+        "aten::mul"
+      ]
+    },
+    "precondition": {
+      "non_const_buffer_sizes": [
+        0,
+        131136
+      ],
+      "planned_buffer_sum": 131136,
+      "delegates": [
+        {
+          "backend": "EthosUBackend",
+          "bytes": 14592,
+          "location": "segment",
+          "segment_index": 33,
+          "file_offset": 5059968,
+          "scratch_bytes": 16704,
+          "weight_bytes": 13920,
+          "command_bytes": 332
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 257440,
+          "location": "segment",
+          "segment_index": 34,
+          "file_offset": 5074560,
+          "scratch_bytes": 49152,
+          "weight_bytes": 256272,
+          "command_bytes": 820
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 253088,
+          "location": "segment",
+          "segment_index": 35,
+          "file_offset": 5332096,
+          "scratch_bytes": 49152,
+          "weight_bytes": 251920,
+          "command_bytes": 820
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 246224,
+          "location": "segment",
+          "segment_index": 36,
+          "file_offset": 5585280,
+          "scratch_bytes": 49152,
+          "weight_bytes": 245056,
+          "command_bytes": 820
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 256192,
+          "location": "segment",
+          "segment_index": 37,
+          "file_offset": 5831552,
+          "scratch_bytes": 49152,
+          "weight_bytes": 255024,
+          "command_bytes": 820
+        },
+        {
+          "backend": "EthosUBackend",
+          "bytes": 133616,
+          "location": "segment",
+          "segment_index": 38,
+          "file_offset": 6087808,
+          "scratch_bytes": 49152,
+          "weight_bytes": 132448,
+          "command_bytes": 832
+        }
+      ],
+      "scratch_sum_if_all_delegates_loaded": 262464,
+      "scratch_max_one_delegate": 49152,
+      "delegate_weight_bytes_total": 1154640,
+      "delegate_command_bytes_total": 4444,
+      "calls_per_1000frame_block": 63,
+      "input_batch": 16,
+      "operators": [
+        "quantized_decomposed::quantize_per_tensor",
+        "quantized_decomposed::dequantize_per_tensor",
+        "aten::mean",
+        "aten::sub",
+        "aten::pow",
+        "aten::add",
+        "aten::rsqrt",
+        "aten::mul"
+      ]
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file_offset": 128384,
+      "bytes": 47136
+    },
+    {
+      "index": 1,
+      "file_offset": 175616,
+      "bytes": 438176
+    },
+    {
+      "index": 2,
+      "file_offset": 613888,
+      "bytes": 441120
+    },
+    {
+      "index": 3,
+      "file_offset": 1055104,
+      "bytes": 137824
+    },
+    {
+      "index": 4,
+      "file_offset": 1192960,
+      "bytes": 138032
+    },
+    {
+      "index": 5,
+      "file_offset": 1331072,
+      "bytes": 287968
+    },
+    {
+      "index": 6,
+      "file_offset": 1619072,
+      "bytes": 18352
+    },
+    {
+      "index": 7,
+      "file_offset": 1637504,
+      "bytes": 18816
+    },
+    {
+      "index": 8,
+      "file_offset": 1656320,
+      "bytes": 2640
+    },
+    {
+      "index": 9,
+      "file_offset": 1659008,
+      "bytes": 257984
+    },
+    {
+      "index": 10,
+      "file_offset": 1917056,
+      "bytes": 66192
+    },
+    {
+      "index": 11,
+      "file_offset": 1983360,
+      "bytes": 130928
+    },
+    {
+      "index": 12,
+      "file_offset": 2114304,
+      "bytes": 131088
+    },
+    {
+      "index": 13,
+      "file_offset": 2245504,
+      "bytes": 131280
+    },
+    {
+      "index": 14,
+      "file_offset": 2376832,
+      "bytes": 66880
+    },
+    {
+      "index": 15,
+      "file_offset": 2443776,
+      "bytes": 66352
+    },
+    {
+      "index": 16,
+      "file_offset": 2510208,
+      "bytes": 130912
+    },
+    {
+      "index": 17,
+      "file_offset": 2641152,
+      "bytes": 131168
+    },
+    {
+      "index": 18,
+      "file_offset": 2772352,
+      "bytes": 130592
+    },
+    {
+      "index": 19,
+      "file_offset": 2903040,
+      "bytes": 66688
+    },
+    {
+      "index": 20,
+      "file_offset": 2969728,
+      "bytes": 66272
+    },
+    {
+      "index": 21,
+      "file_offset": 3036032,
+      "bytes": 131808
+    },
+    {
+      "index": 22,
+      "file_offset": 3167872,
+      "bytes": 131968
+    },
+    {
+      "index": 23,
+      "file_offset": 3299840,
+      "bytes": 131920
+    },
+    {
+      "index": 24,
+      "file_offset": 3431808,
+      "bytes": 66880
+    },
+    {
+      "index": 25,
+      "file_offset": 3498752,
+      "bytes": 66624
+    },
+    {
+      "index": 26,
+      "file_offset": 3565440,
+      "bytes": 132976
+    },
+    {
+      "index": 27,
+      "file_offset": 3698432,
+      "bytes": 133616
+    },
+    {
+      "index": 28,
+      "file_offset": 3832064,
+      "bytes": 131888
+    },
+    {
+      "index": 29,
+      "file_offset": 3964032,
+      "bytes": 752
+    },
+    {
+      "index": 30,
+      "file_offset": 3964800,
+      "bytes": 18640
+    },
+    {
+      "index": 31,
+      "file_offset": 3983488,
+      "bytes": 1023376
+    },
+    {
+      "index": 32,
+      "file_offset": 5006976,
+      "bytes": 52880
+    },
+    {
+      "index": 33,
+      "file_offset": 5059968,
+      "bytes": 14592
+    },
+    {
+      "index": 34,
+      "file_offset": 5074560,
+      "bytes": 257440
+    },
+    {
+      "index": 35,
+      "file_offset": 5332096,
+      "bytes": 253088
+    },
+    {
+      "index": 36,
+      "file_offset": 5585280,
+      "bytes": 246224
+    },
+    {
+      "index": 37,
+      "file_offset": 5831552,
+      "bytes": 256192
+    },
+    {
+      "index": 38,
+      "file_offset": 6087808,
+      "bytes": 133616
+    }
+  ],
+  "constant_segment": {
+    "index": 0,
+    "file_offset": 128384,
+    "bytes": 47136,
+    "tensor_offsets": [
+      0,
+      0,
+      512,
+      1024,
+      1536,
+      2048,
+      2560,
+      3072,
+      3088,
+      3104,
+      3616,
+      4128,
+      4640,
+      5152,
+      5664,
+      6176,
+      6688,
+      7200,
+      7712,
+      8224,
+      8736,
+      9248,
+      9760,
+      10272,
+      10784,
+      11296,
+      11808,
+      12320,
+      12832,
+      13344,
+      13856,
+      14368,
+      14880,
+      15392,
+      15904,
+      16416,
+      16928,
+      17440,
+      17952,
+      18464,
+      18976,
+      19488,
+      20000,
+      20512,
+      21024,
+      21536,
+      22048,
+      22560,
+      23072,
+      23584,
+      24096,
+      24608,
+      25632,
+      26656,
+      28704,
+      30752,
+      32800,
+      34848,
+      36896,
+      38944,
+      40992,
+      43040,
+      45088
+    ]
+  },
+  "limits": "Compiler/serialized allocation evidence only; does not include Method metadata, backend initialization allocations, score/context buffers, DSP or firmware. Do not substitute maximum scratch for sum unless runtime reuse is verified.",
+  "runtime_scratch_reuse_audit": "Pinned ExecuTorch1.4.1 EthosUBackend.cpp execute allocates scratch from BackendExecutionContext.get_temp_allocator(), not persistent init memory. runtime/executor/method.cpp resets the temporary allocator after delegate execution. For serial method execution this justifies maximum delegate scratch rather than sum; other temporary kernel allocations and metadata still need their own bound. Imported runtime files were only read."
+}

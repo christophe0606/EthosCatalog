@@ -1,0 +1,70 @@
+{
+  "address": 3246391296,
+  "bytes": 2536448,
+  "crc32": 3818737745,
+  "dtype": "little-endian float32",
+  "tensors": {
+    "e/pitch_emb/embeddings": {
+      "offset": 0,
+      "shape": [
+        128,
+        64
+      ],
+      "count": 8192
+    },
+    "e/instrument_emb/embeddings": {
+      "offset": 32768,
+      "shape": [
+        13,
+        64
+      ],
+      "count": 832
+    },
+    "e/duration_emb/kernel": {
+      "offset": 36096,
+      "shape": [
+        1,
+        64
+      ],
+      "count": 64
+    },
+    "e/duration_emb/bias": {
+      "offset": 36352,
+      "shape": [
+        64
+      ],
+      "count": 64
+    },
+    "s/midi_decoder/instrument_emb/embeddings": {
+      "offset": 36608,
+      "shape": [
+        13,
+        64
+      ],
+      "count": 832
+    },
+    "s/midi_decoder/decoder/q_pitch_emb/kernel": {
+      "offset": 39936,
+      "shape": [
+        1,
+        64
+      ],
+      "count": 64
+    },
+    "s/midi_decoder/decoder/q_pitch_emb/bias": {
+      "offset": 40192,
+      "shape": [
+        64
+      ],
+      "count": 64
+    },
+    "s/reverb_module/magnitudes_embedding/embeddings": {
+      "offset": 40448,
+      "shape": [
+        13,
+        48000
+      ],
+      "count": 624000
+    }
+  }
+}

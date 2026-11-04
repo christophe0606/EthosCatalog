@@ -1,0 +1,322 @@
+{
+  "passed_row_independence_gate": true,
+  "passed_native_gemm_tight_gate": false,
+  "native_gemm_gate": {
+    "atol": 2e-05,
+    "rtol": 2e-05
+  },
+  "batch": 16,
+  "input_shape": [
+    16,
+    10
+  ],
+  "output_shape": [
+    16,
+    256
+  ],
+  "quantization_parameters_identical": true,
+  "state_tensors_identical": true,
+  "cases": [
+    {
+      "case": "four_regions_instrument_0",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.8224297895794734e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_0",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 4.2332856537541375e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_1",
+      "rows": 47,
+      "max_absolute_error": 0.0003116130828857422,
+      "rmse": 3.6862755223410204e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_1",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.572579225874506e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_2",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.807165921898559e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_2",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.577622555894777e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_3",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.464215842541307e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_3",
+      "rows": 47,
+      "max_absolute_error": 0.0002079010009765625,
+      "rmse": 3.534751522238366e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_4",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.764504799619317e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_4",
+      "rows": 47,
+      "max_absolute_error": 0.0003116503357887268,
+      "rmse": 4.3492666009115055e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_5",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.3737342164386064e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_5",
+      "rows": 47,
+      "max_absolute_error": 0.00031165778636932373,
+      "rmse": 3.891059895977378e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_6",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.927735087927431e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_6",
+      "rows": 47,
+      "max_absolute_error": 0.0002077743411064148,
+      "rmse": 3.344364449731074e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_7",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.27934576489497e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_7",
+      "rows": 47,
+      "max_absolute_error": 0.00020776968449354172,
+      "rmse": 3.5461293009575456e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_8",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.495165583444759e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_8",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.823638326139189e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_9",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.6384710256243125e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_9",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.447380004217848e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_10",
+      "rows": 47,
+      "max_absolute_error": 0.0002077743411064148,
+      "rmse": 3.68747059837915e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_10",
+      "rows": 47,
+      "max_absolute_error": 0.0003116503357887268,
+      "rmse": 4.122740210732445e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_11",
+      "rows": 47,
+      "max_absolute_error": 0.00010395050048828125,
+      "rmse": 3.3644009818090126e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_11",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.1976473110262305e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "four_regions_instrument_12",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.5662778827827424e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "demo_phrase_instrument_12",
+      "rows": 47,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 3.5066699638264254e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_1",
+      "rows": 1,
+      "max_absolute_error": 0.00010395050048828125,
+      "rmse": 5.623012475552969e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_15",
+      "rows": 15,
+      "max_absolute_error": 0.00020778179168701172,
+      "rmse": 4.3813473894260824e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_16",
+      "rows": 16,
+      "max_absolute_error": 0.0002079010009765625,
+      "rmse": 5.0528320571174845e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_17",
+      "rows": 17,
+      "max_absolute_error": 0.0003116726875305176,
+      "rmse": 5.9528301790123805e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_35",
+      "rows": 35,
+      "max_absolute_error": 0.00041554123163223267,
+      "rmse": 5.8661316870711744e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "random_tail_1000",
+      "rows": 1000,
+      "max_absolute_error": 0.00041556358337402344,
+      "rmse": 5.238304947852157e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    },
+    {
+      "case": "held_fixture",
+      "rows": 1,
+      "max_absolute_error": 0.00010395050048828125,
+      "rmse": 5.9860452893190086e-05,
+      "bit_identical": false,
+      "native_gemm_tight_gate_passed": false,
+      "rowwise_linear_bit_identical": true
+    }
+  ],
+  "source_graph_sha256": "d5d1c3d814e12143535b0116f037534cedf1a58f4a2a3cbe582ab8809a2e78c2",
+  "candidate_graph_sha256": "dc9da15fc8142a2d1458e2f90ceab071b0358d702982c00e337a454cddeeace6",
+  "script_sha256": "d8e352cd1b2117ea86bf0f82f9b2b0fb4f4652bb8d2390c88125ecf7fd9d6326",
+  "scope": "Independent rows only; unchanged weights/scales/zero-points and last-axis normalization. Host parity does not prove compiled delegate accuracy, memory or timing. Zero padding only at final partial batch; discard padded output rows."
+}

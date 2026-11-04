@@ -1,0 +1,104 @@
+{
+  "context": "b45/d46 generic independent-row packing, still original batch1 model; uninterrupted",
+  "results": [
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_benchmark_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_benchmark_complete\nResult: 1\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].total_ticks",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].total_ticks\nResult: 1808451302\nType: uint64_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].precondition_batch",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].precondition_batch\nResult: 1\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].precondition_valid_frames",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].precondition_valid_frames\nResult: 1000\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].precondition_padding_frames",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].precondition_padding_frames\nResult: 0\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].trace_max",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].trace_max\nResult: [8]\nType: float [8]\nFields:\n  [0]: 7.17937946e-05 (float)\n  [1]: 7.82180578e-05 (float)\n  [2]: 0.000248789787 (float)\n  [3]: 0.00145435333 (float)\n  [4]: 0.00293673575 (float)\n  [5]: 0.00423444062 (float)\n  [6]: 4.79981709 (float)\n  [7]: 0 (float)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].pitch_mae",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].pitch_mae\nResult: 0.028380014\nType: float"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_schedule[0].raw_selected_max",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_schedule[0].raw_selected_max\nResult: 0.0163551569\nType: float"
+          }
+        ]
+      }
+    }
+  ]
+}

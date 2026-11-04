@@ -1,0 +1,200 @@
+{
+  "cases": [
+    {
+      "instrument_id": 0,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04887247085571289,
+        0.021129608154296875,
+        0.007529914379119873,
+        0.48817646503448486
+      ],
+      "mean_logits_kl_float_to_ptq": 0.002153335837647319,
+      "first_frame_logits_kl": 0.0007846000953577459,
+      "mean_logits_total_variation": 0.021456997841596603,
+      "first_frame_logits_mae": 0.21435227990150452,
+      "pitch_rmse_cents": 1.0898886919021606,
+      "raw_controls_rmse": 0.011987317353487015
+    },
+    {
+      "instrument_id": 1,
+      "max_errors_raw_pitch_expression_logits": [
+        0.0359044075012207,
+        0.0170440673828125,
+        0.00823122262954712,
+        0.4607875347137451
+      ],
+      "mean_logits_kl_float_to_ptq": 0.002616273704916239,
+      "first_frame_logits_kl": 0.0008779556374065578,
+      "mean_logits_total_variation": 0.025675348937511444,
+      "first_frame_logits_mae": 0.20587511360645294,
+      "pitch_rmse_cents": 0.974656343460083,
+      "raw_controls_rmse": 0.010164383798837662
+    },
+    {
+      "instrument_id": 2,
+      "max_errors_raw_pitch_expression_logits": [
+        0.03904438018798828,
+        0.011783599853515625,
+        0.007732808589935303,
+        0.49129343032836914
+      ],
+      "mean_logits_kl_float_to_ptq": 0.003602562937885523,
+      "first_frame_logits_kl": 0.001220108475536108,
+      "mean_logits_total_variation": 0.030063478276133537,
+      "first_frame_logits_mae": 0.21562765538692474,
+      "pitch_rmse_cents": 0.8244441747665405,
+      "raw_controls_rmse": 0.010023290291428566
+    },
+    {
+      "instrument_id": 3,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04001772403717041,
+        0.025665283203125,
+        0.009824991226196289,
+        0.505387544631958
+      ],
+      "mean_logits_kl_float_to_ptq": 0.0054863919503986835,
+      "first_frame_logits_kl": 0.0008092827629297972,
+      "mean_logits_total_variation": 0.035362713038921356,
+      "first_frame_logits_mae": 0.22063826024532318,
+      "pitch_rmse_cents": 1.5668882131576538,
+      "raw_controls_rmse": 0.01199476607143879
+    },
+    {
+      "instrument_id": 4,
+      "max_errors_raw_pitch_expression_logits": [
+        0.03549027442932129,
+        0.02887725830078125,
+        0.009579896926879883,
+        0.48190900683403015
+      ],
+      "mean_logits_kl_float_to_ptq": 0.008565744385123253,
+      "first_frame_logits_kl": 0.0010569528676569462,
+      "mean_logits_total_variation": 0.044701963663101196,
+      "first_frame_logits_mae": 0.20288550853729248,
+      "pitch_rmse_cents": 1.7081903219223022,
+      "raw_controls_rmse": 0.012533897534012794
+    },
+    {
+      "instrument_id": 5,
+      "max_errors_raw_pitch_expression_logits": [
+        0.0458378791809082,
+        0.0618438720703125,
+        0.009088099002838135,
+        0.5188517570495605
+      ],
+      "mean_logits_kl_float_to_ptq": 0.004934319294989109,
+      "first_frame_logits_kl": 0.0018230252899229527,
+      "mean_logits_total_variation": 0.03427499905228615,
+      "first_frame_logits_mae": 0.2312060296535492,
+      "pitch_rmse_cents": 3.151719570159912,
+      "raw_controls_rmse": 0.015647750347852707
+    },
+    {
+      "instrument_id": 6,
+      "max_errors_raw_pitch_expression_logits": [
+        0.03688549995422363,
+        0.0265045166015625,
+        0.008569538593292236,
+        0.5100034475326538
+      ],
+      "mean_logits_kl_float_to_ptq": 0.002947359811514616,
+      "first_frame_logits_kl": 0.0024719866923987865,
+      "mean_logits_total_variation": 0.027310946956276894,
+      "first_frame_logits_mae": 0.2312476634979248,
+      "pitch_rmse_cents": 1.384874939918518,
+      "raw_controls_rmse": 0.01184971071779728
+    },
+    {
+      "instrument_id": 7,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04627084732055664,
+        0.7112159729003906,
+        0.011074185371398926,
+        1.3311004638671875
+      ],
+      "mean_logits_kl_float_to_ptq": 0.03977746143937111,
+      "first_frame_logits_kl": 0.001087595708668232,
+      "mean_logits_total_variation": 0.0960412323474884,
+      "first_frame_logits_mae": 0.21778073906898499,
+      "pitch_rmse_cents": 35.87130355834961,
+      "raw_controls_rmse": 0.013357414864003658
+    },
+    {
+      "instrument_id": 8,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04660212993621826,
+        0.00624847412109375,
+        0.009050190448760986,
+        0.49365270137786865
+      ],
+      "mean_logits_kl_float_to_ptq": 0.002529638120904565,
+      "first_frame_logits_kl": 0.0007422550115734339,
+      "mean_logits_total_variation": 0.022829990833997726,
+      "first_frame_logits_mae": 0.20703721046447754,
+      "pitch_rmse_cents": 0.3433656692504883,
+      "raw_controls_rmse": 0.01485444139689207
+    },
+    {
+      "instrument_id": 9,
+      "max_errors_raw_pitch_expression_logits": [
+        0.05218029022216797,
+        0.9989242553710938,
+        0.010516047477722168,
+        0.5016458630561829
+      ],
+      "mean_logits_kl_float_to_ptq": 0.0038813306018710136,
+      "first_frame_logits_kl": 0.0012584957294166088,
+      "mean_logits_total_variation": 0.03135250508785248,
+      "first_frame_logits_mae": 0.22047825157642365,
+      "pitch_rmse_cents": 49.946739196777344,
+      "raw_controls_rmse": 0.013463053852319717
+    },
+    {
+      "instrument_id": 10,
+      "max_errors_raw_pitch_expression_logits": [
+        0.050217628479003906,
+        0.01097869873046875,
+        0.011583149433135986,
+        0.4992743134498596
+      ],
+      "mean_logits_kl_float_to_ptq": 0.0019535187166184187,
+      "first_frame_logits_kl": 0.0010066698305308819,
+      "mean_logits_total_variation": 0.0193038247525692,
+      "first_frame_logits_mae": 0.21705262362957,
+      "pitch_rmse_cents": 0.6038720607757568,
+      "raw_controls_rmse": 0.013453148305416107
+    },
+    {
+      "instrument_id": 11,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04000091552734375,
+        0.01879119873046875,
+        0.00916510820388794,
+        0.48926639556884766
+      ],
+      "mean_logits_kl_float_to_ptq": 0.002268237993121147,
+      "first_frame_logits_kl": 0.0007373086991719902,
+      "mean_logits_total_variation": 0.02078305184841156,
+      "first_frame_logits_mae": 0.20738492906093597,
+      "pitch_rmse_cents": 0.9403043389320374,
+      "raw_controls_rmse": 0.012179156765341759
+    },
+    {
+      "instrument_id": 12,
+      "max_errors_raw_pitch_expression_logits": [
+        0.04188418388366699,
+        0.0024261474609375,
+        0.009855568408966064,
+        0.45364129543304443
+      ],
+      "mean_logits_kl_float_to_ptq": 0.0011868863366544247,
+      "first_frame_logits_kl": 0.00025888707023113966,
+      "mean_logits_total_variation": 0.015160567127168179,
+      "first_frame_logits_mae": 0.20044606924057007,
+      "pitch_rmse_cents": 0.12256136536598206,
+      "raw_controls_rmse": 0.01400241069495678
+    }
+  ],
+  "scope": "Complete four-frame graph; probabilities before nucleus cutoff; independently seeded quantiles; excludes waveform and long-run PTQ quality"
+}

@@ -1,0 +1,13 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+from cmsis_stream.cg.scheduler import *
+from common.nodes._base import ProjectNode
+
+class MidiMethod(ProjectNode, BaseNode):
+    folder='../nodes_impl'
+    needsHardware=True
+    def __init__(self,name,method):
+        BaseNode.__init__(self,name,identified=False,selectors=['execute','result','ack'])
+        self.addEventInput();self.addEventOutput(2)
+        self.params=dict(method=method)
+        self.parameters()

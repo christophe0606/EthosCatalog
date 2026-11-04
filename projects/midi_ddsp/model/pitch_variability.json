@@ -1,0 +1,968 @@
+{
+  "conditions": "Same four-note/rest synthetic scores as closed-loop PTQ; independent float uniform draws; original full learned schedule",
+  "limitations": "Few seeds only, not a statistical interval, perceptual gate, held-out dataset or waveform comparison",
+  "cases": [
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 0,
+      "frames": 1000,
+      "seed": 9200,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 48,
+          "mean_cents": 4780.255859375,
+          "std_cents": 12.271204948425293
+        },
+        {
+          "region": 1,
+          "midi_note": 55,
+          "mean_cents": 5493.740234375,
+          "std_cents": 14.762126922607422
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 60,
+          "mean_cents": 6001.7001953125,
+          "std_cents": 12.786946296691895
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 0,
+      "frames": 1000,
+      "seed": 9300,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 48,
+          "mean_cents": 4819.69189453125,
+          "std_cents": 20.434410095214844
+        },
+        {
+          "region": 1,
+          "midi_note": 55,
+          "mean_cents": 5508.740234375,
+          "std_cents": 14.669437408447266
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 60,
+          "mean_cents": 6020.10791015625,
+          "std_cents": 10.903593063354492
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 1,
+      "frames": 1000,
+      "seed": 9201,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 49,
+          "mean_cents": 4883.0078125,
+          "std_cents": 18.490211486816406
+        },
+        {
+          "region": 1,
+          "midi_note": 56,
+          "mean_cents": 5601.52392578125,
+          "std_cents": 13.042754173278809
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 61,
+          "mean_cents": 6118.9599609375,
+          "std_cents": 12.420563697814941
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 1,
+      "frames": 1000,
+      "seed": 9301,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 49,
+          "mean_cents": 4894.1640625,
+          "std_cents": 15.83973217010498
+        },
+        {
+          "region": 1,
+          "midi_note": 56,
+          "mean_cents": 5597.31201171875,
+          "std_cents": 10.339760780334473
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 61,
+          "mean_cents": 6118.33984375,
+          "std_cents": 10.800389289855957
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 2,
+      "frames": 1000,
+      "seed": 9202,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 50,
+          "mean_cents": 5002.52392578125,
+          "std_cents": 13.39318561553955
+        },
+        {
+          "region": 1,
+          "midi_note": 57,
+          "mean_cents": 5714.88818359375,
+          "std_cents": 11.005973815917969
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 62,
+          "mean_cents": 6209.1318359375,
+          "std_cents": 9.17009162902832
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 2,
+      "frames": 1000,
+      "seed": 9302,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 50,
+          "mean_cents": 5004.11181640625,
+          "std_cents": 10.910703659057617
+        },
+        {
+          "region": 1,
+          "midi_note": 57,
+          "mean_cents": 5715.912109375,
+          "std_cents": 12.851469039916992
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 62,
+          "mean_cents": 6212.84423828125,
+          "std_cents": 11.97546100616455
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 3,
+      "frames": 1000,
+      "seed": 9203,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 51,
+          "mean_cents": 5106.8681640625,
+          "std_cents": 15.293481826782227
+        },
+        {
+          "region": 1,
+          "midi_note": 58,
+          "mean_cents": 5810.34423828125,
+          "std_cents": 7.5668792724609375
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 63,
+          "mean_cents": 6307.09619140625,
+          "std_cents": 12.776782989501953
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 3,
+      "frames": 1000,
+      "seed": 9303,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 51,
+          "mean_cents": 5103.31591796875,
+          "std_cents": 14.999737739562988
+        },
+        {
+          "region": 1,
+          "midi_note": 58,
+          "mean_cents": 5810.02392578125,
+          "std_cents": 13.692312240600586
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 63,
+          "mean_cents": 6316.0478515625,
+          "std_cents": 5.398309707641602
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 4,
+      "frames": 1000,
+      "seed": 9204,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 52,
+          "mean_cents": 5197.30419921875,
+          "std_cents": 21.561901092529297
+        },
+        {
+          "region": 1,
+          "midi_note": 59,
+          "mean_cents": 5900.47998046875,
+          "std_cents": 10.615159034729004
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 64,
+          "mean_cents": 6405.6162109375,
+          "std_cents": 9.985023498535156
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 4,
+      "frames": 1000,
+      "seed": 9304,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 52,
+          "mean_cents": 5196.68017578125,
+          "std_cents": 14.942342758178711
+        },
+        {
+          "region": 1,
+          "midi_note": 59,
+          "mean_cents": 5897.82421875,
+          "std_cents": 12.147469520568848
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 64,
+          "mean_cents": 6405.0361328125,
+          "std_cents": 12.801342964172363
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 5,
+      "frames": 1000,
+      "seed": 9205,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 53,
+          "mean_cents": 5319.744140625,
+          "std_cents": 17.812088012695312
+        },
+        {
+          "region": 1,
+          "midi_note": 60,
+          "mean_cents": 6024.9599609375,
+          "std_cents": 5.911209583282471
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.4000000059604645,
+          "std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 65,
+          "mean_cents": 6523.740234375,
+          "std_cents": 10.952254295349121
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 5,
+      "frames": 1000,
+      "seed": 9305,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 53,
+          "mean_cents": 5300.85205078125,
+          "std_cents": 18.71700096130371
+        },
+        {
+          "region": 1,
+          "midi_note": 60,
+          "mean_cents": 6018.2001953125,
+          "std_cents": 10.34021282196045
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 65,
+          "mean_cents": 6524.34814453125,
+          "std_cents": 12.864632606506348
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 6,
+      "frames": 1000,
+      "seed": 9206,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 54,
+          "mean_cents": 5410.80419921875,
+          "std_cents": 21.3087215423584
+        },
+        {
+          "region": 1,
+          "midi_note": 61,
+          "mean_cents": 6108.01220703125,
+          "std_cents": 3.0099594593048096
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.4000000059604645,
+          "std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 66,
+          "mean_cents": 6617.19189453125,
+          "std_cents": 8.295744895935059
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 6,
+      "frames": 1000,
+      "seed": 9306,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 54,
+          "mean_cents": 5404.244140625,
+          "std_cents": 21.846017837524414
+        },
+        {
+          "region": 1,
+          "midi_note": 61,
+          "mean_cents": 6104.35205078125,
+          "std_cents": 9.939220428466797
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 66,
+          "mean_cents": 6613.3798828125,
+          "std_cents": 13.07133674621582
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 7,
+      "frames": 1000,
+      "seed": 9207,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 55,
+          "mean_cents": 5497.3720703125,
+          "std_cents": 19.817407608032227
+        },
+        {
+          "region": 1,
+          "midi_note": 62,
+          "mean_cents": 6204.255859375,
+          "std_cents": 8.978110313415527
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 67,
+          "mean_cents": 6733.33984375,
+          "std_cents": 15.809088706970215
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 7,
+      "frames": 1000,
+      "seed": 9307,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 55,
+          "mean_cents": 5512.0400390625,
+          "std_cents": 12.752976417541504
+        },
+        {
+          "region": 1,
+          "midi_note": 62,
+          "mean_cents": 6211.02783203125,
+          "std_cents": 9.110610008239746
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 67,
+          "mean_cents": 6733.85986328125,
+          "std_cents": 14.45431900024414
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 8,
+      "frames": 1000,
+      "seed": 9208,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 56,
+          "mean_cents": 5600.412109375,
+          "std_cents": 16.007068634033203
+        },
+        {
+          "region": 1,
+          "midi_note": 63,
+          "mean_cents": 6302.89990234375,
+          "std_cents": 10.519062042236328
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 68,
+          "mean_cents": 6808.06005859375,
+          "std_cents": 7.584283828735352
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 8,
+      "frames": 1000,
+      "seed": 9308,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 56,
+          "mean_cents": 5608.66796875,
+          "std_cents": 17.247312545776367
+        },
+        {
+          "region": 1,
+          "midi_note": 63,
+          "mean_cents": 6305.06005859375,
+          "std_cents": 11.799711227416992
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.4000000059604645,
+          "std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 68,
+          "mean_cents": 6807.259765625,
+          "std_cents": 8.202960968017578
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 9,
+      "frames": 1000,
+      "seed": 9209,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 57,
+          "mean_cents": 5707.15185546875,
+          "std_cents": 28.7962646484375
+        },
+        {
+          "region": 1,
+          "midi_note": 64,
+          "mean_cents": 6416.0361328125,
+          "std_cents": 13.790240287780762
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 69,
+          "mean_cents": 6904.02783203125,
+          "std_cents": 15.43228816986084
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 9,
+      "frames": 1000,
+      "seed": 9309,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 57,
+          "mean_cents": 5692.76416015625,
+          "std_cents": 20.564346313476562
+        },
+        {
+          "region": 1,
+          "midi_note": 64,
+          "mean_cents": 6406.85986328125,
+          "std_cents": 15.391974449157715
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 69,
+          "mean_cents": 6921.8798828125,
+          "std_cents": 12.510201454162598
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 10,
+      "frames": 1000,
+      "seed": 9210,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 58,
+          "mean_cents": 5819.35205078125,
+          "std_cents": 11.865753173828125
+        },
+        {
+          "region": 1,
+          "midi_note": 65,
+          "mean_cents": 6518.31982421875,
+          "std_cents": 14.193568229675293
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.4000000059604645,
+          "std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 70,
+          "mean_cents": 7020.9521484375,
+          "std_cents": 6.723536014556885
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 10,
+      "frames": 1000,
+      "seed": 9310,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 58,
+          "mean_cents": 5812.76806640625,
+          "std_cents": 17.967809677124023
+        },
+        {
+          "region": 1,
+          "midi_note": 65,
+          "mean_cents": 6515.083984375,
+          "std_cents": 12.203815460205078
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 70,
+          "mean_cents": 7019.16015625,
+          "std_cents": 7.162565231323242
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 11,
+      "frames": 1000,
+      "seed": 9211,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 59,
+          "mean_cents": 5919.0439453125,
+          "std_cents": 20.92161750793457
+        },
+        {
+          "region": 1,
+          "midi_note": 66,
+          "mean_cents": 6618.85986328125,
+          "std_cents": 9.480525970458984
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 71,
+          "mean_cents": 7120.423828125,
+          "std_cents": 16.4881649017334
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 11,
+      "frames": 1000,
+      "seed": 9311,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 59,
+          "mean_cents": 5915.83203125,
+          "std_cents": 25.092226028442383
+        },
+        {
+          "region": 1,
+          "midi_note": 66,
+          "mean_cents": 6622.36376953125,
+          "std_cents": 11.47969913482666
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 71,
+          "mean_cents": 7113.6201171875,
+          "std_cents": 11.662723541259766
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 12,
+      "frames": 1000,
+      "seed": 9212,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 60,
+          "mean_cents": 6015.56396484375,
+          "std_cents": 14.690877914428711
+        },
+        {
+          "region": 1,
+          "midi_note": 67,
+          "mean_cents": 6716.251953125,
+          "std_cents": 8.819790840148926
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.0,
+          "std_cents": 0.0
+        },
+        {
+          "region": 3,
+          "midi_note": 72,
+          "mean_cents": 7221.10009765625,
+          "std_cents": 9.373692512512207
+        }
+      ]
+    },
+    {
+      "source_sha256": {
+        "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+        "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+        "deployment.py": "b04ffe9c1fe657b5d992676b6394b0835b45e411c8cf10e6a0be24efe486624e",
+        "validate_pitch_variability.py": "3427a21440198358eb013986abfd043cc273c115ae2b49b194754b50af5a135f"
+      },
+      "instrument_id": 12,
+      "frames": 1000,
+      "seed": 9312,
+      "regions": [
+        {
+          "region": 0,
+          "midi_note": 60,
+          "mean_cents": 6020.86376953125,
+          "std_cents": 9.76716423034668
+        },
+        {
+          "region": 1,
+          "midi_note": 67,
+          "mean_cents": 6720.1201171875,
+          "std_cents": 10.619343757629395
+        },
+        {
+          "region": 2,
+          "midi_note": 0,
+          "mean_cents": 0.4000000059604645,
+          "std_cents": 6.311893463134766
+        },
+        {
+          "region": 3,
+          "midi_note": 72,
+          "mean_cents": 7213.43212890625,
+          "std_cents": 5.998464107513428
+        }
+      ]
+    }
+  ]
+}

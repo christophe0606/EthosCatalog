@@ -1,0 +1,14 @@
+{
+  "batch": 16,
+  "delegates": 6,
+  "pte_sha256": "ec6cefc9ff3f6ef03862df12638f7d910a3bcd2f1af77cf4d10aae626279455c",
+  "pte_bytes": 1202288,
+  "staged_delegate_bytes": 1161152,
+  "planned_bytes": 131136,
+  "scratch_max_bytes": 49152,
+  "fits_existing_stage_buffer": true,
+  "fits_existing_planned_arena": true,
+  "fits_existing_temp_arena": true,
+  "compile_script_sha256": "1388f583de8b87edfd4e3282e1cd822e6a70fe59b55bb2b4014d2c5852b6e4c6",
+  "scope": "Isolated candidate using shared ExecuTorch/Vela exporter. Active network, PTE, assets and board unchanged. Actual metadata allocations, compiled output parity and timing still require board validation."
+}

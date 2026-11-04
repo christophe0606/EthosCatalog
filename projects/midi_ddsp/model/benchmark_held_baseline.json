@@ -1,0 +1,195 @@
+{
+  "context": "b-14/d-15; sample0 harmonic uninterrupted; sample1 interrupted for inspection. Samples2/3 may be unset. No full-schedule measurement in this file.",
+  "midi_benchmark_complete": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_benchmark_complete\nResult: 0\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "pipeline_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+      }
+    ]
+  },
+  "midi_accuracy_warning": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_accuracy_warning\nResult: 128\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_bank_verified": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_bank_verified\nResult: 1\nType: volatile uint32_t"
+      }
+    ]
+  },
+  "midi_crc": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_crc\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 1450063030 (uint32_t)\n  [1]: 3818737745 (uint32_t)\n  [2]: 2876936117 (uint32_t)"
+      }
+    ]
+  },
+  "midi_cpu_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_cpu_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_axi_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_axi_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_timer_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_timer_hz\nResult: 400000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_ospi_hz": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_ospi_hz\nResult: 100000000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_method_error": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_error\nResult: [8]\nType: float [8]\nFields:\n  [0]: 2.87294388e-05 (float)\n  [1]: 9.77739692e-05 (float)\n  [2]: 0.000106637366 (float)\n  [3]: 0.000207781792 (float)\n  [4]: 0.000305116177 (float)\n  [5]: 0.000228881836 (float)\n  [6]: 0.002615273 (float)\n  [7]: 0.031347394 (float)"
+      }
+    ]
+  },
+  "midi_method_rms": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_rms\nResult: [8]\nType: float [8]\nFields:\n  [0]: 7.92540686e-06 (float)\n  [1]: 2.15876753e-05 (float)\n  [2]: 2.15169384e-05 (float)\n  [3]: 7.76422094e-05 (float)\n  [4]: 3.88032677e-05 (float)\n  [5]: 4.31137159e-05 (float)\n  [6]: 0.000478698901 (float)\n  [7]: 0.00354766636 (float)"
+      }
+    ]
+  },
+  "midi_method_nrmse": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_nrmse\nResult: [8]\nType: float [8]\nFields:\n  [0]: 6.1345323e-05 (float)\n  [1]: 0.000132400542 (float)\n  [2]: 6.19097773e-05 (float)\n  [3]: 0.000244338269 (float)\n  [4]: 6.31315925e-05 (float)\n  [5]: 5.92194083e-05 (float)\n  [6]: 0.000260937348 (float)\n  [7]: 0.00163739128 (float)"
+      }
+    ]
+  },
+  "midi_method_peak": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_peak\nResult: 107220\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_temp_peak": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_temp_peak\nResult: 1216000\nType: uint32_t"
+      }
+    ]
+  },
+  "midi_method_timing[0]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[0]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 765630 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500442 (uint64_t)\n    active: 500442 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 593194 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500442 (uint64_t)\n    active: 500442 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 591287 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500444 (uint64_t)\n    active: 500444 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 590792 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 500449 (uint64_t)\n    active: 500449 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[1]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[1]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 754403 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499394 (uint64_t)\n    active: 499394 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 589451 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499392 (uint64_t)\n    active: 499392 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 588602 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499397 (uint64_t)\n    active: 499397 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 588689 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 499394 (uint64_t)\n    active: 499394 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[2]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[2]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 10261754 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185873 (uint64_t)\n    active: 1185873 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 8493272 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185878 (uint64_t)\n    active: 1185878 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 8492525 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185876 (uint64_t)\n    active: 1185876 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 8492006 (uint64_t)\n    invocations: 4 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1185878 (uint64_t)\n    active: 1185878 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[3]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[3]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 42473033 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202824 (uint64_t)\n    active: 4202824 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 39795214 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202820 (uint64_t)\n    active: 4202820 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 39798196 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202824 (uint64_t)\n    active: 4202824 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 39799442 (uint64_t)\n    invocations: 6 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 4202829 (uint64_t)\n    active: 4202829 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[4]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[4]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 1868108 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 1701117 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 1700337 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599357 (uint64_t)\n    active: 1599357 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 1699283 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1599359 (uint64_t)\n    active: 1599359 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[5]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[5]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 1844915 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588933 (uint64_t)\n    active: 1588933 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 1688267 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588935 (uint64_t)\n    active: 1588935 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 1687547 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588933 (uint64_t)\n    active: 1588933 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 1686591 (uint64_t)\n    invocations: 1 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 1588935 (uint64_t)\n    active: 1588935 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[6]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[6]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 9496409 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901743 (uint64_t)\n    active: 3901743 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 8774483 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901737 (uint64_t)\n    active: 3901737 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 8773942 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901741 (uint64_t)\n    active: 3901741 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 8773760 (uint64_t)\n    invocations: 2 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 3901750 (uint64_t)\n    active: 3901750 (uint64_t)"
+      }
+    ]
+  },
+  "midi_method_timing[7]": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_method_timing[7]\nResult: [4]\nType: MidiTiming [4]\nFields:\n  [0]: {...} (MidiTiming)\n    ticks: 52966366217 (uint64_t)\n    invocations: 22 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 31433609 (uint64_t)\n    active: 31433609 (uint64_t)\n  [1]: {...} (MidiTiming)\n    ticks: 0 (uint64_t)\n    invocations: 0 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 0 (uint64_t)\n    active: 0 (uint64_t)\n  [2]: {...} (MidiTiming)\n    ticks: 0 (uint64_t)\n    invocations: 0 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 0 (uint64_t)\n    active: 0 (uint64_t)\n  [3]: {...} (MidiTiming)\n    ticks: 0 (uint64_t)\n    invocations: 0 (uint32_t)\n    overflow: 0 (uint32_t)\n    cycles: 0 (uint64_t)\n    active: 0 (uint64_t)"
+      }
+    ]
+  },
+  "midi_harmonic_component_max": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_harmonic_component_max\nResult: [126]\nType: float [126]\nFields:\n  [0]: 0.0103583336 (float)\n  [1]: 0.0204439163 (float)\n  [2]: 0.0144470334 (float)\n  [3]: 0.0114486217 (float)\n  [4]: 0.0125389583 (float)\n  [5]: 0.0152648687 (float)\n  [6]: 0.0198987722 (float)\n  [7]: 0.0136293173 (float)\n  [8]: 0.0149922371 (float)\n  [9]: 0.0198987722 (float)\n  [10]: 0.0196261406 (float)\n  [11]: 0.0160825253 (float)\n  [12]: 0.0198987722 (float)\n  [13]: 0.01826334 (float)\n  [14]: 0.0209891796 (float)\n  [15]: 0.0204440355 (float)\n  [16]: 0.0128115416 (float)\n  [17]: 0.0204440355 (float)\n  [18]: 0.0174454451 (float)\n  [19]: 0.0158100128 (float)\n  [20]: 0.0152649879 (float)\n  [21]: 0.0177180767 (float)\n  [22]: 0.0141744614 (float)\n  [23]: 0.0179905891 (float)\n  [24]: 0.0166276693 (float)\n  [25]: 0.016900301 (float)\n  [26]: 0.0201714039 (float)\n  [27]: 0.0234425068 (float)\n  [28]: 0.0147197247 (float)\n  [29]: 0.0237150192 (float)\n  [30]: 0.0226244926 (float)\n  [31]: 0.0201714039 (float)\n  … 94 more — evaluate a field or element by name to read it"
+      }
+    ]
+  },
+  "midi_harmonic_component_rms": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Evaluated: midi_harmonic_component_rms\nResult: [126]\nType: float [126]\nFields:\n  [0]: 0.0033168951 (float)\n  [1]: 0.0138334502 (float)\n  [2]: 0.00956578925 (float)\n  [3]: 0.00926440954 (float)\n  [4]: 0.0108806361 (float)\n  [5]: 0.0120298881 (float)\n  [6]: 0.0140706897 (float)\n  [7]: 0.0117770275 (float)\n  [8]: 0.0115854973 (float)\n  [9]: 0.0139217963 (float)\n  [10]: 0.0161358844 (float)\n  [11]: 0.0131494319 (float)\n  [12]: 0.017072482 (float)\n  [13]: 0.0157437865 (float)\n  [14]: 0.0166673344 (float)\n  [15]: 0.0137658892 (float)\n  [16]: 0.0128111299 (float)\n  [17]: 0.0160604808 (float)\n  [18]: 0.0143027706 (float)\n  [19]: 0.0132516483 (float)\n  [20]: 0.0119389426 (float)\n  [21]: 0.0135542909 (float)\n  [22]: 0.0136825684 (float)\n  [23]: 0.0127287162 (float)\n  [24]: 0.0128012858 (float)\n  [25]: 0.0128334742 (float)\n  [26]: 0.0119656706 (float)\n  [27]: 0.0187125988 (float)\n  [28]: 0.0145231308 (float)\n  [29]: 0.0145073254 (float)\n  [30]: 0.0128808701 (float)\n  [31]: 0.0127515076 (float)\n  … 94 more — evaluate a field or element by name to read it"
+      }
+    ]
+  }
+}

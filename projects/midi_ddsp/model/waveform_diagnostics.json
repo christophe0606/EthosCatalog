@@ -1,0 +1,1463 @@
+{
+  "sample_rate_hz": 16000,
+  "instruments": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "complete_all_13": true,
+  "white_noise": "NumPy PCG64 seed 19100+instrument; same uniform[-1,1) realization per comparison",
+  "phase": "precise cumulative phase, shared zero initial phase; see reference_synth.py",
+  "reverb": "same full signed learned 48000-tap IR with upstream decay and unity dry",
+  "limitations": "Diagnostics only, no acceptance gate or perceptual pass. Host independent sampled trajectories; held oscillator pitch retains raw-control path differences. No NPU PCM, firmware DSP, natural demo register, retained tail or block-seam validation. Unit-range counts precede any playback gain.",
+  "source_provenance": {
+    "file_sha256": {
+      "pretrained.safetensors": "04f39a0f29cfe08effafc8a3657a92d2e26bb4ee1144028a070b5d5830c71591",
+      "model.py": "9b0007455b8f057a85105a16eff863314f3ca1b5f1c09185361cda3627a2ba63",
+      "deployment.py": "c8ff9e1c89a8c63ba1ab9b11f32ce3beefaf8dace73b007b64f5d793dd3690aa",
+      "validate_closed_loop.py": "d6eb3cbd226f033acf1c4783454033430d910a7ab822031af83c3d70e481ae0c",
+      "expression_forward_quantized.pt2": "e996a740cc3ccf5da3af3c52db0bc95c5ccb22597f3f08cccc4f0d35b9570d79",
+      "expression_forward_quantized.safetensors": "ac7ab2d21bd7bde25d34639614762a3610b38b2fc5e22c620bb0d41b4f278aee",
+      "expression_backward_quantized.pt2": "c41b76008f4c1fd07597458b63b9e7298ed723efe8413789db7b411244eee163",
+      "expression_backward_quantized.safetensors": "44539a4af14bd92298c68cd267af891be656f084d0bf095582f828be7c6400c7",
+      "expression_step_quantized.pt2": "303a948b55b4adf6480b78408cb0858a8dd0b94106ac993e306662a430f6126d",
+      "expression_step_quantized.safetensors": "ee11c72ed0bbc32881f4fa9cb9460cea74f373826b9e41cdc8a84d1240d3cd5d",
+      "precondition_quantized.pt2": "dc9da15fc8142a2d1458e2f90ceab071b0358d702982c00e337a454cddeeace6",
+      "precondition_quantized.safetensors": "9e61b75ba5603c8e23932dc6ef2adc7fa18a91d8426baa27fb34b1651aa8fe00",
+      "context_forward_quantized.pt2": "532809a62972474a9f9066e5ca73f7e32b9358abd98b9c9984e62a4b6ae4c1ea",
+      "context_forward_quantized.safetensors": "8895dc6c721790962dff8b94d47ca7d5d6733feca4f1a75cd5aa2e2076597446",
+      "context_backward_quantized.pt2": "6c5fb9f34685a5901379a04a91e12c03395fc7b1c47824e97bbd55db6e2285e9",
+      "context_backward_quantized.safetensors": "f98b6a05f737ad1f2872d61cb2e06f4074b77efbd6b7c7dd527f623ff6c15ded",
+      "pitch_step_quantized.pt2": "1e5d99b7e7b1396e47b654448ca28124f5e34a6c2e7e7c1c04b54f4a65349e98",
+      "pitch_step_quantized.safetensors": "9aab3cdf1ddebef1b37bffbc707d6e20611c5f07cfcab877d6b2757a839a05d5",
+      "harmonic_quantized.pt2": "632da31931fcbabeb365f52274a83f9e1c69778c9dc1fcefc153403fe017c8db",
+      "harmonic_quantized.safetensors": "d3b064855244155c3c96d5b9627a3040f27ad049f6c9349c918d5d7fd8ec36e8"
+    },
+    "frames": 1000,
+    "uniform_seed_base": 9100
+  },
+  "checkpoint_sha256": {
+    "instrument_00.json": "ff9223c55346c8370f26cf3510bc66b23325290365a250d3573a05ac3ff5bd96",
+    "instrument_00_controls.npz": "ef75757bc3d14fef20cf72ae19e44c3f60af553ce89cee183e1091691e5a4847",
+    "instrument_01.json": "d264134ecd32747e10a038499cd9b0a93086e4c300a7abf557aee0eeb4f1c506",
+    "instrument_01_controls.npz": "8cc0871ff5d1cb75b512c74fec2cfb76d9cffa19d28d92bd6388ef922102998c",
+    "instrument_02.json": "1c82b4891d0749842b184936a0bfd2db964e0dd5204cc343d230650787503b62",
+    "instrument_02_controls.npz": "0e66ad5fa2f5fb38106c65ed8ed90cd17b60e586b7d45d4edf163ecad38f91a8",
+    "instrument_03.json": "d311a6caf7ba38d9ad69c8e02eb4c2d5d21eb703930bf04b230b2ae975d1595d",
+    "instrument_03_controls.npz": "c92cdc20fb7503093708f1b7b5288892a0df9962cb598b07b01820250161507f",
+    "instrument_04.json": "113e3f7a23c7ca2457edbe8b34900115dfec31f4ec96db8f314a3b7d79fa1943",
+    "instrument_04_controls.npz": "7c8fd1431a5ab1a2ef00337fee8f6bf8d6928a2637e2814c89d6cf7fab139c75",
+    "instrument_05.json": "f216aa32f5d2e9254ba685a006ae2ecaeca01391625826ebd233d836206d3cc0",
+    "instrument_05_controls.npz": "5796da0346659b782c1bc9511fa3403d4efcf57ccc406abe500d580b7bd8bdb7",
+    "instrument_06.json": "a3b0addcff22a749d77714abd2b2f65670436e46a12dbcb580f0a06f19c27e99",
+    "instrument_06_controls.npz": "0895466722366f56fadadc4a5ec23ad337b9f1f6610dc579da0274e5a8551dc1",
+    "instrument_07.json": "5a79f27e4aacb103e584f4bfe3b5cc808e6ed4ce657b26d3c5564a511663bda0",
+    "instrument_07_controls.npz": "062dd132e6c4dda6a9ff96b32222c92a3cdc9040b93623d775799e3ab7526e2a",
+    "instrument_08.json": "f0d0e9956f057aa0306729669a3d2677f7c4c14c87d884665090351041eba300",
+    "instrument_08_controls.npz": "d524ab7bfd814d397e370d50af27f8b50f1adf092e0832ce48fafe244c94c830",
+    "instrument_09.json": "1fdd736ffd0fb180bbf93b6fc80e0742301b3db4f9ef4b3bd9864b6616d37f2b",
+    "instrument_09_controls.npz": "02e80b48212a229ae65f0e24fcaf93381564834b3ab89747080ab2ae39083465",
+    "instrument_10.json": "6c2cdf42bc8d3bac77926543a36b3a506fa987b83489cf7d169d911069ae9976",
+    "instrument_10_controls.npz": "e309cd93acd481ce1cba43328bfaaaf7762a71ab890bfb56177282485d9410a0",
+    "instrument_11.json": "de4d8e76a660788c21de6ae81aa436c412ebc612442e181303c5455fe1eeea2b",
+    "instrument_11_controls.npz": "94ed250527b714c5780d0a71f406c46ef7f3161322b844f30b9cfaef361f085e",
+    "instrument_12.json": "717b7fb92325e4fd9daf03f32a7f1e7040b6232004b7d0cf02e6f90daab36dc6",
+    "instrument_12_controls.npz": "1f22653bbebaa2080e6c82e9cf2f6f82f6eeb315f61aa9a0ea2d7469038097f6"
+  },
+  "file_sha256": {
+    "cpu_assets.bin": "19ed82d68c4c68eaceab7c7471e25cdd94cf80eb520bae427316865418110523",
+    "cpu_assets.json": "4c3ac35537b0dd7099450be376db659745c2bd551399325c18061707371eb942",
+    "reference_synth.py": "68738e0d072aa759e33897e78ffe18b95b276149920039b9312b2a1a013eb951",
+    "validate_waveforms.py": "3a49791a9cc426afd5dab2a70c3914d4d3e4a41e4b8db77b6984dc71d5701fb3"
+  },
+  "cases": [
+    {
+      "instrument_id": 0,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0008862344548106194,
+          "rmse": 0.00021156115362494054,
+          "reference_rms": 0.003827950444403541,
+          "rmse_over_reference_rms": 0.05526747451348089
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.057031095027923584,
+          "rmse": 0.0017421337572708269,
+          "reference_rms": 0.05870682236399929,
+          "rmse_over_reference_rms": 0.029675149959047235
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.004586745053529739,
+          "rmse": 6.366400493005412e-05,
+          "reference_rms": 0.0009033436644944021,
+          "rmse_over_reference_rms": 0.07047595221214797
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.011498169877762986,
+        "actual_rms": 0.012105063948362456,
+        "reference_peak": 0.04982319101691246,
+        "actual_peak": 0.05475831776857376,
+        "rmse": 0.013071434831775143,
+        "maximum_absolute_error": 0.06285786256194115,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.09696479532645753,
+            "mean_absolute_log_magnitude_error_db": 2.489362486771066,
+            "log_floor_absolute_magnitude": 2.914399739372303e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.12396370062704477,
+            "mean_absolute_log_magnitude_error_db": 2.5918394523921267,
+            "log_floor_absolute_magnitude": 6.50377597873586e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.16960111363109712,
+            "mean_absolute_log_magnitude_error_db": 2.5830756254757397,
+            "log_floor_absolute_magnitude": 0.00012572989011846834,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.1368274230366686
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.011498169877762986,
+        "actual_rms": 0.012092997326209397,
+        "reference_peak": 0.04982319101691246,
+        "actual_peak": 0.05455731600522995,
+        "rmse": 0.0007392806617683023,
+        "maximum_absolute_error": 0.005780678242444992,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06339768548107728,
+            "mean_absolute_log_magnitude_error_db": 0.5844637045749864,
+            "log_floor_absolute_magnitude": 2.914399739372303e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06296342015895337,
+            "mean_absolute_log_magnitude_error_db": 0.697300469381116,
+            "log_floor_absolute_magnitude": 6.50377597873586e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.0624049937639825,
+            "mean_absolute_log_magnitude_error_db": 0.7435171888591401,
+            "log_floor_absolute_magnitude": 0.00012572989011846834,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.06429550699177287
+      }
+    },
+    {
+      "instrument_id": 1,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0007308404892683029,
+          "rmse": 0.00018420426861497514,
+          "reference_rms": 0.004019243188639705,
+          "rmse_over_reference_rms": 0.04583058550316739
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.06591159105300903,
+          "rmse": 0.002249507471638321,
+          "reference_rms": 0.05689411401457805,
+          "rmse_over_reference_rms": 0.03953849199693885
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.009403055533766747,
+          "rmse": 0.00016048907975583853,
+          "reference_rms": 0.0013625728333773162,
+          "rmse_over_reference_rms": 0.11778385406235145
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.012863660996111439,
+        "actual_rms": 0.013220174377917364,
+        "reference_peak": 0.0618622750043869,
+        "actual_peak": 0.05606885254383087,
+        "rmse": 0.012617537404462167,
+        "maximum_absolute_error": 0.06994475796818733,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.10458356985470349,
+            "mean_absolute_log_magnitude_error_db": 3.01830110350851,
+            "log_floor_absolute_magnitude": 4.058810547966656e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.13950985148161746,
+            "mean_absolute_log_magnitude_error_db": 3.074272107444165,
+            "log_floor_absolute_magnitude": 7.916415846151561e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.20064813674336854,
+            "mean_absolute_log_magnitude_error_db": 3.0895957708263455,
+            "log_floor_absolute_magnitude": 0.0001538571080419261,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.980866753895048
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.012863660996111439,
+        "actual_rms": 0.013266357397586429,
+        "reference_peak": 0.0618622750043869,
+        "actual_peak": 0.061845842748880386,
+        "rmse": 0.0008387851160631711,
+        "maximum_absolute_error": 0.0055542876943945885,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06224029210753456,
+            "mean_absolute_log_magnitude_error_db": 0.9849325369330681,
+            "log_floor_absolute_magnitude": 4.058810547966656e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.058881680948378236,
+            "mean_absolute_log_magnitude_error_db": 1.1289244736947908,
+            "log_floor_absolute_magnitude": 7.916415846151561e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05682851641559269,
+            "mean_absolute_log_magnitude_error_db": 1.163213241201051,
+            "log_floor_absolute_magnitude": 0.0001538571080419261,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.06520578522060927
+      }
+    },
+    {
+      "instrument_id": 2,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.000913253054022789,
+          "rmse": 0.00024119712906906562,
+          "reference_rms": 0.004305271908186427,
+          "rmse_over_reference_rms": 0.056023669169520264
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.04151105880737305,
+          "rmse": 0.001721981017251439,
+          "reference_rms": 0.04678614671489875,
+          "rmse_over_reference_rms": 0.03680536094892989
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.003886129707098007,
+          "rmse": 4.424891823866916e-05,
+          "reference_rms": 0.0005742776225496082,
+          "rmse_over_reference_rms": 0.07705144080352318
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.013360110415600058,
+        "actual_rms": 0.014245443171846433,
+        "reference_peak": 0.06553416699171066,
+        "actual_peak": 0.06769026070833206,
+        "rmse": 0.015068113407084962,
+        "maximum_absolute_error": 0.09112643450498581,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.18316730121858987,
+            "mean_absolute_log_magnitude_error_db": 3.32902521328291,
+            "log_floor_absolute_magnitude": 4.337283058494091e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.22474508414075697,
+            "mean_absolute_log_magnitude_error_db": 3.356264052659173,
+            "log_floor_absolute_magnitude": 9.638759261798116e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.28199300180539244,
+            "mean_absolute_log_magnitude_error_db": 3.2800034179965656,
+            "log_floor_absolute_magnitude": 0.00018653980721449202,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.127843478710366
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.013360110415600058,
+        "actual_rms": 0.014070130245221,
+        "reference_peak": 0.06553416699171066,
+        "actual_peak": 0.06776750087738037,
+        "rmse": 0.0008832275912997795,
+        "maximum_absolute_error": 0.00556858628988266,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06424185911317652,
+            "mean_absolute_log_magnitude_error_db": 0.8443203236626623,
+            "log_floor_absolute_magnitude": 4.337283058494091e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06365227094780572,
+            "mean_absolute_log_magnitude_error_db": 0.9558329986360303,
+            "log_floor_absolute_magnitude": 9.638759261798116e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.06297223401773751,
+            "mean_absolute_log_magnitude_error_db": 0.9802353905095093,
+            "log_floor_absolute_magnitude": 0.00018653980721449202,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.06610930327854705
+      }
+    },
+    {
+      "instrument_id": 3,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0010194508358836174,
+          "rmse": 0.00019392629874595793,
+          "reference_rms": 0.004047146589351918,
+          "rmse_over_reference_rms": 0.04791679630685479
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.09356030821800232,
+          "rmse": 0.0030494659508367196,
+          "reference_rms": 0.04896856156231695,
+          "rmse_over_reference_rms": 0.06227395401345406
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.004205404780805111,
+          "rmse": 5.2126202165119086e-05,
+          "reference_rms": 0.00040131093232384393,
+          "rmse_over_reference_rms": 0.1298898135250775
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.006009393759940597,
+        "actual_rms": 0.006040769637806357,
+        "reference_peak": 0.04020533710718155,
+        "actual_peak": 0.04016272723674774,
+        "rmse": 0.006774877227502071,
+        "maximum_absolute_error": 0.03864702582359314,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.2105792412896356,
+            "mean_absolute_log_magnitude_error_db": 4.027216341264016,
+            "log_floor_absolute_magnitude": 2.5923535982592438e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.225973464713083,
+            "mean_absolute_log_magnitude_error_db": 4.122359883939618,
+            "log_floor_absolute_magnitude": 4.129313839370685e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.2548487817276567,
+            "mean_absolute_log_magnitude_error_db": 4.154318800769927,
+            "log_floor_absolute_magnitude": 6.466581560115636e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.1273811466082133
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.006009393759940597,
+        "actual_rms": 0.006172431700628041,
+        "reference_peak": 0.04020533710718155,
+        "actual_peak": 0.04098481684923172,
+        "rmse": 0.00044209446321048155,
+        "maximum_absolute_error": 0.003467066679149866,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.060251156620862466,
+            "mean_absolute_log_magnitude_error_db": 1.428350534279008,
+            "log_floor_absolute_magnitude": 2.5923535982592438e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05875093573712974,
+            "mean_absolute_log_magnitude_error_db": 1.5978154445625017,
+            "log_floor_absolute_magnitude": 4.129313839370685e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.058518013107910105,
+            "mean_absolute_log_magnitude_error_db": 1.6554733885201154,
+            "log_floor_absolute_magnitude": 6.466581560115636e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.07356723171604114
+      }
+    },
+    {
+      "instrument_id": 4,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.001161426305770874,
+          "rmse": 0.0001566890623307055,
+          "reference_rms": 0.0031508905812102144,
+          "rmse_over_reference_rms": 0.04972850001999223
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.16336488723754883,
+          "rmse": 0.00363227779242189,
+          "reference_rms": 0.0597859209022617,
+          "rmse_over_reference_rms": 0.06075473518857315
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.01043128501623869,
+          "rmse": 0.00014600292046704514,
+          "reference_rms": 0.0007889612369649647,
+          "rmse_over_reference_rms": 0.1850571531609083
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.009400632416041351,
+        "actual_rms": 0.009720862673559198,
+        "reference_peak": 0.05799202620983124,
+        "actual_peak": 0.059072598814964294,
+        "rmse": 0.0127315579448048,
+        "maximum_absolute_error": 0.07634516060352325,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.12367280737061134,
+            "mean_absolute_log_magnitude_error_db": 2.370010815105689,
+            "log_floor_absolute_magnitude": 2.451517626692914e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.14876448770222883,
+            "mean_absolute_log_magnitude_error_db": 2.425610086783424,
+            "log_floor_absolute_magnitude": 5.557913386049432e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.18771012992898506,
+            "mean_absolute_log_magnitude_error_db": 2.5057932269436844,
+            "log_floor_absolute_magnitude": 0.00010495659814045796,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.3543299409388156
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.009400632416041351,
+        "actual_rms": 0.009673946937572587,
+        "reference_peak": 0.05799202620983124,
+        "actual_peak": 0.061470743268728256,
+        "rmse": 0.0009609968257492293,
+        "maximum_absolute_error": 0.01033283956348896,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.09006775950916815,
+            "mean_absolute_log_magnitude_error_db": 1.1591844096962034,
+            "log_floor_absolute_magnitude": 2.451517626692914e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.08362601963652301,
+            "mean_absolute_log_magnitude_error_db": 1.2628299598288706,
+            "log_floor_absolute_magnitude": 5.557913386049432e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.0814810284344402,
+            "mean_absolute_log_magnitude_error_db": 1.3016622934628232,
+            "log_floor_absolute_magnitude": 0.00010495659814045796,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.10222682721955736
+      }
+    },
+    {
+      "instrument_id": 5,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0004565790295600891,
+          "rmse": 0.0001108302282011225,
+          "reference_rms": 0.004263201159993113,
+          "rmse_over_reference_rms": 0.02599695018878761
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.03043067455291748,
+          "rmse": 0.0017662295431779406,
+          "reference_rms": 0.05113535881176637,
+          "rmse_over_reference_rms": 0.03454027866861329
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.004192834720015526,
+          "rmse": 7.178646410868163e-05,
+          "reference_rms": 0.0008441125813277123,
+          "rmse_over_reference_rms": 0.08504370826432661
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.013182268015799716,
+        "actual_rms": 0.013498183880901692,
+        "reference_peak": 0.07351991534233093,
+        "actual_peak": 0.07669027894735336,
+        "rmse": 0.01901224632474095,
+        "maximum_absolute_error": 0.12612735107541084,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.13519410335692505,
+            "mean_absolute_log_magnitude_error_db": 2.475169679373617,
+            "log_floor_absolute_magnitude": 4.269961999837758e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.2117710672943988,
+            "mean_absolute_log_magnitude_error_db": 2.563657309536763,
+            "log_floor_absolute_magnitude": 8.059393901738645e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.30345139832483964,
+            "mean_absolute_log_magnitude_error_db": 2.6298270434881705,
+            "log_floor_absolute_magnitude": 0.0001612591231988595,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.4422591242989191
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.013182268015799716,
+        "actual_rms": 0.013493359852978113,
+        "reference_peak": 0.07351991534233093,
+        "actual_peak": 0.0744466483592987,
+        "rmse": 0.0005648634916182065,
+        "maximum_absolute_error": 0.004379488527774811,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.041341357088387765,
+            "mean_absolute_log_magnitude_error_db": 0.8319559931737529,
+            "log_floor_absolute_magnitude": 4.269961999837758e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.04021869404121874,
+            "mean_absolute_log_magnitude_error_db": 1.003423939139077,
+            "log_floor_absolute_magnitude": 8.059393901738645e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03906072553035975,
+            "mean_absolute_log_magnitude_error_db": 1.0537703001009224,
+            "log_floor_absolute_magnitude": 0.0001612591231988595,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.042850250878011635
+      }
+    },
+    {
+      "instrument_id": 6,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0005252528935670853,
+          "rmse": 0.00016919347808269156,
+          "reference_rms": 0.004813676516144627,
+          "rmse_over_reference_rms": 0.03514849357143801
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.04928869009017944,
+          "rmse": 0.0018757687453613107,
+          "reference_rms": 0.060475474645112104,
+          "rmse_over_reference_rms": 0.0310170156806354
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.002055346965789795,
+          "rmse": 2.726552345271913e-05,
+          "reference_rms": 0.00041448928589257934,
+          "rmse_over_reference_rms": 0.06578100901692636
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.015075460178705851,
+        "actual_rms": 0.015295856244211835,
+        "reference_peak": 0.05139055848121643,
+        "actual_peak": 0.0504179447889328,
+        "rmse": 0.009775334014635517,
+        "maximum_absolute_error": 0.04763348586857319,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03721824938856678,
+            "mean_absolute_log_magnitude_error_db": 1.7929161863242142,
+            "log_floor_absolute_magnitude": 3.977845258250852e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03713970496904183,
+            "mean_absolute_log_magnitude_error_db": 1.7098730786327485,
+            "log_floor_absolute_magnitude": 7.834227876068473e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03908994973214202,
+            "mean_absolute_log_magnitude_error_db": 1.7299250597492353,
+            "log_floor_absolute_magnitude": 0.00015452993105858812,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.648426906957256
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.015075460178705851,
+        "actual_rms": 0.015276933757792786,
+        "reference_peak": 0.05139055848121643,
+        "actual_peak": 0.051842447370290756,
+        "rmse": 0.0005247091643037864,
+        "maximum_absolute_error": 0.003187151625752449,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03361603406816576,
+            "mean_absolute_log_magnitude_error_db": 0.7171901918827652,
+            "log_floor_absolute_magnitude": 3.977845258250852e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.033064377008581995,
+            "mean_absolute_log_magnitude_error_db": 0.8035330067080024,
+            "log_floor_absolute_magnitude": 7.834227876068473e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.03251112941339426,
+            "mean_absolute_log_magnitude_error_db": 0.8488428098411609,
+            "log_floor_absolute_magnitude": 0.00015452993105858812,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.03480551559181857
+      }
+    },
+    {
+      "instrument_id": 7,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0006128102540969849,
+          "rmse": 0.00016258082742876966,
+          "reference_rms": 0.003259557326384409,
+          "rmse_over_reference_rms": 0.049878192389120765
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.09996595978736877,
+          "rmse": 0.0032909689740636358,
+          "reference_rms": 0.05863234167872313,
+          "rmse_over_reference_rms": 0.056128902237890375
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.006245475262403488,
+          "rmse": 4.598571444729998e-05,
+          "reference_rms": 0.0002937968520887083,
+          "rmse_over_reference_rms": 0.15652214828161318
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.013139569703204377,
+        "actual_rms": 0.013741346239861282,
+        "reference_peak": 0.06420265883207321,
+        "actual_peak": 0.06815510988235474,
+        "rmse": 0.01924876061620199,
+        "maximum_absolute_error": 0.09133806452155113,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.08114479190423649,
+            "mean_absolute_log_magnitude_error_db": 2.4072981628333276,
+            "log_floor_absolute_magnitude": 3.84364501546698e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.09691682589625042,
+            "mean_absolute_log_magnitude_error_db": 2.4240114996520115,
+            "log_floor_absolute_magnitude": 7.337341181761722e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.12951304318330206,
+            "mean_absolute_log_magnitude_error_db": 2.462569277791599,
+            "log_floor_absolute_magnitude": 0.00014171125347727843,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.4649460409276378
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.013139569703204377,
+        "actual_rms": 0.01364668796252744,
+        "reference_peak": 0.06420265883207321,
+        "actual_peak": 0.06593792885541916,
+        "rmse": 0.0008082604953475274,
+        "maximum_absolute_error": 0.0042290762066841125,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05928112806283742,
+            "mean_absolute_log_magnitude_error_db": 1.0712905096461334,
+            "log_floor_absolute_magnitude": 3.84364501546698e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05867341437572857,
+            "mean_absolute_log_magnitude_error_db": 1.1937932826334272,
+            "log_floor_absolute_magnitude": 7.337341181761722e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05769924078929077,
+            "mean_absolute_log_magnitude_error_db": 1.2361245652747799,
+            "log_floor_absolute_magnitude": 0.00014171125347727843,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.06151346761000972
+      }
+    },
+    {
+      "instrument_id": 8,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0005221436731517315,
+          "rmse": 0.00011125968188486597,
+          "reference_rms": 0.003192168139952134,
+          "rmse_over_reference_rms": 0.03485395411738377
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.0644090473651886,
+          "rmse": 0.002362392320160861,
+          "reference_rms": 0.05757274572581392,
+          "rmse_over_reference_rms": 0.04103317099746442
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.004721514880657196,
+          "rmse": 4.616936891913271e-05,
+          "reference_rms": 0.0004967946884451103,
+          "rmse_over_reference_rms": 0.09293450592967412
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.006171171803026023,
+        "actual_rms": 0.006185487977887195,
+        "reference_peak": 0.030153397470712662,
+        "actual_peak": 0.03070451319217682,
+        "rmse": 0.0061117437236446965,
+        "maximum_absolute_error": 0.037756726145744324,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.1165166031619642,
+            "mean_absolute_log_magnitude_error_db": 3.2057384849514534,
+            "log_floor_absolute_magnitude": 1.6102370577297387e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.1349281329113688,
+            "mean_absolute_log_magnitude_error_db": 3.2462788090952115,
+            "log_floor_absolute_magnitude": 3.0171731745397826e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.16502567142754274,
+            "mean_absolute_log_magnitude_error_db": 3.2469068846144977,
+            "log_floor_absolute_magnitude": 5.7574721218096354e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.9903700494366101
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.006171171803026023,
+        "actual_rms": 0.006233701963702812,
+        "reference_peak": 0.030153397470712662,
+        "actual_peak": 0.03039349801838398,
+        "rmse": 0.0003533958493022694,
+        "maximum_absolute_error": 0.0021375310607254505,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.053038197013572076,
+            "mean_absolute_log_magnitude_error_db": 1.1564652010526824,
+            "log_floor_absolute_magnitude": 1.6102370577297387e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05095022979541431,
+            "mean_absolute_log_magnitude_error_db": 1.2777470852242683,
+            "log_floor_absolute_magnitude": 3.0171731745397826e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.049238784220399213,
+            "mean_absolute_log_magnitude_error_db": 1.3124813180922337,
+            "log_floor_absolute_magnitude": 5.7574721218096354e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.05726559891412882
+      }
+    },
+    {
+      "instrument_id": 9,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0004466190002858639,
+          "rmse": 0.00013951881003292947,
+          "reference_rms": 0.003600327374357383,
+          "rmse_over_reference_rms": 0.03875170103325173
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.060783207416534424,
+          "rmse": 0.00238799348782212,
+          "reference_rms": 0.06022678947999728,
+          "rmse_over_reference_rms": 0.0396500213350278
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.001917281188070774,
+          "rmse": 2.5588334289011138e-05,
+          "reference_rms": 0.00022685313384552598,
+          "rmse_over_reference_rms": 0.1127969177910292
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.013236019851560714,
+        "actual_rms": 0.01382973245587424,
+        "reference_peak": 0.06314173340797424,
+        "actual_peak": 0.0667523592710495,
+        "rmse": 0.01820680198280513,
+        "maximum_absolute_error": 0.10708498954772949,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.09666438066724208,
+            "mean_absolute_log_magnitude_error_db": 2.5351681386825917,
+            "log_floor_absolute_magnitude": 3.865795268656082e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.1423183983619783,
+            "mean_absolute_log_magnitude_error_db": 2.584719147801032,
+            "log_floor_absolute_magnitude": 7.428885172863572e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.20536182689915847,
+            "mean_absolute_log_magnitude_error_db": 2.5941961547040435,
+            "log_floor_absolute_magnitude": 0.0001431473939971455,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.375549612873865
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.013236019851560714,
+        "actual_rms": 0.013768698099651044,
+        "reference_peak": 0.06314173340797424,
+        "actual_peak": 0.06565393507480621,
+        "rmse": 0.000749703194935159,
+        "maximum_absolute_error": 0.004373926669359207,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05518625120334764,
+            "mean_absolute_log_magnitude_error_db": 0.9364958841464914,
+            "log_floor_absolute_magnitude": 3.865795268656082e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.0546301063310967,
+            "mean_absolute_log_magnitude_error_db": 1.0591632296610463,
+            "log_floor_absolute_magnitude": 7.428885172863572e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.05394023494975442,
+            "mean_absolute_log_magnitude_error_db": 1.0663357444862942,
+            "log_floor_absolute_magnitude": 0.0001431473939971455,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.0566411355787411
+      }
+    },
+    {
+      "instrument_id": 10,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.0008304831571877003,
+          "rmse": 0.00019016570518815476,
+          "reference_rms": 0.0037613271557728825,
+          "rmse_over_reference_rms": 0.05055814006933392
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.06707185506820679,
+          "rmse": 0.0025265739965506053,
+          "reference_rms": 0.0651097395780183,
+          "rmse_over_reference_rms": 0.038804854894606305
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.0015740562230348587,
+          "rmse": 2.5290031070426793e-05,
+          "reference_rms": 0.00023767648312968928,
+          "rmse_over_reference_rms": 0.10640527298877596
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.019368486605068548,
+        "actual_rms": 0.019796920817179837,
+        "reference_peak": 0.07577788829803467,
+        "actual_peak": 0.07810839265584946,
+        "rmse": 0.02186651368977322,
+        "maximum_absolute_error": 0.10214525833725929,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.08107170138730721,
+            "mean_absolute_log_magnitude_error_db": 3.6055306773635656,
+            "log_floor_absolute_magnitude": 6.826383196404961e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.11167680782042048,
+            "mean_absolute_log_magnitude_error_db": 3.5921709870369907,
+            "log_floor_absolute_magnitude": 0.0001326790591161103,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.15478145540948152,
+            "mean_absolute_log_magnitude_error_db": 3.3930193740876247,
+            "log_floor_absolute_magnitude": 0.00025238089657135483,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.1289737879701431
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.019368486605068548,
+        "actual_rms": 0.01973721113554257,
+        "reference_peak": 0.07577788829803467,
+        "actual_peak": 0.07791557908058167,
+        "rmse": 0.0008616637961309766,
+        "maximum_absolute_error": 0.005451556295156479,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.04282514318645315,
+            "mean_absolute_log_magnitude_error_db": 1.0979416597442693,
+            "log_floor_absolute_magnitude": 6.826383196404961e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.04233287462303881,
+            "mean_absolute_log_magnitude_error_db": 1.2304192514839114,
+            "log_floor_absolute_magnitude": 0.0001326790591161103,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.041652465992134,
+            "mean_absolute_log_magnitude_error_db": 1.2139880946584585,
+            "log_floor_absolute_magnitude": 0.00025238089657135483,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.04448792586125379
+      }
+    },
+    {
+      "instrument_id": 11,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.00035107554867863655,
+          "rmse": 0.00011485702794635559,
+          "reference_rms": 0.003665313298826181,
+          "rmse_over_reference_rms": 0.03133621019058279
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.04797375202178955,
+          "rmse": 0.0022681188242729485,
+          "reference_rms": 0.057434521000802166,
+          "rmse_over_reference_rms": 0.039490515194533796
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.0008100350387394428,
+          "rmse": 1.6567745004240434e-05,
+          "reference_rms": 0.00019093132781047717,
+          "rmse_over_reference_rms": 0.08677331894264077
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.018104084845520237,
+        "actual_rms": 0.018790582109163706,
+        "reference_peak": 0.06038545444607735,
+        "actual_peak": 0.06618952751159668,
+        "rmse": 0.02669761364792056,
+        "maximum_absolute_error": 0.10351546481251717,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.18451939562686254,
+            "mean_absolute_log_magnitude_error_db": 3.472618394483309,
+            "log_floor_absolute_magnitude": 5.826602085818415e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.22867375604574894,
+            "mean_absolute_log_magnitude_error_db": 3.466596464595309,
+            "log_floor_absolute_magnitude": 0.00011333900149503182,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.31130540968326675,
+            "mean_absolute_log_magnitude_error_db": 3.3739279165520593,
+            "log_floor_absolute_magnitude": 0.00020800820816292413,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 1.4746734715246734
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.018104084845520237,
+        "actual_rms": 0.018280445929533387,
+        "reference_peak": 0.06038545444607735,
+        "actual_peak": 0.060607507824897766,
+        "rmse": 0.0005604276253025777,
+        "maximum_absolute_error": 0.003094351850450039,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.02929928299174038,
+            "mean_absolute_log_magnitude_error_db": 0.8020513254778164,
+            "log_floor_absolute_magnitude": 5.826602085818415e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.028868125934531787,
+            "mean_absolute_log_magnitude_error_db": 0.8834096869584981,
+            "log_floor_absolute_magnitude": 0.00011333900149503182,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.028335930033899868,
+            "mean_absolute_log_magnitude_error_db": 0.9008770060966704,
+            "log_floor_absolute_magnitude": 0.00020800820816292413,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.030955866042643554
+      }
+    },
+    {
+      "instrument_id": 12,
+      "frames": 1000,
+      "same_reference_f0_scaled_controls": {
+        "amplitude": {
+          "maximum_absolute_error": 0.00033592910040169954,
+          "rmse": 5.9357405357328874e-05,
+          "reference_rms": 0.0024517211733424468,
+          "rmse_over_reference_rms": 0.024210504033950385
+        },
+        "harmonic_distribution": {
+          "maximum_absolute_error": 0.0630607008934021,
+          "rmse": 0.0027536410065142395,
+          "reference_rms": 0.06846551814544502,
+          "rmse_over_reference_rms": 0.040219384605613154
+        },
+        "noise_magnitudes": {
+          "maximum_absolute_error": 0.002133665606379509,
+          "rmse": 3.220110184551415e-05,
+          "reference_rms": 0.0003470750177110873,
+          "rmse_over_reference_rms": 0.09277850666946891
+        }
+      },
+      "independent_pitch_paths": {
+        "samples": 64000,
+        "reference_rms": 0.00907346564365422,
+        "actual_rms": 0.009040247297940965,
+        "reference_peak": 0.036356158554553986,
+        "actual_peak": 0.033941850066185,
+        "rmse": 0.005038949360156883,
+        "maximum_absolute_error": 0.029537034686654806,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.07207164436227269,
+            "mean_absolute_log_magnitude_error_db": 2.773939305754097,
+            "log_floor_absolute_magnitude": 2.6842153404569963e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.08448137613761274,
+            "mean_absolute_log_magnitude_error_db": 2.6841048317772023,
+            "log_floor_absolute_magnitude": 5.436847396153862e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.11194225177535741,
+            "mean_absolute_log_magnitude_error_db": 2.6512148454101676,
+            "log_floor_absolute_magnitude": 9.857342733854792e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.5553500236903428
+      },
+      "held_reference_oscillator_pitch": {
+        "samples": 64000,
+        "reference_rms": 0.00907346564365422,
+        "actual_rms": 0.009105180999233712,
+        "reference_peak": 0.036356158554553986,
+        "actual_peak": 0.03669232875108719,
+        "rmse": 0.0004278693126687291,
+        "maximum_absolute_error": 0.002432350942399353,
+        "reference_samples_outside_unit_range": 0,
+        "actual_samples_outside_unit_range": 0,
+        "spectra": [
+          {
+            "fft_size": 512,
+            "hop": 128,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.0453839743284188,
+            "mean_absolute_log_magnitude_error_db": 1.019066729026895,
+            "log_floor_absolute_magnitude": 2.6842153404569963e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 1024,
+            "hop": 256,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.044917093154941974,
+            "mean_absolute_log_magnitude_error_db": 1.1197721940544856,
+            "log_floor_absolute_magnitude": 5.436847396153862e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          },
+          {
+            "fft_size": 2048,
+            "hop": 512,
+            "window": "periodic Hann",
+            "spectral_convergence": 0.04415327327389735,
+            "mean_absolute_log_magnitude_error_db": 1.1390999538341966,
+            "log_floor_absolute_magnitude": 9.857342733854792e-05,
+            "log_floor_relative_to_reference_peak_db": -100
+          }
+        ],
+        "rmse_over_reference_rms": 0.04715610654986845
+      }
+    }
+  ]
+}

@@ -232,6 +232,27 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: MIDI_DDSP_Debug
+          images:
+            - project-context: midi_ddsp.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: MIDI_DDSP_Release
+          images:
+            - project-context: midi_ddsp.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: MIDI_DDSP_ProgramModel
+          images:
+            - project-context: midi_ddsp.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -279,6 +300,7 @@ solution:
         - .Debug
         - .Release
     - project: projects/yamnet/yamnet.cproject.yml
+    - project: projects/midi_ddsp/midi_ddsp.cproject.yml
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

@@ -73,6 +73,8 @@
 /* Ethos NPU driver instance. */
 static struct ethosu_driver EthosDriver;
 volatile uint32_t npu_interrupts;
+/* Observe pending state across NPU reset; no inference exists at this point. */
+volatile uint32_t npu_startup_pending_before, npu_startup_pending_after_reset;
 volatile int32_t npu_error;
 volatile ethos_benchmark_t ethos_benchmark;
 
@@ -136,6 +138,11 @@ void ethos_setup (void) {
     struct ethosu_hw_info hw_info;
     #endif
 
+    /* A peripheral reset does not clear a previously latched NVIC pending bit.
+     * Keep the line disabled until the driver has reset its device/job state. */
+    NVIC_DisableIRQ(ETHOSU_IRQ_IRQn);
+    npu_startup_pending_before = NVIC_GetPendingIRQ(ETHOSU_IRQ_IRQn);
+
     /*  Initialize Ethos-U NPU driver. */
     rval = ethosu_init(&EthosDriver,           /* Ethos-U device driver */
                       ethos_base_addr,         /* Ethos-U base address  */
@@ -157,6 +164,10 @@ void ethos_setup (void) {
         return;
     }
 
+    npu_startup_pending_after_reset = NVIC_GetPendingIRQ(ETHOSU_IRQ_IRQn);
+    NVIC_ClearPendingIRQ(ETHOSU_IRQ_IRQn);
+    __DSB();
+    __ISB();
     NVIC_EnableIRQ(ETHOSU_IRQ_IRQn);
 
     #ifdef DEBUG

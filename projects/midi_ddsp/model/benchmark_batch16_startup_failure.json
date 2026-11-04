@@ -1,0 +1,115 @@
+{
+  "context": "b52/d53 first launch; Error35 on first held expression, before sweep; excluded from timing. Cause unresolved.",
+  "results": [
+    {
+      "expression": "pipeline_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: pipeline_error\nResult: -420\nType: volatile int32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_benchmark_stage",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_benchmark_stage\nResult: 10\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_benchmark_complete",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_benchmark_complete\nResult: 0\nType: volatile uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_method_runtime_error",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_method_runtime_error\nResult: 35\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_crc",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_crc\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 3730983582 (uint32_t)\n  [1]: 3818737745 (uint32_t)\n  [2]: 3663573510 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_quantization_test_cases",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_quantization_test_cases\nResult: 717\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_quantization_test_failures",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_quantization_test_failures\nResult: 0\nType: uint32_t"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_stage_stats[0]",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_stage_stats[0]\nResult: {...}\nType: struct MidiStageStats\nFields:\n  prepare_ticks: 3450851 (uint64_t)\n  copy_ticks: 3263775 (uint64_t)\n  memcpy_ticks: 1946626 (uint64_t)\n  cache_clean_ticks: 15736 (uint64_t)\n  crc_ticks: 1301413 (uint64_t)\n  backend_bytes: 138032 (uint32_t)\n  constant_bytes: 47136 (uint32_t)\n  constant_bypasses: 0 (uint32_t)\n  loads: 1 (uint32_t)\n  method_peak: 0 (uint32_t)\n  temp_peak: 0 (uint32_t)\n  crc_failures: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "midi_stage_routes",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: midi_stage_routes\nResult: [4]\nType: uint32_t [4]\nFields:\n  [0]: 0 (uint32_t)\n  [1]: 0 (uint32_t)\n  [2]: 0 (uint32_t)\n  [3]: 0 (uint32_t)"
+          }
+        ]
+      }
+    },
+    {
+      "expression": "ethos_benchmark",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluated: ethos_benchmark\nResult: {...}\nType: volatile ethos_benchmark_t\nFields:\n  cycles: 0 (uint64_t)\n  active_cycles: 0 (uint64_t)\n  invocations: 1 (uint32_t)\n  overflow: 0 (uint32_t)\n  weights_address: 0 (uint32_t)\n  weights_size: 0 (uint32_t)\n  arena_address: 0 (uint32_t)\n  arena_size: 0 (uint32_t)"
+          }
+        ]
+      }
+    }
+  ]
+}

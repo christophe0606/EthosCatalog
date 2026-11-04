@@ -1,0 +1,318 @@
+{
+  "context": "Final b-91 / d-92 Release, SetVolume78/code49 on both channels: codec -8 dB, +12 dB from original, including the user's latest additional +6 dB. Fresh continue from temporary main stop; no intermediate halt before finite completion.",
+  "status": "PASS for included 104-second sequential thirteen-instrument monophonic score and 3.008-second tail. Not a guarantee for arbitrary MIDI or polyphony.",
+  "run_timing": {
+    "continue_return_utc": "2026-11-04 16:26:52 UTC",
+    "continue_note": "continue_execution waited 60 seconds before returning running; continuation began approximately 16:25:52 UTC.",
+    "first_pause_utc": "2026-11-04 16:30:42 UTC",
+    "no_intermediate_halts": true,
+    "target_resumed_after_inspection": true
+  },
+  "measurements": {
+    "windows": 26,
+    "frames": 26000,
+    "notes": 104,
+    "instrument_mask": 8191,
+    "max_neural_ticks": 1567119800,
+    "max_neural_seconds": 3.9177995,
+    "neural_deadline_misses": 0,
+    "audio_starvations": 0,
+    "driver_underflows": 0,
+    "audio_deadline_misses": 0,
+    "clipped": 0,
+    "nonfinite": 0,
+    "dropped_events": 0,
+    "requests": 80327,
+    "acknowledgments": 80327,
+    "queued_blocks": 6688,
+    "completed_blocks": 6688,
+    "callbacks": 6688,
+    "codec_left_volume_code": 49,
+    "codec_right_volume_code": 49,
+    "codec_gain_db": -8,
+    "relative_to_original_db": 12,
+    "queue_slots": 6,
+    "maximum_audio_queue_ms": 96,
+    "initial_audio_queue_ms": 32,
+    "reverb_accumulation_max_ms": 12,
+    "tail_intervals": 752,
+    "terminal_silence_blocks": 1,
+    "terminal_silence_note": "One intentional final drain clock block after all 6688 application blocks; no active starvation.",
+    "max_target_probe_absolute_error": 0.00000178813934,
+    "target_probe_tolerance": 0.00001,
+    "target_probe_cases": 2560,
+    "startup_pending_before": 0,
+    "startup_pending_after_reset": 0,
+    "startup_runtime_errors": 0,
+    "audio_sample_hz": 16000,
+    "cpu_hz": 400000000,
+    "axi_hz": 400000000,
+    "timer_hz": 400000000,
+    "ospi_hz": 100000000,
+    "callback_min_seconds": 0.01599855,
+    "callback_max_seconds": 0.0160019475
+  },
+  "memory_bytes": {
+    "MRAM": 784944,
+    "SRAM0": 3837440,
+    "SRAM1": 3740672,
+    "DTCM_RW": 678612
+  },
+  "source_binding": {
+    "build_job": "b-91",
+    "codec_driver_volume": 78,
+    "codec_code": 49,
+    "codec_gain_db": -8,
+    "relative_to_original_db": 12,
+    "critical_source_sha256": {
+      "board/DevKit-E8/audio_output.cpp": "6d12f56509adb57459f0acef097122f564ea9045318d399a1ec63bda379b4508",
+      "board/DevKit-E8/audio_output.h": "48f3160abaaab956331f021b3b97ea0c36afa48af680e7102733cdc122ab89ee",
+      "board/DevKit-E8/ethos_setup.c": "daef318e8856634a1e127da7c12d94b1c06e320912bb134e571b42a56002c586",
+      "projects/midi_ddsp/app.py": "07eb732561b13f2a661c41002ef06c0b05512ead8cbfe79f850beb063b6fb6af",
+      "projects/midi_ddsp/assets/demo_midi.h": "5dbabf9e31ebc7baab15513174ec8fce384a9e251fd37c23b3c9f86519a11c02",
+      "projects/midi_ddsp/audio_output.cpp": "98eab72644a9929f678c82599e3798b5d1bb1d8930cf7f7e31456c9986ffe7c1",
+      "projects/midi_ddsp/audio_output.hpp": "5a76e6fdcc3ece7c86893a739e521001c93506ae00f1d0cf246ef631d4bbbbd7",
+      "projects/midi_ddsp/benchmark_main.cpp": "90c67c684dd21721cebd0c4e1376a143b0b06ddde077a7836856202b68a05266",
+      "projects/midi_ddsp/benchmark_schedule.hpp": "294acf0727940aab9647104aa98f35f634255a705b8bc34f03fa7258a8f2961c",
+      "projects/midi_ddsp/dsp_profile.hpp": "9825b5126a6a942dcdc386d863666d62239faa0661a10ab174739cc9f2ae1259",
+      "projects/midi_ddsp/generated/AppNodes.hpp": "264286837a834ce53833904eca760aee22497b5b075ec834778ca9cd6d8464d1",
+      "projects/midi_ddsp/generated/app_params.c": "84638ebac849f5219a1bff52d7f73f031b589b61d85ee8bfcf27c27b69f1b550",
+      "projects/midi_ddsp/generated/app_params.h": "9c8ba57ba334de11ca3f9b1d1842adf3b5556fe36ceea07fc09c6ba2a2fc5277",
+      "projects/midi_ddsp/generated/app_sizes.h": "3bdbdb8d2d2f138a31749fe5a7ccae18f86f0106e400148d85fc2c0e6b4b5425",
+      "projects/midi_ddsp/generated/scheduler_app.cpp": "ea5f1123491d9f8db7b229eccd4254da3be6552d7edf28a393b2681b8070d10e",
+      "projects/midi_ddsp/generated/scheduler_app.h": "e7f78f03eb623037c5d4a860d8402b08020af52572f75f665121accba8f6c443",
+      "projects/midi_ddsp/generated/stream_settings.h": "34a3a4261f2d3bab0b4e1aec28dba69135a330f6a1f18a2b4dc8cd69279c808a",
+      "projects/midi_ddsp/hardware_params.h": "2a399e965971b968996182c9c38584321771ad81c5aad68888002c79309ef6d3",
+      "projects/midi_ddsp/midi_ddsp.cproject.yml": "a2490cd6d246b2d7726843b592fa9f66f4ff5db145a7d5c49c2b8ae09f169d45",
+      "projects/midi_ddsp/midi_stage_runtime.cpp": "8ec47060f8e9c29bb0964285ee47c3d730b4bcd7e84fffc71208df4683cab45a",
+      "projects/midi_ddsp/nodes/__init__.py": "09b067b911325b8fe6b2871047e3ebdeb8fcd3fb7e7176b5cb40de4afc89557d",
+      "projects/midi_ddsp/nodes_impl/AudioOutput.hpp": "a1f16d947bdf3a2f26f2f65006a7a22bb967906d764a2925844469ed78a064e3",
+      "projects/midi_ddsp/nodes_impl/ControlSource.hpp": "ae9cc4e75cb4f138e9dc0900ed876b8b08adbe7775f26f1fe039dee928f21539",
+      "projects/midi_ddsp/nodes_impl/DDSPReverb.cpp": "2dbd5e0f98c46dec6bb197628da61532d61811f580b765b9ff91e74ac9a31717",
+      "projects/midi_ddsp/nodes_impl/DDSPReverb.hpp": "83884e1e6131652843be7f28ea0572a6df2f84febd77b94e3b56213aff381958",
+      "projects/midi_ddsp/nodes_impl/DDSPSynth.hpp": "5f58e99f2d2bea4f77ac517fa815e0297896b90e62d471b660a97f01e794e33c",
+      "projects/midi_ddsp/nodes_impl/MidiMethod.hpp": "4083d07e0779d86ccda8cfdb2244a45f4c86ed70c19a1e20d2f0ea3a4a52362d",
+      "projects/midi_ddsp/nodes_impl/MidiScore.hpp": "0a58c1e5d7daeb020df9a668888b73adfdab43787af9afb9c58bc8fdab58d363",
+      "projects/midi_ddsp/nodes_impl/SendToNetwork.hpp": "af902fa26e2b76c1fd3a6c6ee48d14f9b774deb17ed57c0de3294bdf2d7c74f8",
+      "projects/midi_ddsp/nodes_impl/SendToNetworkRuntime.hpp": "f4bb500a01cadd470e0b7ea2c5a97aab8784fe848a910274d74bcafbfde158c5",
+      "projects/midi_ddsp/nodes_impl/c/ddsp_reverb256.cpp": "21a57a75bfb6bf829e1527aaccd585d503cf544a84b62dbc8045a73700716ddd",
+      "projects/midi_ddsp/nodes_impl/c/ddsp_reverb256.hpp": "f5408ca5f42e5d5e9f8e2aa2e6a28849150e72d5d7b50150e7ade05bf355b0ac",
+      "projects/midi_ddsp/nodes_impl/c/ddsp_synth.cpp": "67f38e58e39f5791674784c5993786cb8effa6306a46478ce1063687c1a9cd67",
+      "projects/midi_ddsp/nodes_impl/c/ddsp_synth.hpp": "ed9aba5b11095b209d33c7dd852bdf10c350427a1254727de7b36042de8b3089",
+      "projects/midi_ddsp/nodes_impl/helium/oscillator_mve.cpp": "a793673da5dc200d21539c887d05f1d48bf511e30fd1bee4b1309d69de339844",
+      "projects/midi_ddsp/nodes_impl/helium/oscillator_mve.hpp": "606ed500ba6bf3c425fde9250e12be8d4b2c5d392130292a325936d703b2005e",
+      "projects/midi_ddsp/player/midi_file.cpp": "7c67df3f3372b61d9e910c0686b1bf9242da9042bda3eea232b28bd1d3d0b61f",
+      "projects/midi_ddsp/player/score_windows.cpp": "de5914fc4270fd8a68bd7057a8eed54b3bd6eeae641200a7b4724aca2676709d",
+      "projects/midi_ddsp/stream_init.cpp": "aaba89cb97fcd7e34a326e3d3aedbf949ab96d397039c7649780218eda1f2764",
+      "projects/midi_ddsp/stream_init.hpp": "c7e3ee360812437e80d0925327b5ffa51acb701d0d821174a36cf1147bccd7f8",
+      "projects/midi_ddsp/stream_types.h": "d28cd978dcdfc3796ad987b4dbc65794bc0b4bc8b03e87b1f2250a495743be73"
+    },
+    "elf_path": "out/midi_ddsp/DevKit-E8/Release/midi_ddsp.axf",
+    "elf_sha256": "6a0380f651511be8af16e109e326c49f95cacef8743d949e3995c4272576fc08"
+  },
+  "assets": {
+    "pte": {
+      "bytes": 6221424,
+      "crc32": "de624a9e",
+      "sha256": "e1cf5cc94363f68cc76dec54347d75472d36b7e200b92be33e59c5e0355a1d52"
+    },
+    "cpu_weights": {
+      "bytes": 2536448,
+      "crc32": "e39d5051",
+      "sha256": "19ed82d68c4c68eaceab7c7471e25cdd94cf80eb520bae427316865418110523"
+    },
+    "held_fixtures": {
+      "bytes": 2078208,
+      "crc32": "da5db206",
+      "sha256": "af6a0d4c75e2d19603122d232940b14552bc35f8fa2ca5099031d1a1e12d77f2"
+    }
+  },
+  "limits": [
+    "Independent noncausal four-second model windows; no whole-piece neural or seam equivalence claim.",
+    "Held-harmonic provisional numerical gate and tuba expected pitch-shift gate remain failed; this audio/timing pass does not change them.",
+    "No independent analog recording; zero clipped samples refers to generated digital PCM. Driver counters do not independently detect every physical FIFO underrun.",
+    "Pretrained binary redistribution terms unresolved; local evaluation only."
+  ],
+  "raw": {
+    "pipeline_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: pipeline_error\nResult: 0\nType: volatile int32_t"
+        }
+      ]
+    },
+    "midi_dsp_selftest_complete": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_selftest_complete\nResult: 1\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_dsp_selftest_max": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_selftest_max\nResult: [4]\nType: float [4]\nFields:\n  [0]: 6.44475222e-07 (float)\n  [1]: 4.36557457e-11 (float)\n  [2]: 6.44475222e-07 (float)\n  [3]: 1.78813934e-06 (float)"
+        }
+      ]
+    },
+    "midi_dsp_selftest_cases": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_dsp_selftest_cases\nResult: 2560\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_demo": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_demo\nResult: {...}\nType: struct MidiDemoStats\nFields:\n  windows_started: 26 (uint32_t)\n  windows_ready: 26 (uint32_t)\n  windows_played: 26 (uint32_t)\n  frames: 26000 (uint32_t)\n  tail_frames: 752 (uint32_t)\n  complete: 1 (uint32_t)\n  audio_complete: 1 (uint32_t)\n  current_instrument: 12 (uint32_t)\n  instrument_mask: 8191 (uint32_t)\n  tail_steals: 12 (uint32_t)\n  control_waits: 1 (uint32_t)\n  deadline_misses: 0 (uint32_t)\n  max_regions: 16 (uint32_t)\n  method_calls: [8] (uint32_t [8])\n    [0]: 221 (uint32_t)\n    [1]: 221 (uint32_t)\n    [2]: 221 (uint32_t)\n    [3]: 1638 (uint32_t)\n    [4]: 26000 (uint32_t)\n    [5]: 26000 (uint32_t)\n    [6]: 26000 (uint32_t)\n    [7]: 26 (uint32_t)\n  neural_ticks: 37318223866 (uint64_t)\n  max_neural_ticks: 1567119800 (uint64_t)\n  control_wait_ticks: 1171378069 (uint64_t)\n  startup_ticks: 1293586684 (uint64_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "midi_admission": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_admission\nResult: {...}\nType: struct midi_ddsp::ScoreWindowCounters\nFields:\n  windows: 26 (uint64_t)\n  note_ons: 104 (uint64_t)\n  unsupported_notes: 0 (uint64_t)\n  rejected_instrument_notes: 0 (uint64_t)\n  overlap_steals: 0 (uint64_t)\n  unmatched_note_offs: 0 (uint64_t)\n  quantized_away_notes: 0 (uint64_t)\n  program_changes: 13 (uint64_t)\n  instrument_switches: 12 (uint64_t)\n  dense_windows: 0 (uint64_t)\n  dense_regions: 0 (uint64_t)\n  dense_note_regions: 0 (uint64_t)\n  capacity_rest_frames: 0 (uint64_t)"
+        }
+      ]
+    },
+    "devkit_e8_audio_stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: devkit_e8_audio_stats\nResult: {...}\nType: volatile DevKitE8AudioStats\nFields:\n  queued_blocks: 6688 (uint32_t)\n  completed_blocks: 6688 (uint32_t)\n  callbacks: 6688 (uint32_t)\n  silence_blocks: 1 (uint32_t)\n  starvation_events: 0 (uint32_t)\n  driver_underflows: 0 (uint32_t)\n  deadline_misses: 0 (uint32_t)\n  queue_high_water: 6 (uint32_t)\n  write_timeouts: 0 (uint32_t)\n  frame_errors: 0 (uint32_t)\n  interval_min_ticks: 6399420 (uint32_t)\n  interval_max_ticks: 6400779 (uint32_t)\n  timer_hz: 400000000 (uint32_t)\n  started_ticks: 1605051073 (uint32_t)\n  first_audio_ticks: 1605051889 (uint32_t)\n  last_completed_ticks: 1458281023 (uint32_t)\n  codec_left_volume_code: 49 (uint32_t)\n  codec_right_volume_code: 49 (uint32_t)\n  error: 0 (int32_t)"
+        }
+      ]
+    },
+    "midi_audio_nonfinite": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_audio_nonfinite\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_audio_clipped": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_audio_clipped\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_event_dropped": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_event_dropped\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_network_requests": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_network_requests\nResult: 80327\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_network_completions": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_network_completions\nResult: 80327\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "npu_startup_pending_before": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: npu_startup_pending_before\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "npu_startup_pending_after_reset": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: npu_startup_pending_after_reset\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_method_runtime_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_method_runtime_error\nResult: 0\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_schedule_runtime_error": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_schedule_runtime_error\nResult: 0\nType: volatile uint32_t"
+        }
+      ]
+    },
+    "midi_crc": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_crc\nResult: [3]\nType: uint32_t [3]\nFields:\n  [0]: 3730983582 (uint32_t)\n  [1]: 3818737745 (uint32_t)\n  [2]: 3663573510 (uint32_t)"
+        }
+      ]
+    },
+    "midi_cpu_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_cpu_hz\nResult: 400000000\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_axi_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_axi_hz\nResult: 400000000\nType: uint32_t"
+        }
+      ]
+    },
+    "midi_timer_hz": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Evaluated: midi_timer_hz\nResult: 400000000\nType: uint32_t"
+        }
+      ]
+    }
+  },
+  "raw_memory": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Build: target DevKit-E8, device Alif Semiconductor::AE822FA0E5597LS0, compiler AC6, board DevKit-E8 — from out/EthosCatalog+DevKit-E8.cbuild-run.yml\nImage midi_ddsp (M55_HP): out/midi_ddsp/DevKit-E8/Release/midi_ddsp.axf, map out/midi_ddsp/DevKit-E8/Release/midi_ddsp.axf.map (armlink)\n[midi_ddsp.axf] size: text 773368 + data 11568 + bss 8412308 = 9197244 B (ROM ≈ 784936 B, RAM ≈ 8423876 B)\n[midi_ddsp.axf.map] totals: code 639540, ro-data 131683, rw-data 11533, zi-data 8412242 → RO 771223, RW 8423775, ROM 782756 B\nNote: no \"Image component sizes\" in the map (link without --info sizes); per-object sizes are summed from the memory map\n\nRegions (device regions from EthosCatalog+DevKit-E8.cbuild-run.yml, usage from midi_ddsp.axf LOAD segments):\n  MRAM           0x80000000    784944 /   5767168 B    14%  ER_ROM_VECTORS ER_ROM\n  SRAM0          0x02000000   3837440 /   4194304 B    91%  RW_SRAM0\n  unused: SRAM1, SRAM2, SRAM3, SRAM4, SRAM5, OSPI_FLASH, OSPI_FLASH_REMAINDER\n  outside the listed regions: 0x02400000 +3740688 B  RW_SRAM1 PADDING\n  outside the listed regions: 0x20000000 +678612 B  RW_RAM RW_RAM\n  outside the listed regions: 0x200a8000 +3296 B  NS_REGION_0\n  outside the listed regions: 0x200ac000 +131072 B  ARM_LIB_HEAP APP_HEAP\n  outside the listed regions: 0x200f8000 +32768 B  ARM_LIB_STACK\n  [midi_ddsp.axf.map] execution regions: ITCM_RAM 0/262144 B, RW_SRAM0 3837440/4194304 B, RW_SRAM1 3740672/4194304 B, PADDING 16/16 B, RW_RAM 678612/884736 B, NS_REGION_0 3296/4294967295 B, NS_REGION_0_PAD 0/4294967295 B, ARM_LIB_HEAP 98304/98304 B, APP_HEAP 32768/32768 B, ARM_LIB_STACK 32768/32768 B, ER_ROM_VECTORS 1984/4294967295 B, ER_ROM 771384/4294967295 B, MRAM_USER 0/1572864 B\n\nLargest symbols [midi_ddsp.axf] (top 1, object from midi_ddsp.axf.map):\n   3328000 B  obj   0x02060000  _ZN12_GLOBAL__N_15phaseE  RW_SRAM0 @SRAM0  ← benchmark_main.o\n\nLargest objects [midi_ddsp.axf.map] (top 1 of 414; code / ro-data / rw-data / zi-data):\n   7413860 B  benchmark_main.o  61114 / 72846 / 0 / 7279900\nLibraries [midi_ddsp.axf.map]:\n     87600 B  libcpp_wnux.l  68968 / 15671 / 28 / 2933\n\nNext: lookup_symbol { name } for one symbol's address/object, get_section_layout for per-section contributors, top: N for longer lists."
+      }
+    ]
+  },
+  "raw_resume": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+      }
+    ],
+    "structuredContent": {
+      "status": "running",
+      "message": "Target is running: no stop within 1 s of 'continue_execution', and it keeps running; nothing was paused. Call wait_for_stop to wait for the next stop (a breakpoint, a fault), or pause_execution to halt it and see where it is."
+    }
+  }
+}

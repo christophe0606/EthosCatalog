@@ -1,0 +1,544 @@
+benchmarks:
+  network:
+    operation: MIDI-DDSP complete learned block schedule, 1000 frames, four score notes, one
+      fixed instrument; input columns are note pitch and duration
+    input_shape:
+    - 4
+    - 2
+    output_shapes:
+    - - 1000
+      - 126
+    - - 1000
+      - 1
+    - - 4
+      - 6
+    float_boundary: true
+    quantization: int16 activations and int8 weights in automatic U85 delegates; float CPU normalization
+      and categorical sampling
+    samples_per_forward: 64000
+    sample_rate_hz: 16000
+    block_deadline_ms: 4000
+  benchmark:
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6218656
+        executorch:
+          method_pool_peak_bytes: 107220
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 28332.637895
+        cycles: 11333055158
+        statistic: mean
+        min_cycles: 11333055158
+        max_cycles: 11333055158
+        mean_cycles: 11333055158
+        forward_ms: 262621.33659
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 11333055158
+        forward_ticks_samples:
+        - 105048534636
+    run:
+      recorded_at: '2026-11-04T12:35:18Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-18
+      execution_job: d-19
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; sum across
+        all 4013 method calls
+      pmu_overflow: 0
+      npu_invocations_per_forward: 10046
+      test_result: FAIL
+      max_absolute_error: 0.031347394
+      tolerance: 0.0119089603
+      model_sha256: d563c9e61872eee06f42153e5cd3e8530c5857e5543fea524cff7b99e3821e31
+      input: Instrument0; notes48,55,0,60 each250frames; deterministic LCGseed9100 quantiles
+        with separate float32 rounding; model/schedule_fixture.json. Accuracy FAIL records separate
+        held harmonic max-error gate; held NRMSE0.164percent. Full stochastic schedule pitch
+        MAE0.02697semitones and selected raw max error0.01690 remain provisional.
+      timing_scope: Complete actual 4001+3N neural schedule, CPU embeddings and affine transforms,
+        full contexts, packing/state/output copies, top-p sampling, finite checks and output
+        statistics. Original portable CPU kernels; all methods coexist. Harmonic method loading
+        and startup CRC are outside forward time. Default method pool high-water excludes a
+        separate caller-owned3072000byte harmonic planned arena. Separate banks hold3328000byte
+        phase storage,1536000byte harmonic input and504000byte retained controls. No DSP, PCM,
+        SAI, LCD or playback included; no real-time capacity claim.
+      measurement_source: CMSIS b-18/d-19, breakpoint after elapsed time captured; uninterrupted
+        block; benchmark_schedule_baseline.json and benchmark_held_baseline.json. Complete finite
+        outputs and correct calls observed. Timing exceeds4000ms deadline. Earlier first-call
+        scheduler failure is excluded.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6218656
+        executorch:
+          method_pool_peak_bytes: 107220
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 28332.555435
+        cycles: 11333022174
+        statistic: mean
+        min_cycles: 11333022174
+        max_cycles: 11333022174
+        mean_cycles: 11333022174
+        forward_ms: 34416.5321325
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 11333022174
+        forward_ticks_samples:
+        - 13766612853
+    run:
+      recorded_at: '2026-11-04T12:43:40Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-22
+      execution_job: d-23
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; sum across
+        all 4013 method calls
+      pmu_overflow: 0
+      npu_invocations_per_forward: 10046
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: d563c9e61872eee06f42153e5cd3e8530c5857e5543fea524cff7b99e3821e31
+      input: Instrument0 notes48,55,0,60 each250frames; exact LCGseed9100. Held harmonic max
+        error0.0286214948 exceeds provisional0.0119089603 gate, NRMSE0.164406percent. Full coupled
+        pitchMAE0.02838semitones, selected rawmax0.0163552 remain provisional. Deadline4000ms
+        missed.
+      timing_scope: Complete actual 4013-call instrument0 schedule, with project-owned six CPU
+        normalization overrides. Same input/LCG and original equations as baseline. Methods
+        prewarmed by four held calls each; one full schedule recorded. Includes all CPU embeddings,
+        packing, copies, top-p sampling, finite checks and output statistics; excludes startup,
+        DSP, PCM, SAI, LCD and playback. Separate3072000byte caller-owned harmonic planned arena
+        is outside method allocator peak.
+      measurement_source: CMSIS b-22/d-23 after completed schedule; benchmark_fast_cpu.json.
+        All4013calls/10046U85invocations finite and no PMU overflow. Fast kernel counters [12306,12306,6153,12306,6153,12306];
+        no fallback hits. Earlier first-call b-20 failure is excluded.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; recurrent backend blobs and CPU constants staged in SRAM
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6221136
+        executorch:
+          method_pool_peak_bytes: 99132
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 1256.22382
+        cycles: 502489528
+        statistic: mean
+        min_cycles: 502489528
+        max_cycles: 502489528
+        mean_cycles: 502489528
+        forward_ms: 5215.188975
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 502489528
+        forward_ticks_samples:
+        - 2086075590
+    run:
+      recorded_at: '2026-11-04T13:25:40Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-26
+      execution_job: d-31
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; sum across
+        all 4013 method calls
+      pmu_overflow: 0
+      npu_invocations_per_forward: 10046
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: 92be03a2be15307aaabc93d1a61c5ee86d52db49903c9b1d20a1a64e919aa1e9
+      input: Instrument0 notes48,55,0,60 each250frames; exact LCGseed9100. Held harmonic max
+        error0.0286214948 exceeds provisional0.0119089603 gate, NRMSE0.164406percent. Full coupled
+        pitchMAE0.02838semitones, selected rawmax0.0163552 remain provisional. Deadline4000ms
+        missed.
+      timing_scope: Complete actual 4013-call instrument0 schedule, six project-owned CPU normalization
+        overrides, stage-local recurrent delegate caches and CPU constant caching. Includes
+        all eight method preparations, copy and full segment CRC checks, teardown, CPU embeddings,
+        packing, copies, top-p sampling, finite checks and output statistics. Same equations
+        and LCG as inline baseline; storage-equivalence report PASS. Four held calls per method
+        preceded this schedule. Excludes full startup CRC, DSP, PCM, SAI, LCD and playback.
+        Separate3072000byte harmonic planned arena is outside method allocator peak.
+      measurement_source: CMSIS b-26/d-31 uninterrupted first staged complete schedule; benchmark_staged_first.json.
+        All4013calls/10046U85invocations finite and no PMU overflow. Full PTE/CPU/fixture CRCs
+        pass. Dedicated SRAM0x20 and OSPI0x24 attribute routing counters both active; each staged
+        segment CRC passes. Held accuracy unchanged from inline fastCPU. Deadline4000ms missed;
+        final audio quality remains provisional.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; recurrent backend blobs and CPU constants staged in SRAM
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6221136
+        executorch:
+          method_pool_peak_bytes: 99132
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 1256.208695
+        cycles: 502483478
+        statistic: mean
+        min_cycles: 502483478
+        max_cycles: 502483478
+        mean_cycles: 502483478
+        forward_ms: 4574.44085
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 502483478
+        forward_ticks_samples:
+        - 1829776340
+    run:
+      recorded_at: '2026-11-04T13:50:15Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-39
+      execution_job: d-40 and same-ELF restart
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; sum across
+        all 4013 method calls
+      pmu_overflow: 0
+      npu_invocations_per_forward: 10046
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: 92be03a2be15307aaabc93d1a61c5ee86d52db49903c9b1d20a1a64e919aa1e9
+      input: Instrument0 notes48,55,0,60 each250frames; exact LCGseed9100. Held harmonic max
+        error0.0286214948 exceeds provisional0.0119089603 gate, NRMSE0.164406percent. Full coupled
+        pitchMAE0.02838semitones, selected rawmax0.0163552 remain provisional. Deadline4000ms
+        missed.
+      timing_scope: Complete actual 4013-call instrument0 schedule, staged delegate/CPU constant
+        caches, six normalization overrides and faithful Float-Short quantization overrides.
+        Includes stage preparation/copy/tableCRC/teardown, all CPU caller work and detailed
+        operator/cache profiling overhead. A diagnostic halt occurred during the preceding held
+        method0 call; its wall time is excluded. All mid-method breakpoints were removed before
+        this full schedule began, and its interval was uninterrupted. No DSP, PCM, SAI, LCD
+        or playback.
+      measurement_source: CMSIS b-39/d-40 same-ELF restart, benchmark_fast_quantization.json.
+        717 independent target edge cases passed with MVEfeature3; benchmark_quantization_selftest.json.
+        Full asset and copied segment CRCs pass. All4013calls/10046U85invocations finite and
+        no PMU overflow. Allquant/dequantfast paths used, no fallbacks; held output comparisons
+        and complete trace metrics unchanged. Two prior first-call errors are excluded and remain
+        an unresolved startup robustness issue. Deadline4000ms missed; held harmonic provisional
+        max-error gate remains FAIL.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; recurrent backend blobs and CPU constants staged in SRAM
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6221136
+        executorch:
+          method_pool_peak_bytes: 99132
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 1256.207995
+        cycles: 502483198
+        statistic: mean
+        min_cycles: 502483198
+        max_cycles: 502483198
+        mean_cycles: 502483198
+        forward_ms: 4517.5090725
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 502483198
+        forward_ticks_samples:
+        - 1807003629
+    run:
+      recorded_at: '2026-11-04T13:55:25Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-43
+      execution_job: d-44
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; sum across
+        all 4013 method calls
+      pmu_overflow: 0
+      npu_invocations_per_forward: 10046
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: 92be03a2be15307aaabc93d1a61c5ee86d52db49903c9b1d20a1a64e919aa1e9
+      input: Instrument0 notes48,55,0,60 each250frames; exact LCGseed9100. Held harmonic max
+        error0.0286214948 exceeds provisional0.0119089603 gate, NRMSE0.164406percent. Full coupled
+        pitchMAE0.02838semitones, selected rawmax0.0163552 remain provisional. Deadline4000ms
+        missed.
+      timing_scope: Complete actual 4013-call instrument0 schedule, staged caches and tableCRC,
+        six CPU normalization overrides, fast MVE quantization and pinned native dequantization.
+        Includes preparation/copy/CRC/teardown, CPU embeddings, packing/state/output copies,
+        top-p sampling, finite checks, statistics and detailed operator/cache profiling overhead.
+        Four held calls per method preceded the full schedule; all intervals uninterrupted.
+        No DSP, PCM, SAI, LCD or playback.
+      measurement_source: CMSIS b-43/d-44; benchmark_native_dequantization.json. 717targetedgecases
+        PASS. AllassetCRCspass, all4013calls/10046U85invocations finite, zerooverflow/errors.
+        Allquantizationfast, alldequantizationnative by deliberate measured selection. Output
+        comparisons match previous candidate exactly. Deadline4000ms and provisional harmonic
+        max-error gate still FAIL.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; recurrent backend blobs and CPU constants staged in SRAM
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6221424
+        executorch:
+          method_pool_peak_bytes: 190180
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 859.37721
+        cycles: 343750884
+        statistic: mean
+        min_cycles: 343750884
+        max_cycles: 343750884
+        mean_cycles: 343750884
+        forward_ms: 2858.9834299999998
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 343750884
+        forward_ticks_samples:
+        - 1143593372
+    run:
+      recorded_at: '2026-11-04T14:34:45Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-50
+      execution_job: d-51
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 1
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; 4424 actual
+        U85 invocations per complete block.
+      pmu_overflow: 0
+      npu_invocations_per_forward: 4424
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: e1cf5cc94363f68cc76dec54347d75472d36b7e200b92be33e59c5e0355a1d52
+      input: 'Synthetic four-region score: notes48+identity,55+identity,rest,60+identity each250frames;
+        LCGseed9100+identity. All13 identities are timing coverage; actual demo registers and
+        audio quality are separate acceptance work. Held harmonic max0.0286214948 exceeds unchanged
+        provisional0.0119089603 gate; NRMSE0.164406percent. Instrument0 pitchMAE0.028380014semitones
+        and selectedrawmax0.0163551569 match batch1.'
+      timing_scope: 'First fresh launch; four held calls per method preceded instrument0 full
+        schedule. Complete 3076-method schedule: precondition63x16 rows,1000valid+8discarded
+        padding; other learned methods unchanged. Includes stage loading/copy/tableCRC/teardown,
+        CPU embeddings, state/context/output copies, top-p sampling, finite checks, statistics
+        and profiling overhead. Six normalization overrides, fast MVE quantization, native dequantization;
+        SRAM-staged recurrent delegates and cached CPU constants, direct-OSPI harmonic. Startup
+        CRC and held calls excluded from forward time; their first-use/warm timings are separate.
+        No DSP, PCM, SAI, LCD or playback included.'
+      measurement_source: CMSIS b-50/d-51; benchmark_batch16_first.json, benchmark_batch16_held_timings.json,
+        benchmark_batch16_sweep.json, benchmark_batch16_sweep_checks.json and benchmark_batch16_summary.json.
+        All asset/segment CRCs pass; no constant bypass, no normalization fallback,717target
+        edgecases pass. All complete schedules finite and faster than4000ms. Test_result remains
+        FAIL for unchanged provisional harmonic gate. One initial b52/d53 first-held Error35
+        launch was excluded and recorded separately; its origin remains unresolved. No final
+        audio/voice-cap claim.
+  - platform:
+      os: RTX5
+      cpu: Cortex-M55
+      memory:
+        weights:
+          type: OSPI1; recurrent backend blobs and CPU constants staged in SRAM
+          clock_mhz: 100
+          clock_source: guarded e8_flash_set_read_clock API at 400 MHz AXI
+        activations:
+          type: SRAM0 and SRAM1
+          clock_mhz: 400
+    measurements:
+      memory:
+        model_bytes: 6221424
+        executorch:
+          method_pool_peak_bytes: 190180
+          temp_pool_peak_bytes: 1216000
+      time:
+        ms: 859.4184700000001
+        cycles: 343767388
+        statistic: mean
+        min_cycles: 343766865
+        max_cycles: 343767753
+        mean_cycles: 343767388
+        forward_ms: 2835.7819520000003
+        forward_timer_hz: 400000000
+        cycles_samples:
+        - 343767405
+        - 343767104
+        - 343767530
+        - 343767266
+        - 343767508
+        - 343766887
+        - 343767460
+        - 343767732
+        - 343767753
+        - 343767574
+        - 343767076
+        - 343767672
+        - 343767424
+        - 343767564
+        - 343766865
+        forward_ticks_samples:
+        - 1135416871
+        - 1135292737
+        - 1135405420
+        - 1134210378
+        - 1134327186
+        - 1133765329
+        - 1134090259
+        - 1133996065
+        - 1133578153
+        - 1133941723
+        - 1134036043
+        - 1134189800
+        - 1134103051
+        - 1134072518
+        - 1134266179
+    run:
+      recorded_at: '2026-11-04T14:34:45Z'
+      context: midi_ddsp.Release+DevKit-E8
+      target: DevKit-E8@MIDI_DDSP_Release
+      device: AE822FA0E5597LS0
+      core: M55_HP
+      npu: Ethos-U85
+      macs: 256
+      compiler: Arm Compiler 6.24.0
+      optimize: -O3 -ffast-math
+      build_job: b-52
+      execution_job: d-53 same-ELF restart
+      cpu_clock_mhz: 400
+      npu_clock_mhz: 400
+      warmup: 0
+      samples: 15
+      pmu_cross_check: CYCLE equals NPU_ACTIVE on every invocation; zero overflow; 4424 actual
+        U85 invocations per complete block.
+      pmu_overflow: 0
+      npu_invocations_per_forward: 4424
+      test_result: FAIL
+      max_absolute_error: 0.0286214948
+      tolerance: 0.0119089603
+      model_sha256: e1cf5cc94363f68cc76dec54347d75472d36b7e200b92be33e59c5e0355a1d52
+      input: 'Synthetic four-region score: notes48+identity,55+identity,rest,60+identity each250frames;
+        LCGseed9100+identity. All13 identities are timing coverage; actual demo registers and
+        audio quality are separate acceptance work. Held harmonic max0.0286214948 exceeds unchanged
+        provisional0.0119089603 gate; NRMSE0.164406percent. Instrument0 pitchMAE0.028380014semitones
+        and selectedrawmax0.0163551569 match batch1.'
+      timing_scope: 'Fifteen full schedules: instrument0 repeated three times, then identities1
+        through12 once each. Complete 3076-method schedule: precondition63x16 rows,1000valid+8discarded
+        padding; other learned methods unchanged. Includes stage loading/copy/tableCRC/teardown,
+        CPU embeddings, state/context/output copies, top-p sampling, finite checks, statistics
+        and profiling overhead. Six normalization overrides, fast MVE quantization, native dequantization;
+        SRAM-staged recurrent delegates and cached CPU constants, direct-OSPI harmonic. Startup
+        CRC and held calls excluded from forward time; their first-use/warm timings are separate.
+        No DSP, PCM, SAI, LCD or playback included.'
+      measurement_source: CMSIS b-52/d-53 same-ELF restart; benchmark_batch16_first.json, benchmark_batch16_held_timings.json,
+        benchmark_batch16_sweep.json, benchmark_batch16_sweep_checks.json and benchmark_batch16_summary.json.
+        All asset/segment CRCs pass; no constant bypass, no normalization fallback,717target
+        edgecases pass. All complete schedules finite and faster than4000ms. Test_result remains
+        FAIL for unchanged provisional harmonic gate. One initial b52/d53 first-held Error35
+        launch was excluded and recorded separately; its origin remains unresolved. No final
+        audio/voice-cap claim.

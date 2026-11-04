@@ -34,6 +34,11 @@ compiled into one PTE. A method with `delegate: false` may run only on CPU;
 every other method must produce an Ethos delegate. Flash provenance covers
 every named graph and tensor cache, including CPU methods.
 
+Optional boolean `extract_delegate_segments` defaults to `false`. Setting it to
+`true` places backend payloads in separate segments within the same PTE file,
+so a project DataLoader can handle them individually. It does not implement
+staging or change buffer/cache policy; regenerate the AI layer when changing it.
+
 ```yaml
 methods:
   backbone:

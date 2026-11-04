@@ -1,0 +1,120 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+project:
+  device: :M55_HP
+  packs:
+  - pack: ARM::CMSIS-RTX@^5.9.0
+  add-path:
+  - .
+  - ../../common
+  - ../../common/stream
+  - generated
+  - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
+  - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
+  define:
+  - MIDI_DDSP_CMSIS_DSP
+  - MIDI_DDSP_MVE_OSCILLATOR
+  - ETHOSU_CACHE_PROFILING
+  - NPU_QCONFIG: 2
+  - NPU_REGIONCFG_0: 3
+  - NPU_REGIONCFG_1: 0
+  - NPU_MEM_ATTR_2: 36
+  - NPU_MEM_ATTR_3: 36
+  - NPU_MEM_ATTR_1: 32
+  - APP_MODEL_OSPI
+  - APP_METHOD_POOL_SIZE: 393216
+  - APP_TEMP_POOL_SIZE: 1310720
+  - OS_THREAD_NUM: 8
+  - OS_DYNAMIC_MEM_SIZE: 65536
+  - APP_POOL_SECTION: \".bss.ai_pool\"
+  components:
+  - component: BSP:OSPI FLASH XIP:core
+  - component: CMSIS:RTOS2:Keil RTX5&Source
+  - component: CMSIS:OS Tick:SysTick
+  - component: CMSIS:STREAM&Source
+  - component: CMSIS Driver:SAI
+  - component: BSP:External peripherals:WM8904 CODEC
+  - component: CMSIS:DSP&Source
+    for-context:
+    - .Debug
+    - .Release
+    optimize: speed
+    misc:
+    - C-CPP:
+      - -O3
+      - -ffast-math
+  connections:
+  - connect: MIDI-DDSP synthesis application
+    provides:
+    - CMSIS-RTOS2
+  linker:
+  - script: linker_ac6.sct.src
+    for-compiler: AC6
+  - script: linker_clang.ld.src
+    for-compiler: CLANG
+  - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
+  misc:
+  - for-compiler: AC6
+    C:
+    - -ffunction-sections
+    - -fdata-sections
+    CPP:
+    - -ffunction-sections
+    - -fdata-sections
+    Link:
+    - --remove
+  - CPP:
+    - -std=gnu++17
+    - -Wno-deprecated-declarations
+    - -fno-color-diagnostics
+  groups:
+  - group: OSPI startup and programming preparation
+    files:
+    - file: ospi_startup.c
+    - file: ../../board/DevKit-E8/model_storage.c
+    - file: ../../board/DevKit-E8/e8_issi_flash.c
+  - group: Embedded ExecuTorch module
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: ../../common/arm_embedded_module.cpp
+    - file: ../../common/arm_embedded_module.hpp
+  - group: MIDI-DDSP benchmark
+    for-context:
+    - .Debug
+    - .Release
+    files:
+    - file: benchmark_main.cpp
+    - file: generated/scheduler_app.cpp
+    - file: generated/app_params.c
+    - file: nodes_impl/DDSPReverb.cpp
+    - file: player/midi_file.cpp
+    - file: player/score_windows.cpp
+    - file: audio_output.cpp
+    - file: ../../board/DevKit-E8/audio_output.cpp
+    - file: nodes_impl/c/ddsp_synth.cpp
+    - file: nodes_impl/c/ddsp_reverb256.cpp
+    - file: nodes_impl/helium/oscillator_mve.cpp
+      misc:
+      - CPP:
+        - -fno-fast-math
+        - -ffp-contract=off
+    - file: kernels/normalization.cpp
+    - file: kernels/quantization.cpp
+    - file: midi_stage_runtime.cpp
+    - file: ../../common/nodes_impl/c/embedded_runtime.cpp
+  layers:
+  - layer: $Board-Layer$
+    type: Board
+  - layer: ai_layer/ai_layer.clayer.yml
+    type: AI
+    for-context:
+    - .Debug
+    - .Release
+  output:
+    type:
+    - elf
+    - bin
+    - hex
+    - map

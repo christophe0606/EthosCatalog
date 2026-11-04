@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "method": "context_backward",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "context_forward",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "expression_backward",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "expression_forward",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "expression_step",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "harmonic",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "pitch_step",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    },
+    {
+      "method": "precondition",
+      "present_in_both": true,
+      "compiled_delegates_identical": true,
+      "cpu_constants_identical": true,
+      "normalized_plan_identical": true
+    }
+  ],
+  "before_sha256": "d563c9e61872eee06f42153e5cd3e8530c5857e5543fea524cff7b99e3821e31",
+  "after_sha256": "92be03a2be15307aaabc93d1a61c5ee86d52db49903c9b1d20a1a64e919aa1e9",
+  "scope": "Exact compiled delegate bytes, CPU constant bytes and execution-plan equality after resolving storage indices. Does not replace staged board correctness/timing."
+}

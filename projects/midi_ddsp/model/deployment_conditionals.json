@@ -1,0 +1,1300 @@
+{
+  "preprocessing": "Corrected upstream synthesis clip and rest relative position; raw expression feedback retained",
+  "conditions": "13 synthetic1000frame segments, same held float states/context/previous categorical sample;128 well-spaced pitch frames each;16 inputs other methods (all4 expression notes),full harmonic block",
+  "purpose": "Measures local conditional quantization error separately from independent accumulated sampled trajectories; not a perceptual or waveform acceptance test",
+  "synthetic_local_benchmark_gate": {
+    "mean_original_top_p_tv_maximum": 0.01,
+    "mean_absolute_expected_pitch_shift_cents_maximum": 0.1,
+    "local_harmonic_rmse_over_reference_rms_maximum": 0.01
+  },
+  "passed_local_benchmark_gate": true,
+  "cases": [
+    {
+      "instrument_id": 0,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0011588186025619507,
+          "mae": 0.00021558403386734426,
+          "rmse": 0.00028147007105872035,
+          "reference_rms": 0.10091879218816757
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.001733154058456421,
+          "mae": 0.00024202614440582693,
+          "rmse": 0.0003299136587884277,
+          "reference_rms": 0.1426151841878891
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010377585887908936,
+          "mae": 0.0003905894991476089,
+          "rmse": 0.0007601918186992407,
+          "reference_rms": 0.2665141820907593,
+          "expression_controls": {
+            "max_absolute_error": 0.010377585887908936,
+            "mae": 0.0032222799491137266,
+            "rmse": 0.004140724893659353,
+            "reference_rms": 0.4187312722206116
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.015816092491149902,
+          "mae": 0.0019740392453968525,
+          "rmse": 0.0026236369740217924,
+          "reference_rms": 0.3880227208137512
+        },
+        "context_forward": {
+          "max_absolute_error": 0.011258035898208618,
+          "mae": 0.00034025550121441483,
+          "rmse": 0.0008127103792503476,
+          "reference_rms": 0.4239138662815094
+        },
+        "context_backward": {
+          "max_absolute_error": 0.012439846992492676,
+          "mae": 0.00031562449294142425,
+          "rmse": 0.0007321996963582933,
+          "reference_rms": 0.481847882270813
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.1369268298149109,
+          "mae": 0.007938466966152191,
+          "rmse": 0.013493619859218597,
+          "reference_rms": 3.382594108581543
+        },
+        "harmonic": {
+          "max_absolute_error": 0.11908960342407227,
+          "mae": 0.00842636451125145,
+          "rmse": 0.011113287881016731,
+          "reference_rms": 2.1676926612854004,
+          "amplitude": {
+            "max_absolute_error": 0.032928466796875,
+            "mae": 0.012323863804340363,
+            "rmse": 0.013445930555462837,
+            "reference_rms": 3.3288962841033936
+          },
+          "harmonics": {
+            "max_absolute_error": 0.10256671905517578,
+            "mae": 0.009615669958293438,
+            "rmse": 0.012375268153846264,
+            "reference_rms": 2.9885780811309814
+          },
+          "noise": {
+            "max_absolute_error": 0.11908960342407227,
+            "mae": 0.0072685834020376205,
+            "rmse": 0.009760217741131783,
+            "reference_rms": 0.8328158259391785
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.1369268298149109,
+          "mae": 0.016926005482673645,
+          "rmse": 0.021494967862963676,
+          "reference_rms": 6.282049179077148
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.07849384099245071,
+          "mae": 0.004410155117511749,
+          "rmse": 0.008495481684803963,
+          "reference_rms": 0.6641088128089905
+        },
+        "mean_untruncated_kl_float_to_ptq": 0.00011256089055677876,
+        "mean_untruncated_total_variation": 0.00480401236563921,
+        "mean_original_top_p_total_variation": 0.00548664340749383,
+        "mean_absolute_expected_pitch_shift_cents": 0.02517694979906082,
+        "maximum_absolute_expected_pitch_shift_cents": 0.9993657469749451
+      }
+    },
+    {
+      "instrument_id": 1,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0012322589755058289,
+          "mae": 0.0002082319842884317,
+          "rmse": 0.0002708679821807891,
+          "reference_rms": 0.10271325707435608
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.001502305269241333,
+          "mae": 0.0002409846056252718,
+          "rmse": 0.0003183584485668689,
+          "reference_rms": 0.14066213369369507
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010199248790740967,
+          "mae": 0.0003877950366586447,
+          "rmse": 0.0007507800473831594,
+          "reference_rms": 0.2604595124721527,
+          "expression_controls": {
+            "max_absolute_error": 0.010199248790740967,
+            "mae": 0.003179623745381832,
+            "rmse": 0.004081739112734795,
+            "reference_rms": 0.4248829483985901
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.01649951934814453,
+          "mae": 0.0019587334245443344,
+          "rmse": 0.0026065134443342686,
+          "reference_rms": 0.3859044015407562
+        },
+        "context_forward": {
+          "max_absolute_error": 0.01228291541337967,
+          "mae": 0.0003153948637191206,
+          "rmse": 0.0007171592442318797,
+          "reference_rms": 0.4289902150630951
+        },
+        "context_backward": {
+          "max_absolute_error": 0.007398696616292,
+          "mae": 0.00031829671934247017,
+          "rmse": 0.0006945731001906097,
+          "reference_rms": 0.48181959986686707
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12127424031496048,
+          "mae": 0.007725609932094812,
+          "rmse": 0.013121558353304863,
+          "reference_rms": 3.2998526096343994
+        },
+        "harmonic": {
+          "max_absolute_error": 0.1408153623342514,
+          "mae": 0.011906631290912628,
+          "rmse": 0.015598081983625889,
+          "reference_rms": 2.203214406967163,
+          "amplitude": {
+            "max_absolute_error": 0.03331756591796875,
+            "mae": 0.012990779243409634,
+            "rmse": 0.01391536183655262,
+            "reference_rms": 3.300710678100586
+          },
+          "harmonics": {
+            "max_absolute_error": 0.12920045852661133,
+            "mae": 0.013476784341037273,
+            "rmse": 0.0172473955899477,
+            "reference_rms": 3.0340912342071533
+          },
+          "noise": {
+            "max_absolute_error": 0.1408153623342514,
+            "mae": 0.010440578684210777,
+            "rmse": 0.013930498622357845,
+            "reference_rms": 0.8627874255180359
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12127424031496048,
+          "mae": 0.01654704660177231,
+          "rmse": 0.020901435986161232,
+          "reference_rms": 6.125398635864258
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.09722179174423218,
+          "mae": 0.004262507427483797,
+          "rmse": 0.008262078277766705,
+          "reference_rms": 0.6588550209999084
+        },
+        "mean_untruncated_kl_float_to_ptq": 9.334038622910157e-05,
+        "mean_untruncated_total_variation": 0.004470562096685171,
+        "mean_original_top_p_total_variation": 0.004560178145766258,
+        "mean_absolute_expected_pitch_shift_cents": 0.020345959812402725,
+        "maximum_absolute_expected_pitch_shift_cents": 1.0994298458099365
+      }
+    },
+    {
+      "instrument_id": 2,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0012138709425926208,
+          "mae": 0.00021777463553007692,
+          "rmse": 0.00028162149828858674,
+          "reference_rms": 0.10135054588317871
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0013107359409332275,
+          "mae": 0.00023162896104622632,
+          "rmse": 0.00030977322603575885,
+          "reference_rms": 0.13814295828342438
+        },
+        "expression_step": {
+          "max_absolute_error": 0.009623706340789795,
+          "mae": 0.0003859403950627893,
+          "rmse": 0.0007416183361783624,
+          "reference_rms": 0.25705525279045105,
+          "expression_controls": {
+            "max_absolute_error": 0.009623706340789795,
+            "mae": 0.0032030411530286074,
+            "rmse": 0.004016905557364225,
+            "reference_rms": 0.42948421835899353
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.018187150359153748,
+          "mae": 0.0019662315025925636,
+          "rmse": 0.002638820093125105,
+          "reference_rms": 0.384856253862381
+        },
+        "context_forward": {
+          "max_absolute_error": 0.013275910168886185,
+          "mae": 0.00030580474413000047,
+          "rmse": 0.0007454226724803448,
+          "reference_rms": 0.4214417636394501
+        },
+        "context_backward": {
+          "max_absolute_error": 0.00770626962184906,
+          "mae": 0.00030636557494290173,
+          "rmse": 0.0006921424646861851,
+          "reference_rms": 0.46555981040000916
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.09902721643447876,
+          "mae": 0.007281107362359762,
+          "rmse": 0.01236313208937645,
+          "reference_rms": 3.473165273666382
+        },
+        "harmonic": {
+          "max_absolute_error": 0.07918762415647507,
+          "mae": 0.010077662765979767,
+          "rmse": 0.013114403933286667,
+          "reference_rms": 1.9982470273971558,
+          "amplitude": {
+            "max_absolute_error": 0.030698776245117188,
+            "mae": 0.010614899918437004,
+            "rmse": 0.012024441733956337,
+            "reference_rms": 3.1793832778930664
+          },
+          "harmonics": {
+            "max_absolute_error": 0.06711292266845703,
+            "mae": 0.011546596884727478,
+            "rmse": 0.014738543890416622,
+            "reference_rms": 2.7261524200439453
+          },
+          "noise": {
+            "max_absolute_error": 0.07918762415647507,
+            "mae": 0.008713457733392715,
+            "rmse": 0.011430304497480392,
+            "reference_rms": 0.8511894345283508
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.09902721643447876,
+          "mae": 0.015556140802800655,
+          "rmse": 0.019672272726893425,
+          "reference_rms": 6.456024646759033
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.08600834012031555,
+          "mae": 0.00403250940144062,
+          "rmse": 0.0078054070472717285,
+          "reference_rms": 0.660110354423523
+        },
+        "mean_untruncated_kl_float_to_ptq": 8.998136036098003e-05,
+        "mean_untruncated_total_variation": 0.004410684108734131,
+        "mean_original_top_p_total_variation": 0.0046658869832754135,
+        "mean_absolute_expected_pitch_shift_cents": 0.023699335753917694,
+        "maximum_absolute_expected_pitch_shift_cents": 1.1819312572479248
+      }
+    },
+    {
+      "instrument_id": 3,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0011546574532985687,
+          "mae": 0.00021633664437104017,
+          "rmse": 0.00028284528525546193,
+          "reference_rms": 0.10388017445802689
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.001527547836303711,
+          "mae": 0.00023563193099107593,
+          "rmse": 0.00032137864036485553,
+          "reference_rms": 0.14467167854309082
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010057032108306885,
+          "mae": 0.00039006193401291966,
+          "rmse": 0.0007639944087713957,
+          "reference_rms": 0.2605973184108734,
+          "expression_controls": {
+            "max_absolute_error": 0.010057032108306885,
+            "mae": 0.0032699706498533487,
+            "rmse": 0.004190072882920504,
+            "reference_rms": 0.40689200162887573
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.0208728164434433,
+          "mae": 0.0019656613003462553,
+          "rmse": 0.0026793270371854305,
+          "reference_rms": 0.37837639451026917
+        },
+        "context_forward": {
+          "max_absolute_error": 0.012718785554170609,
+          "mae": 0.0003146491071674973,
+          "rmse": 0.0007640249677933753,
+          "reference_rms": 0.4077192544937134
+        },
+        "context_backward": {
+          "max_absolute_error": 0.008276406675577164,
+          "mae": 0.00029160367557778955,
+          "rmse": 0.000680625787936151,
+          "reference_rms": 0.4657667875289917
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12393999099731445,
+          "mae": 0.007457131985574961,
+          "rmse": 0.012664507143199444,
+          "reference_rms": 3.239642858505249
+        },
+        "harmonic": {
+          "max_absolute_error": 0.1023099422454834,
+          "mae": 0.012907360680401325,
+          "rmse": 0.016762128099799156,
+          "reference_rms": 2.037583351135254,
+          "amplitude": {
+            "max_absolute_error": 0.048720359802246094,
+            "mae": 0.014854606240987778,
+            "rmse": 0.016585208475589752,
+            "reference_rms": 3.3089334964752197
+          },
+          "harmonics": {
+            "max_absolute_error": 0.1023099422454834,
+            "mae": 0.014556082896888256,
+            "rmse": 0.018586965277791023,
+            "reference_rms": 2.8106741905212402
+          },
+          "noise": {
+            "max_absolute_error": 0.09872031211853027,
+            "mae": 0.01135550532490015,
+            "rmse": 0.014883393421769142,
+            "reference_rms": 0.7663859128952026
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12393999099731445,
+          "mae": 0.016025014221668243,
+          "rmse": 0.020330091938376427,
+          "reference_rms": 6.012829303741455
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.10718362033367157,
+          "mae": 0.004093568306416273,
+          "rmse": 0.007816503755748272,
+          "reference_rms": 0.6497616171836853
+        },
+        "mean_untruncated_kl_float_to_ptq": 7.851993723306805e-05,
+        "mean_untruncated_total_variation": 0.003954004030674696,
+        "mean_original_top_p_total_variation": 0.003938309848308563,
+        "mean_absolute_expected_pitch_shift_cents": 0.027840878814458847,
+        "maximum_absolute_expected_pitch_shift_cents": 2.1110754013061523
+      }
+    },
+    {
+      "instrument_id": 4,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.001185865607112646,
+          "mae": 0.00021384379942901433,
+          "rmse": 0.0002773448941297829,
+          "reference_rms": 0.10232125967741013
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.001607269048690796,
+          "mae": 0.0002428537845844403,
+          "rmse": 0.00033001822885125875,
+          "reference_rms": 0.14341816306114197
+        },
+        "expression_step": {
+          "max_absolute_error": 0.01003885269165039,
+          "mae": 0.0003888127102982253,
+          "rmse": 0.0007457115571014583,
+          "reference_rms": 0.2645094692707062,
+          "expression_controls": {
+            "max_absolute_error": 0.01003885269165039,
+            "mae": 0.0031413601245731115,
+            "rmse": 0.004012004937976599,
+            "reference_rms": 0.40825384855270386
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.020474523305892944,
+          "mae": 0.0019136060727760196,
+          "rmse": 0.002580084837973118,
+          "reference_rms": 0.36752259731292725
+        },
+        "context_forward": {
+          "max_absolute_error": 0.010815083980560303,
+          "mae": 0.00030679808696731925,
+          "rmse": 0.0007327022613026202,
+          "reference_rms": 0.41740867495536804
+        },
+        "context_backward": {
+          "max_absolute_error": 0.009031236171722412,
+          "mae": 0.0003122937341686338,
+          "rmse": 0.0007606747094541788,
+          "reference_rms": 0.4855654835700989
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12389028072357178,
+          "mae": 0.007549014873802662,
+          "rmse": 0.012921464629471302,
+          "reference_rms": 3.283998727798462
+        },
+        "harmonic": {
+          "max_absolute_error": 0.31301233172416687,
+          "mae": 0.012969146482646465,
+          "rmse": 0.017284780740737915,
+          "reference_rms": 2.3060226440429688,
+          "amplitude": {
+            "max_absolute_error": 0.04086160659790039,
+            "mae": 0.016788020730018616,
+            "rmse": 0.017985418438911438,
+            "reference_rms": 3.4320178031921387
+          },
+          "harmonics": {
+            "max_absolute_error": 0.1780714988708496,
+            "mae": 0.01475473865866661,
+            "rmse": 0.019305268302559853,
+            "reference_rms": 3.183626651763916
+          },
+          "noise": {
+            "max_absolute_error": 0.31301233172416687,
+            "mae": 0.011262153275310993,
+            "rmse": 0.015170386992394924,
+            "reference_rms": 0.8781790137290955
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12389028072357178,
+          "mae": 0.016247542575001717,
+          "rmse": 0.0206553153693676,
+          "reference_rms": 6.092875957489014
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.08629047870635986,
+          "mae": 0.004134164657443762,
+          "rmse": 0.008063522167503834,
+          "reference_rms": 0.6668847799301147
+        },
+        "mean_untruncated_kl_float_to_ptq": 0.00011437120701884851,
+        "mean_untruncated_total_variation": 0.0049024950712919235,
+        "mean_original_top_p_total_variation": 0.00543857691809535,
+        "mean_absolute_expected_pitch_shift_cents": 0.023809930309653282,
+        "maximum_absolute_expected_pitch_shift_cents": 1.6584653854370117
+      }
+    },
+    {
+      "instrument_id": 5,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.001393243670463562,
+          "mae": 0.00023312846315093338,
+          "rmse": 0.0003024314355570823,
+          "reference_rms": 0.11146403104066849
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0015005767345428467,
+          "mae": 0.00026372147840447724,
+          "rmse": 0.000351343973306939,
+          "reference_rms": 0.1486789733171463
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010158658027648926,
+          "mae": 0.00040224651456810534,
+          "rmse": 0.0008097596000880003,
+          "reference_rms": 0.27365821599960327,
+          "expression_controls": {
+            "max_absolute_error": 0.010158658027648926,
+            "mae": 0.0034983691293746233,
+            "rmse": 0.004465579055249691,
+            "reference_rms": 0.41292428970336914
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.023290187120437622,
+          "mae": 0.0019748476333916187,
+          "rmse": 0.0027070625219494104,
+          "reference_rms": 0.36531519889831543
+        },
+        "context_forward": {
+          "max_absolute_error": 0.011312623508274555,
+          "mae": 0.00033136436832137406,
+          "rmse": 0.0007993138860911131,
+          "reference_rms": 0.4025898873806
+        },
+        "context_backward": {
+          "max_absolute_error": 0.010050922632217407,
+          "mae": 0.00031639839289709926,
+          "rmse": 0.0007371738902293146,
+          "reference_rms": 0.46662241220474243
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.15180635452270508,
+          "mae": 0.007981935515999794,
+          "rmse": 0.013772545382380486,
+          "reference_rms": 3.341970443725586
+        },
+        "harmonic": {
+          "max_absolute_error": 0.07291397452354431,
+          "mae": 0.009077421389520168,
+          "rmse": 0.011734968982636929,
+          "reference_rms": 2.273455858230591,
+          "amplitude": {
+            "max_absolute_error": 0.047899723052978516,
+            "mae": 0.015790553763508797,
+            "rmse": 0.01656402088701725,
+            "reference_rms": 3.3572375774383545
+          },
+          "harmonics": {
+            "max_absolute_error": 0.07181310653686523,
+            "mae": 0.010286357253789902,
+            "rmse": 0.013070443645119667,
+            "reference_rms": 3.1511402130126953
+          },
+          "noise": {
+            "max_absolute_error": 0.07291397452354431,
+            "mae": 0.00785820186138153,
+            "rmse": 0.010248332284390926,
+            "reference_rms": 0.8245436549186707
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.15180635452270508,
+          "mae": 0.017740052193403244,
+          "rmse": 0.022651545703411102,
+          "reference_rms": 6.210640907287598
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.07104909420013428,
+          "mae": 0.004151113331317902,
+          "rmse": 0.007919564843177795,
+          "reference_rms": 0.6409634351730347
+        },
+        "mean_untruncated_kl_float_to_ptq": 7.130693848012015e-05,
+        "mean_untruncated_total_variation": 0.003750924486666918,
+        "mean_original_top_p_total_variation": 0.004028509370982647,
+        "mean_absolute_expected_pitch_shift_cents": 0.021459057927131653,
+        "maximum_absolute_expected_pitch_shift_cents": 1.3537169694900513
+      }
+    },
+    {
+      "instrument_id": 6,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.001208159257657826,
+          "mae": 0.00021826416195835918,
+          "rmse": 0.00028020370518788695,
+          "reference_rms": 0.10244797170162201
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0015697777271270752,
+          "mae": 0.0002365802793065086,
+          "rmse": 0.00032090520835481584,
+          "reference_rms": 0.13947460055351257
+        },
+        "expression_step": {
+          "max_absolute_error": 0.009966731071472168,
+          "mae": 0.00038274770486168563,
+          "rmse": 0.0007569458684884012,
+          "reference_rms": 0.2535078227519989,
+          "expression_controls": {
+            "max_absolute_error": 0.009966731071472168,
+            "mae": 0.0032896327320486307,
+            "rmse": 0.0041807894594967365,
+            "reference_rms": 0.4093780517578125
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.02272665500640869,
+          "mae": 0.0019602158572524786,
+          "rmse": 0.0026931660249829292,
+          "reference_rms": 0.3629910349845886
+        },
+        "context_forward": {
+          "max_absolute_error": 0.010696947574615479,
+          "mae": 0.00029150707996450365,
+          "rmse": 0.0006818932015448809,
+          "reference_rms": 0.41896528005599976
+        },
+        "context_backward": {
+          "max_absolute_error": 0.012636363506317139,
+          "mae": 0.00033961969893425703,
+          "rmse": 0.0007755958940833807,
+          "reference_rms": 0.47785013914108276
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.15447288751602173,
+          "mae": 0.007618131581693888,
+          "rmse": 0.013344977982342243,
+          "reference_rms": 2.668449640274048
+        },
+        "harmonic": {
+          "max_absolute_error": 0.06834280490875244,
+          "mae": 0.009200025349855423,
+          "rmse": 0.01206915732473135,
+          "reference_rms": 2.1569764614105225,
+          "amplitude": {
+            "max_absolute_error": 0.033097267150878906,
+            "mae": 0.010418813675642014,
+            "rmse": 0.011807632632553577,
+            "reference_rms": 3.259988784790039
+          },
+          "harmonics": {
+            "max_absolute_error": 0.05931448936462402,
+            "mae": 0.010327712632715702,
+            "rmse": 0.013082779012620449,
+            "reference_rms": 2.9523844718933105
+          },
+          "noise": {
+            "max_absolute_error": 0.06834280490875244,
+            "mae": 0.008140332996845245,
+            "rmse": 0.011055641807615757,
+            "reference_rms": 0.8995635509490967
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.15447288751602173,
+          "mae": 0.017302295193076134,
+          "rmse": 0.02192145213484764,
+          "reference_rms": 4.92205286026001
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.09470926970243454,
+          "mae": 0.0038163408171385527,
+          "rmse": 0.007703807204961777,
+          "reference_rms": 0.6365456581115723
+        },
+        "mean_untruncated_kl_float_to_ptq": 3.790448681684211e-05,
+        "mean_untruncated_total_variation": 0.0023290293756872416,
+        "mean_original_top_p_total_variation": 0.00273531349375844,
+        "mean_absolute_expected_pitch_shift_cents": 0.014812173321843147,
+        "maximum_absolute_expected_pitch_shift_cents": 0.775263786315918
+      }
+    },
+    {
+      "instrument_id": 7,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0011906186118721962,
+          "mae": 0.0002200087037635967,
+          "rmse": 0.0002839536464307457,
+          "reference_rms": 0.09839063137769699
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0014577507972717285,
+          "mae": 0.00023716184659861028,
+          "rmse": 0.000318549748044461,
+          "reference_rms": 0.1449252963066101
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010099947452545166,
+          "mae": 0.00037947602686472237,
+          "rmse": 0.0007499097846448421,
+          "reference_rms": 0.2581607401371002,
+          "expression_controls": {
+            "max_absolute_error": 0.010099947452545166,
+            "mae": 0.003172817872837186,
+            "rmse": 0.004112762864679098,
+            "reference_rms": 0.3858402967453003
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.02147790789604187,
+          "mae": 0.0019019405590370297,
+          "rmse": 0.0026160222478210926,
+          "reference_rms": 0.3530663549900055
+        },
+        "context_forward": {
+          "max_absolute_error": 0.009957462549209595,
+          "mae": 0.000260924018220976,
+          "rmse": 0.0006158646428957582,
+          "reference_rms": 0.39505070447921753
+        },
+        "context_backward": {
+          "max_absolute_error": 0.007748007774353027,
+          "mae": 0.0003348774916958064,
+          "rmse": 0.0007609102176502347,
+          "reference_rms": 0.46445852518081665
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.14735090732574463,
+          "mae": 0.007488335017114878,
+          "rmse": 0.01300407201051712,
+          "reference_rms": 3.0699353218078613
+        },
+        "harmonic": {
+          "max_absolute_error": 0.0928565263748169,
+          "mae": 0.011733493767678738,
+          "rmse": 0.01510483119636774,
+          "reference_rms": 2.314366340637207,
+          "amplitude": {
+            "max_absolute_error": 0.04734468460083008,
+            "mae": 0.013903971761465073,
+            "rmse": 0.01661212556064129,
+            "reference_rms": 3.5066282749176025
+          },
+          "harmonics": {
+            "max_absolute_error": 0.08924484252929688,
+            "mae": 0.01323594432324171,
+            "rmse": 0.016795849427580833,
+            "reference_rms": 3.211290121078491
+          },
+          "noise": {
+            "max_absolute_error": 0.0928565263748169,
+            "mae": 0.010313224047422409,
+            "rmse": 0.013327617198228836,
+            "reference_rms": 0.8213801980018616
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.14735090732574463,
+          "mae": 0.016605162993073463,
+          "rmse": 0.02123916894197464,
+          "reference_rms": 5.689028263092041
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.08328038454055786,
+          "mae": 0.003909267485141754,
+          "rmse": 0.007642008829861879,
+          "reference_rms": 0.6469521522521973
+        },
+        "mean_untruncated_kl_float_to_ptq": 6.476789712905884e-05,
+        "mean_untruncated_total_variation": 0.0034709961619228125,
+        "mean_original_top_p_total_variation": 0.00391292292624712,
+        "mean_absolute_expected_pitch_shift_cents": 0.011879514902830124,
+        "maximum_absolute_expected_pitch_shift_cents": 0.6339389085769653
+      }
+    },
+    {
+      "instrument_id": 8,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.001126214861869812,
+          "mae": 0.00022230322065297514,
+          "rmse": 0.00028410961385816336,
+          "reference_rms": 0.10044337064027786
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0013408064842224121,
+          "mae": 0.00023959384998306632,
+          "rmse": 0.0003192844451405108,
+          "reference_rms": 0.14516817033290863
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010145604610443115,
+          "mae": 0.0003830116766039282,
+          "rmse": 0.0007485628593713045,
+          "reference_rms": 0.2591087520122528,
+          "expression_controls": {
+            "max_absolute_error": 0.010145604610443115,
+            "mae": 0.0031262130942195654,
+            "rmse": 0.0040953136049211025,
+            "reference_rms": 0.39053964614868164
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.02264092117547989,
+          "mae": 0.0019261782290413976,
+          "rmse": 0.0026793689467012882,
+          "reference_rms": 0.35249972343444824
+        },
+        "context_forward": {
+          "max_absolute_error": 0.010435625910758972,
+          "mae": 0.0002866382128559053,
+          "rmse": 0.0006823594449087977,
+          "reference_rms": 0.3779340982437134
+        },
+        "context_backward": {
+          "max_absolute_error": 0.008622482419013977,
+          "mae": 0.0003053867840208113,
+          "rmse": 0.0007062990334816277,
+          "reference_rms": 0.46217769384384155
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12039506435394287,
+          "mae": 0.007330520078539848,
+          "rmse": 0.012634224258363247,
+          "reference_rms": 3.4646711349487305
+        },
+        "harmonic": {
+          "max_absolute_error": 0.0947631299495697,
+          "mae": 0.010382048785686493,
+          "rmse": 0.013505691662430763,
+          "reference_rms": 2.2124977111816406,
+          "amplitude": {
+            "max_absolute_error": 0.04234027862548828,
+            "mae": 0.01467567402869463,
+            "rmse": 0.015966912731528282,
+            "reference_rms": 3.4435527324676514
+          },
+          "harmonics": {
+            "max_absolute_error": 0.08265423774719238,
+            "mae": 0.01199607364833355,
+            "rmse": 0.015241943299770355,
+            "reference_rms": 3.0823023319244385
+          },
+          "noise": {
+            "max_absolute_error": 0.0947631299495697,
+            "mae": 0.008826124481856823,
+            "rmse": 0.011628159321844578,
+            "reference_rms": 0.7326987981796265
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12039506435394287,
+          "mae": 0.016043193638324738,
+          "rmse": 0.020427990704774857,
+          "reference_rms": 6.442055702209473
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.08271060138940811,
+          "mae": 0.003910114523023367,
+          "rmse": 0.007646204438060522,
+          "reference_rms": 0.6514669060707092
+        },
+        "mean_untruncated_kl_float_to_ptq": 7.493654993595555e-05,
+        "mean_untruncated_total_variation": 0.0038488609716296196,
+        "mean_original_top_p_total_variation": 0.004225675016641617,
+        "mean_absolute_expected_pitch_shift_cents": 0.020157888531684875,
+        "maximum_absolute_expected_pitch_shift_cents": 1.294680118560791
+      }
+    },
+    {
+      "instrument_id": 9,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0012098457664251328,
+          "mae": 0.000221777634578757,
+          "rmse": 0.0002889673341996968,
+          "reference_rms": 0.10145346075296402
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0014044642448425293,
+          "mae": 0.00023388526460621506,
+          "rmse": 0.0003135105362161994,
+          "reference_rms": 0.1410876363515854
+        },
+        "expression_step": {
+          "max_absolute_error": 0.00970757007598877,
+          "mae": 0.0003823999431915581,
+          "rmse": 0.0007506362162530422,
+          "reference_rms": 0.25768139958381653,
+          "expression_controls": {
+            "max_absolute_error": 0.00970757007598877,
+            "mae": 0.003168535651639104,
+            "rmse": 0.00410363357514143,
+            "reference_rms": 0.4103250205516815
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.023931384086608887,
+          "mae": 0.0019472085405141115,
+          "rmse": 0.0027394338976591825,
+          "reference_rms": 0.3506160080432892
+        },
+        "context_forward": {
+          "max_absolute_error": 0.010504364967346191,
+          "mae": 0.00030046459869481623,
+          "rmse": 0.000759483955334872,
+          "reference_rms": 0.3764443099498749
+        },
+        "context_backward": {
+          "max_absolute_error": 0.008336782455444336,
+          "mae": 0.00030130817322060466,
+          "rmse": 0.0006975274882279336,
+          "reference_rms": 0.4416530132293701
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.13307428359985352,
+          "mae": 0.00759666133671999,
+          "rmse": 0.013252628967165947,
+          "reference_rms": 3.1929819583892822
+        },
+        "harmonic": {
+          "max_absolute_error": 0.08815765380859375,
+          "mae": 0.008798213675618172,
+          "rmse": 0.011323276907205582,
+          "reference_rms": 2.3178608417510986,
+          "amplitude": {
+            "max_absolute_error": 0.039675235748291016,
+            "mae": 0.015216398984193802,
+            "rmse": 0.0163778904825449,
+            "reference_rms": 3.4815633296966553
+          },
+          "harmonics": {
+            "max_absolute_error": 0.08815765380859375,
+            "mae": 0.010339041240513325,
+            "rmse": 0.01301443949341774,
+            "reference_rms": 3.21986985206604
+          },
+          "noise": {
+            "max_absolute_error": 0.0668121874332428,
+            "mae": 0.00727717112749815,
+            "rmse": 0.009384536184370518,
+            "reference_rms": 0.8110529184341431
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.13307428359985352,
+          "mae": 0.017050234600901604,
+          "rmse": 0.0219415295869112,
+          "reference_rms": 5.9234490394592285
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.06970039010047913,
+          "mae": 0.0038853962905704975,
+          "rmse": 0.00745535921305418,
+          "reference_rms": 0.6504101753234863
+        },
+        "mean_untruncated_kl_float_to_ptq": 8.01262358436361e-05,
+        "mean_untruncated_total_variation": 0.004194282926619053,
+        "mean_original_top_p_total_variation": 0.004349770024418831,
+        "mean_absolute_expected_pitch_shift_cents": 0.013950781896710396,
+        "maximum_absolute_expected_pitch_shift_cents": 0.8382813334465027
+      }
+    },
+    {
+      "instrument_id": 10,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0010381042957305908,
+          "mae": 0.00023103173589333892,
+          "rmse": 0.0002943714498542249,
+          "reference_rms": 0.10480885952711105
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0016490072011947632,
+          "mae": 0.00024911988293752074,
+          "rmse": 0.000333899020915851,
+          "reference_rms": 0.14871077239513397
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010531187057495117,
+          "mae": 0.0003909541410394013,
+          "rmse": 0.0007816087454557419,
+          "reference_rms": 0.2593163549900055,
+          "expression_controls": {
+            "max_absolute_error": 0.010531187057495117,
+            "mae": 0.0033146776258945465,
+            "rmse": 0.00432065362110734,
+            "reference_rms": 0.3895418345928192
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.02551230788230896,
+          "mae": 0.0019212905317544937,
+          "rmse": 0.002709963358938694,
+          "reference_rms": 0.3448305130004883
+        },
+        "context_forward": {
+          "max_absolute_error": 0.009519100189208984,
+          "mae": 0.00027906347531825304,
+          "rmse": 0.0006635358440689743,
+          "reference_rms": 0.38787826895713806
+        },
+        "context_backward": {
+          "max_absolute_error": 0.007474631071090698,
+          "mae": 0.00030948937637731433,
+          "rmse": 0.0007083655218593776,
+          "reference_rms": 0.44883808493614197
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12211060523986816,
+          "mae": 0.007660940755158663,
+          "rmse": 0.013323300518095493,
+          "reference_rms": 3.3192343711853027
+        },
+        "harmonic": {
+          "max_absolute_error": 0.09065303206443787,
+          "mae": 0.010367889888584614,
+          "rmse": 0.013497005216777325,
+          "reference_rms": 2.491454601287842,
+          "amplitude": {
+            "max_absolute_error": 0.04778432846069336,
+            "mae": 0.01604405976831913,
+            "rmse": 0.01728851906955242,
+            "reference_rms": 3.530921220779419
+          },
+          "harmonics": {
+            "max_absolute_error": 0.08156991004943848,
+            "mae": 0.012094182893633842,
+            "rmse": 0.015324702486395836,
+            "reference_rms": 3.4821531772613525
+          },
+          "noise": {
+            "max_absolute_error": 0.09065303206443787,
+            "mae": 0.008687062188982964,
+            "rmse": 0.01147815864533186,
+            "reference_rms": 0.8051252961158752
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12211060523986816,
+          "mae": 0.01691010221838951,
+          "rmse": 0.02195185050368309,
+          "reference_rms": 6.166215419769287
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.0914226770401001,
+          "mae": 0.004029921256005764,
+          "rmse": 0.00761708477512002,
+          "reference_rms": 0.6448133587837219
+        },
+        "mean_untruncated_kl_float_to_ptq": 8.2939732237719e-05,
+        "mean_untruncated_total_variation": 0.004157535266131163,
+        "mean_original_top_p_total_variation": 0.00476066954433918,
+        "mean_absolute_expected_pitch_shift_cents": 0.02088138833642006,
+        "maximum_absolute_expected_pitch_shift_cents": 1.570544958114624
+      }
+    },
+    {
+      "instrument_id": 11,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0011286521330475807,
+          "mae": 0.00021324573026504368,
+          "rmse": 0.00027808581944555044,
+          "reference_rms": 0.1019814983010292
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0015933141112327576,
+          "mae": 0.00024639145703986287,
+          "rmse": 0.0003344389551784843,
+          "reference_rms": 0.1470518857240677
+        },
+        "expression_step": {
+          "max_absolute_error": 0.009999394416809082,
+          "mae": 0.0003929049416910857,
+          "rmse": 0.0007690226193517447,
+          "reference_rms": 0.26325348019599915,
+          "expression_controls": {
+            "max_absolute_error": 0.009999394416809082,
+            "mae": 0.0032626278698444366,
+            "rmse": 0.004208852536976337,
+            "reference_rms": 0.39417386054992676
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.025278300046920776,
+          "mae": 0.0019191500032320619,
+          "rmse": 0.002709433203563094,
+          "reference_rms": 0.34232431650161743
+        },
+        "context_forward": {
+          "max_absolute_error": 0.010936811566352844,
+          "mae": 0.00027938041603192687,
+          "rmse": 0.0006696370546706021,
+          "reference_rms": 0.3873710632324219
+        },
+        "context_backward": {
+          "max_absolute_error": 0.008250236511230469,
+          "mae": 0.00031129835406318307,
+          "rmse": 0.0007261184509843588,
+          "reference_rms": 0.4654669761657715
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12485551834106445,
+          "mae": 0.007385279517620802,
+          "rmse": 0.012686743400990963,
+          "reference_rms": 3.152841329574585
+        },
+        "harmonic": {
+          "max_absolute_error": 0.08994317054748535,
+          "mae": 0.009393406100571156,
+          "rmse": 0.012085135094821453,
+          "reference_rms": 2.308289051055908,
+          "amplitude": {
+            "max_absolute_error": 0.05639934539794922,
+            "mae": 0.018838364630937576,
+            "rmse": 0.02016773633658886,
+            "reference_rms": 3.382190465927124
+          },
+          "harmonics": {
+            "max_absolute_error": 0.0795450210571289,
+            "mae": 0.010753544978797436,
+            "rmse": 0.01363989245146513,
+            "reference_rms": 3.2139949798583984
+          },
+          "noise": {
+            "max_absolute_error": 0.08994317054748535,
+            "mae": 0.007992586120963097,
+            "rmse": 0.010252821259200573,
+            "reference_rms": 0.7857177257537842
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12485551834106445,
+          "mae": 0.015929387882351875,
+          "rmse": 0.020555980503559113,
+          "reference_rms": 5.849586486816406
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.08034094423055649,
+          "mae": 0.004031048156321049,
+          "rmse": 0.007632628548890352,
+          "reference_rms": 0.6400695443153381
+        },
+        "mean_untruncated_kl_float_to_ptq": 7.296010153368115e-05,
+        "mean_untruncated_total_variation": 0.003793533192947507,
+        "mean_original_top_p_total_variation": 0.004563688300549984,
+        "mean_absolute_expected_pitch_shift_cents": 0.02662453055381775,
+        "maximum_absolute_expected_pitch_shift_cents": 1.4987298250198364
+      }
+    },
+    {
+      "instrument_id": 12,
+      "frames": 1000,
+      "local_method_metrics": {
+        "expression_forward": {
+          "max_absolute_error": 0.0009602755308151245,
+          "mae": 0.0002405415434623137,
+          "rmse": 0.0003032632521353662,
+          "reference_rms": 0.10725787281990051
+        },
+        "expression_backward": {
+          "max_absolute_error": 0.0018371641635894775,
+          "mae": 0.0002601963351480663,
+          "rmse": 0.0003487675276119262,
+          "reference_rms": 0.16563630104064941
+        },
+        "expression_step": {
+          "max_absolute_error": 0.010196208953857422,
+          "mae": 0.00039386929711326957,
+          "rmse": 0.000781845476012677,
+          "reference_rms": 0.26001402735710144,
+          "expression_controls": {
+            "max_absolute_error": 0.010196208953857422,
+            "mae": 0.003274648217484355,
+            "rmse": 0.0043137227185070515,
+            "reference_rms": 0.3381434679031372
+          }
+        },
+        "precondition": {
+          "max_absolute_error": 0.021868973970413208,
+          "mae": 0.00178730976767838,
+          "rmse": 0.002457056427374482,
+          "reference_rms": 0.34073010087013245
+        },
+        "context_forward": {
+          "max_absolute_error": 0.00993335247039795,
+          "mae": 0.0003049670485779643,
+          "rmse": 0.000684539380017668,
+          "reference_rms": 0.38458898663520813
+        },
+        "context_backward": {
+          "max_absolute_error": 0.008710138499736786,
+          "mae": 0.00030372629407793283,
+          "rmse": 0.000673928763717413,
+          "reference_rms": 0.4597684442996979
+        },
+        "pitch_step": {
+          "max_absolute_error": 0.12108922004699707,
+          "mae": 0.007248647045344114,
+          "rmse": 0.012263043783605099,
+          "reference_rms": 3.224471092224121
+        },
+        "harmonic": {
+          "max_absolute_error": 0.14128875732421875,
+          "mae": 0.011737903580069542,
+          "rmse": 0.016302578151226044,
+          "reference_rms": 2.5646703243255615,
+          "amplitude": {
+            "max_absolute_error": 0.046011924743652344,
+            "mae": 0.014864062890410423,
+            "rmse": 0.016288738697767258,
+            "reference_rms": 3.4343254566192627
+          },
+          "harmonics": {
+            "max_absolute_error": 0.13761460781097412,
+            "mae": 0.013448168523609638,
+            "rmse": 0.01791493594646454,
+            "reference_rms": 3.5949840545654297
+          },
+          "noise": {
+            "max_absolute_error": 0.14128875732421875,
+            "mae": 0.010111101903021336,
+            "rmse": 0.014657899737358093,
+            "reference_rms": 0.7994238138198853
+          }
+        }
+      },
+      "pitch_conditionals": {
+        "held_float_states_context_and_previous_samples": true,
+        "frames_sampled": 128,
+        "logits": {
+          "max_absolute_error": 0.12108922004699707,
+          "mae": 0.015450233593583107,
+          "rmse": 0.019758006557822227,
+          "reference_rms": 5.988015174865723
+        },
+        "hidden_states": {
+          "max_absolute_error": 0.06433752179145813,
+          "mae": 0.004028884693980217,
+          "rmse": 0.007494320161640644,
+          "reference_rms": 0.6344490647315979
+        },
+        "mean_untruncated_kl_float_to_ptq": 8.887139847502112e-05,
+        "mean_untruncated_total_variation": 0.0042238254100084305,
+        "mean_original_top_p_total_variation": 0.004517317283898592,
+        "mean_absolute_expected_pitch_shift_cents": 0.027329925447702408,
+        "maximum_absolute_expected_pitch_shift_cents": 2.3739304542541504
+      }
+    }
+  ]
+}

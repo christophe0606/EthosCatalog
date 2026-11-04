@@ -1,0 +1,11 @@
+{
+  "context": "b37/d38 Release -O3 -ffast-math; model execution guarded by raw-loop selftest",
+  "cases": 174,
+  "failures": 1,
+  "first_failure_case": 164,
+  "first_failure_input": "four NaN float32 elements, vector-only fast quantization accepted when fallback required",
+  "mve_feature_bitmap": 3,
+  "pipeline_error": -620,
+  "neural_schedule_executed": false,
+  "other_results": "All independent nearest-even/saturation/dyadic dequantization/unaligned vector/tail/output-bound cases passed. NaN count1 and count5 rejected; vector-only NaN count4 did not. Infinity and out-of-range cases rejected."
+}
