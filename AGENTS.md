@@ -18,6 +18,10 @@ Generate the layer when its model, quantization or Vela/storage settings change.
 Switching projects does not require regeneration. Select the intended target set
 when building or loading firmware for the board.
 
+* For new [benchmark records](documentation/HOWTO.md#benchmark-records), measure
+  each PTE method independently and give it a named entry in `benchmarks.networks`
+  with the project-relative PTE path, exported method name and its own configurations.
+
 * Format of the solution must be respected : folder organization, purpose of each folder. The constraimts are detailed in the agents that need them.
 
 * Nothing covered by GPL license must be included in this project. GPL use is forbidden. Network dual licensed can be used if the other license is not GPL.

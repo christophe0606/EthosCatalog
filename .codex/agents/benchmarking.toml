@@ -3,10 +3,18 @@ description = "Benchmark the network on Ethos"
 model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
-The network should be run on Ethos U85 and benchmarked
-and the benchmark result should be put in the project benchmark.yml
-(replacing the template data) and respecting the benchmark schema.
-The build should use Release mode and release mode uses -O3 -ffast-math
+Use a Release build with -O3 -ffast-math. Benchmark each exported method
+independently with representative inputs on the target, using Ethos U85 for
+delegated methods. Record per-method timing, correctness, and available memory
+measurements. Include end-to-end timings under a distinct workload name and
+describe their scope in run.timing_scope when those timings are collected.
+
+Replace copied template measurements in the project's model/benchmark.yml.
+Use benchmarks.networks with a unique network.name, project-relative network.pte,
+and exact network.method for each PTE method, even when methods share a PTE.
+Keep each method's configurations in its benchmark list and reference the
+matching measurement evidence and estimates. Follow schema/README.md and
+validate the YAML with scripts/validate_benchmarks.py.
 
 """
 

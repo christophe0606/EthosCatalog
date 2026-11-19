@@ -61,9 +61,29 @@ def validator():
 
 def validation_errors(document, check):
     yield from finite_numbers(document)
-    for error in sorted(check.iter_errors(document), key=lambda e: str(list(e.absolute_path))):
+    errors = sorted(check.iter_errors(document), key=lambda e: str(list(e.absolute_path)))
+    for error in errors:
         path = "$" + "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in error.absolute_path)
         yield f"{path}: {error.message}"
+    if not errors:
+        yield from network_identity_errors(document["benchmarks"].get("networks", []))
+
+
+def network_identity_errors(groups):
+    names = set()
+    pte_methods = set()
+    for index, group in enumerate(groups):
+        network = group["network"]
+        path = f"$.benchmarks.networks[{index}].network"
+        name = network["name"]
+        if name in names:
+            yield f"{path}.name: duplicate network name {name!r}"
+        names.add(name)
+        if "pte" in network:
+            pte_method = network["pte"], network["method"]
+            if pte_method in pte_methods:
+                yield f"{path}: duplicate PTE and method {pte_method!r}"
+            pte_methods.add(pte_method)
 
 
 def benchmark_files():

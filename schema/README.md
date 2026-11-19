@@ -155,77 +155,77 @@ uv run scripts/validate_benchmarks.py projects/template_mram/model/benchmark.yml
 The validator also rejects duplicate mapping keys, non-string keys and non-finite
 numbers. Timestamps must be quoted RFC 3339 strings with a timezone.
 
-Each project's `model/benchmark.yml` contains a `benchmarks` mapping with one
-shared `network` and a nonempty `benchmark` list. Every list entry describes one
-configuration with its own `platform`, `measurements`, `run` and optional
-`estimates`. Network properties are required under `benchmarks.network` and are
-not accepted inside individual entries. The old top-level `benchmark` layout is
-no longer accepted.
+Use `benchmarks.networks` for new records in `model/benchmark.yml`, including
+single-network projects. Each item contains `network` metadata and a nonempty
+`benchmark` list. Every benchmark entry records one configuration with its own
+`platform`, `measurements`, `run` and optional `estimates`.
 
-Use `network.output_shape` for a single output tensor. For multiple outputs,
-use `network.output_shapes` with at least two shapes in runtime output order;
-the two fields are mutually exclusive. For example, the face detector has
-`output_shapes: [[1, 6, 6, 18], [1, 12, 12, 18]]`. Keep each tensor's actual
-shape rather than flattening independent heads into a synthetic tensor.
+Give each network a stable `network.name`. For a PTE method, specify both the
+project-relative `network.pte` path and the exact exported `network.method`,
+including `forward` for a default forward method. Store the configurations for
+that method in the same item. The validator checks that names and PTE/method
+pairs are unique within the file. Native and end-to-end workloads can use a
+name alone. The existing `benchmarks.network` and `benchmarks.benchmark` layout
+is still accepted, with identity fields optional. Use one layout per file.
 
-Keep the latest result for each configuration in the same file. Different
-configurations can vary the CPU, OS, clocks, memory placement or compiler
-settings; describe those differences in each entry's `platform` and `run`.
-Keep UART captures and Vela summaries alongside the YAML and reference the
-matching files from each entry. Use distinct evidence filenames when recording
-different configurations. Update a configuration's result in place; Git
-provides the history rather than separate historical benchmark snapshots.
-
-## Platform identity
-
-Every entry in `benchmarks.benchmark` has `platform.os` and `platform.cpu`.
-`os` names either the OS or RTOS; `os_version` is optional. CPU and OS names are
-free text, independent of CMSIS targets, pack names or Vela configuration. For
-example, the templates use:
-
-```yaml
-platform:
-  os: RTX5
-  os_version: 5.9.1
-  cpu: Cortex-M55
-```
-
-`run.target`, `run.context`, `run.packs`, device/core identifiers and NPU details
-remain optional provenance. A future Cortex-A benchmark can omit all of them,
-along with the optional compiler estimates and network-memory details:
+This example records two methods measured independently from the same PTE.
 
 ```yaml
 benchmarks:
-  network:
-    operation: y = 2*x
-    input_shape: [1, 512]
-    output_shape: [1, 512]
-  benchmark:
-    - platform:
-        os: Linux
-        cpu: Cortex-A78
-      measurements:
-        time:
-          ms: 1.25
-      run:
-        recorded_at: '2026-10-15T12:00:00Z'
-        samples: 10
-        test_result: PASS
-    - platform:
-        os: RTX5
-        cpu: Cortex-M55
-      measurements:
-        time:
-          ms: 2.5
-      run:
-        recorded_at: '2026-10-16T12:00:00Z'
-        samples: 20
-        test_result: PASS
+  networks:
+    - network:
+        name: Encoder
+        pte: ai_layer/model.pte
+        method: encode
+        operation: Encode an input frame
+        input_shape: [1, 512]
+        output_shape: [1, 128]
+      benchmark:
+        - platform: {os: RTX5, cpu: Cortex-M55}
+          measurements:
+            time: {ms: 2.5}
+          run:
+            recorded_at: '2026-10-16T12:00:00Z'
+            samples: 20
+            test_result: PASS
+    - network:
+        name: Decoder
+        pte: ai_layer/model.pte
+        method: decode
+        operation: Decode the representation with a conditioning tensor
+        input_shapes: [[1, 128], [1, 32]]
+        output_shape: [1, 512]
+      benchmark:
+        - platform: {os: RTX5, cpu: Cortex-M55}
+          measurements:
+            time: {ms: 3.75}
+          run:
+            recorded_at: '2026-10-16T12:05:00Z'
+            samples: 20
+            test_result: PASS
 ```
 
-This illustrative example shows all mandatory fields for two configurations of
-the same network. Additional measurements use the same schema
-properties on every platform; optional sections are omitted when inapplicable.
+Use `network.input_shape` or `network.output_shape` for a single tensor on that
+side of the method interface. For multiple tensors, use `network.input_shapes`
+or `network.output_shapes` with at least two shapes in runtime order. For example,
+the face detector records `output_shapes: [[1, 6, 6, 18], [1, 12, 12, 18]]`.
+
+Measure one method at a time with representative inputs. Record its own timings,
+correctness result and available memory observations. Keep any combined timings
+under a separate workload name and describe their scope in `run.timing_scope`.
+Use the entry's `platform` and `run` fields to describe differences in CPU, OS,
+clocks, memory placement or compiler settings. Keep matching UART captures and
+Vela summaries alongside the YAML and use distinct filenames for each method and
+configuration. Update each configuration in place and use Git for its history.
+
+## Platform identity
+
+Each benchmark entry requires `platform.os` and `platform.cpu`. Use the OS or
+RTOS name and CPU model, for example `RTX5` on `Cortex-M55` or `Linux` on
+`Cortex-A78`. `platform.os_version` is optional. The platform fields are
+independent of CMSIS targets, pack names and Vela configuration. `run.target`,
+`run.context`, `run.packs`, device/core identifiers and NPU details are optional
+provenance, as are compiler estimates and network-memory measurements.
 Extend the shared schema when adding a new metric.
 
 ## Network memory measurements
@@ -246,11 +246,12 @@ memory:
 ```
 
 The model and Ethos region sizes come from the runtime/driver values printed in
-the UART capture. `input_tensor_bytes` is the exact storage size of the
-caller-owned input tensor (512 float32 values in these templates). Pool peaks
-are the actual allocator high-water marks after
-model loading, warmup and inference, including allocation alignment. They are
-not the application-configured pool capacities.
+the UART capture. For a PTE with several methods, `model_bytes` is the full PTE
+size shared by those entries. Ethos regions and allocator peaks are observations
+from benchmarking the named method. `input_tensor_bytes` is the total storage
+for the caller-owned input tensors (512 float32 values in these templates).
+Pool peaks are allocator high-water marks after model loading, warmup and
+inference, including allocation alignment.
 
 The weights region is part of the compiled model. The Ethos arena is allocated
 from the ExecuTorch temporary pool in these templates, so its 1216 bytes are
@@ -264,10 +265,10 @@ breakdowns, pool reservations, linker section names and memory addresses.
 
 ## Vela estimates and units
 
-Each entry in `benchmarks.benchmark` holds `measurements` for observed results
-and optional `estimates` for predictions. Vela configuration, provenance,
-estimated cycles, time and bandwidth all live under `estimates.vela`; they are
-not accepted under `measurements` or as a top-level `vela` section.
+Each benchmark entry holds `measurements` for observed results and optional
+`estimates` for predictions. Vela configuration, provenance, estimated cycles,
+time and bandwidth live under `estimates.vela`. Include Vela estimates for a
+named method when the summary corresponds to that method.
 
 The two templates' estimates were collected with Vela 5.1.0 by
 recompiling their existing quantized caches using their configured system and

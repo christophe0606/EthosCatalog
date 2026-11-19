@@ -314,9 +314,9 @@ Complete the [tool setup](#set-up-the-tools) first. The example below creates
    [flashing instructions](#flash-and-run) and verify your application's expected
    results. For OSPI, program the model separately before running inference.
 10. Update the project's README metadata and
-    [regenerate the catalog](#project-catalog). If you retain a copied
-    `model/benchmark.yml`, replace the template results with measurements for
-    your application and update its context to `my_network.Release+DevKit-E8`.
+    [regenerate the catalog](#project-catalog). Replace any copied
+    `model/benchmark.yml` with your application's own [benchmark records](#benchmark-records)
+    and record the context `my_network.Release+DevKit-E8` for that build.
 
 After changing the model or quantization policy, regenerate the AI layer with
 `--quantize` and rebuild. For Vela or storage changes, regenerate without
@@ -365,18 +365,22 @@ header first, followed by the generated catalog.
 
 ## Benchmark records
 
-Store each project's latest results for its different configurations in
-`model/benchmark.yml`, along with the matching source data. The `benchmarks`
-mapping contains shared `network` details and a `benchmark` list with one entry
-per configuration. Update a configuration's entry in place; Git provides the
-history. Each entry references its own UART capture and Vela summary when present.
+Store each project's latest results in `model/benchmark.yml` under
+`benchmarks.networks`. Give each network a unique `network.name`. For every
+ExecuTorch method you benchmark, record `network.pte` as the project-relative
+PTE path and `network.method` as the exported method name. Measure each method
+independently with representative inputs, including when several methods
+share a PTE. Keep one `benchmark` entry per configuration for each network,
+with references to the matching UART capture and Vela summary when present.
+Update each configuration's entry in place and use Git for its history.
+Record any end-to-end measurements under their own workload name.
 
 Keep hardware measurements in `measurements` and compiler estimates, such as
 Vela bandwidth estimates, in `estimates`. Memory measurements cover model
 storage, Ethos regions and ExecuTorch pool peaks. Each entry's `platform` identifies
 the OS or RTOS and CPU, with an optional OS version. The
-[benchmark schema](../schema/README.md) also supports platforms such as Linux on
-Cortex-A without CMSIS or Vela metadata.
+[benchmark schema guide](../schema/README.md#benchmark-yaml) includes a YAML
+example and validation commands, and covers platforms such as Linux on Cortex-A.
 
 ## Validation checks
 

@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/midi_ddsp/DevKit-E8/Release/midi_ddsp.axf",
+            "program": "out/rvtts_fargan/DevKit-E8/Release/rvtts_fargan.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -47,7 +47,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/midi_ddsp/DevKit-E8/Release/midi_ddsp.axf",
+            "program": "out/rvtts_fargan/DevKit-E8/Release/rvtts_fargan.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

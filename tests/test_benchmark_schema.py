@@ -35,8 +35,18 @@ class BenchmarkSchema(unittest.TestCase):
     def records(self):
         for path, document in zip(self.paths, self.documents):
             collection = document["benchmarks"]
-            for index, record in enumerate(collection["benchmark"]):
-                yield path, index, collection["network"], record
+            for group_index, group in enumerate(collection.get("networks", [collection])):
+                for index, record in enumerate(group["benchmark"]):
+                    yield path, (group_index, index), group["network"], record
+
+    def named_document(self):
+        encoder = deepcopy(self.template["benchmarks"])
+        encoder["network"].update(name="Encoder", pte="ai_layer/model.pte", method="encode")
+        decoder = deepcopy(self.template["benchmarks"])
+        decoder["network"].update(name="Decoder", pte="ai_layer/model.pte", method="decode")
+        del decoder["network"]["input_shape"]
+        decoder["network"]["input_shapes"] = [[1, 128], [1, 32]]
+        return {"benchmarks": {"networks": [encoder, decoder]}}
 
     def test_all_benchmarks_validate(self):
         self.assertGreaterEqual(len(self.paths), 2)
@@ -75,6 +85,67 @@ class BenchmarkSchema(unittest.TestCase):
         records[1]["measurements"]["time"]["ms"] = -1
         errors = self.errors(document)
         self.assertTrue(any("$.benchmarks.benchmark[1].measurements.time.ms" in error for error in errors))
+
+    def test_methods_in_one_pte_have_independent_configurations(self):
+        document = self.named_document()
+        encoder, decoder = document["benchmarks"]["networks"]
+        alternative = deepcopy(decoder["benchmark"][0])
+        alternative["run"]["cpu_clock_mhz"] = 200
+        alternative["measurements"]["time"]["ms"] = 2.5
+        decoder["benchmark"].append(alternative)
+        self.assertEqual(len(encoder["benchmark"]), 1)
+        self.assertEqual(self.errors(document), [])
+        alternative["run"]["samples"] = 0
+        self.assertTrue(any("$.benchmarks.networks[1].benchmark[1].run.samples" in error
+                            for error in self.errors(document)))
+
+    def test_same_method_name_in_different_ptes_and_native_workload_validate(self):
+        document = self.named_document()
+        groups = document["benchmarks"]["networks"]
+        groups[1]["network"].update(pte="alternate/model.pte", method="encode")
+        native = deepcopy(groups[0])
+        del native["network"]["pte"], native["network"]["method"]
+        native["network"]["name"] = "Native workload"
+        groups.append(native)
+        self.assertEqual(self.errors(document), [])
+
+    def test_duplicate_network_name_or_pte_method_is_rejected(self):
+        for fields, message in (({"name": "Encoder"}, "duplicate network name"),
+                                ({"method": "encode"}, "duplicate PTE and method")):
+            with self.subTest(fields=fields):
+                document = self.named_document()
+                document["benchmarks"]["networks"][1]["network"].update(fields)
+                self.assertTrue(any("$.benchmarks.networks[1].network" in error and message in error
+                                    for error in self.errors(document)))
+
+    def test_named_layout_requires_groups_with_identity_and_results(self):
+        self.assertTrue(self.errors({"benchmarks": {"networks": []}}))
+        for key in ("name", "pte", "method"):
+            with self.subTest(key=key):
+                document = self.named_document()
+                del document["benchmarks"]["networks"][0]["network"][key]
+                self.assertTrue(self.errors(document))
+        document = self.named_document()
+        document["benchmarks"]["networks"][0]["benchmark"] = []
+        self.assertTrue(self.errors(document))
+
+    def test_named_and_single_network_layouts_cannot_be_mixed(self):
+        for key in ("network", "benchmark"):
+            with self.subTest(key=key):
+                document = self.named_document()
+                document["benchmarks"][key] = self.template["benchmarks"][key]
+                self.assertTrue(self.errors(document))
+
+    def test_multiple_input_shapes_require_two_valid_shapes_and_exclude_input_shape(self):
+        document = self.named_document()
+        network = document["benchmarks"]["networks"][1]["network"]
+        network["input_shape"] = [1, 128]
+        self.assertTrue(self.errors(document))
+        del network["input_shape"]
+        for shapes in ([[1, 128]], [[1, 128], [1, 0]]):
+            with self.subTest(shapes=shapes):
+                network["input_shapes"] = shapes
+                self.assertTrue(self.errors(document))
 
     def test_collection_requires_shared_network_and_nonempty_list(self):
         for key in ("network", "benchmark"):
@@ -131,7 +202,7 @@ class BenchmarkSchema(unittest.TestCase):
                 for index, child in enumerate(value):
                     yield from objects(child, (*path, index))
 
-        for document in self.documents:
+        for document in [*self.documents, self.named_document()]:
             for path in objects(document):
                 with self.subTest(path=path):
                     invalid = deepcopy(document)
@@ -218,17 +289,32 @@ class BenchmarkSchema(unittest.TestCase):
                 if not uart_path.suffix and not uart_path.is_file():
                     continue
                 uart = uart_path.read_text(encoding="utf-8")
+                memory = record["measurements"]["memory"]
                 observed = re.findall(r"Benchmark memory: model=(\d+) B, arena=(\d+) B at 0x[0-9a-fA-F]+, weights=(\d+) B", uart)
+                combined = re.findall(
+                    r"Benchmark memory: model=(\d+) B[,;] method peak=(\d+) B[,;] temp peak=(\d+) B", uart)
+                ethos = None
                 if observed:
                     model, arena, weights = map(int, observed[-1])
+                    ethos = {"weights_region_bytes": weights, "arena_region_bytes": arena}
                     pools = re.findall(r"Benchmark pools: method peak=(\d+) B, temp peak=(\d+) B", uart)
+                elif combined:
+                    model_bytes, method, temp = combined[-1]
+                    model = int(model_bytes)
+                    pools = [(method, temp)]
+                    regions = re.findall(
+                        r"Benchmark regions: weights=(\d+) B at 0x[0-9a-fA-F]+[,;] arena=(\d+) B", uart)
+                    if regions:
+                        weights, arena = map(int, regions[-1])
+                        ethos = {"weights_region_bytes": weights, "arena_region_bytes": arena}
                 else:
-                    # Multi-method models report each region separately. Count
-                    # the union of address ranges so a reused scratch arena is
-                    # counted once, while disjoint method weights are summed.
+                    # A legacy aggregate run can report a region for each method.
+                    # The union counts reused scratch memory once.
                     regions = re.findall(
                         r"^REGION (\w+) weights=(\d+) weights_address=(0x[0-9a-fA-F]+) "
                         r"arena=(\d+) arena_address=(0x[0-9a-fA-F]+)", uart, re.MULTILINE)
+                    if "method" in network:
+                        regions = [region for region in regions if region[0] == network["method"]]
                     self.assertTrue(regions, "UART has no recognized memory observations")
                     self.assertEqual(len({region[0] for region in regions}), len(regions),
                                      "UART contains repeated method observations")
@@ -243,20 +329,28 @@ class BenchmarkSchema(unittest.TestCase):
                             previous_end = max(previous_end, end)
                         return total
 
-                    weights = region_union_bytes(1, 2)
-                    arena = region_union_bytes(3, 4)
+                    ethos = {"weights_region_bytes": region_union_bytes(1, 2),
+                             "arena_region_bytes": region_union_bytes(3, 4)}
                     models = re.findall(r"^Model=(\d+) bytes;", uart, re.MULTILINE)
                     self.assertEqual(len(models), 1, "UART must describe one complete run")
                     model = int(models[0])
                     pools = re.findall(r"^POOLS method_peak=(\d+) temp_peak=(\d+)", uart, re.MULTILINE)
-                self.assertTrue(pools, "UART has no recognized pool observations")
-                method, temp = map(int, pools[-1])
-                memory = record["measurements"]["memory"]
                 self.assertEqual(memory["model_bytes"], model)
-                if network.get("float_boundary"):
-                    self.assertEqual(memory["input_tensor_bytes"], math.prod(network["input_shape"]) * 4)
-                self.assertEqual(memory["ethos"], {"weights_region_bytes": weights, "arena_region_bytes": arena})
-                self.assertEqual(memory["executorch"], {"method_pool_peak_bytes": method, "temp_pool_peak_bytes": temp})
+                if network.get("float_boundary") and "input_tensor_bytes" in memory:
+                    shapes = network["input_shapes"] if "input_shapes" in network else [network["input_shape"]]
+                    described_bytes = sum(math.prod(shape) * 4 for shape in shapes)
+                    if "input_shapes" in network or "method" in network:
+                        self.assertEqual(memory["input_tensor_bytes"], described_bytes)
+                    else:
+                        # A legacy input_shape may describe only the primary tensor.
+                        self.assertGreaterEqual(memory["input_tensor_bytes"], described_bytes)
+                if "ethos" in memory:
+                    self.assertEqual(memory["ethos"], ethos)
+                if "executorch" in memory:
+                    self.assertTrue(pools, "UART has no recognized pool observations")
+                    method, temp = map(int, pools[-1])
+                    self.assertEqual(memory["executorch"],
+                                     {"method_pool_peak_bytes": method, "temp_pool_peak_bytes": temp})
 
     def test_yaml_duplicates_and_non_string_keys_rejected(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as directory:

@@ -149,6 +149,13 @@ descriptions and C++ wrapper will be required.
   can use some CPU fallbacks. They would be represented
   in the same node as the Ethos code since the granularity
   is an executorch method.
+- Avoid too many event outputs or event inputs on a node. 
+  2 or 3 is generally acceptable, but more than that can make 
+  the graph difficult to read and understand. Instead, use an 
+  information in the event to know how to process it. For 
+  example, include a type or identifier in the event payload 
+  to distinguish different kinds of events, rather than 
+  creating separate event outputs for each type.
 
 ## Validation constraints
 

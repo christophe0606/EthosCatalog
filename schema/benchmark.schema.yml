@@ -1,7 +1,7 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: EthosCatalog benchmarks
-description: Benchmarks for multiple configurations of one network, with observed measurements and compiler estimates.
-  Platform identity is independent of build tools; memory records contain only network resources.
+description: Independent benchmark results for one or more networks across multiple configurations.
+  Platform identity is independent of build tools, and memory records contain only network resources.
 type: object
 additionalProperties: false
 required:
@@ -10,34 +10,77 @@ properties:
   benchmarks:
     type: object
     additionalProperties: false
-    required:
-    - network
-    - benchmark
+    oneOf:
+    - required: [network, benchmark]
+    - required: [networks]
+      not:
+        anyOf:
+        - required: [network]
+        - required: [benchmark]
     properties:
       network:
         $ref: '#/$defs/network'
-        description: Network properties shared by every benchmark configuration in this file.
+        description: Network properties for the single-network layout.
       benchmark:
+        $ref: '#/$defs/benchmarkList'
+      networks:
         type: array
         minItems: 1
-        description: Results for individual configurations, each with its own platform, run, measurements and optional estimates.
+        description: Named networks or workloads, each with its own benchmark configurations.
         items:
-          $ref: '#/$defs/benchmark'
+          $ref: '#/$defs/networkBenchmark'
 $defs:
+  networkBenchmark:
+    type: object
+    additionalProperties: false
+    required: [network, benchmark]
+    properties:
+      network:
+        $ref: '#/$defs/network'
+        required: [name]
+      benchmark:
+        $ref: '#/$defs/benchmarkList'
+  benchmarkList:
+    type: array
+    minItems: 1
+    description: Results for individual configurations, each with its own platform, run, measurements and optional estimates.
+    items:
+      $ref: '#/$defs/benchmark'
   network:
     type: object
     additionalProperties: false
-    required:
-    - operation
-    - input_shape
-    oneOf:
-    - required: [output_shape]
-    - required: [output_shapes]
+    required: [operation]
+    dependentRequired:
+      pte: [method]
+      method: [pte]
+    allOf:
+    - oneOf:
+      - required: [input_shape]
+      - required: [input_shapes]
+    - oneOf:
+      - required: [output_shape]
+      - required: [output_shapes]
     properties:
+      name:
+        $ref: '#/$defs/text'
+        description: Stable name for the benchmarked network or workload, unique within the file.
+      pte:
+        $ref: '#/$defs/text'
+        description: ExecuTorch PTE file path relative to the project directory.
+      method:
+        $ref: '#/$defs/text'
+        description: Exact exported method name in the PTE, including forward for a default method.
       operation:
         $ref: '#/$defs/text'
       input_shape:
         $ref: '#/$defs/shape'
+        description: Shape of a single input tensor.
+      input_shapes:
+        type: array
+        minItems: 2
+        items:
+          $ref: '#/$defs/shape'
+        description: Shapes of multiple input tensors in runtime input order. Mutually exclusive with input_shape.
       output_shape:
         $ref: '#/$defs/shape'
         description: Shape of a single output tensor; use output_shapes for multiple tensors.
@@ -124,10 +167,10 @@ $defs:
             properties:
               model_bytes:
                 $ref: '#/$defs/nonnegativeInteger'
-                description: Measured compiled model size; includes the Ethos weights region.
+                description: Measured compiled model size, including the Ethos weights region. For a PTE method, this is the entire shared PTE size.
               input_tensor_bytes:
                 $ref: '#/$defs/nonnegativeInteger'
-                description: Exact storage size of the caller-owned network input tensor; excludes application processing buffers.
+                description: Exact storage size of the caller-owned network input tensors, excluding application processing buffers.
               ethos:
                 type: object
                 additionalProperties: false
