@@ -1,0 +1,36 @@
+{
+  "project": "projects/dtln_aec/dtln_aec.cproject.yml",
+  "config_sha256": "922d7535cc57160f3579fb439ca4b03c9be73351d1a1dd651457c0085e1c9f22",
+  "pte_sha256": "1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05",
+  "method_caches": {
+    "stage1": {
+      "graph_sha256": "a33a43f24d405aa4e10253e448082d599e6df538dc8aa1ec27a6567680ba9917",
+      "safetensors_sha256": "e13df727018ef6f3a552f2c624cb699492c1f389d036b651a69b38c08f95ebb8"
+    },
+    "stage2": {
+      "graph_sha256": "fa2bbd98d977528cf1c899e8d59d48ec097cec762c7711f9a4fff151b1c6f9fe",
+      "safetensors_sha256": "5c8cdc910d771ae7c9ead74489153c7ac037dab612b336d6423db0210a14fceb"
+    }
+  },
+  "assets": {},
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram"
+  },
+  "extract_delegate_segments": false,
+  "delegates": 3,
+  "operators": [
+    "Portable add",
+    "Portable log",
+    "Portable mean",
+    "Portable mul",
+    "Portable pow",
+    "Portable rsqrt",
+    "Portable sub",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 1763792
+}

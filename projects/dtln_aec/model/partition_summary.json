@@ -1,0 +1,37 @@
+{
+  "stage1": {
+    "delegates": 1,
+    "planned_buffer_sizes": [
+      0,
+      7232
+    ],
+    "operators": [
+      "quantized_decomposed::quantize_per_tensor.out",
+      "quantized_decomposed::dequantize_per_tensor.out",
+      "aten::pow.Tensor_Scalar_out",
+      "aten::add.out",
+      "aten::log.out",
+      "aten::mean.out",
+      "aten::sub.out",
+      "aten::rsqrt.out",
+      "aten::mul.out"
+    ]
+  },
+  "stage2": {
+    "delegates": 2,
+    "planned_buffer_sizes": [
+      0,
+      12304
+    ],
+    "operators": [
+      "quantized_decomposed::quantize_per_tensor.out",
+      "quantized_decomposed::dequantize_per_tensor.out",
+      "aten::mean.out",
+      "aten::sub.out",
+      "aten::pow.Tensor_Scalar_out",
+      "aten::add.out",
+      "aten::rsqrt.out",
+      "aten::mul.out"
+    ]
+  }
+}

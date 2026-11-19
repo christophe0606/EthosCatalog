@@ -1,0 +1,46 @@
+{
+  "Duplicate<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DtlnFakeSink<float,128>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DtlnFakeSource<float,128,float,128>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RFFTMaskInverse<float,512,float,257,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "FFT<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "RawRFFTMagnitude<float,512,float,257>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SlidingBuffer<float,128,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "OverlapAdd<float,512,float,128>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "PreservingFFT<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DtlnMethod<float,257,float,257,float,257>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DtlnMethod<float,512,float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  }
+}

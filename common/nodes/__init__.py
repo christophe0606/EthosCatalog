@@ -16,3 +16,7 @@ from .LogMel import LogMel
 
 from .RNNoiseAnalysis import RNNoiseAnalysis
 from .RNNoiseSynthesis import RNNoiseSynthesis
+from .RawRFFTMagnitude import RawRFFTMagnitude
+from .RFFTMaskInverse import RFFTMaskInverse
+from .OverlapAdd import OverlapAdd
+from .PreservingFFT import PreservingFFT

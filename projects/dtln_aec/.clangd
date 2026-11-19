@@ -1,0 +1,18 @@
+CompileFlags:
+  CompilationDatabase: c:\Users\chrfav01\benchresults\EthosCatalog\out\dtln_aec\DevKit-E8\ReleaseSRAM
+
+---
+If:
+  PathMatch: .*\.(c|C|h)$
+CompileFlags:
+  Add:
+    - -include
+    - c:\Users\chrfav01\benchresults\EthosCatalog\out\dtln_aec\DevKit-E8\ReleaseSRAM\compile_macros_c.h
+
+---
+If:
+  PathMatch: .*\.(cpp|c\+\+|C\+\+|cxx|cc|CC|hpp)$
+CompileFlags:
+  Add:
+    - -include
+    - c:\Users\chrfav01\benchresults\EthosCatalog\out\dtln_aec\DevKit-E8\ReleaseSRAM\compile_macros_cxx.h

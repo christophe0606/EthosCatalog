@@ -171,7 +171,7 @@ solution:
             protocol: swd
         - set: RvTTS_FARGAN_Release
           images:
-            - project-context: rvtts_fargan.Release
+            - project-context: dtln_aec.FlashLoader
           debugger:
             name: ULINKplus@pyOCD
             clock: 10000000
@@ -253,6 +253,34 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: DTLN_AEC_Debug
+          images:
+            - project-context: dtln_aec.Debug
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: DTLN_AEC_Release
+          images:
+            - project-context: dtln_aec.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: DTLN_AEC_ProgramModel
+          images:
+            - project-context: dtln_aec.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: DTLN_AEC_ReleaseSRAM
+          images:
+            - project-context: dtln_aec.ReleaseSRAM
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -266,6 +294,14 @@ solution:
       debug: on
       optimize: none
     - type: Release
+      debug: on
+      optimize: speed
+      misc:
+        - for-compiler: AC6
+          C-CPP:
+            - -O3
+            - -ffast-math
+    - type: ReleaseSRAM
       debug: on
       optimize: speed
       misc:
@@ -301,6 +337,12 @@ solution:
         - .Release
     - project: projects/yamnet/yamnet.cproject.yml
     - project: projects/midi_ddsp/midi_ddsp.cproject.yml
+    - project: projects/dtln_aec/dtln_aec.cproject.yml
+      for-context:
+        - .Debug
+        - .Release
+        - .ProgramModel
+        - .ReleaseSRAM
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

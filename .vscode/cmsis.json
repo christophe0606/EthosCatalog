@@ -1,10 +1,10 @@
 {
     "activeSolution": "../EthosCatalog.csolution.yml",
-    "activeTarget": "DevKit-E8@RvTTS_FARGAN_Release",
+    "activeTarget": "DevKit-E8@DTLN_AEC_ReleaseSRAM",
     "targetSet": {
         "EthosCatalog": {
             "activeTargetType": "DevKit-E8",
-            "DevKit-E8": 20
+            "DevKit-E8": 35
         },
         "board/flash/loader/FlashLoader": {
             "activeTargetType": "DevKit-E8"

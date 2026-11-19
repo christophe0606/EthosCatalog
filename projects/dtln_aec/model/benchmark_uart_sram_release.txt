@@ -1,0 +1,131 @@
+DTLN clocks CPU=400000000 AXI/NPU=400000000 timer=400000000 OSPI=100000000 Hz CRC=5ae153b6
+DTLN model address=0x02000000 cached_in_sram=1
+METHOD stage1 result=PASS output_max=0.000000000 state_max=0.000000000 delegates=1 finite=1 pmu=1
+MEMORY stage1 model=1763792 input=4104 method_peak=13356 temp_peak=5168 scope=cumulative_since_boot
+LAST_DELEGATE stage1 weights=487120@0x0212feb0 arena=5168@0x021ee9e0
+SAMPLE stage1 0 npu=81082 adapter=268427 execute=260146 npu_ms=0.202705 adapter_ms=0.671068 execute_ms=0.650365
+SAMPLE stage1 1 npu=81098 adapter=267767 execute=259318 npu_ms=0.202745 adapter_ms=0.669417 execute_ms=0.648295
+SAMPLE stage1 2 npu=81066 adapter=266711 execute=258796 npu_ms=0.202665 adapter_ms=0.666778 execute_ms=0.646990
+SAMPLE stage1 3 npu=81116 adapter=267113 execute=259152 npu_ms=0.202790 adapter_ms=0.667782 execute_ms=0.647880
+SAMPLE stage1 4 npu=81097 adapter=267155 execute=259234 npu_ms=0.202742 adapter_ms=0.667887 execute_ms=0.648085
+SAMPLE stage1 5 npu=81114 adapter=266795 execute=258724 npu_ms=0.202785 adapter_ms=0.666987 execute_ms=0.646810
+SAMPLE stage1 6 npu=81069 adapter=266333 execute=258304 npu_ms=0.202673 adapter_ms=0.665833 execute_ms=0.645760
+SAMPLE stage1 7 npu=81071 adapter=266231 execute=258203 npu_ms=0.202678 adapter_ms=0.665578 execute_ms=0.645508
+SAMPLE stage1 8 npu=81100 adapter=266114 execute=258094 npu_ms=0.202750 adapter_ms=0.665285 execute_ms=0.645235
+SAMPLE stage1 9 npu=81077 adapter=266776 execute=258832 npu_ms=0.202692 adapter_ms=0.666940 execute_ms=0.647080
+METHOD stage2 result=PASS output_max=0.000000000 state_max=0.000000000 delegates=2 finite=1 pmu=1
+MEMORY stage2 model=1763792 input=6144 method_peak=30884 temp_peak=255168 scope=cumulative_since_boot
+LAST_DELEGATE stage2 weights=975248@0x020016e0 arena=8192@0x021ee9e0
+SAMPLE stage2 0 npu=253911 adapter=429389 execute=418480 npu_ms=0.634777 adapter_ms=1.073473 execute_ms=1.046200
+SAMPLE stage2 1 npu=253908 adapter=428816 execute=418228 npu_ms=0.634770 adapter_ms=1.072040 execute_ms=1.045570
+SAMPLE stage2 2 npu=253841 adapter=428650 execute=417778 npu_ms=0.634602 adapter_ms=1.071625 execute_ms=1.044445
+SAMPLE stage2 3 npu=253845 adapter=428680 execute=417991 npu_ms=0.634613 adapter_ms=1.071700 execute_ms=1.044977
+SAMPLE stage2 4 npu=253862 adapter=428231 execute=417322 npu_ms=0.634655 adapter_ms=1.070577 execute_ms=1.043305
+SAMPLE stage2 5 npu=253890 adapter=429142 execute=418412 npu_ms=0.634725 adapter_ms=1.072855 execute_ms=1.046030
+SAMPLE stage2 6 npu=253900 adapter=427613 execute=416834 npu_ms=0.634750 adapter_ms=1.069033 execute_ms=1.042085
+SAMPLE stage2 7 npu=253912 adapter=427749 execute=417120 npu_ms=0.634780 adapter_ms=1.069373 execute_ms=1.042800
+SAMPLE stage2 8 npu=253891 adapter=428075 execute=417460 npu_ms=0.634728 adapter_ms=1.070188 execute_ms=1.043650
+SAMPLE stage2 9 npu=253894 adapter=428633 execute=417802 npu_ms=0.634735 adapter_ms=1.071583 execute_ms=1.044505
+DTLN_Test_result PASS
+DTLN demo cycle=1 blocks=750 deadline_misses=0 processing_max_ms=2.060 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=2 blocks=1257 deadline_misses=0 processing_max_ms=2.060 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=3 blocks=1889 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=4 blocks=2521 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=5 blocks=3152 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=6 blocks=3784 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=7 blocks=4416 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=8 blocks=5048 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=9 blocks=5680 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=10 blocks=6312 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=11 blocks=6944 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=12 blocks=7575 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=13 blocks=8207 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=14 blocks=8839 deadline_misses=0 processing_max_ms=2.062 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=15 blocks=9471 deadline_misses=0 processing_max_ms=2.063 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=16 blocks=10103 deadline_misses=0 processing_max_ms=2.063 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=17 blocks=10734 deadline_misses=0 processing_max_ms=2.063 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000

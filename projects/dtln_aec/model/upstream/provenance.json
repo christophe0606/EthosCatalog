@@ -1,0 +1,32 @@
+{
+  "repository": "https://github.com/breizhn/DTLN-aec",
+  "commit": "9d24e128b4f409db18227b8babb343016625921f",
+  "license": "MIT (repository license applies to the bundled pretrained files; no separate weight license is supplied)",
+  "files": {
+    "dtln_aec_128_1.tflite": {
+      "sha256": "8d241b3a732af8ca140b2e30043e56a6c3c7800c46e22c26f4eea2f70974ad1e",
+      "bytes": 1996600,
+      "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/pretrained_models/dtln_aec_128_1.tflite"
+    },
+    "dtln_aec_128_2.tflite": {
+      "sha256": "350bb01a1152ae3cabe09fe5e868ef2f7d8b988a9f22aae44f140195f6493126",
+      "bytes": 5277012,
+      "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/pretrained_models/dtln_aec_128_2.tflite"
+    },
+    "LICENSE": {
+      "sha256": "aa95acd8c8a7341bfcdb2823694dcbb27a2a4143e860bb52db1ff0f29c85e5a1",
+      "bytes": 1075,
+      "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/LICENSE"
+    },
+    "README.md": {
+      "sha256": "54ccc6bc7761f47a8b2ca68bc846f44b0009593715fdde90501147c2ebeaef37",
+      "bytes": 2446,
+      "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/README.md"
+    },
+    "run_aec.py": {
+      "sha256": "99e4c179b8a2838bb0f257308e24a28a8565d1f93f40546bbdf585f4305dc317",
+      "bytes": 8687,
+      "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/run_aec.py"
+    }
+  }
+}

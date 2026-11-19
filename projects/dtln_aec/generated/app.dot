@@ -1,0 +1,239 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    edge [arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+dup0 [shape=point,label="dup0"]
+
+dup1 [shape=point,label="dup1"]
+
+fake_sink [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">fake_sink<BR/>(DtlnFakeSink)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+fake_source [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">fake_source<BR/>(DtlnFakeSource)</FONT></TD>
+    <TD PORT="o1"><FONT POINT-SIZE="12.0" COLOR="black">o1</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+<TD PORT="o2"><FONT POINT-SIZE="12.0" COLOR="black">o2</FONT></TD>
+</TR>
+
+</TABLE>>];
+
+
+mask_inverse [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">mask_inverse<BR/>(RFFTMaskInverse)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+mic_fft [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">mic_fft<BR/>(FFT)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+mic_magnitude [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">mic_magnitude<BR/>(RawRFFTMagnitude)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+mic_window [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">mic_window<BR/>(SlidingBuffer)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+overlap_add [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">overlap_add<BR/>(OverlapAdd)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+reference_fft [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">reference_fft<BR/>(PreservingFFT)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+reference_magnitude [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">reference_magnitude<BR/>(RawRFFTMagnitude)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+reference_window [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">reference_window<BR/>(SlidingBuffer)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+stage1 [label=<
+<TABLE color="#7B1FA2" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#7B1FA2" POINT-SIZE="14.0">stage1<BR/>(DtlnMethod)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+
+stage2 [label=<
+<TABLE color="#7B1FA2" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="#7B1FA2" POINT-SIZE="14.0">stage2<BR/>(DtlnMethod)</FONT></TD>
+    <TD PORT="o"><FONT POINT-SIZE="12.0" COLOR="black">o</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+
+
+fake_source:o1 -> mic_window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>]
+
+fake_source:o2 -> reference_window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>]
+
+mic_window:i -> mic_fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+reference_fft:i -> reference_magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+mic_magnitude:i -> stage1:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(257)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>]
+
+reference_magnitude:i -> stage1:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(257)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>]
+
+stage1:o -> mask_inverse:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(257)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >257</FONT>
+</TD></TR></TABLE>>]
+
+mask_inverse:o -> stage2:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+stage2:o -> overlap_add:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+overlap_add:i -> fake_sink:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>]
+
+reference_window:i ->
+dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+
+dup0 -> reference_fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup0 -> stage2:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+mic_fft:i ->
+dup1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+
+dup1 -> mic_magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup1 -> mask_inverse:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+
+
+
+}

@@ -1,0 +1,29 @@
+DTLN clocks CPU=400000000 AXI/NPU=400000000 timer=400000000 OSPI=100000000 Hz CRC=5ae153b6
+DTLN model address=0x02000000 cached_in_sram=1
+METHOD stage1 result=FAIL output_max=0.023907483 state_max=0.057539448 delegates=1 finite=1 pmu=1
+MEMORY stage1 model=1763792 input=4104 method_peak=13356 temp_peak=5168 scope=cumulative_since_boot
+LAST_DELEGATE stage1 weights=487120@0x0212feb0 arena=5168@0x021ee9e0
+SAMPLE stage1 0 npu=81098 adapter=1942399 execute=1933839 npu_ms=0.202745 adapter_ms=4.855997 execute_ms=4.834598
+SAMPLE stage1 1 npu=81066 adapter=1941072 execute=1932651 npu_ms=0.202665 adapter_ms=4.852680 execute_ms=4.831627
+SAMPLE stage1 2 npu=81061 adapter=1941718 execute=1933280 npu_ms=0.202653 adapter_ms=4.854295 execute_ms=4.833200
+SAMPLE stage1 3 npu=81061 adapter=1941445 execute=1933010 npu_ms=0.202653 adapter_ms=4.853612 execute_ms=4.832525
+SAMPLE stage1 4 npu=81098 adapter=1942290 execute=1933880 npu_ms=0.202745 adapter_ms=4.855725 execute_ms=4.834700
+SAMPLE stage1 5 npu=81092 adapter=1940934 execute=1932680 npu_ms=0.202730 adapter_ms=4.852335 execute_ms=4.831700
+SAMPLE stage1 6 npu=81059 adapter=1940518 execute=1932314 npu_ms=0.202648 adapter_ms=4.851295 execute_ms=4.830785
+SAMPLE stage1 7 npu=81079 adapter=1941267 execute=1932992 npu_ms=0.202698 adapter_ms=4.853167 execute_ms=4.832480
+SAMPLE stage1 8 npu=81080 adapter=1940645 execute=1932452 npu_ms=0.202700 adapter_ms=4.851612 execute_ms=4.831130
+SAMPLE stage1 9 npu=81057 adapter=1941042 execute=1932656 npu_ms=0.202643 adapter_ms=4.852605 execute_ms=4.831640
+METHOD stage2 result=FAIL output_max=0.000531930 state_max=0.128538132 delegates=2 finite=1 pmu=1
+MEMORY stage2 model=1763792 input=6144 method_peak=30884 temp_peak=255168 scope=cumulative_since_boot
+LAST_DELEGATE stage2 weights=975248@0x020016e0 arena=8192@0x021ee9e0
+SAMPLE stage2 0 npu=253861 adapter=2735041 execute=2724404 npu_ms=0.634652 adapter_ms=6.837603 execute_ms=6.811010
+SAMPLE stage2 1 npu=253911 adapter=2736032 execute=2725287 npu_ms=0.634777 adapter_ms=6.840080 execute_ms=6.813218
+SAMPLE stage2 2 npu=253842 adapter=2733171 execute=2722730 npu_ms=0.634605 adapter_ms=6.832928 execute_ms=6.806825
+SAMPLE stage2 3 npu=253865 adapter=2733925 execute=2723048 npu_ms=0.634663 adapter_ms=6.834812 execute_ms=6.807620
+SAMPLE stage2 4 npu=253895 adapter=2733974 execute=2723193 npu_ms=0.634737 adapter_ms=6.834935 execute_ms=6.807982
+SAMPLE stage2 5 npu=253888 adapter=2731967 execute=2721464 npu_ms=0.634720 adapter_ms=6.829917 execute_ms=6.803660
+SAMPLE stage2 6 npu=253898 adapter=2734048 execute=2723276 npu_ms=0.634745 adapter_ms=6.835120 execute_ms=6.808190
+SAMPLE stage2 7 npu=253896 adapter=2733772 execute=2723201 npu_ms=0.634740 adapter_ms=6.834430 execute_ms=6.808002
+SAMPLE stage2 8 npu=253895 adapter=2734513 execute=2723768 npu_ms=0.634737 adapter_ms=6.836283 execute_ms=6.809420
+SAMPLE stage2 9 npu=253938 adapter=2734384 execute=2723714 npu_ms=0.634845 adapter_ms=6.835960 execute_ms=6.809285
+DTLN_Test_result FAIL

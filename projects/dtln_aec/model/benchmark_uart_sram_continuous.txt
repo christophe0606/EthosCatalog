@@ -1,0 +1,95 @@
+DTLN clocks CPU=400000000 AXI/NPU=400000000 timer=400000000 OSPI=100000000 Hz CRC=5ae153b6
+DTLN model address=0x02000000 cached_in_sram=1
+METHOD stage1 result=PASS output_max=0.000000000 state_max=0.000000000 delegates=1 finite=1 pmu=1
+MEMORY stage1 model=1763792 input=4104 method_peak=13356 temp_peak=5168 scope=cumulative_since_boot
+LAST_DELEGATE stage1 weights=487120@0x0212feb0 arena=5168@0x021ee9e0
+SAMPLE stage1 0 npu=81070 adapter=267105 execute=258844 npu_ms=0.202675 adapter_ms=0.667763 execute_ms=0.647110
+SAMPLE stage1 1 npu=81057 adapter=265449 execute=257548 npu_ms=0.202643 adapter_ms=0.663623 execute_ms=0.643870
+SAMPLE stage1 2 npu=81079 adapter=265785 execute=257740 npu_ms=0.202698 adapter_ms=0.664462 execute_ms=0.644350
+SAMPLE stage1 3 npu=81111 adapter=266205 execute=257986 npu_ms=0.202777 adapter_ms=0.665512 execute_ms=0.644965
+SAMPLE stage1 4 npu=81079 adapter=266163 execute=257968 npu_ms=0.202698 adapter_ms=0.665408 execute_ms=0.644920
+SAMPLE stage1 5 npu=81085 adapter=266343 execute=258282 npu_ms=0.202712 adapter_ms=0.665857 execute_ms=0.645705
+SAMPLE stage1 6 npu=81114 adapter=266205 execute=257986 npu_ms=0.202785 adapter_ms=0.665512 execute_ms=0.644965
+SAMPLE stage1 7 npu=81083 adapter=265863 execute=257710 npu_ms=0.202708 adapter_ms=0.664658 execute_ms=0.644275
+SAMPLE stage1 8 npu=81127 adapter=266180 execute=258141 npu_ms=0.202818 adapter_ms=0.665450 execute_ms=0.645352
+SAMPLE stage1 9 npu=81082 adapter=265965 execute=257786 npu_ms=0.202705 adapter_ms=0.664913 execute_ms=0.644465
+METHOD stage2 result=PASS output_max=0.000000000 state_max=0.000000000 delegates=2 finite=1 pmu=1
+MEMORY stage2 model=1763792 input=6144 method_peak=30884 temp_peak=255168 scope=cumulative_since_boot
+LAST_DELEGATE stage2 weights=975248@0x020016e0 arena=8192@0x021ee9e0
+SAMPLE stage2 0 npu=253891 adapter=426879 execute=416218 npu_ms=0.634728 adapter_ms=1.067198 execute_ms=1.040545
+SAMPLE stage2 1 npu=253911 adapter=427631 execute=416968 npu_ms=0.634777 adapter_ms=1.069077 execute_ms=1.042420
+SAMPLE stage2 2 npu=253850 adapter=427427 execute=416788 npu_ms=0.634625 adapter_ms=1.068567 execute_ms=1.041970
+SAMPLE stage2 3 npu=253878 adapter=427721 execute=417040 npu_ms=0.634695 adapter_ms=1.069303 execute_ms=1.042600
+SAMPLE stage2 4 npu=253894 adapter=428078 execute=417660 npu_ms=0.634735 adapter_ms=1.070195 execute_ms=1.044150
+SAMPLE stage2 5 npu=253948 adapter=427600 execute=416944 npu_ms=0.634870 adapter_ms=1.069000 execute_ms=1.042360
+SAMPLE stage2 6 npu=253900 adapter=427079 execute=416423 npu_ms=0.634750 adapter_ms=1.067697 execute_ms=1.041057
+SAMPLE stage2 7 npu=253896 adapter=427475 execute=416716 npu_ms=0.634740 adapter_ms=1.068688 execute_ms=1.041790
+SAMPLE stage2 8 npu=253877 adapter=427683 execute=417136 npu_ms=0.634692 adapter_ms=1.069208 execute_ms=1.042840
+SAMPLE stage2 9 npu=253893 adapter=427356 execute=416752 npu_ms=0.634733 adapter_ms=1.068390 execute_ms=1.041880
+DTLN_Test_result PASS
+DTLN demo cycle=1 blocks=750 deadline_misses=0 processing_max_ms=2.054 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.002547 residual=0.002547 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.078771 residual=0.010634 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.072008 residual=0.014483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=2 blocks=1257 deadline_misses=0 processing_max_ms=2.054 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003387 residual=0.003387 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.075873 residual=0.013642 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.066619 residual=0.021004 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=3 blocks=1889 deadline_misses=0 processing_max_ms=2.055 checks_failed=0
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003263 residual=0.003263 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.075292 residual=0.014447 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.048202 residual=0.044579 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=4 blocks=2521 deadline_misses=0 processing_max_ms=2.055 checks_failed=1
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003164 residual=0.003164 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.073184 residual=0.015250 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002720 residual=0.076207 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=5 blocks=3152 deadline_misses=0 processing_max_ms=2.055 checks_failed=2
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003581 residual=0.003581 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072794 residual=0.015122 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002565 residual=0.076483 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=6 blocks=3784 deadline_misses=0 processing_max_ms=2.055 checks_failed=3
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003558 residual=0.003558 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072738 residual=0.015043 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002606 residual=0.076480 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=7 blocks=4416 deadline_misses=0 processing_max_ms=2.055 checks_failed=4
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003512 residual=0.003512 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072513 residual=0.015292 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002651 residual=0.076475 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=8 blocks=5048 deadline_misses=0 processing_max_ms=2.055 checks_failed=5
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003539 residual=0.003539 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072585 residual=0.015249 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002560 residual=0.076501 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=9 blocks=5680 deadline_misses=0 processing_max_ms=2.055 checks_failed=6
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003563 residual=0.003563 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072534 residual=0.015211 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002624 residual=0.076480 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=10 blocks=6312 deadline_misses=0 processing_max_ms=2.055 checks_failed=7
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003778 residual=0.003778 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072259 residual=0.015725 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002596 residual=0.076508 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN demo cycle=11 blocks=6943 deadline_misses=0 processing_max_ms=2.055 checks_failed=8
+DTLN case=0 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000
+DTLN case=1 n=8000 input=0.048997 output=0.003582 residual=0.003582 clean=0.000000
+DTLN case=2 n=8000 input=0.091159 output=0.072406 residual=0.015570 clean=0.076979
+DTLN case=3 n=8000 input=0.076706 output=0.002682 residual=0.076494 clean=0.076706
+DTLN case=4 n=8000 input=0.000000 output=0.000000 residual=0.000000 clean=0.000000

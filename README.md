@@ -34,6 +34,7 @@ so switching projects does not require regenerating the model.
 
 | Project name | Description | Application graph | Benchmark |
 | --- | --- | --- | --- |
+| [dtln_aec](projects/dtln_aec/README.md) | Real-time DTLN-aec 128 echo cancellation on Alif DevKit-E8 with synthetic audio and UART metrics. | [![dtln_aec graph](projects/dtln_aec/generated/app.png)](projects/dtln_aec/generated/app.pdf) | [benchmark.yml](projects/dtln_aec/model/benchmark.yml) |
 | [kws_micronet_l](projects/kws_micronet_l/README.md) | Prequantized MicroNet Large keyword spotting through PyTorch and ExecuTorch; validated and benchmarked on Ethos-U85 with MRAM weights. | [![kws_micronet_l graph](projects/kws_micronet_l/generated/app.png)](projects/kws_micronet_l/generated/app.pdf) | [benchmark.yml](projects/kws_micronet_l/model/benchmark.yml) |
 | [midi_ddsp](projects/midi_ddsp/README.md) | Pretrained thirteen-instrument MIDI-DDSP music synthesis with Ethos-U85 inference and streaming CPU audio; monophonic, audio-only demo. | [![midi_ddsp graph](projects/midi_ddsp/generated/app.png)](projects/midi_ddsp/generated/app.pdf) | [benchmark.yml](projects/midi_ddsp/model/benchmark.yml) |
 | [rnnoise](projects/rnnoise/README.md) | RNNoise live microphone noise suppression with landscape LCD metrics. | [![rnnoise graph](projects/rnnoise/generated/app.png)](projects/rnnoise/generated/app.pdf) | [benchmark.yml](projects/rnnoise/model/benchmark.yml) |

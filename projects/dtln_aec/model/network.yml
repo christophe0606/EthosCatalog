@@ -1,0 +1,50 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+network:
+  name: DTLN-aec 128
+  model: model/model.py
+  quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    error:
+      calibration_frames: 192
+      evaluation_frames: 128
+      float_shared_state_nonzero_max_absolute_error:
+      - 2.86102294921875e-05
+      - 1.52587890625e-05
+      float_shared_state_zero_input_max_absolute_error:
+      - 2.8487701416015625
+      - 1.52587890625e-05
+      activation: int16; log-power and instant normalization float32
+      weights: int8
+      data: Deterministic synthetic paired near/far signals, silence, echo-only, near-only,
+        double-talk; calibration seed310 and evaluation seed901
+      limitation: Synthetic numeric conversion checks do not establish speech quality
+        or AEC challenge scores.
+      stage1:
+        output_mae: 0.0017321782168868574
+        output_max_absolute_error: 0.08360046148300171
+        state_mae: 0.024678893527646184
+        state_max_absolute_error: 2.246204376220703
+      stage2:
+        output_mae: 0.0001671094702110562
+        output_max_absolute_error: 0.004053682088851929
+        state_mae: 0.011751248718611114
+        state_max_absolute_error: 1.1306076049804688
+  methods:
+    stage1:
+      graph: model/stage1_quantized.pt2
+      safetensors: model/stage1_quantized.safetensors
+    stage2:
+      graph: model/stage2_quantized.pt2
+      safetensors: model/stage2_quantized.safetensors
+  flash_ospi: true
+  ospi:
+    address: 3284140032
+    size: 4194304
+    pname: M55_HP
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Shared_Sram
