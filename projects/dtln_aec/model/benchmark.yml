@@ -2,373 +2,209 @@
 # SPDX-License-Identifier: Apache-2.0
 benchmarks:
   networks:
-    - network:
-        name: DTLN-aec stage1
-        pte: ai_layer/model.pte
-        method: stage1
-        operation: Spectral mask and recurrent-state update
-        input_shapes: [[1, 1, 257], [1, 2, 128, 2], [1, 1, 257]]
-        output_shapes: [[1, 1, 257], [1, 2, 128, 2]]
-        samples_per_forward: 128
-        sample_rate_hz: 16000
-        block_deadline_ms: 8
-        float_boundary: true
-        quantization: int16 activations and per-channel int8 weights with float normalization
-      benchmark:
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: OSPI, clock_mhz: 100}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 4104
-              executorch:
-                method_pool_peak_bytes: 13356
-                temp_pool_peak_bytes: 5168
-            time:
-              ms: 4.52172125
-              cycles: 1808688.5
-              statistic: median
-              min_cycles: 1808684
-              max_cycles: 1808695
-              mean_cycles: 1808689.8
-              forward_ms: 23.51982625
-              forward_timer_hz: 400000000
-              cycles_samples: [1808693, 1808695, 1808688, 1808694, 1808687, 1808689, 1808692, 1808688, 1808684, 1808688]
-              forward_ticks_samples: [9408474, 9407886, 9407234, 9408096, 9408095, 9407730, 9407759, 9408918, 9407748, 9407975]
-          run:
-            recorded_at: '2026-11-19T10:01:40Z'
-            context: dtln_aec.Release+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_Release
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: rb-4
-            execution_job: d-5
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 1
-            test_result: FAIL
-            max_absolute_error: 0.023907483
-            tolerance: 0.005
-            uart: model/benchmark_uart_ospi_initial.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            input: Warm recurrent fixture from model/model_test_data.h
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method. Allocator peaks are cumulative since boot. The initial check compares the board with pre-Vela fake quantization.
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: SRAM0}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 4104
-              executorch:
-                method_pool_peak_bytes: 13356
-                temp_pool_peak_bytes: 5168
-            time:
-              ms: 0.20268125
-              cycles: 81072.5
-              statistic: median
-              min_cycles: 81057
-              max_cycles: 81098
-              mean_cycles: 81075.1
-              forward_ms: 4.85292375
-              forward_timer_hz: 400000000
-              cycles_samples: [81098, 81066, 81061, 81061, 81098, 81092, 81059, 81079, 81080, 81057]
-              forward_ticks_samples: [1942399, 1941072, 1941718, 1941445, 1942290, 1940934, 1940518, 1941267, 1940645, 1941042]
-          run:
-            recorded_at: '2026-11-19T10:17:04Z'
-            context: dtln_aec.ReleaseSRAM+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_ReleaseSRAM
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: rb-6
-            execution_job: d-7
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 1
-            test_result: FAIL
-            max_absolute_error: 0.023907483
-            tolerance: 0.005
-            uart: model/benchmark_uart_sram_initial.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            input: Warm recurrent fixture from model/model_test_data.h
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method. Allocator peaks are cumulative since boot. The initial check compares the board with pre-Vela fake quantization.
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: SRAM0}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 4104
-              executorch:
-                method_pool_peak_bytes: 13356
-                temp_pool_peak_bytes: 5168
-            time:
-              ms: 0.20272375
-              cycles: 81089.5
-              statistic: median
-              min_cycles: 81066
-              max_cycles: 81116
-              mean_cycles: 81089
-              forward_ms: 0.66696375
-              forward_timer_hz: 400000000
-              cycles_samples: [81082, 81098, 81066, 81116, 81097, 81114, 81069, 81071, 81100, 81077]
-              forward_ticks_samples: [268427, 267767, 266711, 267113, 267155, 266795, 266333, 266231, 266114, 266776]
-          run:
-            recorded_at: '2026-11-19T10:37:24Z'
-            context: dtln_aec.ReleaseSRAM+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_ReleaseSRAM
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: b-11
-            execution_job: d-12
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 1
-            test_result: PASS
-            max_absolute_error: 0
-            tolerance: 0.005
-            uart: model/benchmark_uart_sram_release.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            firmware_sha256: 92ea76636d3946bb4832a6bd3b43c28411d33e6e4a67f01b8fdded7c74613a75
-            input: Warm recurrent fixture checked against the integer TOSA reference
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method with guarded CPU kernels. Allocator peaks are cumulative since boot.
-    - network:
-        name: DTLN-aec stage2
-        pte: ai_layer/model.pte
-        method: stage2
-        operation: Time-domain enhancement and recurrent-state update
-        input_shapes: [[1, 1, 512], [1, 2, 128, 2], [1, 1, 512]]
-        output_shapes: [[1, 1, 512], [1, 2, 128, 2]]
-        samples_per_forward: 128
-        sample_rate_hz: 16000
-        block_deadline_ms: 8
-        float_boundary: true
-        quantization: int16 activations and per-channel int8 weights with float normalization
-      benchmark:
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: OSPI, clock_mhz: 100}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 6144
-              executorch:
-                method_pool_peak_bytes: 30884
-                temp_pool_peak_bytes: 255168
-            time:
-              ms: 11.4079375
-              cycles: 4563175
-              statistic: median
-              min_cycles: 4563153
-              max_cycles: 4563189
-              mean_cycles: 4563174.7
-              forward_ms: 39.24001
-              forward_timer_hz: 400000000
-              cycles_samples: [4563153, 4563181, 4563172, 4563184, 4563178, 4563173, 4563177, 4563189, 4563172, 4563168]
-              forward_ticks_samples: [15696801, 15695692, 15694929, 15695539, 15696714, 15694823, 15696243, 15696105, 15695903, 15696537]
-          run:
-            recorded_at: '2026-11-19T10:01:40Z'
-            context: dtln_aec.Release+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_Release
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: rb-4
-            execution_job: d-5
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 2
-            test_result: FAIL
-            max_absolute_error: 0.000531930
-            tolerance: 0.0005
-            uart: model/benchmark_uart_ospi_initial.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            input: Warm recurrent fixture from model/model_test_data.h
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method. Allocator peaks are cumulative since boot. The initial check compares the board with pre-Vela fake quantization.
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: SRAM0}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 6144
-              executorch:
-                method_pool_peak_bytes: 30884
-                temp_pool_peak_bytes: 255168
-            time:
-              ms: 0.6347375
-              cycles: 253895
-              statistic: median
-              min_cycles: 253842
-              max_cycles: 253938
-              mean_cycles: 253888.9
-              forward_ms: 6.8350275
-              forward_timer_hz: 400000000
-              cycles_samples: [253861, 253911, 253842, 253865, 253895, 253888, 253898, 253896, 253895, 253938]
-              forward_ticks_samples: [2735041, 2736032, 2733171, 2733925, 2733974, 2731967, 2734048, 2733772, 2734513, 2734384]
-          run:
-            recorded_at: '2026-11-19T10:17:04Z'
-            context: dtln_aec.ReleaseSRAM+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_ReleaseSRAM
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: rb-6
-            execution_job: d-7
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 2
-            test_result: FAIL
-            max_absolute_error: 0.000531930
-            tolerance: 0.0005
-            uart: model/benchmark_uart_sram_initial.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            input: Warm recurrent fixture from model/model_test_data.h
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method. Allocator peaks are cumulative since boot. The initial check compares the board with pre-Vela fake quantization.
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: SRAM0}
-              activations: {type: SRAM0}
-          measurements:
-            memory:
-              model_bytes: 1763792
-              input_tensor_bytes: 6144
-              executorch:
-                method_pool_peak_bytes: 30884
-                temp_pool_peak_bytes: 255168
-            time:
-              ms: 0.63473125
-              cycles: 253892.5
-              statistic: median
-              min_cycles: 253841
-              max_cycles: 253912
-              mean_cycles: 253885.4
-              forward_ms: 1.07160375
-              forward_timer_hz: 400000000
-              cycles_samples: [253911, 253908, 253841, 253845, 253862, 253890, 253900, 253912, 253891, 253894]
-              forward_ticks_samples: [429389, 428816, 428650, 428680, 428231, 429142, 427613, 427749, 428075, 428633]
-          run:
-            recorded_at: '2026-11-19T10:37:24Z'
-            context: dtln_aec.ReleaseSRAM+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_ReleaseSRAM
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: b-11
-            execution_job: d-12
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            warmup: 2
-            samples: 10
-            pmu_cross_check: Cycle count equals active cycles for all measured invocations
-            pmu_overflow: 0
-            npu_invocations_per_forward: 2
-            test_result: PASS
-            max_absolute_error: 0
-            tolerance: 0.0005
-            uart: model/benchmark_uart_sram_release.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            firmware_sha256: 92ea76636d3946bb4832a6bd3b43c28411d33e6e4a67f01b8fdded7c74613a75
-            input: Warm recurrent fixture checked against the integer TOSA reference
-            timing_scope: Summed delegate PMU cycles and complete adapter ticks per independent method with guarded CPU kernels. Allocator peaks are cumulative since boot.
-    - network:
-        name: DTLN-aec synthetic streaming
-        operation: Generate synchronized mic and far-end test samples, cancel echo and check the resulting samples
-        input_shapes: [[128], [128]]
-        output_shape: [128]
-        samples_per_forward: 128
-        sample_rate_hz: 16000
-        block_deadline_ms: 8
-      benchmark:
-        - platform:
-            os: RTX5
-            cpu: Cortex-M55
-            memory:
-              weights: {type: SRAM0}
-              activations: {type: SRAM0}
-          measurements:
-            time:
-              ms: 2.0631575
-              statistic: max
-              forward_timer_hz: 400000000
-          run:
-            recorded_at: '2026-11-19T10:37:24Z'
-            context: dtln_aec.ReleaseSRAM+DevKit-E8
-            target: DevKit-E8@DTLN_AEC_ReleaseSRAM
-            device: AE822FA0E5597LS0
-            core: M55_HP
-            npu: Ethos-U85
-            macs: 256
-            compiler: AC6@6.24.0
-            optimize: -O3 -ffast-math
-            build_job: b-11
-            execution_job: d-12
-            cpu_clock_mhz: 400
-            npu_clock_mhz: 400
-            samples: 9640
-            test_result: PASS
-            uart: model/benchmark_uart_sram_release.txt
-            model_sha256: 1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05
-            firmware_sha256: 92ea76636d3946bb4832a6bd3b43c28411d33e6e4a67f01b8fdded7c74613a75
-            input: Repeated five-second synthetic episodes with separate recurrent initialization at silent replay boundaries
-            measurement_source: Maximum timer ticks from stream_stats after 9640 completed hops and 15 passing case suites
-            timing_scope: Complete processing from source generation after pacing through both methods, DSP and fake sink checks. Excludes source sleep and UART reporting.
+  - network:
+      name: DTLN-aec stage1
+      pte: ai_layer/model.pte
+      method: stage1
+      operation: Spectral mask and recurrent-state update
+      input_shapes:
+      - - 1
+        - 1
+        - 257
+      - - 1
+        - 2
+        - 128
+        - 2
+      - - 1
+        - 1
+        - 257
+      output_shapes:
+      - - 1
+        - 1
+        - 257
+      - - 1
+        - 2
+        - 128
+        - 2
+      samples_per_forward: 128
+      sample_rate_hz: 16000
+      block_deadline_ms: 8
+      float_boundary: true
+      quantization: Linear operators use int16 activations and per-channel int8 weights. LSTM state updates
+        and nonlinearities use float32.
+    benchmark:
+    - platform:
+        os: RTX5
+        cpu: Cortex-M55
+        memory:
+          weights:
+            type: SRAM0
+          activations:
+            type: SRAM0
+      measurements:
+        memory:
+          model_bytes: 1742288
+          input_tensor_bytes: 4104
+          executorch:
+            method_pool_peak_bytes: 22524
+            temp_pool_peak_bytes: 2320
+        time:
+          ms: 0.166475
+          cycles: 66590.0
+          statistic: median
+          min_cycles: 66580
+          max_cycles: 66610
+          mean_cycles: 66594.4
+          forward_ms: 1.7519375
+          forward_timer_hz: 400000000
+          cycles_samples:
+          - 66602
+          - 66584
+          - 66592
+          - 66580
+          - 66588
+          - 66606
+          - 66610
+          - 66588
+          - 66584
+          - 66610
+          forward_ticks_samples:
+          - 701408
+          - 699890
+          - 700562
+          - 701102
+          - 700502
+          - 699956
+          - 701066
+          - 700562
+          - 702020
+          - 700988
+      run:
+        recorded_at: '2026-11-23T10:58:24+00:00'
+        context: dtln_aec.ReleaseSRAM+DevKit-E8
+        target: DevKit-E8@DTLN_AEC_ReleaseSRAM
+        device: AE822FA0E5597LS0
+        core: M55_HP
+        npu: Ethos-U85
+        macs: 256
+        compiler: AC6@6.24.0
+        optimize: -O3 -ffast-math
+        build_job: b-15
+        execution_job: r-16
+        cpu_clock_mhz: 400
+        npu_clock_mhz: 400
+        warmup: 2
+        samples: 10
+        pmu_cross_check: Cycle count equals active cycles for all measured invocations
+        pmu_overflow: 0
+        npu_invocations_per_forward: 3
+        test_result: PASS
+        max_absolute_error: 1.5e-08
+        tolerance: 0.005
+        uart: model/benchmark_uart_sram_affine.txt
+        model_sha256: ae9ea923ac96fd7536e0b780b1df73ff9710171881ef91677868a7cabd6a91c7
+        input: Warm recurrent fixture from model/model_test_data.h
+        timing_scope: Independent method median. Method and temp pool peaks are cumulative since boot.
+  - network:
+      name: DTLN-aec stage2
+      pte: ai_layer/model.pte
+      method: stage2
+      operation: Time-domain enhancement and recurrent-state update
+      input_shapes:
+      - - 1
+        - 1
+        - 512
+      - - 1
+        - 2
+        - 128
+        - 2
+      - - 1
+        - 1
+        - 512
+      output_shapes:
+      - - 1
+        - 1
+        - 512
+      - - 1
+        - 2
+        - 128
+        - 2
+      samples_per_forward: 128
+      sample_rate_hz: 16000
+      block_deadline_ms: 8
+      float_boundary: true
+      quantization: Linear operators use int16 activations and per-channel int8 weights. LSTM state updates
+        and nonlinearities use float32.
+    benchmark:
+    - platform:
+        os: RTX5
+        cpu: Cortex-M55
+        memory:
+          weights:
+            type: SRAM0
+          activations:
+            type: SRAM0
+      measurements:
+        memory:
+          model_bytes: 1742288
+          input_tensor_bytes: 6144
+          executorch:
+            method_pool_peak_bytes: 48140
+            temp_pool_peak_bytes: 255168
+        time:
+          ms: 0.599005
+          cycles: 239602.0
+          statistic: median
+          min_cycles: 239596
+          max_cycles: 239614
+          mean_cycles: 239604.7
+          forward_ms: 2.3983075
+          forward_timer_hz: 400000000
+          cycles_samples:
+          - 239596
+          - 239614
+          - 239607
+          - 239608
+          - 239602
+          - 239613
+          - 239601
+          - 239602
+          - 239602
+          - 239602
+          forward_ticks_samples:
+          - 958048
+          - 959242
+          - 959404
+          - 959758
+          - 958918
+          - 959860
+          - 959632
+          - 959752
+          - 958504
+          - 958942
+      run:
+        recorded_at: '2026-11-23T10:58:24+00:00'
+        context: dtln_aec.ReleaseSRAM+DevKit-E8
+        target: DevKit-E8@DTLN_AEC_ReleaseSRAM
+        device: AE822FA0E5597LS0
+        core: M55_HP
+        npu: Ethos-U85
+        macs: 256
+        compiler: AC6@6.24.0
+        optimize: -O3 -ffast-math
+        build_job: b-15
+        execution_job: r-16
+        cpu_clock_mhz: 400
+        npu_clock_mhz: 400
+        warmup: 2
+        samples: 10
+        pmu_cross_check: Cycle count equals active cycles for all measured invocations
+        pmu_overflow: 0
+        npu_invocations_per_forward: 5
+        test_result: PASS
+        max_absolute_error: 0.0
+        tolerance: 0.0005
+        uart: model/benchmark_uart_sram_affine.txt
+        model_sha256: ae9ea923ac96fd7536e0b780b1df73ff9710171881ef91677868a7cabd6a91c7
+        input: Warm recurrent fixture from model/model_test_data.h
+        timing_scope: Independent method median. Method and temp pool peaks are cumulative since boot.

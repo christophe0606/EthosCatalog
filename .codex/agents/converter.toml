@@ -48,6 +48,14 @@ can run on Ethos and subnetworks that can only run on Cortex-M.
 It is only if the executorch flow cannot partition the network 
 and fail that you can do the partionning and explain the reason.
 
+If there is a speed constraint (real-time constraint for instance)
+and it requires to force some kernels on the CPU rather than on Ethos
+because it is more efficient, then you can do the change. First you should try
+to change the datatype of those kernels so that executorch partitionning will
+choose to run them on the CPU (float for instance). If you cannot force
+the executorch partitionning to run those kernels on CPU, then in this case you may
+do the partitionning yourself but you must document and explain why it was needed.
+
 Memory buffers for the Ethos and the executorch layer must be 
 big enough or there may be crashes and stalls at runtime.
 

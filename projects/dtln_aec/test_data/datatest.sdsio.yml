@@ -1,0 +1,17 @@
+sdsio:
+  interface:
+    usb:
+  workdir: ./sds_run
+  metadir: .
+  streams:
+    - name: Dtln_In
+      view: signal
+    - name: Dtln_Out
+      view: signal
+  play:
+    - step: far-end
+      labels: [0]
+    - step: near-end
+      labels: [1]
+    - step: double-talk
+      labels: [2]

@@ -29,34 +29,31 @@ The resulting output buffering alignment is 384 samples,
 
 ## Quantization and fidelity
 
-The port uses int16 activations and per-channel int8 weights for learned
-affine and recurrent computation. `InstantNormalization` and `LogPower`
-retain float32 through the quantizer's module exclusions. ExecuTorch selects
-the CPU/NPU partition boundaries automatically. No imported package is edited.
-Calibration uses 192 synthetic recurrent frames and MinMax observers.
-Held-out per-method evaluation uses 128 frames with a different random seed.
-The stage2 per-method error feeds float stage1 output, while each quantized
-method propagates its own recurrent state. The full pipeline evaluation feeds
-quantized stage1 output into quantized stage2 and propagates both states.
+The port quantizes the learned linear operators to int16 activations
+and per-channel int8 weights. Spectral features, normalization, gate
+nonlinearities and LSTM state updates use float32. The exported hidden
+and cell states therefore retain their own precision between hops.
+ExecuTorch selects the CPU and Ethos-U85 partitions automatically.
 
-| Metric | stage1 | stage2 |
-| --- | --- | --- |
-| Float shared-state maximum error with both signals nonzero | 0.00002861 | 0.00001526 |
-| PTQ output mean absolute error | 0.00173218 | 0.00016711 |
-| PTQ output maximum absolute error | 0.0836005 | 0.00405368 |
-| PTQ state mean absolute error | 0.0246789 | 0.0117512 |
-| PTQ state maximum absolute error | 2.24620 | 1.13061 |
+MinMax observers see 2,000 continuous frames of synthetic audio. The
+16-second sequence varies level, pitch and echo delays and carries the
+recurrent state through talk and silence transitions. The 128-frame
+per-method evaluation uses a different seed and supplies the float stage1
+signal to stage2. The separate audio regression carries both quantized
+stages' own recurrent states and feeds stage1 output directly to stage2.
+
+| Held-out metric | Stage 1 | Stage 2 |
+| --- | ---: | ---: |
+| Output mean absolute error | 0.00086121 | 0.00014885 |
+| Output maximum absolute error | 0.03142327 | 0.00586574 |
+| State mean absolute error | 0.00613399 | 0.00765107 |
+| State maximum absolute error | 0.38628960 | 0.63264656 |
 
 `conversion_metrics.json` and `network.yml` record these measurements.
-`heldout_metrics.json` compares an independent five-second fake source with
-silence, echo-only, double talk, near-end-only, and silence sections. It omits
-250 ms at each section boundary for the section RMS metrics and compares the
-whole signal for global error. The builtin TFLite reference runs with default
-delegates disabled so its execution path is reproducible. Float global audio
-MAE against this reference is 0.00017957 and PTQ MAE is 0.00263472.
-Echo-only input RMS 0.048997 becomes 0.017576 after PTQ. Double-talk residual
-RMS is 0.010827. These synthetic checks establish numeric and demo behavior.
-Speech-quality scores require appropriate recorded and labelled audio.
+`heldout_metrics.json` measures the independent five-second pattern.
+The [USB validation](../VALIDATION.md#usb-signal-processing-results)
+compares the longer continuous stream and recorded clips against the
+original TFLite model.
 
 The fake source formula is in `test_patterns.py` for reuse by the board demo.
 Independent benchmark fixtures in `model_test_data.h` and
@@ -70,23 +67,11 @@ the acceptance limits.
 
 ## Delegation and memory
 
-The PTE is 1,763,792 bytes and occupies the OSPI slot beginning at
-`0xC3C00000`. `stage1` has one Ethos delegate and `stage2` has two.
-Their planned method tensor buffers are 7,232 and 12,304 bytes respectively.
-Runtime metadata, allocator alignment and NPU scratch add to these sizes.
-The Vela summaries for the three delegates report the following compiler
-estimates. These require independent board timing and allocator measurements.
-`vela_report.txt` preserves the matching compiler console summaries.
-
-| Delegate in execution order | SRAM KiB | Encoded constants KiB | MACs | DRAM traffic MB/frame |
-| --- | --- | --- | --- | --- |
-| stage1 learned/recurrent | 5.05 | 475.70 | 496770 | 0.47 |
-| stage2 shared encoder | 249.19 | 251.19 | 524288 | 0.48 |
-| stage2 learned/recurrent/decoder | 8.00 | 952.39 | 1053184 | 0.93 |
-
-Use allocator high-water marks for pool sizing. CPU floating normalization
-and log operations remain in the exported methods. The shared encoder is
-automatically delegated for both signals and its constant storage is shared.
+The 1,742,288-byte PTE occupies the OSPI slot at `0xC3C00000`. The
+real-time target checks the PTE and stages it in SRAM0. Stage1 runs three
+Ethos-U85 delegates and stage2 runs five. The generated
+`partition_summary.json` lists method buffers and CPU operators.
+`vela_report.txt` records the compiler estimates for the eight delegates.
 
 ## Reproduction
 
@@ -94,8 +79,8 @@ Run these from the repository root in the configured Python environment.
 TensorFlow 2.20 is needed for source TFLite validation and weight extraction.
 
 ```powershell
-.venv/Scripts/python.exe projects/dtln_aec/model/quantize.py
-.venv/Scripts/python.exe scripts/create_ai_layer.py --project dtln_aec
+.venv/Scripts/python.exe scripts/create_ai_layer.py --project dtln_aec --quantize
+.venv/Scripts/python.exe projects/dtln_aec/model/generate_integer_fixtures.py
 .venv/Scripts/python.exe projects/dtln_aec/model/validate_conversion.py
 .venv/Scripts/python.exe scripts/validate_networks.py projects/dtln_aec/model/network.yml
 ```
@@ -104,7 +89,7 @@ Keep generated caches and the AI layer together after requantization.
 
 ## Integer reference and board fixtures
 
-The original warm-state fixtures in `model_test_data.h` and
+For the previous quantization policy, the warm-state fixtures in `model_test_data.h` and
 `method_fixtures.npz` contain pre-Vela PTQ outputs. The board's integer
 arithmetic exceeded their proposed tight limits. An independent integer TOSA
 reference run reproduces every observed board discrepancy against those PTQ
@@ -147,6 +132,15 @@ agreement for the supplied tensors. The continuous fake-source checks verify
 signal behavior while propagating the board's recurrent states.
 
 ## Numerical findings
+
+On the 30-second regression, a float stage1 followed by the original
+quantized stage2 reproduced the near-end collapse on the host. With the
+original quantized stage1 and float stage2, near-end gain stayed within
+1.3 dB of the clean signal. The old quantizer rounded the packed hidden
+and cell tensor on every hop using a single activation scale. It also
+quantized the spectral inputs before log-power. Quantizing only linear
+operators avoids both sources of rounding while keeping the matrix
+multiplications on the accelerator.
 
 The initial full-operation a16w8 PTQ caused substantial echo-only degradation,
 with RMS 0.048997 becoming 0.048795. Keeping log and normalization in float32

@@ -47,7 +47,7 @@ int measure(unsigned stage)
     const float *expected_signal = stage == 1 ? stage1_integer_output0 : stage2_integer_output0;
     const float *expected_state = stage == 1 ? stage1_integer_output1 : stage2_integer_output1;
     const unsigned width = stage == 1 ? 257 : 512;
-    const unsigned delegates = stage == 1 ? 1 : 2;
+    const unsigned delegates = stage == 1 ? DTLN_STAGE1_DELEGATES : DTLN_STAGE2_DELEGATES;
     const float signal_tolerance = stage == 1 ? 0.005f : 0.0005f;
     bool outputs_finite = true;
     bool pmu_valid = true;

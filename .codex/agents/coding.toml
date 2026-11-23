@@ -26,7 +26,7 @@ CMSIS Stream section gives detailed guidance on when a node can be considered re
 
 ## Inference scheduling
 
-Use the network's inference time to choose where inference runs:
+Use the network's inference time to choose where inference runs in CMSIS Stream:
 
 - In the dataflow, if it can meet the pipeline's real-time deadlines.
 - Outside the dataflow on an event thread, if it cannot.

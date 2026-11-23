@@ -1,8 +1,107 @@
-# Streaming demo validation
+# DTLN-aec validation
+
+## LCD replay verification
+
+Both RGB565 framebuffers use 1,536,000 bytes of SRAM0 at `0x0226ADE0`.
+SRAM0 usage totals 4,070,896 bytes, including the model and inference pools.
+Build `b-26` and load `r-27` confirmed visible labels and moving waveforms
+during the 30-second synthetic replay. All 3,756 hops met the 8 ms deadline,
+with a maximum of 4.441 ms of work and 290 LCD updates.
+
+Build `b-28` and load `r-29` rotated the landscape display by 180 degrees.
+The user confirmed the labels were upright. The three recorded clips completed
+all 4,081 hops with zero deadline misses, a maximum of 4.456 ms of work,
+and 317 LCD updates. Both runs reported zero display errors. All four
+captures matched the earlier SHA-256 hashes.
+
+The earlier layout at `0x02400000` reported successful controller updates
+while the physical LCD was black. The SRAM0 measurements above include
+visual confirmation.
+
+[Manual startup order](test_data/README.md#run-the-usb-demo-manually)
+
+## USB signal processing results
+
+ReleaseSRAM build `b-15` and load `r-16` ran the corrected PTE with CRC
+`31C8406C`. The model quantizes the linear layers and keeps the LSTM
+state and nonlinearities in float32. Both stages passed the integer TOSA
+startup fixtures. [Conversion and calibration](model/CONVERSION.md#quantization-and-fidelity)
+
+The continuous 30-second USB replay passed the signal regression checks
+with one uninterrupted recurrent state per stage. The original comparison
+uses the float DTLN-aec 128 TFLite models on the same input and alignment.
+
+| Synthetic measurement | Corrected board | Original float |
+| --- | ---: | ---: |
+| Echo-only ERLE across six repeats | 4.40–4.94 dB | 3.74–4.63 dB |
+| Near-end gain, repeat 1 | −1.02 dB | −1.07 dB |
+| Near-end gain, repeat 6 | −1.49 dB | −1.61 dB |
+| Double-talk error reduction, repeat 6 | 8.76 dB | 8.67 dB |
+
+The 120-second continuous pre-Vela host run also passed the signal checks.
+Its final near-end gain was −1.55 dB versus −1.62 dB for float.
+
+On three independent recorded speech clips, waveform RMSE against the
+original float output improved in every case.
+
+| Clip | Previous board RMSE | Corrected board RMSE |
+| --- | ---: | ---: |
+| Far-end only | 0.0002034 | 0.0000460 |
+| Near-end only | 0.0487987 | 0.0084066 |
+| Double-talk | 0.0225268 | 0.0031717 |
+
+Recorded far-end-only reduction remained close to the original at 49.6 dB
+versus 49.4 dB. On the dedicated test runs, the board completed all
+3,756 synthetic hops and all 4,081 recorded hops with valid timestamps
+and zero misses against the 8 ms budget. The worst completed hop was
+4.505 ms, including board-side SDS access. An earlier recorded replay
+overlapped host validation jobs and had three timing outliers. It still
+captured every record.
+
+## USB results before the accuracy fix
+
+The DevKit-E8 ran `DTLN_AEC_ReleaseSRAM` with PTE CRC `5AE153B6`. The
+synthetic USB replay contained six successive five-second episodes in one
+stream. Both the board and the original 128-unit float TFLite model carried
+their recurrent state across the entire replay. The comparison aligned the
+waveforms and measured the center 500 ms of each one-second section.
+[Reproduction steps](test_data/README.md#measure-echo-cancellation-with-a-known-clean-signal)
+
+| Repeat | Echo-only ERLE, board / float (dB) | Double-talk error reduction, board / float (dB) | Near-end gain, board / float (dB) |
+| --- | ---: | ---: | ---: |
+| 1 | 25.77 / 3.74 | 13.11 / 12.97 | -0.57 / -1.07 |
+| 2 | 22.79 / 4.23 | 11.39 / 10.08 | -1.12 / -1.48 |
+| 3 | 24.00 / 4.63 | 10.51 / 9.00 | -3.78 / -1.54 |
+| 4 | 22.25 / 4.63 | 10.40 / 8.73 | -28.00 / -1.58 |
+| 5 | 23.78 / 4.59 | 10.21 / 8.67 | -29.38 / -1.60 |
+| 6 | 22.97 / 4.57 | 10.13 / 8.67 | -29.29 / -1.61 |
+
+Near-end RMS on the board dropped from 0.07180 in repeat 1 to 0.00263
+in repeat 6, with clean RMS 0.07671. Both tested silence windows stayed at
+zero on the board in every repeat. All 3,756 SDS hops arrived with the
+expected timestamps, and the production graph recorded zero misses
+against the 8 ms hop budget. The worst completed hop took 2.022 ms.
+The near-end suppression makes this model unsuitable for sustained
+echo cancellation as measured on this pattern.
+
+The saved pre-Vela quantized methods also lost near-end level on the same
+sequence in the host validation loop. Gain reached -9.40 dB in repeat 6.
+The attenuation therefore appears before Vela compilation and was more severe
+in the deployed PTE.
+
+On the three recorded speech clips, the board reduced far-end-only
+mic RMS by 45.71 dB and the original by 49.40 dB. In the near-end-only
+clip, board output was 2.33 dB below the input mic RMS and the original
+was 0.07 dB below it. In the double-talk clip, board output RMS was
+1.34 dB below the original output. These recorded clips lack isolated
+clean near-end ground truth, so the double-talk error-to-clean measurement
+comes from the synthetic test.
+
+## Earlier synthetic streaming demo
 
 ReleaseSRAM build `b-11` and load `d-12` passed on Alif DevKit-E8.
-This report records the synthetic acceptance cases, host scheduler test,
-and final board evidence.
+This report records the earlier synthetic replay firmware and its board
+measurements. The current USB replay procedure is in the [SDS test guide](test_data/README.md).
 
 ## Graph and bounded storage
 

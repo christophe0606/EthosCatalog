@@ -30,10 +30,19 @@
 #define RTE_CMSIS_RTOS2_RTX5_SOURCE     /* CMSIS-RTOS2 Keil RTX5 Source */
 /* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0 */
 #define RTE_ETHOS_U_CORE_DRIVER
+/* ARM::SDS:IO:USB&MDK USB@3.0.0 */
+#define RTE_SDS_IO                              /* SDSIO */
+#define RTE_SDS_IO_CLIENT                       /* SDSIO-Client */
+#define RTE_SDS_IO_CLIENT_USB                   /* SDSIO-Client via USB */
+#define RTE_SDS_IO_CLIENT_USB_MDK               /* SDSIO-Client via USB - MDK-Middleware USB */
+/* ARM::SDS:Stream&CMSIS-RTOS2@3.1.0 */
+#define RTE_SDS                                 /* Synchronous Data Stream (SDS) */
 /* AlifSemiconductor::BSP:External peripherals:CAMERA Sensor MT9M114@2.2.0 */
 #define RTE_Drivers_CAMERA_SENSOR_MT9M114            /* Driver CAMERA Sensor */
 /* AlifSemiconductor::BSP:External peripherals:Ethernet PHY@2.2.0 */
 #define RTE_Drivers_PHY_GENERIC           /* Driver PHY generic */
+/* AlifSemiconductor::BSP:External peripherals:GT911 Touch Controller@2.2.0 */
+#define RTE_Drivers_GT911
 /* AlifSemiconductor::BSP:External peripherals:ILI9806E LCD panel@2.2.0 */
 #define RTE_Drivers_MIPI_DSI_ILI9806E_PANEL    /* Driver ILI9806E LCD panel*/
 /* AlifSemiconductor::BSP:OSPI FLASH XIP:core@2.2.0 */
@@ -75,8 +84,18 @@
 #define RTE_Drivers_MIPI_DSI               /* Driver MIPI DSI */
 /* AlifSemiconductor::Device:SOC Peripherals:PINCONF@2.2.0 */
 #define RTE_Drivers_LL_PINCONF              /* Driver PinPAD and PinMux */
+/* Keil::USB&MDK:CORE@8.0.2 */
+#define RTE_USB_Core                    /* USB Core */
+/* Keil::USB&MDK:Device:Custom Class@8.0.2 */
+#define RTE_USB_Device_CustomClass_0    /* USB Device Custom Class instance 0 */
+
+/* Keil::USB&MDK:Device@8.0.2 */
+#define RTE_USB_Device_0                /* USB Device 0 */
+
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable add@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_ADD     /* ExecuTorch op_add */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable cat@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_CAT     /* ExecuTorch op_cat */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable log@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_LOG     /* ExecuTorch op_log */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable mean@1.4.1 */
@@ -87,8 +106,20 @@
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_POW     /* ExecuTorch op_pow */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable rsqrt@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_RSQRT     /* ExecuTorch op_rsqrt */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable select_copy@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_SELECT_COPY     /* ExecuTorch op_select_copy */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable sigmoid@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_SIGMOID     /* ExecuTorch op_sigmoid */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable split_with_sizes_copy@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_SPLIT_WITH_SIZES_COPY     /* ExecuTorch op_split_with_sizes_copy */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable sub@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_SUB     /* ExecuTorch op_sub */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable tanh@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_TANH     /* ExecuTorch op_tanh */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable unsqueeze_copy@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_UNSQUEEZE_COPY     /* ExecuTorch op_unsqueeze_copy */
+/* PyTorch::Machine Learning:ExecuTorch Operators:Portable view_copy@1.4.1 */
+#define RTE_ML_EXECUTORCH_OP_PORTABLE_VIEW_COPY     /* ExecuTorch op_view_copy */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Quantized dequantize@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_QUANTIZED_DEQUANTIZE     /* ExecuTorch op_dequantize */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Quantized quantize@1.4.1 */

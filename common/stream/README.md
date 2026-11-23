@@ -22,6 +22,8 @@ DOT and (when Graphviz is available) PDF.
 | HannWindow | `float[n]` audio -> `float[n]` audio | Owns periodic Hann coefficients |
 | FFT | `float[n]` audio -> `float[n]` packed RFFT | Power-of-two n from 32 to 4096 |
 | RFFTMagnitude | `float[n]` CMSIS-DSP fast RFFT packing -> `float[n/2+1]` bins | DC/Nyquist included; configurable amplitude scale |
+| SdsSource | SDS record -> `T[n]` | Read handle, optional timeslot output and retry policy |
+| SdsSink | `T[n]` -> SDS record | Write handle, timeslot callback and optional retry policy |
 
 Application nodes live in their project's `nodes/` and `nodes_impl/` folders.
 Each template's `EthosGain`, `SendToLCD` and `LCD` belong there: its model
@@ -132,3 +134,50 @@ queued spectra, bounded pool exhaustion, rejected publications, LCD event handli
 and the original DSP/renderer cases. Generator rate-balancing checks run with
 `uv run python -m unittest discover -s tests -p test_stream_graph.py`. Hardware validation is recorded in
 `documentation/audio-spectrum-validation.md`.
+
+## SDS playback and recording
+
+`SdsSource(name, the_type, samples, params)` and `SdsSink(name, the_type,
+samples, params)` take a CMSIS Stream type such as `CType(SINT16)` and a
+positive sample count. They expose the dataflow ports `o` and `i`, respectively.
+Each firing transfers one SDS record of `samples * sizeof(T)` bytes. Choose
+trivially copyable sample types with a byte layout that matches the SDS file
+metadata. Interleaved channels can share one record by including all channel
+values in the count. CMSIS Stream can also reblock between different source
+and sink rates.
+
+`params` is a C++ constructor argument expression. For example, pass
+`"replayParams"` or `"recordParams"` in Python and declare those variables as
+`SdsSourceParams` and `SdsSinkParams` in the application's `app_config.hpp`
+after including `SdsEndpoint.hpp`. The nodes use the ARM SDS 3.x Stream API.
+The application chooses the SDSIO transport, initializes SDS and opens each
+stream with `sdsModeRead` or `sdsModeWrite` before initializing the graph. Use
+one node per handle and size the SDS stream buffer for at least a full record
+including its SDS header. Keep the handles open until scheduling finishes,
+then close them through SDS to flush pending capture data. A new set of stream
+handles can be supplied when the application initializes the graph again.
+[ARM SDS stream lifecycle](https://arm-software.github.io/SDS-Framework/main/theory.html)
+
+The sink calls its application clock once per firing and uses the same
+timeslot across retries. The source optionally reports the latest successfully
+read timeslot to a `uint32_t*` in `SdsSourceParams`. The application supplies any
+playback pacing. Both nodes leave the FIFO sample count unchanged until SDS
+accepts or returns a complete record. The optional bounded retry policy lets
+the application yield or wait on temporary starvation, backpressure, or SDS
+lock contention. A wait callback may cancel by returning `false`. End of stream
+and cancellation return `CG_STOP_SCHEDULER`. Size mismatches and SDS I/O errors
+return `CG_BUFFER_ERROR`. With retries exhausted, `SDS_NO_DATA` returns
+`CG_BUFFER_UNDERFLOW` and `SDS_NO_SPACE` returns `CG_BUFFER_OVERFLOW`.
+`lastSdsStatus()` reports the most recent SDS API result. Choose a playback
+record count that completes a schedule cycle when the graph reblocks data, or
+handle any remaining samples in the application.
+
+An optional record observer receives each successful record once on the
+scheduler thread. Copy any data needed after the callback returns. Keep the
+callback short to avoid delaying the scheduler.
+
+The host check generates synchronous and asynchronous graphs, builds both
+against the installed SDS pack header, and uses a test double for SDS I/O.
+Run `uv run python tests/run_sds_tests.py` with `CMSIS_PACK_ROOT` set and a host
+Clang compiler on `PATH`. On Windows, `--vcvars` accepts Visual Studio's
+`vcvarsall.bat` to use MSVC.

@@ -1,0 +1,8 @@
+sds:
+  name: DTLN microphone and loopback
+  sample-frequency: 16000
+  content:
+    - value: microphone
+      type: float
+    - value: loopback
+      type: float

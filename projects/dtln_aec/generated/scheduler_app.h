@@ -26,7 +26,7 @@ extern "C"
 /* Node identifiers */
 #define STREAM_APP_NB_IDENTIFIED_NODES 0
 
-#define STREAM_APP_SCHED_LEN 14
+#define STREAM_APP_SCHED_LEN 15
 
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);

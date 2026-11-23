@@ -32,6 +32,7 @@ solution:
           size: 0x04000000
       variables:
         - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
+        - DTLN-SDS-Layer: ${CMSIS_PACK_ROOT}/ARM/SDS/3.1.0/layer/sdsio/usb/sdsio_usb.clayer.yml
       target-set:
         - set: Debug
           images:

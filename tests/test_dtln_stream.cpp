@@ -5,18 +5,16 @@
 #include "EventQueue.hpp"
 #include "scheduler_app.h"
 #include "DtlnMethod.hpp"
-#include "dtln_test_pattern.hpp"
-#include "DtlnFakeSource.hpp"
+#include <array>
 #include <cassert>
 #include <complex>
 #include <cstdio>
+#include <fstream>
 #include <limits>
 #include <memory_resource>
 #include "arm_math.h"
 
 std::pmr::synchronized_pool_resource pool;
-uint32_t test_tick = 0, test_iterations = 0, test_limit = 628;
-bool test_delay_race = false, test_delay_error = false;
 void* arm_cmsis_stream::EventQueue::handlerData = nullptr;
 arm_cmsis_stream::EventQueue::AppHandler arm_cmsis_stream::EventQueue::handler = nullptr;
 std::atomic<bool> arm_cmsis_stream::EventQueue::handlerReady_ = false;
@@ -75,20 +73,51 @@ extern "C" void fft_forward(arm_rfft_fast_instance_f32* fft, float* in, float* o
 }
 static uint32_t calls[2]{};
 static bool inject_nan;
+constexpr size_t hop = DTLN_AUDIO_HOP_SAMPLES;
+constexpr size_t delay = DTLN_AUDIO_FRAME_SAMPLES - hop;
+using StereoHop = std::array<float, 2 * hop>;
+using MonoHop = std::array<float, hop>;
+static std::vector<StereoHop> inputRecords;
+static std::vector<MonoHop> outputRecords;
+static size_t nextRecord;
+static uint32_t timeslot;
+SdsSourceParams dtlnReplayParams;
+SdsSinkParams dtlnRecordParams;
+
+extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t bytes) {
+    assert(id == &inputRecords && bytes == sizeof(StereoHop));
+    if (nextRecord == inputRecords.size()) return SDS_EOS;
+    *slot = uint32_t(nextRecord * 8);
+    std::memcpy(output, inputRecords[nextRecord++].data(), bytes);
+    return int32_t(bytes);
+}
+
+extern "C" int32_t sdsWrite(sdsId_t id, uint32_t slot, const void* input, uint32_t bytes) {
+    assert(id == &outputRecords && bytes == sizeof(MonoHop));
+    assert(slot == outputRecords.size() * 8);
+    outputRecords.emplace_back();
+    std::memcpy(outputRecords.back().data(), input, bytes);
+    return int32_t(bytes);
+}
+
+static uint32_t recordTimeslot(void*) { return timeslot; }
+
+static float inputSample(int index, size_t channel) {
+    if (index < 0) return 0.0f;
+    return inputRecords[index / hop][2 * (index % hop) + channel];
+}
+
 static int fake_forward(unsigned stage, const float* signal, const float* state,
                          const float* reference, float* output, float* next,
                          DtlnForwardTiming* timing) {
     assert(stage == 1 || stage == 2);
-    constexpr unsigned episode_hops = dtln::TestPattern::cycle_samples / DTLN_AUDIO_HOP_SAMPLES;
-    assert(state[0] == float(calls[stage - 1] % episode_hops));
+    assert(state[0] == float(calls[stage - 1]));
     ++calls[stage - 1];
     const unsigned size = stage == 1 ? 257 : 512;
-    if (stage == 2) {
-        static const dtln::TestPattern pattern;
+    if (stage == 2 && !inject_nan) {
         for (unsigned i = 0; i < size; ++i) {
-            const int index = int((calls[1] - 1) * 128 + i) - 384;
-            const float expected = index < 0 ? 0.0f : pattern.at(unsigned(index)).reference;
-            assert(std::fabs(reference[i] - expected) < 1e-7f);
+            const int index = int((calls[1] - 1) * hop + i) - int(delay);
+            assert(std::fabs(reference[i] - inputSample(index, 1)) < 1e-7f);
         }
     }
     for (unsigned i = 0; i < size; ++i) {
@@ -100,55 +129,70 @@ static int fake_forward(unsigned stage, const float* signal, const float* state,
     if (inject_nan) output[0] = std::numeric_limits<float>::quiet_NaN();
     return 0;
 }
-class Queue : public arm_cmsis_stream::EventQueue {
-    bool push(arm_cmsis_stream::Message&&) final { return true; }
-    bool isEmpty() final { return true; }
-    void clear() final {}
-    void execute() final {}
-};
-
-int main() {
+static void runGraph() {
+    calls[0] = calls[1] = 0;
+    nextRecord = 0;
+    timeslot = 0;
+    outputRecords.clear();
+    dtlnReplayParams = {&inputRecords, &timeslot};
+    dtlnRecordParams = {&outputRecords, recordTimeslot};
     StreamStats stats{};
     HardwareParams hardware{&stats, fake_forward};
     app_params_set_hardware(&hardware);
-    Queue queue;
-    assert(init_scheduler_app(&queue, &appParams) == CG_SUCCESS);
+    assert(init_scheduler_app(nullptr, &appParams) == CG_SUCCESS);
+    reset_fifos_scheduler_app(1);
     int error = 0;
-    scheduler_app(&error);
+    assert(scheduler_app(&error) == inputRecords.size());
     assert(error == CG_STOP_SCHEDULER);
-    assert(stats.output_blocks == 628 && stats.audio_blocks == 628);
-    assert(stats.stage1_calls == 628 && stats.stage2_calls == 628);
-    assert(stats.input_epoch == 2);
-    assert(stats.cycles_completed == 1 && stats.nonfinite_samples == 0);
-    assert(stats.deadline_misses == 0 && stats.source_late_frames == 0);
-    assert(stats.cases[0].samples == 8000 && stats.cases[4].samples == 8000);
-    for (const auto& value : stats.cases) {
-        assert(std::fabs(value.output_rms - value.input_rms) < 1e-6);
+    assert(outputRecords.size() == inputRecords.size());
+    assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());
+    // Unity mask, inverse FFT and one-quarter gain overlap-add to the input.
+    for (size_t frame = 0; frame < outputRecords.size(); ++frame) {
+        for (size_t i = 0; i < hop; ++i) {
+            const int index = int(frame * hop + i) - int(delay);
+            assert(std::fabs(outputRecords[frame][i] - inputSample(index, 0)) < 1e-6f);
+        }
     }
-    assert(stats.cases[0].output_rms < 1e-7 && stats.cases[4].output_rms < 1e-7);
     free_scheduler_app();
+}
+
+static void loadReplay(const char* name) {
+    std::ifstream file(name, std::ios::binary);
+    assert(file);
+    inputRecords.clear();
+    while (file.peek() != std::char_traits<char>::eof()) {
+        uint32_t header[2];
+        assert(file.read(reinterpret_cast<char*>(header), sizeof(header)));
+        assert(header[0] == inputRecords.size() * 8 && header[1] == sizeof(StereoHop));
+        inputRecords.emplace_back();
+        assert(file.read(reinterpret_cast<char*>(inputRecords.back().data()), sizeof(StereoHop)));
+    }
+    assert(!inputRecords.empty());
+}
+
+int main(int argc, char** argv) {
+    inputRecords.resize(12);
+    for (size_t frame = 0; frame < inputRecords.size(); ++frame) {
+        for (size_t i = 0; i < hop; ++i) {
+            inputRecords[frame][2 * i] = float(i % 5) / 50.0f;
+            inputRecords[frame][2 * i + 1] = -float((frame + i) % 7) / 60.0f;
+        }
+    }
+    runGraph();
+    for (int i = 1; i < argc; ++i) {
+        loadReplay(argv[i]);
+        runGraph();
+        printf("Verified %s, %zu SDS hops\n", argv[i], outputRecords.size());
+    }
     // Fast-math-safe finite guard must reject a bad model before the DSP.
     calls[0] = 0;
+    StreamStats stats{};
+    HardwareParams hardware{&stats, fake_forward};
     float a[257]{}, b[257]{}, result[257]{};
     arm_cmsis_stream::FIFO<float,257,1,0> fa(a), fb(b), fo(result);
     DtlnMethod<float,257,float,257,float,257> method(fa, fb, fo, {hardware, 1});
     assert(method.init() == CG_SUCCESS);
     inject_nan = true;
     assert(method.run() == -511);
-    float source_mic[128]{}, source_ref[128]{};
-    arm_cmsis_stream::FIFO<float,128,1,0> fm(source_mic), fr(source_ref);
-    DtlnFakeSource<float,128,float,128> source(fm, fr, {hardware});
-    assert(source.init() == CG_SUCCESS && source.run() == CG_SUCCESS);
-    test_tick += 20;
-    const auto late = stats.source_late_frames;
-    const auto before = test_tick;
-    assert(source.run() == CG_SUCCESS);
-    assert(stats.source_late_frames == late + 1 && test_tick == before + 1);
-    test_delay_race = true;
-    assert(source.run() == CG_SUCCESS);
-    assert(stats.source_late_frames == late + 2);
-    test_delay_race = false;
-    test_delay_error = true;
-    assert(source.run() == CG_OS_ERROR);
-    printf("DTLN generated scheduler PASS, 628 hops, aligned overlap-add, independent states, nonfinite guard\n");
+    printf("DTLN SDS scheduler PASS, channel ordering, timeslots, overlap-add and fresh model states\n");
 }

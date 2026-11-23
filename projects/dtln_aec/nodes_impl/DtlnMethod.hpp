@@ -22,10 +22,6 @@ public:
         const auto* reference = this->getReadBuffer2();
         auto* output = this->getWriteBuffer();
         auto& stats = *params_.hw_.stats;
-        if (input_epoch_ != stats.input_epoch) {
-            std::fill(std::begin(state_), std::end(state_), 0.0f);
-            input_epoch_ = stats.input_epoch;
-        }
         DtlnForwardTiming timing{};
         const int error = params_.hw_.forward(params_.stage, input, state_, reference,
                                                output, next_state_, &timing);
@@ -44,7 +40,6 @@ public:
     }
 private:
     DtlnMethodParams params_;
-    uint32_t input_epoch_ = 0;
     float state_[DTLN_STATE_VALUES]{}, next_state_[DTLN_STATE_VALUES]{};
     static bool finite(const float* values, unsigned count) {
         for (unsigned i = 0; i < count; ++i) {

@@ -47,3 +47,5 @@ when building or loading firmware for the board.
 * You are not allowed to modify files from imported libraries and packs. You can only modify files from this project.
 
 * Don't use inline asm since it will make a port to Cortex-A more difficult
+
+* You MUST NOT open a new vscode window or launch a new vscode instance

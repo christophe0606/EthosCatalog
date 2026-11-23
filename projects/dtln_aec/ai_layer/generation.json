@@ -1,15 +1,15 @@
 {
   "project": "projects/dtln_aec/dtln_aec.cproject.yml",
-  "config_sha256": "922d7535cc57160f3579fb439ca4b03c9be73351d1a1dd651457c0085e1c9f22",
-  "pte_sha256": "1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05",
+  "config_sha256": "d1e4f37777ec15f21c26cea282f27d6bdffac57c472270c27dbdab242a383317",
+  "pte_sha256": "ae9ea923ac96fd7536e0b780b1df73ff9710171881ef91677868a7cabd6a91c7",
   "method_caches": {
     "stage1": {
-      "graph_sha256": "a33a43f24d405aa4e10253e448082d599e6df538dc8aa1ec27a6567680ba9917",
-      "safetensors_sha256": "e13df727018ef6f3a552f2c624cb699492c1f389d036b651a69b38c08f95ebb8"
+      "graph_sha256": "a71283c128e0330ab3cf1baa2ece49011f38fb9e21b03dc1e387faa85e06b401",
+      "safetensors_sha256": "572b115b612c11ccf5eadaf8a27de94cfdce13c08f3af27ac7070f85975e2087"
     },
     "stage2": {
-      "graph_sha256": "fa2bbd98d977528cf1c899e8d59d48ec097cec762c7711f9a4fff151b1c6f9fe",
-      "safetensors_sha256": "5c8cdc910d771ae7c9ead74489153c7ac037dab612b336d6423db0210a14fceb"
+      "graph_sha256": "f086208dab9a1945c5aac0907536ceacdf562c0c67593ff363f2b0fc91a1a47c",
+      "safetensors_sha256": "4184c3bb78ae9eb9658532da1ea5fe15c9b90dc02cfdc863cf45ffef7d42d0a9"
     }
   },
   "assets": {},
@@ -20,17 +20,24 @@
     "memory_mode": "Shared_Sram"
   },
   "extract_delegate_segments": false,
-  "delegates": 3,
+  "delegates": 8,
   "operators": [
     "Portable add",
+    "Portable cat",
     "Portable log",
     "Portable mean",
     "Portable mul",
     "Portable pow",
     "Portable rsqrt",
+    "Portable select_copy",
+    "Portable sigmoid",
+    "Portable split_with_sizes_copy",
     "Portable sub",
+    "Portable tanh",
+    "Portable unsqueeze_copy",
+    "Portable view_copy",
     "Quantized dequantize",
     "Quantized quantize"
   ],
-  "pte_bytes": 1763792
+  "pte_bytes": 1742288
 }

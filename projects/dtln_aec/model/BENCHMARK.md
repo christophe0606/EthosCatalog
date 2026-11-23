@@ -1,5 +1,20 @@
 # DTLN-aec hardware benchmark status
 
+The current PTE has CRC `31C8406C` and quantizes only linear operators.
+ReleaseSRAM build `b-15` and load `r-16` produced the following independent
+method medians. Both methods passed the warm-state integer TOSA fixtures.
+
+| Method | Ethos delegates | Median NPU (ms) | Median full adapter (ms) |
+| --- | ---: | ---: | ---: |
+| stage1 | 3 | 0.166475 | 1.751938 |
+| stage2 | 5 | 0.599005 | 2.398308 |
+
+The complete graph's worst hop was 4.505 ms in the dedicated USB replays.
+The image uses 738,384 bytes of MRAM and 2,534,896 bytes of SRAM0.
+[Current per-method benchmark](benchmark.yml) · [USB signal validation](../VALIDATION.md#usb-signal-processing-results)
+
+## Previous model
+
 The initial direct-OSPI Release run measured both methods on DevKit-E8.
 The CMSIS Solution extension had returned `CMSIS_NO_SOLUTION` for the earlier ProgramModel rebuild
 because `cmsis-csolution.getSolutionFile` was unavailable. Explicit solution
@@ -86,8 +101,8 @@ setup, execution and output/state copies. Module timing includes the ExecuTorch
 call and its host/operator work. Display, test-pattern generation, FFT,
 overlap-add and serial reporting are outside those intervals.
 
-The startup checks require one completed Ethos invocation for `stage1` and two
-for `stage2`, nonzero PMU cycles, matching active cycles and zero overflow.
+The startup checks use the delegate counts generated with the integer
+fixtures. They require nonzero PMU cycles, matching active cycles and zero overflow.
 The predeclared maximum absolute errors are 0.005 for the stage1 mask,
 0.0005 for the stage2 block and 0.05 for either recurrent state. Current
 expected outputs come from the independent integer TOSA model in
@@ -97,7 +112,7 @@ with fast-math enabled.
 The harness reports every numeric result before returning a failed check.
 
 The project reserves 256 KiB for method data and 512 KiB for temporary data in
-SRAM0. The runtime copies inputs to NPU-visible SRAM0 and keeps the 1,763,792-byte
+SRAM0. The runtime copies inputs to NPU-visible SRAM0 and keeps the
 PTE in place at `0xC3C00000`. Before loading it, runtime initialization uses the
 guarded 100 MHz OSPI read-clock API and verifies the entire PTE CRC32. These
 reservations require build and runtime high-water verification on the board.

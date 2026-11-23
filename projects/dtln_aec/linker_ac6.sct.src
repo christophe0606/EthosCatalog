@@ -66,6 +66,10 @@ LR_ROM __ROM_BASE NOCOMPRESS __ROM_SIZE  {    ; load region size_region
     * (usb_dma_buf)
     * (sd_dma_buf)
     * (.driver.usbd0)
+    ; The SDS USB layer leaves these DMA buffers in ordinary BSS.
+    * (.bss.usbd0_ep0_buf)
+    * (.bss.bulkOutBuffer)
+    * (.bss.dtln_usb_tx)
   }
 
   NS_REGION_0_PAD  (AlignExpr(ImageLimit(NS_REGION_0), TGU_BLOCK_SIZE)) { ; Non secure region 0 Padding
@@ -91,8 +95,8 @@ LR_ROM __ROM_BASE NOCOMPRESS __ROM_SIZE  {    ; load region size_region
   ; SRAM0 is powered by board main before the pools are used. Their allocators
   ; initialize allocated contents; startup must not zero them before that.
   RW_SRAM0 APP_SRAM0_BASE UNINIT APP_SRAM0_SIZE  {
-   * (.bss.lcd_frame_buf)
    * (.bss.ai_pool)                    ; NPU-visible method, scratch and input pools.
+   * (.bss.lcd_frame_buf)              ; LCD scanout buffers.
   }
   PADDING +0 OVERLAY ALIGN 16 FILL 0 16
   {

@@ -1,29 +1,37 @@
 {
   "stage1": {
-    "delegates": 1,
+    "delegates": 3,
     "planned_buffer_sizes": [
       0,
-      7232
+      11296
     ],
     "operators": [
-      "quantized_decomposed::quantize_per_tensor.out",
-      "quantized_decomposed::dequantize_per_tensor.out",
+      "aten::select_copy.int_out",
       "aten::pow.Tensor_Scalar_out",
       "aten::add.out",
+      "quantized_decomposed::quantize_per_tensor.out",
       "aten::log.out",
       "aten::mean.out",
       "aten::sub.out",
       "aten::rsqrt.out",
-      "aten::mul.out"
+      "aten::mul.out",
+      "aten::cat.out",
+      "quantized_decomposed::dequantize_per_tensor.out",
+      "aten::split_with_sizes_copy.out",
+      "aten::sigmoid.out",
+      "aten::tanh.out",
+      "aten::unsqueeze_copy.out",
+      "aten::view_copy.out"
     ]
   },
   "stage2": {
-    "delegates": 2,
+    "delegates": 5,
     "planned_buffer_sizes": [
       0,
-      12304
+      12800
     ],
     "operators": [
+      "aten::select_copy.int_out",
       "quantized_decomposed::quantize_per_tensor.out",
       "quantized_decomposed::dequantize_per_tensor.out",
       "aten::mean.out",
@@ -31,7 +39,13 @@
       "aten::pow.Tensor_Scalar_out",
       "aten::add.out",
       "aten::rsqrt.out",
-      "aten::mul.out"
+      "aten::mul.out",
+      "aten::cat.out",
+      "aten::split_with_sizes_copy.out",
+      "aten::sigmoid.out",
+      "aten::tanh.out",
+      "aten::unsqueeze_copy.out",
+      "aten::view_copy.out"
     ]
   }
 }

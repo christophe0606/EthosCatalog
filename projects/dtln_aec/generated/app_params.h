@@ -7,20 +7,10 @@
 #include "hardware_params.h"
 typedef struct {
     HardwareParams hw_;
-} DtlnFakeSinkParams;
-
-typedef struct {
-    HardwareParams hw_;
-} DtlnFakeSourceParams;
-
-typedef struct {
-    HardwareParams hw_;
     int32_t stage;
 } DtlnMethodParams;
 
 typedef struct {
-    DtlnFakeSinkParams fake_sink;
-    DtlnFakeSourceParams fake_source;
     DtlnMethodParams stage1;
     DtlnMethodParams stage2;
 } AppParams;

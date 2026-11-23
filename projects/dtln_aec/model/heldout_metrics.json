@@ -15,9 +15,9 @@
     "tflite_residual_rms": 0.03121338225901127,
     "float_rms": 0.030741816386580467,
     "float_residual_rms": 0.030741816386580467,
-    "ptq_rms": 0.01757647469639778,
-    "ptq_residual_rms": 0.01757647469639778,
-    "ptq_vs_tflite_mae": 0.011450671590864658
+    "ptq_rms": 0.028553206473588943,
+    "ptq_residual_rms": 0.028553206473588943,
+    "ptq_vs_tflite_mae": 0.0026923532132059336
   },
   "2_double talk": {
     "input_rms": 0.09115917980670929,
@@ -25,9 +25,9 @@
     "tflite_residual_rms": 0.010959678329527378,
     "float_rms": 0.07731454074382782,
     "float_residual_rms": 0.010896138846874237,
-    "ptq_rms": 0.07861592620611191,
-    "ptq_residual_rms": 0.010826878249645233,
-    "ptq_vs_tflite_mae": 0.0017799350898712873
+    "ptq_rms": 0.07767924666404724,
+    "ptq_residual_rms": 0.011052615940570831,
+    "ptq_vs_tflite_mae": 0.0009401446441188455
   },
   "3_near end only": {
     "input_rms": 0.07670643925666809,
@@ -35,9 +35,9 @@
     "tflite_residual_rms": 0.020210936665534973,
     "float_rms": 0.06764590740203857,
     "float_residual_rms": 0.020654775202274323,
-    "ptq_rms": 0.0700884461402893,
-    "ptq_residual_rms": 0.016617225483059883,
-    "ptq_vs_tflite_mae": 0.0033435544464737177
+    "ptq_rms": 0.06825627386569977,
+    "ptq_residual_rms": 0.020875222980976105,
+    "ptq_vs_tflite_mae": 0.0011870941380038857
   },
   "4_silence": {
     "input_rms": 0.0,
@@ -52,6 +52,6 @@
   "global": {
     "tflite_mae_vs_tflite": 0.0,
     "float_mae_vs_tflite": 0.000179567068698816,
-    "ptq_mae_vs_tflite": 0.002634718781337142
+    "ptq_mae_vs_tflite": 0.0007442226633429527
   }
 }

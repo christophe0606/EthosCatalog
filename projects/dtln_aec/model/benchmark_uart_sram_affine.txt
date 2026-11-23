@@ -1,0 +1,30 @@
+DTLN clocks CPU=400000000 AXI/NPU=400000000 timer=400000000 OSPI=100000000 Hz CRC=31c8406c
+DTLN model address=0x02000000 cached_in_sram=1
+METHOD stage1 result=PASS output_max=0.000000015 state_max=0.000000119 delegates=3 finite=1 pmu=1
+MEMORY stage1 model=1742288 input=4104 method_peak=22524 temp_peak=2320 scope=cumulative_since_boot
+LAST_DELEGATE stage1 weights=31024@0x02128040 arena=784@0x021e95e0
+SAMPLE stage1 0 npu=66602 adapter=701408 execute=692690 npu_ms=0.166505 adapter_ms=1.753520 execute_ms=1.731725
+SAMPLE stage1 1 npu=66584 adapter=699890 execute=690949 npu_ms=0.166460 adapter_ms=1.749725 execute_ms=1.727372
+SAMPLE stage1 2 npu=66592 adapter=700562 execute=691688 npu_ms=0.166480 adapter_ms=1.751405 execute_ms=1.729220
+SAMPLE stage1 3 npu=66580 adapter=701102 execute=692268 npu_ms=0.166450 adapter_ms=1.752755 execute_ms=1.730670
+SAMPLE stage1 4 npu=66588 adapter=700502 execute=691596 npu_ms=0.166470 adapter_ms=1.751255 execute_ms=1.728990
+SAMPLE stage1 5 npu=66606 adapter=699956 execute=691184 npu_ms=0.166515 adapter_ms=1.749890 execute_ms=1.727960
+SAMPLE stage1 6 npu=66610 adapter=701066 execute=692270 npu_ms=0.166525 adapter_ms=1.752665 execute_ms=1.730675
+SAMPLE stage1 7 npu=66588 adapter=700562 execute=691776 npu_ms=0.166470 adapter_ms=1.751405 execute_ms=1.729440
+SAMPLE stage1 8 npu=66584 adapter=702020 execute=693230 npu_ms=0.166460 adapter_ms=1.755050 execute_ms=1.733075
+SAMPLE stage1 9 npu=66610 adapter=700988 execute=692186 npu_ms=0.166525 adapter_ms=1.752470 execute_ms=1.730465
+METHOD stage2 result=PASS output_max=0.000000000 state_max=0.000000238 delegates=5 finite=1 pmu=1
+MEMORY stage2 model=1742288 input=6144 method_peak=48140 temp_peak=255168 scope=cumulative_since_boot
+LAST_DELEGATE stage2 weights=235984@0x020002d0 arena=2048@0x021e95e0
+SAMPLE stage2 0 npu=239596 adapter=958048 execute=946836 npu_ms=0.598990 adapter_ms=2.395120 execute_ms=2.367090
+SAMPLE stage2 1 npu=239614 adapter=959242 execute=947922 npu_ms=0.599035 adapter_ms=2.398105 execute_ms=2.369805
+SAMPLE stage2 2 npu=239607 adapter=959404 execute=948092 npu_ms=0.599017 adapter_ms=2.398510 execute_ms=2.370230
+SAMPLE stage2 3 npu=239608 adapter=959758 execute=948566 npu_ms=0.599020 adapter_ms=2.399395 execute_ms=2.371415
+SAMPLE stage2 4 npu=239602 adapter=958918 execute=947540 npu_ms=0.599005 adapter_ms=2.397295 execute_ms=2.368850
+SAMPLE stage2 5 npu=239613 adapter=959860 execute=948534 npu_ms=0.599032 adapter_ms=2.399650 execute_ms=2.371335
+SAMPLE stage2 6 npu=239601 adapter=959632 execute=948438 npu_ms=0.599002 adapter_ms=2.399080 execute_ms=2.371095
+SAMPLE stage2 7 npu=239602 adapter=959752 execute=948414 npu_ms=0.599005 adapter_ms=2.399380 execute_ms=2.371035
+SAMPLE stage2 8 npu=239602 adapter=958504 execute=947150 npu_ms=0.599005 adapter_ms=2.396260 execute_ms=2.367875
+SAMPLE stage2 9 npu=239602 adapter=958942 execute=947550 npu_ms=0.599005 adapter_ms=2.397355 execute_ms=2.368875
+DTLN_Test_result PASS
+SDSIO-Client USB interface initialized successfully

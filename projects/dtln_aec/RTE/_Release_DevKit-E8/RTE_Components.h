@@ -30,6 +30,13 @@
 #define RTE_CMSIS_RTOS2_RTX5_SOURCE     /* CMSIS-RTOS2 Keil RTX5 Source */
 /* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U85@2.0.0 */
 #define RTE_ETHOS_U_CORE_DRIVER
+/* ARM::SDS:IO:USB&MDK USB@3.0.0 */
+#define RTE_SDS_IO                              /* SDSIO */
+#define RTE_SDS_IO_CLIENT                       /* SDSIO-Client */
+#define RTE_SDS_IO_CLIENT_USB                   /* SDSIO-Client via USB */
+#define RTE_SDS_IO_CLIENT_USB_MDK               /* SDSIO-Client via USB - MDK-Middleware USB */
+/* ARM::SDS:Stream&CMSIS-RTOS2@3.1.0 */
+#define RTE_SDS                                 /* Synchronous Data Stream (SDS) */
 /* AlifSemiconductor::BSP:External peripherals:CAMERA Sensor MT9M114@2.2.0 */
 #define RTE_Drivers_CAMERA_SENSOR_MT9M114            /* Driver CAMERA Sensor */
 /* AlifSemiconductor::BSP:External peripherals:Ethernet PHY@2.2.0 */
@@ -75,6 +82,14 @@
 #define RTE_Drivers_MIPI_DSI               /* Driver MIPI DSI */
 /* AlifSemiconductor::Device:SOC Peripherals:PINCONF@2.2.0 */
 #define RTE_Drivers_LL_PINCONF              /* Driver PinPAD and PinMux */
+/* Keil::USB&MDK:CORE@8.0.2 */
+#define RTE_USB_Core                    /* USB Core */
+/* Keil::USB&MDK:Device:Custom Class@8.0.2 */
+#define RTE_USB_Device_CustomClass_0    /* USB Device Custom Class instance 0 */
+
+/* Keil::USB&MDK:Device@8.0.2 */
+#define RTE_USB_Device_0                /* USB Device 0 */
+
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable add@1.4.1 */
 #define RTE_ML_EXECUTORCH_OP_PORTABLE_ADD     /* ExecuTorch op_add */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Portable log@1.4.1 */

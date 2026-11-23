@@ -1,0 +1,6 @@
+sds:
+  name: DTLN enhanced microphone
+  sample-frequency: 16000
+  content:
+    - value: enhanced
+      type: float

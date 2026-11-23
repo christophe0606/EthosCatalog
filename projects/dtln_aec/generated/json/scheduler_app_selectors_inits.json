@@ -3,14 +3,6 @@
     "isTemplate": true,
     "selectors": []
   },
-  "DtlnFakeSink<float,128>": {
-    "isTemplate": true,
-    "selectors": []
-  },
-  "DtlnFakeSource<float,128,float,128>": {
-    "isTemplate": true,
-    "selectors": []
-  },
   "RFFTMaskInverse<float,512,float,257,float,512>": {
     "isTemplate": true,
     "selectors": []
@@ -32,6 +24,18 @@
     "selectors": []
   },
   "PreservingFFT<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SdsSink<float,128>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SdsSource<float,256>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "DtlnSplitInput<float,256,float,128,float,128>": {
     "isTemplate": true,
     "selectors": []
   },

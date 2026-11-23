@@ -1,7 +1,7 @@
 {
   "reference": "Integer TOSA immediately before Vela using the deployment Ethos partitions",
-  "pte_sha256": "1d2207da5b06086a64115962616e6c1f51291113a793521a70da71d7038cce05",
-  "fixture_inputs_sha256": "edd13210157ea9693859ccc280d42689daf78e5a4d0a2befb7dfa06570e04100",
+  "pte_sha256": "ae9ea923ac96fd7536e0b780b1df73ff9710171881ef91677868a7cabd6a91c7",
+  "fixture_inputs_sha256": "2777dc4d46caa61c3153a76968224c9d3ff42796eb86ec143a3b2eaee7a9ebb9",
   "versions": {
     "torch": "2.13.0",
     "executorch": "1.4.1",
@@ -11,84 +11,65 @@
   "methods": {
     "stage1": {
       "cache_sha256": {
-        "graph_sha256": "a33a43f24d405aa4e10253e448082d599e6df538dc8aa1ec27a6567680ba9917",
-        "safetensors_sha256": "e13df727018ef6f3a552f2c624cb699492c1f389d036b651a69b38c08f95ebb8"
+        "graph_sha256": "a71283c128e0330ab3cf1baa2ece49011f38fb9e21b03dc1e387faa85e06b401",
+        "safetensors_sha256": "572b115b612c11ccf5eadaf8a27de94cfdce13c08f3af27ac7070f85975e2087"
       },
+      "delegate_calls": 3,
       "tosa_sha256": [
-        "24902c7c84ed12b279d1cbb07b6124e62e7111010d9988222d81bd5fb02a5158"
+        "0d13366b22ae83eea217d0670164c71ffeca0fdcef6a1ba2143b9b5d8f934056",
+        "27e9a98dde74e7fa9d7fefae1ab939da6948d123757cc4d4d8a56afb79aced4b",
+        "6fc1f7f05fa95a02bd01367a54e8cacbe942fc811d9834c759b35564723355c7"
       ],
       "outputs": {
         "output0": {
           "elements": 257,
           "integer_vs_prevela_ptq": {
-            "max_absolute_error": 0.023907482624053955,
-            "mean_absolute_error": 0.0030022858735921356,
-            "root_mean_square_error": 0.0035694121035689344
-          },
-          "board_vs_integer_reference": {
-            "max_absolute_error": 0.0,
-            "mean_absolute_error": 0.0,
-            "root_mean_square_error": 0.0,
-            "different_float32_values": 0
+            "max_absolute_error": 5.441904067993164e-05,
+            "mean_absolute_error": 3.5717689517363617e-06,
+            "root_mean_square_error": 9.872510861823282e-06
           }
         },
         "output1": {
           "elements": 512,
           "integer_vs_prevela_ptq": {
-            "max_absolute_error": 0.0575394481420517,
-            "mean_absolute_error": 0.00429297867231071,
-            "root_mean_square_error": 0.009259816625086136
-          },
-          "board_vs_integer_reference": {
-            "max_absolute_error": 0.0,
-            "mean_absolute_error": 0.0,
-            "root_mean_square_error": 0.0,
-            "different_float32_values": 0
+            "max_absolute_error": 0.0002636909484863281,
+            "mean_absolute_error": 3.3534318757411086e-06,
+            "root_mean_square_error": 1.6916406007249405e-05
           }
         }
-      },
-      "board_capture_sha256": "8748e7b51561c80f69bfc482ad8bd9b6ca021e77cc52f0afff4e714f78a0865c"
+      }
     },
     "stage2": {
       "cache_sha256": {
-        "graph_sha256": "fa2bbd98d977528cf1c899e8d59d48ec097cec762c7711f9a4fff151b1c6f9fe",
-        "safetensors_sha256": "5c8cdc910d771ae7c9ead74489153c7ac037dab612b336d6423db0210a14fceb"
+        "graph_sha256": "f086208dab9a1945c5aac0907536ceacdf562c0c67593ff363f2b0fc91a1a47c",
+        "safetensors_sha256": "4184c3bb78ae9eb9658532da1ea5fe15c9b90dc02cfdc863cf45ffef7d42d0a9"
       },
+      "delegate_calls": 5,
       "tosa_sha256": [
-        "797769d4e201bdead87adbb7c50b2a07ed740bcd4ac0d3dbe609c76a4de91cb8",
-        "208aec182eea33e8b5c2cb804ddbd906ec5b14c64bbbcd47102a896446fcef66"
+        "70217fb85b4e16497bb92d88bc47c4f9c097a29ff2cf7f998ebebd51778c158e",
+        "2eb850fb900216a904b46401a6b2c405a36e3f23e1d718ea06cffe0c6a60fa75",
+        "28f0656876d405a862b9829167db05dce77ecc05595059467d191d3834c68e55",
+        "f3176c68528e6344b41fa3118c5d5ccfa39c3614cd98ab7142e2fb97f9f36b49",
+        "1628a6f9b6aec32201c5727c1ac340f562db8830ff6e6df1b752d89a650b003d"
       ],
       "outputs": {
         "output0": {
           "elements": 512,
           "integer_vs_prevela_ptq": {
-            "max_absolute_error": 0.0005319302435964346,
-            "mean_absolute_error": 0.00010852257402227394,
-            "root_mean_square_error": 0.00016801377764433053
-          },
-          "board_vs_integer_reference": {
-            "max_absolute_error": 0.0,
-            "mean_absolute_error": 0.0,
-            "root_mean_square_error": 0.0,
-            "different_float32_values": 0
+            "max_absolute_error": 8.047209121286869e-06,
+            "mean_absolute_error": 1.5717205315013416e-08,
+            "root_mean_square_error": 3.5563975870551147e-07
           }
         },
         "output1": {
           "elements": 512,
           "integer_vs_prevela_ptq": {
-            "max_absolute_error": 0.1285381317138672,
-            "mean_absolute_error": 0.00845585242677771,
-            "root_mean_square_error": 0.015657453229096462
-          },
-          "board_vs_integer_reference": {
-            "max_absolute_error": 0.0,
-            "mean_absolute_error": 0.0,
-            "root_mean_square_error": 0.0,
-            "different_float32_values": 0
+            "max_absolute_error": 0.0008928179740905762,
+            "mean_absolute_error": 2.2965206654457226e-05,
+            "root_mean_square_error": 8.067824302105295e-05
           }
         }
-      },
-      "board_capture_sha256": "174f416a1c2317e8f1a8cd3a1079cde5d85e6c72fcb255de410b33bffbd6f71b"
+      }
     }
   }
 }

@@ -4,10 +4,13 @@ project:
   device: :M55_HP
   packs:
     - pack: ARM::CMSIS-RTX@^5.9.0
+    - pack: ARM::SDS@3.1.0
+      for-context: [.Debug, .Release, .ReleaseSRAM]
   add-path:
     - .
     - ../../common
     - ../../common/stream
+    - ../../common/nodes_impl/c
     - generated
     - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
     - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
@@ -20,7 +23,7 @@ project:
     - APP_TEMP_POOL_SIZE: 524288
     - APP_READ_CLOCK_HZ: 100000000
     - APP_POOL_SECTION: \".bss.ai_pool\"
-    - OS_THREAD_NUM: 3
+    - OS_THREAD_NUM: 7
     - OS_DYNAMIC_MEM_SIZE: 65536
   setups:
     - setup: Direct OSPI weights
@@ -37,6 +40,8 @@ project:
         - NPU_MEM_ATTR_3: 0x20
   components:
     - component: BSP:OSPI FLASH XIP:core
+    - component: BSP:External peripherals:GT911 Touch Controller
+      for-context: [.Debug, .Release, .ReleaseSRAM]
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
     - component: CMSIS:STREAM&Source
@@ -72,6 +77,14 @@ project:
       for-context: [.Debug, .Release, .ReleaseSRAM]
       files:
         - file: demo.cpp
+          add-path:
+            - $Pack(ARM::SDS)$/sds/sdsio/client
+        - file: sds_usb_tx.c
+          for-compiler: AC6
+          add-path:
+            - $Pack(ARM::SDS)$/sds/sdsio/client
+        - file: waveform_display.cpp
+        - file: ../../common/nodes_impl/alif_e8/lcd.c
         - file: hardware_params.cpp
         - file: hardware_params.h
         - file: datatypes.h
@@ -102,6 +115,9 @@ project:
   layers:
     - layer: $Board-Layer$
       type: Board
+    - layer: $DTLN-SDS-Layer$
+      type: SDSIO
+      for-context: [.Debug, .Release, .ReleaseSRAM]
     - layer: ai_layer/ai_layer.clayer.yml
       type: AI
       for-context: [.Debug, .Release, .ReleaseSRAM]

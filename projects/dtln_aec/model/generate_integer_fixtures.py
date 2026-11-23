@@ -121,10 +121,14 @@ def main():
             edge = to_edge_transform_and_lower(
                 program, partitioner=[EthosUPartitioner(spec)],
                 compile_config=EdgeCompileConfig(_check_ir_validity=False))
+        delegate_calls = sum(node.op == "call_function" and "executorch_call_delegate" in str(node.target)
+                             for node in edge.exported_program().graph.nodes)
+        assert delegate_calls and tosa_hashes
         with torch.no_grad(), IntegerReferenceDispatch(spec.tosa_spec):
             actual = edge.exported_program().module(check_guards=False)(*inputs)
-        assert len(tosa_hashes) == (1 if name == "stage1" else 2), tosa_hashes
-        method_report = {"cache_sha256": cache, "tosa_sha256": tosa_hashes, "outputs": {}}
+        header.append(f"#define DTLN_{name.upper()}_DELEGATES {delegate_calls}U")
+        method_report = {"cache_sha256": cache, "delegate_calls": delegate_calls,
+                         "tosa_sha256": tosa_hashes, "outputs": {}}
         board = None
         if args.board_captures_dir:
             capture = args.board_captures_dir / f"board_sram_{name}.json"

@@ -1,5 +1,5 @@
 {
-  "calibration_frames": 192,
+  "calibration_frames": 2000,
   "evaluation_frames": 128,
   "float_shared_state_nonzero_max_absolute_error": [
     2.86102294921875e-05,
@@ -9,20 +9,20 @@
     2.8487701416015625,
     1.52587890625e-05
   ],
-  "activation": "int16; log-power and instant normalization float32",
-  "weights": "int8",
-  "data": "Deterministic synthetic paired near/far signals, silence, echo-only, near-only, double-talk; calibration seed310 and evaluation seed901",
+  "activation": "int16 at linear operators; spectral features, nonlinearities and recurrent state updates float32",
+  "weights": "per-channel int8 for linear operators",
+  "data": "16 seconds of continuous synthetic near/far audio with varying signal levels, frequency, two echo delays and silence, echo-only, near-only and double-talk transitions; calibration seed 578 and held-out method evaluation seed 901",
   "limitation": "Synthetic numeric conversion checks do not establish speech quality or AEC challenge scores.",
   "stage1": {
-    "output_mae": 0.0017321782168868574,
-    "output_max_absolute_error": 0.08360046148300171,
-    "state_mae": 0.024678893527646184,
-    "state_max_absolute_error": 2.246204376220703
+    "output_mae": 0.0008612109057848268,
+    "output_max_absolute_error": 0.03142327070236206,
+    "state_mae": 0.006133988827153466,
+    "state_max_absolute_error": 0.3862895965576172
   },
   "stage2": {
-    "output_mae": 0.0001671094702110562,
-    "output_max_absolute_error": 0.004053682088851929,
-    "state_mae": 0.011751248718611114,
-    "state_max_absolute_error": 1.1306076049804688
+    "output_mae": 0.00014884598751496725,
+    "output_max_absolute_error": 0.0058657387271523476,
+    "state_mae": 0.007651073382060704,
+    "state_max_absolute_error": 0.6326465606689453
   }
 }

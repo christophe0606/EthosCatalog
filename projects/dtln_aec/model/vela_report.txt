@@ -1,31 +1,97 @@
-﻿Accelerator configuration               Ethos_U85_256
+DTLN-aec 128 affine-only quantization, PTE CRC 31C8406C.
+Compiler estimates for stage1 (first three) and stage2 (next five).
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
 System configuration              Ethos_U85_SRAM_OSPI
 Memory mode                               Shared_Sram
 Accelerator clock                                 400 MHz
 Design peak SRAM bandwidth                      11.92 GB/s
 Design peak DRAM bandwidth                       0.31 GB/s
 
-Total SRAM used                                  5.05 KiB
-Total DRAM used                                475.70 KiB
+Total SRAM used                                  2.27 KiB
+Total DRAM used                                300.45 KiB
 
 CPU operators = 0 (0.0%)
-NPU operators = 31 (100.0%)
+NPU operators = 2 (100.0%)
 
 Average SRAM bandwidth                           0.00 GB/s
-Input   SRAM bandwidth                           0.01 MB/batch
+Input   SRAM bandwidth                           0.00 MB/batch
 Weight  SRAM bandwidth                           0.00 MB/batch
 Output  SRAM bandwidth                           0.00 MB/batch
-Total   SRAM bandwidth                           0.01 MB/batch
-Total   SRAM bandwidth            per input      0.01 MB/inference (batch size 1)
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
 
 Average DRAM bandwidth                           0.15 GB/s
 Input   DRAM bandwidth                           0.00 MB/batch
-Weight  DRAM bandwidth                           0.42 MB/batch
+Weight  DRAM bandwidth                           0.28 MB/batch
 Output  DRAM bandwidth                           0.00 MB/batch
-Total   DRAM bandwidth                           0.47 MB/batch
-Total   DRAM bandwidth            per input      0.47 MB/inference (batch size 1)
+Total   DRAM bandwidth                           0.29 MB/batch
+Total   DRAM bandwidth            per input      0.29 MB/inference (batch size 1)
 
-Neural network macs                            496770 MACs/batch
+Neural network macs                            328704 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_OSPI
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak DRAM bandwidth                       0.31 GB/s
+
+Total SRAM used                                  2.25 KiB
+Total DRAM used                                126.95 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 2 (100.0%)
+
+Average SRAM bandwidth                           0.00 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average DRAM bandwidth                           0.16 GB/s
+Input   DRAM bandwidth                           0.00 MB/batch
+Weight  DRAM bandwidth                           0.11 MB/batch
+Output  DRAM bandwidth                           0.00 MB/batch
+Total   DRAM bandwidth                           0.12 MB/batch
+Total   DRAM bandwidth            per input      0.12 MB/inference (batch size 1)
+
+Neural network macs                            131072 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_OSPI
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak DRAM bandwidth                       0.31 GB/s
+
+Total SRAM used                                  0.77 KiB
+Total DRAM used                                 30.30 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 1 (100.0%)
+
+Average SRAM bandwidth                           0.00 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average DRAM bandwidth                           0.16 GB/s
+Input   DRAM bandwidth                           0.00 MB/batch
+Weight  DRAM bandwidth                           0.03 MB/batch
+Output  DRAM bandwidth                           0.00 MB/batch
+Total   DRAM bandwidth                           0.03 MB/batch
+Total   DRAM bandwidth            per input      0.03 MB/inference (batch size 1)
+
+Neural network macs                             32896 MACs/batch
 
 
 Network summary for out
@@ -67,25 +133,117 @@ Accelerator clock                                 400 MHz
 Design peak SRAM bandwidth                      11.92 GB/s
 Design peak DRAM bandwidth                       0.31 GB/s
 
-Total SRAM used                                  8.00 KiB
-Total DRAM used                                952.39 KiB
+Total SRAM used                                  3.25 KiB
+Total DRAM used                                512.91 KiB
 
 CPU operators = 0 (0.0%)
-NPU operators = 32 (100.0%)
+NPU operators = 2 (100.0%)
 
 Average SRAM bandwidth                           0.00 GB/s
-Input   SRAM bandwidth                           0.01 MB/batch
+Input   SRAM bandwidth                           0.00 MB/batch
 Weight  SRAM bandwidth                           0.00 MB/batch
-Output  SRAM bandwidth                           0.01 MB/batch
-Total   SRAM bandwidth                           0.01 MB/batch
-Total   SRAM bandwidth            per input      0.01 MB/inference (batch size 1)
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
 
 Average DRAM bandwidth                           0.15 GB/s
 Input   DRAM bandwidth                           0.00 MB/batch
-Weight  DRAM bandwidth                           0.88 MB/batch
+Weight  DRAM bandwidth                           0.49 MB/batch
 Output  DRAM bandwidth                           0.00 MB/batch
-Total   DRAM bandwidth                           0.93 MB/batch
-Total   DRAM bandwidth            per input      0.93 MB/inference (batch size 1)
+Total   DRAM bandwidth                           0.50 MB/batch
+Total   DRAM bandwidth            per input      0.50 MB/inference (batch size 1)
 
-Neural network macs                           1053184 MACs/batch
+Neural network macs                            589824 MACs/batch
 
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_OSPI
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak DRAM bandwidth                       0.31 GB/s
+
+Total SRAM used                                  2.25 KiB
+Total DRAM used                                127.00 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 2 (100.0%)
+
+Average SRAM bandwidth                           0.00 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average DRAM bandwidth                           0.16 GB/s
+Input   DRAM bandwidth                           0.00 MB/batch
+Weight  DRAM bandwidth                           0.11 MB/batch
+Output  DRAM bandwidth                           0.00 MB/batch
+Total   DRAM bandwidth                           0.12 MB/batch
+Total   DRAM bandwidth            per input      0.12 MB/inference (batch size 1)
+
+Neural network macs                            131072 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_OSPI
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak DRAM bandwidth                       0.31 GB/s
+
+Total SRAM used                                  1.25 KiB
+Total DRAM used                                 58.03 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 1 (100.0%)
+
+Average SRAM bandwidth                           0.00 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average DRAM bandwidth                           0.16 GB/s
+Input   DRAM bandwidth                           0.00 MB/batch
+Weight  DRAM bandwidth                           0.05 MB/batch
+Output  DRAM bandwidth                           0.00 MB/batch
+Total   DRAM bandwidth                           0.06 MB/batch
+Total   DRAM bandwidth            per input      0.06 MB/inference (batch size 1)
+
+Neural network macs                             65536 MACs/batch
+
+
+Network summary for out
+Accelerator configuration               Ethos_U85_256
+System configuration              Ethos_U85_SRAM_OSPI
+Memory mode                               Shared_Sram
+Accelerator clock                                 400 MHz
+Design peak SRAM bandwidth                      11.92 GB/s
+Design peak DRAM bandwidth                       0.31 GB/s
+
+Total SRAM used                                  2.00 KiB
+Total DRAM used                                230.45 KiB
+
+CPU operators = 0 (0.0%)
+NPU operators = 1 (100.0%)
+
+Average SRAM bandwidth                           0.00 GB/s
+Input   SRAM bandwidth                           0.00 MB/batch
+Weight  SRAM bandwidth                           0.00 MB/batch
+Output  SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth                           0.00 MB/batch
+Total   SRAM bandwidth            per input      0.00 MB/inference (batch size 1)
+
+Average DRAM bandwidth                           0.15 GB/s
+Input   DRAM bandwidth                           0.00 MB/batch
+Weight  DRAM bandwidth                           0.22 MB/batch
+Output  DRAM bandwidth                           0.00 MB/batch
+Total   DRAM bandwidth                           0.23 MB/batch
+Total   DRAM bandwidth            per input      0.23 MB/inference (batch size 1)
+
+Neural network macs                            262144 MACs/batch

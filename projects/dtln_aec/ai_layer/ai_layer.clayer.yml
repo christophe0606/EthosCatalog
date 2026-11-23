@@ -14,12 +14,19 @@ layer:
   - component: Machine Learning:ExecuTorch:Kernel Registration
   - component: Machine Learning:ExecuTorch:Backend EthosU
   - component: Machine Learning:ExecuTorch Operators:Portable add
+  - component: Machine Learning:ExecuTorch Operators:Portable cat
   - component: Machine Learning:ExecuTorch Operators:Portable log
   - component: Machine Learning:ExecuTorch Operators:Portable mean
   - component: Machine Learning:ExecuTorch Operators:Portable mul
   - component: Machine Learning:ExecuTorch Operators:Portable pow
   - component: Machine Learning:ExecuTorch Operators:Portable rsqrt
+  - component: Machine Learning:ExecuTorch Operators:Portable select_copy
+  - component: Machine Learning:ExecuTorch Operators:Portable sigmoid
+  - component: Machine Learning:ExecuTorch Operators:Portable split_with_sizes_copy
   - component: Machine Learning:ExecuTorch Operators:Portable sub
+  - component: Machine Learning:ExecuTorch Operators:Portable tanh
+  - component: Machine Learning:ExecuTorch Operators:Portable unsqueeze_copy
+  - component: Machine Learning:ExecuTorch Operators:Portable view_copy
   - component: Machine Learning:ExecuTorch Operators:Quantized dequantize
   - component: Machine Learning:ExecuTorch Operators:Quantized quantize
   groups:

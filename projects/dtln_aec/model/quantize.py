@@ -9,14 +9,14 @@ from pathlib import Path
 import numpy as np
 import torch
 import yaml
-from safetensors.torch import save_file
+from safetensors.torch import save
 
 ROOT = Path(__file__).resolve().parents[3]
 MODEL = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / 'scripts'))
 from project_config import DEFAULT_SOLUTION, selected_project
 from quantized_model import compile_spec, method_configs, save_quantized_program
-from model import DTLNStage, InstantNormalization, LogPower
+from model import DTLNStage
 
 
 def interpreter(stage):
@@ -39,7 +39,10 @@ def extract_weights(stage, reference):
     if stage == 2:
         weights['encoder'] = weights['encoder'][:, 0, 0, :].contiguous()
         weights['decoder'] = weights['decoder'][:, 0, 0, :].contiguous()
-    save_file(weights, MODEL / f'weights_{stage}.safetensors')
+    path = MODEL / f'weights_{stage}.safetensors'
+    data = save(weights)
+    if not path.is_file() or path.read_bytes() != data:
+        path.write_bytes(data)
 
 
 def reference_forward(reference, inputs):
@@ -72,9 +75,32 @@ def audio_frames(seed, count):
         yield mic_window.copy(), ref_window.copy()
 
 
-def traces(models, count=192, seed=310):
+def calibration_frames():
+    """Exercise recurrent state over consecutive, varied acoustic conditions."""
+    rng = np.random.default_rng(578)
+    sample_rate = 16000
+    time = np.arange(16 * sample_rate) / sample_rate
+    near_phase = np.cumsum((115 + 39 * np.sin(2*np.pi*.71*time)
+                            + 19 * np.sin(2*np.pi*.22*time)) / sample_rate)
+    far_phase = np.cumsum((157 + 108 * np.sin(2*np.pi*.57*time)
+                           + 34 * np.sin(2*np.pi*.77*time)) / sample_rate)
+    near = .2*np.sin(2*np.pi*near_phase) + .07*np.sin(6*np.pi*near_phase) + .012*rng.normal(size=len(time))
+    far = .22*np.sin(2*np.pi*far_phase) + .07*np.sin(10*np.pi*far_phase) + .018*rng.normal(size=len(time))
+    segment = (time / .73).astype(int)
+    mode = segment % 5
+    levels = np.linspace(.2, 2.2, 8)
+    amplitude = levels[segment % len(levels)]
+    near *= (mode >= 2) * (.51 + .49*np.sin(2*np.pi*1.9*time)**2) * amplitude
+    far *= ((mode == 1) | (mode == 2)) * (.51 + .49*np.sin(2*np.pi*3.2*time)**2) * amplitude[::-1]
+    mic = np.clip(near + .57*np.pad(far, (73, 0))[:-73] + .34*np.pad(far, (146, 0))[:-146], -1, 1)
+    pair = np.pad(np.stack((mic, far)).astype(np.float32), ((0, 0), (384, 0)))
+    for offset in range(0, len(time), 128):
+        yield pair[:, offset:offset + 512]
+
+
+def traces(models, windows):
     states = [torch.zeros(1, 2, 128, 2), torch.zeros(1, 2, 128, 2)]
-    for mic, far in audio_frames(seed, count):
+    for mic, far in windows:
         spectrum = np.fft.rfft(mic).astype(np.complex64)
         x1 = (torch.from_numpy(np.abs(spectrum)).reshape(1, 1, 257), states[0],
               torch.from_numpy(np.abs(np.fft.rfft(far)).astype(np.float32)).reshape(1, 1, 257))
@@ -106,20 +132,30 @@ def main():
     qconfig = get_symmetric_a16w8_quantization_config(epsilon=2**-24)
     activation = replace(qconfig.input_activation, observer_or_fake_quant_ctr=MinMaxObserver.with_args(eps=2**-24))
     qconfig = replace(qconfig, input_activation=activation, output_activation=activation)
-    prepared = [prepare_pt2e(torch.export.export(m, x).module(check_guards=False),
-        EthosUQuantizer(spec).set_global(qconfig).set_module_type(InstantNormalization, None).set_module_type(LogPower, None))
-        for m, x in zip(models, examples)]
+    # Keep the LSTM updates and packed hidden/cell state in float32. The cell
+    # values can be far larger than the hidden values, so quantizing the whole
+    # state with one activation scale sacrifices precision on every hop.
+    # Quantizing before log-power also loses low-energy spectral bins.
+    prepared = [
+        prepare_pt2e(
+            torch.export.export(model, inputs).module(check_guards=False),
+            EthosUQuantizer(spec).set_global(None).set_node_target(torch.ops.aten.linear.default, qconfig),
+        )
+        for model, inputs in zip(models, examples)
+    ]
     parity = [0., 0.]
     silence_parity = [0., 0.]
     with torch.no_grad():
-        for frame, trace in enumerate(traces(models)):
+        for trace in traces(models, audio_frames(310, 192)):
             for s in (0, 1):
                 inputs = trace[s]
                 actual = models[s](*inputs)
                 expected = reference_forward(references[s], inputs)
                 target = parity if inputs[0].abs().max() > 0 and inputs[2].abs().max() > 0 else silence_parity
                 target[s] = max(target[s], *(float((a-b).abs().max()) for a, b in zip(actual, expected)))
-                prepared[s](*inputs)
+        for calibration_count, trace in enumerate(traces(models, calibration_frames()), 1):
+            for stage, module in enumerate(prepared):
+                module(*trace[stage])
     assert max(parity) < 2e-4, parity
     quantized = [convert_pt2e(p, fold_quantize=True) for p in prepared]
     errors = [[], []]
@@ -127,7 +163,7 @@ def main():
     fixture = {}
     qstates = [torch.zeros(1, 2, 128, 2), torch.zeros(1, 2, 128, 2)]
     with torch.no_grad():
-        for frame, trace in enumerate(traces(models, count=128, seed=901)):
+        for frame, trace in enumerate(traces(models, audio_frames(901, 128))):
             for s in (0, 1):
                 inputs = trace[s]
                 expected = models[s](*inputs)
@@ -148,9 +184,13 @@ def main():
             header.append('    ' + ', '.join(f'{float(v):.9e}f' for v in values[start:start+8]) + ',')
         header.append('};')
     (MODEL / 'model_test_data.h').write_text('\n'.join(header)+'\n')
-    report = dict(calibration_frames=192, evaluation_frames=128, float_shared_state_nonzero_max_absolute_error=parity,
+    report = dict(calibration_frames=calibration_count, evaluation_frames=128, float_shared_state_nonzero_max_absolute_error=parity,
         float_shared_state_zero_input_max_absolute_error=silence_parity,
-        activation='int16; log-power and instant normalization float32', weights='int8', data='Deterministic synthetic paired near/far signals, silence, echo-only, near-only, double-talk; calibration seed310 and evaluation seed901',
+        activation='int16 at linear operators; spectral features, nonlinearities and recurrent state updates float32',
+        weights='per-channel int8 for linear operators',
+        data=('16 seconds of continuous synthetic near/far audio with varying signal levels, frequency, two echo '
+              'delays and silence, echo-only, near-only and double-talk transitions; calibration seed 578 and '
+              'held-out method evaluation seed 901'),
         limitation='Synthetic numeric conversion checks do not establish speech quality or AEC challenge scores.')
     for s in (0, 1):
         report[f'stage{s+1}'] = dict(output_mae=float(np.mean(errors[s])), output_max_absolute_error=max(errors[s]),

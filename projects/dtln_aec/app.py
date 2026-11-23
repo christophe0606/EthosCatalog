@@ -8,10 +8,11 @@ import sys
 PROJECT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT.parents[1]))
 
-from cmsis_stream.cg.scheduler import Graph
-from common.stream_graph import GraphStyle, graph_only_requested, mk_app
-from common.nodes import SlidingBuffer, FFT, PreservingFFT, RawRFFTMagnitude, RFFTMaskInverse, OverlapAdd
-from projects.dtln_aec.nodes import DtlnMethod, DtlnFakeSink, DtlnFakeSource
+from cmsis_stream.cg.scheduler import CType, F32, Graph
+from common.stream_graph import GraphStyle, configuration, graph_only_requested, mk_app
+from common.nodes import (SlidingBuffer, FFT, PreservingFFT, RawRFFTMagnitude,
+                          RFFTMaskInverse, OverlapAdd, SdsSource, SdsSink)
+from projects.dtln_aec.nodes import DtlnMethod, DtlnSplitInput
 
 SAMPLE_RATE = 16000
 HOP_SAMPLES = 128
@@ -23,7 +24,9 @@ NOTICE = (
 
 def make_graph():
     graph = Graph()
-    source = DtlnFakeSource("fake_source", HOP_SAMPLES)
+    audio = CType(F32)
+    source = SdsSource("sds_source", audio, 2 * HOP_SAMPLES, "dtlnReplayParams")
+    split = DtlnSplitInput("split_input", HOP_SAMPLES)
     mic_window = SlidingBuffer("mic_window", HOP_SAMPLES, 512)
     ref_window = SlidingBuffer("reference_window", HOP_SAMPLES, 512)
     mic_fft = FFT("mic_fft", 512)
@@ -34,9 +37,10 @@ def make_graph():
     inverse = RFFTMaskInverse("mask_inverse", 512)
     stage2 = DtlnMethod("stage2", 2)
     synthesis = OverlapAdd("overlap_add", 512, HOP_SAMPLES)
-    sink = DtlnFakeSink("fake_sink", HOP_SAMPLES)
-    graph.connect(source.o1, mic_window.i)
-    graph.connect(source.o2, ref_window.i)
+    sink = SdsSink("sds_sink", audio, HOP_SAMPLES, "dtlnRecordParams")
+    graph.connect(source.o, split.i)
+    graph.connect(split.o1, mic_window.i)
+    graph.connect(split.o2, ref_window.i)
     graph.connect(mic_window.o, mic_fft.i)
     graph.connect(ref_window.o, ref_fft.i)
     graph.connect(mic_fft.o, mic_magnitude.i)
@@ -54,6 +58,8 @@ def make_graph():
 
 def generate(graph_only=False):
     style = GraphStyle({"stage1": "#7B1FA2", "stage2": "#7B1FA2"})
+    config = configuration()
+    config.appConfigCName = "dtln_app_config.hpp"
     return mk_app(
         make_graph(),
         PROJECT / "generated",
@@ -64,6 +70,7 @@ def generate(graph_only=False):
             "CMSISSTREAM_STREAM_THREAD_STACK_SIZE": 24576,
             "CMSISSTREAM_STREAM_THREAD_PRIORITY": "osPriorityRealtime",
         },
+        config=config,
         style=style,
         source_notice=NOTICE,
         graph_only=graph_only,

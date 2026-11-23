@@ -1,0 +1,13 @@
+sdsio:
+  interface:
+    usb:
+  workdir: ./sds_run/synthetic
+  metadir: .
+  streams:
+    - name: Dtln_In
+      view: signal
+    - name: Dtln_Out
+      view: signal
+  play:
+    - step: continuous-pattern
+      labels: [0]
