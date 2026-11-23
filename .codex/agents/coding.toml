@@ -156,6 +156,12 @@ descriptions and C++ wrapper will be required.
   example, include a type or identifier in the event payload 
   to distinguish different kinds of events, rather than 
   creating separate event outputs for each type.
+- When a node is a common node, you may generate some documentation
+  about its implementation in common/nodes_impl/design as 
+  a markdown file.
+  Nodes that are simple do not need a design document. More complex
+  nodes need a detailed explanation of their architecture, memory 
+  management, state macine, multi-threading etc ...
 
 ## Validation constraints
 

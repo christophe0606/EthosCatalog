@@ -13,8 +13,17 @@ the LCD.
 ## Run the demo on Windows
 
 Make sure `uv` is on your PATH and the **ARM SDS 3.1.0** pack is installed
-in CMSIS Solution. [Prepare the test clips](test_data/README.md#prepare-the-inputs) once.
-For a fresh board, [program the model](#model-programming) first.
+in CMSIS Solution. Before the first run, download the test WAVs and generate
+the SDS replay files from the repository root. The preparation step uses
+NumPy and TensorFlow 2.20. [Test clip setup](test_data/README.md#prepare-the-inputs)
+
+```powershell
+.venv/Scripts/python.exe projects/dtln_aec/test_data/download_audio_samples.py
+.venv/Scripts/python.exe projects/dtln_aec/test_data/sds_demo.py prepare
+```
+
+The downloader puts the six WAVs in `projects/dtln_aec/test_data/audio_samples/`.
+For a fresh board, program the model first. [Model programming](#model-programming)
 
 1. With the board powered off, connect the LCD to J21. Connect the PC to
    **PRG USB** and to the underside **MCU USB Device** port.
@@ -35,7 +44,7 @@ original float DTLN-aec 128 model.
 During playback, the board releases one audio hop every 8 ms and displays the
 **MICROPHONE** and **ECHO CANCELLED** waveforms on the LCD.
 
-[USB checks](test_data/README.md#run-the-usb-demo-manually) · [How to read the metrics](test_data/README.md#compare-the-captures)
+[USB checks](test_data/README.md#run-the-usb-demo-manually) · [Example test output and metrics](test_data/README.md#example-test-output)
 
 ## Model programming
 

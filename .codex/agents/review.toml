@@ -33,9 +33,14 @@ is not intended for reuse across multiple projects of a similar kind.
 A node does not have to be usable for all projects to be reusable. It only needs to be reusable 
 for multiple projects of a similar kind. 
 
-4. Check that the catalog markdown has been refreshed with this latest project.
+4. If test patterns have to be downloaded for the final demo, ensure that 
+there is some script and documentation to download them so that
+someone cloning the project can easily get started and download
+everything needed for building and running the project.
 
-5. Communicate to the calling agent the findings and recommendations 
+5. Check that the catalog markdown has been refreshed with this latest project.
+
+6. Communicate to the calling agent the findings and recommendations 
 based on the review (give it the path to the file recording the findings).
 """
 

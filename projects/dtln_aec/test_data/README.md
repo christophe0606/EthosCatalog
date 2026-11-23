@@ -1,8 +1,9 @@
 # DTLN-aec recordings for SDS
 
-The nine original WAV files are stored locally in `audio_samples/`. All are
-mono, 16 kHz, signed 16-bit PCM. Each file name consists of the stem below and
-one of the three suffixes.
+The recorded-speech demo uses six upstream WAVs, one microphone and one
+loopback file per case. The downloader stores them locally in `audio_samples/`.
+They are mono, 16 kHz, signed 16-bit PCM. The table also lists the optional
+upstream `_processed.wav` listening references.
 
 | Test case | Filename stem | `_mic.wav` samples | `_lpb.wav` samples | `_processed.wav` samples |
 | --- | --- | ---: | ---: | ---: |
@@ -12,12 +13,15 @@ one of the three suffixes.
 
 ## Prepare the inputs
 
-From the repository root, run the following with a Python environment that
-has NumPy and TensorFlow 2.20. This creates `Dtln_In.0.sds`, `Dtln_In.1.sds`,
-and `Dtln_In.2.sds` in the local `sds_run/` directory. It also generates
-sample-aligned references using the [bundled float DTLN-aec 128 models](../model/upstream/).
+Before running the recorded-speech demo, run both commands from the repository
+root. The first downloads the six required WAVs to
+`projects/dtln_aec/test_data/audio_samples/`. The second requires NumPy and
+TensorFlow 2.20 and creates `Dtln_In.0.sds`, `Dtln_In.1.sds`, and
+`Dtln_In.2.sds` in `sds_run/`. It also generates sample-aligned references
+using the bundled float DTLN-aec 128 models. [Float models](../model/upstream/)
 
 ```powershell
+.venv/Scripts/python.exe projects/dtln_aec/test_data/download_audio_samples.py
 .venv/Scripts/python.exe projects/dtln_aec/test_data/sds_demo.py prepare
 ```
 
@@ -68,9 +72,81 @@ the last one. The LCD labels the aligned input and output traces
 `sds_run/`. Move any captures you want to keep before starting a replay.
 [ARM SDS USB transport](https://arm-software.github.io/SDS-Framework/main/sdsio.html#layer-sdsio_usb)
 
+## Example test output
+
+This is the output of `test_demo.ps1` for the three recorded clips.
+`<repo>` stands for the local EthosCatalog checkout.
+
+```text
+SDSIO-Server v3.1.0
+Press 'Ctrl+C' or 'X' to exit.
+Working directory: <repo>\projects\dtln_aec\test_data\sds_run
+SDSIO configuration YAML: <repo>\projects\dtln_aec\test_data\datatest.sdsio.yml
+SDSIO command input: R=Record, P=playback, S/s=stop, T/t=reset, X/x=exit, A-H=set flags 0-7, a-h=clear flags 0-7.
+SDSIO-Client USB device connected.
+sdsFlags = 0xB0000000.
+Playback step 0: far-end.
+Playback: Dtln_In (Dtln_In.0.sds)
+Record:   Dtln_Out (Dtln_Out.0.p.sds)
+Closed:   Dtln_Out (Dtln_Out.0.p.sds)
+Closed:   Dtln_In (Dtln_In.0.sds)
+sdsFlags = 0x30000000.
+sdsFlags = 0xB0000000.
+Playback step 1: near-end.
+Playback: Dtln_In (Dtln_In.1.sds)
+Record:   Dtln_Out (Dtln_Out.1.p.sds)
+Closed:   Dtln_Out (Dtln_Out.1.p.sds)
+Closed:   Dtln_In (Dtln_In.1.sds)
+sdsFlags = 0x30000000.
+sdsFlags = 0xB0000000.
+Playback step 2: double-talk.
+Playback: Dtln_In (Dtln_In.2.sds)
+Record:   Dtln_Out (Dtln_Out.2.p.sds)
+Closed:   Dtln_Out (Dtln_Out.2.p.sds)
+Closed:   Dtln_In (Dtln_In.2.sds)
+Playback complete - no more steps remaining.
+SDSIO-Server terminating (playback complete).
+sdsFlags = 0x30000000.
+SDSIO-Server shut down.
+Reference: original float DTLN-aec 128 (TFLite)
+dB columns show RMS level change from the input microphone.
+Clip          Board dB  Float dB         MAE        RMSE  Peak error
+far-end         -49.60    -49.40  3.4341e-05  4.6038e-05  0.00045599
+near-end         -0.23     -0.07   0.0015696   0.0084066     0.44779
+double-talk      -0.77     -0.70   0.0006322   0.0031717     0.35928
+```
+
+`SDSIO-Client USB device connected` confirms that the PC server reached the
+board over USB. The startup banner lists the interactive shortcuts.
+`test_demo.ps1` starts playback and closes the server automatically.
+
+For each clip, `Playback` names the input sent to the board, and `Record`
+names the file receiving the echo-cancelled audio. The number in each file
+matches the playback step. The `Closed` lines mark the end of those streams.
+`0xB0000000` indicates the server is alive in playback mode with the Start
+flag set. `0x30000000` indicates Start has cleared while the server is still
+alive in playback mode. After shutdown, the launcher checks for three fresh
+captures and runs the Python comparison.
+
+The `Board dB` and `Float dB` columns show each output's RMS level change
+relative to the input microphone. A negative value means a quieter output.
+The last three columns compare aligned board and reference samples in linear
+amplitude units. MAE is the mean absolute difference, RMSE weights larger
+differences more heavily, and peak error is the largest absolute difference
+in the clip. Smaller errors indicate closer agreement with the original model.
+
+- **Far-end** has far-end speech only, so the level drop estimates echo
+  suppression. The board achieves 49.60 dB, within 0.20 dB of the float model.
+- **Near-end** has local speech only. The board reduces the overall speech
+  level by 0.23 dB versus 0.07 dB for the reference.
+- **Double-talk** contains both speakers. The board output is 0.07 dB
+  quieter than the reference, with an RMSE of 0.00317.
+  [Measure double-talk error against clean speech](#measure-echo-cancellation-with-a-known-clean-signal)
+
 ## Compare the captures
 
-The test launcher prints the comparison automatically. To recheck saved captures, run:
+The test launcher prints the comparison automatically. To recheck saved
+captures, run this command.
 
 ```powershell
 .venv/Scripts/python.exe projects/dtln_aec/test_data/sds_demo.py compare --summary
@@ -78,13 +154,7 @@ The test launcher prints the comparison automatically. To recheck saved captures
 
 The comparison checks the record counts, 8 ms timeslots, record sizes and
 finite values. It then removes the 384-sample warm-up prefix and 384-sample
-graph delay and trims to the original paired length. The table reports
-sample-wise MAE, RMSE and peak absolute error against the original float
-DTLN-aec 128 output. It also shows the RMS level change from the input
-microphone for both outputs. A negative value means a quieter output.
-For the far-end-only clip, this level drop measures echo suppression.
-Use the synthetic test below to measure double-talk error against clean
-near-end speech.
+graph delay and trims to the original paired length.
 
 The script writes aligned `*.capture.wav` files for listening alongside
 `*.reference.wav`. Omit `--summary` for JSON with the raw RMS values. Add
@@ -120,9 +190,10 @@ the original or better in every repeat.
 
 ## Source and recovery
 
-Restore the files by downloading the nine WAVs from the pinned upstream
-directory into `audio_samples/`, keeping their original file names. The local
-copies were verified against the Git blob hashes at that commit.
+The downloader fetches the required inputs from the pinned upstream revision
+and verifies their SHA-256 checksums. Rerun it to restore missing files or
+verify existing copies. The optional `_processed.wav` listening references
+are available from the same upstream directory.
 [DTLN-aec audio samples at commit `9d24e128`](https://github.com/breizhn/DTLN-aec/tree/9d24e128b4f409db18227b8babb343016625921f/audio_samples)
 
 The microphone and loopback names match Microsoft's ICASSP 2021 AEC Challenge
