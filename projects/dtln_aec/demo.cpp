@@ -7,9 +7,11 @@
 #include "sdsio_client.h"
 #include "stream_init.hpp"
 #include "waveform_display.hpp"
+#include "../../board/DevKit-E8/audio_output.h"
 #include <algorithm>
 #include <atomic>
 #include <cstdio>
+#include <cstring>
 
 SdsSourceParams dtlnReplayParams;
 SdsSinkParams dtlnRecordParams;
@@ -19,6 +21,10 @@ constexpr uint32_t bufferSize = 16384;
 constexpr uint32_t hopsPerSecond = DTLN_AUDIO_SAMPLE_RATE / DTLN_AUDIO_HOP_SAMPLES;
 constexpr uint32_t hopPeriodMs = 1000 / hopsPerSecond;
 static_assert(DTLN_AUDIO_SAMPLE_RATE % DTLN_AUDIO_HOP_SAMPLES == 0 && 1000 % hopsPerSecond == 0);
+static_assert(DTLN_AUDIO_SAMPLE_RATE == DEVKIT_E8_AUDIO_RATE);
+static_assert(DEVKIT_E8_AUDIO_FRAMES % DTLN_AUDIO_HOP_SAMPLES == 0);
+// Allow the full speaker queue and the hardware FIFO to drain at clip end.
+constexpr unsigned speakerDrainTimeoutMs = 200;
 alignas(32) uint8_t replayBuffer[bufferSize], recordBuffer[bufferSize];
 alignas(8) uint8_t graphStack[24576];
 uint32_t timeslot;
@@ -31,6 +37,52 @@ std::atomic<bool> stopping{false};
 std::atomic<bool> transportError{false};
 std::atomic<bool> finished{false};
 int graphResult;
+
+struct SpeakerPlayback {
+    int16_t block[DEVKIT_E8_AUDIO_FRAMES];
+    unsigned pending = 0;
+    int error = 0;
+
+    void writeBlock()
+    {
+        error = devkit_e8_audio_write(block, DEVKIT_E8_AUDIO_FRAMES);
+        pending = 0;
+    }
+
+    void append(const float* samples)
+    {
+        if (error) return;
+        for (unsigned i = 0; i < DTLN_AUDIO_HOP_SAMPLES; ++i) {
+            float sample = samples[i];
+            // Check the representation so this also works with finite-math optimizations.
+            uint32_t bits;
+            std::memcpy(&bits, &sample, sizeof(bits));
+            if ((bits & 0x7f800000U) == 0x7f800000U) sample = 0.0f;
+            sample = std::clamp(sample, -1.0f, 32767.0f / 32768.0f);
+            block[pending++] = static_cast<int16_t>(sample * 32768.0f);
+        }
+        if (pending == DEVKIT_E8_AUDIO_FRAMES) writeBlock();
+    }
+
+    void finish()
+    {
+        if (error) return;
+        if (pending) {
+            std::fill(block + pending, block + DEVKIT_E8_AUDIO_FRAMES, int16_t{0});
+            writeBlock();
+        }
+        if (!error) error = devkit_e8_audio_drain(speakerDrainTimeoutMs);
+    }
+};
+
+void observeOutput(void* context, const void* record, uint32_t bytes)
+{
+    if (bytes == DTLN_AUDIO_HOP_SAMPLES * sizeof(float)) {
+        static_cast<SpeakerPlayback*>(context)->append(static_cast<const float*>(record));
+    }
+    const auto waveform = dtln::waveform::outputObserver();
+    waveform.observe(waveform.context, record, bytes);
+}
 
 void sdsEvent(sdsId_t, uint32_t events)
 {
@@ -96,9 +148,11 @@ int playClip(HardwareParams& hardware)
     auto record = replay ? sdsOpen("Dtln_Out", sdsModeWrite, recordBuffer, sizeof(recordBuffer)) : nullptr;
     int result = CG_BUFFER_ERROR;
     if (replay && record) {
+        SpeakerPlayback speaker;
+        speaker.error = devkit_e8_audio_init();
         constexpr SdsRetry retry{waitForSds, nullptr, 1500};
         dtlnReplayParams = {replay, &timeslot, retry, dtln::waveform::microphoneObserver(), pacePlayback};
-        dtlnRecordParams = {record, recordTimeslot, nullptr, retry, dtln::waveform::outputObserver()};
+        dtlnRecordParams = {record, recordTimeslot, nullptr, retry, {observeOutput, &speaker}};
         sdsState = SDS_STATE_ACTIVE;
 
         osThreadAttr_t attr{};
@@ -120,9 +174,15 @@ int playClip(HardwareParams& hardware)
                 }
                 osDelay(pollTicks);
             }
-            if (osThreadJoin(graph) != osOK) return CG_OS_ERROR;
-            result = graphResult == CG_STOP_SCHEDULER ? CG_SUCCESS : graphResult;
+            if (osThreadJoin(graph) != osOK) {
+                result = CG_OS_ERROR;
+            } else {
+                result = graphResult == CG_STOP_SCHEDULER ? CG_SUCCESS : graphResult;
+            }
         }
+        if (result == CG_SUCCESS && !dtlnPlaybackStopping()) speaker.finish();
+        devkit_e8_audio_stop();
+        if (speaker.error) printf("DTLN speaker error=%d\n", speaker.error);
     }
 
     sdsState = SDS_STATE_STOP_REQ;

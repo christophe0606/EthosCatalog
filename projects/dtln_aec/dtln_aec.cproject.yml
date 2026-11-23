@@ -42,6 +42,10 @@ project:
     - component: BSP:OSPI FLASH XIP:core
     - component: BSP:External peripherals:GT911 Touch Controller
       for-context: [.Debug, .Release, .ReleaseSRAM]
+    - component: CMSIS Driver:SAI
+      for-context: [.Debug, .Release, .ReleaseSRAM]
+    - component: BSP:External peripherals:WM8904 CODEC
+      for-context: [.Debug, .Release, .ReleaseSRAM]
     - component: CMSIS:RTOS2:Keil RTX5&Source
     - component: CMSIS:OS Tick:SysTick
     - component: CMSIS:STREAM&Source
@@ -84,6 +88,7 @@ project:
           add-path:
             - $Pack(ARM::SDS)$/sds/sdsio/client
         - file: waveform_display.cpp
+        - file: ../../board/DevKit-E8/audio_output.cpp
         - file: ../../common/nodes_impl/alif_e8/lcd.c
         - file: hardware_params.cpp
         - file: hardware_params.h
