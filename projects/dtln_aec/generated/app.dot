@@ -15,6 +15,26 @@ dup0 [shape=point,label="dup0"]
 
 dup1 [shape=point,label="dup1"]
 
+dup2 [shape=point,label="dup2"]
+
+dup3 [shape=point,label="dup3"]
+
+
+lcd [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
+    <TD></TD>
+  </TR>
+<TR>
+<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
+
+
+<TD></TD></TR>
+
+</TABLE>>];
+
 
 mask_inverse [label=<
 <TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
@@ -94,6 +114,13 @@ sds_source [label=<
   </TR>
 </TABLE>>];
 
+speaker [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">speaker<BR/>(SpeakerOutput)</FONT></TD>
+  </TR>
+</TABLE>>];
+
 
 split_input [label=<
 <TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
@@ -150,12 +177,6 @@ sds_source:i -> split_input:i [style="solid",color="black",fontsize="12.0",fontc
 ,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
 </TD></TR></TABLE>>]
 
-split_input:o1 -> mic_window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
-,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
-</TD></TR></TABLE>>
-,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
-</TD></TR></TABLE>>]
-
 split_input:o2 -> reference_window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
 </TD></TR></TABLE>>
@@ -204,45 +225,81 @@ stage2:o -> overlap_add:i [style="solid",color="black",fontsize="12.0",fontcolor
 ,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
 </TD></TR></TABLE>>]
 
-overlap_add:i -> sds_sink:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
-,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
-</TD></TR></TABLE>>
+split_input:o1 ->
+dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+
 ,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
 </TD></TR></TABLE>>]
 
+
+dup0 -> mic_window:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup0 -> lcd:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+]
+
 reference_window:i ->
-dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
-
-,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
-</TD></TR></TABLE>>]
-
-
-dup0 -> reference_fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
-,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
-</TD></TR></TABLE>>
-]
-
-
-dup0 -> stage2:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
-,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
-</TD></TR></TABLE>>
-]
-
-mic_fft:i ->
 dup1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
 
 ,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
 </TD></TR></TABLE>>]
 
 
-dup1 -> mic_magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+dup1 -> reference_fft:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
 </TD></TR></TABLE>>
 ]
 
 
-dup1 -> mask_inverse:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+dup1 -> stage2:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+mic_fft:i ->
+dup2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>]
+
+
+dup2 -> mic_magnitude:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup2 -> mask_inverse:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(512)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >512</FONT>
+</TD></TR></TABLE>>
+]
+
+overlap_add:i ->
+dup3 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>]
+
+
+dup3 -> sds_sink:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup3 -> lcd:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup3 -> speaker:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
 </TD></TR></TABLE>>
 ]
 

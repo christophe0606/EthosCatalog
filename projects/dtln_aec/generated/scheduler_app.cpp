@@ -93,9 +93,9 @@ using namespace arm_cmsis_stream;
 Description of the scheduling.
 
 */
-static uint8_t schedule[15]=
+static uint8_t schedule[19]=
 {
-11,12,5,3,1,4,9,0,7,8,13,2,14,6,10,
+14,16,12,1,10,11,0,8,6,2,7,17,5,18,9,3,4,13,15,
 };
 
 /*
@@ -105,19 +105,23 @@ Internal ID identification for the nodes
 */
 #define DUP0_INTERNAL_ID 0
 #define DUP1_INTERNAL_ID 1
-#define MASK_INVERSE_INTERNAL_ID 2
-#define MIC_FFT_INTERNAL_ID 3
-#define MIC_MAGNITUDE_INTERNAL_ID 4
-#define MIC_WINDOW_INTERNAL_ID 5
-#define OVERLAP_ADD_INTERNAL_ID 6
-#define REFERENCE_FFT_INTERNAL_ID 7
-#define REFERENCE_MAGNITUDE_INTERNAL_ID 8
-#define REFERENCE_WINDOW_INTERNAL_ID 9
-#define SDS_SINK_INTERNAL_ID 10
-#define SDS_SOURCE_INTERNAL_ID 11
-#define SPLIT_INPUT_INTERNAL_ID 12
-#define STAGE1_INTERNAL_ID 13
-#define STAGE2_INTERNAL_ID 14
+#define DUP2_INTERNAL_ID 2
+#define DUP3_INTERNAL_ID 3
+#define LCD_INTERNAL_ID 4
+#define MASK_INVERSE_INTERNAL_ID 5
+#define MIC_FFT_INTERNAL_ID 6
+#define MIC_MAGNITUDE_INTERNAL_ID 7
+#define MIC_WINDOW_INTERNAL_ID 8
+#define OVERLAP_ADD_INTERNAL_ID 9
+#define REFERENCE_FFT_INTERNAL_ID 10
+#define REFERENCE_MAGNITUDE_INTERNAL_ID 11
+#define REFERENCE_WINDOW_INTERNAL_ID 12
+#define SDS_SINK_INTERNAL_ID 13
+#define SDS_SOURCE_INTERNAL_ID 14
+#define SPEAKER_INTERNAL_ID 15
+#define SPLIT_INPUT_INTERNAL_ID 16
+#define STAGE1_INTERNAL_ID 17
+#define STAGE2_INTERNAL_ID 18
 
 
 
@@ -132,23 +136,28 @@ FIFO buffers
 ************/
 #define FIFOSIZE0 256
 #define FIFOSIZE1 128
-#define FIFOSIZE2 128
+#define FIFOSIZE2 512
 #define FIFOSIZE3 512
-#define FIFOSIZE4 512
+#define FIFOSIZE4 257
 #define FIFOSIZE5 257
 #define FIFOSIZE6 257
-#define FIFOSIZE7 257
+#define FIFOSIZE7 512
 #define FIFOSIZE8 512
-#define FIFOSIZE9 512
+#define FIFOSIZE9 128
 #define FIFOSIZE10 128
-#define FIFOSIZE11 512
+#define FIFOSIZE11 128
 #define FIFOSIZE12 512
 #define FIFOSIZE13 512
 #define FIFOSIZE14 512
 #define FIFOSIZE15 512
 #define FIFOSIZE16 512
+#define FIFOSIZE17 512
+#define FIFOSIZE18 128
+#define FIFOSIZE19 128
+#define FIFOSIZE20 128
+#define FIFOSIZE21 128
 
-#define BUFFERSIZE0 2048
+#define BUFFERSIZE0 512
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf0[BUFFERSIZE0]={0};
 
@@ -164,9 +173,13 @@ uint8_t stream_app_buf2[BUFFERSIZE2]={0};
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf3[BUFFERSIZE3]={0};
 
-#define BUFFERSIZE4 1028
+#define BUFFERSIZE4 2048
 CG_BEFORE_BUFFER
 uint8_t stream_app_buf4[BUFFERSIZE4]={0};
+
+#define BUFFERSIZE5 2048
+CG_BEFORE_BUFFER
+uint8_t stream_app_buf5[BUFFERSIZE5]={0};
 
 
 typedef struct {
@@ -187,11 +200,19 @@ FIFO<float,FIFOSIZE13,1,0> *fifo13;
 FIFO<float,FIFOSIZE14,1,0> *fifo14;
 FIFO<float,FIFOSIZE15,1,0> *fifo15;
 FIFO<float,FIFOSIZE16,1,0> *fifo16;
+FIFO<float,FIFOSIZE17,1,0> *fifo17;
+FIFO<float,FIFOSIZE18,1,0> *fifo18;
+FIFO<float,FIFOSIZE19,1,0> *fifo19;
+FIFO<float,FIFOSIZE20,1,0> *fifo20;
+FIFO<float,FIFOSIZE21,1,0> *fifo21;
 } fifos_t;
 
 typedef struct {
-    Duplicate<float,512,float,512> *dup0;
+    Duplicate<float,128,float,128> *dup0;
     Duplicate<float,512,float,512> *dup1;
+    Duplicate<float,512,float,512> *dup2;
+    Duplicate<float,128,float,128> *dup3;
+    WaveformDisplay<float,128,float,128> *lcd;
     RFFTMaskInverse<float,512,float,257,float,512> *mask_inverse;
     FFT<float,512,float,512> *mic_fft;
     RawRFFTMagnitude<float,512,float,257> *mic_magnitude;
@@ -202,6 +223,7 @@ typedef struct {
     SlidingBuffer<float,128,float,512> *reference_window;
     SdsSink<float,128> *sds_sink;
     SdsSource<float,256> *sds_source;
+    SpeakerOutput<float,128> *speaker;
     DtlnSplitInput<float,256,float,128,float,128> *split_input;
     DtlnMethod<float,257,float,257,float,257> *stage1;
     DtlnMethod<float,512,float,512,float,512> *stage2;
@@ -231,22 +253,22 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     (void)evtQueue;
 
     CG_BEFORE_FIFO_INIT;
-    fifos.fifo0 = new (std::nothrow) FIFO<float,FIFOSIZE0,1,0>(stream_app_buf1);
+    fifos.fifo0 = new (std::nothrow) FIFO<float,FIFOSIZE0,1,0>(stream_app_buf2);
     if (fifos.fifo0==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo1 = new (std::nothrow) FIFO<float,FIFOSIZE1,1,0>(stream_app_buf0);
+    fifos.fifo1 = new (std::nothrow) FIFO<float,FIFOSIZE1,1,0>(stream_app_buf1);
     if (fifos.fifo1==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo2 = new (std::nothrow) FIFO<float,FIFOSIZE2,1,0>(stream_app_buf2);
+    fifos.fifo2 = new (std::nothrow) FIFO<float,FIFOSIZE2,1,0>(stream_app_buf3);
     if (fifos.fifo2==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo3 = new (std::nothrow) FIFO<float,FIFOSIZE3,1,0>(stream_app_buf1);
+    fifos.fifo3 = new (std::nothrow) FIFO<float,FIFOSIZE3,1,0>(stream_app_buf3);
     if (fifos.fifo3==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -256,7 +278,7 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo5 = new (std::nothrow) FIFO<float,FIFOSIZE5,1,0>(stream_app_buf0);
+    fifos.fifo5 = new (std::nothrow) FIFO<float,FIFOSIZE5,1,0>(stream_app_buf2);
     if (fifos.fifo5==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -266,17 +288,17 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo7 = new (std::nothrow) FIFO<float,FIFOSIZE7,1,0>(stream_app_buf3);
+    fifos.fifo7 = new (std::nothrow) FIFO<float,FIFOSIZE7,1,0>(stream_app_buf2);
     if (fifos.fifo7==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo8 = new (std::nothrow) FIFO<float,FIFOSIZE8,1,0>(stream_app_buf0);
+    fifos.fifo8 = new (std::nothrow) FIFO<float,FIFOSIZE8,1,0>(stream_app_buf3);
     if (fifos.fifo8==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo9 = new (std::nothrow) FIFO<float,FIFOSIZE9,1,0>(stream_app_buf1);
+    fifos.fifo9 = new (std::nothrow) FIFO<float,FIFOSIZE9,1,0>(stream_app_buf0);
     if (fifos.fifo9==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -286,7 +308,7 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo11 = new (std::nothrow) FIFO<float,FIFOSIZE11,1,0>(stream_app_buf3);
+    fifos.fifo11 = new (std::nothrow) FIFO<float,FIFOSIZE11,1,0>(stream_app_buf0);
     if (fifos.fifo11==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -296,23 +318,48 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo13 = new (std::nothrow) FIFO<float,FIFOSIZE13,1,0>(stream_app_buf2);
+    fifos.fifo13 = new (std::nothrow) FIFO<float,FIFOSIZE13,1,0>(stream_app_buf1);
     if (fifos.fifo13==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo14 = new (std::nothrow) FIFO<float,FIFOSIZE14,1,0>(stream_app_buf0);
+    fifos.fifo14 = new (std::nothrow) FIFO<float,FIFOSIZE14,1,0>(stream_app_buf1);
     if (fifos.fifo14==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo15 = new (std::nothrow) FIFO<float,FIFOSIZE15,1,0>(stream_app_buf1);
+    fifos.fifo15 = new (std::nothrow) FIFO<float,FIFOSIZE15,1,0>(stream_app_buf4);
     if (fifos.fifo15==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
-    fifos.fifo16 = new (std::nothrow) FIFO<float,FIFOSIZE16,1,0>(stream_app_buf1);
+    fifos.fifo16 = new (std::nothrow) FIFO<float,FIFOSIZE16,1,0>(stream_app_buf4);
     if (fifos.fifo16==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    fifos.fifo17 = new (std::nothrow) FIFO<float,FIFOSIZE17,1,0>(stream_app_buf5);
+    if (fifos.fifo17==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    fifos.fifo18 = new (std::nothrow) FIFO<float,FIFOSIZE18,1,0>(stream_app_buf1);
+    if (fifos.fifo18==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    fifos.fifo19 = new (std::nothrow) FIFO<float,FIFOSIZE19,1,0>(stream_app_buf1);
+    if (fifos.fifo19==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    fifos.fifo20 = new (std::nothrow) FIFO<float,FIFOSIZE20,1,0>(stream_app_buf1);
+    if (fifos.fifo20==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    fifos.fifo21 = new (std::nothrow) FIFO<float,FIFOSIZE21,1,0>(stream_app_buf1);
+    if (fifos.fifo21==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
@@ -320,67 +367,85 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     CG_BEFORE_NODE_INIT;
     cg_status initError;
 
-    nodes.dup0 = new (std::nothrow) Duplicate<float,512,float,512>(*(fifos.fifo11),{fifos.fifo12});
+    nodes.dup0 = new (std::nothrow) Duplicate<float,128,float,128>(*(fifos.fifo9),{});
     if (nodes.dup0==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.dup1 = new (std::nothrow) Duplicate<float,512,float,512>(*(fifos.fifo14),{fifos.fifo15});
+    nodes.dup1 = new (std::nothrow) Duplicate<float,512,float,512>(*(fifos.fifo12),{fifos.fifo13});
     if (nodes.dup1==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.mask_inverse = new (std::nothrow) RFFTMaskInverse<float,512,float,257,float,512>(*(fifos.fifo16),*(fifos.fifo7),*(fifos.fifo8));
+    nodes.dup2 = new (std::nothrow) Duplicate<float,512,float,512>(*(fifos.fifo15),{fifos.fifo17});
+    if (nodes.dup2==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.dup3 = new (std::nothrow) Duplicate<float,128,float,128>(*(fifos.fifo18),{});
+    if (nodes.dup3==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.lcd = new (std::nothrow) WaveformDisplay<float,128,float,128>(*(fifos.fifo11),*(fifos.fifo20),params->lcd);
+    if (nodes.lcd==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.mask_inverse = new (std::nothrow) RFFTMaskInverse<float,512,float,257,float,512>(*(fifos.fifo17),*(fifos.fifo6),*(fifos.fifo7));
     if (nodes.mask_inverse==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.mic_fft = new (std::nothrow) FFT<float,512,float,512>(*(fifos.fifo3),*(fifos.fifo14));
+    nodes.mic_fft = new (std::nothrow) FFT<float,512,float,512>(*(fifos.fifo2),*(fifos.fifo15));
     if (nodes.mic_fft==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.mic_magnitude = new (std::nothrow) RawRFFTMagnitude<float,512,float,257>(*(fifos.fifo15),*(fifos.fifo5));
+    nodes.mic_magnitude = new (std::nothrow) RawRFFTMagnitude<float,512,float,257>(*(fifos.fifo16),*(fifos.fifo4));
     if (nodes.mic_magnitude==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.mic_window = new (std::nothrow) SlidingBuffer<float,128,float,512>(*(fifos.fifo1),*(fifos.fifo3));
+    nodes.mic_window = new (std::nothrow) SlidingBuffer<float,128,float,512>(*(fifos.fifo10),*(fifos.fifo2));
     if (nodes.mic_window==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.overlap_add = new (std::nothrow) OverlapAdd<float,512,float,128>(*(fifos.fifo9),*(fifos.fifo10));
+    nodes.overlap_add = new (std::nothrow) OverlapAdd<float,512,float,128>(*(fifos.fifo8),*(fifos.fifo18));
     if (nodes.overlap_add==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.reference_fft = new (std::nothrow) PreservingFFT<float,512,float,512>(*(fifos.fifo12),*(fifos.fifo4));
+    nodes.reference_fft = new (std::nothrow) PreservingFFT<float,512,float,512>(*(fifos.fifo13),*(fifos.fifo3));
     if (nodes.reference_fft==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.reference_magnitude = new (std::nothrow) RawRFFTMagnitude<float,512,float,257>(*(fifos.fifo4),*(fifos.fifo6));
+    nodes.reference_magnitude = new (std::nothrow) RawRFFTMagnitude<float,512,float,257>(*(fifos.fifo3),*(fifos.fifo5));
     if (nodes.reference_magnitude==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.reference_window = new (std::nothrow) SlidingBuffer<float,128,float,512>(*(fifos.fifo2),*(fifos.fifo11));
+    nodes.reference_window = new (std::nothrow) SlidingBuffer<float,128,float,512>(*(fifos.fifo1),*(fifos.fifo12));
     if (nodes.reference_window==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.sds_sink = new (std::nothrow) SdsSink<float,128>(*(fifos.fifo10),dtlnRecordParams);
+    nodes.sds_sink = new (std::nothrow) SdsSink<float,128>(*(fifos.fifo19),dtlnRecordParams);
     if (nodes.sds_sink==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -392,19 +457,25 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.split_input = new (std::nothrow) DtlnSplitInput<float,256,float,128,float,128>(*(fifos.fifo0),*(fifos.fifo1),*(fifos.fifo2));
+    nodes.speaker = new (std::nothrow) SpeakerOutput<float,128>(*(fifos.fifo21),params->speaker);
+    if (nodes.speaker==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+
+    nodes.split_input = new (std::nothrow) DtlnSplitInput<float,256,float,128,float,128>(*(fifos.fifo0),*(fifos.fifo9),*(fifos.fifo1));
     if (nodes.split_input==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.stage1 = new (std::nothrow) DtlnMethod<float,257,float,257,float,257>(*(fifos.fifo5),*(fifos.fifo6),*(fifos.fifo7),params->stage1);
+    nodes.stage1 = new (std::nothrow) DtlnMethod<float,257,float,257,float,257>(*(fifos.fifo4),*(fifos.fifo5),*(fifos.fifo6),params->stage1);
     if (nodes.stage1==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.stage2 = new (std::nothrow) DtlnMethod<float,512,float,512,float,512>(*(fifos.fifo8),*(fifos.fifo13),*(fifos.fifo9),params->stage2);
+    nodes.stage2 = new (std::nothrow) DtlnMethod<float,512,float,512,float,512>(*(fifos.fifo7),*(fifos.fifo14),*(fifos.fifo8),params->stage2);
     if (nodes.stage2==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
@@ -419,6 +490,18 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(initError);
 
     initError = nodes.dup1->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.dup2->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.dup3->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.lcd->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -459,6 +542,10 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(initError);
 
     initError = nodes.sds_source->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.speaker->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -551,6 +638,26 @@ void free_scheduler_app()
     {
        delete fifos.fifo16;
     }
+    if (fifos.fifo17!=NULL)
+    {
+       delete fifos.fifo17;
+    }
+    if (fifos.fifo18!=NULL)
+    {
+       delete fifos.fifo18;
+    }
+    if (fifos.fifo19!=NULL)
+    {
+       delete fifos.fifo19;
+    }
+    if (fifos.fifo20!=NULL)
+    {
+       delete fifos.fifo20;
+    }
+    if (fifos.fifo21!=NULL)
+    {
+       delete fifos.fifo21;
+    }
 
     if (nodes.dup0!=NULL)
     {
@@ -559,6 +666,18 @@ void free_scheduler_app()
     if (nodes.dup1!=NULL)
     {
         delete nodes.dup1;
+    }
+    if (nodes.dup2!=NULL)
+    {
+        delete nodes.dup2;
+    }
+    if (nodes.dup3!=NULL)
+    {
+        delete nodes.dup3;
+    }
+    if (nodes.lcd!=NULL)
+    {
+        delete nodes.lcd;
     }
     if (nodes.mask_inverse!=NULL)
     {
@@ -599,6 +718,10 @@ void free_scheduler_app()
     if (nodes.sds_source!=NULL)
     {
         delete nodes.sds_source;
+    }
+    if (nodes.speaker!=NULL)
+    {
+        delete nodes.speaker;
     }
     if (nodes.split_input!=NULL)
     {
@@ -684,6 +807,26 @@ void reset_fifos_scheduler_app(int all)
     {
        fifos.fifo16->reset();
     }
+    if (fifos.fifo17!=NULL)
+    {
+       fifos.fifo17->reset();
+    }
+    if (fifos.fifo18!=NULL)
+    {
+       fifos.fifo18->reset();
+    }
+    if (fifos.fifo19!=NULL)
+    {
+       fifos.fifo19->reset();
+    }
+    if (fifos.fifo20!=NULL)
+    {
+       fifos.fifo20->reset();
+    }
+    if (fifos.fifo21!=NULL)
+    {
+       fifos.fifo21->reset();
+    }
    // Buffers are set to zero too
    if (all)
    {
@@ -692,6 +835,7 @@ void reset_fifos_scheduler_app(int all)
        std::fill_n(stream_app_buf2, BUFFERSIZE2, (uint8_t)0);
        std::fill_n(stream_app_buf3, BUFFERSIZE3, (uint8_t)0);
        std::fill_n(stream_app_buf4, BUFFERSIZE4, (uint8_t)0);
+       std::fill_n(stream_app_buf5, BUFFERSIZE5, (uint8_t)0);
    }
 }
 
@@ -714,7 +858,7 @@ uint32_t scheduler_app(int *error)
         /* Run a schedule iteration */
         CG_BEFORE_ITERATION;
         unsigned long id=0;
-        for(; id < 15; id++)
+        for(; id < 19; id++)
         {
             CG_BEFORE_NODE_EXECUTION(schedule[id]);
             switch(schedule[id])
@@ -736,88 +880,116 @@ uint32_t scheduler_app(int *error)
                 case 2:
                 {
 
-                   cgStaticError = nodes.mask_inverse->run();
+                   cgStaticError = nodes.dup2->run();
                 }
                 break;
 
                 case 3:
                 {
 
-                   cgStaticError = nodes.mic_fft->run();
+                   cgStaticError = nodes.dup3->run();
                 }
                 break;
 
                 case 4:
                 {
 
-                   cgStaticError = nodes.mic_magnitude->run();
+                   cgStaticError = nodes.lcd->run();
                 }
                 break;
 
                 case 5:
                 {
 
-                   cgStaticError = nodes.mic_window->run();
+                   cgStaticError = nodes.mask_inverse->run();
                 }
                 break;
 
                 case 6:
                 {
 
-                   cgStaticError = nodes.overlap_add->run();
+                   cgStaticError = nodes.mic_fft->run();
                 }
                 break;
 
                 case 7:
                 {
 
-                   cgStaticError = nodes.reference_fft->run();
+                   cgStaticError = nodes.mic_magnitude->run();
                 }
                 break;
 
                 case 8:
                 {
 
-                   cgStaticError = nodes.reference_magnitude->run();
+                   cgStaticError = nodes.mic_window->run();
                 }
                 break;
 
                 case 9:
                 {
 
-                   cgStaticError = nodes.reference_window->run();
+                   cgStaticError = nodes.overlap_add->run();
                 }
                 break;
 
                 case 10:
                 {
 
-                   cgStaticError = nodes.sds_sink->run();
+                   cgStaticError = nodes.reference_fft->run();
                 }
                 break;
 
                 case 11:
                 {
 
-                   cgStaticError = nodes.sds_source->run();
+                   cgStaticError = nodes.reference_magnitude->run();
                 }
                 break;
 
                 case 12:
                 {
 
-                   cgStaticError = nodes.split_input->run();
+                   cgStaticError = nodes.reference_window->run();
                 }
                 break;
 
                 case 13:
                 {
 
-                   cgStaticError = nodes.stage1->run();
+                   cgStaticError = nodes.sds_sink->run();
                 }
                 break;
 
                 case 14:
+                {
+
+                   cgStaticError = nodes.sds_source->run();
+                }
+                break;
+
+                case 15:
+                {
+
+                   cgStaticError = nodes.speaker->run();
+                }
+                break;
+
+                case 16:
+                {
+
+                   cgStaticError = nodes.split_input->run();
+                }
+                break;
+
+                case 17:
+                {
+
+                   cgStaticError = nodes.stage1->run();
+                }
+                break;
+
+                case 18:
                 {
 
                    cgStaticError = nodes.stage2->run();

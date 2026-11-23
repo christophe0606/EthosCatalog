@@ -7,7 +7,7 @@ StreamStats stream_stats;
 int hardware_params_init(HardwareParams *params)
 {
     if (!params) return -500;
-    *params = {&stream_stats, dtln_forward};
+    *params = {&stream_stats, dtln_forward, nullptr, nullptr};
     return 0;
 }
 void hardware_params_uninit(HardwareParams *params)

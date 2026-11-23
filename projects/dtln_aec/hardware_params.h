@@ -11,6 +11,8 @@ typedef struct {
     StreamStats *stats;
     int (*forward)(unsigned, const float*, const float*, const float*,
                    float*, float*, DtlnForwardTiming*);
+    void (*display_waveform)(const float* microphone, const float* output);
+    void (*play_audio)(const float* output);
 } HardwareParams;
 extern StreamStats stream_stats;
 int hardware_params_init(HardwareParams *params);

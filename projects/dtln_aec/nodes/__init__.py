@@ -2,3 +2,5 @@
 # SPDX-License-Identifier: Apache-2.0
 from .DtlnMethod import DtlnMethod
 from .DtlnSplitInput import DtlnSplitInput
+from .SpeakerOutput import SpeakerOutput
+from .WaveformDisplay import WaveformDisplay

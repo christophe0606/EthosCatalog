@@ -2,14 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "SdsEndpoint.hpp"
+#include <cstdint>
 
 namespace dtln::waveform {
 void start();
 void reset();
 void finish();
-SdsRecordObserver microphoneObserver();
-SdsRecordObserver outputObserver();
+void append(const float* microphone, const float* output);
 uint32_t framesPresented();
 int32_t displayError();
 }

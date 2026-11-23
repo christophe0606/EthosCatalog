@@ -44,6 +44,8 @@ The script plays all three clips, saves the captures in
 original float DTLN-aec 128 model.
 During playback, the board releases one audio hop every 8 ms and displays the
 **MICROPHONE** and **ECHO CANCELLED** waveforms on the LCD.
+The CMSIS Stream graph sends processed hops to the SDS sink, LCD and speaker
+nodes. The LCD node also receives the microphone hop for the paired display.
 The speaker starts once four output hops (32 ms of audio) are ready. The
 speaker queue holds up to 96 ms, including the block being played, plus one
 8 ms hop waiting to form the next block. The hardware FIFO adds about 1 ms.

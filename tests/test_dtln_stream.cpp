@@ -79,6 +79,9 @@ using StereoHop = std::array<float, 2 * hop>;
 using MonoHop = std::array<float, hop>;
 static std::vector<StereoHop> inputRecords;
 static std::vector<MonoHop> outputRecords;
+static std::vector<MonoHop> speakerRecords;
+static std::vector<MonoHop> displayMicrophoneRecords;
+static std::vector<MonoHop> displayOutputRecords;
 static size_t nextRecord;
 static uint32_t timeslot;
 SdsSourceParams dtlnReplayParams;
@@ -101,6 +104,15 @@ extern "C" int32_t sdsWrite(sdsId_t id, uint32_t slot, const void* input, uint32
 }
 
 static uint32_t recordTimeslot(void*) { return timeslot; }
+
+static void displayWaveform(const float* microphone, const float* output) {
+    std::copy_n(microphone, hop, displayMicrophoneRecords.emplace_back().begin());
+    std::copy_n(output, hop, displayOutputRecords.emplace_back().begin());
+}
+
+static void playAudio(const float* output) {
+    std::copy_n(output, hop, speakerRecords.emplace_back().begin());
+}
 
 static float inputSample(int index, size_t channel) {
     if (index < 0) return 0.0f;
@@ -134,10 +146,13 @@ static void runGraph() {
     nextRecord = 0;
     timeslot = 0;
     outputRecords.clear();
+    speakerRecords.clear();
+    displayMicrophoneRecords.clear();
+    displayOutputRecords.clear();
     dtlnReplayParams = {&inputRecords, &timeslot};
     dtlnRecordParams = {&outputRecords, recordTimeslot};
     StreamStats stats{};
-    HardwareParams hardware{&stats, fake_forward};
+    HardwareParams hardware{&stats, fake_forward, displayWaveform, playAudio};
     app_params_set_hardware(&hardware);
     assert(init_scheduler_app(nullptr, &appParams) == CG_SUCCESS);
     reset_fifos_scheduler_app(1);
@@ -145,10 +160,13 @@ static void runGraph() {
     assert(scheduler_app(&error) == inputRecords.size());
     assert(error == CG_STOP_SCHEDULER);
     assert(outputRecords.size() == inputRecords.size());
+    assert(speakerRecords == outputRecords && displayOutputRecords == outputRecords);
+    assert(displayMicrophoneRecords.size() == inputRecords.size());
     assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());
     // Unity mask, inverse FFT and one-quarter gain overlap-add to the input.
     for (size_t frame = 0; frame < outputRecords.size(); ++frame) {
         for (size_t i = 0; i < hop; ++i) {
+            assert(displayMicrophoneRecords[frame][i] == inputSample(int(frame * hop + i), 0));
             const int index = int(frame * hop + i) - int(delay);
             assert(std::fabs(outputRecords[frame][i] - inputSample(index, 0)) < 1e-6f);
         }
@@ -187,12 +205,12 @@ int main(int argc, char** argv) {
     // Fast-math-safe finite guard must reject a bad model before the DSP.
     calls[0] = 0;
     StreamStats stats{};
-    HardwareParams hardware{&stats, fake_forward};
+    HardwareParams hardware{&stats, fake_forward, displayWaveform, playAudio};
     float a[257]{}, b[257]{}, result[257]{};
     arm_cmsis_stream::FIFO<float,257,1,0> fa(a), fb(b), fo(result);
     DtlnMethod<float,257,float,257,float,257> method(fa, fb, fo, {hardware, 1});
     assert(method.init() == CG_SUCCESS);
     inject_nan = true;
     assert(method.run() == -511);
-    printf("DTLN SDS scheduler PASS, channel ordering, timeslots, overlap-add and fresh model states\n");
+    printf("DTLN SDS scheduler PASS, channel ordering, timeslots, overlap-add, model states, LCD and speaker routing\n");
 }

@@ -75,13 +75,11 @@ struct SpeakerPlayback {
     }
 };
 
-void observeOutput(void* context, const void* record, uint32_t bytes)
+SpeakerPlayback speaker;
+
+void playSpeakerHop(const float* output)
 {
-    if (bytes == DTLN_AUDIO_HOP_SAMPLES * sizeof(float)) {
-        static_cast<SpeakerPlayback*>(context)->append(static_cast<const float*>(record));
-    }
-    const auto waveform = dtln::waveform::outputObserver();
-    waveform.observe(waveform.context, record, bytes);
+    speaker.append(output);
 }
 
 void sdsEvent(sdsId_t, uint32_t events)
@@ -148,11 +146,11 @@ int playClip(HardwareParams& hardware)
     auto record = replay ? sdsOpen("Dtln_Out", sdsModeWrite, recordBuffer, sizeof(recordBuffer)) : nullptr;
     int result = CG_BUFFER_ERROR;
     if (replay && record) {
-        SpeakerPlayback speaker;
+        speaker.pending = 0;
         speaker.error = devkit_e8_audio_init();
         constexpr SdsRetry retry{waitForSds, nullptr, 1500};
-        dtlnReplayParams = {replay, &timeslot, retry, dtln::waveform::microphoneObserver(), pacePlayback};
-        dtlnRecordParams = {record, recordTimeslot, nullptr, retry, {observeOutput, &speaker}};
+        dtlnReplayParams = {replay, &timeslot, retry, {}, pacePlayback};
+        dtlnRecordParams = {record, recordTimeslot, nullptr, retry};
         sdsState = SDS_STATE_ACTIVE;
 
         osThreadAttr_t attr{};
@@ -225,6 +223,8 @@ extern "C" int dtln_demo_start(void)
     static HardwareParams hardware;
     int error = hardware_params_init(&hardware);
     if (error) return error;
+    hardware.display_waveform = dtln::waveform::append;
+    hardware.play_audio = playSpeakerHop;
     dtln::waveform::start();
     const uint32_t ticksPerSecond = osKernelGetTickFreq();
     while ((error = sdsInit(sdsEvent)) == SDS_ERROR_IO) {

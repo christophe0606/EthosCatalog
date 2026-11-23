@@ -12,3 +12,5 @@
 #include "../../../common/nodes_impl/c/SlidingBuffer.hpp"
 #include "../nodes_impl/DtlnMethod.hpp"
 #include "../nodes_impl/DtlnSplitInput.hpp"
+#include "../nodes_impl/SpeakerOutput.hpp"
+#include "../nodes_impl/WaveformDisplay.hpp"

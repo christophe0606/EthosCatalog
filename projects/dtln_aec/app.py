@@ -12,7 +12,7 @@ from cmsis_stream.cg.scheduler import CType, F32, Graph
 from common.stream_graph import GraphStyle, configuration, graph_only_requested, mk_app
 from common.nodes import (SlidingBuffer, FFT, PreservingFFT, RawRFFTMagnitude,
                           RFFTMaskInverse, OverlapAdd, SdsSource, SdsSink)
-from projects.dtln_aec.nodes import DtlnMethod, DtlnSplitInput
+from projects.dtln_aec.nodes import DtlnMethod, DtlnSplitInput, SpeakerOutput, WaveformDisplay
 
 SAMPLE_RATE = 16000
 HOP_SAMPLES = 128
@@ -38,6 +38,8 @@ def make_graph():
     stage2 = DtlnMethod("stage2", 2)
     synthesis = OverlapAdd("overlap_add", 512, HOP_SAMPLES)
     sink = SdsSink("sds_sink", audio, HOP_SAMPLES, "dtlnRecordParams")
+    lcd = WaveformDisplay("lcd", HOP_SAMPLES)
+    speaker = SpeakerOutput("speaker", HOP_SAMPLES)
     graph.connect(source.o, split.i)
     graph.connect(split.o1, mic_window.i)
     graph.connect(split.o2, ref_window.i)
@@ -53,6 +55,9 @@ def make_graph():
     graph.connect(ref_window.o, stage2.i2)
     graph.connect(stage2.o, synthesis.i)
     graph.connect(synthesis.o, sink.i)
+    graph.connect(split.o1, lcd.i1)
+    graph.connect(synthesis.o, lcd.i2)
+    graph.connect(synthesis.o, speaker.i)
     return graph
 
 

@@ -157,12 +157,12 @@ void display(void*)
     ready.store(false, std::memory_order_release);
 }
 
-Peak envelope(const float* samples, unsigned stride)
+Peak envelope(const float* samples)
 {
     uint32_t bits;
     Peak peak{1.0f, -1.0f};
     for (unsigned i = 0; i < samplesPerBin; ++i) {
-        float value = samples[i * stride];
+        float value = samples[i];
         std::memcpy(&bits, &value, sizeof(bits));
         if ((bits & 0x7f800000U) == 0x7f800000U) value = 0.0f;
         value = std::clamp(value, -1.0f, 1.0f);
@@ -182,26 +182,21 @@ void offerSnapshot(bool force)
     osThreadFlagsSet(displayThread, dataReadyFlag);
 }
 
-void observeMicrophone(void*, const void* record, uint32_t bytes)
-{
-    if (!ready.load(std::memory_order_acquire) || bytes != 2 * DTLN_AUDIO_HOP_SAMPLES * sizeof(float)) return;
-    const auto* mic = static_cast<const float*>(record);
-    for (unsigned bin = 0; bin < binsPerHop; ++bin)
-        microphoneDelay[microphoneSlot][bin] = envelope(mic + 2 * bin * samplesPerBin, 2);
-}
+} // namespace
 
-void observeOutput(void*, const void* record, uint32_t bytes)
+void append(const float* microphone, const float* output)
 {
-    if (!ready.load(std::memory_order_acquire) || bytes != DTLN_AUDIO_HOP_SAMPLES * sizeof(float)) return;
-    const auto* output = static_cast<const float*>(record);
+    if (!ready.load(std::memory_order_acquire)) return;
+    for (unsigned bin = 0; bin < binsPerHop; ++bin) {
+        microphoneDelay[microphoneSlot][bin] = envelope(microphone + bin * samplesPerBin);
+    }
     microphoneSlot = (microphoneSlot + 1) % microphoneDelay.size();
     for (unsigned bin = 0; bin < binsPerHop; ++bin) {
-        history.bins[history.next] = {microphoneDelay[microphoneSlot][bin], envelope(output + bin * samplesPerBin, 1)};
+        history.bins[history.next] = {microphoneDelay[microphoneSlot][bin], envelope(output + bin * samplesPerBin)};
         history.next = (history.next + 1) % historyBins;
     }
     offerSnapshot(false);
 }
-} // namespace
 
 void start()
 {
@@ -228,8 +223,6 @@ void finish()
     if (ready.load(std::memory_order_acquire)) offerSnapshot(true);
 }
 
-SdsRecordObserver microphoneObserver() { return {observeMicrophone}; }
-SdsRecordObserver outputObserver() { return {observeOutput}; }
 uint32_t framesPresented() { return presented.load(std::memory_order_relaxed); }
 int32_t displayError() { return error.load(); }
 }

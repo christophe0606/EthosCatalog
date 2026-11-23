@@ -1,5 +1,13 @@
 {
+  "Duplicate<float,128,float,128>": {
+    "isTemplate": true,
+    "selectors": []
+  },
   "Duplicate<float,512,float,512>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "WaveformDisplay<float,128,float,128>": {
     "isTemplate": true,
     "selectors": []
   },
@@ -32,6 +40,10 @@
     "selectors": []
   },
   "SdsSource<float,256>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SpeakerOutput<float,128>": {
     "isTemplate": true,
     "selectors": []
   },
