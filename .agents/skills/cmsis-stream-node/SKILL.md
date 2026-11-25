@@ -138,6 +138,11 @@ For each port, the template has two arguments:
 
 If the component has any dataflow port, it must implement the `run` method that will be called by the CMSIS Stream scheduler to process the data. The `run` method must read the input data from the input ports, process it, and write the output data to the output ports.
 
+By construction, in `run` the CMSIS Stream FIFOs can't have
+any underflow or overflow. The sizing of the FIFOs and the 
+deterministic scheduling of the dataflow computed by python
+ensure that underflow or overflow cannot occur. 
+
 If the component has any event output port, it must implement the 
 ```C++
 void subscribe(int outputPort,StreamNode &dst,int dstPort)

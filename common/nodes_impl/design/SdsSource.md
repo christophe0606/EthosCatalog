@@ -43,17 +43,16 @@ size or timeslot gives `CG_BUFFER_ERROR`. A failed retry delay gives
 `CG_OS_ERROR`, as does a failed pacing delay if the release tick is still
 in the future.
 
-The source reads into graph-owned storage and publishes the FIFO block only
-after a complete transfer, timeslot validation where applicable, and the
-pacing wait. When there is insufficient FIFO capacity, `prepareForRunning()`
-returns `CG_SKIP_EXECUTION` and `run()` returns `CG_BUFFER_OVERFLOW` before
-reading SDS. If `sdsRead()` returns `SDS_EOS`, `run()` returns
+The generated synchronous schedule provides room for the output block at
+each firing. The source reads into graph-owned storage and publishes the
+FIFO block only after a complete transfer, timeslot validation where
+applicable, and the pacing wait. If `sdsRead()` returns `SDS_EOS`, `run()` returns
 `CG_STOP_SCHEDULER` before publishing another block. `lastSdsStatus()`
 retains the most recent raw SDS result for diagnostics.
 
 DTLN uses 128 frames per record at 16 kHz, for an 8 ms period. Each record
 contains 256 interleaved floats for microphone and reference. The source reads
 from the 16 KiB SDS circular buffer and exposes the hop to the split node. The
-tests exercise timed release, underflow deadlines, tick rollover, record
-validation and graph FIFO errors. [DTLN graph](../../../projects/dtln_aec/app.py) ·
+tests exercise timed release, SDS read deadlines, tick rollover, record
+validation, and when the source publishes to the FIFO. [DTLN graph](../../../projects/dtln_aec/app.py) ·
 [Host tests](../../../tests/test_sds_nodes.cpp)

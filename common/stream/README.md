@@ -165,16 +165,19 @@ publishes each timeslot and the next release tick via `SdsPlaybackTiming`. The
 sink uses that timeslot and shares the same deadline for write backpressure.
 With reblocking, the sink uses the most recent source timeslot.
 
-The nodes keep the FIFO occupancy unchanged until a complete SDS record
-transfers. They sleep one tick between transfer attempts while time remains.
-If the deadline expires, `SDS_NO_DATA` maps to `CG_BUFFER_UNDERFLOW` and
+The generated synchronous schedule provides space for the source output
+and a complete input block for the sink at each firing. The nodes advance
+the graph FIFO only after a complete SDS record transfers. They sleep
+one tick between SDS transfer attempts while time remains.
+If the SDS retry deadline expires, `SDS_NO_DATA` maps to `CG_BUFFER_UNDERFLOW` and
 `SDS_NO_SPACE` maps to `CG_BUFFER_OVERFLOW`. Other transfer failures return
 `CG_BUFFER_ERROR`. End of stream returns `CG_STOP_SCHEDULER`.
 `lastSdsStatus()` reports the latest SDS API result. Connect a separate
 dataflow node to inspect samples.
 
-The host check generates synchronous and asynchronous graphs, builds both
-against the installed SDS pack header, and uses a test double for SDS I/O.
+The host check generates a graph with the project's synchronous scheduler
+configuration, builds it against the installed SDS pack header, and uses
+a test double for SDS I/O.
 Run `uv run python tests/run_sds_tests.py` with `CMSIS_PACK_ROOT` set and a host
 Clang compiler on `PATH`. On Windows, `--vcvars` accepts Visual Studio's
 `vcvarsall.bat` to use MSVC.

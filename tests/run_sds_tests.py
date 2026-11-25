@@ -12,20 +12,17 @@ sys.path.insert(0, str(ROOT))
 
 from cmsis_stream.cg.scheduler import CType, Graph, SINT16
 from common.nodes import SdsSink, SdsSource
-from common.stream_graph import configuration, mk_app
+from common.stream_graph import mk_app
 
 
-def run_test(args, sds_include, asynchronous):
-    output = ROOT / "out" / "sds-tests" / ("async" if asynchronous else "sync")
+def run_test(args, sds_include):
+    output = ROOT / "out" / "sds-tests" / "sync"
     sample_type = CType(SINT16)
     replay = SdsSource("replay", sample_type, 2, "replayParams")
     record = SdsSink("record", sample_type, 4, "recordParams")
     graph = Graph()
     graph.connect(replay.o, record.i)
-    config = configuration()
-    config.asynchronous = asynchronous
-    config.memoryOptimization = not asynchronous
-    schedule = mk_app(graph, output, {}, {}, config=config)
+    schedule = mk_app(graph, output, {}, {})
     assert schedule.scheduleLength == 3
 
     includes = [sds_include, output, *[ROOT / path for path in (
@@ -64,9 +61,7 @@ def main():
     sds_include = args.pack_root.resolve() / "ARM" / "SDS" / args.sds_version / "sds" / "include"
     if not (sds_include / "sds.h").is_file():
         parser.error(f"SDS pack header missing in {sds_include}")
-    for asynchronous in (False, True):
-        print(f"Testing {'asynchronous' if asynchronous else 'synchronous'} scheduler", flush=True)
-        run_test(args, sds_include, asynchronous)
+    run_test(args, sds_include)
 
 
 if __name__ == "__main__":

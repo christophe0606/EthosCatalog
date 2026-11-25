@@ -29,13 +29,7 @@ public:
         return CG_SUCCESS;
     }
 
-    int prepareForRunning() final {
-        return this->willOverflow() ? CG_SKIP_EXECUTION : CG_SUCCESS;
-    }
-
     int run() final {
-        if (this->willOverflow()) return CG_BUFFER_OVERFLOW;
-
         auto& timing = *params_.timing;
         timing.pacingTimerCounts = 0;
         const uint32_t deadline = timing.started ? timing.nextReleaseTick

@@ -15,12 +15,7 @@ public:
         return params_.stream && params_.timing ? CG_SUCCESS : CG_INIT_FAILURE;
     }
 
-    int prepareForRunning() final {
-        return this->willUnderflow() ? CG_SKIP_EXECUTION : CG_SUCCESS;
-    }
-
     int run() final {
-        if (this->willUnderflow()) return CG_BUFFER_UNDERFLOW;
         const auto& timing = *params_.timing;
         if (!timing.started) return CG_BUFFER_ERROR;
 

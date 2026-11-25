@@ -11,10 +11,9 @@ output combines two source blocks and uses the second block's timeslot.
 [Sink](../c/SdsSink.hpp) ·
 [Source timing](SdsSource.md)
 
-When a full input block is missing, `prepareForRunning()` returns
-`CG_SKIP_EXECUTION` and `run()` returns `CG_BUFFER_UNDERFLOW`. The source
-must publish timing before the first write. With a full input block and
-`timing.started` still false, `run()` returns `CG_BUFFER_ERROR`. The sink
+The generated synchronous schedule provides a full input block at each
+firing. The source must publish timing before the first write. If
+`timing.started` is false, `run()` returns `CG_BUFFER_ERROR`. The sink
 keeps the block queued until `sdsWrite()` accepts the full payload.
 For `SDS_NO_SPACE` or `SDS_ERROR` from a busy stream lock, it sleeps one tick
 and retries within the current hop. If SDS still reports `SDS_NO_SPACE` at
