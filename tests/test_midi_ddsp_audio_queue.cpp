@@ -76,6 +76,13 @@ int main(){
     assert(devkit_e8_audio_write(nullptr,256)==-912);
     int16_t block[256]{};assert(devkit_e8_audio_write(block,255)==-912);
     write_block(0);assert(!pending);write_block(1);assert(pending);
+    const auto* playing = pending;
+    assert(devkit_e8_audio_set_muted(true) == 0);
+    assert(regs[0x39] == 0x131 && regs[0x3a] == 0x1b1);
+    assert(pending == playing && devkit_e8_audio_stats.queued_blocks == 2);
+    assert(devkit_e8_audio_set_muted(false) == 0);
+    assert(regs[0x39] == 0x31 && regs[0x3a] == 0xb1);
+    assert(pending == playing && devkit_e8_audio_stats.queued_blocks == 2);
     for(unsigned s=2;s<40;++s)write_block(s);
     assert(devkit_e8_audio_stats.queue_high_water==6);
     assert(devkit_e8_audio_drain(1000)==0);

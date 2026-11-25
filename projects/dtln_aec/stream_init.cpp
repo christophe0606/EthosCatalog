@@ -233,6 +233,8 @@ void dtln_stream_shutdown()
 {
     if (!eventQueue) return;
     stream_stop_threads();
+    auto* speaker = static_cast<SpeakerNode*>(get_scheduler_app_node(STREAM_APP_SPEAKER_ID)->obj);
+    speaker->stop();
     free_scheduler_app();
     releaseResources();
 }

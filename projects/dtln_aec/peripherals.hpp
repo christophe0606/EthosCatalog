@@ -27,4 +27,5 @@ struct DtlnSpeaker {
 
     int write(const int16_t* frames) const { return devkit_e8_audio_write(frames, blockFrames); }
     int drain(unsigned timeoutMs) const { return devkit_e8_audio_drain(timeoutMs); }
+    int setMuted(bool muted) const { return devkit_e8_audio_set_muted(muted); }
 };

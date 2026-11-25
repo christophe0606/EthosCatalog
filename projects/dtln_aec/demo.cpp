@@ -51,10 +51,12 @@ int playClip(HardwareParams& hardware)
             }
             result = dtln_stream_finish();
             if (result == CG_STOP_SCHEDULER) result = CG_SUCCESS;
+        } else {
+            hardware_params_uninit_speaker(&hardware);
         }
-        hardware_params_uninit_speaker(&hardware);
         if (hardware.stats->speaker_error) {
             printf("DTLN speaker error=%ld\n", static_cast<long>(hardware.stats->speaker_error));
+            hardware_params_uninit_speaker(&hardware);
         }
     }
 
@@ -132,6 +134,7 @@ extern "C" int dtln_demo_start(void)
                 if (error && (sdsState != SDS_STATE_STOP_DONE || error == CG_INIT_FAILURE ||
                               error == CG_MEMORY_ALLOCATION_FAILURE)) {
                     dtln_stream_shutdown();
+                    hardware_params_uninit(&hardware);
                     return error;
                 }
             } else if (sdsFlags & SDS_FLAG_START) {

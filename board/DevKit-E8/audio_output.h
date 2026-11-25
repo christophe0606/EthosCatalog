@@ -1,6 +1,7 @@
 // Copyright 2026 Arm Limited and/or its affiliates.
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
+#include <stdbool.h>
 #include <stdint.h>
 #ifdef __cplusplus
 extern "C" {
@@ -19,6 +20,9 @@ typedef struct {
 // Inspect while halted; fields are updated by the producer or SAI interrupt.
 extern volatile DevKitE8AudioStats devkit_e8_audio_stats;
 int devkit_e8_audio_init(void);
+// Switches the codec's analogue headphone mute. Call from the audio producer
+// or while it is stopped. The codec, I2S and queued data stay active.
+int devkit_e8_audio_set_muted(bool muted);
 // One producer thread. Copies exactly 256 mono PCM16 samples to a bounded
 // stereo I2S queue, waiting for space. Starts after two blocks (32 ms).
 int devkit_e8_audio_write(const int16_t *mono, unsigned frames);

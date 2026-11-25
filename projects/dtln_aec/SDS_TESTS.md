@@ -100,7 +100,7 @@ sequenceDiagram
     Events-->>Flow: Marker handled after the snapshot
     Flow->>Flow: Return CG_STOP_SCHEDULER
     Flow->>Events: Runtime pauses the event queue
-    Flow->>Flow: Call node pause hooks
+    Flow->>Flow: Call pause hooks and mute the speaker codec
     Events-->>Flow: EVENT_PAUSED_EVENT
     Flow-->>Demo: STREAM_PAUSED_EVENT
     Demo->>Demo: Clear remaining queued events
@@ -127,7 +127,7 @@ sequenceDiagram
     SDS-->>Demo: Dtln_Out handle
     Demo->>Demo: bindStream() for both handles and reset private node state
     Demo->>Flow: stream_resume_scheduler()
-    Flow->>Flow: Reset FIFO positions and bytes, call node resume hooks
+    Flow->>Flow: Reset FIFOs, call resume hooks and unmute the codec
     Flow-->>Demo: STREAM_RESUMED_EVENT
     Demo->>Events: Runtime resumes the event thread
     Events-->>Demo: EVENT_RESUMED_EVENT
@@ -144,7 +144,9 @@ sequenceDiagram
 2. `CG_STOP_SCHEDULER` triggers the runtime's pause path. The runtime
    pauses event dispatch and calls `pause_scheduler_app()`, which invokes
    `ContextSwitchInterface::pause` on each identified node that implements
-   it. The runtime consumes `EVENT_PAUSED_EVENT` from the event thread
+   it. The speaker hook mutes the WM8904 analogue headphone outputs after
+   the final speaker block has drained. The runtime consumes
+   `EVENT_PAUSED_EVENT` from the event thread
    before posting `STREAM_PAUSED_EVENT`. The controller waits for this
    final acknowledgement and clears the queue, discarding pending events
    and releasing their buffer references. A second pause request through
@@ -159,9 +161,9 @@ sequenceDiagram
 ### Reset state and resume
 
 1. While both workers are paused, the controller reopens `Dtln_In` and
-   `Dtln_Out`, clears playback timing and clip statistics, and initializes
-   the speaker. It calls `bindStream()` on the existing source and sink with
-   the handles returned by `sdsOpen()`.
+   `Dtln_Out` and clears playback timing and clip statistics. It calls
+   `bindStream()` on the existing source and sink with the handles returned
+   by `sdsOpen()`. The codec and I²S driver stay initialized between clips.
 2. The controller calls `state_reset_intf->reset(node->obj)` on each
    identified node that exposes it. This clears recurrent state for both
    model stages, the microphone and reference sliding windows, overlap-add
@@ -172,7 +174,8 @@ sequenceDiagram
    reset the FIFO positions and zero their backing storage. It then calls
    `resume_scheduler_app()`, which invokes `ContextSwitchInterface::resume`
    on identified nodes that implement it. The waveform capture node uses
-   this hook to restart its display cadence.
+   this hook to restart its display cadence, and the speaker hook unmutes
+   the codec.
 4. The dataflow thread waits on a semaphore before its first firing. The
    controller releases it after both workers acknowledge resume. This keeps
    an immediate EOF from pausing the graph during the resume handshake.
@@ -197,7 +200,8 @@ and FIFO and processing state are reset at the clip boundary.
 
 At SDS session termination, cancellation, or a failed transition, DTLN
 uses `stream_stop_threads()` to join both workers before freeing the
-scheduler, event queue, and runtime memory. If the final LCD snapshot or
+scheduler, event queue, and runtime memory. On this path the speaker is
+muted and any queued samples drain under mute. If the final LCD snapshot or
 marker fails to queue, or the marker times out, DTLN records an LCD error
 and takes this teardown path. The sink has already handed the last audio
 record to SDS in that case. [DTLN lifecycle](stream_init.cpp#L211)

@@ -92,6 +92,8 @@ static DtlnSpeaker speaker{};
 static std::thread::id dataflowThread;
 static unsigned lcdPresents;
 static unsigned speakerDrains;
+static unsigned audibleSpeakerDrains;
+static bool speakerMuted = true;
 extern uint8_t stream_app_buf0[], stream_app_buf1[], stream_app_buf2[];
 extern uint8_t stream_app_buf3[], stream_app_buf4[], stream_app_buf5[];
 static const std::array fifoStorage{stream_app_buf0, stream_app_buf1, stream_app_buf2,
@@ -110,6 +112,7 @@ void dtlnRecordHopTicks(uint32_t) {}
 extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t bytes) {
     assert(id == replayHandle && bytes == sizeof(StereoHop));
     if (nextRecord == 0) {
+        assert(!speakerMuted);
         static thread_local unsigned clips;
         clipsOnThread = ++clips;
         dataflowThread = std::this_thread::get_id();
@@ -144,6 +147,7 @@ extern "C" int lcd_present(uint16_t* frame) {
 }
 
 extern "C" int devkit_e8_audio_write(const int16_t* samples, unsigned frames) {
+    assert(!speakerMuted);
     assert(frames == SpeakerBlock{}.size());
     std::copy_n(samples, frames, speakerRecords.emplace_back().begin());
     return 0;
@@ -152,6 +156,12 @@ extern "C" int devkit_e8_audio_write(const int16_t* samples, unsigned frames) {
 extern "C" int devkit_e8_audio_drain(unsigned timeoutMs) {
     assert(timeoutMs == 200);
     ++speakerDrains;
+    if (!speakerMuted) ++audibleSpeakerDrains;
+    return 0;
+}
+
+extern "C" int devkit_e8_audio_set_muted(bool muted) {
+    speakerMuted = muted;
     return 0;
 }
 
@@ -197,6 +207,7 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     outputRecords.clear();
     speakerRecords.clear();
     speakerDrains = 0;
+    audibleSpeakerDrains = 0;
     lcdPresents = 0;
     static std::array<char, 4> handles;
     const size_t handleIndex = (expectedClipsOnThread % 2) * 2;
@@ -212,15 +223,17 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     assert(dtln_stream_start(hardware) == CG_SUCCESS);
     while (!dtln_stream_finished()) std::this_thread::yield();
     assert(dtln_stream_finish() == expected);
+    assert(speakerMuted);
     assert(clipsOnThread == expectedClipsOnThread + 1);
     if (runtimeEvents || sdsStop) {
         assert(nextRecord == 1 && calls[0] == 0 && calls[1] == 0);
         assert(outputRecords.empty());
+        assert(audibleSpeakerDrains == 0);
         return;
     }
     ++expectedClipsOnThread;
     assert(clipsOnEventThread == expectedClipsOnThread);
-    assert(speakerDrains == 1);
+    assert(speakerDrains == 1 && audibleSpeakerDrains == 1);
     assert(outputRecords.size() == inputRecords.size());
     assert(!stats.lcd_error && stats.lcd_frames == lcdPresents && lcdPresents >= (inputRecords.empty() ? 1 : 2));
     assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());

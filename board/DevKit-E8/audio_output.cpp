@@ -21,6 +21,9 @@ volatile DevKitE8AudioStats devkit_e8_audio_stats{};
 namespace {
 constexpr unsigned Frames=DEVKIT_E8_AUDIO_FRAMES, Slots=DEVKIT_E8_AUDIO_SLOTS;
 constexpr unsigned Items=Frames*2;
+// WM8904 Rev4.1 pp.74-75, Analogue OUT1 Left/Right.
+constexpr uint16_t headphoneLeft = 0x39, headphoneRight = 0x3a;
+constexpr uint16_t headphoneMute = 1u << 8, headphoneVolumeUpdate = 1u << 7;
 // The board RTE uses interrupt-fed I2S3 (DMA disabled). The CPU reads these
 // DTCM buffers directly; this implementation intentionally requires that mode.
 #if RTE_I2S3_DMA_ENABLE || RTE_I2S3_BLOCKING_MODE_ENABLE
@@ -135,8 +138,8 @@ extern "C" int devkit_e8_audio_init(){
     // WM8904 Rev4.1 pp.74-75 Table45, HPOUTL/R_VOL in 1 dB steps.
     if(WM8904.SetVolume(78)||WM8904.UnMute())return failure(-906);
     uint16_t left_volume=0,right_volume=0;
-    if(WM8904_codec_i2c_read(&i2c_cnfg,0x39,&left_volume)||
-       WM8904_codec_i2c_read(&i2c_cnfg,0x3a,&right_volume)||
+    if(WM8904_codec_i2c_read(&i2c_cnfg,headphoneLeft,&left_volume)||
+       WM8904_codec_i2c_read(&i2c_cnfg,headphoneRight,&right_volume)||
        (left_volume&0x3f)!=49||(right_volume&0x3f)!=49)return failure(-915);
     devkit_e8_audio_stats.codec_left_volume_code=left_volume&0x3f;
     devkit_e8_audio_stats.codec_right_volume_code=right_volume&0x3f;
@@ -145,6 +148,24 @@ extern "C" int devkit_e8_audio_init(){
     if(Driver_SAI3.Control(ARM_SAI_CONFIGURE_TX|ARM_SAI_MODE_MASTER|ARM_SAI_ASYNCHRONOUS|ARM_SAI_PROTOCOL_I2S|ARM_SAI_DATA_SIZE(32),64,DEVKIT_E8_AUDIO_RATE))return failure(-908);
     initialized=true;return 0;
 }
+
+extern "C" int devkit_e8_audio_set_muted(bool muted)
+{
+    if (!initialized) return -912;
+
+    uint16_t left, right;
+    if (WM8904_codec_i2c_read(&i2c_cnfg, headphoneLeft, &left) ||
+        WM8904_codec_i2c_read(&i2c_cnfg, headphoneRight, &right)) return -916;
+
+    const uint16_t mask = headphoneMute | headphoneVolumeUpdate;
+    const uint16_t mute = muted ? headphoneMute : 0;
+    left = (left & ~mask) | mute;
+    right = (right & ~mask) | mute | headphoneVolumeUpdate;
+    if (WM8904_codec_i2c_write(&i2c_cnfg, headphoneLeft, left) ||
+        WM8904_codec_i2c_write(&i2c_cnfg, headphoneRight, right)) return -916;
+    return 0;
+}
+
 extern "C" int devkit_e8_audio_write(const int16_t *mono,unsigned frames){
     if(!initialized||!mono||frames!=Frames)return -912;
     if(devkit_e8_audio_stats.error)return devkit_e8_audio_stats.error;

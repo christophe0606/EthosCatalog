@@ -31,7 +31,9 @@ void hardware_params_uninit(HardwareParams *params)
 
 void hardware_params_init_speaker(HardwareParams *params)
 {
+    if (params->speaker) return;
     speaker.initStatus = devkit_e8_audio_init();
+    if (!speaker.initStatus) speaker.initStatus = speaker.setMuted(true);
     params->speaker = &speaker;
 }
 

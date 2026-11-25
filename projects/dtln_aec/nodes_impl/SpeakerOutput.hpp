@@ -7,7 +7,7 @@
 #include "peripherals.hpp"
 
 template<typename IN, int n>
-class SpeakerOutput : public GenericSink<IN, n>, public ResettableStreamState {
+class SpeakerOutput : public GenericSink<IN, n>, public ResettableStreamState, public ContextSwitch {
 public:
     SpeakerOutput(FIFOBase<IN>& input, const SpeakerOutputParams& params)
         : GenericSink<IN, n>(input), speaker_(params.hw_.speaker), stats_(params.hw_.stats) {
@@ -22,6 +22,19 @@ public:
 
     cg_status init() final {
         return speaker_ && stats_ ? CG_SUCCESS : CG_INIT_FAILURE;
+    }
+
+    int pause() final {
+        if (!speaker_->initStatus) {
+            const int error = speaker_->setMuted(true);
+            if (!stats_->speaker_error) stats_->speaker_error = error;
+        }
+        return CG_SUCCESS;
+    }
+
+    int resume() final {
+        if (!stats_->speaker_error) stats_->speaker_error = speaker_->setMuted(false);
+        return CG_SUCCESS;
     }
 
     int run() final {
@@ -47,6 +60,12 @@ public:
             writeBlock();
         }
         // Allow the speaker queue and hardware FIFO to drain at clip end.
+        if (!stats_->speaker_error) stats_->speaker_error = speaker_->drain(200);
+    }
+
+    void stop() {
+        pause();
+        // Retire previously queued blocks under mute before starting another graph.
         if (!stats_->speaker_error) stats_->speaker_error = speaker_->drain(200);
     }
 
