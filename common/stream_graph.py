@@ -3,6 +3,7 @@
 """Shared graph conventions and generated configuration for this solution."""
 from pathlib import Path
 import argparse
+import re
 import subprocess
 import sys
 from cmsis_stream.cg.scheduler import Configuration, Style
@@ -39,6 +40,18 @@ def graph_only_requested():
     return parser.parse_args().graph_only
 
 
+def _space_dot_sample_labels(dot_text):
+    """Keep sample counts next to the ports in horizontal CMSIS Stream graphs."""
+    # Remove this workaround when the CMSIS Stream DOT template sets endpoint spacing.
+    if ('rankdir=LR' not in dot_text or ',taillabel=' not in dot_text
+            or re.search(r'\blabel(?:angle|distance)\s*=', dot_text)):
+        return dot_text
+    # Leave room for the edge's type label between the two endpoint labels.
+    if not re.search(r'\branksep\s*=', dot_text):
+        dot_text = dot_text.replace('    rankdir=LR\n', '    rankdir=LR\n    ranksep=0.85\n', 1)
+    return dot_text.replace('    edge [', '    edge [labeldistance=2.6,labelangle=-25,', 1)
+
+
 def render_graph(scheduling, output, config, style=None):
     """Render the scheduled graph without generating any firmware files."""
     output = Path(output)
@@ -47,7 +60,8 @@ def render_graph(scheduling, output, config, style=None):
     with dot.open('w') as f:
         scheduling.graphviz(f, config=config, style=style if style is not None else GraphStyle())
     # The upstream DOT template leaves trailing spaces in edges.
-    dot.write_text('\n'.join(line.rstrip() for line in dot.read_text().splitlines()) + '\n')
+    dot_text = '\n'.join(line.rstrip() for line in dot.read_text().splitlines()) + '\n'
+    dot.write_text(_space_dot_sample_labels(dot_text))
     # Render the same diagram as a PDF and a thumbnail bounded by 320 x 240 px.
     for format, options in (('pdf', []), ('png', ['-Gsize=4,3', '-Gdpi=80'])):
         try:
