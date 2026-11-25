@@ -1,6 +1,12 @@
 {
-  "speaker": 0,
-  "stage1": 1,
-  "stage2": 2,
-  "waveform": 3
+  "mic_window": 0,
+  "overlap_add": 1,
+  "reference_window": 2,
+  "sds_sink": 3,
+  "sds_source": 4,
+  "speaker": 5,
+  "stage1": 6,
+  "stage2": 7,
+  "waveform": 8,
+  "lcd": 9
 }

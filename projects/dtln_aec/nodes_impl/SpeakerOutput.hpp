@@ -15,12 +15,13 @@ public:
         static_assert(n == DTLN_AUDIO_HOP_SAMPLES && DtlnSpeaker::blockFrames % n == 0);
     }
 
-    void resetState() final { pending_ = 0; }
+    void resetState() final {
+        pending_ = 0;
+        stats_->speaker_error = speaker_->initStatus;
+    }
 
     cg_status init() final {
-        if (!speaker_ || !stats_) return CG_INIT_FAILURE;
-        stats_->speaker_error = speaker_->initStatus;
-        return CG_SUCCESS;
+        return speaker_ && stats_ ? CG_SUCCESS : CG_INIT_FAILURE;
     }
 
     int run() final {

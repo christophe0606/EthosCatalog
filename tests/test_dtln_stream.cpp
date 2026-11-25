@@ -98,25 +98,32 @@ static const std::array fifoStorage{stream_app_buf0, stream_app_buf1, stream_app
                                     stream_app_buf3, stream_app_buf4, stream_app_buf5};
 static uint32_t runtimeEventsOnFirstRead;
 static bool sdsStopOnFirstRead;
+static sdsId_t replayHandle;
+static sdsId_t recordHandle;
+static unsigned expectedClipsOnThread;
+static unsigned clipsOnThread;
+static unsigned clipsOnEventThread;
 
 bool dtlnPlaybackStopping() { return sdsStopOnFirstRead && nextRecord != 0; }
 void dtlnRecordHopTicks(uint32_t) {}
 
 extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t bytes) {
-    assert(id == &inputRecords && bytes == sizeof(StereoHop));
-    if (nextRecord == inputRecords.size()) return SDS_EOS;
+    assert(id == replayHandle && bytes == sizeof(StereoHop));
     if (nextRecord == 0) {
+        static thread_local unsigned clips;
+        clipsOnThread = ++clips;
         dataflowThread = std::this_thread::get_id();
         cg_streamEvent.post(runtimeEventsOnFirstRead);
         for (const auto* buffer : fifoStorage) assert(buffer[0] == 0);
     }
+    if (nextRecord == inputRecords.size()) return SDS_EOS;
     *slot = uint32_t(nextRecord * 8);
     std::memcpy(output, inputRecords[nextRecord++].data(), bytes);
     return int32_t(bytes);
 }
 
 extern "C" int32_t sdsWrite(sdsId_t id, uint32_t slot, const void* input, uint32_t bytes) {
-    assert(id == &outputRecords && bytes == sizeof(MonoHop));
+    assert(id == recordHandle && bytes == sizeof(MonoHop));
     assert(slot == outputRecords.size() * 8);
     assert(osKernelGetTickCount() == outputRecords.size() * 8);
     outputRecords.emplace_back();
@@ -129,7 +136,10 @@ extern "C" int lcd_present(uint16_t* frame) {
     assert(std::this_thread::get_id() != dataflowThread);
     assert(frame == lcd.frames[lcd.front ^ 1U]);
     assert(frame[0] == 0x0863);
-    ++lcdPresents;
+    if (lcdPresents++ == 0) {
+        static thread_local unsigned clips;
+        clipsOnEventThread = ++clips;
+    }
     return 0;
 }
 
@@ -176,8 +186,10 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     calls[0] = calls[1] = 0;
     nextRecord = 0;
     // POSIX retains the event objects across runs. RTX allocates fresh flags on startup.
-    cg_streamEvent.clear(UINT32_MAX);
-    cg_streamReplyEvent.clear(UINT32_MAX);
+    if (!expectedClipsOnThread) {
+        cg_streamEvent.clear(UINT32_MAX);
+        cg_streamReplyEvent.clear(UINT32_MAX);
+    }
     for (auto* buffer : fifoStorage) buffer[0] = 0xa5;
     runtimeEventsOnFirstRead = runtimeEvents;
     sdsStopOnFirstRead = sdsStop;
@@ -186,23 +198,31 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     speakerRecords.clear();
     speakerDrains = 0;
     lcdPresents = 0;
-    dtlnReplayParams = {&inputRecords, &playback, DTLN_AUDIO_SAMPLE_RATE, DTLN_AUDIO_HOP_SAMPLES};
-    dtlnRecordParams = {&outputRecords, &playback};
-    StreamStats stats{};
-    HardwareParams hardware{&stats, &lcd, &speaker};
+    static std::array<char, 4> handles;
+    const size_t handleIndex = (expectedClipsOnThread % 2) * 2;
+    replayHandle = &handles[handleIndex];
+    recordHandle = &handles[handleIndex + 1];
+    dtlnReplayParams = {replayHandle, &playback, DTLN_AUDIO_SAMPLE_RATE, DTLN_AUDIO_HOP_SAMPLES};
+    dtlnRecordParams = {recordHandle, &playback};
+    static StreamStats stats;
+    stats = {};
+    static const HardwareParams hardware{&stats, &lcd, &speaker};
     const auto expected = (runtimeEvents & STREAM_PAUSE_EVENT) && !(runtimeEvents & STREAM_DONE_EVENT)
         ? CG_PAUSED_SCHEDULER : CG_STOP_SCHEDULER;
     assert(dtln_stream_start(hardware) == CG_SUCCESS);
     while (!dtln_stream_finished()) std::this_thread::yield();
     assert(dtln_stream_finish() == expected);
+    assert(clipsOnThread == expectedClipsOnThread + 1);
     if (runtimeEvents || sdsStop) {
         assert(nextRecord == 1 && calls[0] == 0 && calls[1] == 0);
         assert(outputRecords.empty());
         return;
     }
+    ++expectedClipsOnThread;
+    assert(clipsOnEventThread == expectedClipsOnThread);
     assert(speakerDrains == 1);
     assert(outputRecords.size() == inputRecords.size());
-    assert(!stats.lcd_error && stats.lcd_frames == lcdPresents && lcdPresents >= 2);
+    assert(!stats.lcd_error && stats.lcd_frames == lcdPresents && lcdPresents >= (inputRecords.empty() ? 1 : 2));
     assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());
     // Unity mask, inverse FFT and one-quarter gain overlap-add to the input.
     for (size_t frame = 0; frame < outputRecords.size(); ++frame) {
@@ -254,6 +274,10 @@ int main(int argc, char** argv) {
         runGraph();
         printf("Verified %s, %zu SDS hops\n", argv[i], outputRecords.size());
     }
+    // An immediate EOS must not pause dataflow ahead of the event thread's resume acknowledgement.
+    inputRecords.clear();
+    runGraph();
+    dtln_stream_shutdown();
     // Fast-math-safe finite guard must reject a bad model before the DSP.
     calls[0] = 0;
     StreamStats stats{};
@@ -269,5 +293,5 @@ int main(int argc, char** argv) {
     calls[0] = 0;
     inject_nan = true;
     assert(method.run() == -511);
-    printf("DTLN SDS scheduler PASS, runtime pause and stop, SDS stop, signal processing, LCD and speaker routing\n");
+    printf("DTLN SDS scheduler PASS, worker reuse, empty clip, runtime and SDS stop, signal processing, LCD and speaker routing\n");
 }

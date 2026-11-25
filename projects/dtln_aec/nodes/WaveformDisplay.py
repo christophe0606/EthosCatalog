@@ -9,6 +9,6 @@ class WaveformDisplay(ProjectNode, BaseNode):
     needsHardware = True
 
     def __init__(self, name):
-        super().__init__(name, identified=False, selectors=["waveform"])
+        super().__init__(name, identified=True, selectors=["waveform"])
         self.addEventInput()
         self.parameters()

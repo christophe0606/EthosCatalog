@@ -10,7 +10,7 @@ class SdsSource(ProjectNode, GenericSource):
     `params` is a C++ expression for the application's SdsSourceParams.
     """
 
-    def __init__(self, name, the_type, samples, params):
-        super().__init__(name, identified=False)
+    def __init__(self, name, the_type, samples, params, *, identified=False):
+        super().__init__(name, identified=identified)
         self.addOutput("o", the_type, sample_count(samples))
         self.addVariableArg(params)

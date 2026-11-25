@@ -6,8 +6,8 @@ from ._base import ProjectNode, sample_count
 
 class OverlapAdd(ProjectNode, GenericNode):
     """Add overlapping frames and emit one hop without window normalization."""
-    def __init__(self, name, frame_samples, hop):
-        GenericNode.__init__(self, name, identified=False)
+    def __init__(self, name, frame_samples, hop, *, identified=False):
+        GenericNode.__init__(self, name, identified=identified)
         frame_samples, hop = sample_count(frame_samples), sample_count(hop)
         if hop > frame_samples:
             raise ValueError("Hop cannot exceed the frame length")

@@ -111,8 +111,14 @@ extern "C" int dtln_demo_start(void)
     const uint32_t pollTicks = (ticksPerSecond + 9) / 10;
     for (;;) {
         sdsExchange();
-        if (sdsFlags & SDS_FLAG_RESET) hardware_params_reset_board();
-        if (sdsFlags & SDS_FLAG_TERMINATE) sdsFlagsModify(0, SDS_FLAG_TERMINATE | SDS_FLAG_START);
+        if (sdsFlags & SDS_FLAG_RESET) {
+            dtln_stream_shutdown();
+            hardware_params_reset_board();
+        }
+        if (sdsFlags & SDS_FLAG_TERMINATE) {
+            dtln_stream_shutdown();
+            sdsFlagsModify(0, SDS_FLAG_TERMINATE | SDS_FLAG_START);
+        }
 
         if (sdsState == SDS_STATE_STOP_DONE) {
             sdsState = SDS_STATE_INACTIVE;
@@ -124,7 +130,10 @@ extern "C" int dtln_demo_start(void)
                 (SDS_FLAG_START | SDS_FLAG_PLAYBACK)) {
                 error = playClip(hardware);
                 if (error && (sdsState != SDS_STATE_STOP_DONE || error == CG_INIT_FAILURE ||
-                              error == CG_MEMORY_ALLOCATION_FAILURE)) return error;
+                              error == CG_MEMORY_ALLOCATION_FAILURE)) {
+                    dtln_stream_shutdown();
+                    return error;
+                }
             } else if (sdsFlags & SDS_FLAG_START) {
                 sdsFlagsModify(0, SDS_FLAG_START);
             }

@@ -71,11 +71,18 @@ public:
         return CG_SUCCESS;
     }
 
+    // Bind a new recording after initialization, while the scheduler is stopped or paused.
+    void bindStream(sdsId_t stream) {
+        params_.stream = stream;
+        lastStatus_ = SDS_OK;
+        *params_.timing = {};
+    }
+
     int32_t lastSdsStatus() const { return lastStatus_; }
 
 private:
     static constexpr int32_t bytes_ = sds_node_detail::recordBytes<OUT, outputSamples>();
-    const SdsSourceParams params_;
+    SdsSourceParams params_;
     uint32_t periodTicks_ = 0;
     uint32_t periodMs_ = 0;
     int32_t lastStatus_ = SDS_OK;

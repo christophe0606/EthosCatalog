@@ -14,15 +14,17 @@ bool sliding_buffer_push(sliding_buffer_t *state, const float *block, size_t cou
 #ifdef __cplusplus
 }
 #include "NodeSupport.hpp"
+#include "IdentifiedNode.hpp"
 
 template<typename IN, int inputSamples, typename OUT, int outputSamples>
-class SlidingBuffer : public GenericNode<IN,inputSamples,OUT,outputSamples> {
+class SlidingBuffer : public GenericNode<IN,inputSamples,OUT,outputSamples>, public ResettableStreamState {
 public:
     SlidingBuffer(FIFOBase<IN>& in, FIFOBase<OUT>& out) : GenericNode<IN,inputSamples,OUT,outputSamples>(in,out) {
         static_assert(std::is_same_v<IN,float> && std::is_same_v<OUT,float>);
         static_assert(inputSamples > 0 && inputSamples <= outputSamples);
     }
-    cg_status init() final { overlap_.fill(0.0f); return CG_SUCCESS; }
+    cg_status init() final { resetState(); return CG_SUCCESS; }
+    void resetState() final { overlap_.fill(0.0f); }
     int run() final {
         auto* in = this->getReadBuffer(); auto* out = this->getWriteBuffer();
         // Copy the new samples first, even if FIFO storage overlaps.

@@ -10,7 +10,7 @@ class SdsSink(ProjectNode, GenericSink):
     `params` is a C++ expression for the application's SdsSinkParams.
     """
 
-    def __init__(self, name, the_type, samples, params):
-        super().__init__(name, identified=False)
+    def __init__(self, name, the_type, samples, params, *, identified=False):
+        super().__init__(name, identified=identified)
         self.addInput("i", the_type, sample_count(samples))
         self.addVariableArg(params)

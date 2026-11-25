@@ -2,15 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 #include "NodeSupport.hpp"
+#include "IdentifiedNode.hpp"
 
 template<typename IN, int ni, typename OUT, int no>
-class OverlapAdd : public GenericNode<IN, ni, OUT, no> {
+class OverlapAdd : public GenericNode<IN, ni, OUT, no>, public ResettableStreamState {
 public:
     OverlapAdd(FIFOBase<IN>& input, FIFOBase<OUT>& output)
         : GenericNode<IN, ni, OUT, no>(input, output) {
         static_assert(std::is_same_v<IN, float> && std::is_same_v<OUT, float>);
         static_assert(no > 0 && no <= ni);
     }
+    void resetState() final { std::fill_n(buffer_, ni, 0.0f); }
+
     int run() final {
         const auto* input = this->getReadBuffer();
         auto* output = this->getWriteBuffer();

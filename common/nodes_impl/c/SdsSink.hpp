@@ -37,10 +37,16 @@ public:
         return CG_SUCCESS;
     }
 
+    // The caller binds a new handle while the scheduler is stopped or paused.
+    void bindStream(sdsId_t stream) {
+        params_.stream = stream;
+        lastStatus_ = SDS_OK;
+    }
+
     int32_t lastSdsStatus() const { return lastStatus_; }
 
 private:
     static constexpr int32_t bytes_ = sds_node_detail::recordBytes<IN, inputSamples>();
-    const SdsSinkParams params_;
+    SdsSinkParams params_;
     int32_t lastStatus_ = SDS_OK;
 };

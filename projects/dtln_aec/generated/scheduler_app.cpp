@@ -424,12 +424,16 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_MIC_WINDOW_ID]=createStreamNode(*nodes.mic_window);
+    nodes.mic_window->setID(STREAM_APP_MIC_WINDOW_ID);
 
     nodes.overlap_add = new (std::nothrow) OverlapAdd<float,512,float,128>(*(fifos.fifo8),*(fifos.fifo18));
     if (nodes.overlap_add==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_OVERLAP_ADD_ID]=createStreamNode(*nodes.overlap_add);
+    nodes.overlap_add->setID(STREAM_APP_OVERLAP_ADD_ID);
 
     nodes.reference_fft = new (std::nothrow) PreservingFFT<float,512,float,512>(*(fifos.fifo13),*(fifos.fifo3));
     if (nodes.reference_fft==NULL)
@@ -448,18 +452,24 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_REFERENCE_WINDOW_ID]=createStreamNode(*nodes.reference_window);
+    nodes.reference_window->setID(STREAM_APP_REFERENCE_WINDOW_ID);
 
     nodes.sds_sink = new (std::nothrow) SdsSink<float,128>(*(fifos.fifo19),dtlnRecordParams);
     if (nodes.sds_sink==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_SDS_SINK_ID]=createStreamNode(*nodes.sds_sink);
+    nodes.sds_sink->setID(STREAM_APP_SDS_SINK_ID);
 
     nodes.sds_source = new (std::nothrow) SdsSource<float,256>(*(fifos.fifo0),dtlnReplayParams);
     if (nodes.sds_source==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_SDS_SOURCE_ID]=createStreamNode(*nodes.sds_source);
+    nodes.sds_source->setID(STREAM_APP_SDS_SOURCE_ID);
 
     nodes.speaker = new (std::nothrow) SpeakerOutput<float,128>(*(fifos.fifo21),params->speaker);
     if (nodes.speaker==NULL)
@@ -504,6 +514,8 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_LCD_ID]=createStreamNode(*nodes.lcd);
+    nodes.lcd->setID(STREAM_APP_LCD_ID);
 
 
 /* Subscribe nodes for the event system*/

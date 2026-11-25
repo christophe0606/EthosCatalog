@@ -9,8 +9,8 @@ class SlidingBuffer(ProjectNode, GenericNode):
     firing appends the new hop and emits the full time-domain frame, including
     zero padding during startup.
     """
-    def __init__(self, name, hop, frame_samples):
-        GenericNode.__init__(self, name, identified=False)
+    def __init__(self, name, hop, frame_samples, *, identified=False):
+        GenericNode.__init__(self, name, identified=identified)
         hop, frame_samples = sample_count(hop), sample_count(frame_samples)
         if hop > frame_samples:
             raise ValueError("SlidingBuffer hop must not exceed the frame length")

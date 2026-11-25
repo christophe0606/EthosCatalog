@@ -7,7 +7,7 @@
 #include "waveform_display.hpp"
 
 template<typename MIC, int nm, typename OUT, int no>
-class WaveformCapture : public GenericSink<MIC, nm>, public ResettableStreamState {
+class WaveformCapture : public GenericSink<MIC, nm>, public ResettableStreamState, public ContextSwitch {
 public:
     enum Selector { waveform };
     static std::array<uint16_t, 1> selectors;
@@ -20,13 +20,19 @@ public:
     cg_status init() final {
         snapshot_ = wrap(snapshotStorage_);
         if (!snapshot_) return CG_MEMORY_ALLOCATION_FAILURE;
+        offerPeriod_ = (osKernelGetTickFreq() + displayFps - 1) / displayFps;
         return CG_SUCCESS;
     }
 
     void resetState() final {
         dtln::waveform::reset(history_);
-        offerPeriod_ = (osKernelGetTickFreq() + displayFps - 1) / displayFps;
+    }
+
+    int pause() final { return CG_SUCCESS; }
+
+    int resume() final {
         lastOfferTick_ = osKernelGetTickCount() - offerPeriod_;
+        return CG_SUCCESS;
     }
 
     void subscribe(int port, StreamNode& destination, int destPort) final {

@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
+#include "IdentifiedNode.hpp"
 #include "peripherals.hpp"
 #include "waveform_display.hpp"
 
-class WaveformDisplay : public StreamNode {
+class WaveformDisplay : public StreamNode, public ResettableStreamState {
 public:
     enum Selector { waveform };
     static std::array<uint16_t, 1> selectors;
@@ -14,10 +15,10 @@ public:
         : lcd_(params.hw_.lcd), stats_(params.hw_.stats) {}
 
     cg_status init() final {
-        if (!lcd_ || !stats_) return CG_INIT_FAILURE;
-        stats_->lcd_error = lcd_->status;
-        return CG_SUCCESS;
+        return lcd_ && stats_ ? CG_SUCCESS : CG_INIT_FAILURE;
     }
+
+    void resetState() final { stats_->lcd_error = lcd_->status; }
 
     cg_status processEvent(int port, Event&& event) final {
         if (port != 0 || event.event_id != selectors[waveform] || !event.wellFormed<BufferPtr>()) {
