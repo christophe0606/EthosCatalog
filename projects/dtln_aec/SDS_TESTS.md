@@ -36,17 +36,65 @@ payload produces exit code `1`. [Fixture preparation and capture comparison](tes
 ## Transition between test patterns
 
 The automatic `test_demo.ps1` playlist runs three clips in one boot. It
-keeps the graph, event queue, memory pools, and both runtime threads
-allocated while switching to a new pair of SDS streams for each clip.
-[Test launcher](test_demo.ps1) · [Example playlist log](test_data/README.md#example-test-output)
+configures one SDSIO playback step per pattern. The USB connection stays
+open, and the graph, event queue, memory pools, and both runtime threads
+stay allocated. The controller closes and reopens the two named data
+streams for every step. [Test launcher](test_demo.ps1) ·
+[Playlist configuration](test_data/datatest.sdsio.yml) ·
+[Example playlist log](test_data/README.md#example-test-output)
+
+### SDSIO handshake
+
+SDSIO carries control messages and stream data over the same USB
+connection. The firmware sends two fixed stream names in its `OPEN`
+requests. `Dtln_In` carries microphone and reference samples from the host
+to the board. `Dtln_Out` carries processed audio from the board to the
+host. The playlist label selects the files behind those names. For label
+`0`, the host plays `Dtln_In.0.sds` and records `Dtln_Out.0.p.sds`.
+Label `1` uses the same stream names with files `Dtln_In.1.sds` and
+`Dtln_Out.1.p.sds`.
+
+| Direction | Message | Role in the transition |
+| --- | --- | --- |
+| Host → board | `FLAGS` | Sets `SDS_FLAG_START` and `SDS_FLAG_PLAYBACK` to request playback. The server also sends `SDS_FLAG_ALIVE` as a keepalive. |
+| Board → host | `OPEN` | Opens `Dtln_In` for reading and then `Dtln_Out` for writing. The server returns a fresh SDSIO stream ID for each open. |
+| Host → board | `READ` response with EOF | Signals the end of the input stream. After reading all buffered records, `SdsSource` receives `SDS_EOS` from `sdsRead()`. |
+| Board → host | `CLOSE` | Closes `Dtln_Out` first, flushing the capture, and then `Dtln_In`. The server advances the playlist step once both are closed. |
+| Board → host | `INFO` | Reports the current `sdsFlags` on the next `sdsExchange()`. The board clears `SDS_FLAG_START` after both closes succeed. The server waits for the streams to be closed and for `START` to be clear before requesting the next step. |
+
+`SDS_STATE_START`, `SDS_STATE_ACTIVE`, `SDS_STATE_STOP_REQ`, and
+`SDS_STATE_STOP_DONE` are local firmware states. The server uses the
+`CLOSE` requests and the flags reported in `INFO` to coordinate the handoff.
+
+An SDSIO ID identifies one open instance of a named stream. The server
+assigns it in the `OPEN` response, and subsequent `READ`, `WRITE`, and
+`CLOSE` messages use that ID. The board passes the `sdsId_t` handles
+returned by `sdsOpen()` to `bindStream()` on the existing source and sink.
+A board-side handle may reuse the same address after a close. The nodes
+are rebound before the scheduler starts or resumes. [DTLN SDS controller](demo.cpp#L22) ·
+[Node binding](stream_init.cpp#L84) · [SDS pack version](dtln_aec.cproject.yml#L7)
+
+SDSIO can also play multiple labels in a single step, with one open input
+stream and EOF after the last label. Testing each label independently
+within that stream would require an application-level boundary signal and
+state reset between labels.
 
 ```mermaid
 sequenceDiagram
     participant Host as SDSIO Server
+    participant SDS as Board SDSIO
     participant Demo as DTLN controller
     participant Flow as Dataflow thread
     participant Events as Event thread
-    Note over Flow: Final sink write, then source EOF
+    Note over Host,SDS: One USB connection for patterns A and B
+    par SDS input prefetch reaches EOF
+        SDS->>Host: READ (A input ID)
+        Host-->>SDS: READ response (A input ID, EOF)
+    and Graph processes the final input records
+        Flow->>SDS: sdsWrite() queues the final output record
+    end
+    Flow->>SDS: sdsRead() after buffered input is consumed
+    SDS-->>Flow: SDS_EOS
     Flow->>Events: Final LCD snapshot, then marker at same priority
     Flow->>Flow: Drain speaker output
     Events-->>Flow: Marker handled after the snapshot
@@ -56,11 +104,28 @@ sequenceDiagram
     Events-->>Flow: EVENT_PAUSED_EVENT
     Flow-->>Demo: STREAM_PAUSED_EVENT
     Demo->>Demo: Clear remaining queued events
-    Demo->>Host: Close output, then input
-    Demo->>Host: Set SDS_STATE_STOP_DONE and clear START
-    Host->>Demo: Request START for clip B
-    Demo->>Host: Open B input and output
-    Demo->>Demo: Bind SDS handles and reset private node state
+    Demo->>SDS: sdsClose(Dtln_Out handle)
+    opt Output data still buffered
+        SDS->>Host: WRITE (A output ID, remaining audio)
+    end
+    SDS->>Host: CLOSE (A output ID)
+    Demo->>SDS: sdsClose(Dtln_In handle)
+    SDS->>Host: CLOSE (A input ID)
+    Demo->>Demo: Set SDS_STATE_STOP_DONE and clear START
+    Demo->>SDS: sdsExchange()
+    SDS->>Host: INFO (START clear)
+    Host->>Host: Confirm both streams closed and START clear
+    Host->>SDS: FLAGS (set ALIVE, START, and PLAYBACK)
+    SDS-->>Demo: Next sdsExchange() updates flags for pattern B
+    Demo->>SDS: sdsOpen(Dtln_In, read)
+    SDS->>Host: OPEN (Dtln_In, read)
+    Host-->>SDS: OPEN response (B input ID)
+    SDS-->>Demo: Dtln_In handle
+    Demo->>SDS: sdsOpen(Dtln_Out, write)
+    SDS->>Host: OPEN (Dtln_Out, write)
+    Host-->>SDS: OPEN response (B output ID)
+    SDS-->>Demo: Dtln_Out handle
+    Demo->>Demo: bindStream() for both handles and reset private node state
     Demo->>Flow: stream_resume_scheduler()
     Flow->>Flow: Reset FIFO positions and bytes, call node resume hooks
     Flow-->>Demo: STREAM_RESUMED_EVENT
@@ -85,18 +150,18 @@ sequenceDiagram
    and releasing their buffer references. A second pause request through
    `stream_pause_current_scheduler()` would wait for an event-thread
    acknowledgement that the runtime has already consumed.
-3. The controller closes `Dtln_Out` followed by `Dtln_In`. When both closes
-   succeed, it sets `SDS_STATE_STOP_DONE` and clears `START`. The server
-   waits for both streams to close and `START` to clear before requesting
-   the next clip. At that point the capture is ready to compare.
+3. The controller closes `Dtln_Out` followed by `Dtln_In` and acknowledges
+   completion through the [SDSIO handshake](#sdsio-handshake). Once the
+   output stream closes successfully, the capture is ready to compare.
 
 [DTLN clip completion](stream_init.cpp#L112) · [Runtime EOF pause](../../thirdparty/CMSIS-Stream/platform/cmsis_rtos_runtime/stream_runtime_init.cpp#L185) · [SDS close handshake](demo.cpp#L62)
 
 ### Reset state and resume
 
-1. While both workers are paused, the controller opens the next pair of
-   SDS streams, clears playback timing and clip statistics, and initializes
-   the speaker. It rebinds the existing source and sink to the new handles.
+1. While both workers are paused, the controller reopens `Dtln_In` and
+   `Dtln_Out`, clears playback timing and clip statistics, and initializes
+   the speaker. It calls `bindStream()` on the existing source and sink with
+   the handles returned by `sdsOpen()`.
 2. The controller calls `state_reset_intf->reset(node->obj)` on each
    identified node that exposes it. This clears recurrent state for both
    model stages, the microphone and reference sliding windows, overlap-add
