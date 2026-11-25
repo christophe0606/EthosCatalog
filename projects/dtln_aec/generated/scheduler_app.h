@@ -24,10 +24,16 @@ extern "C"
 
 
 /* Node identifiers */
-#define STREAM_APP_NB_IDENTIFIED_NODES 0
+#define STREAM_APP_NB_IDENTIFIED_NODES 4
+#define STREAM_APP_SPEAKER_ID 0
+#define STREAM_APP_STAGE1_ID 1
+#define STREAM_APP_STAGE2_ID 2
+#define STREAM_APP_WAVEFORM_ID 3
 
 #define STREAM_APP_SCHED_LEN 19
 
+/* Selectors global identifiers */
+#define SEL_WAVEFORM_ID 100
 
 extern CStreamNode* get_scheduler_app_node(int32_t nodeID);
 

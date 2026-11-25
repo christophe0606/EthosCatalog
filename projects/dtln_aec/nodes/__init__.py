@@ -3,4 +3,5 @@
 from .DtlnMethod import DtlnMethod
 from .DtlnSplitInput import DtlnSplitInput
 from .SpeakerOutput import SpeakerOutput
+from .WaveformCapture import WaveformCapture
 from .WaveformDisplay import WaveformDisplay

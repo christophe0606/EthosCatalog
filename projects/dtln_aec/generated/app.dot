@@ -20,22 +20,6 @@ dup2 [shape=point,label="dup2"]
 dup3 [shape=point,label="dup3"]
 
 
-lcd [label=<
-<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
-  <TR>
-    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
-    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
-    <TD></TD>
-  </TR>
-<TR>
-<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
-
-
-<TD></TD></TR>
-
-</TABLE>>];
-
-
 mask_inverse [label=<
 <TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
   <TR>
@@ -170,6 +154,33 @@ stage2 [label=<
 </TABLE>>];
 
 
+waveform [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i1"><FONT POINT-SIZE="12.0" COLOR="black">i1</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="3"><FONT COLOR="black" POINT-SIZE="14.0">waveform<BR/>(WaveformCapture)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+<TD PORT="i2"><FONT POINT-SIZE="12.0" COLOR="black">i2</FONT></TD>
+
+
+<TD></TD></TR><TR>
+
+<TD></TD>
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+lcd [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
 
 sds_source:i -> split_input:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(256)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >256</FONT>
@@ -238,7 +249,7 @@ dup0 -> mic_window:i [style="solid",color="black",fontsize="12.0",fontcolor="bla
 ]
 
 
-dup0 -> lcd:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+dup0 -> waveform:i1 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
 </TD></TR></TABLE>>
 ]
@@ -292,7 +303,7 @@ dup3 -> sds_sink:i [style="solid",color="black",fontsize="12.0",fontcolor="black
 ]
 
 
-dup3 -> lcd:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
+dup3 -> waveform:i2 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(128)>
 ,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >128</FONT>
 </TD></TR></TABLE>>
 ]
@@ -305,5 +316,8 @@ dup3 -> speaker:i [style="solid",color="black",fontsize="12.0",fontcolor="black"
 
 
 
+waveform:oev0 -> lcd:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
 
 }

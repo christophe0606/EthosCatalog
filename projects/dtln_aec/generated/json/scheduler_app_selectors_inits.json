@@ -7,10 +7,6 @@
     "isTemplate": true,
     "selectors": []
   },
-  "WaveformDisplay<float,128,float,128>": {
-    "isTemplate": true,
-    "selectors": []
-  },
   "RFFTMaskInverse<float,512,float,257,float,512>": {
     "isTemplate": true,
     "selectors": []
@@ -58,5 +54,17 @@
   "DtlnMethod<float,512,float,512,float,512>": {
     "isTemplate": true,
     "selectors": []
+  },
+  "WaveformCapture<float,128,float,128>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_WAVEFORM_ID"
+    ]
+  },
+  "WaveformDisplay": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_WAVEFORM_ID"
+    ]
   }
 }

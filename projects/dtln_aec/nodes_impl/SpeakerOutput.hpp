@@ -2,22 +2,61 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
+#include "hardware_params.h"
+#include "IdentifiedNode.hpp"
+#include "peripherals.hpp"
 
 template<typename IN, int n>
-class SpeakerOutput : public GenericSink<IN, n> {
+class SpeakerOutput : public GenericSink<IN, n>, public ResettableStreamState {
 public:
     SpeakerOutput(FIFOBase<IN>& input, const SpeakerOutputParams& params)
-        : GenericSink<IN, n>(input), play_(params.hw_.play_audio) {
-        static_assert(n == DTLN_AUDIO_HOP_SAMPLES);
+        : GenericSink<IN, n>(input), speaker_(params.hw_.speaker), stats_(params.hw_.stats) {
+        static_assert(DTLN_AUDIO_SAMPLE_RATE == DtlnSpeaker::sampleRate);
+        static_assert(n == DTLN_AUDIO_HOP_SAMPLES && DtlnSpeaker::blockFrames % n == 0);
     }
 
-    cg_status init() final { return play_ ? CG_SUCCESS : CG_INIT_FAILURE; }
+    void resetState() final { pending_ = 0; }
 
-    int run() final {
-        play_(this->getReadBuffer());
+    cg_status init() final {
+        if (!speaker_ || !stats_) return CG_INIT_FAILURE;
+        stats_->speaker_error = speaker_->initStatus;
         return CG_SUCCESS;
     }
 
+    int run() final {
+        const auto* samples = this->getReadBuffer();
+        if (stats_->speaker_error) return CG_SUCCESS;
+        for (unsigned i = 0; i < n; ++i) {
+            float sample = samples[i];
+            // Inspect the representation so this also works with finite-math optimizations.
+            uint32_t bits;
+            std::memcpy(&bits, &sample, sizeof(bits));
+            if ((bits & 0x7f800000U) == 0x7f800000U) sample = 0.0f;
+            sample = std::clamp(sample, -1.0f, 32767.0f / 32768.0f);
+            block_[pending_++] = static_cast<int16_t>(sample * 32768.0f);
+        }
+        if (pending_ == DtlnSpeaker::blockFrames) writeBlock();
+        return CG_SUCCESS;
+    }
+
+    void finish() {
+        if (stats_->speaker_error) return;
+        if (pending_) {
+            std::fill(block_ + pending_, block_ + DtlnSpeaker::blockFrames, int16_t{0});
+            writeBlock();
+        }
+        // Allow the speaker queue and hardware FIFO to drain at clip end.
+        if (!stats_->speaker_error) stats_->speaker_error = speaker_->drain(200);
+    }
+
 private:
-    void (*play_)(const float*);
+    void writeBlock() {
+        stats_->speaker_error = speaker_->write(block_);
+        pending_ = 0;
+    }
+
+    DtlnSpeaker* const speaker_;
+    StreamStats* const stats_;
+    int16_t block_[DtlnSpeaker::blockFrames];
+    unsigned pending_ = 0;
 };

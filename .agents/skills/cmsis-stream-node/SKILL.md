@@ -200,3 +200,27 @@ If the node has no output event port but must still be able to send events, it c
 
 In that case the EventQueue argument is the first after the dataflow FIFO arguments.
 It is defined in the Python by using the specific argument `evtQueue` in the `addVariableArg` function as described in the previous section. And the C++ constructor will have an argument named `EventQueue *queue` and the component will store this pointer in a member variable to use it to send events when needed.
+
+## Deprecated C++ API
+
+`prepareForRunning` is only needed when CMSIS Stream
+is used in asynchronous scheduling mode. But this is a deprecated
+mode that is never enabled in the Python.
+
+So the default inherited implementation can be used
+and no need to provide an implementation of this method,
+
+And `willUnderflow` and `willOverflow` methods (and similar) should not be used in `run`.
+
+## Buffers management with events
+
+MANDATORY:
+Buffers used in events should rely on the UniquePtr, BufferPtr and TensorPtr from CMSIS Stream.
+
+Normal pointers, shared_ptr, unique_ptr must not be used to exchange
+buffers.
+
+The CMSIS Stream class templates are providing atomic reference counting
+that is important in multi-threaded environment and they also
+provide move semantic to avoid copies.
+They also provide a secure way to access the content of a shared buffer.

@@ -25,27 +25,31 @@ def main():
     output.mkdir(exist_ok=True, parents=True)
     binary = output / "dtln_stream.exe"
     includes = [sds_include, *[ROOT / path for path in (
-        "tests/dtln", "projects/dtln_aec", "projects/dtln_aec/generated",
+        "tests/dtln", "tests/rtos", "projects/dtln_aec", "projects/dtln_aec/generated",
         "projects/dtln_aec/nodes_impl", "common/stream", "common/nodes_impl/c",
         "thirdparty/CMSIS-Stream/platform", "thirdparty/CMSIS-Stream/platform/posix_runtime")]]
     sources = [ROOT / path for path in (
         "tests/test_dtln_stream.cpp", "projects/dtln_aec/generated/scheduler_app.cpp",
-        "projects/dtln_aec/generated/app_params.c")]
+        "projects/dtln_aec/generated/app_params.c", "projects/dtln_aec/stream_init.cpp",
+        "projects/dtln_aec/nodes_impl/waveform_display.cpp",
+        "thirdparty/CMSIS-Stream/platform/posix_runtime/stream_event_queue.cpp",
+        "thirdparty/CMSIS-Stream/platform/posix_runtime/stream_runtime_init.cpp")]
     if args.vcvars:
         batch = output / "compile.cmd"
         architecture = "-arch=x64" if args.vcvars.name.lower() == "vsdevcmd.bat" else "x64"
         batch.write_text(f'@echo off\ncall "{args.vcvars.resolve()}" {architecture} >nul\n'
             'if errorlevel 1 exit /b %errorlevel%\n'
-            + 'cl /nologo /std:c++20 /EHsc /O2 /fp:fast /TP '
+            + 'cl /nologo /std:c++20 /EHsc /O2 /fp:fast /TP /D__PRETTY_FUNCTION__=__FUNCSIG__ '
             + ' '.join('/I"' + str(path) + '"' for path in includes) + ' '
             + ' '.join('"' + str(path) + '"' for path in sources)
             + ' /Fe:"' + str(binary) + '"\n')
         subprocess.run(["cmd", "/d", "/c", str(batch)], cwd=output, check=True)
     else:
-        subprocess.run([args.cxx, "-std=c++17", "-O2", "-ffast-math",
+        thread_flags = [] if os.name == "nt" else ["-pthread"]
+        subprocess.run([args.cxx, "-std=c++17", "-O2", "-ffast-math", *thread_flags,
                         *[f"-I{path}" for path in includes], *map(str, sources),
                         "-o", str(binary)], check=True)
-    subprocess.run([str(binary), *map(str, args.replays)], check=True)
+    subprocess.run([str(binary), *map(str, args.replays)], check=True, timeout=30)
 
 
 if __name__ == "__main__":

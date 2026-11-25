@@ -12,7 +12,7 @@ from cmsis_stream.cg.scheduler import CType, F32, Graph
 from common.stream_graph import GraphStyle, configuration, graph_only_requested, mk_app
 from common.nodes import (SlidingBuffer, FFT, PreservingFFT, RawRFFTMagnitude,
                           RFFTMaskInverse, OverlapAdd, SdsSource, SdsSink)
-from projects.dtln_aec.nodes import DtlnMethod, DtlnSplitInput, SpeakerOutput, WaveformDisplay
+from projects.dtln_aec.nodes import DtlnMethod, DtlnSplitInput, SpeakerOutput, WaveformCapture, WaveformDisplay
 
 SAMPLE_RATE = 16000
 HOP_SAMPLES = 128
@@ -38,7 +38,8 @@ def make_graph():
     stage2 = DtlnMethod("stage2", 2)
     synthesis = OverlapAdd("overlap_add", 512, HOP_SAMPLES)
     sink = SdsSink("sds_sink", audio, HOP_SAMPLES, "dtlnRecordParams")
-    lcd = WaveformDisplay("lcd", HOP_SAMPLES)
+    waveform = WaveformCapture("waveform", HOP_SAMPLES)
+    lcd = WaveformDisplay("lcd")
     speaker = SpeakerOutput("speaker", HOP_SAMPLES)
     graph.connect(source.o, split.i)
     graph.connect(split.o1, mic_window.i)
@@ -55,8 +56,9 @@ def make_graph():
     graph.connect(ref_window.o, stage2.i2)
     graph.connect(stage2.o, synthesis.i)
     graph.connect(synthesis.o, sink.i)
-    graph.connect(split.o1, lcd.i1)
-    graph.connect(synthesis.o, lcd.i2)
+    graph.connect(split.o1, waveform.i1)
+    graph.connect(synthesis.o, waveform.i2)
+    graph.connect(waveform["oev0"], lcd["iev0"])
     graph.connect(synthesis.o, speaker.i)
     return graph
 
@@ -72,8 +74,10 @@ def generate(graph_only=False):
                  "DTLN_AUDIO_FRAME_SAMPLES": 512},
         runtime={
             "CMSISSTREAM_EVT_THREAD_STACK_SIZE": 4096,
+            "CMSISSTREAM_EVENT_QUEUE_LENGTH": 4,
+            "CMSISSTREAM_EVT_LOW_PRIORITY": "osPriorityBelowNormal",
             "CMSISSTREAM_STREAM_THREAD_STACK_SIZE": 24576,
-            "CMSISSTREAM_STREAM_THREAD_PRIORITY": "osPriorityRealtime",
+            "CMSISSTREAM_STREAM_THREAD_PRIORITY": "osPriorityNormal",
         },
         config=config,
         style=style,

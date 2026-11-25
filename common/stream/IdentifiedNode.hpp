@@ -31,6 +31,13 @@ extern "C" {
 
 #include "StreamNode.hpp"
 
+class ResettableStreamState
+{
+public:
+    virtual ~ResettableStreamState() = default;
+    virtual void resetState() = 0;
+};
+
 /**
  * @brief Create a CStreamNode handle for an identified C++ node.
  *
@@ -47,6 +54,7 @@ CStreamNode createStreamNode(T &obj)
 {
     const StreamNodeInterface *stream_intf_current = nullptr;
     const ContextSwitchInterface *context_switch_intf_current = nullptr;
+    const StateResetInterface *state_reset_intf_current = nullptr;
     if constexpr (std::is_base_of<arm_cmsis_stream::StreamNode, T>::value)
     {
         static const StreamNodeInterface stream_intf = {
@@ -82,9 +90,15 @@ CStreamNode createStreamNode(T &obj)
         };
         context_switch_intf_current = &context_switch_intf;
     }
-   
+    if constexpr (std::is_base_of<ResettableStreamState, T>::value)
+    {
+        static const StateResetInterface state_reset_intf = {
+            [](void *self) { static_cast<T *>(self)->resetState(); },
+        };
+        state_reset_intf_current = &state_reset_intf;
+    }
 
-    return CStreamNode {&obj,stream_intf_current,context_switch_intf_current};
+    return CStreamNode {&obj,stream_intf_current,context_switch_intf_current,state_reset_intf_current};
 
 };
 

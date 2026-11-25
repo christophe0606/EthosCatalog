@@ -1,11 +1,11 @@
 cmsis-tools-environment:
     version: 1.1.0
-    generated-by: arm.cmsis-csolution version 1.72.1-100-20261117
+    generated-by: arm.cmsis-csolution version 1.74.0
     solution: ../EthosCatalog.csolution.yml
     environment:
         path:
             - c:/Users/chrfav01/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-win32-x64/tools/pyocd
-            - c:/Users/chrfav01/.vscode/extensions/arm.cmsis-csolution-1.72.1-100-20261117/tools/cmsis-toolbox/bin
+            - c:/Users/chrfav01/.vscode/extensions/arm.cmsis-csolution-1.74.0-win32-x64/tools/cmsis-toolbox/bin
             - c:/Users/chrfav01/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-win32-x64/tools/gdb/bin
         variables:
             AC6_TOOLCHAIN_6_22_0: C:/Users/chrfav01/.vcpkg/artifacts/2139c4c6/compilers.arm.armclang/6.22.0/bin
@@ -25,12 +25,12 @@ cmsis-tools-environment:
           directory: c:/Users/chrfav01/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-win32-x64/tools/pyocd
           manual: https://pyocd.io/docs/
         - name: CMSIS-Toolbox
-          version: 2.15.0-41-gb69523a
+          version: 2.16.0-1-g6b2dc5e
           origin: built-in
           provider:
               type: vscode-extension
               id: arm.cmsis-csolution
-          directory: c:/Users/chrfav01/.vscode/extensions/arm.cmsis-csolution-1.72.1-100-20261117/tools/cmsis-toolbox/bin
+          directory: c:/Users/chrfav01/.vscode/extensions/arm.cmsis-csolution-1.74.0-win32-x64/tools/cmsis-toolbox/bin
           manual: https://open-cmsis-pack.github.io/cmsis-toolbox/
         - name: Arm GNU GDB
           version: 15.3.1

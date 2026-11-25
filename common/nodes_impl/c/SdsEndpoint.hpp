@@ -3,40 +3,29 @@
 #pragma once
 
 #include "cg_enums.h"
+#include "cmsis_os2.h"
 #include "sds.h"
 #include <cstdint>
 #include <type_traits>
 
-struct SdsRetry {
-    // Yield or wait before another attempt. Return false to stop the scheduler.
-    bool (*wait)(void* context, int32_t status) = nullptr;
-    void* context = nullptr;
-    uint32_t maxRetries = 0;
-
-    bool valid() const { return maxRetries == 0 || wait != nullptr; }
-};
-
-struct SdsRecordObserver {
-    // Called once after a complete transfer. The record is valid only for the call.
-    void (*observe)(void* context, const void* record, uint32_t bytes) = nullptr;
-    void* context = nullptr;
+// Shared by a replay source and its capture sink on the same graph thread.
+struct SdsPlaybackTiming {
+    uint32_t timeslot = 0;
+    uint32_t nextReleaseTick = 0;
+    uint32_t pacingTimerCounts = 0;
+    bool started = false;
 };
 
 struct SdsSourceParams {
     sdsId_t stream = nullptr;
-    uint32_t* timeslot = nullptr;  // Updated on successful playback only.
-    SdsRetry retry{};
-    SdsRecordObserver observer{};
-    // Allows playback to wait for the record's timeslot before publishing it.
-    cg_status (*beforePublish)(uint32_t timeslot) = nullptr;
+    SdsPlaybackTiming* timing = nullptr;
+    uint32_t sampleRate = 0;
+    uint32_t framesPerRecord = 0;  // Sample count per channel.
 };
 
 struct SdsSinkParams {
     sdsId_t stream = nullptr;
-    uint32_t (*timeslot)(void* context) = nullptr;
-    void* context = nullptr;
-    SdsRetry retry{};
-    SdsRecordObserver observer{};
+    const SdsPlaybackTiming* timing = nullptr;
 };
 
 namespace sds_node_detail {
@@ -49,19 +38,18 @@ constexpr int32_t recordBytes() {
     return static_cast<int32_t>(samples * sizeof(Sample));
 }
 
-template<typename Transfer>
-cg_status transferRecord(const SdsRetry& retry, Transfer transfer, int32_t expectedBytes,
-                         int32_t wouldBlock, cg_status bufferError, int32_t& status) {
-    for (uint32_t remaining = retry.maxRetries;; --remaining) {
-        status = transfer();
-        if (status == expectedBytes) return CG_SUCCESS;
-        if (status == SDS_EOS && wouldBlock == SDS_NO_DATA) return CG_STOP_SCHEDULER;
+inline int32_t ticksUntil(uint32_t deadline) {
+    return static_cast<int32_t>(deadline - osKernelGetTickCount());
+}
 
-        // SDS 3.1 can also return SDS_ERROR if its worker holds the stream lock.
-        if (status != wouldBlock && status != SDS_ERROR) return CG_BUFFER_ERROR;
-        if (remaining == 0) return status == wouldBlock ? bufferError : CG_BUFFER_ERROR;
-        if (!retry.wait(retry.context, status)) return CG_STOP_SCHEDULER;
-    }
+inline cg_status waitToRetry(int32_t status, int32_t wouldBlock, cg_status bufferError,
+                             uint32_t deadline) {
+    // SDS 3.1 reports a busy stream lock as SDS_ERROR and has no data-ready event.
+    if (status != wouldBlock && status != SDS_ERROR) return CG_BUFFER_ERROR;
+    const auto timeout = status == wouldBlock ? bufferError : CG_BUFFER_ERROR;
+    if (ticksUntil(deadline) <= 0) return timeout;
+    if (osDelay(1) != osOK) return CG_OS_ERROR;
+    return ticksUntil(deadline) < 0 ? timeout : CG_SUCCESS;
 }
 
 } // namespace sds_node_detail

@@ -10,7 +10,7 @@ class DtlnMethod(ProjectNode, GenericNode):
     needsHardware = True
 
     def __init__(self, name, stage):
-        GenericNode.__init__(self, name, identified=False)
+        GenericNode.__init__(self, name, identified=True)
         width = 257 if stage == 1 else 512
         self.addInput("i1", CType(F32), width)
         self.addInput("i2", CType(F32), width)

@@ -7,10 +7,6 @@
 #include "hardware_params.h"
 typedef struct {
     HardwareParams hw_;
-} WaveformDisplayParams;
-
-typedef struct {
-    HardwareParams hw_;
 } SpeakerOutputParams;
 
 typedef struct {
@@ -19,10 +15,14 @@ typedef struct {
 } DtlnMethodParams;
 
 typedef struct {
-    WaveformDisplayParams lcd;
+    HardwareParams hw_;
+} WaveformDisplayParams;
+
+typedef struct {
     SpeakerOutputParams speaker;
     DtlnMethodParams stage1;
     DtlnMethodParams stage2;
+    WaveformDisplayParams lcd;
 } AppParams;
 #ifdef __cplusplus
 extern "C" {

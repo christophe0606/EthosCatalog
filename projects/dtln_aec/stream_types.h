@@ -7,4 +7,6 @@ typedef struct {
     volatile uint32_t stage1_calls, stage2_calls;
     volatile uint32_t stage1_ticks_max, stage2_ticks_max;
     uint32_t hop_ticks_max, deadline_misses;
+    uint32_t lcd_frames;
+    int32_t lcd_error, speaker_error;
 } StreamStats;

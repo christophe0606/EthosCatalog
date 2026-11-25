@@ -44,8 +44,13 @@ The script plays all three clips, saves the captures in
 original float DTLN-aec 128 model.
 During playback, the board releases one audio hop every 8 ms and displays the
 **MICROPHONE** and **ECHO CANCELLED** waveforms on the LCD.
-The CMSIS Stream graph sends processed hops to the SDS sink, LCD and speaker
-nodes. The LCD node also receives the microphone hop for the paired display.
+The SDS source waits for its next release tick, and both SDS endpoints bound
+transport retries by the hop deadline. A late input or a full output buffer
+that persists to that deadline stops the graph with an underflow or overflow.
+The CMSIS Stream graph sends processed hops to the SDS sink and speaker. A
+waveform capture node collects microphone and processed peaks and posts
+snapshots as CMSIS Stream `BufferPtr` events to the LCD node on the graph's
+event thread.
 The speaker starts once four output hops (32 ms of audio) are ready. The
 speaker queue holds up to 96 ms, including the block being played, plus one
 8 ms hop waiting to form the next block. The hardware FIFO adds about 1 ms.
@@ -64,4 +69,4 @@ In the LCD validation run before speaker playback was added, all 7,837
 measured hops met the 8 ms deadline. The slowest took 4.456 ms of processing
 time. [Board and signal processing results](VALIDATION.md)
 
-[Conversion report](model/CONVERSION.md) · [Benchmarks](model/BENCHMARK.md) · [Application graph](generated/app.pdf)
+[Conversion report](model/CONVERSION.md) · [CPU operator overrides](kernels/README.md) · [Benchmarks](model/BENCHMARK.md) · [Application graph](generated/app.pdf)

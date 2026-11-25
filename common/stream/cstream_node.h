@@ -65,6 +65,12 @@ struct ContextSwitchInterface
     int (*resume)(void *self);
 };
 
+/** Optional reset of node-owned state while its scheduler is stopped. */
+struct StateResetInterface
+{
+    void (*reset)(void *self);
+};
+
 /**
  * @brief Opaque handle for an identified C++ stream node.
  *
@@ -85,6 +91,7 @@ struct CStreamNode
     void *obj;
     const struct StreamNodeInterface *stream_intf;
     const struct ContextSwitchInterface *context_switch_intf;
+    const struct StateResetInterface *state_reset_intf;
 };
 
 #ifdef   __cplusplus

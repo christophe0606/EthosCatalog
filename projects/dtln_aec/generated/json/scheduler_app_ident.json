@@ -1,1 +1,6 @@
-{}
+{
+  "speaker": 0,
+  "stage1": 1,
+  "stage2": 2,
+  "waveform": 3
+}

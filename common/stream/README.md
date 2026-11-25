@@ -22,8 +22,8 @@ DOT and (when Graphviz is available) PDF.
 | HannWindow | `float[n]` audio -> `float[n]` audio | Owns periodic Hann coefficients |
 | FFT | `float[n]` audio -> `float[n]` packed RFFT | Power-of-two n from 32 to 4096 |
 | RFFTMagnitude | `float[n]` CMSIS-DSP fast RFFT packing -> `float[n/2+1]` bins | DC/Nyquist included; configurable amplitude scale |
-| SdsSource | SDS record -> `T[n]` | Read handle, optional timeslot output and retry policy |
-| SdsSink | `T[n]` -> SDS record | Write handle, timeslot callback and optional retry policy |
+| SdsSource | SDS record -> `T[n]` | Read handle, sample rate, frames per record and shared timing |
+| SdsSink | `T[n]` -> SDS record | Write handle and shared timing |
 
 Application nodes live in their project's `nodes/` and `nodes_impl/` folders.
 Each template's `EthosGain`, `SendToLCD` and `LCD` belong there: its model
@@ -158,23 +158,20 @@ then close them through SDS to flush pending capture data. A new set of stream
 handles can be supplied when the application initializes the graph again.
 [ARM SDS stream lifecycle](https://arm-software.github.io/SDS-Framework/main/theory.html)
 
-The sink calls its application clock once per firing and uses the same
-timeslot across retries. The source optionally reports the latest successfully
-read timeslot to a `uint32_t*` in `SdsSourceParams`. The application supplies any
-playback pacing. Both nodes leave the FIFO sample count unchanged until SDS
-accepts or returns a complete record. The optional bounded retry policy lets
-the application yield or wait on temporary starvation, backpressure, or SDS
-lock contention. A wait callback may cancel by returning `false`. End of stream
-and cancellation return `CG_STOP_SCHEDULER`. Size mismatches and SDS I/O errors
-return `CG_BUFFER_ERROR`. With retries exhausted, `SDS_NO_DATA` returns
-`CG_BUFFER_UNDERFLOW` and `SDS_NO_SPACE` returns `CG_BUFFER_OVERFLOW`.
-`lastSdsStatus()` reports the most recent SDS API result. Choose a playback
-record count that completes a schedule cycle when the graph reblocks data, or
-handle any remaining samples in the application.
+The source calculates its release period from the number of frames per record
+and sample rate. The period must fit whole milliseconds and RTOS ticks. The
+source sleeps until its release tick when prefetch is ahead of playback. It
+publishes each timeslot and the next release tick via `SdsPlaybackTiming`. The
+sink uses that timeslot and shares the same deadline for write backpressure.
+With reblocking, the sink uses the most recent source timeslot.
 
-An optional record observer receives each successful record once on the
-scheduler thread. Copy any data needed after the callback returns. Keep the
-callback short to avoid delaying the scheduler.
+The nodes keep the FIFO occupancy unchanged until a complete SDS record
+transfers. They sleep one tick between transfer attempts while time remains.
+If the deadline expires, `SDS_NO_DATA` maps to `CG_BUFFER_UNDERFLOW` and
+`SDS_NO_SPACE` maps to `CG_BUFFER_OVERFLOW`. Other transfer failures return
+`CG_BUFFER_ERROR`. End of stream returns `CG_STOP_SCHEDULER`.
+`lastSdsStatus()` reports the latest SDS API result. Connect a separate
+dataflow node to inspect samples.
 
 The host check generates synchronous and asynchronous graphs, builds both
 against the installed SDS pack header, and uses a test double for SDS I/O.

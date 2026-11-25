@@ -9,6 +9,6 @@ class SpeakerOutput(ProjectNode, GenericSink):
     needsHardware = True
 
     def __init__(self, name, samples):
-        super().__init__(name, identified=False)
+        super().__init__(name, identified=True)
         self.addInput("i", CType(F32), samples)
         self.parameters()

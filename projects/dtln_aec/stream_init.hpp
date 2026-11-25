@@ -1,4 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 #include "hardware_params.h"
-int stream_run(const HardwareParams& hardware);
+bool dtlnPlaybackStopping();
+int dtln_stream_start(const HardwareParams& hardware);
+bool dtln_stream_finished();
+int dtln_stream_finish();

@@ -29,7 +29,7 @@ def run_test(args, sds_include, asynchronous):
     assert schedule.scheduleLength == 3
 
     includes = [sds_include, output, *[ROOT / path for path in (
-        "tests/sds", "tests/stream", "common/stream", "common/nodes_impl/c",
+        "tests/sds", "tests/stream", "tests/rtos", "common/stream", "common/nodes_impl/c",
         "thirdparty/CMSIS-Stream/platform", "thirdparty/CMSIS-Stream/platform/posix_runtime",
     )]]
     binary = output / ("test_sds_nodes.exe" if os.name == "nt" else "test_sds_nodes")

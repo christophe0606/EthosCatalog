@@ -2,22 +2,23 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "app_config.hpp"
 #include "stream_platform_config.hpp"
-#include "EventQueue.hpp"
-#include "scheduler_app.h"
+#include "stream_runtime_init.hpp"
 #include "DtlnMethod.hpp"
+#include "peripherals.hpp"
+#include "stream_init.hpp"
 #include <array>
 #include <cassert>
 #include <complex>
 #include <cstdio>
 #include <fstream>
 #include <limits>
-#include <memory_resource>
+#include <thread>
 #include "arm_math.h"
 
-std::pmr::synchronized_pool_resource pool;
-void* arm_cmsis_stream::EventQueue::handlerData = nullptr;
-arm_cmsis_stream::EventQueue::AppHandler arm_cmsis_stream::EventQueue::handler = nullptr;
-std::atomic<bool> arm_cmsis_stream::EventQueue::handlerReady_ = false;
+uint32_t osEventFlagsWait(osEventFlagsId_t& event, uint32_t mask, uint32_t, uint32_t timeout) {
+    const auto flags = event.wait(mask, true, timeout);
+    return flags ? flags : osFlagsError;
+}
 
 // Independent radix-two host FFT checks production packing/masking/inverse
 // and generated scheduling. CMSIS-DSP numerical accuracy needs the board.
@@ -79,17 +80,36 @@ using StereoHop = std::array<float, 2 * hop>;
 using MonoHop = std::array<float, hop>;
 static std::vector<StereoHop> inputRecords;
 static std::vector<MonoHop> outputRecords;
-static std::vector<MonoHop> speakerRecords;
-static std::vector<MonoHop> displayMicrophoneRecords;
-static std::vector<MonoHop> displayOutputRecords;
+using SpeakerBlock = std::array<int16_t, DtlnSpeaker::blockFrames>;
+static std::vector<SpeakerBlock> speakerRecords;
 static size_t nextRecord;
-static uint32_t timeslot;
+static SdsPlaybackTiming playback;
 SdsSourceParams dtlnReplayParams;
 SdsSinkParams dtlnRecordParams;
+static uint16_t lcdFrames[2][LCD_PIXELS];
+static DtlnLcd lcd{{lcdFrames[0], lcdFrames[1]}};
+static DtlnSpeaker speaker{};
+static std::thread::id dataflowThread;
+static unsigned lcdPresents;
+static unsigned speakerDrains;
+extern uint8_t stream_app_buf0[], stream_app_buf1[], stream_app_buf2[];
+extern uint8_t stream_app_buf3[], stream_app_buf4[], stream_app_buf5[];
+static const std::array fifoStorage{stream_app_buf0, stream_app_buf1, stream_app_buf2,
+                                    stream_app_buf3, stream_app_buf4, stream_app_buf5};
+static uint32_t runtimeEventsOnFirstRead;
+static bool sdsStopOnFirstRead;
+
+bool dtlnPlaybackStopping() { return sdsStopOnFirstRead && nextRecord != 0; }
+void dtlnRecordHopTicks(uint32_t) {}
 
 extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t bytes) {
     assert(id == &inputRecords && bytes == sizeof(StereoHop));
     if (nextRecord == inputRecords.size()) return SDS_EOS;
+    if (nextRecord == 0) {
+        dataflowThread = std::this_thread::get_id();
+        cg_streamEvent.post(runtimeEventsOnFirstRead);
+        for (const auto* buffer : fifoStorage) assert(buffer[0] == 0);
+    }
     *slot = uint32_t(nextRecord * 8);
     std::memcpy(output, inputRecords[nextRecord++].data(), bytes);
     return int32_t(bytes);
@@ -98,20 +118,31 @@ extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t by
 extern "C" int32_t sdsWrite(sdsId_t id, uint32_t slot, const void* input, uint32_t bytes) {
     assert(id == &outputRecords && bytes == sizeof(MonoHop));
     assert(slot == outputRecords.size() * 8);
+    assert(osKernelGetTickCount() == outputRecords.size() * 8);
     outputRecords.emplace_back();
     std::memcpy(outputRecords.back().data(), input, bytes);
     return int32_t(bytes);
 }
 
-static uint32_t recordTimeslot(void*) { return timeslot; }
 
-static void displayWaveform(const float* microphone, const float* output) {
-    std::copy_n(microphone, hop, displayMicrophoneRecords.emplace_back().begin());
-    std::copy_n(output, hop, displayOutputRecords.emplace_back().begin());
+extern "C" int lcd_present(uint16_t* frame) {
+    assert(std::this_thread::get_id() != dataflowThread);
+    assert(frame == lcd.frames[lcd.front ^ 1U]);
+    assert(frame[0] == 0x0863);
+    ++lcdPresents;
+    return 0;
 }
 
-static void playAudio(const float* output) {
-    std::copy_n(output, hop, speakerRecords.emplace_back().begin());
+extern "C" int devkit_e8_audio_write(const int16_t* samples, unsigned frames) {
+    assert(frames == SpeakerBlock{}.size());
+    std::copy_n(samples, frames, speakerRecords.emplace_back().begin());
+    return 0;
+}
+
+extern "C" int devkit_e8_audio_drain(unsigned timeoutMs) {
+    assert(timeoutMs == 200);
+    ++speakerDrains;
+    return 0;
 }
 
 static float inputSample(int index, size_t channel) {
@@ -119,9 +150,9 @@ static float inputSample(int index, size_t channel) {
     return inputRecords[index / hop][2 * (index % hop) + channel];
 }
 
-static int fake_forward(unsigned stage, const float* signal, const float* state,
-                         const float* reference, float* output, float* next,
-                         DtlnForwardTiming* timing) {
+extern "C" int dtln_forward(unsigned stage, const float* signal, const float* state,
+                            const float* reference, float* output, float* next,
+                            DtlnForwardTiming* timing) {
     assert(stage == 1 || stage == 2);
     assert(state[0] == float(calls[stage - 1]));
     ++calls[stage - 1];
@@ -141,37 +172,53 @@ static int fake_forward(unsigned stage, const float* signal, const float* state,
     if (inject_nan) output[0] = std::numeric_limits<float>::quiet_NaN();
     return 0;
 }
-static void runGraph() {
+static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     calls[0] = calls[1] = 0;
     nextRecord = 0;
-    timeslot = 0;
+    // POSIX retains the event objects across runs. RTX allocates fresh flags on startup.
+    cg_streamEvent.clear(UINT32_MAX);
+    cg_streamReplyEvent.clear(UINT32_MAX);
+    for (auto* buffer : fifoStorage) buffer[0] = 0xa5;
+    runtimeEventsOnFirstRead = runtimeEvents;
+    sdsStopOnFirstRead = sdsStop;
+    test_rtos::tick = 0;
     outputRecords.clear();
     speakerRecords.clear();
-    displayMicrophoneRecords.clear();
-    displayOutputRecords.clear();
-    dtlnReplayParams = {&inputRecords, &timeslot};
-    dtlnRecordParams = {&outputRecords, recordTimeslot};
+    speakerDrains = 0;
+    lcdPresents = 0;
+    dtlnReplayParams = {&inputRecords, &playback, DTLN_AUDIO_SAMPLE_RATE, DTLN_AUDIO_HOP_SAMPLES};
+    dtlnRecordParams = {&outputRecords, &playback};
     StreamStats stats{};
-    HardwareParams hardware{&stats, fake_forward, displayWaveform, playAudio};
-    app_params_set_hardware(&hardware);
-    assert(init_scheduler_app(nullptr, &appParams) == CG_SUCCESS);
-    reset_fifos_scheduler_app(1);
-    int error = 0;
-    assert(scheduler_app(&error) == inputRecords.size());
-    assert(error == CG_STOP_SCHEDULER);
+    HardwareParams hardware{&stats, &lcd, &speaker};
+    const auto expected = (runtimeEvents & STREAM_PAUSE_EVENT) && !(runtimeEvents & STREAM_DONE_EVENT)
+        ? CG_PAUSED_SCHEDULER : CG_STOP_SCHEDULER;
+    assert(dtln_stream_start(hardware) == CG_SUCCESS);
+    while (!dtln_stream_finished()) std::this_thread::yield();
+    assert(dtln_stream_finish() == expected);
+    if (runtimeEvents || sdsStop) {
+        assert(nextRecord == 1 && calls[0] == 0 && calls[1] == 0);
+        assert(outputRecords.empty());
+        return;
+    }
+    assert(speakerDrains == 1);
     assert(outputRecords.size() == inputRecords.size());
-    assert(speakerRecords == outputRecords && displayOutputRecords == outputRecords);
-    assert(displayMicrophoneRecords.size() == inputRecords.size());
+    assert(!stats.lcd_error && stats.lcd_frames == lcdPresents && lcdPresents >= 2);
     assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());
     // Unity mask, inverse FFT and one-quarter gain overlap-add to the input.
     for (size_t frame = 0; frame < outputRecords.size(); ++frame) {
         for (size_t i = 0; i < hop; ++i) {
-            assert(displayMicrophoneRecords[frame][i] == inputSample(int(frame * hop + i), 0));
             const int index = int(frame * hop + i) - int(delay);
             assert(std::fabs(outputRecords[frame][i] - inputSample(index, 0)) < 1e-6f);
         }
     }
-    free_scheduler_app();
+    constexpr size_t blockFrames = DtlnSpeaker::blockFrames;
+    const size_t sampleCount = outputRecords.size() * hop;
+    assert(speakerRecords.size() == (sampleCount + blockFrames - 1) / blockFrames);
+    for (size_t i = 0; i < speakerRecords.size() * blockFrames; ++i) {
+        const float sample = i < sampleCount ? outputRecords[i / hop][i % hop] : 0.0f;
+        const auto expected = static_cast<int16_t>(std::clamp(sample, -1.0f, 32767.0f / 32768.0f) * 32768.0f);
+        assert(speakerRecords[i / blockFrames][i % blockFrames] == expected);
+    }
 }
 
 static void loadReplay(const char* name) {
@@ -189,13 +236,18 @@ static void loadReplay(const char* name) {
 }
 
 int main(int argc, char** argv) {
-    inputRecords.resize(12);
+    inputRecords.resize(13);
     for (size_t frame = 0; frame < inputRecords.size(); ++frame) {
         for (size_t i = 0; i < hop; ++i) {
             inputRecords[frame][2 * i] = float(i % 5) / 50.0f;
             inputRecords[frame][2 * i + 1] = -float((frame + i) % 7) / 60.0f;
         }
     }
+    runGraph(STREAM_PAUSE_EVENT);
+    runGraph(STREAM_DONE_EVENT);
+    runGraph(STREAM_DONE_EVENT | STREAM_PAUSE_EVENT);
+    runGraph(STREAM_PAUSE_EVENT, true);
+    runGraph(0, true);
     runGraph();
     for (int i = 1; i < argc; ++i) {
         loadReplay(argv[i]);
@@ -205,12 +257,17 @@ int main(int argc, char** argv) {
     // Fast-math-safe finite guard must reject a bad model before the DSP.
     calls[0] = 0;
     StreamStats stats{};
-    HardwareParams hardware{&stats, fake_forward, displayWaveform, playAudio};
+    HardwareParams hardware{&stats, &lcd, &speaker};
     float a[257]{}, b[257]{}, result[257]{};
     arm_cmsis_stream::FIFO<float,257,1,0> fa(a), fb(b), fo(result);
     DtlnMethod<float,257,float,257,float,257> method(fa, fb, fo, {hardware, 1});
     assert(method.init() == CG_SUCCESS);
+    assert(method.run() == CG_SUCCESS);
+    auto identified = createStreamNode(method);
+    assert(identified.state_reset_intf);
+    identified.state_reset_intf->reset(identified.obj);
+    calls[0] = 0;
     inject_nan = true;
     assert(method.run() == -511);
-    printf("DTLN SDS scheduler PASS, channel ordering, timeslots, overlap-add, model states, LCD and speaker routing\n");
+    printf("DTLN SDS scheduler PASS, runtime pause and stop, SDS stop, signal processing, LCD and speaker routing\n");
 }

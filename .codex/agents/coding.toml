@@ -49,6 +49,24 @@ The network node has:
 - An event output to acknowledge completion.
 - An event output to send inference results to another node.
 
+## Graph integration constraint
+
+Hardware initializations (like micro, speaker, lcd etc ...) are done
+in file hardware_params.c and with API in hardware_params.h of the project.
+Each project may need a different set of hardware peripheral.
+
+The hardware_params.h struct generally contains the data and pointers
+required to interact with the peripherals. Those
+peripherals have been initialized in hardware_params.c and
+are ready to use in the CMSIS Stream node that needs them.
+
+hardware_params is for init / uninit / reset of peripherals but not
+to implement the features which are implemented in the CMSIS Stream 
+nodes.
+
+The CMSIS Stream graph skills explain how to create and use
+hardware_params.
+
 ## Organization constraints for the CMSIS Stream demo
 
 - You can have several models in the .pte file. But if a demo uses 
@@ -105,7 +123,7 @@ descriptions and C++ wrapper will be required.
   types without importing Stream's C++ runtime.
 - Keep processing results and retained application state in the node that owns
   them. For example, do not allocate spectrum magnitudes, peak frequencies or
-  similar data in `hardware_params.cpp`, or pass their storage through
+  similar data in `hardware_params.c`, or pass their storage through
   `HardwareParams`.
   Pass node-owned data explicitly to application callbacks that consume it.
 - Do not expose private processing functions through a shared `common/nodes.h`

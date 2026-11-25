@@ -95,7 +95,7 @@ Description of the scheduling.
 */
 static uint8_t schedule[19]=
 {
-14,16,12,1,10,11,0,8,6,2,7,17,5,18,9,3,4,13,15,
+13,15,11,1,9,10,0,7,5,2,6,16,4,17,8,3,12,14,18,
 };
 
 /*
@@ -107,26 +107,35 @@ Internal ID identification for the nodes
 #define DUP1_INTERNAL_ID 1
 #define DUP2_INTERNAL_ID 2
 #define DUP3_INTERNAL_ID 3
-#define LCD_INTERNAL_ID 4
-#define MASK_INVERSE_INTERNAL_ID 5
-#define MIC_FFT_INTERNAL_ID 6
-#define MIC_MAGNITUDE_INTERNAL_ID 7
-#define MIC_WINDOW_INTERNAL_ID 8
-#define OVERLAP_ADD_INTERNAL_ID 9
-#define REFERENCE_FFT_INTERNAL_ID 10
-#define REFERENCE_MAGNITUDE_INTERNAL_ID 11
-#define REFERENCE_WINDOW_INTERNAL_ID 12
-#define SDS_SINK_INTERNAL_ID 13
-#define SDS_SOURCE_INTERNAL_ID 14
-#define SPEAKER_INTERNAL_ID 15
-#define SPLIT_INPUT_INTERNAL_ID 16
-#define STAGE1_INTERNAL_ID 17
-#define STAGE2_INTERNAL_ID 18
+#define MASK_INVERSE_INTERNAL_ID 4
+#define MIC_FFT_INTERNAL_ID 5
+#define MIC_MAGNITUDE_INTERNAL_ID 6
+#define MIC_WINDOW_INTERNAL_ID 7
+#define OVERLAP_ADD_INTERNAL_ID 8
+#define REFERENCE_FFT_INTERNAL_ID 9
+#define REFERENCE_MAGNITUDE_INTERNAL_ID 10
+#define REFERENCE_WINDOW_INTERNAL_ID 11
+#define SDS_SINK_INTERNAL_ID 12
+#define SDS_SOURCE_INTERNAL_ID 13
+#define SPEAKER_INTERNAL_ID 14
+#define SPLIT_INPUT_INTERNAL_ID 15
+#define STAGE1_INTERNAL_ID 16
+#define STAGE2_INTERNAL_ID 17
+#define WAVEFORM_INTERNAL_ID 18
+#define LCD_INTERNAL_ID 19
+
+/* Initialize the selectors global IDs in each class */
+template<>
+std::array<uint16_t,1> WaveformCapture<float,128,float,128>::selectors = {SEL_WAVEFORM_ID};
+std::array<uint16_t,1> WaveformDisplay::selectors = {SEL_WAVEFORM_ID};
 
 
+/***********
 
-/* No identified nodes found so array is forced to length 1*/
-static CStreamNode identifiedNodes[1]={0};
+Node identification
+
+************/
+static CStreamNode identifiedNodes[STREAM_APP_NB_IDENTIFIED_NODES]={0};
 
 CG_BEFORE_FIFO_BUFFERS
 /***********
@@ -212,7 +221,6 @@ typedef struct {
     Duplicate<float,512,float,512> *dup1;
     Duplicate<float,512,float,512> *dup2;
     Duplicate<float,128,float,128> *dup3;
-    WaveformDisplay<float,128,float,128> *lcd;
     RFFTMaskInverse<float,512,float,257,float,512> *mask_inverse;
     FFT<float,512,float,512> *mic_fft;
     RawRFFTMagnitude<float,512,float,257> *mic_magnitude;
@@ -227,6 +235,8 @@ typedef struct {
     DtlnSplitInput<float,256,float,128,float,128> *split_input;
     DtlnMethod<float,257,float,257,float,257> *stage1;
     DtlnMethod<float,512,float,512,float,512> *stage2;
+    WaveformCapture<float,128,float,128> *waveform;
+    WaveformDisplay *lcd;
 } nodes_t;
 
 
@@ -391,12 +401,6 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
 
-    nodes.lcd = new (std::nothrow) WaveformDisplay<float,128,float,128>(*(fifos.fifo11),*(fifos.fifo20),params->lcd);
-    if (nodes.lcd==NULL)
-    {
-        return(CG_MEMORY_ALLOCATION_FAILURE);
-    }
-
     nodes.mask_inverse = new (std::nothrow) RFFTMaskInverse<float,512,float,257,float,512>(*(fifos.fifo17),*(fifos.fifo6),*(fifos.fifo7));
     if (nodes.mask_inverse==NULL)
     {
@@ -462,6 +466,8 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_SPEAKER_ID]=createStreamNode(*nodes.speaker);
+    nodes.speaker->setID(STREAM_APP_SPEAKER_ID);
 
     nodes.split_input = new (std::nothrow) DtlnSplitInput<float,256,float,128,float,128>(*(fifos.fifo0),*(fifos.fifo9),*(fifos.fifo1));
     if (nodes.split_input==NULL)
@@ -474,15 +480,34 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_STAGE1_ID]=createStreamNode(*nodes.stage1);
+    nodes.stage1->setID(STREAM_APP_STAGE1_ID);
 
     nodes.stage2 = new (std::nothrow) DtlnMethod<float,512,float,512,float,512>(*(fifos.fifo7),*(fifos.fifo14),*(fifos.fifo8),params->stage2);
     if (nodes.stage2==NULL)
     {
         return(CG_MEMORY_ALLOCATION_FAILURE);
     }
+    identifiedNodes[STREAM_APP_STAGE2_ID]=createStreamNode(*nodes.stage2);
+    nodes.stage2->setID(STREAM_APP_STAGE2_ID);
+
+    nodes.waveform = new (std::nothrow) WaveformCapture<float,128,float,128>(*(fifos.fifo11),*(fifos.fifo20),evtQueue);
+    if (nodes.waveform==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
+    identifiedNodes[STREAM_APP_WAVEFORM_ID]=createStreamNode(*nodes.waveform);
+    nodes.waveform->setID(STREAM_APP_WAVEFORM_ID);
+
+    nodes.lcd = new (std::nothrow) WaveformDisplay(params->lcd);
+    if (nodes.lcd==NULL)
+    {
+        return(CG_MEMORY_ALLOCATION_FAILURE);
+    }
 
 
 /* Subscribe nodes for the event system*/
+    nodes.waveform->subscribe(0,*nodes.lcd,0);
 
     initError = CG_SUCCESS;
     initError = nodes.dup0->init();
@@ -498,10 +523,6 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(initError);
 
     initError = nodes.dup3->init();
-    if (initError != CG_SUCCESS)
-        return(initError);
-
-    initError = nodes.lcd->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -558,6 +579,14 @@ int init_scheduler_app(void *evtQueue_,AppParams *params)
         return(initError);
 
     initError = nodes.stage2->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.waveform->init();
+    if (initError != CG_SUCCESS)
+        return(initError);
+
+    initError = nodes.lcd->init();
     if (initError != CG_SUCCESS)
         return(initError);
 
@@ -675,10 +704,6 @@ void free_scheduler_app()
     {
         delete nodes.dup3;
     }
-    if (nodes.lcd!=NULL)
-    {
-        delete nodes.lcd;
-    }
     if (nodes.mask_inverse!=NULL)
     {
         delete nodes.mask_inverse;
@@ -734,6 +759,14 @@ void free_scheduler_app()
     if (nodes.stage2!=NULL)
     {
         delete nodes.stage2;
+    }
+    if (nodes.waveform!=NULL)
+    {
+        delete nodes.waveform;
+    }
+    if (nodes.lcd!=NULL)
+    {
+        delete nodes.lcd;
     }
 }
 
@@ -894,105 +927,105 @@ uint32_t scheduler_app(int *error)
                 case 4:
                 {
 
-                   cgStaticError = nodes.lcd->run();
+                   cgStaticError = nodes.mask_inverse->run();
                 }
                 break;
 
                 case 5:
                 {
 
-                   cgStaticError = nodes.mask_inverse->run();
+                   cgStaticError = nodes.mic_fft->run();
                 }
                 break;
 
                 case 6:
                 {
 
-                   cgStaticError = nodes.mic_fft->run();
+                   cgStaticError = nodes.mic_magnitude->run();
                 }
                 break;
 
                 case 7:
                 {
 
-                   cgStaticError = nodes.mic_magnitude->run();
+                   cgStaticError = nodes.mic_window->run();
                 }
                 break;
 
                 case 8:
                 {
 
-                   cgStaticError = nodes.mic_window->run();
+                   cgStaticError = nodes.overlap_add->run();
                 }
                 break;
 
                 case 9:
                 {
 
-                   cgStaticError = nodes.overlap_add->run();
+                   cgStaticError = nodes.reference_fft->run();
                 }
                 break;
 
                 case 10:
                 {
 
-                   cgStaticError = nodes.reference_fft->run();
+                   cgStaticError = nodes.reference_magnitude->run();
                 }
                 break;
 
                 case 11:
                 {
 
-                   cgStaticError = nodes.reference_magnitude->run();
+                   cgStaticError = nodes.reference_window->run();
                 }
                 break;
 
                 case 12:
                 {
 
-                   cgStaticError = nodes.reference_window->run();
+                   cgStaticError = nodes.sds_sink->run();
                 }
                 break;
 
                 case 13:
                 {
 
-                   cgStaticError = nodes.sds_sink->run();
+                   cgStaticError = nodes.sds_source->run();
                 }
                 break;
 
                 case 14:
                 {
 
-                   cgStaticError = nodes.sds_source->run();
+                   cgStaticError = nodes.speaker->run();
                 }
                 break;
 
                 case 15:
                 {
 
-                   cgStaticError = nodes.speaker->run();
+                   cgStaticError = nodes.split_input->run();
                 }
                 break;
 
                 case 16:
                 {
 
-                   cgStaticError = nodes.split_input->run();
+                   cgStaticError = nodes.stage1->run();
                 }
                 break;
 
                 case 17:
                 {
 
-                   cgStaticError = nodes.stage1->run();
+                   cgStaticError = nodes.stage2->run();
                 }
                 break;
 
                 case 18:
                 {
 
-                   cgStaticError = nodes.stage2->run();
+                   cgStaticError = nodes.waveform->run();
                 }
                 break;
 

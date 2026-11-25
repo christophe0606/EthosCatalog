@@ -75,8 +75,8 @@ project:
     - group: ExecuTorch CPU operator overrides
       for-context: [.ReleaseSRAM]
       files:
-        - file: ../midi_ddsp/kernels/normalization.cpp
-        - file: ../midi_ddsp/kernels/quantization.cpp
+        - file: kernels/normalization.cpp
+        - file: kernels/quantization.cpp
     - group: DTLN streaming demo
       for-context: [.Debug, .Release, .ReleaseSRAM]
       files:
@@ -87,7 +87,7 @@ project:
           for-compiler: AC6
           add-path:
             - $Pack(ARM::SDS)$/sds/sdsio/client
-        - file: waveform_display.cpp
+        - file: nodes_impl/waveform_display.cpp
         - file: ../../board/DevKit-E8/audio_output.cpp
         - file: ../../common/nodes_impl/alif_e8/lcd.c
         - file: hardware_params.cpp

@@ -2,56 +2,28 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "waveform_display.hpp"
 #include "app_sizes.h"
-#include "board_nodes.h"
-#include "cmsis_os2.h"
+#include "peripherals.hpp"
 
 #include <algorithm>
-#include <array>
-#include <atomic>
 #include <cmath>
 #include <cstring>
 
 namespace dtln::waveform {
 namespace {
-constexpr unsigned width = 800, height = 480;
+constexpr unsigned width = DtlnLcd::width, height = DtlnLcd::height;
+constexpr unsigned pixelCount = width * height;
 constexpr unsigned left = 32, plotWidth = 736, plotHeight = 166;
 constexpr unsigned samplesPerBin = DTLN_AUDIO_SAMPLE_RATE / 1000;
 constexpr unsigned binsPerHop = DTLN_AUDIO_HOP_SAMPLES / samplesPerBin;
 constexpr unsigned delayHops = DTLN_AUDIO_FRAME_SAMPLES / DTLN_AUDIO_HOP_SAMPLES - 1;
-constexpr unsigned historyBins = 512;
-constexpr unsigned displayFps = 10;
-constexpr uint32_t dataReadyFlag = 1;
 static_assert(DTLN_AUDIO_HOP_SAMPLES % samplesPerBin == 0 && historyBins % binsPerHop == 0);
 static_assert(DTLN_AUDIO_FRAME_SAMPLES % DTLN_AUDIO_HOP_SAMPLES == 0);
-static_assert(width * height == LCD_PIXELS);
 
 constexpr uint16_t background = 0x0863, grid = 0x222a, zeroLine = 0x3b0f;
 constexpr uint16_t microphoneColor = 0x2e7f, outputColor = 0x67f2;
 
-struct Peak {
-    float low, high;
-};
-
-struct PairedPeak {
-    Peak microphone, output;
-};
-
-struct PlotHistory {
-    std::array<PairedPeak, historyBins> bins;
-    unsigned next;
-};
-
-alignas(32) uint16_t frames[2][LCD_PIXELS] __attribute__((section(".bss.lcd_frame_buf")));
-alignas(8) uint8_t displayStack[4096];
-
-PlotHistory history{}, snapshot{};
 std::array<std::array<Peak, binsPerHop>, delayHops + 1> microphoneDelay{};
 unsigned microphoneSlot;
-uint32_t lastOfferTick, offerPeriod;
-osThreadId_t displayThread;
-std::atomic<bool> ready{false}, snapshotPending{false};
-std::atomic<uint32_t> presented{0};
-std::atomic<int32_t> error{0};
 
 // 5x7 letter shapes follow the repository's keyword UI font.
 constexpr uint8_t letters[26][5] = {
@@ -99,7 +71,8 @@ void caption(uint16_t* frame, const char* text, unsigned y, uint16_t color)
     }
 }
 
-void plot(uint16_t* frame, unsigned top, Peak PairedPeak::*trace, float scale, uint16_t color)
+void plot(uint16_t* frame, const History& history, unsigned top,
+          Peak PairedPeak::*trace, float scale, uint16_t color)
 {
     const unsigned middle = top + plotHeight / 2;
     for (unsigned x = 0; x < plotWidth; ++x) {
@@ -109,52 +82,27 @@ void plot(uint16_t* frame, unsigned top, Peak PairedPeak::*trace, float scale, u
         drawSpan(pixels, top, 1, grid);
         drawSpan(pixels, top + plotHeight, 1, grid);
         drawSpan(pixels, middle, 1, zeroLine);
-        const auto peak = snapshot.bins[(snapshot.next + x * historyBins / plotWidth) % historyBins].*trace;
+        const auto peak = history.bins[(history.next + x * historyBins / plotWidth) % historyBins].*trace;
         const int high = static_cast<int>(middle) - static_cast<int>(peak.high * scale);
         const int low = static_cast<int>(middle) - static_cast<int>(peak.low * scale);
         drawSpan(pixels, high, low - high + 1, color);
     }
 }
 
-void render(uint16_t* frame)
+void paint(uint16_t* frame, const History& history)
 {
     // Both traces use the same gain so echo reduction is visible.
     float maximum = 0.015625f;
-    for (const auto& bin : snapshot.bins) {
+    for (const auto& bin : history.bins) {
         maximum = std::max({maximum, std::abs(bin.microphone.low), std::abs(bin.microphone.high),
                             std::abs(bin.output.low), std::abs(bin.output.high)});
     }
     const float scale = (plotHeight / 2 - 1) / maximum;
-    std::fill_n(frame, LCD_PIXELS, background);
+    std::fill_n(frame, pixelCount, background);
     caption(frame, "MICROPHONE", 23, microphoneColor);
     caption(frame, "ECHO CANCELLED", 253, outputColor);
-    plot(frame, 54, &PairedPeak::microphone, scale, microphoneColor);
-    plot(frame, 284, &PairedPeak::output, scale, outputColor);
-}
-
-void display(void*)
-{
-    render(frames[0]);
-    const int initStatus = lcd_init_display(frames[0]);
-    error.store(initStatus);
-    if (initStatus != 0) return;
-    ready.store(true, std::memory_order_release);
-
-    unsigned back = 1;
-    while ((osThreadFlagsWait(dataReadyFlag, osFlagsWaitAny, osWaitForever) & osFlagsError) == 0) {
-        if (!snapshotPending.load(std::memory_order_acquire)) continue;
-        render(frames[back]);
-        // The snapshot is no longer needed while the controller scans out the frame.
-        snapshotPending.store(false, std::memory_order_release);
-        const int status = lcd_present(frames[back]);
-        if (status != 0) {
-            error.store(status);
-            break;
-        }
-        presented.fetch_add(1, std::memory_order_relaxed);
-        back ^= 1U;
-    }
-    ready.store(false, std::memory_order_release);
+    plot(frame, history, 54, &PairedPeak::microphone, scale, microphoneColor);
+    plot(frame, history, 284, &PairedPeak::output, scale, outputColor);
 }
 
 Peak envelope(const float* samples)
@@ -172,21 +120,10 @@ Peak envelope(const float* samples)
     return peak;
 }
 
-void offerSnapshot(bool force)
-{
-    const uint32_t tick = osKernelGetTickCount();
-    if (snapshotPending.load(std::memory_order_acquire) || (!force && tick - lastOfferTick < offerPeriod)) return;
-    snapshot = history;
-    lastOfferTick = tick;
-    snapshotPending.store(true, std::memory_order_release);
-    osThreadFlagsSet(displayThread, dataReadyFlag);
-}
-
 } // namespace
 
-void append(const float* microphone, const float* output)
+void append(History& history, const float* microphone, const float* output)
 {
-    if (!ready.load(std::memory_order_acquire)) return;
     for (unsigned bin = 0; bin < binsPerHop; ++bin) {
         microphoneDelay[microphoneSlot][bin] = envelope(microphone + bin * samplesPerBin);
     }
@@ -195,34 +132,17 @@ void append(const float* microphone, const float* output)
         history.bins[history.next] = {microphoneDelay[microphoneSlot][bin], envelope(output + bin * samplesPerBin)};
         history.next = (history.next + 1) % historyBins;
     }
-    offerSnapshot(false);
 }
 
-void start()
-{
-    offerPeriod = (osKernelGetTickFreq() + displayFps - 1) / displayFps;
-    osThreadAttr_t attr{};
-    attr.name = "DTLN waveform";
-    attr.stack_mem = displayStack;
-    attr.stack_size = sizeof(displayStack);
-    attr.priority = osPriorityBelowNormal;
-    displayThread = osThreadNew(display, nullptr, &attr);
-    if (!displayThread) error.store(osErrorResource);
-}
-
-void reset()
+void reset(History& history)
 {
     history = {};
     microphoneDelay = {};
     microphoneSlot = 0;
-    lastOfferTick = osKernelGetTickCount() - offerPeriod;
 }
 
-void finish()
+void render(uint16_t* frame, const History& history)
 {
-    if (ready.load(std::memory_order_acquire)) offerSnapshot(true);
+    paint(frame, history);
 }
-
-uint32_t framesPresented() { return presented.load(std::memory_order_relaxed); }
-int32_t displayError() { return error.load(); }
 }

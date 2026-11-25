@@ -49,3 +49,7 @@ when building or loading firmware for the board.
 * Don't use inline asm since it will make a port to Cortex-A more difficult
 
 * You MUST NOT open a new vscode window or launch a new vscode instance
+
+* A project cannot include files from another project. It can only reference code from common folder or board folder.
+
+* thirdparty code must not be modified

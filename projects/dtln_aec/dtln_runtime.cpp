@@ -7,8 +7,8 @@
 #include <array>
 #include <cstring>
 #if defined(DTLN_USE_FAST_CPU_KERNELS)
-#include "../midi_ddsp/kernels/normalization.hpp"
-#include "../midi_ddsp/kernels/quantization.hpp"
+#include "kernels/normalization.hpp"
+#include "kernels/quantization.hpp"
 #endif
 
 extern "C" int e8_flash_set_read_clock(uint32_t hz);
@@ -75,7 +75,7 @@ int dtln_runtime_init(void)
     if (!module) return dtln_runtime_error = -400;
 #if defined(DTLN_USE_FAST_CPU_KERNELS)
     // Install the repository's existing guarded CPU kernels before any method loads.
-    if (const int error = midi_ddsp_install_normalization(module); error)
+    if (const int error = dtln_install_normalization(module); error)
         return dtln_runtime_error = error;
 #endif
     return 0;
@@ -90,7 +90,7 @@ int dtln_forward(unsigned stage, const float *signal, const float *state,
     if (!module || stage < 1 || stage > 2 || !signal || !state || !reference ||
             !output || !next_state) return dtln_runtime_error = -400;
 #if defined(DTLN_USE_FAST_CPU_KERNELS)
-    midi_quantization_current_method = stage - 1;
+    dtln_quantization_current_method = stage - 1;
 #endif
     const uint32_t start = osKernelGetSysTimerCount();
     uint32_t execute_ticks = 0;
