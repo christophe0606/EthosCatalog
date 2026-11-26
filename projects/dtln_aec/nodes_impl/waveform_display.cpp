@@ -13,6 +13,8 @@ namespace {
 constexpr unsigned width = DtlnLcd::width, height = DtlnLcd::height;
 constexpr unsigned pixelCount = width * height;
 constexpr unsigned left = 32, plotWidth = 736, plotHeight = 166;
+constexpr unsigned outputTop = 284, playbackCaptionTop = 459, playbackCaptionScale = 2;
+static_assert(playbackCaptionTop > outputTop + plotHeight && playbackCaptionTop + 7 * playbackCaptionScale <= height);
 constexpr unsigned samplesPerBin = DTLN_AUDIO_SAMPLE_RATE / 1000;
 constexpr unsigned binsPerHop = DTLN_AUDIO_HOP_SAMPLES / samplesPerBin;
 constexpr unsigned delayHops = DTLN_AUDIO_FRAME_SAMPLES / DTLN_AUDIO_HOP_SAMPLES - 1;
@@ -21,6 +23,7 @@ static_assert(DTLN_AUDIO_FRAME_SAMPLES % DTLN_AUDIO_HOP_SAMPLES == 0);
 
 constexpr uint16_t background = 0x0863, grid = 0x222a, zeroLine = 0x3b0f;
 constexpr uint16_t microphoneColor = 0x2e7f, outputColor = 0x67f2;
+constexpr uint16_t playbackCaptionColor = 0xffff;
 
 std::array<std::array<Peak, binsPerHop>, delayHops + 1> microphoneDelay{};
 unsigned microphoneSlot;
@@ -42,6 +45,24 @@ constexpr uint8_t letters[26][5] = {
     {0x07,0x08,0x70,0x08,0x07},{0x61,0x51,0x49,0x45,0x43}
 };
 
+constexpr char playbackCharacters[] = "-abdefklnortu";
+constexpr uint8_t playbackGlyphs[][5] = {
+    {0x08, 0x08, 0x08, 0x08, 0x08}, // -
+    {0x20, 0x54, 0x54, 0x54, 0x78}, // a
+    {0x7f, 0x48, 0x44, 0x44, 0x38}, // b
+    {0x38, 0x44, 0x44, 0x48, 0x7f}, // d
+    {0x38, 0x54, 0x54, 0x54, 0x18}, // e
+    {0x08, 0x7e, 0x09, 0x01, 0x02}, // f
+    {0x7f, 0x10, 0x28, 0x44, 0x40}, // k
+    {0x00, 0x41, 0x7f, 0x40, 0x00}, // l
+    {0x7c, 0x08, 0x04, 0x04, 0x78}, // n
+    {0x38, 0x44, 0x44, 0x44, 0x38}, // o
+    {0x7c, 0x08, 0x04, 0x04, 0x08}, // r
+    {0x04, 0x3f, 0x44, 0x40, 0x20}, // t
+    {0x3c, 0x40, 0x40, 0x20, 0x7c}, // u
+};
+static_assert(std::size(playbackGlyphs) + 1 == sizeof(playbackCharacters));
+
 uint16_t* column(uint16_t* frame, unsigned x)
 {
     return frame + x * height;
@@ -53,21 +74,37 @@ void drawSpan(uint16_t* pixels, unsigned y, unsigned length, uint16_t color)
     std::fill_n(pixels + height - y - length, length, color);
 }
 
-void caption(uint16_t* frame, const char* text, unsigned y, uint16_t color)
+void caption(uint16_t* frame, const char* text, unsigned y, uint16_t color, unsigned scale = 3)
 {
-    constexpr unsigned scale = 3;
     unsigned x = left;
     for (; *text; ++text, x += 6 * scale) {
-        if (*text < 'A' || *text > 'Z') continue;
+        const uint8_t* glyph;
+        if (*text >= 'A' && *text <= 'Z') {
+            glyph = letters[*text - 'A'];
+        } else {
+            const auto* match = std::strchr(playbackCharacters, *text);
+            if (!match) continue;
+            glyph = playbackGlyphs[match - playbackCharacters];
+        }
         for (unsigned c = 0; c < 5; ++c) {
             for (unsigned r = 0; r < 7; ++r) {
-                if (letters[*text - 'A'][c] & (1U << r)) {
+                if (glyph[c] & (1U << r)) {
                     for (unsigned dx = 0; dx < scale; ++dx) {
                         drawSpan(column(frame, x + c * scale + dx), y + r * scale, scale, color);
                     }
                 }
             }
         }
+    }
+}
+
+const char* playbackCaption(uint32_t flags)
+{
+    switch (flags & talkFlags) {
+    case farEndFlag: return "far-end";
+    case nearEndFlag: return "near-end";
+    case doubleTalkFlag: return "double talk";
+    default: return "";
     }
 }
 
@@ -102,7 +139,8 @@ void paint(uint16_t* frame, const History& history)
     caption(frame, "MICROPHONE", 23, microphoneColor);
     caption(frame, "ECHO CANCELLED", 253, outputColor);
     plot(frame, history, 54, &PairedPeak::microphone, scale, microphoneColor);
-    plot(frame, history, 284, &PairedPeak::output, scale, outputColor);
+    plot(frame, history, outputTop, &PairedPeak::output, scale, outputColor);
+    caption(frame, playbackCaption(history.playbackFlags), playbackCaptionTop, playbackCaptionColor, playbackCaptionScale);
 }
 
 Peak envelope(const float* samples)

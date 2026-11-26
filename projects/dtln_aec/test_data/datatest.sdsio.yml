@@ -8,10 +8,20 @@ sdsio:
       view: signal
     - name: Dtln_Out
       view: signal
+  flag-info:
+    - 0: far-end
+    - 1: near-end
+    - 2: double talk
   play:
     - step: far-end
       labels: [0]
+      setflags: 0x01
+      clearflags: 0x06
     - step: near-end
       labels: [1]
+      setflags: 0x02
+      clearflags: 0x05
     - step: double-talk
       labels: [2]
+      setflags: 0x04
+      clearflags: 0x03

@@ -11,3 +11,4 @@ sdsio:
   play:
     - step: continuous-pattern
       labels: [0]
+      clearflags: 0x07

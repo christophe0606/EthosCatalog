@@ -4,6 +4,7 @@
 #include "../../../common/nodes_impl/c/NodeSupport.hpp"
 #include "EventQueue.hpp"
 #include "IdentifiedNode.hpp"
+#include "sds.h"
 #include "waveform_display.hpp"
 
 template<typename MIC, int nm, typename OUT, int no>
@@ -50,6 +51,8 @@ public:
         bool lockError = false;
         const bool copied = snapshot_.lock(lockError, [&](bool shared, RawBuffer& buffer) {
             if (shared) return false;
+            // SDS sends the step flags asynchronously after opening the stream.
+            history_.playbackFlags = sdsFlags;
             std::memcpy(buffer.buffer(), &history_, sizeof(history_));
             return true;
         });
@@ -62,6 +65,7 @@ public:
 
     bool finish() {
         // The dataflow is finished. Move the final history into an event without copying its bytes.
+        history_.playbackFlags = sdsFlags;
         auto final = wrap(history_);
         return final && events_.sendAsync(kLowPriority, selectors[waveform], std::move(final));
     }

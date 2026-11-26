@@ -67,7 +67,10 @@ and start the server again to capture all three clips.
 
 The server plays the three configured clips automatically and exits after
 the last one. The LCD labels the aligned input and output traces
-`MICROPHONE` and `ECHO CANCELLED`. The server writes
+`MICROPHONE` and `ECHO CANCELLED`. Each recorded-speech step sets one SDS user
+flag and clears the other two. The matching caption appears below the output
+trace as `far-end` (bit 0), `near-end` (bit 1), or `double talk` (bit 2).
+The continuous synthetic pattern leaves the caption blank. The server writes
 `Dtln_Out.0.p.sds`, `Dtln_Out.1.p.sds`, and `Dtln_Out.2.p.sds` into
 `sds_run/`. Move any captures you want to keep before starting a replay.
 [ARM SDS USB transport](https://arm-software.github.io/SDS-Framework/main/sdsio.html#layer-sdsio_usb)
@@ -123,7 +126,8 @@ board over USB. The startup banner lists the interactive shortcuts.
 For each clip, `Playback` names the input sent to the board, and `Record`
 names the file receiving the echo-cancelled audio. The number in each file
 matches the playback step. The `Closed` lines mark the end of those streams.
-`0xB0000000` indicates the server is alive in playback mode with the Start
+In this example, captured before the caption flags were added, `0xB0000000`
+indicates the server is alive in playback mode with the Start
 flag set. `0x30000000` indicates Start has cleared while the server is still
 alive in playback mode. After shutdown, the launcher checks for three fresh
 captures and runs the Python comparison.

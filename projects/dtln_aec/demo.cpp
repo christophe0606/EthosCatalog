@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "dtln_app_config.hpp"
 #include "cmsis_os2.h"
+#include "nodes_impl/waveform_display.hpp"
 #include "sdsio_client.h"
 #include "stream_init.hpp"
 #include <algorithm>
@@ -78,7 +79,7 @@ int playClip(HardwareParams& hardware)
            static_cast<long>(hardware.stats->lcd_error));
     if (closeError != SDS_OK) return closeError;
     sdsState = SDS_STATE_STOP_DONE;
-    sdsFlagsModify(0, SDS_FLAG_START);
+    sdsFlagsModify(0, SDS_FLAG_START | dtln::waveform::talkFlags);
     return result;
 }
 } // namespace

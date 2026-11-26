@@ -5,7 +5,9 @@
 #include "stream_runtime_init.hpp"
 #include "DtlnMethod.hpp"
 #include "peripherals.hpp"
+#include "sds.h"
 #include "stream_init.hpp"
+#include "waveform_display.hpp"
 #include <array>
 #include <cassert>
 #include <complex>
@@ -91,6 +93,8 @@ static DtlnLcd lcd{{lcdFrames[0], lcdFrames[1]}};
 static DtlnSpeaker speaker{};
 static std::thread::id dataflowThread;
 static unsigned lcdPresents;
+static unsigned firstCaptionWidth, lastCaptionWidth;
+static uint32_t replayFlags;
 static unsigned speakerDrains;
 static unsigned audibleSpeakerDrains;
 static bool speakerMuted = true;
@@ -105,6 +109,7 @@ static sdsId_t recordHandle;
 static unsigned expectedClipsOnThread;
 static unsigned clipsOnThread;
 static unsigned clipsOnEventThread;
+volatile uint32_t sdsFlags;
 
 bool dtlnPlaybackStopping() { return sdsStopOnFirstRead && nextRecord != 0; }
 void dtlnRecordHopTicks(uint32_t) {}
@@ -119,6 +124,7 @@ extern "C" int32_t sdsRead(sdsId_t id, uint32_t* slot, void* output, uint32_t by
         cg_streamEvent.post(runtimeEventsOnFirstRead);
         for (const auto* buffer : fifoStorage) assert(buffer[0] == 0);
     }
+    if (nextRecord == 1) sdsFlags = sdsFlags | replayFlags; // Step flags arrive after the first hop.
     if (nextRecord == inputRecords.size()) return SDS_EOS;
     *slot = uint32_t(nextRecord * 8);
     std::memcpy(output, inputRecords[nextRecord++].data(), bytes);
@@ -139,7 +145,13 @@ extern "C" int lcd_present(uint16_t* frame) {
     assert(std::this_thread::get_id() != dataflowThread);
     assert(frame == lcd.frames[lcd.front ^ 1U]);
     assert(frame[0] == 0x0863);
+    lastCaptionWidth = 0;
+    for (unsigned x = 32; x < DtlnLcd::width; ++x) {
+        const auto* bottom = frame + x * DtlnLcd::height;
+        if (std::find(bottom, bottom + 29, 0xffff) != bottom + 29) lastCaptionWidth = x - 32 + 1;
+    }
     if (lcdPresents++ == 0) {
+        firstCaptionWidth = lastCaptionWidth;
         static thread_local unsigned clips;
         clipsOnEventThread = ++clips;
     }
@@ -192,7 +204,8 @@ extern "C" int dtln_forward(unsigned stage, const float* signal, const float* st
     if (inject_nan) output[0] = std::numeric_limits<float>::quiet_NaN();
     return 0;
 }
-static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
+static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false,
+                     uint32_t flags = 0, unsigned expectedCaptionWidth = 0) {
     calls[0] = calls[1] = 0;
     nextRecord = 0;
     // POSIX retains the event objects across runs. RTX allocates fresh flags on startup.
@@ -203,6 +216,8 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     for (auto* buffer : fifoStorage) buffer[0] = 0xa5;
     runtimeEventsOnFirstRead = runtimeEvents;
     sdsStopOnFirstRead = sdsStop;
+    sdsFlags = SDS_FLAG_START | SDS_FLAG_PLAYBACK;
+    replayFlags = flags;
     test_rtos::tick = 0;
     outputRecords.clear();
     speakerRecords.clear();
@@ -236,6 +251,7 @@ static void runGraph(uint32_t runtimeEvents = 0, bool sdsStop = false) {
     assert(speakerDrains == 1 && audibleSpeakerDrains == 1);
     assert(outputRecords.size() == inputRecords.size());
     assert(!stats.lcd_error && stats.lcd_frames == lcdPresents && lcdPresents >= (inputRecords.empty() ? 1 : 2));
+    assert(firstCaptionWidth == 0 && lastCaptionWidth == expectedCaptionWidth);
     assert(stats.stage1_calls == inputRecords.size() && stats.stage2_calls == inputRecords.size());
     // Unity mask, inverse FFT and one-quarter gain overlap-add to the input.
     for (size_t frame = 0; frame < outputRecords.size(); ++frame) {
@@ -281,7 +297,11 @@ int main(int argc, char** argv) {
     runGraph(STREAM_DONE_EVENT | STREAM_PAUSE_EVENT);
     runGraph(STREAM_PAUSE_EVENT, true);
     runGraph(0, true);
-    runGraph();
+    using namespace dtln::waveform;
+    runGraph(0, false, farEndFlag, 82);
+    runGraph(0, false, nearEndFlag, 94);
+    runGraph(0, false, doubleTalkFlag, 130);
+    runGraph(0, false, farEndFlag | nearEndFlag);
     for (int i = 1; i < argc; ++i) {
         loadReplay(argv[i]);
         runGraph();
