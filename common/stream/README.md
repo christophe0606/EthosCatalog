@@ -172,8 +172,15 @@ one tick between SDS transfer attempts while time remains.
 If the SDS retry deadline expires, `SDS_NO_DATA` maps to `CG_BUFFER_UNDERFLOW` and
 `SDS_NO_SPACE` maps to `CG_BUFFER_OVERFLOW`. Other transfer failures return
 `CG_BUFFER_ERROR`. End of stream returns `CG_STOP_SCHEDULER`.
-`lastSdsStatus()` reports the latest SDS API result. Connect a separate
-dataflow node to inspect samples.
+
+### Picture playback and recording
+
+`SdsPictureSource` and `SdsPictureSink` transfer pictures through CMSIS
+Stream events carrying a timeslot and a shared `BufferPtr`. The designs
+cover event ports, playback timer setup, timestamp validation, overflow
+handling, and buffer ownership.
+[Playback design](../nodes_impl/design/SdsPictureSource.md) ·
+[Recording design](../nodes_impl/design/SdsPictureSink.md)
 
 The host check generates a graph with the project's synchronous scheduler
 configuration, builds it against the installed SDS pack header, and uses

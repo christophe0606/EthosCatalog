@@ -22,3 +22,5 @@ from .OverlapAdd import OverlapAdd
 from .PreservingFFT import PreservingFFT
 from .SdsSource import SdsSource
 from .SdsSink import SdsSink
+from .SdsPictureSource import SdsPictureSource
+from .SdsPictureSink import SdsPictureSink

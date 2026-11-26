@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from cmsis_stream.cg.scheduler import CType, Graph, SINT16
-from common.nodes import SdsSink, SdsSource
+from common.nodes import SdsPictureSink, SdsPictureSource, SdsSink, SdsSource
 from common.stream_graph import mk_app
 
 
@@ -20,8 +20,11 @@ def run_test(args, sds_include):
     sample_type = CType(SINT16)
     replay = SdsSource("replay", sample_type, 2, "replayParams")
     record = SdsSink("record", sample_type, 4, "recordParams")
+    picture_replay = SdsPictureSource("picture_replay", "pictureReplayParams", identified=True)
+    picture_record = SdsPictureSink("picture_record", "pictureRecordParams", identified=True)
     graph = Graph()
     graph.connect(replay.o, record.i)
+    graph.connect(picture_replay["oev0"], picture_record["iev0"])
     schedule = mk_app(graph, output, {}, {})
     assert schedule.scheduleLength == 3
 

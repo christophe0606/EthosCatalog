@@ -2,7 +2,7 @@
 #pragma once
 
 #include "app_params.h"
-#include "SdsEndpoint.hpp"
+#include "SdsPictureEndpoint.hpp"
 
 #if defined(_MSC_VER)
 #define __PRETTY_FUNCTION__ __FUNCSIG__
@@ -12,3 +12,5 @@
 
 extern SdsSourceParams replayParams;
 extern SdsSinkParams recordParams;
+extern SdsPictureSourceParams pictureReplayParams;
+extern SdsPictureSinkParams pictureRecordParams;

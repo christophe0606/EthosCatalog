@@ -10,6 +10,12 @@ inline uint32_t wakeLatency;
 
 enum osStatus_t { osOK, osError };
 
+using osMemoryPoolId_t = void*;
+uint32_t osMemoryPoolGetBlockSize(osMemoryPoolId_t pool);
+uint32_t osMemoryPoolGetCapacity(osMemoryPoolId_t pool);
+void* osMemoryPoolAlloc(osMemoryPoolId_t pool, uint32_t timeout);
+osStatus_t osMemoryPoolFree(osMemoryPoolId_t pool, void* block);
+
 inline uint32_t osKernelGetTickCount() { return test_rtos::tick; }
 inline uint32_t osKernelGetTickFreq() { return test_rtos::tickFrequency; }
 inline uint32_t osKernelGetSysTimerCount() { return test_rtos::tick; }
