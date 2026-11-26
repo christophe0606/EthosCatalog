@@ -182,7 +182,7 @@ power. Double-talk error reduction compares the input and output error
 power relative to the known clean near-end signal. Near-end gain compares
 output RMS with clean-signal RMS, with 0 dB corresponding to the clean
 signal level. The per-repeat values and aligned WAVs are in
-`sds_run/synthetic/`. [Board measurements](../VALIDATION.md#usb-signal-processing-results)
+`sds_run/synthetic/`. [Board measurements](VALIDATION.md#usb-signal-processing-results)
 
 The check allows up to 2 dB difference in near-end gain from the original.
 Echo-only ERLE and double-talk error reduction must each be within 1 dB of

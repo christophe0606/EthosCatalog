@@ -50,7 +50,7 @@ if ($Synthetic) {
 foreach ($label in $labels) {
     $inputFile = Join-Path $inputDirectory "Dtln_In.$label.sds"
     if (-not (Test-Path -LiteralPath $inputFile -PathType Leaf)) {
-        throw "Missing $inputFile. Follow the input preparation steps in projects/dtln_aec/test_data/README.md."
+        throw "Missing $inputFile. Follow the input preparation steps in projects/dtln_aec/documentation/SDS_REPLAY.md."
     }
 }
 

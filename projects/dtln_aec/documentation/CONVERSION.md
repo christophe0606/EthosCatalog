@@ -2,8 +2,10 @@
 
 The two trained stages were reconstructed from the upstream float TFLite
 files at commit `9d24e128b4f409db18227b8babb343016625921f`. The upstream
-repository supplies the files under its MIT license. Its notice is preserved
-in `upstream/LICENSE`, and `upstream/provenance.json` records hashes and URLs.
+repository supplies the files under its MIT license. The provenance record
+contains the hashes and source URLs.
+[Upstream README](UPSTREAM_README.md) · [MIT license](../model/upstream/LICENSE) ·
+[Provenance record](../model/upstream/provenance.json)
 
 ## Runtime contract
 
@@ -51,7 +53,7 @@ stages' own recurrent states and feeds stage1 output directly to stage2.
 
 `conversion_metrics.json` and `network.yml` record these measurements.
 `heldout_metrics.json` measures the independent five-second pattern.
-The [USB validation](../VALIDATION.md#usb-signal-processing-results)
+The [USB validation](VALIDATION.md#usb-signal-processing-results)
 compares the longer continuous stream and recorded clips against the
 original TFLite model.
 

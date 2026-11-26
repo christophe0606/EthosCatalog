@@ -18,14 +18,14 @@ The earlier layout at `0x02400000` reported successful controller updates
 while the physical LCD was black. The SRAM0 measurements above include
 visual confirmation.
 
-[Manual startup order](test_data/README.md#run-the-usb-demo-manually)
+[Manual startup order](SDS_REPLAY.md#run-the-usb-demo-manually)
 
 ## USB signal processing results
 
 ReleaseSRAM build `b-15` and load `r-16` ran the corrected PTE with CRC
 `31C8406C`. The model quantizes the linear layers and keeps the LSTM
 state and nonlinearities in float32. Both stages passed the integer TOSA
-startup fixtures. [Conversion and calibration](model/CONVERSION.md#quantization-and-fidelity)
+startup fixtures. [Conversion and calibration](CONVERSION.md#quantization-and-fidelity)
 
 The continuous 30-second USB replay passed the signal regression checks
 with one uninterrupted recurrent state per stage. The original comparison
@@ -65,7 +65,7 @@ synthetic USB replay contained six successive five-second episodes in one
 stream. Both the board and the original 128-unit float TFLite model carried
 their recurrent state across the entire replay. The comparison aligned the
 waveforms and measured the center 500 ms of each one-second section.
-[Reproduction steps](test_data/README.md#measure-echo-cancellation-with-a-known-clean-signal)
+[Reproduction steps](SDS_REPLAY.md#measure-echo-cancellation-with-a-known-clean-signal)
 
 | Repeat | Echo-only ERLE, board / float (dB) | Double-talk error reduction, board / float (dB) | Near-end gain, board / float (dB) |
 | --- | ---: | ---: | ---: |
@@ -101,7 +101,7 @@ comes from the synthetic test.
 
 ReleaseSRAM build `b-11` and load `d-12` passed on Alif DevKit-E8.
 This report records the earlier synthetic replay firmware and its board
-measurements. The current USB replay procedure is in the [SDS test guide](test_data/README.md).
+measurements. The current USB replay procedure is in the [SDS test guide](SDS_REPLAY.md).
 
 ## Graph and bounded storage
 
@@ -202,7 +202,7 @@ and passed 15 complete case suites. The maximum processing interval was
 825,263 ticks at 400 MHz, or 2.0631575 ms. Deadline misses, late source
 starts, nonfinite samples, case failures and pipeline error were all zero.
 The UART trace continued through 17 passing case suites.
-[Final UART capture](model/benchmark_uart_sram_release.txt)
+[Final UART capture](../model/benchmark_uart_sram_release.txt)
 
 | Synthetic case | Mixed input RMS | Enhanced RMS | RMS error against clean |
 | --- | ---: | ---: | ---: |
@@ -224,4 +224,4 @@ whole recurrent trajectory.
 The board result establishes deterministic independent test episodes.
 Long continuous recurrence with the integer model needs separate
 validation before a streamed-audio deployment.
-[Continuous-state UART capture](model/benchmark_uart_sram_continuous.txt)
+[Continuous-state UART capture](../model/benchmark_uart_sram_continuous.txt)

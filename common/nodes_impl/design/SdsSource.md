@@ -20,7 +20,7 @@ starts with its own first timeslot and release deadline. The record format
 and rate come from the initialized node. For the DTLN playlist, the
 controller reopens both streams and rebinds the nodes while paused, then
 resets graph state before the next pattern fires.
-[DTLN pattern transition](../../../projects/dtln_aec/SDS_TESTS.md#reset-state-and-resume)
+[DTLN pattern transition](../../../projects/dtln_aec/documentation/SDS_TESTS.md#reset-state-and-resume)
 
 The source gives the first read one record period and starts the playback clock
 when the first record is published. Each subsequent firing reads one record and

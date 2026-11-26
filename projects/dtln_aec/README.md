@@ -15,7 +15,7 @@ shows the microphone and echo-cancelled waveforms together.
 Make sure `uv` is on your PATH and the **ARM SDS 3.1.0** pack is installed
 in CMSIS Solution. Before the first run, download the test WAVs and generate
 the SDS replay files from the repository root. The preparation step uses
-NumPy and TensorFlow 2.20. [Test clip setup](test_data/README.md#prepare-the-inputs)
+NumPy and TensorFlow 2.20. [Test clip setup](documentation/SDS_REPLAY.md#prepare-the-inputs)
 
 ```powershell
 .venv/Scripts/python.exe projects/dtln_aec/test_data/download_audio_samples.py
@@ -55,18 +55,28 @@ The speaker starts once four output hops (32 ms of audio) are ready. The
 speaker queue holds up to 96 ms, including the block being played, plus one
 8 ms hop waiting to form the next block. The hardware FIFO adds about 1 ms.
 
-[USB checks](test_data/README.md#run-the-usb-demo-manually) · [Example test output and metrics](test_data/README.md#example-test-output)
+[USB checks](documentation/SDS_REPLAY.md#run-the-usb-demo-manually) · [Example test output and metrics](documentation/SDS_REPLAY.md#example-test-output)
 
 ## Model programming
 
 Program the model into OSPI once on a fresh board or whenever the model
 changes. The `ReleaseSRAM` build copies it into SRAM at startup for real-time
-processing. [Fresh-board setup](RESUME_USB.md#first-time-board-setup)
+processing. [Fresh-board setup](documentation/BENCHMARK.md#run-and-record)
 
 ## Validation
 
 In the LCD validation run before speaker playback was added, all 7,837
 measured hops met the 8 ms deadline. The slowest took 4.456 ms of processing
-time. [Board and signal processing results](VALIDATION.md)
+time. [Board and signal processing results](documentation/VALIDATION.md)
 
-[Conversion report](model/CONVERSION.md) · [CPU operator overrides](kernels/README.md) · [Benchmarks](model/BENCHMARK.md) · [Application graph](generated/app.pdf)
+## Application and model documentation
+
+- [Application structure](documentation/STRUCTURE.md) covers boot, the
+  generated graph and how `app_params` connects the nodes to the board.
+  [Application graph](generated/app.pdf)
+- [Conversion report](documentation/CONVERSION.md) explains how the upstream
+  models were converted and quantized.
+- [CPU operator overrides](documentation/CPU_KERNELS.md) describes the
+  Cortex-M55 kernels used by the real-time build.
+- [Benchmarks](documentation/BENCHMARK.md) records the per-method timings and
+  the steps to reproduce them.

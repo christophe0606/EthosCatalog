@@ -17,7 +17,7 @@ operators in their CPU partitions. [Partition summary](../model/partition_summar
 The wrappers check shapes, types, layouts, and other requirements before
 taking a fast path. Cases outside those requirements call the original
 ExecuTorch pack kernel. CPU operators outside this table also use the pack's
-registry. [Operator registration](normalization.cpp) · [Quantization guards](quantization.cpp) · [Model definition](../model/model.py)
+registry. [Operator registration](../kernels/normalization.cpp) · [Quantization guards](../kernels/quantization.cpp) · [Model definition](../model/model.py)
 
 ## Where the overrides are enabled
 
@@ -32,7 +32,7 @@ The overrides address the **8 ms hop budget**. On the earlier PTE staged in
 SRAM, the two model adapter medians summed to **11.69 ms** with the pack kernels
 and **1.74 ms** with the guarded overrides. The measurements used the same
 PTE and Vela partitioning. The current PTE's recorded ReleaseSRAM USB replay
-peaked at **4.505 ms per hop** for the complete graph. [DTLN benchmark](../model/BENCHMARK.md)
+peaked at **4.505 ms per hop** for the complete graph. [DTLN benchmark](BENCHMARK.md)
 
 ## Where signal processing runs
 

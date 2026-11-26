@@ -19,6 +19,7 @@
       "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/LICENSE"
     },
     "README.md": {
+      "local_path": "../../documentation/UPSTREAM_README.md",
       "sha256": "54ccc6bc7761f47a8b2ca68bc846f44b0009593715fdde90501147c2ebeaef37",
       "bytes": 2446,
       "url": "https://github.com/breizhn/DTLN-aec/blob/9d24e128b4f409db18227b8babb343016625921f/README.md"

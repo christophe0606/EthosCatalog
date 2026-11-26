@@ -21,7 +21,7 @@ source reports `SDS_EOS` at the start of the next iteration, the sink has
 already handed every output record to SDS. The controller then closes
 `Dtln_Out` to flush those records to the capture file. Waveform events run
 on a separate thread and carry only LCD updates.
-[Graph definition](app.py) · [Generated schedule](generated/scheduler_app.cpp#L96) · [Clip completion](#finish-the-clip-and-pause)
+[Graph definition](../app.py) · [Generated schedule](../generated/scheduler_app.cpp#L96) · [Clip completion](#finish-the-clip-and-pause)
 
 The test input includes 384 leading zero samples and enough trailing zeros
 to complete the last hop and flush DTLN's 384-sample algorithmic delay. The
@@ -31,7 +31,7 @@ length against the float reference. The capture reader first requires the
 exact padded record count, full payloads, and consecutive 8 ms timeslots.
 The saved far-end, near-end, and double-talk captures contain 1,365, 1,376,
 and 1,340 records respectively. A missing final record or a partial final
-payload produces exit code `1`. [Fixture preparation and capture comparison](test_data/sds_demo.py)
+payload produces exit code `1`. [Fixture preparation and capture comparison](../test_data/sds_demo.py)
 
 ## Transition between test patterns
 
@@ -39,9 +39,9 @@ The automatic `test_demo.ps1` playlist runs three clips in one boot. It
 configures one SDSIO playback step per pattern. The USB connection stays
 open, and the graph, event queue, memory pools, and both runtime threads
 stay allocated. The controller closes and reopens the two named data
-streams for every step. [Test launcher](test_demo.ps1) ·
-[Playlist configuration](test_data/datatest.sdsio.yml) ·
-[Example playlist log](test_data/README.md#example-test-output)
+streams for every step. [Test launcher](../test_demo.ps1) ·
+[Playlist configuration](../test_data/datatest.sdsio.yml) ·
+[Example playlist log](SDS_REPLAY.md#example-test-output)
 
 ### SDSIO handshake
 
@@ -71,8 +71,8 @@ assigns it in the `OPEN` response, and subsequent `READ`, `WRITE`, and
 `CLOSE` messages use that ID. The board passes the `sdsId_t` handles
 returned by `sdsOpen()` to `bindStream()` on the existing source and sink.
 A board-side handle may reuse the same address after a close. The nodes
-are rebound before the scheduler starts or resumes. [DTLN SDS controller](demo.cpp#L22) ·
-[Node binding](stream_init.cpp#L84) · [SDS pack version](dtln_aec.cproject.yml#L7)
+are rebound before the scheduler starts or resumes. [DTLN SDS controller](../demo.cpp#L22) ·
+[Node binding](../stream_init.cpp#L84) · [SDS pack version](../dtln_aec.cproject.yml#L7)
 
 SDSIO can also play multiple labels in a single step, with one open input
 stream and EOF after the last label. Testing each label independently
@@ -156,7 +156,7 @@ sequenceDiagram
    completion through the [SDSIO handshake](#sdsio-handshake). Once the
    output stream closes successfully, the capture is ready to compare.
 
-[DTLN clip completion](stream_init.cpp#L112) · [Runtime EOF pause](../../thirdparty/CMSIS-Stream/platform/cmsis_rtos_runtime/stream_runtime_init.cpp#L185) · [SDS close handshake](demo.cpp#L62)
+[DTLN clip completion](../stream_init.cpp#L112) · [Runtime EOF pause](../../../thirdparty/CMSIS-Stream/platform/cmsis_rtos_runtime/stream_runtime_init.cpp#L185) · [SDS close handshake](../demo.cpp#L62)
 
 ### Reset state and resume
 
@@ -189,12 +189,12 @@ events before execution starts. On the first clip, DTLN allocates the
 runtime and constructs the graph, resets node and FIFO state, and invokes
 the resume hooks before calling `stream_start_threads()`. Each node can
 track its own first activation if it needs to distinguish it from resume.
-[C interfaces](../../common/stream/cstream_node.h) · [C++ adapter](../../common/stream/IdentifiedNode.hpp) · [Runtime resume](../../thirdparty/CMSIS-Stream/platform/cmsis_rtos_runtime/stream_runtime_init.cpp#L352)
+[C interfaces](../../../common/stream/cstream_node.h) · [C++ adapter](../../../common/stream/IdentifiedNode.hpp) · [Runtime resume](../../../thirdparty/CMSIS-Stream/platform/cmsis_rtos_runtime/stream_runtime_init.cpp#L352)
 
 The host scheduler test replays the three SDS input clips and an empty
 clip. It checks that both workers are reused, the SDS handles are rebound,
 and FIFO and processing state are reset at the clip boundary.
-[Host scheduler test](../../tests/test_dtln_stream.cpp)
+[Host scheduler test](../../../tests/test_dtln_stream.cpp)
 
 ### End the session or reset the board
 
@@ -204,13 +204,13 @@ scheduler, event queue, and runtime memory. On this path the speaker is
 muted and any queued samples drain under mute. If the final LCD snapshot or
 marker fails to queue, or the marker times out, DTLN records an LCD error
 and takes this teardown path. The sink has already handed the last audio
-record to SDS in that case. [DTLN lifecycle](stream_init.cpp#L211)
+record to SDS in that case. [DTLN lifecycle](../stream_init.cpp#L211)
 
 For an independent test that needs a fresh boot, use `T` or `t` in SDSIO
 Server to set `SDS_FLAG_RESET`. Request it after both streams close and
 `START` clears, then wait for the board to reconnect. A reset requested
 during playback aborts the scheduler at a node boundary and can leave a
-short capture. [Reset handling](demo.cpp#L113)
+short capture. [Reset handling](../demo.cpp#L113)
 
 ## Adapting this test to another graph
 

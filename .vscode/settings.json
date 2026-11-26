@@ -13,5 +13,6 @@
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/out/dtln_aec/DevKit-E8/ReleaseSRAM"
     ],
-    "cmake.sourceDirectory": "C:/Users/chrfav01/benchresults/EthosCatalog/tmp/DevKit-E8/KWS_Release"
+    "cmake.sourceDirectory": "C:/Users/chrfav01/benchresults/EthosCatalog/tmp/DevKit-E8/KWS_Release",
+    "cmsis-sds.sdsio.configFile": "projects/dtln_aec/test_data/datatest.sdsio.yml"
 }

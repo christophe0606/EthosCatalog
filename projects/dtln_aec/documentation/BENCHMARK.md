@@ -11,7 +11,7 @@ method medians. Both methods passed the warm-state integer TOSA fixtures.
 
 The complete graph's worst hop was 4.505 ms in the dedicated USB replays.
 The image uses 738,384 bytes of MRAM and 2,534,896 bytes of SRAM0.
-[Current per-method benchmark](benchmark.yml) · [USB signal validation](../VALIDATION.md#usb-signal-processing-results)
+[Current per-method benchmark](../model/benchmark.yml) · [USB signal validation](VALIDATION.md#usb-signal-processing-results)
 
 ## Previous model
 
@@ -47,7 +47,7 @@ respectively and valid PMU samples. Both failed the pre-Vela fixture limits.
 The startup check stopped the demo before streaming. The full-adapter
 times already exceed the shared 8 ms hop budget. The link placed 792,592
 bytes in SRAM0 including pools, with a 595,504-byte MRAM image.
-[Initial UART capture](benchmark_uart_ospi_initial.txt)
+[Initial UART capture](../model/benchmark_uart_ospi_initial.txt)
 
 ## Initial SRAM-staged measurements
 
@@ -66,7 +66,7 @@ integer TOSA reference across both methods. This isolated the discrepancy
 to the comparison reference. The initial SRAM method sum was 11.69 ms,
 above the 8 ms hop interval before DSP. Follow-up ReleaseSRAM testing
 uses the existing guarded CPU operator overrides from MIDI-DDSP.
-[Initial SRAM UART capture](benchmark_uart_sram_initial.txt)
+[Initial SRAM UART capture](../model/benchmark_uart_sram_initial.txt)
 
 ## Verified ReleaseSRAM measurements
 
@@ -88,7 +88,7 @@ SRAM0 bytes including the cached PTE and reserved pools.
 The complete fake pipeline's measured maximum was 2.0631575 ms across
 9,640 completed hops. The separate streaming record includes both methods,
 DSP, synthetic sample generation and sink checks. It excludes the source
-sleep and serial reporting. [Final UART capture](benchmark_uart_sram_release.txt)
+sleep and serial reporting. [Final UART capture](../model/benchmark_uart_sram_release.txt)
 
 ## Harness
 
@@ -154,6 +154,6 @@ They do not represent the combined regions of both stage2 delegates.
    `scripts/validate_benchmarks.py` after creating the measured record.
 
 Vela estimates are preserved in `vela_report.txt`. The observed method
-measurements and results are recorded in [benchmark.yml](benchmark.yml).
+measurements and results are recorded in [benchmark.yml](../model/benchmark.yml).
 
 [OSPI programming procedure](../../../documentation/alif-e8-flashing.md#program-an-ospi-model)

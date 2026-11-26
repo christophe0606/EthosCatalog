@@ -32,7 +32,7 @@ next capture while the scheduler is stopped or paused. This replaces the
 handle and resets `lastSdsStatus()` to `SDS_OK`. The source's
 `bindStream()` clears the shared timing, and the next source record
 initializes it for the new pattern.
-[DTLN pattern transition](../../../projects/dtln_aec/SDS_TESTS.md#reset-state-and-resume)
+[DTLN pattern transition](../../../projects/dtln_aec/documentation/SDS_TESTS.md#reset-state-and-resume)
 
 In DTLN the input is one mono hop of 128 floats. The graph also connects the
 processed hop to dedicated LCD and speaker nodes. Host tests check the timeslot
