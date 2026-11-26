@@ -4,6 +4,7 @@
 #include "RTE_Components.h"
 #include CMSIS_device_header
 #include "peripherals.hpp"
+#include <cstring>
 
 namespace {
 alignas(32) uint16_t lcdFrames[2][LCD_PIXELS] __attribute__((section(".bss.lcd_frame_buf")));
@@ -17,7 +18,10 @@ StreamStats stream_stats;
 int hardware_params_init(HardwareParams *params)
 {
     if (!params) return -500;
-    lcd.status = lcd_init_display(lcd.frames[lcd.front]);
+    auto* initialFrame = lcd.frames[lcd.front];
+    // Startup leaves SRAM0 uninitialized. Scan out black until the first waveform.
+    std::memset(initialFrame, 0, sizeof(lcdFrames[0]));
+    lcd.status = lcd_init_display(initialFrame);
     *params = {&stream_stats, &lcd, nullptr};
     return 0;
 }
