@@ -46,22 +46,21 @@ target set, covering the existing Debug, Release and OSPI ProgramModel sets.
 
 ## Environment and build order
 
-An unfinished port retained outside the catalog can explicitly declare this
-README header policy:
+A project that requires locally generated model files can declare this CI
+policy in its README header.
 
 ```yaml
-catalog: false
 ci:
   mode: metadata_only
-  reason: A concrete explanation referring to the port checkpoint.
+  reason: A concrete explanation referring to the project checkpoint.
 ```
 
 This requires a nonempty project `CHECKPOINT.md`. CI continues checking source
 structure, Python syntax/imports, schemas, model paths, linker scripts and target
 sets. Generated Stream files, model binaries, binary asset layout, generation and firmware
-builds are reported as **SKIP**, with the stated reason. They are not certified
-by a metadata-only pass. Merely setting `catalog: false` does not skip builds.
-Remove the explicit policy when a port is accepted and reproducible in CI.
+builds are reported as **SKIP**, with the stated reason. The `catalog` field
+controls visibility in the project catalog independently of CI build coverage.
+Remove the metadata-only policy when CI can reproduce the firmware build.
 
 The Arm setup follows CMSIS-DSP's `runtest.yaml`: Ubuntu 22.04, Python 3.12,
 system dependencies, the CMSIS vcpkg action and Arm license activation.

@@ -1,10 +1,10 @@
 ---
 category: audio
-description: EnCodec neural audio reconstruction on the Alif DevKit-E8.
-catalog: false
+description: 6 kb/s EnCodec with independently real-time encoding and decoding on DevKit-E8, plus an SDS USB reconstruction demo.
+catalog: true
 ci:
   mode: metadata_only
-  reason: The official checkpoint is supplied locally. CI does not have the checkpoint-derived model cache.
+  reason: CI does not have the model cache generated locally from the official checkpoint. See CHECKPOINT.md for board validation and reproduction.
 ---
 
 # EnCodec on DevKit-E8
@@ -19,6 +19,9 @@ PCM block. Each direction carries its own state across blocks. The demo
 connects the two Stream nodes through a codes FIFO on one E8.
 
 ## Reproduce the model build
+
+GitHub CI validates project metadata. The firmware build uses a model cache
+generated locally from the official checkpoint.
 
 The port uses the upstream 6 kb/s configuration and carries the codec
 state across blocks of 2,880 samples, or 120 ms. Download the official 24 kHz

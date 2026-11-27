@@ -157,18 +157,19 @@ class CIProjects(unittest.TestCase):
         self.assertIn("linker.sct.src", self.errors())
         self.assertIn("SKIP", self.report.markdown()[0].read_text())
 
-    def test_metadata_only_requires_exclusion_checkpoint_and_valid_reason(self):
+    def test_metadata_only_requires_checkpoint_and_valid_reason(self):
         directory = self.project()
         self.metadata_only(directory)
         readme = directory / "README.md"
         original = readme.read_text()
-        for invalid in (original.replace("catalog: false", "catalog: true"),
-                        original.replace("mode: metadata_only", "mode: disabled"),
+        for invalid in (original.replace("mode: metadata_only", "mode: disabled"),
                         original.replace("reason: Hardware feasibility failed; see CHECKPOINT.md.", "reason: ''")):
             readme.write_text(invalid)
             with self.assertRaises(ValueError):
                 ci.build_exclusion(self.root, "demo")
-        readme.write_text(original)
+        readme.write_text(original.replace("catalog: false", "catalog: true"))
+        self.assertEqual(ci.build_exclusion(self.root, "demo"),
+                         "Hardware feasibility failed; see CHECKPOINT.md.")
         (directory / "CHECKPOINT.md").unlink()
         with self.assertRaisesRegex(ValueError, "CHECKPOINT"):
             ci.build_exclusion(self.root, "demo")

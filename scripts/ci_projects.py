@@ -173,7 +173,7 @@ def build_targets(config, cproject):
 
 
 def build_exclusion(root, name):
-    """An explicit experimental checkpoint can retain source without CI binaries."""
+    """Return the documented reason to limit CI to metadata checks."""
     from update_catalog import _read_header
     project = root / "projects" / name
     header = _read_header(project / "README.md")
@@ -184,8 +184,6 @@ def build_exclusion(root, name):
             or policy["mode"] != "metadata_only"
             or not isinstance(policy["reason"], str) or not policy["reason"].strip()):
         raise ValueError("README ci must contain mode: metadata_only and a nonempty reason")
-    if header.get("catalog") is not False:
-        raise ValueError("Metadata-only CI requires catalog: false")
     checkpoint = project / "CHECKPOINT.md"
     if (not checkpoint.resolve().is_relative_to(project.resolve())
             or not checkpoint.is_file() or not checkpoint.read_text(encoding="utf-8").strip()):
