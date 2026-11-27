@@ -35,9 +35,10 @@ For each affected project, `scripts/ci_projects.py` checks:
 6. `app.py` parses as Python and explicitly imports `cmsis_stream` or a submodule.
 7. The cproject declares an existing linker script within its project directory.
 8. The project's Stream integration and generated files exist: `stream_init.cpp`
-   and `.hpp`, `hardware_params.cpp` and `.h`, `stream_types.h`, `datatypes.h`,
-   the RTE Stream configuration/shims, generated scheduler, parameters, node
-   includes, sizes and settings.
+   and `.hpp`, `hardware_params.h`, `stream_types.h`, `datatypes.h`, the RTE
+   Stream configuration/shims, generated scheduler, parameters, node includes,
+   sizes and settings. The firmware build checks the hardware implementation
+   in the source files declared by the cproject.
 
 The cproject must also appear exactly once in `EthosCatalog.csolution.yml`, with
 at least one target set that selects only that project. CI builds every such
@@ -93,11 +94,9 @@ A generation failure skips that project's builds. Other projects still get their
 own generation attempt. A build failure does not stop the remaining target sets
 or projects. Metadata errors are collected independently of build results.
 
-The checked-in projects currently select AC6 and declare AC6 scatter files.
-The CI command overrides the compiler selection, but this change does not migrate
-startup, linker scripts or runtime support. CLANG incompatibilities fail the
-build check and appear in the report. A CI build checks compilation and linking;
-it does not run firmware on a board or simulator.
+The solution defaults to AC6. CI selects CLANG and uses the projects' LLVM
+linker scripts. Compiler and linker failures appear in the report. The job
+validates compilation and linking on the hosted runner.
 
 ## Downloading errors
 

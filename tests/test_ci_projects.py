@@ -198,7 +198,7 @@ class CIProjects(unittest.TestCase):
         ci.check_project(self.root, "demo", self.config, self.report)
         errors = self.errors()
         for text in ("nodes/", "stream_init.cpp", "hardware_params.h", "YAML header", "import cmsis_stream",
-                     "graph.pt2", "weights.safetensors", "required property", "linker.sct.src"):
+                     "graph.pt2", "weights.safetensors", "$.benchmarks", "linker.sct.src"):
             self.assertIn(text, errors)
         output, failed = self.report.markdown()
         self.assertTrue(failed)

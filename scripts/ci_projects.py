@@ -20,7 +20,7 @@ SHARED_DIRS = {"common", "board", "thirdparty", "scripts", "schema", ".github", 
 SHARED_FILES = {SOLUTION, "cdefault.yml", "vcpkg-configuration.json", ".gitmodules", "AGENTS.md"}
 DIRECTORIES = ("generated", "model", "nodes", "nodes_impl", "RTE")
 STREAM_FILES = (
-    "stream_init.cpp", "stream_init.hpp", "hardware_params.cpp", "hardware_params.h",
+    "stream_init.cpp", "stream_init.hpp", "hardware_params.h",
     "stream_types.h", "datatypes.h", "RTE/CMSIS/app_config.hpp",
     "RTE/CMSIS/stream_init.cpp", "RTE/CMSIS/stream_init.hpp",
     "RTE/CMSIS/stream_runtime_config.hpp", "generated/scheduler_app.cpp",
