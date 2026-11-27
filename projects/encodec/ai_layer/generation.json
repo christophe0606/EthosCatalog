@@ -1,0 +1,83 @@
+{
+  "project": "projects/encodec/encodec.cproject.yml",
+  "config_sha256": "a4b637cb4f67a5597616f5dad17da04cf223a984d7a296e96ed542549109cb5f",
+  "pte_sha256": "26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3",
+  "method_caches": {
+    "encode_front": {
+      "graph_sha256": "3170f6082cb1bdc41c13f4c95aee5e67c0657584591d8f97b5708335ba2d39e0",
+      "safetensors_sha256": "ab15e40e11e136b53bfd94668987be159198a46fa7c1f6d6ffd7d2ae0ce1be5e"
+    },
+    "encode_hidden0": {
+      "graph_sha256": "5421b53991f2f736d946afd082e436d81c6a7045999ae4f7dd57df0313d9a625",
+      "safetensors_sha256": "4a78d8e25a5af3102d515f345976318d6eafa1016e0a9b2d35fcd070e42a50a5"
+    },
+    "encode_project1": {
+      "graph_sha256": "971a56fc76bc53bca82ed85253fa507d3b17f1e82933a1acbd05f830cb7bb234",
+      "safetensors_sha256": "e0cb835ebff97e3d00c043ee307d51c1c9adaafda9466f8d2d8b828225d0f594"
+    },
+    "encode_hidden1": {
+      "graph_sha256": "d3cff19dcc62926acfb15c6f9007c359c87f20d89c863e92cbe5be52864c3ead",
+      "safetensors_sha256": "cfa340b1a2f3453eac7bb587520947b147239617555203ab9f4f025a10a0ceeb"
+    },
+    "encode_back": {
+      "graph_sha256": "2ef3b87e9849cfe54b8e161a1903facfd34bb1a08094a4c007bd99139048c506",
+      "safetensors_sha256": "f482c8cd5656daf7a877287367b4f644f336f75753a131a5ff968722cacc9113"
+    },
+    "decode_front": {
+      "graph_sha256": "4ceb60f6c7ab9a6140b6fd62f19eaa9d0cc4ca3514ce52a156b1b6e2b00f2759",
+      "safetensors_sha256": "145b653bd46ea5624d892cb8c53c697b619973dde5a33f28690b4aebf1ac5103"
+    },
+    "decode_hidden0": {
+      "graph_sha256": "5bc71dde1da834ac9b070cbcee558fbf9937188e6dbb44371b1419a6bf0ffe7b",
+      "safetensors_sha256": "0ebcb2c32379eee075cfb9230a9ba5c0d33c225464b2c0fd20458a638d5cd909"
+    },
+    "decode_project1": {
+      "graph_sha256": "06bfa0ce7c7a51b6aeec6d9834297865ab2bff2d11e4ce47b55538f63e2f81f7",
+      "safetensors_sha256": "2b6128fb54877ea9fcc3efa2184bbf5a35cb7353612275909b2263db84f4b78d"
+    },
+    "decode_hidden1": {
+      "graph_sha256": "2ec8354bb1a03756f6d827b3df6d8b5084b60d7b1ea8901b30f2b8a633d81caa",
+      "safetensors_sha256": "c90951cd87a11d225a451dc1ebc61d76cf14d366e672dfc351e815cd572881ef"
+    },
+    "decode_back": {
+      "graph_sha256": "b432a169c662dfce2cec8f324c15ec03800f57331dee40396ce5313b998822e2",
+      "safetensors_sha256": "8bbef84a945c0b71823e67201697931ea885687690442747e2d169926bd03cf4"
+    }
+  },
+  "assets": {},
+  "flash_ospi": true,
+  "vela": {
+    "ini": "../../.cmsis/ensemble_vela.ini",
+    "system_config": "Ethos_U85_SRAM_OSPI",
+    "memory_mode": "Shared_Sram",
+    "optimise": "Size"
+  },
+  "extract_delegate_segments": true,
+  "delegates": 27,
+  "operators": [
+    "Portable add",
+    "Portable argmax",
+    "Portable cat",
+    "Portable clone_dim_order",
+    "Portable elu",
+    "Portable embedding",
+    "Portable flip",
+    "Portable full_like",
+    "Portable mul",
+    "Portable neg",
+    "Portable permute_copy",
+    "Portable pow",
+    "Portable sigmoid",
+    "Portable slice_copy",
+    "Portable split_with_sizes_copy",
+    "Portable sub",
+    "Portable sum",
+    "Portable tanh",
+    "Portable to_dim_order_copy",
+    "Portable unsqueeze_copy",
+    "Portable where",
+    "Quantized dequantize",
+    "Quantized quantize"
+  ],
+  "pte_bytes": 19720672
+}

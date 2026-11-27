@@ -1,0 +1,679 @@
+{
+  "recordedAt": "2026-11-27T08:53:47Z",
+  "context": "encodec.ReleaseDemo+DevKit-E8",
+  "buildJob": "b-28",
+  "loadJob": "d-29",
+  "modelCRC32": "0xb8d32050",
+  "modelSha256": "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f",
+  "firmwareSha256": "eee040742ef11d886af35e88867bc676fa54c56af1b14e320fa51a86c20a897b",
+  "capture": {
+    "sampleRate": 24000,
+    "samples": 72000,
+    "records": 25,
+    "samplesPerRecord": 2880,
+    "alignmentSamples": 0,
+    "inputSha256": "73364961558b040ba9b8b565f2dbf9dbcf86def976686afbc93a36a0f60b282b",
+    "outputSha256": "848558a4d48be060d32cedfbbae91d960f0bc0f6c3550d3ff18d729122637de9",
+    "versusInput": {
+      "mae": 0.026066953,
+      "peak": 0.26061779,
+      "rmse": 0.041219185,
+      "snrDb": 10.03
+    },
+    "versusFloatCodec": {
+      "mae": 0.015568891212862358,
+      "peak": 0.2223941683769226,
+      "rmse": 0.026502029198160318,
+      "snrDb": 13.055630244121792
+    },
+    "hostServerWallSeconds": 20.7365279
+  },
+  "board": {
+    "completed_blocks": 25,
+    "codec_blocks": 25,
+    "codec_ticks_max": 294212197,
+    "codec_deadline_misses": 25,
+    "replay_deadline_misses": 25,
+    "lcd_frames": 26,
+    "waveform_drops": 0,
+    "timer_hz": 400000000,
+    "codec_budget_ticks": 48000000,
+    "codec_error": 0,
+    "stream_error": 0,
+    "replay_status": -7,
+    "record_status": 11520,
+    "lcd_error": 0,
+    "waveform_drain_error": 0,
+    "transport_error": 0,
+    "display_scanlines": 3755,
+    "display_errors": 0
+  },
+  "lcd": {
+    "userObservedWaveform": true,
+    "orientation": "landscape"
+  },
+  "separatedRun": {
+    "buildJob": "b-31",
+    "loadJob": "d-32",
+    "firmwareSha256": "2e6e1b0aa3874e6fcabe6ce12c7ff48e59420631a948efc32531676b132434ee",
+    "captureSha256": "848558a4d48be060d32cedfbbae91d960f0bc0f6c3550d3ff18d729122637de9",
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 151974947,
+      "decoder_ticks_max": 144672358,
+      "codec_ticks_max": 294783406,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0
+    }
+  },
+  "restoredRun": {
+    "buildJob": "b-40",
+    "loadJob": "d-41",
+    "modelCRC32": "0xb8d32050",
+    "firmwareSha256": "46b0301ee3dce95449ff7f7b75f7e2716438bd83ab9e332ef07098782fcfb9a4",
+    "captureSha256": "848558a4d48be060d32cedfbbae91d960f0bc0f6c3550d3ff18d729122637de9",
+    "hostServerWallSeconds": 20.8053566,
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 152300378,
+      "decoder_ticks_max": 144323215,
+      "codec_ticks_max": 294741079,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "display_errors": 0
+    },
+    "encodeBack": {
+      "calls": 25,
+      "lastTicks": 39988379,
+      "maxTicks": 40021931,
+      "npuCalls": 10,
+      "npuOverflow": 0,
+      "weightsAddress": 3234650016,
+      "npuCycles": 5390741
+    }
+  },
+  "optimizedRun": {
+    "recordedAt": "2026-11-27T09:46:21Z",
+    "buildJob": "b-50",
+    "loadJob": "d-51",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0xb8d32050",
+    "hostServerWallSeconds": 12.5516514,
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 79941788,
+      "decoder_ticks_max": 76233417,
+      "codec_ticks_max": 154220849,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "display_errors": 0
+    },
+    "methods": [
+      {
+        "method": "encode_front",
+        "calls": 25,
+        "lastTicks": 49673700,
+        "maxTicks": 52263295,
+        "npuCalls": 14,
+        "npuOverflow": 0,
+        "weightsAddress": 3237069744,
+        "npuCycles": 20276707
+      },
+      {
+        "method": "encode_hidden0",
+        "calls": 225,
+        "lastTicks": 698272,
+        "maxTicks": 705123,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 37749168,
+        "npuCycles": 139146
+      },
+      {
+        "method": "encode_project1",
+        "calls": 25,
+        "lastTicks": 3623590,
+        "maxTicks": 3627845,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 3239932976,
+        "npuCycles": 3424354
+      },
+      {
+        "method": "encode_hidden1",
+        "calls": 225,
+        "lastTicks": 695416,
+        "maxTicks": 711140,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 38710416,
+        "npuCycles": 136124
+      },
+      {
+        "method": "encode_back",
+        "calls": 25,
+        "lastTicks": 11417165,
+        "maxTicks": 11434505,
+        "npuCalls": 10,
+        "npuOverflow": 0,
+        "weightsAddress": 3234650016,
+        "npuCycles": 5390739
+      },
+      {
+        "method": "decode_front",
+        "calls": 25,
+        "lastTicks": 6086578,
+        "maxTicks": 6089355,
+        "npuCalls": 3,
+        "npuOverflow": 0,
+        "weightsAddress": 3229433648,
+        "npuCycles": 4990657
+      },
+      {
+        "method": "decode_hidden0",
+        "calls": 225,
+        "lastTicks": 686976,
+        "maxTicks": 717543,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 39658224,
+        "npuCycles": 137233
+      },
+      {
+        "method": "decode_project1",
+        "calls": 25,
+        "lastTicks": 3517135,
+        "maxTicks": 3517784,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 3232245424,
+        "npuCycles": 3319970
+      },
+      {
+        "method": "decode_hidden1",
+        "calls": 225,
+        "lastTicks": 692362,
+        "maxTicks": 713110,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 40601456,
+        "npuCycles": 137400
+      },
+      {
+        "method": "decode_back",
+        "calls": 25,
+        "lastTicks": 54003678,
+        "maxTicks": 54053801,
+        "npuCalls": 13,
+        "npuOverflow": 0,
+        "weightsAddress": 3229019344,
+        "npuCycles": 20103748
+      }
+    ],
+    "capture": {
+      "measurements": {
+        "input": {
+          "mae": 0.025981092292224846,
+          "peak": 0.26231637597084045,
+          "rmse": 0.041148864815353806,
+          "snrDb": 10.045233902128212
+        },
+        "float": {
+          "mae": 0.015609511669547898,
+          "peak": 0.22283130884170532,
+          "rmse": 0.026549556939483906,
+          "snrDb": 13.040067247560103
+        },
+        "unoptimized": {
+          "mae": 0.0004039108350306277,
+          "peak": 0.064433753490448,
+          "rmse": 0.0020679854162177773,
+          "snrDb": 34.6169204461015
+        }
+      },
+      "hashes": {
+        "input": "73364961558b040ba9b8b565f2dbf9dbcf86def976686afbc93a36a0f60b282b",
+        "capture": "b8e0bb3735d482ed1a65933ef1469456d0f2cf9b9e6c3652a2fd0d6abf1ce886",
+        "firmware": "1461a45ebdb3f35c28cb6b5a00d0458fab277af77aab94c4148a949f8ce8f7bb"
+      },
+      "records": 25,
+      "samples": 72000
+    }
+  },
+  "repeatedOptimizedRun": {
+    "recordedAt": "2026-11-27T09:50:32Z",
+    "buildJob": "b-52",
+    "loadJob": "d-53",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0xb8d32050",
+    "firmwareSha256": "4687759a0f0ebdb6801ca75003084f3e3390d4fb7131a835f1c950d6b7b3edbd",
+    "replays": [
+      {
+        "hostServerWallSeconds": 11.9461857,
+        "records": 25,
+        "samples": 72000,
+        "captureSha256": "b8e0bb3735d482ed1a65933ef1469456d0f2cf9b9e6c3652a2fd0d6abf1ce886"
+      },
+      {
+        "hostServerWallSeconds": 11.5878785,
+        "records": 25,
+        "samples": 72000,
+        "captureSha256": "b8e0bb3735d482ed1a65933ef1469456d0f2cf9b9e6c3652a2fd0d6abf1ce886"
+      }
+    ],
+    "boardOnSecondReplay": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 79990591,
+      "decoder_ticks_max": 76243206,
+      "codec_ticks_max": 154290868,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "control_stop_flags": 0,
+      "display_errors": 0
+    },
+    "methods": [
+      {
+        "method": "encode_front",
+        "calls": 50,
+        "lastTicks": 49668499,
+        "maxTicks": 52303039,
+        "npuCalls": 14,
+        "npuOverflow": 0,
+        "weightsAddress": 3237069744,
+        "npuCycles": 20276794
+      },
+      {
+        "method": "encode_hidden0",
+        "calls": 450,
+        "lastTicks": 705615,
+        "maxTicks": 710627,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 37749168,
+        "npuCycles": 139146
+      },
+      {
+        "method": "encode_project1",
+        "calls": 50,
+        "lastTicks": 3623296,
+        "maxTicks": 3625409,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 3239932976,
+        "npuCycles": 3424354
+      },
+      {
+        "method": "encode_hidden1",
+        "calls": 450,
+        "lastTicks": 696339,
+        "maxTicks": 713200,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 38710416,
+        "npuCycles": 136124
+      },
+      {
+        "method": "encode_back",
+        "calls": 50,
+        "lastTicks": 11415953,
+        "maxTicks": 11432741,
+        "npuCalls": 10,
+        "npuOverflow": 0,
+        "weightsAddress": 3234650016,
+        "npuCycles": 5390733
+      },
+      {
+        "method": "decode_front",
+        "calls": 50,
+        "lastTicks": 6087924,
+        "maxTicks": 6093214,
+        "npuCalls": 3,
+        "npuOverflow": 0,
+        "weightsAddress": 3229433648,
+        "npuCycles": 4990651
+      },
+      {
+        "method": "decode_hidden0",
+        "calls": 450,
+        "lastTicks": 688449,
+        "maxTicks": 717076,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 39658224,
+        "npuCycles": 137233
+      },
+      {
+        "method": "decode_project1",
+        "calls": 50,
+        "lastTicks": 3517401,
+        "maxTicks": 3522032,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 3232245424,
+        "npuCycles": 3319972
+      },
+      {
+        "method": "decode_hidden1",
+        "calls": 450,
+        "lastTicks": 691281,
+        "maxTicks": 721348,
+        "npuCalls": 1,
+        "npuOverflow": 0,
+        "weightsAddress": 40601456,
+        "npuCycles": 137400
+      },
+      {
+        "method": "decode_back",
+        "calls": 50,
+        "lastTicks": 53991209,
+        "maxTicks": 54045497,
+        "npuCalls": 13,
+        "npuOverflow": 0,
+        "weightsAddress": 3229019344,
+        "npuCycles": 20103693
+      }
+    ]
+  },
+  "splitSizeRestoredReplay": {
+    "recordedAt": "2026-11-27T10:14:37Z",
+    "loadJob": "d-62",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0xb8d32050",
+    "firmwareSha256": "4687759a0f0ebdb6801ca75003084f3e3390d4fb7131a835f1c950d6b7b3edbd",
+    "captureSha256": "b8e0bb3735d482ed1a65933ef1469456d0f2cf9b9e6c3652a2fd0d6abf1ce886",
+    "records": 25,
+    "samples": 72000,
+    "snrVsInputDb": 10.0452339,
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 79979826,
+      "decoder_ticks_max": 76232260,
+      "codec_ticks_max": 154271789,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "codec_error": 0,
+      "stream_error": 0,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "control_stop_flags": 0
+    }
+  },
+  "recurrentActivationReplay": {
+    "consecutiveReplays": 2,
+    "secondCaptureSha256": "606dbab58e1685186b67e036bb106ec07d211a590f3c4208bc7c4ed76eebea97",
+    "recordedAt": "2026-11-27T10:38:36Z",
+    "buildJob": "b-66",
+    "loadJob": "d-67",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0xb8d32050",
+    "firmwareSha256": "95bb3a70b3a18e8a26064911db87fc5e35ad60a09f52269bab35a50871c57508",
+    "captureSha256": "606dbab58e1685186b67e036bb106ec07d211a590f3c4208bc7c4ed76eebea97",
+    "records": 25,
+    "samples": 72000,
+    "delaySamples": 0,
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 74425470,
+      "decoder_ticks_max": 70789989,
+      "codec_ticks_max": 143177982,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "control_stop_flags": 0
+    },
+    "againstInput": {
+      "changedSamples": 71991,
+      "peakAbsoluteError": 0.26231637597084045,
+      "meanAbsoluteError": 0.026048883196137917,
+      "rmse": 0.04125715932701913,
+      "snrDb": 10.022404631379667
+    },
+    "againstPreviousDemo": {
+      "changedSamples": 66780,
+      "peakAbsoluteError": 0.04445042461156845,
+      "meanAbsoluteError": 0.0002960551156768108,
+      "rmse": 0.0014705811704659904,
+      "snrDb": 37.58358975386356
+    }
+  },
+  "packedA16W8Replay": {
+    "recordedAt": "2026-11-27T11:00:39Z",
+    "buildJob": "b-69",
+    "loadJob": "d-77",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0x8d3c3b5b",
+    "modelSha256": "758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6",
+    "firmwareSha256": "b71b5e508e6bf925863952f0d6008722767face960b8a581815c5b0d53babd1c",
+    "consecutiveReplays": 2,
+    "records": 25,
+    "samples": 72000,
+    "delaySamples": 0,
+    "replays": [
+      {
+        "hostServerWallSeconds": 7.7825904,
+        "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01"
+      },
+      {
+        "hostServerWallSeconds": 7.8890556,
+        "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01"
+      }
+    ],
+    "board": {
+      "completed_blocks": 25,
+      "encoder_blocks": 25,
+      "decoder_blocks": 25,
+      "encoder_ticks_max": 49527133,
+      "decoder_ticks_max": 35676041,
+      "codec_ticks_max": 85074722,
+      "codec_deadline_misses": 25,
+      "replay_deadline_misses": 25,
+      "lcd_frames": 26,
+      "waveform_drops": 0,
+      "timer_hz": 400000000,
+      "codec_budget_ticks": 48000000,
+      "codec_error": 0,
+      "stream_error": 0,
+      "replay_status": -7,
+      "record_status": 11520,
+      "lcd_error": 0,
+      "waveform_drain_error": 0,
+      "transport_error": 0,
+      "control_stop_flags": 0
+    },
+    "previousDemoSnrAgainstFloatCodecDb": 13.007128953153922,
+    "againstInput": {
+      "changedSamples": 71978,
+      "peakAbsoluteError": 0.2636282294988632,
+      "meanAbsoluteError": 0.025113278303315566,
+      "rmse": 0.03849804491063494,
+      "snrDb": 10.623617580357067
+    },
+    "againstPreviousDemo": {
+      "changedSamples": 71805,
+      "peakAbsoluteError": 0.1833595559000969,
+      "meanAbsoluteError": 0.01886198115262376,
+      "rmse": 0.02873785405084048,
+      "snrDb": 11.755355065449127
+    },
+    "againstPackedHost": {
+      "changedSamples": 71759,
+      "peakAbsoluteError": 0.1956368088722229,
+      "meanAbsoluteError": 0.011796683365337976,
+      "rmse": 0.019001469958847196,
+      "snrDb": 15.624326734897416
+    },
+    "againstFloatCodec": {
+      "changedSamples": 72000,
+      "peakAbsoluteError": 0.19092977046966553,
+      "meanAbsoluteError": 0.02002742597616603,
+      "rmse": 0.030984666269116088,
+      "snrDb": 11.69827635060914
+    },
+    "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01",
+    "inputSha256": "73364961558b040ba9b8b565f2dbf9dbcf86def976686afbc93a36a0f60b282b"
+  },
+  "independentDeadlineReplay": {
+    "recordedAt": "2026-11-27T11:29:07Z",
+    "buildJob": "b-82",
+    "loadJob": "d-89",
+    "context": "encodec.ReleaseDemo+DevKit-E8",
+    "modelCRC32": "0x6abf7173",
+    "modelSha256": "26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3",
+    "firmwareSha256": "a82cc01befac1abf75bf42a7994a316d99089ea51ae1b1c1f7b3b8de9129dfa5",
+    "deadlineMs": 120,
+    "consecutiveReplays": 2,
+    "records": 25,
+    "samples": 72000,
+    "delaySamples": 0,
+    "inputSha256": "73364961558b040ba9b8b565f2dbf9dbcf86def976686afbc93a36a0f60b282b",
+    "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01",
+    "replays": [
+      {
+        "hostServerWallSeconds": 8.5529856,
+        "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01",
+        "board": {
+          "completed_blocks": 25,
+          "encoder_blocks": 25,
+          "decoder_blocks": 25,
+          "encoder_ticks_max": 47483829,
+          "decoder_ticks_max": 36855241,
+          "encoder_deadline_misses": 0,
+          "decoder_deadline_misses": 0,
+          "codec_ticks_max": 84189953,
+          "codec_deadline_misses": 25,
+          "replay_deadline_misses": 25,
+          "lcd_frames": 26,
+          "waveform_drops": 0,
+          "timer_hz": 400000000,
+          "codec_budget_ticks": 48000000,
+          "codec_error": 0,
+          "stream_error": 0,
+          "replay_status": -7,
+          "record_status": 11520,
+          "lcd_error": 0,
+          "waveform_drain_error": 0,
+          "transport_error": 0,
+          "control_stop_flags": 0
+        }
+      },
+      {
+        "hostServerWallSeconds": 7.2873731,
+        "captureSha256": "f022fcf85833d41f0e48e91e57d4b4317fbf5ad36eeeed5a160df38e85544e01",
+        "board": {
+          "completed_blocks": 25,
+          "encoder_blocks": 25,
+          "decoder_blocks": 25,
+          "encoder_ticks_max": 47472632,
+          "decoder_ticks_max": 36851870,
+          "encoder_deadline_misses": 0,
+          "decoder_deadline_misses": 0,
+          "codec_ticks_max": 84200906,
+          "codec_deadline_misses": 25,
+          "replay_deadline_misses": 25,
+          "lcd_frames": 26,
+          "waveform_drops": 0,
+          "timer_hz": 400000000,
+          "codec_budget_ticks": 48000000,
+          "codec_error": 0,
+          "stream_error": 0,
+          "replay_status": -7,
+          "record_status": 11520,
+          "lcd_error": 0,
+          "waveform_drain_error": 0,
+          "transport_error": 0,
+          "control_stop_flags": 0
+        }
+      }
+    ],
+    "againstInput": {
+      "changedSamples": 71978,
+      "peakAbsoluteError": 0.2636282294988632,
+      "meanAbsoluteError": 0.025113278303315566,
+      "rmse": 0.03849804491063494,
+      "snrDb": 10.623617580357067
+    },
+    "againstFloatCodec": {
+      "changedSamples": 72000,
+      "peakAbsoluteError": 0.19092977046966553,
+      "meanAbsoluteError": 0.02002742597616603,
+      "rmse": 0.030984666269116088,
+      "snrDb": 11.69827635060914
+    },
+    "floatCodecAgainstInput": {
+      "captureSha256": "dda4084bf89bfb5f4bae2449966f0fe7076dcb243b892d0e327ab262706498d7",
+      "rmse": 0.037076504286,
+      "snrDb": 10.950415467262
+    }
+  }
+}

@@ -109,11 +109,18 @@ void ethosu_inference_begin(struct ethosu_driver *drv, void *user_arg) {
 void ethosu_inference_end(struct ethosu_driver *drv, void *user_arg) {
     (void)user_arg;
     ETHOSU_PMU_CNTR_Disable(drv, ETHOSU_PMU_CCNT_Msk | ETHOSU_PMU_CNT1_Msk);
-    ethos_benchmark.cycles += ETHOSU_PMU_Get_CCNTR(drv);
+    const uint64_t cycles = ETHOSU_PMU_Get_CCNTR(drv);
+    ethos_benchmark.cycles += cycles;
     ethos_benchmark.active_cycles += ETHOSU_PMU_Get_EVCNTR(drv, 0);
     ethos_benchmark.overflow |= ETHOSU_PMU_Get_CNTR_OVS(drv);
     ++ethos_benchmark.invocations;
     ETHOSU_PMU_Disable(drv);
+#ifdef ETHOSU_DELEGATE_PROFILING
+    extern void ethosu_delegate_profile(unsigned invocation, uint32_t weights_address,
+                                        uint32_t weights_size, uint64_t cycles);
+    ethosu_delegate_profile(ethos_benchmark.invocations, ethos_benchmark.weights_address,
+                            ethos_benchmark.weights_size, cycles);
+#endif
 }
 
 #if defined(ETHOSU85)

@@ -33,6 +33,7 @@ solution:
       variables:
         - Board-Layer: $SolutionDir()$/board/DevKit-E8/Board_HP-U85.clayer.yml
         - DTLN-SDS-Layer: ${CMSIS_PACK_ROOT}/ARM/SDS/3.1.0/layer/sdsio/usb/sdsio_usb.clayer.yml
+        - EnCodec-SDS-Layer: ${CMSIS_PACK_ROOT}/ARM/SDS/3.1.0/layer/sdsio/usb/sdsio_usb.clayer.yml
       target-set:
         - set: Debug
           images:
@@ -282,6 +283,27 @@ solution:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+        - set: EnCodec_ProgramModel
+          images:
+            - project-context: encodec.ProgramModel
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: EnCodec_Release
+          images:
+            - project-context: encodec.Release
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
+        - set: EnCodec_Demo
+          images:
+            - project-context: encodec.ReleaseDemo
+          debugger:
+            name: ULINKplus@pyOCD
+            clock: 10000000
+            protocol: swd
   build-types:
     - type: FlashLoader
       debug: on
@@ -310,6 +332,12 @@ solution:
           C-CPP:
             - -O3
             - -ffast-math
+    - type: ReleaseDemo
+      debug: on
+      optimize: speed
+      misc:
+        - for-compiler: AC6
+          C-CPP: [-O3, -ffast-math]
   projects:
     - project: projects/template_mram/template_mram.cproject.yml
       for-context:
@@ -344,6 +372,11 @@ solution:
         - .Release
         - .ProgramModel
         - .ReleaseSRAM
+    - project: projects/encodec/encodec.cproject.yml
+      for-context:
+        - .ProgramModel
+        - .Release
+        - .ReleaseDemo
     - project: board/flash/loader/FlashLoader.cproject.yml
       for-context:
         - .FlashLoader

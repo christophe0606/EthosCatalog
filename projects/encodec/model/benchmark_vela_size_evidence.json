@@ -1,0 +1,288 @@
+{
+  "recordedAt": "2026-11-27T08:23:00Z",
+  "buildJob": "b-20",
+  "loadJob": "d-21",
+  "modelSha256": "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f",
+  "firmwareSha256": "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260",
+  "modelCRC32": "0xb8d32050",
+  "hostTimerHz": 400000000,
+  "npuClockHz": 400000000,
+  "blocks": {
+    "completed": 12,
+    "deadlineMisses": 12,
+    "deadlineMs": 120,
+    "maxTicks": 807262467,
+    "lastTicks": 807262467,
+    "error": 0
+  },
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 12,
+      "lastTicks": 273369658,
+      "maxTicks": 273461062,
+      "npuCalls": 14,
+      "npuOverflow": 0,
+      "weightsAddress": 3237069744,
+      "npuCycles": 95831847
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 108,
+      "lastTicks": 2849921,
+      "maxTicks": 2853788,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142
+    },
+    {
+      "method": "encode_project1",
+      "calls": 12,
+      "lastTicks": 3764235,
+      "maxTicks": 3764235,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3239932976,
+      "npuCycles": 3424351
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 108,
+      "lastTicks": 2862968,
+      "maxTicks": 2870034,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136124
+    },
+    {
+      "method": "encode_back",
+      "calls": 12,
+      "lastTicks": 184736063,
+      "maxTicks": 184871117,
+      "npuCalls": 10,
+      "npuOverflow": 0,
+      "weightsAddress": 3234650016,
+      "npuCycles": 5390717
+    },
+    {
+      "method": "decode_front",
+      "calls": 12,
+      "lastTicks": 9842528,
+      "maxTicks": 9846099,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3229433648,
+      "npuCycles": 4990665
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 108,
+      "lastTicks": 2861630,
+      "maxTicks": 2865931,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 39658224,
+      "npuCycles": 137233
+    },
+    {
+      "method": "decode_project1",
+      "calls": 12,
+      "lastTicks": 3664281,
+      "maxTicks": 3664478,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3232245424,
+      "npuCycles": 3319972
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 108,
+      "lastTicks": 2860579,
+      "maxTicks": 2862649,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 40601456,
+      "npuCycles": 137430
+    },
+    {
+      "method": "decode_back",
+      "calls": 12,
+      "lastTicks": 228555870,
+      "maxTicks": 228555870,
+      "npuCalls": 13,
+      "npuOverflow": 0,
+      "weightsAddress": 3229019344,
+      "npuCycles": 23557718
+    }
+  ],
+  "delegateSamples": {
+    "encode_front": [
+      {
+        "index": 0,
+        "weightsAddress": 3234651056,
+        "weightsBytes": 672,
+        "npuCycles": 123624
+      },
+      {
+        "index": 1,
+        "weightsAddress": 3234652640,
+        "weightsBytes": 2256,
+        "npuCycles": 87400
+      },
+      {
+        "index": 2,
+        "weightsAddress": 3234656096,
+        "weightsBytes": 3168,
+        "npuCycles": 770448
+      },
+      {
+        "index": 3,
+        "weightsAddress": 3234660144,
+        "weightsBytes": 10816,
+        "npuCycles": 1806923
+      },
+      {
+        "index": 4,
+        "weightsAddress": 3234671840,
+        "weightsBytes": 8112,
+        "npuCycles": 154561
+      },
+      {
+        "index": 5,
+        "weightsAddress": 3234681056,
+        "weightsBytes": 8512,
+        "npuCycles": 911635
+      },
+      {
+        "index": 6,
+        "weightsAddress": 3234697840,
+        "weightsBytes": 67760,
+        "npuCycles": 4407608
+      },
+      {
+        "index": 7,
+        "weightsAddress": 3234766512,
+        "weightsBytes": 29984,
+        "npuCycles": 671435
+      },
+      {
+        "index": 8,
+        "weightsAddress": 3234797664,
+        "weightsBytes": 24992,
+        "npuCycles": 789206
+      },
+      {
+        "index": 9,
+        "weightsAddress": 3234825120,
+        "weightsBytes": 299648,
+        "npuCycles": 78261597
+      },
+      {
+        "index": 10,
+        "weightsAddress": 3235125680,
+        "weightsBytes": 118768,
+        "npuCycles": 870194
+      },
+      {
+        "index": 11,
+        "weightsAddress": 3235245616,
+        "weightsBytes": 94544,
+        "npuCycles": 1042630
+      },
+      {
+        "index": 12,
+        "weightsAddress": 34741552,
+        "weightsBytes": 1727664,
+        "npuCycles": 2476898
+      },
+      {
+        "index": 13,
+        "weightsAddress": 3237069744,
+        "weightsBytes": 953376,
+        "npuCycles": 3457688
+      }
+    ],
+    "decode_back": [
+      {
+        "index": 0,
+        "weightsAddress": 3225602608,
+        "weightsBytes": 2561616,
+        "npuCycles": 9289950
+      },
+      {
+        "index": 1,
+        "weightsAddress": 3228165040,
+        "weightsBytes": 120896,
+        "npuCycles": 885584
+      },
+      {
+        "index": 2,
+        "weightsAddress": 3228287024,
+        "weightsBytes": 92336,
+        "npuCycles": 1018097
+      },
+      {
+        "index": 3,
+        "weightsAddress": 3228380336,
+        "weightsBytes": 445984,
+        "npuCycles": 4859557
+      },
+      {
+        "index": 4,
+        "weightsAddress": 3228827184,
+        "weightsBytes": 30896,
+        "npuCycles": 691111
+      },
+      {
+        "index": 5,
+        "weightsAddress": 3228859232,
+        "weightsBytes": 24864,
+        "npuCycles": 783079
+      },
+      {
+        "index": 6,
+        "weightsAddress": 3228885040,
+        "weightsBytes": 94320,
+        "npuCycles": 2070554
+      },
+      {
+        "index": 7,
+        "weightsAddress": 3228980320,
+        "weightsBytes": 8192,
+        "npuCycles": 154804
+      },
+      {
+        "index": 8,
+        "weightsAddress": 3228989664,
+        "weightsBytes": 8544,
+        "npuCycles": 893766
+      },
+      {
+        "index": 9,
+        "weightsAddress": 3228999088,
+        "weightsBytes": 11904,
+        "npuCycles": 1984440
+      },
+      {
+        "index": 10,
+        "weightsAddress": 3229011936,
+        "weightsBytes": 2176,
+        "npuCycles": 87102
+      },
+      {
+        "index": 11,
+        "weightsAddress": 3229015264,
+        "weightsBytes": 3136,
+        "npuCycles": 764633
+      },
+      {
+        "index": 12,
+        "weightsAddress": 3229019344,
+        "weightsBytes": 544,
+        "npuCycles": 75041
+      }
+    ]
+  }
+}

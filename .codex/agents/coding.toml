@@ -24,6 +24,9 @@ If a reusable node becomes too complex, consider splitting it into smaller, more
 focused nodes.
 CMSIS Stream section gives detailed guidance on when a node can be considered reusable.
 
+If optimizations are needed to respect the demo constraints (like real-time) you can use vector instructions and
+DMA when one is available.
+
 ## Inference scheduling
 
 Use the network's inference time to choose where inference runs in CMSIS Stream:

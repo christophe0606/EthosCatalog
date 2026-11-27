@@ -6,7 +6,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/dtln_aec/DevKit-E8/ReleaseSRAM/dtln_aec.axf",
+            "program": "out/encodec/DevKit-E8/ReleaseDemo/encodec.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -47,7 +47,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/dtln_aec/DevKit-E8/ReleaseSRAM/dtln_aec.axf",
+            "program": "out/encodec/DevKit-E8/ReleaseDemo/encodec.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [

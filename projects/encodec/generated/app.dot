@@ -1,0 +1,106 @@
+
+
+
+
+
+
+digraph structs {
+    bgcolor = "white"
+    node [shape=plaintext,color="black",fontcolor="black",fontname="Times-Roman"]
+    rankdir=LR
+    ranksep=0.85
+    edge [labeldistance=2.6,labelangle=-25,arrowsize="0.5",color="black",fontcolor="black",fontname="Times-Roman"]
+
+
+decoder [label=<
+<TABLE color="#3A6088" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#3A6088" POINT-SIZE="14.0">decoder<BR/>(EnCodecDecoder)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+dup0 [shape=point,label="dup0"]
+
+encoder [label=<
+<TABLE color="#3A6088" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#3A6088" POINT-SIZE="14.0">encoder<BR/>(EnCodecEncoder)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+sds_sink [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">sds_sink<BR/>(SdsSink)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+sds_source [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="black" POINT-SIZE="14.0">sds_source<BR/>(SdsSource)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+waveform [label=<
+<TABLE color="black" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD PORT="i"><FONT POINT-SIZE="12.0" COLOR="black">i</FONT></TD>
+    <TD ALIGN="CENTER" ROWSPAN="2"><FONT COLOR="black" POINT-SIZE="14.0">waveform<BR/>(WaveformCapture)</FONT></TD>
+    <TD PORT="oev0"><FONT POINT-SIZE="12.0" COLOR="black">oev0</FONT></TD>
+  </TR>
+<TR>
+
+<TD></TD>
+
+<TD></TD></TR>
+
+</TABLE>>];
+
+lcd [label=<
+<TABLE color="#8B4513" bgcolor="white" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+  <TR>
+    <TD ALIGN="CENTER" PORT="i"><FONT COLOR="#8B4513" POINT-SIZE="14.0">lcd<BR/>(WaveformDisplay)</FONT></TD>
+  </TR>
+</TABLE>>];
+
+
+
+encoder:i -> decoder:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<s32(72)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >72</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >72</FONT>
+</TD></TR></TABLE>>]
+
+decoder:i -> sds_sink:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2880)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2880</FONT>
+</TD></TR></TABLE>>
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2880</FONT>
+</TD></TR></TABLE>>]
+
+sds_source:i ->
+dup0 [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2880)>
+
+,taillabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2880</FONT>
+</TD></TR></TABLE>>]
+
+
+dup0 -> encoder:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2880)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2880</FONT>
+</TD></TR></TABLE>>
+]
+
+
+dup0 -> waveform:i [style="solid",color="black",fontsize="12.0",fontcolor="black",label=<f32(2880)>
+,headlabel=<<TABLE BORDER="0" CELLPADDING="4"><TR><TD><FONT COLOR="blue" POINT-SIZE="12.0" >2880</FONT>
+</TD></TR></TABLE>>
+]
+
+
+
+waveform:oev0 -> lcd:i [style="dashed",color="black",fontsize="12.0",fontcolor="black",label=<>
+
+]
+
+}

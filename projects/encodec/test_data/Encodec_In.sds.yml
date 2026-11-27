@@ -1,0 +1,6 @@
+sds:
+  name: EnCodec input
+  sample-frequency: 24000
+  content:
+    - value: input
+      type: float

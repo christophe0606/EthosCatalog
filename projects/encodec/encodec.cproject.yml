@@ -1,0 +1,102 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+project:
+  device: :M55_HP
+  packs:
+    - pack: ARM::CMSIS-RTX@^5.9.0
+    - pack: ARM::SDS@3.1.0
+  add-path:
+    - .
+    - ../../common
+    - ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP
+    - ../../board/DevKit-E8/RTE/BSP/AE822FA0E5597LS0_M55_HP
+  define:
+    - APP_MODEL_OSPI
+    - NPU_QCONFIG: 2
+    - NPU_REGIONCFG_0: 3
+    - NPU_REGIONCFG_1: 0
+    - NPU_MEM_ATTR_1: 0x20
+    - NPU_MEM_ATTR_2: 0x24
+    - NPU_MEM_ATTR_3: 0x24
+  setups:
+    - setup: Record per-delegate NPU timing
+      for-context: [.Release]
+      define: [ETHOSU_DELEGATE_PROFILING, ENCODEC_CPU_PROFILING, ENCODEC_FAST_RECURRENT]
+    - setup: CMSIS Stream runtime and SDS USB demo
+      for-context: [.ReleaseDemo]
+      add-path: [generated, ../../common/stream, ../../common/nodes_impl/c]
+      define:
+        - ETHOSU_DELEGATE_PROFILING
+        - ENCODEC_FAST_RECURRENT
+        - OS_THREAD_NUM: 7
+        - OS_DYNAMIC_MEM_SIZE: 65536
+  components:
+    - component: BSP:OSPI FLASH XIP:core
+    - component: CMSIS:RTOS2:Keil RTX5&Source
+    - component: CMSIS:OS Tick:SysTick
+    - component: CMSIS:STREAM&Source
+      for-context: [.ReleaseDemo]
+    - component: CMSIS:DSP&Source
+      for-context: [.ReleaseDemo]
+    - component: BSP:External peripherals:GT911 Touch Controller
+      for-context: [.ReleaseDemo]
+  connections:
+    - connect: EnCodec audio application
+      provides:
+        - CMSIS-RTOS2
+  linker:
+    - script: linker_ac6.sct.src
+      for-compiler: AC6
+    - script: linker_clang.ld.src
+      for-compiler: CLANG
+    - regions: ../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h
+  misc:
+    - for-compiler: AC6
+      C-CPP: [-ffunction-sections, -fdata-sections]
+      Link: [--remove]
+    - CPP: [-std=gnu++17]
+  groups:
+    - group: OSPI startup and programming preparation
+      files:
+        - file: ospi_startup.c
+        - file: ../../board/DevKit-E8/model_storage.c
+        - file: ../../board/DevKit-E8/e8_issi_flash.c
+    - group: EnCodec benchmark
+      for-context: [.Release]
+      files:
+        - file: benchmark_main.cpp
+    - group: EnCodec inference
+      for-context: [.Release, .ReleaseDemo]
+      files:
+        - file: codec_runtime.cpp
+        - file: staged_model_loader.cpp
+        - file: kernels/cpu_kernels.cpp
+          misc:
+            - CPP: [-fno-fast-math, -ffp-contract=off]
+        - file: ../../common/arm_embedded_module.cpp
+    - group: EnCodec USB demo
+      for-context: [.ReleaseDemo]
+      files:
+        - file: demo_main.cpp
+          add-path:
+            - $Pack(ARM::SDS)$/sds/sdsio/client
+        - file: sds_usb_tx.c
+          for-compiler: AC6
+          add-path:
+            - $Pack(ARM::SDS)$/sds/sdsio/client
+        - file: hardware_params.cpp
+        - file: nodes_impl/waveform.cpp
+        - file: generated/app_params.c
+        - file: generated/scheduler_app.cpp
+        - file: ../../common/nodes_impl/alif_e8/lcd.c
+  layers:
+    - layer: $Board-Layer$
+      type: Board
+    - layer: $EnCodec-SDS-Layer$
+      type: SDSIO
+      for-context: [.ReleaseDemo]
+    - layer: ai_layer/ai_layer.clayer.yml
+      type: AI
+      for-context: [.Release, .ReleaseDemo]
+  output:
+    type: [elf, bin, hex, map]

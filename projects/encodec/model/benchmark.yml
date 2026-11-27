@@ -1,0 +1,3604 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+benchmarks:
+  networks:
+  - network:
+      name: EnCodec encoder front
+      pte: ai_layer/performance-baseline.pte
+      method: encode_front
+      operation: Causal convolution and first LSTM input projection
+      input_shapes: [[1,1,2880],[3974],[1]]
+      output_shapes: [[1,9,512],[1,9,2048],[3974]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 27417
+          time:
+            ms: 1985.6176375
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 14
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 27417
+          time:
+            ms: 523.1332025
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 14
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec encoder first recurrent step
+      pte: ai_layer/performance-baseline.pte
+      method: encode_hidden0
+      operation: First encoder LSTM hidden projection and state update
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 33.313775
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.1571725
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec encoder second input projection
+      pte: ai_layer/performance-baseline.pte
+      method: encode_project1
+      operation: Batched second encoder LSTM input projection
+      input_shape: [1,9,512]
+      output_shape: [1,9,2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.488415
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.4097925
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec encoder second recurrent step
+      pte: ai_layer/performance-baseline.pte
+      method: encode_hidden1
+      operation: Second encoder LSTM hidden projection and state update
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 33.4297925
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.1726175
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec encoder back and quantizer
+      pte: ai_layer/performance-baseline.pte
+      method: encode_back
+      operation: Latent projection and residual vector quantization
+      input_shapes: [[1,9,512],[1,9,512],[3072],[1]]
+      output_shapes: [[1,8,9],[3072]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 49153
+          time:
+            ms: 2153.9512625
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 10
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 49153
+          time:
+            ms: 463.0577175
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 10
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec decoder front and codebook lookup
+      pte: ai_layer/performance-baseline.pte
+      method: decode_front
+      operation: Codebook lookup, causal convolution and first LSTM input projection
+      input_shapes: [[1,8,9],[768],[1]]
+      output_shapes: [[1,9,512],[1,9,2048],[768]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 3361
+          time:
+            ms: 82.913955
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 3361
+          time:
+            ms: 24.65146
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec decoder first recurrent step
+      pte: ai_layer/performance-baseline.pte
+      method: decode_hidden0
+      operation: First decoder LSTM hidden projection and state update
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 33.334395
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.1878875
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec decoder second input projection
+      pte: ai_layer/performance-baseline.pte
+      method: decode_project1
+      operation: Batched second decoder LSTM input projection
+      input_shape: [1,9,512]
+      output_shape: [1,9,2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.22731
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.16045
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec decoder second recurrent step
+      pte: ai_layer/performance-baseline.pte
+      method: decode_hidden1
+      operation: Second decoder LSTM hidden projection and state update
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 33.2906925
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.17436
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec decoder back
+      pte: ai_layer/performance-baseline.pte
+      method: decode_back
+      operation: Causal upsampling and PCM reconstruction
+      input_shapes: [[1,9,512],[1,9,512],[2112],[1]]
+      output_shapes: [[1,1,2880],[2112]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 45313
+          time:
+            ms: 2139.411905
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 13
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 45313
+          time:
+            ms: 562.16085
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 13
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed host invocation of this PTE method, including ExecuTorch input setup, dispatch and result retrieval. PASS records successful execution and the expected output tensor types and sizes. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+  - network:
+      name: EnCodec reconstruction block
+      operation: Encoder, quantizer and decoder
+      input_shape: [1, 1, 2880]
+      output_shape: [1, 1, 2880]
+      samples_per_forward: 2880
+      sample_rate_hz: 24000
+      block_deadline_ms: 120
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: 'OSPI and SRAM1', clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 11520
+          time:
+            ms: 7579.07836
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:50:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: rb-5
+          execution_job: d-11
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: a6ab6f7e4a210f09d0eabcc94390c8a6bc2c1dddf3736aa49637b01937692e01
+          measurement_source: model/benchmark_e8_evidence.json
+          samples: 12
+          test_result: FAIL
+          max_absolute_error: 0.16962101310491562
+          input: 12 consecutive period-149 audio blocks
+          timing_scope: Full encode and decode, including intermediate copies and recurrent-state updates. FAIL records all 12 misses of the 120 ms compute deadline. PCM error uses the final block's pre-Vela reference.
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: 'OSPI and SRAM1', clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory:
+            model_bytes: 19651680
+            input_tensor_bytes: 11520
+          time:
+            ms: 1849.1488825
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T07:58:59Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-13
+          execution_job: d-14
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: a9d801fc83c6d70b245706ad0bc51142a5a554040382d4581b7e6029b99f0ff2
+          firmware_sha256: 5d055a61d67ae67ae8bee0191b58e34e643b02ae8fd3ce7039159aa085ca1f1f
+          measurement_source: model/benchmark_dtcm_metadata_evidence.json
+          samples: 12
+          test_result: FAIL
+          input: 12 consecutive period-149 audio blocks
+          timing_scope: Full encode and decode, including intermediate copies and recurrent-state updates. FAIL records all 12 misses of the 120 ms compute deadline. The 148,632-byte FlatBuffer metadata is staged in DTCM before timing.
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI, SRAM0 and SRAM1","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 11520
+          time:
+            ms: 2018.1561675
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "FAIL"
+          input: "12 consecutive period-149 audio blocks"
+          timing_scope: "Complete streaming codec block. 12 of 12 blocks missed the 120 ms compute deadline. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI, SRAM0 and SRAM1","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 11520
+          time:
+            ms: 727.977965
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "FAIL"
+          input: "12 consecutive period-149 audio blocks"
+          timing_scope: "Complete streaming codec block. 12 of 12 blocks missed the 120 ms compute deadline. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+  - network:
+      name: "EnCodec encoder front (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "encode_front"
+      operation: "Causal convolution and first LSTM input projection"
+      input_shapes: [[1,1,2880],[3974],[1]]
+      output_shapes: [[1,9,512],[1,9,2048],[3974]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI and SRAM0","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 27417
+          time:
+            ms: 683.652655
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 14
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI, SRAM0 and SRAM1","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 27417
+          time:
+            ms: 237.69612
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 14
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 27417
+          time:
+            ms: 124.89606
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 14
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec encoder first recurrent step (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "encode_hidden0"
+      operation: "First encoder LSTM hidden projection and state update"
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.13447
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.7204225
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.0202275
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec encoder second input projection (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "encode_project1"
+      operation: "Batched second encoder LSTM input projection"
+      input_shape: [1,9,512]
+      output_shape: [1,9,2048]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.4105875
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.0536075
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.06412
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec encoder second recurrent step (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "encode_hidden1"
+      operation: "Second encoder LSTM hidden projection and state update"
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.175085
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.743295
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.0004300000000002
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec encoder back and quantizer (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "encode_back"
+      operation: "Latent projection and residual vector quantization"
+      input_shapes: [[1,9,512],[1,9,512],[3072],[1]]
+      output_shapes: [[1,8,9],[3072]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 49153
+          time:
+            ms: 462.1777925
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 10
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 49153
+          time:
+            ms: 98.436125
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 10
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 49153
+          time:
+            ms: 28.65647
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 10
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec decoder front and codebook lookup (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "decode_front"
+      operation: "Codebook lookup, causal convolution and first LSTM input projection"
+      input_shapes: [[1,8,9],[768],[1]]
+      output_shapes: [[1,9,512],[1,9,2048],[768]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 3361
+          time:
+            ms: 24.6152475
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 3361
+          time:
+            ms: 15.893035
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 3361
+          time:
+            ms: 15.2655575
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec decoder first recurrent step (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "decode_hidden0"
+      operation: "First decoder LSTM hidden projection and state update"
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.1648275
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.74832
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.01051
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec decoder second input projection (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "decode_project1"
+      operation: "Batched second decoder LSTM input projection"
+      input_shape: [1,9,512]
+      output_shape: [1,9,2048]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.161195
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 8.7936025
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 18432
+          time:
+            ms: 8.800117499999999
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec decoder second recurrent step (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "decode_hidden1"
+      operation: "Second decoder LSTM hidden projection and state update"
+      input_shapes: [[1,2048],[1024],[1]]
+      output_shapes: [[1,512],[1024]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 7.1566225
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "SRAM1"}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.746375
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 108
+          test_result: "PASS"
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.00083
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: "EnCodec decoder back (Vela Size)"
+      pte: "ai_layer/size-baseline.pte"
+      method: "decode_back"
+      operation: "Causal upsampling and PCM reconstruction"
+      input_shapes: [[1,9,512],[1,9,512],[2112],[1]]
+      output_shapes: [[1,1,2880],[2112]]
+    benchmark:
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 45313
+          time:
+            ms: 571.389675
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:23:00Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-20"
+          execution_job: "d-21"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "8f11d1d36cb35a7262faccb01eb320d3b1a0281eda4ddfd12d2dbcd33ad50260"
+          measurement_source: "model/benchmark_vela_size_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 13
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. Size-scheduled PTE with FlatBuffer metadata staged in DTCM. The weights of the largest encoder delegate are staged in SRAM0."
+      - platform:
+          os: "RTX5"
+          cpu: "Cortex-M55"
+          memory:
+            weights: {"type": "OSPI","clock_mhz": 100}
+            activations: {"type": "SRAM0"}
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 45313
+          time:
+            ms: 294.84887
+            statistic: "max"
+        run:
+          recorded_at: "2026-11-27T08:33:11Z"
+          context: "encodec.Release+DevKit-E8"
+          target: "DevKit-E8@EnCodec_Release"
+          device: "AE822FA0E5597LS0"
+          core: "M55_HP"
+          npu: "Ethos-U85"
+          macs: 256
+          compiler: "AC6@6.24.0"
+          optimize: "-O3 -ffast-math"
+          build_job: "b-22"
+          execution_job: "d-23"
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f"
+          firmware_sha256: "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3"
+          measurement_source: "model/benchmark_cpu_hot_sram_evidence.json"
+          samples: 12
+          test_result: "PASS"
+          npu_invocations_per_forward: 13
+          pmu_overflow: 0
+          input: "Method inputs from the 12-block period-149 audio fixture"
+          timing_scope: "Independently timed host invocation of this PTE method. The hot encoder convolution is also staged in SRAM1. The firmware uses shape-guarded portable kernel overrides."
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19651936
+            input_tensor_bytes: 45313
+          time:
+            ms: 131.78708
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:32:27Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-64
+          execution_job: d-65
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f
+          firmware_sha256: 3eca0f749d335648fe3064fc4e4ede4f1fa10993d1b3ea9954918bc2a73813cd
+          measurement_source: model/benchmark_recurrent_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 13
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with SRAM staging and Helium recurrent activations. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder front (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: encode_front
+      operation: Causal convolution and first LSTM input projection
+      input_shapes: [[1, 1, 2880], [3974], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [3974]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI with SRAM staging, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 27417}
+          time: {ms: 184.07158, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec encoder first recurrent step (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: encode_hidden0
+      operation: First encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 12289}
+          time: {ms: 1.761815, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 108
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec encoder second input projection (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: encode_project1
+      operation: Batched second encoder LSTM input projection
+      input_shape:
+        - 1
+        - 9
+        - 512
+      output_shape:
+        - 1
+        - 9
+        - 2048
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 18432}
+          time: {ms: 9.0645775, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec encoder second recurrent step (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: encode_hidden1
+      operation: Second encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 12289}
+          time: {ms: 1.77978, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 108
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec encoder back and quantizer (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: encode_back
+      operation: Latent projection and residual vector quantization
+      input_shapes: [[1, 9, 512], [1, 9, 512], [3072], [1]]
+      output_shapes: [[1, 8, 9], [3072]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 49153}
+          time: {ms: 28.721635, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 11
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec decoder front and codebook lookup (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: decode_front
+      operation: Codebook lookup, causal convolution and first LSTM input projection
+      input_shapes: [[1, 8, 9], [768], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [768]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI with SRAM staging, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 3361}
+          time: {ms: 11.728489999999999, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec decoder first recurrent step (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: decode_hidden0
+      operation: First decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 12289}
+          time: {ms: 1.7806549999999999, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 108
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec decoder second input projection (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: decode_project1
+      operation: Batched second decoder LSTM input projection
+      input_shape:
+        - 1
+        - 9
+        - 512
+      output_shape:
+        - 1
+        - 9
+        - 2048
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 18432}
+          time: {ms: 8.802255, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec decoder second recurrent step (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: decode_hidden1
+      operation: Second decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: SRAM1}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 12289}
+          time: {ms: 1.76819, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 108
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec decoder back (Banded A16, Vela Size)
+      pte: ai_layer/banded-a16-size.pte
+      method: decode_back
+      operation: Causal upsampling and PCM reconstruction
+      input_shapes: [[1, 9, 512], [1, 9, 512], [2112], [1]]
+      output_shapes: [[1, 1, 2880], [2112]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights: {type: OSPI with SRAM staging, clock_mhz: 100}
+            activations: {type: SRAM0}
+        measurements:
+          memory: {model_bytes: 19647456, input_tensor_bytes: 45313}
+          time: {ms: 57.790915, statistic: max}
+        run:
+          recorded_at: '2026-11-27T10:05:54Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-54
+          execution_job: d-58
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          samples: 12
+          test_result: PASS
+          model_sha256: 8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34
+          firmware_sha256: 4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd
+          measurement_source: model/benchmark_banded_a16_evidence.json
+          npu_invocations_per_forward: 4
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE method invocation with Banded A16 scheduling and SRAM staging. PASS
+            records successful method execution. End-to-end processing missed all 12 audio deadlines.
+  - network:
+      name: EnCodec encoder front (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: encode_front
+      operation: Causal convolution and first LSTM input projection
+      input_shapes: [[1, 1, 2880], [3974], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [3974]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 27417
+          time:
+            ms: 67.876545
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder first recurrent step (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: encode_hidden0
+      operation: First encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.0298725
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder second input projection (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: encode_project1
+      operation: Batched second encoder LSTM input projection
+      input_shape: [1, 9, 512]
+      output_shape: [1, 9, 2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.062612499999998
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder second recurrent step (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: encode_hidden1
+      operation: Second encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.0011474999999999
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder back and quantizer (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: encode_back
+      operation: Latent projection and residual vector quantization
+      input_shapes: [[1, 9, 512], [1, 9, 512], [3072], [1]]
+      output_shapes: [[1, 8, 9], [3072]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 49153
+          time:
+            ms: 28.656042499999998
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 11
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec decoder front and codebook lookup (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: decode_front
+      operation: Codebook lookup, causal convolution and first LSTM input projection
+      input_shapes: [[1, 8, 9], [768], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [768]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 3361
+          time:
+            ms: 11.726045
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec decoder first recurrent step (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: decode_hidden0
+      operation: First decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.0089700000000001
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec decoder second input projection (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: decode_project1
+      operation: Batched second decoder LSTM input projection
+      input_shape: [1, 9, 512]
+      output_shape: [1, 9, 2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 18432
+          time:
+            ms: 8.800942500000001
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec decoder second recurrent step (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: decode_hidden1
+      operation: Second decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.00386
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 108
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec decoder back (Packed A16W8, Vela Size)
+      pte: ai_layer/packed-a16w8-size.pte
+      method: decode_back
+      operation: Causal upsampling and PCM reconstruction
+      input_shapes: [[1, 9, 512], [1, 9, 512], [2112], [1]]
+      output_shapes: [[1, 1, 2880], [2112]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19721184
+            input_tensor_bytes: 45313
+          time:
+            ms: 49.4507
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T10:56:30Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-68
+          execution_job: d-75
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6
+          firmware_sha256: 91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185
+          measurement_source: model/benchmark_packed_a16w8_evidence.json
+          samples: 12
+          test_result: PASS
+          npu_invocations_per_forward: 4
+          pmu_overflow: 0
+          input: Method inputs from the 12-block period-149 audio fixture
+          timing_scope: Independently timed PTE invocation with the reordered encoder and packed decoder. PASS records
+            successful method execution. End-to-end processing missed the audio deadline.
+  - network:
+      name: EnCodec encoder front (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: encode_front
+      operation: Causal convolution and first LSTM input projection
+      input_shapes: [[1, 1, 2880], [3974], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [3974]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 27417
+          time:
+            ms: 67.884675
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec encoder first recurrent step (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: encode_hidden0
+      operation: First encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.02419
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 1008
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec encoder second input projection (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: encode_project1
+      operation: Batched second encoder LSTM input projection
+      input_shape: [1, 9, 512]
+      output_shape: [1, 9, 2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 18432
+          time:
+            ms: 9.0669825
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec encoder second recurrent step (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: encode_hidden1
+      operation: Second encoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 12289
+          time:
+            ms: 0.98955
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 1008
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec encoder back and quantizer (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: encode_back
+      operation: Latent projection and residual vector quantization
+      input_shapes: [[1, 9, 512], [1, 9, 512], [3072], [1]]
+      output_shapes: [[1, 8, 9], [3072]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 49153
+          time:
+            ms: 24.285712500000002
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 11
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec decoder front and codebook lookup (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: decode_front
+      operation: Codebook lookup, causal convolution and first LSTM input projection
+      input_shapes: [[1, 8, 9], [768], [1]]
+      output_shapes: [[1, 9, 512], [1, 9, 2048], [768]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI with SRAM staging
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 3361
+          time:
+            ms: 11.73096
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 3
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec decoder first recurrent step (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: decode_hidden0
+      operation: First decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 12289
+          time:
+            ms: 1.001725
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 1008
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec decoder second input projection (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: decode_project1
+      operation: Batched second decoder LSTM input projection
+      input_shape: [1, 9, 512]
+      output_shape: [1, 9, 2048]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 18432
+          time:
+            ms: 8.804620000000002
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec decoder second recurrent step (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: decode_hidden1
+      operation: Second decoder LSTM hidden projection and state update
+      input_shapes: [[1, 2048], [1024], [1]]
+      output_shapes: [[1, 512], [1024]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: SRAM1
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 12289
+          time:
+            ms: 0.994005
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 1008
+          test_result: PASS
+          npu_invocations_per_forward: 1
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.
+  - network:
+      name: EnCodec decoder back (Packed endpoints, Vela Size)
+      pte: ai_layer/packed-endpoints-size.pte
+      method: decode_back
+      operation: Causal upsampling and PCM reconstruction
+      input_shapes: [[1, 9, 512], [1, 9, 512], [2112], [1]]
+      output_shapes: [[1, 1, 2880], [2112]]
+    benchmark:
+      - platform:
+          os: RTX5
+          cpu: Cortex-M55
+          memory:
+            weights:
+              type: OSPI
+              clock_mhz: 100
+            activations:
+              type: SRAM0
+        measurements:
+          memory:
+            model_bytes: 19720672
+            input_tensor_bytes: 45313
+          time:
+            ms: 52.927245
+            statistic: max
+        run:
+          recorded_at: '2026-11-27T11:26:17Z'
+          context: encodec.Release+DevKit-E8
+          target: DevKit-E8@EnCodec_Release
+          device: AE822FA0E5597LS0
+          core: M55_HP
+          npu: Ethos-U85
+          macs: 256
+          compiler: AC6@6.24.0
+          optimize: -O3 -ffast-math
+          build_job: b-83
+          execution_job: d-87
+          cpu_clock_mhz: 400
+          npu_clock_mhz: 400
+          warmup: 0
+          model_sha256: 26b6dacc0a8e02b42b9367872861d93d19692ab4bf59791794fb32d9de1fd4a3
+          firmware_sha256: 89000cdaa85fd138e2c3395d3e29a245a9f4fb8bfc252a9a17b61b6334ce15c2
+          measurement_source: model/benchmark_endpoints_evidence.json
+          samples: 112
+          test_result: PASS
+          npu_invocations_per_forward: 4
+          pmu_overflow: 0
+          input: Method inputs from the period-149 standalone and serial loopback fixtures
+          timing_scope: Independently timed PTE invocation over 12 loopback blocks and 100 standalone blocks for its
+            direction. Both standalone stages met all block deadlines.

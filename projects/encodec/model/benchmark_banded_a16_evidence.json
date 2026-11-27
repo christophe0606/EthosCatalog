@@ -1,0 +1,687 @@
+{
+  "recordedAt": "2026-11-27T10:05:54Z",
+  "context": "encodec.Release+DevKit-E8",
+  "buildJob": "b-54",
+  "loadJob": "d-58",
+  "modelCRC32": "0xe7f399c2",
+  "modelSha256": "8bb5396f33f65dcb834b765f7c155d6a191a6bfb3e3aa4deb9d45faf7c964c34",
+  "firmwareSha256": "4ad4e2ded05260c2c651aceb02b19a0afa02154f17fb2d95b89455314b9d3ccd",
+  "modelBytes": 19647456,
+  "clockHz": 400000000,
+  "fixture": "12 period-149 synthetic audio blocks, 2,880 samples each",
+  "blocks": {
+    "completed": 12,
+    "error": 0,
+    "deadlineMs": 120,
+    "deadlineMisses": 12,
+    "maxTicks": 145802985,
+    "encodeMaxTicks": 101596556,
+    "decodeMaxTicks": 44263333
+  },
+  "stagedBytes": {
+    "sram0": 862544,
+    "sram1": 4167904
+  },
+  "activationBytes": 1216512,
+  "delegateScratchPoolBytes": 1409024,
+  "weightedNpuMs": 266.7917875,
+  "pcm": {
+    "sha256": "023dcef75a700934802214f07466e615827f0e9e91620fff4f1c7d868fa0aa4c",
+    "againstSameQuantizationPreVela": {
+      "samples": 2880,
+      "peakAbsoluteError": 0.21895485743880272,
+      "rmse": 0.03411936026784623,
+      "snrDb": 8.09398762434659
+    },
+    "againstSplitSizeBoard": {
+      "samples": 2880,
+      "peakAbsoluteError": 0.2678765654563904,
+      "rmse": 0.04674868630529303,
+      "snrDb": 4.2954681180212155
+    }
+  },
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 12,
+      "lastTicks": 73611994,
+      "maxTicks": 73628632,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3235337216,
+      "npuCycles": 69029275,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 36220128,
+          "weightsBytes": 172672,
+          "npuCycles": 5671207
+        },
+        {
+          "index": 1,
+          "weightsAddress": 36398288,
+          "weightsBytes": 517072,
+          "npuCycles": 3502723
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3235337216,
+          "weightsBytes": 2681056,
+          "npuCycles": 59855345
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 5071048,
+          "calls": 48
+        },
+        "elu": {
+          "ticks": 19873316,
+          "calls": 24
+        },
+        "dequantize": {
+          "ticks": 3949090,
+          "calls": 60
+        }
+      }
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 108,
+      "lastTicks": 694561,
+      "maxTicks": 704726,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 37749168,
+          "weightsBytes": 960576,
+          "npuCycles": 139142
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3294073,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1088926,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 338320,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 556335,
+          "calls": 108
+        },
+        "cat": {
+          "ticks": 403379,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 255046,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27769570,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4557056,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 987405,
+          "calls": 108
+        },
+        "tanh": {
+          "ticks": 12963077,
+          "calls": 216
+        },
+        "unsqueeze_copy": {
+          "ticks": 479334,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 889703,
+          "calls": 108
+        }
+      }
+    },
+    {
+      "method": "encode_project1",
+      "calls": 12,
+      "lastTicks": 3625831,
+      "maxTicks": 3625831,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3239928496,
+      "npuCycles": 3424351,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3239928496,
+          "weightsBytes": 944192,
+          "npuCycles": 3424351
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 422798,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 797984,
+          "calls": 12
+        }
+      }
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 108,
+      "lastTicks": 706289,
+      "maxTicks": 711912,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136128,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 38710416,
+          "weightsBytes": 947136,
+          "npuCycles": 136128
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3290671,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1086519,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 376270,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 546121,
+          "calls": 108
+        },
+        "cat": {
+          "ticks": 399799,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 251185,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27651301,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4560389,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 979350,
+          "calls": 108
+        },
+        "tanh": {
+          "ticks": 14648963,
+          "calls": 216
+        },
+        "unsqueeze_copy": {
+          "ticks": 430090,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 884942,
+          "calls": 108
+        }
+      }
+    },
+    {
+      "method": "encode_back",
+      "calls": 12,
+      "lastTicks": 11484346,
+      "maxTicks": 11488654,
+      "npuCalls": 11,
+      "npuOverflow": 0,
+      "weightsAddress": 3234620448,
+      "npuCycles": 5402087,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3233129136,
+          "weightsBytes": 2048,
+          "npuCycles": 11201
+        },
+        {
+          "index": 1,
+          "weightsAddress": 3233132080,
+          "weightsBytes": 404928,
+          "npuCycles": 1472747
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3233537712,
+          "weightsBytes": 131696,
+          "npuCycles": 479063
+        },
+        {
+          "index": 3,
+          "weightsAddress": 3233670192,
+          "weightsBytes": 135216,
+          "npuCycles": 491829
+        },
+        {
+          "index": 4,
+          "weightsAddress": 3233806128,
+          "weightsBytes": 134720,
+          "npuCycles": 490014
+        },
+        {
+          "index": 5,
+          "weightsAddress": 3233941552,
+          "weightsBytes": 134848,
+          "npuCycles": 490439
+        },
+        {
+          "index": 6,
+          "weightsAddress": 3234077104,
+          "weightsBytes": 134928,
+          "npuCycles": 490695
+        },
+        {
+          "index": 7,
+          "weightsAddress": 3234212784,
+          "weightsBytes": 134864,
+          "npuCycles": 490499
+        },
+        {
+          "index": 8,
+          "weightsAddress": 3234348336,
+          "weightsBytes": 135184,
+          "npuCycles": 491657
+        },
+        {
+          "index": 9,
+          "weightsAddress": 3234484272,
+          "weightsBytes": 135200,
+          "npuCycles": 491797
+        },
+        {
+          "index": 10,
+          "weightsAddress": 3234620448,
+          "weightsBytes": 1,
+          "npuCycles": 2146
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 10392993,
+          "calls": 108
+        },
+        "sub": {
+          "ticks": 6219298,
+          "calls": 180
+        },
+        "mul": {
+          "ticks": 5947676,
+          "calls": 96
+        },
+        "where": {
+          "ticks": 118876,
+          "calls": 12
+        },
+        "argmax": {
+          "ticks": 14578501,
+          "calls": 96
+        },
+        "quantize": {
+          "ticks": 1867301,
+          "calls": 120
+        },
+        "neg": {
+          "ticks": 2963610,
+          "calls": 96
+        },
+        "pow": {
+          "ticks": 457931,
+          "calls": 96
+        },
+        "permute_copy": {
+          "ticks": 554233,
+          "calls": 24
+        },
+        "cat": {
+          "ticks": 1411701,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4250075,
+          "calls": 84
+        },
+        "flip": {
+          "ticks": 7633828,
+          "calls": 12
+        },
+        "slice_copy": {
+          "ticks": 3465818,
+          "calls": 24
+        },
+        "sum": {
+          "ticks": 608793,
+          "calls": 96
+        },
+        "clone_dim_order": {
+          "ticks": 129752,
+          "calls": 12
+        },
+        "to_dim_order_copy": {
+          "ticks": 216826,
+          "calls": 96
+        },
+        "dequantize": {
+          "ticks": 3394043,
+          "calls": 132
+        }
+      }
+    },
+    {
+      "method": "decode_front",
+      "calls": 12,
+      "lastTicks": 4689494,
+      "maxTicks": 4691396,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3229401264,
+      "npuCycles": 3591149,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3228988448,
+          "weightsBytes": 1,
+          "npuCycles": 2148
+        },
+        {
+          "index": 1,
+          "weightsAddress": 41505456,
+          "weightsBytes": 410944,
+          "npuCycles": 93039
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3229401264,
+          "weightsBytes": 963936,
+          "npuCycles": 3495962
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 856086,
+          "calls": 84
+        },
+        "where": {
+          "ticks": 37061,
+          "calls": 12
+        },
+        "quantize": {
+          "ticks": 526367,
+          "calls": 24
+        },
+        "permute_copy": {
+          "ticks": 464821,
+          "calls": 24
+        },
+        "cat": {
+          "ticks": 348780,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4802438,
+          "calls": 96
+        },
+        "flip": {
+          "ticks": 1914410,
+          "calls": 12
+        },
+        "slice_copy": {
+          "ticks": 883963,
+          "calls": 24
+        },
+        "clone_dim_order": {
+          "ticks": 46452,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 1002892,
+          "calls": 24
+        }
+      }
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 108,
+      "lastTicks": 706007,
+      "maxTicks": 712262,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 39658224,
+      "npuCycles": 137241,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 39658224,
+          "weightsBytes": 942560,
+          "npuCycles": 137241
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3291125,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1085345,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 359713,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 547138,
+          "calls": 108
+        },
+        "cat": {
+          "ticks": 401469,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 252202,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27667262,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4524767,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 995369,
+          "calls": 108
+        },
+        "tanh": {
+          "ticks": 14760004,
+          "calls": 216
+        },
+        "unsqueeze_copy": {
+          "ticks": 461239,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 885755,
+          "calls": 108
+        }
+      }
+    },
+    {
+      "method": "decode_project1",
+      "calls": 12,
+      "lastTicks": 3519758,
+      "maxTicks": 3520902,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3232213040,
+      "npuCycles": 3319969,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3232213040,
+          "weightsBytes": 915408,
+          "npuCycles": 3319969
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 425467,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 798028,
+          "calls": 12
+        }
+      }
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 108,
+      "lastTicks": 706175,
+      "maxTicks": 707276,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 40601456,
+      "npuCycles": 137400,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 40601456,
+          "weightsBytes": 903184,
+          "npuCycles": 137400
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3291870,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1088076,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 356231,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 554341,
+          "calls": 108
+        },
+        "cat": {
+          "ticks": 400806,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 250728,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27657484,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4588972,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 981125,
+          "calls": 108
+        },
+        "tanh": {
+          "ticks": 14574258,
+          "calls": 216
+        },
+        "unsqueeze_copy": {
+          "ticks": 462180,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 886707,
+          "calls": 108
+        }
+      }
+    },
+    {
+      "method": "decode_back",
+      "calls": 12,
+      "lastTicks": 23109826,
+      "maxTicks": 23116366,
+      "npuCalls": 4,
+      "npuOverflow": 0,
+      "weightsAddress": 37040944,
+      "npuCycles": 17000685,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3225543344,
+          "weightsBytes": 2782032,
+          "npuCycles": 12147048
+        },
+        {
+          "index": 1,
+          "weightsAddress": 3228330928,
+          "weightsBytes": 506608,
+          "npuCycles": 2840511
+        },
+        {
+          "index": 2,
+          "weightsAddress": 36919664,
+          "weightsBytes": 114720,
+          "npuCycles": 1012766
+        },
+        {
+          "index": 3,
+          "weightsAddress": 37040944,
+          "weightsBytes": 24048,
+          "npuCycles": 1000360
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 11824874,
+          "calls": 72
+        },
+        "elu": {
+          "ticks": 39081357,
+          "calls": 36
+        },
+        "dequantize": {
+          "ticks": 6948328,
+          "calls": 60
+        }
+      }
+    }
+  ]
+}

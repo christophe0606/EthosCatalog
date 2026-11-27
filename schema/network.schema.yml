@@ -148,6 +148,9 @@ properties:
           memory_mode:
             $ref: '#/$defs/text'
             description: Memory mode name in the Vela ini file.
+          optimise:
+            enum: [Performance, Size]
+            description: Optional Vela scheduling strategy.
     dependentSchemas:
       assets:
         properties:

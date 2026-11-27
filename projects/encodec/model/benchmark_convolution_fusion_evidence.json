@@ -1,0 +1,117 @@
+{
+  "recordedAt": "2026-11-27T09:09:04Z",
+  "modelSha256": "5f3cc6ec0516fd7d8f0c450eb26a2fa2cfc9ab8b2bd5fbd8b29f39edca83709a",
+  "modelCRC32": "0xb7c11c34",
+  "firmwareSha256": "6c059bcdf950f7884e8bb08e33f683324f7299064816cdff3ef66adc03ba47dc",
+  "buildJob": "b-36",
+  "loadJob": "d-37",
+  "timerHz": 400000000,
+  "npuClockHz": 400000000,
+  "blockDeadlineMs": 120,
+  "encoderBlocks": 1,
+  "encoderMaxTicks": 201155047,
+  "decoderBlocks": 0,
+  "capturedRecords": 0,
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 1,
+      "lastTicks": 149000267,
+      "maxTicks": 149000267,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3234640352,
+      "npuCycles": 148731266
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 9,
+      "lastTicks": 698746,
+      "maxTicks": 706260,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142
+    },
+    {
+      "method": "encode_project1",
+      "calls": 1,
+      "lastTicks": 321786,
+      "maxTicks": 321786,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 33694128,
+      "npuCycles": 137219
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 9,
+      "lastTicks": 689698,
+      "maxTicks": 695044,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136122
+    },
+    {
+      "method": "encode_back",
+      "calls": 1,
+      "lastTicks": 39096772,
+      "maxTicks": 39096772,
+      "npuCalls": 11,
+      "npuOverflow": 0,
+      "weightsAddress": 3234615200,
+      "npuCycles": 5401924
+    },
+    {
+      "method": "decode_front",
+      "calls": 0,
+      "lastTicks": 0,
+      "maxTicks": 0,
+      "npuCalls": 0,
+      "npuOverflow": 0,
+      "weightsAddress": 0,
+      "npuCycles": 0
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 0,
+      "lastTicks": 0,
+      "maxTicks": 0,
+      "npuCalls": 0,
+      "npuOverflow": 0,
+      "weightsAddress": 0,
+      "npuCycles": 0
+    },
+    {
+      "method": "decode_project1",
+      "calls": 0,
+      "lastTicks": 0,
+      "maxTicks": 0,
+      "npuCalls": 0,
+      "npuOverflow": 0,
+      "weightsAddress": 0,
+      "npuCycles": 0
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 0,
+      "lastTicks": 0,
+      "maxTicks": 0,
+      "npuCalls": 0,
+      "npuOverflow": 0,
+      "weightsAddress": 0,
+      "npuCycles": 0
+    },
+    {
+      "method": "decode_back",
+      "calls": 0,
+      "lastTicks": 0,
+      "maxTicks": 0,
+      "npuCalls": 0,
+      "npuOverflow": 0,
+      "weightsAddress": 0,
+      "npuCycles": 0
+    }
+  ]
+}

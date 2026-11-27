@@ -1,0 +1,1401 @@
+{
+  "recordedAt": "2026-11-27T09:39:00Z",
+  "context": "encodec.Release+DevKit-E8",
+  "buildJob": "b-46",
+  "loadJob": "d-47",
+  "modelCRC32": "0xb8d32050",
+  "modelSha256": "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f",
+  "firmwareSha256": "78194d1f4400adc31734abd2cb06232b7b1008a137dd4ed0ec511a02df404c40",
+  "clockHz": 400000000,
+  "blocks": {
+    "completed": 12,
+    "error": 0,
+    "deadlineMs": 120,
+    "deadlineMisses": 12,
+    "maxTicks": 153231257,
+    "encodeMaxTicks": 77941922,
+    "decodeMaxTicks": 75304075
+  },
+  "stagedBytes": {
+    "sram0": 1823856,
+    "sram1": 4146784
+  },
+  "pcmAgainstD43": {
+    "samples": 2880,
+    "changed": 135,
+    "rmse": 0.000012374019511497509,
+    "peak": 0.00018733739852905273,
+    "snrDb": 75.84064041190031
+  },
+  "pcmAgainstD45": {
+    "samples": 2880,
+    "changed": 0,
+    "rmse": 0,
+    "peak": 0,
+    "snrDb": null
+  },
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 12,
+      "lastTicks": 50000065,
+      "maxTicks": 50000065,
+      "npuInvocations": 14,
+      "npuOverflow": 0,
+      "weightsAddress": 3237069744,
+      "npuCycles": 20276594,
+      "opTimes": {
+        "add": {
+          "ticks": 38359206,
+          "calls": 48
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "where": {
+          "ticks": 254335,
+          "calls": 108
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 44536710,
+          "calls": 168
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 398887,
+          "calls": 12
+        },
+        "elu": {
+          "ticks": 155346600,
+          "calls": 144
+        },
+        "cat": {
+          "ticks": 22772870,
+          "calls": 120
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 9937877,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 7520907,
+          "calls": 324
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 269410,
+          "calls": 96
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 38273169,
+          "calls": 216
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3234651056,
+          "bytes": 672,
+          "cycles": 123624
+        },
+        {
+          "index": 1,
+          "address": 3234652640,
+          "bytes": 2256,
+          "cycles": 87362
+        },
+        {
+          "index": 2,
+          "address": 3234656096,
+          "bytes": 3168,
+          "cycles": 770341
+        },
+        {
+          "index": 3,
+          "address": 3234660144,
+          "bytes": 10816,
+          "cycles": 1806880
+        },
+        {
+          "index": 4,
+          "address": 3234671840,
+          "bytes": 8112,
+          "cycles": 154474
+        },
+        {
+          "index": 5,
+          "address": 3234681056,
+          "bytes": 8512,
+          "cycles": 911532
+        },
+        {
+          "index": 6,
+          "address": 41814800,
+          "bytes": 67760,
+          "cycles": 3925545
+        },
+        {
+          "index": 7,
+          "address": 3234766512,
+          "bytes": 29984,
+          "cycles": 671401
+        },
+        {
+          "index": 8,
+          "address": 3234797664,
+          "bytes": 24992,
+          "cycles": 788802
+        },
+        {
+          "index": 9,
+          "address": 41506976,
+          "bytes": 299648,
+          "cycles": 3189233
+        },
+        {
+          "index": 10,
+          "address": 3235125680,
+          "bytes": 118768,
+          "cycles": 870227
+        },
+        {
+          "index": 11,
+          "address": 3235245616,
+          "bytes": 94544,
+          "cycles": 1042620
+        },
+        {
+          "index": 12,
+          "address": 35290416,
+          "bytes": 1727664,
+          "cycles": 2476868
+        },
+        {
+          "index": 13,
+          "address": 3237069744,
+          "bytes": 953376,
+          "cycles": 3457685
+        }
+      ]
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 108,
+      "lastTicks": 693208,
+      "maxTicks": 701183,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142,
+      "opTimes": {
+        "add": {
+          "ticks": 3300134,
+          "calls": 216
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 1088726,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 368469,
+          "calls": 216
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 543934,
+          "calls": 108
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 377551,
+          "calls": 108
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 262427,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27770450,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4509284,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 982467,
+          "calls": 108
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 12925980,
+          "calls": 216
+        },
+        "unsqueeze": {
+          "ticks": 460719,
+          "calls": 216
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 901323,
+          "calls": 108
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 37749168,
+          "bytes": 960576,
+          "cycles": 139142
+        }
+      ]
+    },
+    {
+      "method": "encode_project1",
+      "calls": 12,
+      "lastTicks": 3625620,
+      "maxTicks": 3626736,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3239932976,
+      "npuCycles": 3424353,
+      "opTimes": {
+        "add": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "where": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 425777,
+          "calls": 12
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 799305,
+          "calls": 12
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3239932976,
+          "bytes": 944192,
+          "cycles": 3424353
+        }
+      ]
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 108,
+      "lastTicks": 707525,
+      "maxTicks": 710854,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136128,
+      "opTimes": {
+        "add": {
+          "ticks": 3298137,
+          "calls": 216
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 1084819,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 348963,
+          "calls": 216
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 551764,
+          "calls": 108
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 373496,
+          "calls": 108
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 262344,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27651221,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4570815,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 972542,
+          "calls": 108
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 14700502,
+          "calls": 216
+        },
+        "unsqueeze": {
+          "ticks": 474293,
+          "calls": 216
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 899661,
+          "calls": 108
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 38710416,
+          "bytes": 947136,
+          "cycles": 136128
+        }
+      ]
+    },
+    {
+      "method": "encode_back",
+      "calls": 12,
+      "lastTicks": 11480978,
+      "maxTicks": 11485346,
+      "npuInvocations": 10,
+      "npuOverflow": 0,
+      "weightsAddress": 3234650016,
+      "npuCycles": 5390726,
+      "opTimes": {
+        "add": {
+          "ticks": 10362378,
+          "calls": 108
+        },
+        "sub": {
+          "ticks": 6194851,
+          "calls": 180
+        },
+        "mul": {
+          "ticks": 5914842,
+          "calls": 96
+        },
+        "where": {
+          "ticks": 122128,
+          "calls": 12
+        },
+        "argmax": {
+          "ticks": 14556551,
+          "calls": 96
+        },
+        "quantize": {
+          "ticks": 1420935,
+          "calls": 108
+        },
+        "neg": {
+          "ticks": 2962825,
+          "calls": 96
+        },
+        "pow": {
+          "ticks": 455224,
+          "calls": 96
+        },
+        "permute_copy": {
+          "ticks": 554622,
+          "calls": 24
+        },
+        "elu": {
+          "ticks": 1531570,
+          "calls": 12
+        },
+        "cat": {
+          "ticks": 1407063,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4252858,
+          "calls": 84
+        },
+        "flip": {
+          "ticks": 7607742,
+          "calls": 12
+        },
+        "full_like": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 3537484,
+          "calls": 24
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 601900,
+          "calls": 96
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 129189,
+          "calls": 12
+        },
+        "to_dim_order": {
+          "ticks": 231139,
+          "calls": 96
+        },
+        "dequantize": {
+          "ticks": 3095698,
+          "calls": 108
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3233161648,
+          "bytes": 404928,
+          "cycles": 1472737
+        },
+        {
+          "index": 1,
+          "address": 3233567280,
+          "bytes": 131696,
+          "cycles": 479029
+        },
+        {
+          "index": 2,
+          "address": 3233699760,
+          "bytes": 135216,
+          "cycles": 491791
+        },
+        {
+          "index": 3,
+          "address": 3233835696,
+          "bytes": 134720,
+          "cycles": 489976
+        },
+        {
+          "index": 4,
+          "address": 3233971120,
+          "bytes": 134848,
+          "cycles": 490477
+        },
+        {
+          "index": 5,
+          "address": 3234106672,
+          "bytes": 134928,
+          "cycles": 490729
+        },
+        {
+          "index": 6,
+          "address": 3234242352,
+          "bytes": 134864,
+          "cycles": 490461
+        },
+        {
+          "index": 7,
+          "address": 3234377904,
+          "bytes": 135184,
+          "cycles": 491621
+        },
+        {
+          "index": 8,
+          "address": 3234513840,
+          "bytes": 135200,
+          "cycles": 491759
+        },
+        {
+          "index": 9,
+          "address": 3234650016,
+          "bytes": 1,
+          "cycles": 2146
+        }
+      ]
+    },
+    {
+      "method": "decode_front",
+      "calls": 12,
+      "lastTicks": 6107848,
+      "maxTicks": 6107848,
+      "npuInvocations": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3229433648,
+      "npuCycles": 4990656,
+      "opTimes": {
+        "add": {
+          "ticks": 860076,
+          "calls": 84
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "where": {
+          "ticks": 38131,
+          "calls": 12
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 524831,
+          "calls": 24
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 465193,
+          "calls": 24
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 344115,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4804579,
+          "calls": 96
+        },
+        "flip": {
+          "ticks": 1914425,
+          "calls": 12
+        },
+        "full_like": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 881507,
+          "calls": 24
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 47403,
+          "calls": 12
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 1005976,
+          "calls": 24
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3229020832,
+          "bytes": 1,
+          "cycles": 2148
+        },
+        {
+          "index": 1,
+          "address": 3229022000,
+          "bytes": 410944,
+          "cycles": 1492545
+        },
+        {
+          "index": 2,
+          "address": 3229433648,
+          "bytes": 963936,
+          "cycles": 3495963
+        }
+      ]
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 108,
+      "lastTicks": 707506,
+      "maxTicks": 712542,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 39658224,
+      "npuCycles": 137241,
+      "opTimes": {
+        "add": {
+          "ticks": 3299366,
+          "calls": 216
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 1087216,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 381187,
+          "calls": 216
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 537973,
+          "calls": 108
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 374294,
+          "calls": 108
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 264296,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27665204,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4513753,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 993855,
+          "calls": 108
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 14761147,
+          "calls": 216
+        },
+        "unsqueeze": {
+          "ticks": 440042,
+          "calls": 216
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 898840,
+          "calls": 108
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 39658224,
+          "bytes": 942560,
+          "cycles": 137241
+        }
+      ]
+    },
+    {
+      "method": "decode_project1",
+      "calls": 12,
+      "lastTicks": 3520279,
+      "maxTicks": 3522217,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3232245424,
+      "npuCycles": 3319969,
+      "opTimes": {
+        "add": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "where": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 426197,
+          "calls": 12
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 800341,
+          "calls": 12
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3232245424,
+          "bytes": 915408,
+          "cycles": 3319969
+        }
+      ]
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 108,
+      "lastTicks": 707566,
+      "maxTicks": 709542,
+      "npuInvocations": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 40601456,
+      "npuCycles": 137400,
+      "opTimes": {
+        "add": {
+          "ticks": 3301702,
+          "calls": 216
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 1081863,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 331272,
+          "calls": 216
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 555910,
+          "calls": 108
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "elu": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "cat": {
+          "ticks": 374636,
+          "calls": 108
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "full_like": {
+          "ticks": 261764,
+          "calls": 216
+        },
+        "sigmoid": {
+          "ticks": 27661429,
+          "calls": 324
+        },
+        "slice_copy": {
+          "ticks": 4574673,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 975134,
+          "calls": 108
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 14539032,
+          "calls": 216
+        },
+        "unsqueeze": {
+          "ticks": 490025,
+          "calls": 216
+        },
+        "clone_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 899645,
+          "calls": 108
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 40601456,
+          "bytes": 903184,
+          "cycles": 137400
+        }
+      ]
+    },
+    {
+      "method": "decode_back",
+      "calls": 12,
+      "lastTicks": 52734632,
+      "maxTicks": 52734632,
+      "npuInvocations": 13,
+      "npuOverflow": 0,
+      "weightsAddress": 3229019344,
+      "npuCycles": 20103643,
+      "opTimes": {
+        "add": {
+          "ticks": 39048967,
+          "calls": 60
+        },
+        "sub": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "mul": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "where": {
+          "ticks": 181144,
+          "calls": 108
+        },
+        "argmax": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "quantize": {
+          "ticks": 61559542,
+          "calls": 204
+        },
+        "neg": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "pow": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "permute_copy": {
+          "ticks": 17762850,
+          "calls": 60
+        },
+        "elu": {
+          "ticks": 155964687,
+          "calls": 156
+        },
+        "cat": {
+          "ticks": 24094710,
+          "calls": 120
+        },
+        "embedding": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "flip": {
+          "ticks": 2928223,
+          "calls": 60
+        },
+        "full_like": {
+          "ticks": 41274,
+          "calls": 48
+        },
+        "sigmoid": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "slice_copy": {
+          "ticks": 4084710,
+          "calls": 276
+        },
+        "split": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "sum": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "tanh": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "unsqueeze": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "clone_dim_order": {
+          "ticks": 8856730,
+          "calls": 108
+        },
+        "to_dim_order": {
+          "ticks": 0,
+          "calls": 0
+        },
+        "dequantize": {
+          "ticks": 37413855,
+          "calls": 204
+        }
+      },
+      "delegates": [
+        {
+          "index": 0,
+          "address": 3225602608,
+          "bytes": 2561616,
+          "cycles": 9289938
+        },
+        {
+          "index": 1,
+          "address": 3228165040,
+          "bytes": 120896,
+          "cycles": 885605
+        },
+        {
+          "index": 2,
+          "address": 3228287024,
+          "bytes": 92336,
+          "cycles": 1018094
+        },
+        {
+          "index": 3,
+          "address": 3228380336,
+          "bytes": 445984,
+          "cycles": 4859565
+        },
+        {
+          "index": 4,
+          "address": 3228827184,
+          "bytes": 30896,
+          "cycles": 691077
+        },
+        {
+          "index": 5,
+          "address": 3228859232,
+          "bytes": 24864,
+          "cycles": 782522
+        },
+        {
+          "index": 6,
+          "address": 37018896,
+          "bytes": 94320,
+          "cycles": 385650
+        },
+        {
+          "index": 7,
+          "address": 3228980320,
+          "bytes": 8192,
+          "cycles": 154741
+        },
+        {
+          "index": 8,
+          "address": 3228989664,
+          "bytes": 8544,
+          "cycles": 893725
+        },
+        {
+          "index": 9,
+          "address": 41883376,
+          "bytes": 11904,
+          "cycles": 216090
+        },
+        {
+          "index": 10,
+          "address": 3229011936,
+          "bytes": 2176,
+          "cycles": 87062
+        },
+        {
+          "index": 11,
+          "address": 3229015264,
+          "bytes": 3136,
+          "cycles": 764570
+        },
+        {
+          "index": 12,
+          "address": 3229019344,
+          "bytes": 544,
+          "cycles": 75004
+        }
+      ]
+    }
+  ],
+  "weightedNpuMs": 156.13785000000001,
+  "kernelMsByName": {
+    "add": 21.214576249999997,
+    "sub": 1.2905939583333332,
+    "mul": 2.136972083333333,
+    "where": 0.4220060416666666,
+    "argmax": 3.0326147916666666,
+    "quantize": 23.142411041666666,
+    "neg": 0.6172552083333334,
+    "pow": 0.09483833333333333,
+    "permute_copy": 3.996156666666667,
+    "elu": 65.17559520833333,
+    "cat": 10.441403124999999,
+    "embedding": 1.8869660416666667,
+    "flip": 4.664222291666667,
+    "full_like": 0.22752187499999998,
+    "sigmoid": 23.072563333333335,
+    "slice_copy": 7.123569375,
+    "split": 0.8174995833333333,
+    "sum": 0.12539583333333335,
+    "tanh": 11.859721041666667,
+    "unsqueeze": 0.388558125,
+    "clone_dim_order": 1.9380691666666665,
+    "to_dim_order": 0.04815395833333333,
+    "dequantize": 17.705794375000004
+  }
+}

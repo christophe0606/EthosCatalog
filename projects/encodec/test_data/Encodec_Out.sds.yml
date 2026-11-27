@@ -1,0 +1,6 @@
+sds:
+  name: EnCodec reconstruction
+  sample-frequency: 24000
+  content:
+    - value: reconstruction
+      type: float

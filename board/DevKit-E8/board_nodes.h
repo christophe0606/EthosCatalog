@@ -34,6 +34,9 @@ int lcd_init(uint16_t *initial_frame);
 // Display-only initialization leaves I2C1 available to the camera. lcd_init
 // initializes GT911 and retains that bus callback; the two cannot own it together.
 int lcd_init_display(uint16_t *initial_frame);
+// Display a packed RGB565 viewport with all 800 native lines. Both the
+// viewport's native width (a multiple of 16 pixels) and native x are in pixels.
+int lcd_init_display_window(uint16_t *initial_frame, unsigned x, unsigned width, uint32_t memory_blocks);
 int lcd_present(uint16_t *frame);
 // Optional split presentation, one owning thread. Before mutating the previous
 // front buffer, wait for release; submit the new immutable front buffer, then
@@ -41,8 +44,9 @@ int lcd_present(uint16_t *frame);
 // Do not mix the split API with another presentation caller.
 int lcd_wait_for_release(void);
 int lcd_submit(uint16_t *frame);
-// Native RGB565 rectangle (480x800). Only this rectangle may have changed since
-// the buffer was last cleaned. Cache-line rounding stays inside the framebuffer.
+// RGB565 rectangle in the configured buffer's native coordinates. Cache-line
+// rounding stays inside the framebuffer. Pixels outside the rectangle must be
+// clean when submitting this buffer.
 // Zero-sized damage submits an unchanged buffer. Same release contract as submit.
 int lcd_submit_region(uint16_t *frame,unsigned x,unsigned y,unsigned width,unsigned height);
 int lcd_touch(unsigned *x, unsigned *y, bool *contact);

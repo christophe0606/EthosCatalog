@@ -1,0 +1,34 @@
+{
+  "EnCodecDecoder<int32_t,72,float,2880>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "Duplicate<float,2880,float,2880>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "EnCodecEncoder<float,2880,int32_t,72>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SdsSink<float,2880>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "SdsSource<float,2880>": {
+    "isTemplate": true,
+    "selectors": []
+  },
+  "WaveformCapture<float,2880>": {
+    "isTemplate": true,
+    "selectors": [
+      "SEL_WAVEFORM_ID"
+    ]
+  },
+  "WaveformDisplay": {
+    "isTemplate": false,
+    "selectors": [
+      "SEL_WAVEFORM_ID"
+    ]
+  }
+}

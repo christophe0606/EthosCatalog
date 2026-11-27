@@ -1,0 +1,130 @@
+{
+  "recordedAt": "2026-11-27T08:33:11Z",
+  "buildJob": "b-22",
+  "loadJob": "d-23",
+  "modelSha256": "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f",
+  "firmwareSha256": "a12347e21d7fc55e1560d38c4d09549e33e6dcc65a8d0f50be5d0d87ccd791a3",
+  "modelCRC32": "0xb8d32050",
+  "hostTimerHz": 400000000,
+  "npuClockHz": 400000000,
+  "blocks": {
+    "completed": 12,
+    "deadlineMisses": 12,
+    "deadlineMs": 120,
+    "maxTicks": 291191186,
+    "lastTicks": 291136495,
+    "error": 0
+  },
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 12,
+      "lastTicks": 95056290,
+      "maxTicks": 95078448,
+      "npuCalls": 14,
+      "npuOverflow": 0,
+      "weightsAddress": 3237069744,
+      "npuCycles": 20759594
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 108,
+      "lastTicks": 682865,
+      "maxTicks": 688169,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142
+    },
+    {
+      "method": "encode_project1",
+      "calls": 12,
+      "lastTicks": 3621443,
+      "maxTicks": 3621443,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3239932976,
+      "npuCycles": 3424354
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 108,
+      "lastTicks": 696181,
+      "maxTicks": 697318,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136124
+    },
+    {
+      "method": "encode_back",
+      "calls": 12,
+      "lastTicks": 39352208,
+      "maxTicks": 39374450,
+      "npuCalls": 10,
+      "npuOverflow": 0,
+      "weightsAddress": 3234650016,
+      "npuCycles": 5390731
+    },
+    {
+      "method": "decode_front",
+      "calls": 12,
+      "lastTicks": 6357214,
+      "maxTicks": 6357214,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3229433648,
+      "npuCycles": 4990656
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 108,
+      "lastTicks": 695195,
+      "maxTicks": 699328,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 39658224,
+      "npuCycles": 137233
+    },
+    {
+      "method": "decode_project1",
+      "calls": 12,
+      "lastTicks": 3515258,
+      "maxTicks": 3517441,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3232245424,
+      "npuCycles": 3319970
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 108,
+      "lastTicks": 694452,
+      "maxTicks": 698550,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 40601456,
+      "npuCycles": 137430
+    },
+    {
+      "method": "decode_back",
+      "calls": 12,
+      "lastTicks": 117887504,
+      "maxTicks": 117939548,
+      "npuCalls": 13,
+      "npuOverflow": 0,
+      "weightsAddress": 3229019344,
+      "npuCycles": 23557771
+    }
+  ],
+  "delegates": {
+    "encode_front": [
+      {
+        "index": 9,
+        "weightsAddress": 41506976,
+        "weightsBytes": 299648,
+        "npuCycles": 3189363
+      }
+    ]
+  }
+}

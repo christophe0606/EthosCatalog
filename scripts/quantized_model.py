@@ -63,6 +63,8 @@ def compile_spec(solution, project_dir, network):
     kwargs = dict(target=f"{npu['type'].lower()}-{npu['macs']}",
                   system_config=vela["system_config"], memory_mode=vela["memory_mode"],
                   config_ini=str((project_dir / vela["ini"]).resolve()))
+    if "optimise" in vela:
+        kwargs["extra_flags"] = [f"--optimise={vela['optimise']}"]
     print(f"[ai_layer] Vela: {kwargs}", flush=True)
     return EthosUCompileSpec(**kwargs)
 

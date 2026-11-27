@@ -1,0 +1,60 @@
+# Copyright 2026 Arm Limited and/or its affiliates.
+# SPDX-License-Identifier: Apache-2.0
+network:
+  name: EnCodec 24 kHz mono (6 kb/s)
+  model: model/model.py
+  quantize: model/quantize.py
+  quantization:
+    type: post_training_quantization
+    quantization: synthetic
+    error:
+      reference: Pretrained float EnCodec 24 kHz mono at 6 kb/s
+      calibration: 24 sequential 120 ms synthetic blocks across three clips, with the decoder back calibrated against the float codec
+      held_out: 12 sequential synthetic blocks, seed 601
+      matching_codes: 390
+      total_codes: 864
+      pcm_mean_absolute_error: 0.020110635
+      pcm_max_absolute_error: 0.25788593
+      pcm_snr_vs_float_db: 9.41
+  methods:
+    encode_front:
+      graph: model/cache/encode_front.pt2
+      safetensors: model/cache/encode_front.safetensors
+    encode_hidden0:
+      graph: model/cache/encode_hidden0.pt2
+      safetensors: model/cache/encode_hidden0.safetensors
+    encode_project1:
+      graph: model/cache/encode_project1.pt2
+      safetensors: model/cache/encode_project1.safetensors
+    encode_hidden1:
+      graph: model/cache/encode_hidden1.pt2
+      safetensors: model/cache/encode_hidden1.safetensors
+    encode_back:
+      graph: model/cache/encode_back.pt2
+      safetensors: model/cache/encode_back.safetensors
+    decode_front:
+      graph: model/cache/decode_front.pt2
+      safetensors: model/cache/decode_front.safetensors
+    decode_hidden0:
+      graph: model/cache/decode_hidden0.pt2
+      safetensors: model/cache/decode_hidden0.safetensors
+    decode_project1:
+      graph: model/cache/decode_project1.pt2
+      safetensors: model/cache/decode_project1.safetensors
+    decode_hidden1:
+      graph: model/cache/decode_hidden1.pt2
+      safetensors: model/cache/decode_hidden1.safetensors
+    decode_back:
+      graph: model/cache/decode_back.pt2
+      safetensors: model/cache/decode_back.safetensors
+  flash_ospi: true
+  extract_delegate_segments: true
+  ospi:
+    address: 0xC0000000
+    size: 0x02000000
+    pname: M55_HP
+  vela:
+    ini: ../../.cmsis/ensemble_vela.ini
+    system_config: Ethos_U85_SRAM_OSPI
+    memory_mode: Shared_Sram
+    optimise: Size

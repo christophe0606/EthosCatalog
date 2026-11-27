@@ -1,0 +1,724 @@
+{
+  "recordedAt": "2026-11-27T10:56:30Z",
+  "context": "encodec.Release+DevKit-E8",
+  "buildJob": "b-68",
+  "loadJob": "d-75",
+  "modelCRC32": "0x8d3c3b5b",
+  "modelSha256": "758847551d80299528e92fee6484f18004a7b7171371f0da81d534ddafb3b2a6",
+  "firmwareSha256": "91f21cf5c9e75b7fd536d77d5f22680f1cc9139302635affa3e371ba86d8b185",
+  "modelBytes": 19721184,
+  "clockHz": 400000000,
+  "fixture": "12 period-149 synthetic audio blocks, 2,880 samples each",
+  "blocks": {
+    "completed": 12,
+    "error": 0,
+    "deadlineMs": 120,
+    "deadlineMisses": 12,
+    "maxTicks": 85052548,
+    "encodeMaxTicks": 49668476,
+    "decodeMaxTicks": 35410784
+  },
+  "stagedBytes": {
+    "sram0": 862544,
+    "sram1": 4167904
+  },
+  "activationBytes": 1216512,
+  "delegateScratchPoolBytes": 1409024,
+  "lastPcmAgainstPackedHost": {
+    "samples": 2880,
+    "peak": 0.21821797266602516,
+    "rmse": 0.034132849227266164,
+    "snrDb": 8.090381982025445,
+    "sha256": "d142bca11786708989db34e478211480056148fbb3b932289f6af476b1d66670"
+  },
+  "weightedNpuMs": 142.23836,
+  "kernelMsByName": {
+    "add": 5.043837291666667,
+    "sub": 1.285120625,
+    "mul": 2.115300208333333,
+    "where": 0.3059439583333333,
+    "argmax": 3.034466875,
+    "quantize": 4.5843654166666665,
+    "neg": 0.6130447916666666,
+    "pow": 0.09118458333333333,
+    "permute_copy": 0.21505020833333333,
+    "elu": 12.281159166666667,
+    "sigmoid": 5.37894625,
+    "tanh": 2.447198125,
+    "cat": 0.714326875,
+    "embedding": 1.8777747916666665,
+    "flip": 2.001189375,
+    "full_like": 0.22823770833333332,
+    "slice_copy": 4.662701041666667,
+    "split": 0.8615752083333332,
+    "sum": 0.10758729166666665,
+    "unsqueeze_copy": 0.3860625,
+    "clone_dim_order": 0.03627145833333333,
+    "to_dim_order_copy": 0.036452291666666664,
+    "dequantize": 4.272412708333333
+  },
+  "methods": [
+    {
+      "method": "encode_front",
+      "calls": 12,
+      "lastTicks": 25382848,
+      "maxTicks": 27150618,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3234415728,
+      "npuCycles": 22543054,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 36220128,
+          "weightsBytes": 172672,
+          "npuCycles": 5671200
+        },
+        {
+          "index": 1,
+          "weightsAddress": 36398288,
+          "weightsBytes": 517072,
+          "npuCycles": 3502711
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3234415728,
+          "weightsBytes": 3676288,
+          "npuCycles": 13369143
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 5071715,
+          "calls": 48
+        },
+        "elu": {
+          "ticks": 19866703,
+          "calls": 24
+        },
+        "dequantize": {
+          "ticks": 3954928,
+          "calls": 60
+        }
+      },
+      "backendCopyTicks": 24491124,
+      "backendCopyBytes": 27334020
+    },
+    {
+      "method": "encode_hidden0",
+      "calls": 108,
+      "lastTicks": 401692,
+      "maxTicks": 411949,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 37749168,
+      "npuCycles": 139142,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 37749168,
+          "weightsBytes": 960576,
+          "npuCycles": 139142
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3259052,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1088587,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 308812,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 489343,
+          "calls": 108
+        },
+        "sigmoid": {
+          "ticks": 6449464,
+          "calls": 324
+        },
+        "tanh": {
+          "ticks": 2934202,
+          "calls": 216
+        },
+        "cat": {
+          "ticks": 418126,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 277438,
+          "calls": 216
+        },
+        "slice_copy": {
+          "ticks": 4500736,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 1030523,
+          "calls": 108
+        },
+        "unsqueeze_copy": {
+          "ticks": 487358,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 897125,
+          "calls": 108
+        }
+      },
+      "backendCopyTicks": 419166,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "encode_project1",
+      "calls": 12,
+      "lastTicks": 3622973,
+      "maxTicks": 3625045,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3240002224,
+      "npuCycles": 3424353,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3240002224,
+          "weightsBytes": 944192,
+          "npuCycles": 3424353
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 417141,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 798814,
+          "calls": 12
+        }
+      },
+      "backendCopyTicks": 409769,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "encode_hidden1",
+      "calls": 108,
+      "lastTicks": 399449,
+      "maxTicks": 400459,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 38710416,
+      "npuCycles": 136128,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 38710416,
+          "weightsBytes": 947136,
+          "npuCycles": 136128
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3253130,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1087814,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 351091,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 476271,
+          "calls": 108
+        },
+        "sigmoid": {
+          "ticks": 6450412,
+          "calls": 324
+        },
+        "tanh": {
+          "ticks": 2935223,
+          "calls": 216
+        },
+        "cat": {
+          "ticks": 417577,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 273012,
+          "calls": 216
+        },
+        "slice_copy": {
+          "ticks": 4514963,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 1023743,
+          "calls": 108
+        },
+        "unsqueeze_copy": {
+          "ticks": 436965,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 894659,
+          "calls": 108
+        }
+      },
+      "backendCopyTicks": 416690,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "encode_back",
+      "calls": 12,
+      "lastTicks": 11451416,
+      "maxTicks": 11462417,
+      "npuCalls": 11,
+      "npuOverflow": 0,
+      "weightsAddress": 3233698976,
+      "npuCycles": 5401934,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3232207664,
+          "weightsBytes": 2048,
+          "npuCycles": 11197
+        },
+        {
+          "index": 1,
+          "weightsAddress": 3232210608,
+          "weightsBytes": 404928,
+          "npuCycles": 1472748
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3232616240,
+          "weightsBytes": 131696,
+          "npuCycles": 479032
+        },
+        {
+          "index": 3,
+          "weightsAddress": 3232748720,
+          "weightsBytes": 135216,
+          "npuCycles": 491790
+        },
+        {
+          "index": 4,
+          "weightsAddress": 3232884656,
+          "weightsBytes": 134720,
+          "npuCycles": 489974
+        },
+        {
+          "index": 5,
+          "weightsAddress": 3233020080,
+          "weightsBytes": 134848,
+          "npuCycles": 490478
+        },
+        {
+          "index": 6,
+          "weightsAddress": 3233155632,
+          "weightsBytes": 134928,
+          "npuCycles": 490729
+        },
+        {
+          "index": 7,
+          "weightsAddress": 3233291312,
+          "weightsBytes": 134864,
+          "npuCycles": 490463
+        },
+        {
+          "index": 8,
+          "weightsAddress": 3233426864,
+          "weightsBytes": 135184,
+          "npuCycles": 491621
+        },
+        {
+          "index": 9,
+          "weightsAddress": 3233562800,
+          "weightsBytes": 135200,
+          "npuCycles": 491757
+        },
+        {
+          "index": 10,
+          "weightsAddress": 3233698976,
+          "weightsBytes": 1,
+          "npuCycles": 2145
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 10331396,
+          "calls": 108
+        },
+        "sub": {
+          "ticks": 6168579,
+          "calls": 180
+        },
+        "mul": {
+          "ticks": 5797308,
+          "calls": 96
+        },
+        "where": {
+          "ticks": 117766,
+          "calls": 12
+        },
+        "argmax": {
+          "ticks": 14565441,
+          "calls": 96
+        },
+        "quantize": {
+          "ticks": 1825307,
+          "calls": 120
+        },
+        "neg": {
+          "ticks": 2942615,
+          "calls": 96
+        },
+        "pow": {
+          "ticks": 437686,
+          "calls": 96
+        },
+        "permute_copy": {
+          "ticks": 562710,
+          "calls": 24
+        },
+        "cat": {
+          "ticks": 1406282,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4238608,
+          "calls": 84
+        },
+        "flip": {
+          "ticks": 7680096,
+          "calls": 12
+        },
+        "slice_copy": {
+          "ticks": 3461781,
+          "calls": 24
+        },
+        "sum": {
+          "ticks": 516419,
+          "calls": 96
+        },
+        "clone_dim_order": {
+          "ticks": 128273,
+          "calls": 12
+        },
+        "to_dim_order_copy": {
+          "ticks": 174971,
+          "calls": 96
+        },
+        "dequantize": {
+          "ticks": 3404672,
+          "calls": 132
+        }
+      },
+      "backendCopyTicks": 1837265,
+      "backendCopyBytes": 2430720
+    },
+    {
+      "method": "decode_front",
+      "calls": 12,
+      "lastTicks": 4687460,
+      "maxTicks": 4690418,
+      "npuCalls": 3,
+      "npuOverflow": 0,
+      "weightsAddress": 3228479792,
+      "npuCycles": 3591161,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3228066976,
+          "weightsBytes": 1,
+          "npuCycles": 2150
+        },
+        {
+          "index": 1,
+          "weightsAddress": 41505456,
+          "weightsBytes": 410944,
+          "npuCycles": 93049
+        },
+        {
+          "index": 2,
+          "weightsAddress": 3228479792,
+          "weightsBytes": 963936,
+          "npuCycles": 3495962
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 856323,
+          "calls": 84
+        },
+        "where": {
+          "ticks": 36767,
+          "calls": 12
+        },
+        "quantize": {
+          "ticks": 516175,
+          "calls": 24
+        },
+        "permute_copy": {
+          "ticks": 469531,
+          "calls": 24
+        },
+        "cat": {
+          "ticks": 347220,
+          "calls": 24
+        },
+        "embedding": {
+          "ticks": 4774711,
+          "calls": 96
+        },
+        "flip": {
+          "ticks": 1925613,
+          "calls": 12
+        },
+        "slice_copy": {
+          "ticks": 889680,
+          "calls": 24
+        },
+        "clone_dim_order": {
+          "ticks": 45830,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 1010504,
+          "calls": 24
+        }
+      },
+      "backendCopyTicks": 546894,
+      "backendCopyBytes": 716544
+    },
+    {
+      "method": "decode_hidden0",
+      "calls": 108,
+      "lastTicks": 398922,
+      "maxTicks": 403588,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 39658224,
+      "npuCycles": 137241,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 39658224,
+          "weightsBytes": 942560,
+          "npuCycles": 137241
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3255407,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1091054,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 328198,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 484081,
+          "calls": 108
+        },
+        "sigmoid": {
+          "ticks": 6466838,
+          "calls": 324
+        },
+        "tanh": {
+          "ticks": 2940792,
+          "calls": 216
+        },
+        "cat": {
+          "ticks": 422138,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 272926,
+          "calls": 216
+        },
+        "slice_copy": {
+          "ticks": 4483377,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 1053940,
+          "calls": 108
+        },
+        "unsqueeze_copy": {
+          "ticks": 463302,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 895326,
+          "calls": 108
+        }
+      },
+      "backendCopyTicks": 418810,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "decode_project1",
+      "calls": 12,
+      "lastTicks": 3518561,
+      "maxTicks": 3520377,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 3231291568,
+      "npuCycles": 3319969,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3231291568,
+          "weightsBytes": 915408,
+          "npuCycles": 3319969
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 414414,
+          "calls": 12
+        },
+        "dequantize": {
+          "ticks": 799420,
+          "calls": 12
+        }
+      },
+      "backendCopyTicks": 409217,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "decode_hidden1",
+      "calls": 108,
+      "lastTicks": 400839,
+      "maxTicks": 401544,
+      "npuCalls": 1,
+      "npuOverflow": 0,
+      "weightsAddress": 40601456,
+      "npuCycles": 137400,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 40601456,
+          "weightsBytes": 903184,
+          "npuCycles": 137400
+        }
+      ],
+      "opTimes": {
+        "add": {
+          "ticks": 3255111,
+          "calls": 216
+        },
+        "mul": {
+          "ticks": 1088678,
+          "calls": 324
+        },
+        "where": {
+          "ticks": 325897,
+          "calls": 216
+        },
+        "quantize": {
+          "ticks": 482300,
+          "calls": 108
+        },
+        "sigmoid": {
+          "ticks": 6452228,
+          "calls": 324
+        },
+        "tanh": {
+          "ticks": 2936334,
+          "calls": 216
+        },
+        "cat": {
+          "ticks": 417426,
+          "calls": 108
+        },
+        "full_like": {
+          "ticks": 272165,
+          "calls": 216
+        },
+        "slice_copy": {
+          "ticks": 4530428,
+          "calls": 216
+        },
+        "split": {
+          "ticks": 1027355,
+          "calls": 108
+        },
+        "unsqueeze_copy": {
+          "ticks": 465475,
+          "calls": 216
+        },
+        "dequantize": {
+          "ticks": 895488,
+          "calls": 108
+        }
+      },
+      "backendCopyTicks": 417321,
+      "backendCopyBytes": 552960
+    },
+    {
+      "method": "decode_back",
+      "calls": 12,
+      "lastTicks": 19772438,
+      "maxTicks": 19780280,
+      "npuCalls": 4,
+      "npuOverflow": 0,
+      "weightsAddress": 37040944,
+      "npuCycles": 13665674,
+      "delegates": [
+        {
+          "index": 0,
+          "weightsAddress": 3225543920,
+          "weightsBytes": 1860016,
+          "npuCycles": 8812023
+        },
+        {
+          "index": 1,
+          "weightsAddress": 3227409456,
+          "weightsBytes": 506608,
+          "npuCycles": 2840573
+        },
+        {
+          "index": 2,
+          "weightsAddress": 36919664,
+          "weightsBytes": 114720,
+          "npuCycles": 1012782
+        },
+        {
+          "index": 3,
+          "weightsAddress": 37040944,
+          "weightsBytes": 24048,
+          "npuCycles": 1000296
+        }
+      ],
+      "opTimes": {
+        "quantize": {
+          "ticks": 11828207,
+          "calls": 72
+        },
+        "elu": {
+          "ticks": 39082861,
+          "calls": 36
+        },
+        "dequantize": {
+          "ticks": 6956645,
+          "calls": 60
+        }
+      },
+      "backendCopyTicks": 12656684,
+      "backendCopyBytes": 17396784
+    }
+  ]
+}

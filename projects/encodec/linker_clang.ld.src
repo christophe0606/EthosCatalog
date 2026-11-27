@@ -1,0 +1,9 @@
+/* Copyright 2026 Arm Limited and/or its affiliates.
+ * SPDX-License-Identifier: Apache-2.0
+ * EnCodec SRAM1 placement for the shared DevKit-E8 LLVM linker layout.
+ */
+#include "app_mem_regions.h"
+#undef APP_SRAM1_BASE
+#define APP_SRAM1_BASE (APP_SRAM0_BASE + APP_SRAM0_SIZE)
+#define APP_LINKER_SRAM1_SECTIONS *(.bss.encodec_staging)
+#include "../../board/DevKit-E8/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_clang.ld.src"

@@ -28,34 +28,65 @@ extern ARM_DRIVER_TOUCH_SCREEN GT911;
 static volatile uint32_t scanlines, display_errors;
 static uint32_t pending_scanline;
 static bool frame_pending;
+static unsigned frame_width = RTE_PANEL_HACTIVE_TIME;
 static void display_callback(uint32_t events)
 {
     if (events & ARM_CDC_SCANLINE0_EVENT) ++scanlines;
     display_errors |= events & ARM_CDC_DSI_ERROR_EVENT;
 }
-static void clean_frame(uint16_t *frame)
-{
-    SCB_CleanDCache_by_Addr((uint32_t *)frame, LCD_PIXELS * sizeof(uint16_t));
-    __DSB();
-}
-int lcd_init_display(uint16_t *initial_frame)
+static int init_display(uint16_t *initial_frame, unsigned x, unsigned width, uint32_t memory_blocks)
 {
     frame_pending = false;
     uint32_t error = 0;
     run_profile_t profile = {0};
     if (SERVICES_get_run_cfg(se_services_s_handle, &profile, &error) != SERVICES_REQ_SUCCESS || error) return -1;
-    profile.memory_blocks |= MRAM_MASK | SRAM0_MASK;
+    profile.memory_blocks |= MRAM_MASK | SRAM0_MASK | memory_blocks;
     profile.phy_pwr_gating |= MIPI_PLL_DPHY_MASK | MIPI_TX_DPHY_MASK |
                              MIPI_RX_DPHY_MASK | LDO_PHY_MASK;
     if (SERVICES_set_run_cfg(se_services_s_handle, &profile, &error) != SERVICES_REQ_SUCCESS || error) return -1;
     if (SERVICES_clocks_enable_clock(se_services_s_handle, CLKEN_HFOSCx2, true, &error) != SERVICES_REQ_SUCCESS || error) return -1;
-    clean_frame(initial_frame);
+    SCB_CleanDCache_by_Addr((uint32_t *)initial_frame,
+                          width * RTE_PANEL_VACTIVE_LINE * sizeof(uint16_t));
+    __DSB();
     CHECK(Driver_CDC200.Initialize(display_callback));
     CHECK(Driver_CDC200.PowerControl(ARM_POWER_FULL));
     CHECK(Driver_CDC200.Control(CDC200_CONFIGURE_DISPLAY, (uint32_t)initial_frame));
+    if (width != RTE_PANEL_HACTIVE_TIME) {
+        const unsigned native_x = RTE_PANEL_HSYNC_TIME + RTE_PANEL_HBP_TIME + x;
+        const unsigned native_y = RTE_PANEL_VSYNC_LINE + RTE_PANEL_VBP_LINE;
+        ARM_CDC200_LAYER_INFO layer = {
+            .layer_idx = ARM_CDC200_LAYER_1,
+            .win_info = {
+                .h_start_pos = native_x,
+                .h_stop_pos = native_x + width - 1U,
+                .v_start_pos = native_y,
+                .v_stop_pos = native_y + RTE_PANEL_VACTIVE_LINE - 1U,
+            },
+            .pix_format = ARM_CDC200_RGB565,
+            .const_alpha = 255U,
+            .blend_factor = CDC200_BLEND_CONST_ALPHA,
+            .fb_addr = (uint32_t)initial_frame,
+            .line_length_in_pixels = width,
+            .num_lines = RTE_PANEL_VACTIVE_LINE,
+        };
+        CHECK(Driver_CDC200.Control(CDC200_CONFIGURE_LAYER, (uint32_t)&layer));
+    }
     CHECK(Driver_CDC200.Control(CDC200_SCANLINE0_EVENT, 1U));
     CHECK(Driver_CDC200.Start());
+    frame_width = width;
     return 0;
+}
+int lcd_init_display(uint16_t *initial_frame)
+{
+    return init_display(initial_frame, 0, RTE_PANEL_HACTIVE_TIME, 0);
+}
+int lcd_init_display_window(uint16_t *initial_frame, unsigned x, unsigned width, uint32_t memory_blocks)
+{
+    if (!initial_frame || ((uintptr_t)initial_frame & 31U) || !width || (width % 16U) ||
+        x >= RTE_PANEL_HACTIVE_TIME || width > RTE_PANEL_HACTIVE_TIME - x) {
+        return ARM_DRIVER_ERROR_PARAMETER;
+    }
+    return init_display(initial_frame, x, width, memory_blocks);
 }
 int lcd_init(uint16_t *initial_frame)
 {
@@ -89,21 +120,25 @@ int lcd_wait_for_release(void)
 }
 int lcd_submit(uint16_t *frame)
 {
-    return lcd_submit_region(frame,0,0,480,800);
+    return lcd_submit_region(frame, 0, 0, frame_width, RTE_PANEL_VACTIVE_LINE);
 }
-int lcd_submit_region(uint16_t *frame,unsigned x,unsigned y,unsigned width,unsigned height)
+int lcd_submit_region(uint16_t *frame, unsigned x, unsigned y, unsigned width, unsigned height)
 {
-    if (!frame || x>480 || y>800 || width>480-x || height>800-y || ((uintptr_t)frame & 31U))
+    if (!frame || x > frame_width || y > RTE_PANEL_VACTIVE_LINE || width > frame_width - x ||
+        height > RTE_PANEL_VACTIVE_LINE - y || ((uintptr_t)frame & 31U))
         return ARM_DRIVER_ERROR_PARAMETER;
     CHECK(lcd_wait_for_release());
-    if(width && height) {
-        // Native row stride is 960 bytes, a multiple of the 32-byte cache line.
-        unsigned first=(x*2U)&~31U, last=((x+width)*2U+31U)&~31U;
-        if(first==0 && last==960) {
-            SCB_CleanDCache_by_Addr((uint32_t*)((uint8_t*)frame+y*960U),height*960U);
+    if (width && height) {
+        // The configured row stride remains a multiple of the 32-byte cache line.
+        const unsigned stride = frame_width * sizeof(uint16_t);
+        const unsigned first = (x * sizeof(uint16_t)) & ~31U;
+        const unsigned last = ((x + width) * sizeof(uint16_t) + 31U) & ~31U;
+        if (first == 0 && last == stride) {
+            SCB_CleanDCache_by_Addr((uint32_t *)((uint8_t *)frame + y * stride), height * stride);
         } else {
-            for(unsigned row=y;row<y+height;++row)
-                SCB_CleanDCache_by_Addr((uint32_t*)((uint8_t*)frame+row*960U+first),last-first);
+            for (unsigned row = y; row < y + height; ++row) {
+                SCB_CleanDCache_by_Addr((uint32_t *)((uint8_t *)frame + row * stride + first), last - first);
+            }
         }
         __DSB();
     }

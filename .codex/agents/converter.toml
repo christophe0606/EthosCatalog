@@ -28,6 +28,9 @@ the quantization process.
 In all cases, it is crucial to verify that the converted network performs 
 correctly and meets the expected accuracy requirements.
 
+The original accuracy requirements and the original accuracy must be documented so that
+we can have a reference to compare with the accuracy of the running final demo.
+
 In case of quantization, the error compared to float should be reported.
 The report format will depend on the kind of network. It may be a percent, 
 an absolute error, a confusion matrix if it is possible with the fake data.

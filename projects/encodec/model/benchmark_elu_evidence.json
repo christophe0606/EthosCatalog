@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-11-27T09:35:18Z",
+  "context": "encodec.Release+DevKit-E8",
+  "buildJob": "b-44",
+  "loadJob": "d-45",
+  "modelCRC32": "0xb8d32050",
+  "modelSha256": "16b13cfc569e8a28b779f40fd12a2de33c61f21c0fc4986a2f113a72cf3e149f",
+  "firmwareSha256": "e3de830407d471e5da74af2f7f1ea776d50d96cf305c43b0c8f0faa9d5603ff2",
+  "clockHz": 400000000,
+  "blocks": {
+    "completed": 12,
+    "error": 0,
+    "deadlineMs": 120,
+    "deadlineMisses": 12,
+    "maxTicks": 199747249,
+    "encodeMaxTicks": 106760438,
+    "decodeMaxTicks": 93039403
+  },
+  "lastPCMComparedWith": "d-43, last complete synthetic benchmark block",
+  "numeric": {
+    "sampleCount": 2880,
+    "changed": 135,
+    "rmse": 0.000012374019511497509,
+    "max": 0.00018733739852905273,
+    "snrDb": 75.84064041190031,
+    "eluMs": 65.14611604166666
+  }
+}

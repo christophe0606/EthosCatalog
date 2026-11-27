@@ -1,0 +1,13 @@
+sdsio:
+  interface:
+    usb:
+  workdir: ./sds_run
+  metadir: .
+  streams:
+    - name: Encodec_In
+      view: signal
+    - name: Encodec_Out
+      view: signal
+  play:
+    - step: reconstruct
+      labels: [0]

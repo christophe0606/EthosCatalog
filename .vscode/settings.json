@@ -11,8 +11,8 @@
         "./schema/network.schema.yml": ["projects/**/network.yml", "projects/**/network.yaml"]
     },
     "clangd.arguments": [
-        "--compile-commands-dir=${workspaceFolder}/out/dtln_aec/DevKit-E8/ReleaseSRAM"
+        "--compile-commands-dir=${workspaceFolder}/out/encodec/DevKit-E8/ReleaseDemo"
     ],
     "cmake.sourceDirectory": "C:/Users/chrfav01/benchresults/EthosCatalog/tmp/DevKit-E8/KWS_Release",
-    "cmsis-sds.sdsio.configFile": "projects/dtln_aec/test_data/datatest.sdsio.yml"
+    "cmsis-sds.sdsio.configFile": "projects/encodec/test_data/datatest.sdsio.yml"
 }

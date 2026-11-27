@@ -1,0 +1,8 @@
+{
+  "decoder": 0,
+  "encoder": 1,
+  "sds_sink": 2,
+  "sds_source": 3,
+  "waveform": 4,
+  "lcd": 5
+}
