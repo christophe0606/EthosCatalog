@@ -124,7 +124,27 @@ def mk_app(graph, output, globals, runtime, config=None, source_notice='',
     defines = ''.join(f'#define {k} {v}\n' for k,v in globals.items())
     (output/'app_sizes.h').write_text(banner + '#pragma once\n' + defines)
     (output/'stream_settings.h').write_text(banner + '#pragma once\n' + ''.join(f'#define {k} {v}\n' for k,v in runtime.items()))
-    (output/'app_params.h').write_text(banner + '#pragma once\n#include <stdint.h>\n#include "app_sizes.h"\n#include "hardware_params.h"\n' + '\n'.join(fields) + '\ntypedef struct {\n' + '\n'.join(members) + '\n} AppParams;\n#ifdef __cplusplus\nextern "C" {\n#endif\nextern AppParams appParams;\nvoid app_params_set_hardware(const HardwareParams *params);\n#ifdef __cplusplus\n}\n#endif\n')
+    (output/'app_params.h').write_text(
+        banner
+        + '#ifndef APP_PARAMS_H\n'
+          '#define APP_PARAMS_H\n\n'
+          '#ifdef __cplusplus\n'
+          'extern "C" {\n'
+          '#endif\n\n'
+          '#include <stdint.h>\n'
+          '#include "app_sizes.h"\n'
+          '#include "hardware_params.h"\n'
+        + '\n'.join(fields)
+        + '\ntypedef struct {\n'
+        + '\n'.join(members)
+        + '\n} AppParams;\n'
+          'extern AppParams appParams;\n'
+          'void app_params_set_hardware(const HardwareParams *params);\n\n'
+          '#ifdef __cplusplus\n'
+          '}\n'
+          '#endif\n\n'
+          '#endif /* APP_PARAMS_H */\n'
+    )
     (output/'app_params.c').write_text(banner + '#include "app_params.h"\nAppParams appParams = {\n' + '\n'.join(initializers) + '\n};\nvoid app_params_set_hardware(const HardwareParams *params)\n{\n    if (!params) return;\n' + '\n'.join(hardware) + '\n}\n')
     scheduling.ccode(str(output), conf)
     scheduling.genJsonIdentification(str(output/'json'), conf)

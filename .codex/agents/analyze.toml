@@ -18,7 +18,7 @@ The network can already be in quantized form for Ethos (so using Ethos quantizat
 MUST NOT have been already converted by vela. So, a .tflite file is acceptable only if it is before vela.
 A .pte is generally not ok because after vela. Instead a .pt2 or .py is preferred.
 The size of the network and its memory usage should be roughly estimated so that we can check if it
-with the memory constraints of the target board. The 
+fits with the memory constraints of the target board. The 
 conclusion of this memory analysis should be : 
 * Can't fit within the memory constraints of the target board 
 * Can fit in MRAM

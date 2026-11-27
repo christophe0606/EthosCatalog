@@ -110,6 +110,7 @@ The header file uses the C++ name defined during description of the component an
 The generated file will contain the definition for the C++ component.
 
 The file must start with
+
 ```C++
 #pragma once
 
@@ -129,10 +130,12 @@ If the component has any dataflow port then it will be implemented as a template
 If the component has input and output dataflow ports, it must inherit from `GenericNode` and the template parameters of `GenericNode` must be set according to the type and length of the ports. If the component has only input dataflow ports, it must inherit from `GenericSink` and if it has only output dataflow ports, it must inherit from `GenericSource`.
 
 The template arguments are as follow:
+
 - The list of inputs come first
 - The list of output follows
 
 For each port, the template has two arguments:
+
 - A typename for the sample type
 - An int for the number of samples processed by the port (consumed or produced)
 
@@ -165,6 +168,8 @@ public:
   static std::array<uint16_t,1> selectors;
 ```
 
+The `selectors` array template needs to be specialized somewhere so that an implementation of the template is generated,
+
 If the component needs any parameter, it can take as last argument of the constructor a parameter struct. For instance:
 ```C++
   DebugSource(FIFOBase<IN> &src, emptySourceParams_t &params)
@@ -192,11 +197,11 @@ To process an event, some convenience functions are defined in the CMSIS Stream 
 ```C++
 if (evt.wellFormed<float>())
 {
-                evt.apply<float>(&DebugEvtSink::messageReceived, *this);
+    evt.apply<float>(&DebugEvtSink::messageReceived, *this);
 }
 ```
 
-IN this example, the function messageReceived has type:
+In this example, the function messageReceived has type:
 ```C++
 void messageReceived(float v)
 ```

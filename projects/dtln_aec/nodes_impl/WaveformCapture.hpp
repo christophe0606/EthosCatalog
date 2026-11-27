@@ -86,3 +86,7 @@ private:
     uint32_t offerPeriod_ = 0;
     uint32_t lastOfferTick_ = 0;
 };
+
+// The generated scheduler defines and initializes the selector table.
+template<>
+std::array<uint16_t, 1> WaveformCapture<float, DTLN_AUDIO_HOP_SAMPLES, float, DTLN_AUDIO_HOP_SAMPLES>::selectors;

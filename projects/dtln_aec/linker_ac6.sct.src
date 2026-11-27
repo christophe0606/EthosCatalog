@@ -1,7 +1,7 @@
 ; Copyright 2026 Arm Limited and/or its affiliates.
 ; SPDX-License-Identifier: Apache-2.0
 ; MRAM executable with an OSPI model or an SRAM0 copy.
-; app_mem_regions.h is supplied by the cproject's linker regions setting.
+; The cproject supplies app_mem_regions.h through its linker regions setting.
 
 #define __ROM_BASE      APP_MRAM_HP_BASE
 #define __ROM_SIZE      APP_CODE_MRAM_SIZE

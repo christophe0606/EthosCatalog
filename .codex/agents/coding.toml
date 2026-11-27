@@ -1,6 +1,6 @@
 name = "coding"
 description = "Implement the complete network processing pipeline"
-model = "gpt-6.1-sol"
+model = "gpt-6.2-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 Implement the complete network demo using CMSIS Stream. Follow the organization
@@ -60,7 +60,7 @@ required to interact with the peripherals. Those
 peripherals have been initialized in hardware_params.c and
 are ready to use in the CMSIS Stream node that needs them.
 
-hardware_params is for init / uninit / reset of peripherals but not
+hardware_params is for lifecycle management of peripherals but not
 to implement the features which are implemented in the CMSIS Stream 
 nodes.
 
@@ -74,7 +74,7 @@ several models, they should appear as several CMSIS Stream nodes
 (one per model) so that the structure of the application is clearer. 
 It does not mean the nodes have to be of different kinds. 
 If it is possible to reuse the same python node class and its
-C++ wrapper and only the network run is different then it is ok. 
+C++ wrapper and only the network executed is different then it is ok. 
 And the networks will be represented by different nodes of the same kind. 
 Now, if the networks are quite differents (different numbers of input and 
 outputs, dataflow instead of events etc ...) then different python 
@@ -89,6 +89,7 @@ descriptions and C++ wrapper will be required.
     CMSIS-DSP, which selects acceleration at build time, does not make a node
     Helium-specific.
   - `alif_e8/`: Alif E8 hardware-specific drivers and peripheral setup.
+  - `design` : markdown documentation of a node implementation
 - A reusable node in common must be usable by different projects. Portability or injected
   hardware callbacks alone do not make a node reusable. Keep application-specific
   drawing, styling, animation, touch interaction, event protocols and pipeline
@@ -134,7 +135,7 @@ descriptions and C++ wrapper will be required.
   in that package's `__init__.py`. Put their implementations and node-specific
   adapters in `projects/<project>/nodes_impl/`. Preserve any backend subfolders
   used by that project. Do not promote a demonstration or model-specific node
-  into `common` merely because it could technically be reused.
+  into `common` merely because it could technically be reused. For instance:
   - `EthosGain` is a project-specific demonstration. Its Python description
     belongs in `projects/template_mram/nodes/`; its C++ wrapper and ExecuTorch
     adapter belong in `projects/template_mram/nodes_impl/`.
@@ -177,7 +178,8 @@ descriptions and C++ wrapper will be required.
 - When a node is a common node, you may generate some documentation
   about its implementation in common/nodes_impl/design as 
   a markdown file.
-  Nodes that are simple do not need a design document. More complex
+  Nodes that are simple do not need a design document but need a description of their
+  purpose in the comments of the python and C++. More complex
   nodes need a detailed explanation of their architecture, memory 
   management, state macine, multi-threading etc ...
 
